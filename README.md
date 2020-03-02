@@ -1,130 +1,86 @@
-<img src="https://github.com/radiantearth/stac-site/raw/master/images/logo/stac-030-long.png" alt="stac-logo" width="700"/>
+# STAC API
 
-[![CircleCI](https://circleci.com/gh/radiantearth/stac-spec.svg?style=svg)](https://circleci.com/gh/radiantearth/stac-spec)
+A STAC API is the dynamic version of a SpatioTemporal Asset Catalog. It returns a STAC [Catalog](../catalog-spec/catalog-spec.md), [Collection](../collection-spec/collection-spec.md), [Item](../item-spec/item-spec.md), or [ItemCollection](../item-spec/itemcollection-spec.md), depending on the endpoint. Catalogs and Collections are JSON, while Items and ItemCollections are GeoJSON-compliant entities with foreign members.  Typically, a Feature is used when returning a
+single Item, and FeatureCollection when multiple Items (rather than a JSON array of Item entities).
 
-## About
+The API is a *[OGC API - Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html)* (formerly known as *OGC Web Feature Service 3*), in that it defines many of the endpoints that STAC uses. A STAC API should be compatible and usable with OGC API - Features clients.
 
-The SpatioTemporal Asset Catalog (STAC) specification aims to standardize the way geospatial assets are exposed online and queried. 
-A 'spatiotemporal asset' is any file that represents information about the earth captured in a certain space and 
-time. The initial focus is primarily remotely-sensed imagery (from satellites, but also planes, drones, balloons, etc), but 
-the core is designed to be extensible to SAR, full motion video, point clouds, hyperspectral, LiDAR and derived data like
-NDVI, Digital Elevation Models, mosaics, etc. 
+## In this directory
 
-The goal is for all major providers of imagery and other earth observation data to expose their data as SpatioTemporal Asset 
-Catalogs, so that new code doesn't need to be written whenever a new JSON-based REST API comes out that makes its data 
-available in a slightly different way. This will enable standard library components in many languages. STAC can also be
-implemented in a completely 'static' manner, enabling data publishers to expose their data by simply publishing linked JSON
-files online.
+**The Specification:** The main description of the STAC API specification is in the *[api-spec.md](api-spec.md)* file. It includes an overview and in depth explanation of the REST endpoints and parameters.
 
-## WARNING
+**Extensions:** API Extensions are given in the *[extensions](extensions/)* folder. YAML fragments are provided for each extension with details provided in the *[README](extensions/README.md)*.
 
-The specification is currently still an early version, with the potential for some major things to change. The core is now
-fleshed out, so implementors are encouraged to try it out and give feedback. But the goal is to actually be able to act
-on that feedback, which will mean changes are quite possible. 
+**Examples:** For samples of how the STAC API can be queried, see the *[examples.md](examples.md)* file.
 
-But efforts will be made to maintain the core fields established in the central [Item spec](item-spec/), 
-[Catalog spec](catalog-spec/) and [Collection spec](collection-spec/).
-The minimal amount is specified right now, but best practices should emerge with implementation and more will likely be specified.
+**API Definitions:** The API is described by the OpenAPI documents in the *[openapi](openapi/)* folder. Human-readable versions of the OpenAPI definitions can be viewed online for the last release:
+* [Only the core STAC API](https://stacspec.org/STAC-api.html) 
+* [STAC API including all extensions](https://stacspec.org/STAC-ext-api.html)
 
-## Current version and branches
+## OpenAPI definitions
 
-The [master branch](https://github.com/radiantearth/stac-spec/tree/master) is the 'stable' version of the spec. It is currently version 
-**0.9.0** of the specification. The 
-[dev](https://github.com/radiantearth/stac-spec/tree/dev) branch is where active development takes place, and may have inconsistent examples. 
-Whenever dev stabilizes a release is cut and we merge dev in to master. So master should be stable at any given time.
-It is possible that there may be small releases in quick succession, especially if they are nice improvements that do 
-not require lots of updating. More information on how the STAC development process works can be found in 
-[process.md](process.md).
+The definitive specification for STAC API is provided as an [OpenAPI](http://openapis.org/) 3.0 specification that is contained within several YAML files in the [openapi](openapi/) and [extensions](extensions/) directories.
 
-## Communication
+These are built into the definitive core API specification at [STAC.yaml](STAC.yaml), which can be viewed online at 
+[https://stacspec.org/STAC-api.html](https://stacspec.org/STAC-api.html). An additional OpenAPI definition is provided at 
+[STAC-extensions.yaml](STAC-extensions.yaml) that includes all the optional extensions, and can be browsed online at
+[https://stacspec.org/STAC-ext-api.html](https://stacspec.org/STAC-ext-api.html).
 
-For any questions feel free to jump on our [gitter channel](https://gitter.im/SpatioTemporal-Asset-Catalog/Lobby) or email 
-our [google group](https://groups.google.com/forum/#!forum/stac-spec). The majority of communication about the evolution of 
-the specification takes place in the [issue tracker](https://github.com/radiantearth/stac-spec/issues) and in 
-[pull requests](https://github.com/radiantearth/stac-spec/pulls).
+In the [openapi](openapi/) directory there are three files
 
-## In this Repository
+- OAFeat.yaml - The OAFeat.yaml file is the OGC API - Features OpenAPI definition as currently used by STAC API.
+- STAC.yaml - Contains (1) additional STAC-specific endpoints that STAC APIs expose and (2) extensions and concretization to OGC API - Features that STAC APIs require.
+- STAC.merge.yaml - A file referencing the above two used to create the final [STAC.yaml](STAC.yaml) definition.
 
-This repository contains the core specifications plus examples and validation schemas and tools. Also included are a
-few documents that provide more context and plans for the evolution of the specification. Each spec folder contains a
-README explaining the layout of the folder, the main specification document, examples, validating schemas and OpenAPI
-documents (if relevant). The four specifications detailed are meant to be used together, but are designed so each piece
-is small, self-contained and reusable in other contexts.
+A basic STAC implementation implements both the OGC API - Features and STAC definitions.
 
-**[item-spec/](item-spec/)** defines a STAC Item, which is a [GeoJSON](http://geojson.org) Feature
-with additional fields for things like time, links to related entities and assets (including thumbnails). This is the 
-atomic unit that describes the data to be discovered.
+The YAML files in the [extensions](extensions/) folder are fragments. Fragments are used to describe incomplete pieces of an OpenAPI document, and must be merged with a complete OpenAPI document to be usable. This way extensions can be kept separate, and implementors can combine just the extensions they want to use in order to create a custom OpenAPI document they can use.
 
-**[catalog-spec/](catalog-spec/)** specifies a structure to link various STAC Items together to be crawled or browsed. It is a
-simple, flexible JSON file of links to Items, Catalogs or Collections that can be used in a variety of ways.
+Editing should be done on the files in the [openapi](openapi/) and [extensions](extensions/) directories, *not* the `STAC.yaml` and `STAC-extensions.yaml` files, as these are automatically generated. If any of the files are edited, update the OpenAPI docs to overwrite the files:
 
-**[collection-spec/](collection-spec/)** provides additional information about a spatio-temporal collection of data.
-In the context of STAC it is most likely a collection of STAC Items that is made available by a data provider.
-It includes things like the spatial and temporal extent of the data, the license, keywords, etc.
-It enables discovery at a higher level than individual items, providing a simple way to describe sets of data.
+```
+npm install
+npm run generate-all
+```
 
-**[api-spec/](api-spec/)** extends the core publishing capabilities of [OGC API - Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) with  
-STAC-related endpoints. They add catalog and collection browsing and an active STAC REST search endpoint that returns
-just the Items a user requests in their query. The API is specified as a couple [OpenAPI](http://openapis.org) documents, one is just the
-[minimal core API](api-spec/STAC.yaml) and the other one [integrates the API extensions](api-spec/STAC-extensions.yaml).
+You can also dynamically serve a human-readable version of your edited files at `http://127.0.0.1:8080` using the following commands:
+* Only the core STAC API:
+  ```
+  npm install
+  npm run serve
+  ```
+* The STAC API including all extensions:
+  ```
+  npm install
+  npm run serve-ext
+  ```
 
-**Extensions:** The *[extensions/](extensions/)* folder is where extensions live. Extensions can extend the 
-functionality of the core spec or add fields for specific domains.
+Create your own OpenAPI document by combining the STAC definition with the extensions you want by creating a `myapi.merge.yaml` file. This file should contain a line indicating the files that need to be merged:
 
-**Additional documents** A complementary [how to help](how-to-help.md)
-document, a [list of implementations](implementations.md), 
-and a discussion of the collaboration [principles](principles.md) and specification approach.
+```
+!!files_merge_append ["STAC.yaml", "extensions/query/query.fragment.yaml"]
+```
 
-## Design Overview
+Then, run the [yaml-files](https://www.npmjs.com/package/yaml-files) command line tool:
 
-An important core principle of the STAC design is to embrace best practices of making data available on the web (like 
-[HATEOAS](https://en.wikipedia.org/wiki/HATEOAS) and [W3C Spatial Data on the Web](https://www.w3.org/TR/sdw-bp/)), and 
-to leverage the reliability of flat files on object stores like [AWS S3](https://aws.amazon.com/s3/) and [Google Cloud Storage](https://cloud.google.com/storage/).
-This lead to designing a static catalog at the core of the STAC spec.
+```
+npm -g install
+yaml-files myapi.merge.yaml myapi.yaml
+```
 
-### Catalog Types
+The commands above require root/administrator level access to install the npm packages globally. If you do not have the required permissions or do not want to install the packages globally for any other reason check the npm documentation for your platform for instructions to install and run local packages. Unix bash users for instance may use:
 
-STAC Catalogs generally fall into two different types: Static Catalogs and Dynamic Catalog APIs.
+```
+npm install
+$(npm bin)/yaml-files myapi.merge.yaml myapi.yaml
+```
 
-The two catalog types both implement the same fields and links, and can be treated as the same by clients.
-For more details on the two types see the chapters below. Additionally, consider the [Static and Dynamic Catalogs](best-practices.md#static-and-dynamic-catalogs)
-section of the best practices document on how you might use them best.
+## API Evolution
 
-#### Static Catalog
+The STAC API is still a work in progress. It currently tries to adhere to the OGC API - Features (OAFeat) specification, with some STAC specific extensions.
+The OAFeat portion of the API is provided in the *[OAFeat.yaml](openapi/OAFeat.yaml)* and represents the version of OAFeat that is currently being used by STAC.
+It may diverge some with the *[OAFeat](https://github.com/opengeospatial/ogcapi-features)* spec at any given time, either out of date or 'ahead', with proposals to align OAFeat.
+The long term goal is for STAC's API and OAFeat to completely align, ideally all of STAC API is made from OAFeat plus its extension ecosystem, and STAC just focuses on the content.
+But until then STAC will work to bring practical implementation experience to OAFeat. 
 
-A static catalog is an implementation of the STAC specification that does not respond dynamically to requests. It is simply
-a set of files on a web server that link to one another in a way that can be crawled, often stored in an cloud storage
-service like [Amazon S3](https://aws.amazon.com/s3/) or [Google Cloud Storage](https://cloud.google.com/storage/).
-The core JSON documents and link structures are encoded in the file, and work as long as things are structured properly.
-A static catalog can only really be crawled by search engines and active catalogs; it can not respond to queries.
-But it is incredibly reliable, as there are no moving parts, no clusters or databases to maintain.
-The goal of STAC is to expose as much asset metadata online as possible, so the static catalog offers a very lower
-barrier to entry for anyone with geospatial assets to make their data searchable.
-
-#### Dynamic Catalog API
-
-A dynamic catalog API is implemented in software as a RESTful API that responds to queries (like give me all imagery in Oahu gathered on January 15, 2017). 
-Its structure and responses are usually generated dynamically and are designed to mirror the static catalog, so the same client and crawler tools can consume
-it. It generally indexes data for efficient responses, and aims to be easy for existing APIs to implement as a more standard
-interface for clients to consume. It is specified in OpenAPI 3.0. An active catalog will often be populated by a static catalog,
-or at least may have a 'backup' of its fields stored as a cached static catalog.
-
-### Core Metadata and Extensions
-
-The Item specification defines the core fields that all assets must make available for searching in a catalog.
-In addition there are some basic fields for describing collections of data.
-Vendors can extend those core fields for the metadata they want to make available, and the community has started to define shared extensions.
-
-### UML Diagram
-
-A UML diagram of the [STAC model](STAC-UML.pdf) is provided to help with navigating the specification. 
-
-## Contributing
-
-Anyone building software that catalogs imagery or other geospatial assets is welcome to collaborate.
-Beforehand, please review our [guidelines for contributions](CONTRIBUTING.md).
-
-
-
-
-
+The evolution of the STAC Item spec will take place in this repository, primarily informed by the real world implementations that people create. The goal is for the core API spec to remain quite small and stable, with most all the evolution taking place in extensions. Once there is a critical mass of implementations utilizing different extensions the core API spec will lock down to a 1.0.
