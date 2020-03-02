@@ -1,5 +1,7 @@
 # STAC API
 
+**March 2, 2020** This STA API repo was recently split off from the main [stac-spec repository](https://github.com/radiantearth/stac-spec). Not all links and references have been updated yet so should be considered a work in progress.
+
 A STAC API is the dynamic version of a SpatioTemporal Asset Catalog. It returns a STAC [Catalog](../catalog-spec/catalog-spec.md), [Collection](../collection-spec/collection-spec.md), [Item](../item-spec/item-spec.md), or [ItemCollection](../item-spec/itemcollection-spec.md), depending on the endpoint. Catalogs and Collections are JSON, while Items and ItemCollections are GeoJSON-compliant entities with foreign members.  Typically, a Feature is used when returning a
 single Item, and FeatureCollection when multiple Items (rather than a JSON array of Item entities).
 
