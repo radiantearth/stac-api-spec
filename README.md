@@ -1,13 +1,43 @@
+<img src="https://github.com/radiantearth/stac-site/raw/master/images/logo/stac-030-long.png" alt="stac-logo" width="700"/>
+
 # STAC API
 
-**March 2, 2020** This STA API repo was recently split off from the main [stac-spec repository](https://github.com/radiantearth/stac-spec). Not all links and references have been updated yet so should be considered a work in progress.
+## About
 
-A STAC API is the dynamic version of a SpatioTemporal Asset Catalog. It returns a STAC [Catalog](../catalog-spec/catalog-spec.md), [Collection](../collection-spec/collection-spec.md), [Item](../item-spec/item-spec.md), or [ItemCollection](../item-spec/itemcollection-spec.md), depending on the endpoint. Catalogs and Collections are JSON, while Items and ItemCollections are GeoJSON-compliant entities with foreign members.  Typically, a Feature is used when returning a
-single Item, and FeatureCollection when multiple Items (rather than a JSON array of Item entities).
+The SpatioTemporal Asset Catalog (STAC) specification aims to standardize the way geospatial assets are exposed online and queried. 
+A 'spatiotemporal asset' is any file that represents information about the earth captured in a certain space and 
+time. The core STAC specification lives at [gitub.com/radiantearth/stac-spec](https://github.com/radiantearth/stac-spec).
 
-The API is a *[OGC API - Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html)* (formerly known as *OGC Web Feature Service 3*), in that it defines many of the endpoints that STAC uses. A STAC API should be compatible and usable with OGC API - Features clients.
+A STAC API is the dynamic version of a SpatioTemporal Asset Catalog. It returns a STAC [Catalog](https://github.com/radiantearth/stac-spec/catalog-spec/catalog-spec.md), 
+[Collection](https://github.com/radiantearth/stac-spec/collection-spec/collection-spec.md), [Item](https://github.com/radiantearth/stac-spec/item-spec/item-spec.md), 
+or [ItemCollection](https://github.com/radiantearth/stac-spec/item-spec/itemcollection-spec.md), depending on the endpoint.
+Catalogs and Collections are JSON, while Items and ItemCollections are GeoJSON-compliant entities with foreign members.  
+Typically, a Feature is used when returning a single Item, and FeatureCollection when multiple Items (rather than a JSON array of Item entities).
 
-## In this directory
+The API is compliant with the *[OGC API - Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html)* standard 
+(formerly known as *OGC Web Feature Service 3*), in that it defines many of the endpoints that STAC uses. A STAC API should be 
+compatible and usable with any OGC API - Features clients. The STAC API can be thought of as a specialized Features API 
+to search STAC Catalogs, where the features returned are STAC [Items](https://github.com/radiantearth/stac-spec/item-spec/item-spec.md), 
+that have common properties, links to their assets and geometries that represent the footprints of the geospatial assets.
+
+## WARNING
+
+This specification is approaching maturity, but will likely have some minor changes as we approach the 1.0-beta release and 
+fully align with [OGC API - Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html). This repo was also recently 
+split off from the main [stac-spec repository](https://github.com/radiantearth/stac-spec). Not all links and references have 
+been updated yet so should be considered a work in progress. To implement against a stable STAC API we recommend using 
+[STAC API Version 0.9.0](https://github.com/radiantearth/stac-spec/tree/v0.9.0/api-spec). This master branch will be 
+considered to be under active development until we release version 1.0-beta, at which time it will be stable, and a `dev` 
+branch will be created for active development.
+
+## Communication
+
+For any questions feel free to jump on our [gitter channel](https://gitter.im/SpatioTemporal-Asset-Catalog/Lobby) or email 
+our [google group](https://groups.google.com/forum/#!forum/stac-spec). The majority of communication about the evolution of 
+the specification takes place in the [issue tracker](https://github.com/radiantearth/stac-api-spec/issues) and in 
+[pull requests](https://github.com/radiantearth/stac-api-spec/pulls).
+
+## In this repository
 
 **The Specification:** The main description of the STAC API specification is in the *[api-spec.md](api-spec.md)* file. It includes an overview and in depth explanation of the REST endpoints and parameters.
 
@@ -85,4 +115,7 @@ It may diverge some with the *[OAFeat](https://github.com/opengeospatial/ogcapi-
 The long term goal is for STAC's API and OAFeat to completely align, ideally all of STAC API is made from OAFeat plus its extension ecosystem, and STAC just focuses on the content.
 But until then STAC will work to bring practical implementation experience to OAFeat. 
 
-The evolution of the STAC Item spec will take place in this repository, primarily informed by the real world implementations that people create. The goal is for the core API spec to remain quite small and stable, with most all the evolution taking place in extensions. Once there is a critical mass of implementations utilizing different extensions the core API spec will lock down to a 1.0.
+## Contributing
+
+Anyone building software that catalogs imagery or other geospatial assets is welcome to collaborate.
+Beforehand, please review our [guidelines for contributions](CONTRIBUTING.md).
