@@ -15,12 +15,12 @@ contains Items.
 In OAFeat Collections are the sets of data that can be queried 
 ([7.11](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_collections_)), and each describes basic information 
 about the geospatial dataset, like its name and description, as well as the spatial and temporal extents of all the data 
-contained. [STAC collections](../collection-spec/README.md) contain this same information, along with other STAC 
+contained. [STAC collections](https://github.com/radiantearth/stac-spec/collection-spec/README.md) contain this same information, along with other STAC 
 specific fields and thus are compliant with both OAFeat Collections and STAC Collections and is returned from the 
 `/collections/{collection_id}` endpoint.
 
 In OAFeat Features are the individual records within a Collection and are provided in GeoJSON format. 
-[STAC Items](../item-spec/README.md) are analogous to OAFeat Features, are in GeoJSON, and are returned from the 
+[STAC Items](https://github.com/radiantearth/stac-spec/item-spec/README.md) are analogous to OAFeat Features, are in GeoJSON, and are returned from the 
 `/collections/{collection_id}/items/{item_id}` endpoint.
 
 A typical OAFeat will have multiple collections, and each will just offer simple search for its particular collection at 
@@ -101,7 +101,7 @@ See the [OpenAPI specification document](openapi/STAC.yaml).
 | Endpoint      | Returns | Description |
 | ------------- | ------- | ----------- |
 | /             | Catalog | Extends `/` from OAFeat to return a full STAC catalog. |
-| /search       | [ItemCollection](../item-spec/itemcollection-spec.md) | Retrieves a group of Items matching the 
+| /search       | [ItemCollection](https://github.com/radiantearth/stac-spec/item-spec/itemcollection-spec.md) | Retrieves a group of Items matching the 
 provided search predicates, probably containing search metadata from the `search` extension |
 
 The `/` endpoint should function as a complete `Catalog` representation of all the data contained in the API and linked 
