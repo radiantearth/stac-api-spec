@@ -1,6 +1,6 @@
 # Items and Collections API Version Extension
 
-**Extension [Maturity Classification](../../../extensions/README.md#extension-maturity): Proposal**
+**Extension [Maturity Classification](../README.md#extension-maturity): Proposal**
 
 The core API doesn't support semantics to creating and accessing different versions of an Item or Collection. This version API extension defines the API resources and semantics for creating and accessing versioned records.
 
