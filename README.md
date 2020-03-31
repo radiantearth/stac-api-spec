@@ -8,16 +8,16 @@ The SpatioTemporal Asset Catalog (STAC) specification aims to standardize the wa
 A 'spatiotemporal asset' is any file that represents information about the earth captured in a certain space and 
 time. The core STAC specification lives at [gitub.com/radiantearth/stac-spec](https://github.com/radiantearth/stac-spec).
 
-A STAC API is the dynamic version of a SpatioTemporal Asset Catalog. It returns a STAC [Catalog](https://github.com/radiantearth/stac-spec/catalog-spec/catalog-spec.md), 
-[Collection](https://github.com/radiantearth/stac-spec/collection-spec/collection-spec.md), [Item](https://github.com/radiantearth/stac-spec/item-spec/item-spec.md), 
-or [ItemCollection](https://github.com/radiantearth/stac-spec/item-spec/itemcollection-spec.md), depending on the endpoint.
+A STAC API is the dynamic version of a SpatioTemporal Asset Catalog. It returns a STAC [Catalog](./stac-spec/catalog-spec/catalog-spec.md), 
+[Collection](./stac-spec/collection-spec/collection-spec.md), [Item](./stac-spec/item-spec/item-spec.md), 
+or [ItemCollection](./stac-spec/item-spec/itemcollection-spec.md), depending on the endpoint.
 Catalogs and Collections are JSON, while Items and ItemCollections are GeoJSON-compliant entities with foreign members.  
 Typically, a Feature is used when returning a single Item, and FeatureCollection when multiple Items (rather than a JSON array of Item entities).
 
 The API is compliant with the *[OGC API - Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html)* standard 
 (formerly known as *OGC Web Feature Service 3*), in that it defines many of the endpoints that STAC uses. A STAC API should be 
 compatible and usable with any OGC API - Features clients. The STAC API can be thought of as a specialized Features API 
-to search STAC Catalogs, where the features returned are STAC [Items](https://github.com/radiantearth/stac-spec/item-spec/item-spec.md), 
+to search STAC Catalogs, where the features returned are STAC [Items](./stac-spec/item-spec/item-spec.md), 
 that have common properties, links to their assets and geometries that represent the footprints of the geospatial assets.
 
 ## WARNING

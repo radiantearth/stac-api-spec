@@ -7,7 +7,7 @@ OGC Web Feature Service (WFS). Future STAC API releases will align with
 
 The OGC API - Features is a standard API that represents collections of geospatial data. It defines the RESTful interface 
 to query geospatial data, with GeoJSON as a main return type. With OAFeat you can return any `Feature`, which is a geometry 
-plus any number of properties. The core [STAC Item spec](https://github.com/radiantearth/stac-spec/item-spec/README.md) 
+plus any number of properties. The core [STAC Item spec](./stac-spec/item-spec/README.md) 
 enhances the core `Feature` with additional requirements and options to enable cataloging of spatiotemporal 'assets' like 
 satellite imagery. This STAC `Item` always links to an asset, and these assets always have a capture time, so it requires 
 fields for `datetime` and `assets`. The STAC API extends the OAFeat core with some key functionality to enable search of 
@@ -16,13 +16,13 @@ geospatial assets, detailed below.
 OAFeat also defines the concept of a Collection, which contains Features. In OAFeat Collections are the sets of data that can 
 be queried ([7.11](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_collections_)), and each describes basic 
 information about the geospatial dataset, like its name and description, as well as the spatial and temporal extents of all 
-the data contained. [STAC collections](https://github.com/radiantearth/stac-spec/collection-spec/README.md) contain this same 
+the data contained. [STAC collections](./stac-spec/collection-spec/README.md) contain this same 
 information, along with other STAC specific fields to provide additional metadata for searching spatiotemporal assets, and 
 thus are compliant with both OAFeat Collections and STAC Collections and are returned from the `/collections/{collection_id}` 
 endpoint.
 
 In OAFeat Features are the individual records within a Collection and are provided in GeoJSON format. 
-[STAC Items](https://github.com/radiantearth/stac-spec/item-spec/README.md) are analogous to OAFeat Features, are in GeoJSON, and are returned from the 
+[STAC Items](./stac-spec/item-spec/README.md) are analogous to OAFeat Features, are in GeoJSON, and are returned from the 
 `/collections/{collection_id}/items/{item_id}` endpoint.
 
 A typical OAFeat will have multiple collections, and each will just offer simple search for its particular collection at 
@@ -103,7 +103,7 @@ See the [OpenAPI specification document](openapi/STAC.yaml).
 | Endpoint      | Returns | Description |
 | ------------- | ------- | ----------- |
 | /             | Catalog | Extends `/` from OAFeat to return a full STAC catalog. |
-| /search       | [ItemCollection](https://github.com/radiantearth/stac-spec/item-spec/itemcollection-spec.md) | Retrieves a group of Items matching the 
+| /search       | [ItemCollection](./stac-spec/item-spec/itemcollection-spec.md) | Retrieves a group of Items matching the 
 provided search predicates, probably containing search metadata from the `search` extension |
 
 The `/` endpoint should function as a complete `Catalog` representation of all the data contained in the API and linked 
