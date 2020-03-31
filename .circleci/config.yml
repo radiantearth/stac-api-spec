@@ -14,4 +14,4 @@ jobs:
           command: npm install
       - run:
           name: validate
-          command: npm run check-links
+          command: npm run check
