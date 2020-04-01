@@ -2,42 +2,38 @@
 
 ## OGC API - Features (OAFeat)
 
-Note that the OAFeat endpoints _only_ supports HTTP GET. HTTP POST requests are not supported.
+Note that the OAFeat endpoints *only* supports HTTP GET. HTTP POST requests are not supported.
 
 Request all the data in `mycollection` that is in New Zealand:
 
-```
+```http
 GET /collections/mycollection/items?bbox=160.6,-55.95,-170,-25.89
 ```
 
 Request 100 results in `mycollection` from New Zealand:
 
-```
+```http
 GET /collections/mycollection/items?bbox=160.6,-55.95,-170,-25.89&limit=100
 ```
 
 Request all the data in `mycollection` that is in New Zealand from January 1st, 2019:
 
-```
+```http
 GET /collections/mycollection/items?bbox=160.6,-55.95,-170,-25.89&datetime=2019-01-01T00:00:00Z/2019-01-01T23:59:59ZZ
 ```
 
 Request 10 results from the data in `mycollection` from between January 1st (inclusive) and April 1st, 2019 (exclusive):
 
-```
+```http
 GET /collections/mycollection/items?datetime=2019-01-01T00:00:00Z/2019-03-31T23:59:59Z&limit=10
 ```
 
 ## STAC API
 
-Use the _[Query](extensions/query/README.md)_ extension to search for any data falling within a specific geometry 
+Use the *[Query](extensions/query/README.md)* extension to search for any data falling within a specific geometry 
 collected between Jan 1st and May 1st, 2019:
 
-```
-POST /search
-```
-
-Body:
+Request to `POST /search`:
 ```json
 {
     "limit": 100,
@@ -55,15 +51,14 @@ Body:
 
 ### Paging
 
-#### Simple GET based search:
+#### Simple GET based search
 Request:
-```
+```http
 HTTP GET /search?bbox=-110,39.5,-105,40.5
 ```
 
-Response:
+Response with `200 OK`:
 ```json
-200 OK
 {
     "type": "FeatureCollection",
     "features": [],
@@ -77,18 +72,16 @@ Response:
 ```
 Following the link `http://api.cool-sat.com/search?page=2` will send the user to the next page of results.
 
-#### POST search with body and merge fields:
-Request:
+#### POST search with body and merge fields
+Request to `HTTP POST /search`:
 ```json
-HTTP POST /search
 {
     "bbox": [-110, 39.5, -105, 40.5]
 }
 ```
 
-Response:
+Response with `200 OK`:
 ```json
-200 OK
 {
     "type": "FeatureCollection",
     "features": [],
@@ -110,9 +103,8 @@ Response:
 This tells the client to POST to the search endpoint using the original request with the `page` and `limit` fields 
 merged in to obtain the next set of results:
 
-Request:
+Request to `POST /search`:
 ```json
-POST /search
 {
     "bbox": [-110, 39.5, -105, 40.5],
     "page": 2,
@@ -123,9 +115,8 @@ POST /search
 This can be even more effective when using continuation tokens on the server, as the entire request body need not be 
 repeated in the subsequent request:
 
-Response:
+Response with `200 OK`:
 ```json
-200 OK
 {
     "rel": "next",
     "href": "http://api.cool-sat.com/search",
@@ -137,18 +128,16 @@ Response:
 ```
 The above link tells the client not to merge (default of false) so it is only required to pass the next token in the body.
 
-Request:
+Request to `POST /search`:
 ```json
-POST /search
 {
     "next": "a9f3kfbc98e29a0da23"
 }
 ```
 
-#### POST search using headers:
-Request:
+#### POST search using headers
+Request to `HTTP POST /search`:
 ```json
-HTTP POST /search
 {
     "bbox": [-110, 39.5, -105, 40.5],
     "page": 2,
@@ -156,9 +145,8 @@ HTTP POST /search
 }
 ```
 
-Response:
+Response with `200 OK`:
 ```json
-200 OK
 {
     "type": "FeatureCollection",
     "features": [],
@@ -178,8 +166,7 @@ Response:
 This tells the client to POST to the search endpoint with the header `Search-After` to obtain the next set of results:
 
 Request:
-```json
+```http
 POST /search
 Search-After: LC81530752019135LGN00
 ```
-

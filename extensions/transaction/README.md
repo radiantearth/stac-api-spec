@@ -2,7 +2,8 @@
 
 **Extension [Maturity Classification](../README.md#extension-maturity): Pilot**
 
-The core API doesn't support adding, editing, or removing items. The transaction API extension supports the creation, editing, and deleting of items through POST, PUT, PATCH, and DELETE requests.
+The core API doesn't support adding, editing, or removing items.
+The transaction API extension supports the creation, editing, and deleting of items through POST, PUT, PATCH, and DELETE requests.
 
 Transactions support optimistic locking through use of the ETag header.
 

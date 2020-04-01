@@ -32,7 +32,7 @@ Examples of `sortby` parameter:
     
 Note that examples 1 and 2 are symantically equivalent, as well as examples 3 and 4.
 
-# HTTP POST JSON Entity
+## HTTP POST JSON Entity
 
 When calling `/search` using POST with`Content-Type: application/json`, this extension adds an attribute `sortby` with 
 an object value to the core JSON search request body.
@@ -72,4 +72,3 @@ The syntax for the `sortby` attribute is:
     ]
 }
 ```
-
