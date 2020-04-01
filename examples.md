@@ -30,7 +30,7 @@ GET /collections/mycollection/items?datetime=2019-01-01T00:00:00Z/2019-03-31T23:
 
 ## STAC API
 
-Use the *[Query](extensions/query/README.md)* extension to search for any data falling within a specific geometry 
+Use the _[Query](extensions/query/README.md)_ extension to search for any data falling within a specific geometry 
 collected between Jan 1st and May 1st, 2019:
 
 ```
@@ -75,7 +75,7 @@ Response:
     ]
 }
 ```
-Following the link http://api.cool-sat.com/search?page=2 will send the user to the next page of results.
+Following the link `http://api.cool-sat.com/search?page=2` will send the user to the next page of results.
 
 #### POST search with body and merge fields:
 Request:

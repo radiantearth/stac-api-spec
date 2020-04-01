@@ -85,7 +85,7 @@ The core OGC API - Features endpoints are shown below, with details provided in 
 | ------------ | ------------- | ----------- |
 | /            | JSON          | Landing page, links to API capabilities |
 | /conformance | JSON          | Info about standards to which the API conforms |
-| /collections | [Collection]  | List of Collections contained in the catalog |
+| /collections | \[Collection]  | List of Collections contained in the catalog |
 | /collections/{collectionId}  | Collection | Returns single Collection JSON |
 | /collections/{collectionId}/items | ItemCollection | GeoJSON FeatureCollection-conformant entity of Items in collection |
 | /collections/{collectionId}/items/{featureId} | Item | Returns single Item (GeoJSON Feature) |
@@ -102,9 +102,8 @@ See the [OpenAPI specification document](openapi/STAC.yaml).
 
 | Endpoint      | Returns | Description |
 | ------------- | ------- | ----------- |
-| /             | Catalog | Extends `/` from OAFeat to return a full STAC catalog. |
-| /search       | [ItemCollection](./stac-spec/item-spec/itemcollection-spec.md) | Retrieves a group of Items matching the 
-provided search predicates, probably containing search metadata from the `search` extension |
+| /             | [Catalog](./stac-spec/catalog-spec/catalog-spec.md) | Extends `/` from OAFeat to return a full STAC catalog. |
+| /search       | [ItemCollection](./stac-spec/item-spec/itemcollection-spec.md) | Retrieves a group of Items matching the provided search predicates, probably containing search metadata from the `search` extension |
 
 The `/` endpoint should function as a complete `Catalog` representation of all the data contained in the API and linked 
 to in some way from root through `Collections` and `Items`.
@@ -127,11 +126,11 @@ string values and JSON entity attributes should use JSON Arrays.
 | -----------  | ---------------- | ------------ | ---------------------- |
 | collectionId | string           | OAFeat       | **Path-only** Single Collection ID to include in the search for items. Only Items in one of the provided Collection will be searched |
 | limit        | integer          | OAFeat, STAC | The maximum number of results to return (page size). Defaults to 10 |
-| bbox         | [number]         | OAFeat, STAC | Requested bounding box.  Represented using either 2D or 3D geometries. The length of the array must be 2*n where n is the number of dimensions. The array contains all axes of the southwesterly most extent followed by all axes of the northeasterly most extent specified in Longitude/Latitude or Longitude/Latitude/Elevation based on [WGS 84](http://www.opengis.net/def/crs/OGC/1.3/CRS84). When using 3D geometries, the elevation of the southwesterly most extent is the minimum elevation in meters and the elevation of the northeasterly most extent is the maximum. |
+| bbox         | \[number]         | OAFeat, STAC | Requested bounding box.  Represented using either 2D or 3D geometries. The length of the array must be 2*n where n is the number of dimensions. The array contains all axes of the southwesterly most extent followed by all axes of the northeasterly most extent specified in Longitude/Latitude or Longitude/Latitude/Elevation based on [WGS 84](http://www.opengis.net/def/crs/OGC/1.3/CRS84). When using 3D geometries, the elevation of the southwesterly most extent is the minimum elevation in meters and the elevation of the northeasterly most extent is the maximum. |
 | datetime     | string           | OAFeat, STAC | Single date+time, or a range ('/' seperator), formatted to [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). Use double dots `..` for open date ranges. |
 | intersects   | GeoJSON Geometry | STAC         | Searches items by performing intersection between their geometry and provided GeoJSON geometry.  All GeoJSON geometry types must be supported. |
-| ids | [string] | STAC | Array of Item ids to return. All other filter parameters that further restrict the number of search results (except `next` and `limit`) are ignored |
-| collections  | [string]         | STAC         | Array of Collection IDs to include in the search for items. Only Items in one of the provided Collections will be searched |
+| ids | \[string] | STAC | Array of Item ids to return. All other filter parameters that further restrict the number of search results (except `next` and `limit`) are ignored |
+| collections  | \[string]         | STAC         | Array of Collection IDs to include in the search for items. Only Items in one of the provided Collections will be searched |
 
 Only one of either **intersects** or **bbox** should be specified.  If both are specified, a 400 Bad Request response 
 should be returned. 
@@ -151,7 +150,7 @@ These parameters and fields are reserved for the Fields extension.
 
 | Parameter | Type              | APIs       | Description |
 | --------- | ----------------- | ---------- | ----------- |
-| fields    | string \| [Field] | Placeholder parameter for [API Fields Extension](extensions/fields/README.md). |
+| fields    | string \| \[Field] | Placeholder parameter for [API Fields Extension](extensions/fields/README.md). |
 
 ### Sort Extension
 
@@ -159,7 +158,7 @@ These parameters and fields are reserved for the Sort extension.
 
 | Parameter | Type             | APIs       | Description |
 | --------- | ---------------- | ---------- | ----------- |
-| sort      | string \| [Sort] | Placeholder parameter for [API Sort Extension](extensions/sort/README.md). |
+| sort      | string \| \[Sort] | Placeholder parameter for [API Sort Extension](extensions/sort/README.md). |
 
 ### Query Extension
 

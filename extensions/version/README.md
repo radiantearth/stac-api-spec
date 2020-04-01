@@ -6,12 +6,12 @@ The core API doesn't support semantics to creating and accessing different versi
 
 ## Methods
 
-| Path                                                  | Content-Type Header | Description |
-| ----------------------------------------------------- | ------------------- | ----------- |
-| `GET /collections/{collectionID}/versions`              | `application/json`  | Returns a catalog response with links to all versions of a given collection. |
-| `GET /collections/{collectionID}/versions/{versionId}`              | `application/json`  | Returns a collection record. |
-| `GET /collections/{collectionID}/items/{featureId}/versions`              | `application/json`  | Returns a catalog response with links to all versions of a given item. |
-| `GET /collections/{collectionID}/items/{featureId}/versions/{versionId}`              | `application/json`  | Returns an item record. |
+| Path                                                                     | Content-Type Header | Description |
+| ------------------------------------------------------------------------ | ------------------- | ----------- |
+| `GET /collections/{collectionID}/versions`                               | `application/json`  | Returns a catalog response with links to all versions of a given collection. |
+| `GET /collections/{collectionID}/versions/{versionId}`                   | `application/json`  | Returns a collection record. |
+| `GET /collections/{collectionID}/items/{featureId}/versions`             | `application/json`  | Returns a catalog response with links to all versions of a given item. |
+| `GET /collections/{collectionID}/items/{featureId}/versions/{versionId}` | `application/json`  | Returns an item record. |
 
 ## How It Works
 
@@ -37,11 +37,11 @@ The extension uses [RFC5829](https://tools.ietf.org/html/rfc5829) rel types to l
 
 | Type                | Description |
 | ------------------- | ----------- |
-| latest-version      | Points to the latest version of the record |
-| version-history     | Points to the list of versions |
-| predecessor-version | Points to the previous version of the document |
+| latest-version      | Points to the latest version of the record. |
+| version-history     | Points to the list of versions. |
+| predecessor-version | Points to the previous version of the document. |
 | successor-version   | Points to the successor version in the version history. |
-| permalink | Points to the permanent location of the record. This location points to a specific version, remains accessible and will not change even when there are future versions of the record. 
+| permalink           | Points to the permanent location of the record. This location points to a specific version, remains accessible and will not change even when there are future versions of the record. |
 
 ## Example
 For an item record with the id `this_is_my_id` and version of `02`, this is how the versioning works
@@ -148,7 +148,7 @@ GET /collections/my_collection/items/this_is_my_id/versions/01
 
 By going to `/collections/{collectionID}/items/{itemsId}` or by looking at `"rel": "latest-version"`.
 
-** How do I find the permalink of an item I'm looking at?**
+**How do I find the permalink of an item I'm looking at?**
 
 By looking at the `href` value of a link with `"rel": "permalink"`
 
@@ -156,6 +156,6 @@ By looking at the `href` value of a link with `"rel": "permalink"`
 
 By going to `/collections/{collectionID}/items/{itemsId}/versions`
 
-** How do I find the order of versions? **
+**How do I find the order of versions?**
 
 By following the `"rel": "predecessor-version"` links.
