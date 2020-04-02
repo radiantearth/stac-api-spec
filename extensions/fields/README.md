@@ -59,7 +59,7 @@ in the attributes of `properties`.
 Return baseline fields.  This **must** return valid STAC Item entities. 
 
 Query Parameters
-```
+```http
 ?fields=
 ```
 
@@ -74,7 +74,7 @@ JSON
 This has a similar effect as an empty object for `fields`, but it is up to the discretion of the implementation 
 
 Query Parameters
-```
+```http
 ?fields=id,type,geometry,bbox,properties,links,assets
 ```
 
@@ -98,7 +98,7 @@ JSON
 Exclude `geometry` from the baseline fields.  This **must** return an entity that is not a valid GeoJSON Feature or a valid STAC Item.
 
 Query Parameters
-```
+```http
 ?fields=-geometry
 ```
 
@@ -113,10 +113,13 @@ JSON
 }
 ```
 
-To return the `id`, `type`, `geometry`, and the Properties attribute `eo:cloud_cover`.  This **must** return a valid STAC Item, as the includes are added to the default includes. Explicitly specifying `id`, `type`, and `geometry` has not effect as these are default fields, but `properties.eo:cloud_cover` is not a default field and thereby should be in the response.
+To return the `id`, `type`, `geometry`, and the Properties attribute `eo:cloud_cover`.
+This **must** return a valid STAC Item, as the includes are added to the default includes.
+Explicitly specifying `id`, `type`, and `geometry` has not effect as these are default fields,
+but `properties.eo:cloud_cover` is not a default field and thereby should be in the response.
 
 Query Parameters
-```
+```http
 ?fields=id,type,geometry,properties.eo:cloud_cover
 ```
 
@@ -137,12 +140,12 @@ JSON
 To include `id` and all the properties fields, except for the `foo` field.
 
 Query Parameters
-```
+```http
 ?fields=id,properties,-properties.foo
 ```
 
 also valid:
-```
+```http
 ?fields=+id,+properties,-properties.foo
 ```
 

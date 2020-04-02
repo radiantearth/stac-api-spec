@@ -24,19 +24,15 @@ provided before the field name, it will be assumed to be "+".
 
 Examples of `sortby` parameter:
 
-    1. GET /search?sortby=properties.created
-    
-    2. GET /search?sortby=+properties.created
-    
-    3. GET /search?sortby=properties.created,-id
-    
-    4. GET /search?sortby=+properties.created,-id
-    
-    5. GET /search?sortby=-properties.eo:cloud_cover
+1. `GET /search?sortby=properties.created`
+2. `GET /search?sortby=+properties.created`
+3. `GET /search?sortby=properties.created,-id`
+4. `GET /search?sortby=+properties.created,-id`
+5. `GET /search?sortby=-properties.eo:cloud_cover`
     
 Note that examples 1 and 2 are symantically equivalent, as well as examples 3 and 4.
-ß
-# HTTP POST JSON Entity
+
+## HTTP POST JSON Entity
 
 When calling `/search` using POST with`Content-Type: application/json`, this extension adds an attribute `sortby` with 
 an object value to the core JSON search request body.
@@ -76,4 +72,3 @@ The syntax for the `sortby` attribute is:
     ]
 }
 ```
-
