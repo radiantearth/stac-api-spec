@@ -85,7 +85,7 @@ The core OGC API - Features endpoints are shown below, with details provided in 
 | ----------------------------------------------- | -------------- | ----------- |
 | `/`                                             | JSON           | Landing page, links to API capabilities |
 | `/conformance`                                  | JSON           | Info about standards to which the API conforms |
-| `/collections`                                  | \[Collection]  | List of Collections contained in the catalog |
+| `/collections`                                  | JSON           | Object with a list of Collections contained in the catalog and links |
 | `/collections/{collectionId}`                   | Collection     | Returns single Collection JSON |
 | `/collections/{collectionId}/items`             | ItemCollection | GeoJSON FeatureCollection-conformant entity of Items in collection |
 | `/collections/{collectionId}/items/{featureId}` | Item           | Returns single Item (GeoJSON Feature) |
@@ -101,7 +101,7 @@ Note that a STAC API does not need to implement OAFeat, in which case it would o
 See the [OpenAPI specification document](openapi/STAC.yaml).
 
 | Endpoint  | Returns                                                        | Description |
-| --------  | ------------------------------------------------- ------------ | ----------- |
+| --------  | -------------------------------------------------------------- | ----------- |
 | `/`       | [Catalog](./stac-spec/catalog-spec/catalog-spec.md)            | Extends `/` from OAFeat to return a full STAC catalog. |
 | `/search` | [ItemCollection](./stac-spec/item-spec/itemcollection-spec.md) | Retrieves a group of Items matching the provided search predicates, probably containing search metadata from the `search` extension |
 
