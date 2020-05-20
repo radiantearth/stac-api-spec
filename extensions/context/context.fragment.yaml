@@ -6,9 +6,12 @@ components:
         'context':
           type: object
           required:
-            - next
             - returned
           properties:
+            returned:
+              type: integer
+              minimum: 0
+              example: 1
             limit:
               type: integer
               nullable: true
@@ -17,8 +20,4 @@ components:
             matched:
               type: integer
               minimum: 0
-              example: 1
-            returned:
-              type: integer
-              minimum: 0
-              example: 1
+              example: 314159
