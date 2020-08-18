@@ -1,6 +1,8 @@
 # Aggregation Extension
 
-The purpose of the Aggregation Extension is to provide an endpoint similar to the Search endpoint (`/search`), but which will provide aggregated information on matching Items rather than the Items themselves. This is highly influenced by the Elasticsearch aggregation endpoint, but with a more regular structure for responses.
+The purpose of the Aggregation Extension is to provide an endpoint similar to the Search endpoint (`/search`), but which will provide aggregated information on matching Items rather than the Items themselves. This is useful when a dataset is very large, and it is infeasible to example all results.  This is particularly useful in data exploration, whereby a user of the data can change queries to see the "shape" of the results for a given query. 
+
+This is highly influenced by the Elasticsearch aggregation endpoint, but with a more regular structure for responses.
 
 ## STAC Endpoints
 
