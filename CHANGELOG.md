@@ -14,6 +14,7 @@ For changes in 0.9.0 and prior, see the [STAC Spec Changelog](https://github.com
 
 ### Changed
 - Context Extension OpenAPI spec was updated to remove the no longer used `next` attribute
+- Added root endpoint Link `search` must have `type` of `application/geo+json`
 
 ### Fixed
 
