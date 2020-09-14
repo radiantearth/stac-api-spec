@@ -92,10 +92,10 @@ The `/collections/{collection_id}/items` endpoint accepts parameters for filteri
 Items in the collection should match all filters to be returned when querying. This implies a logical AND operation. If 
 an OR operation is needed, it should be specified through an extension filter.
 
-## STAC Endpoints
+## STAC API Endpoints
 
-STAC provides some additional endpoints for the root Catalog itself, as well as the capability to search the Catalog. 
-Note that a STAC API does not need to implement OAFeat, in which case it would only support the endpoints given below. 
+STAC API provides additional attributes for the root Catalog endpoint and defines an endpoint to search the Catalog. 
+Note that a STAC API does not need to implement OAFeat, in which case it would support only the endpoints below. 
 See the [OpenAPI specification document](openapi/STAC.yaml).
 
 | Endpoint      | Returns | Description |
@@ -105,15 +105,22 @@ See the [OpenAPI specification document](openapi/STAC.yaml).
 provided search predicates, probably containing search metadata from the `search` extension |
 
 The `/` endpoint should function as a complete `Catalog` representation of all the data contained in the API and linked 
-to in some way from root through `Collections` and `Items`.
+to in some way from root to `Collections` and `Items` through `children` and `child` Links.
 
 The `/search` endpoint is similar to the `/collections/{collectionId}/items` endpoint in OGC API - Features in that it 
 accepts parameters for filtering, however it performs the filtering across all collections. The parameters accepted are 
 the same as the Filter Parameters above, however the *[extensions](extensions/README.md)* also provide advanced querying 
 parameters.
 
-If the `/search` endpoint is implemented, it is **required** to add a link with the `rel` type set to `search` to the 
-`links` array in `/` that refers to the search endpoint in the `href` property.
+It is **required** to add to the root endpoint (`/`) object a Link in the `links` array with the `rel` type set to `search`  that refers to the search endpoint in the `href` property, with a `type` of `application/geo+json`. This Link should look like:
+```
+{
+    "href": "https://example.com/search",
+    "rel": "search",
+    "title": "Search",
+    "type": "application/geo+json"
+}
+```
 
 ## Filter Parameters and Fields
 
