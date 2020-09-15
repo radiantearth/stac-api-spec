@@ -111,7 +111,7 @@ accepts parameters for filtering; however, it performs the filtering across all 
 the same as the Filter Parameters above; however, the *[extensions](extensions/README.md)* also provide advanced querying 
 parameters.
 
-It is **required** to add to the root endpoint (`/`) object a Link in the `links` array with the `rel` type set to `search`  that refers to the search endpoint in the `href` property, with a `type` of `application/geo+json`. This Link should look like:
+If the `/search` endpoint is implemented, it is recommended to add a Link to the root endpoint (`/`) with the `rel` type set to `search` that refers to the search endpoint in the `href` property, with a `type` of `application/geo+json`. This Link should look like:
 ```
 {
     "href": "https://example.com/search",
