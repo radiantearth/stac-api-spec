@@ -104,12 +104,11 @@ See the [OpenAPI specification document](openapi/STAC.yaml).
 | /search       | [ItemCollection](../item-spec/itemcollection-spec.md) | Retrieves a group of Items matching the 
 provided search predicates, probably containing search metadata from the `search` extension |
 
-The `/` endpoint should function as a complete `Catalog` representation of all the data contained in the API and linked 
-to in some way from root to `Collections` and `Items` through `children` and `child` Links.
+The root endpoint (`/`) should function as a complete `Catalog` representation of all the data contained in the API. All `Collections` and `Items` should be linked to from the root through a `data` Link (returning all `Collections`), one or more `child` Links each referencing a single `Collection`, and a `search` Link referencing the `/search` endpoint.
 
-The `/search` endpoint is similar to the `/collections/{collectionId}/items` endpoint in OGC API - Features in that it 
-accepts parameters for filtering, however it performs the filtering across all collections. The parameters accepted are 
-the same as the Filter Parameters above, however the *[extensions](extensions/README.md)* also provide advanced querying 
+The `/search` endpoint is similar to the `/collections/{collectionId}/items` endpoint in OAFeat in that it 
+accepts parameters for filtering; however, it performs the filtering across all collections. The parameters accepted are 
+the same as the Filter Parameters above; however, the *[extensions](extensions/README.md)* also provide advanced querying 
 parameters.
 
 It is **required** to add to the root endpoint (`/`) object a Link in the `links` array with the `rel` type set to `search`  that refers to the search endpoint in the `href` property, with a `type` of `application/geo+json`. This Link should look like:
