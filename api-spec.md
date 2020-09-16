@@ -104,14 +104,19 @@ See the [OpenAPI specification document](openapi/STAC.yaml).
 | /search       | [ItemCollection](../item-spec/itemcollection-spec.md) | Retrieves a group of Items matching the 
 provided search predicates, probably containing search metadata from the `search` extension |
 
-The root endpoint (`/`) should function as a complete `Catalog` representation of all the data contained in the API. All `Collections` and `Items` should be linked to from the root through a `data` Link (returning all `Collections`), one or more `child` Links each referencing a single `Collection`, and a `search` Link referencing the `/search` endpoint.
+The root endpoint (`/`) is most useful when it presents a complete `Catalog` representation of all the data contained in the API, such that all `Collections` and `Items` can be navigated to by transitively traversing links from this root. This spec does not require any API endpoints from OAFeat or STAC API to be implemented, so these links may not exist if the endpoint has not been implemented.
+
+Links with these `rel` attributes should exist in the root endpoint if the reference API endpoint is implemented:
+* `data` with href to the OAFeat `/collections` endpoint
+* `child` (one or more) with href to a single `Collection` at the OAFeat `/collections/{collectionId}` endpoint
+* `search` with href to the `/search` endpoint (**required** if search endpoint is implemented)
 
 The `/search` endpoint is similar to the `/collections/{collectionId}/items` endpoint in OAFeat in that it 
 accepts parameters for filtering; however, it performs the filtering across all collections. The parameters accepted are 
 the same as the Filter Parameters above; however, the *[extensions](extensions/README.md)* also provide advanced querying 
 parameters.
 
-If the `/search` endpoint is implemented, it is recommended to add a Link to the root endpoint (`/`) with the `rel` type set to `search` that refers to the search endpoint in the `href` property, with a `type` of `application/geo+json`. This Link should look like:
+If the `/search` endpoint is implemented, it is **required** to add a Link to the root endpoint (`/`) with the `rel` type set to `search` that refers to the search endpoint in the `href` property, with a `type` of `application/geo+json`. This Link should look like:
 ```
 {
     "href": "https://example.com/search",
