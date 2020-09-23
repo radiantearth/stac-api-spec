@@ -83,10 +83,12 @@ The core OGC API - Features endpoints are shown below, with details provided in 
 | ------------ | ------------- | ----------- |
 | /            | JSON          | Landing page, links to API capabilities |
 | /conformance | JSON          | Info about standards to which the API conforms |
-| /collections | [Collection]  | List of Collections contained in the catalog |
+| /collections | JSON          | List of Collections contained in the catalog |
 | /collections/{collectionId}  | Collection | Returns single Collection JSON |
 | /collections/{collectionId}/items | ItemCollection | GeoJSON FeatureCollection-conformant entity of Items in collection |
 | /collections/{collectionId}/items/{featureId} | Item | Returns single Item (GeoJSON Feature) |
+
+The `/collections` endpoint returns an object with a field `collections` that is an array of Collection objects.
 
 The `/collections/{collection_id}/items` endpoint accepts parameters for filtering the results (also called filters). 
 Items in the collection should match all filters to be returned when querying. This implies a logical AND operation. If 
