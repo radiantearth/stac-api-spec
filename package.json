@@ -1,18 +1,29 @@
 {
   "name": "api-spec",
   "version": "0.9.0",
-  "description": "Generate STAC openapi defintions from fragments.",
-  "repository": "https://github.com/radiantearth/stac-spec",
+  "description": "STAC API helpers to generate, serve and check the API spec.",
+  "repository": "https://github.com/radiantearth/stac-api-spec",
   "license": "Apache-2.0",
   "scripts": {
     "generate-ext": "yaml-files extensions/STAC-extensions.merge.yaml STAC-extensions.yaml",
     "generate-core": "yaml-files openapi/STAC.merge.yaml STAC.yaml",
     "generate-all": "npm run generate-core && npm run generate-ext",
     "serve-ext": "npm run generate-all && redoc-cli serve STAC-extensions.yaml --watch --options.expandResponses \"200,201,202,203,204\" --options.pathInMiddlePanel true",
-    "serve": "npm run generate-all && redoc-cli serve STAC.yaml --watch --options.expandResponses \"200,201,202,203,204\" --options.pathInMiddlePanel true"
+    "serve": "npm run generate-all && redoc-cli serve STAC.yaml --watch --options.expandResponses \"200,201,202,203,204\" --options.pathInMiddlePanel true",
+    "check": "npm run check-markdown && npm run check-openapi",
+    "check-markdown": "remark . -f -r .circleci/rc.yaml",
+    "check-openapi": "npm run generate-all && spectral lint STAC.yaml && spectral lint STAC-extensions.yaml"
   },
   "dependencies": {
+    "@stoplight/spectral": "^5.2.0",
     "redoc-cli": "^0.9.4",
+    "remark-cli": "^8.0.0",
+    "remark-lint": "^7.0.0",
+    "remark-lint-no-html": "^2.0.0",
+    "remark-preset-lint-consistent": "^3.0.0",
+    "remark-preset-lint-markdown-style-guide": "^3.0.0",
+    "remark-preset-lint-recommended": "^4.0.0",
+    "remark-validate-links": "^10.0.0",
     "yaml-files": "^1.1.0"
   }
 }

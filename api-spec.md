@@ -1,26 +1,28 @@
 # STAC API Specification
 
 The STAC API is intended to be a superset of the *OGC API - Features - Part 1: Core* (OAFeat) standard. STAC API 
-currently bases on [OAFeat version 1.0](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html), previously known as 
-OGC Web Feature Service (WFS). We'll try to align with 
+currently is based on [OAFeat version 1.0](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html), previously known as 
+OGC Web Feature Service (WFS). Future STAC API releases will align with 
 [upcoming versions](https://github.com/opengeospatial/ogcapi-features).
 
-The OGC API - Features is a standard API that represents collections of geospatial data. It is the latest iteration of 
-that standard and defines the RESTful interface to query geospatial data, with GeoJSON as a main return type. With 
-OAFeat you can return any `Feature`, which is a geometry plus any number of properties. In the STAC specification an 
-`Item` is a `Feature`, with additional required fields for `datetime` and `assets`. OAFeat also defines the concept of 
-a Collection, which contains Features. A STAC `Collection` aligns with (and extends slightly) a OAFeat `Collection`; it 
-contains Items.
+The OGC API - Features is a standard API that represents collections of geospatial data. It defines the RESTful interface 
+to query geospatial data, with GeoJSON as a main return type. With OAFeat you can return any `Feature`, which is a geometry 
+plus any number of properties. The core [STAC Item spec](./stac-spec/item-spec/README.md) 
+enhances the core `Feature` with additional requirements and options to enable cataloging of spatiotemporal 'assets' like 
+satellite imagery. This STAC `Item` always links to an asset, and these assets always have a capture time, so it requires 
+fields for `datetime` and `assets`. The STAC API extends the OAFeat core with some key functionality to enable search of 
+geospatial assets, detailed below.
 
-In OAFeat Collections are the sets of data that can be queried 
-([7.11](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_collections_)), and each describes basic information 
-about the geospatial dataset, like its name and description, as well as the spatial and temporal extents of all the data 
-contained. [STAC collections](../collection-spec/README.md) contain this same information, along with other STAC 
-specific fields and thus are compliant with both OAFeat Collections and STAC Collections and is returned from the 
-`/collections/{collection_id}` endpoint.
+OAFeat also defines the concept of a Collection, which contains Features. In OAFeat Collections are the sets of data that can 
+be queried ([7.11](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_collections_)), and each describes basic 
+information about the geospatial dataset, like its name and description, as well as the spatial and temporal extents of all 
+the data contained. [STAC collections](./stac-spec/collection-spec/README.md) contain this same 
+information, along with other STAC specific fields to provide additional metadata for searching spatiotemporal assets, and 
+thus are compliant with both OAFeat Collections and STAC Collections and are returned from the `/collections/{collection_id}` 
+endpoint.
 
 In OAFeat Features are the individual records within a Collection and are provided in GeoJSON format. 
-[STAC Items](../item-spec/README.md) are analogous to OAFeat Features, are in GeoJSON, and are returned from the 
+[STAC Items](./stac-spec/item-spec/README.md) are analogous to OAFeat Features, are in GeoJSON, and are returned from the 
 `/collections/{collection_id}/items/{item_id}` endpoint.
 
 A typical OAFeat will have multiple collections, and each will just offer simple search for its particular collection at 
@@ -43,12 +45,12 @@ STAC API.
 The OAFeat and STAC APIs follow a RESTful model. A core principal of this is the use of HTTP Request Methods ("verbs") and
 the `Content-Type` header to drive behavior on resources ("nouns"). This section describes how these are used in the OAFeat and STAC endpoints. 
 
-#### GET
+### GET
 
 **Required**: OAFeat 1.0 only specifies GET query parameters, and they are all required. STAC's cross-collection `/search` also requires
 GET queries for all implementations, and generally aligns with OAFeat's single Collection search. 
 
-#### POST
+### POST
 
 1. **Recommended** STAC `/search` is strongly recommended to implement POST `Content-Type: application/json`, where the content body is a JSON 
 object representing a query and filter, as defined in the [STAC API OpenAPI specification document](STAC.yaml). 
@@ -79,14 +81,15 @@ does implement them, for STAC and OAFeat implementations that want to enable wri
 The core OGC API - Features endpoints are shown below, with details provided in an 
 [OpenAPI specification document](openapi/OAFeat.yaml).
 
-| Endpoint     | Returns       | Description |
-| ------------ | ------------- | ----------- |
-| /            | JSON          | Landing page, links to API capabilities |
-| /conformance | JSON          | Info about standards to which the API conforms |
-| /collections | JSON          | List of Collections contained in the catalog |
-| /collections/{collectionId}  | Collection | Returns single Collection JSON |
-| /collections/{collectionId}/items | ItemCollection | GeoJSON FeatureCollection-conformant entity of Items in collection |
-| /collections/{collectionId}/items/{featureId} | Item | Returns single Item (GeoJSON Feature) |
+| Endpoint                                        | Returns        | Description |
+| ----------------------------------------------- | -------------- | ----------- |
+| `/`                                             | JSON           | Landing page, links to API capabilities |
+| `/conformance`                                  | JSON           | Info about standards to which the API conforms |
+| `/collections`                                  | JSON           | Object with a list of Collections contained in the catalog and links |
+| `/collections/{collectionId}`                   | Collection     | Returns single Collection JSON |
+| `/collections/{collectionId}/items`             | ItemCollection | GeoJSON FeatureCollection-conformant entity of Items in collection |
+| `/collections/{collectionId}/items/{featureId}` | Item           | Returns single Item (GeoJSON Feature) |
+
 
 The `/collections` endpoint returns an object with a field `collections` that is an array of Collection objects.
 
@@ -100,11 +103,10 @@ STAC API provides additional attributes for the root Catalog endpoint and define
 Note that a STAC API does not need to implement OAFeat, in which case it would support only the endpoints below. 
 See the [OpenAPI specification document](openapi/STAC.yaml).
 
-| Endpoint      | Returns | Description |
-| ------------- | ------- | ----------- |
-| /             | Catalog | Extends `/` from OAFeat to return a full STAC catalog. |
-| /search       | [ItemCollection](../item-spec/itemcollection-spec.md) | Retrieves a group of Items matching the 
-provided search predicates, probably containing search metadata from the `search` extension |
+| Endpoint  | Returns                                                        | Description |
+| --------  | -------------------------------------------------------------- | ----------- |
+| `/`       | [Catalog](./stac-spec/catalog-spec/catalog-spec.md)            | Extends `/` from OAFeat to return a full STAC catalog. |
+| `/search` | [ItemCollection](./stac-spec/item-spec/itemcollection-spec.md) | Retrieves a group of Items matching the provided search predicates, probably containing search metadata from the `search` extension |
 
 The root endpoint (`/`) is most useful when it presents a complete `Catalog` representation of all the data contained in the API, such that all `Collections` and `Items` can be navigated to by transitively traversing links from this root. This spec does not require any API endpoints from OAFeat or STAC API to be implemented, so these links may not exist if the endpoint has not been implemented.
 
@@ -134,15 +136,15 @@ Unless otherwise noted by **Path-only**, these filters are passed as query strin
 entity fields.  For filters that represent a set of values, query and form parameters should use comma-separated 
 string values and JSON entity attributes should use JSON Arrays. 
 
-| Parameter    | Type             | APIs         | Description        |
-| -----------  | ---------------- | ------------ | ---------------------- |
+| Parameter    | Type             | APIs         | Description |
+| -----------  | ---------------- | ------------ | ----------- |
 | collectionId | string           | OAFeat       | **Path-only** Single Collection ID to include in the search for items. Only Items in one of the provided Collection will be searched |
 | limit        | integer          | OAFeat, STAC | The maximum number of results to return (page size). Defaults to 10 |
-| bbox         | [number]         | OAFeat, STAC | Requested bounding box.  Represented using either 2D or 3D geometries. The length of the array must be 2*n where n is the number of dimensions. The array contains all axes of the southwesterly most extent followed by all axes of the northeasterly most extent specified in Longitude/Latitude or Longitude/Latitude/Elevation based on [WGS 84](http://www.opengis.net/def/crs/OGC/1.3/CRS84). When using 3D geometries, the elevation of the southwesterly most extent is the minimum elevation in meters and the elevation of the northeasterly most extent is the maximum. |
-| datetime     | string           | OAFeat, STAC | Single date+time, or a range ('/' separator), formatted to [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). Use double dots `..` for open date ranges. |
+| bbox         | \[number]        | OAFeat, STAC | Requested bounding box.  Represented using either 2D or 3D geometries. The length of the array must be 2*n where n is the number of dimensions. The array contains all axes of the southwesterly most extent followed by all axes of the northeasterly most extent specified in Longitude/Latitude or Longitude/Latitude/Elevation based on [WGS 84](http://www.opengis.net/def/crs/OGC/1.3/CRS84). When using 3D geometries, the elevation of the southwesterly most extent is the minimum elevation in meters and the elevation of the northeasterly most extent is the maximum. |
+| datetime     | string           | OAFeat, STAC | Single date+time, or a range ('/' seperator), formatted to [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). Use double dots `..` for open date ranges. |
 | intersects   | GeoJSON Geometry | STAC         | Searches items by performing intersection between their geometry and provided GeoJSON geometry.  All GeoJSON geometry types must be supported. |
-| ids | [string] | STAC | Array of Item ids to return. All other filter parameters that further restrict the number of search results (except `next` and `limit`) are ignored |
-| collections  | [string]         | STAC         | Array of Collection IDs to include in the search for items. Only Items in one of the provided Collections will be searched |
+| ids          | \[string]        | STAC         | Array of Item ids to return. All other filter parameters that further restrict the number of search results (except `next` and `limit`) are ignored |
+| collections  | \[string]        | STAC         | Array of Collection IDs to include in the search for items. Only Items in one of the provided Collections will be searched |
 
 Only one of either **intersects** or **bbox** should be specified.  If both are specified, a 400 Bad Request response 
 should be returned. 
@@ -160,17 +162,17 @@ should be returned.
 
 These parameters and fields are reserved for the Fields extension.
 
-| Parameter | Type              | APIs       | Description |
-| --------- | ----------------- | ---------- | ----------- |
-| fields    | string \| [Field] | Placeholder parameter for [API Fields Extension](extensions/fields/README.md). |
+| Parameter | Type               | Description |
+| --------- | ------------------ | ----------- |
+| fields    | string \| \[Field] | Placeholder parameter for [API Fields Extension](extensions/fields/README.md). |
 
 ### Sort Extension
 
 These parameters and fields are reserved for the Sort extension.
 
-| Parameter | Type             | APIs       | Description |
-| --------- | ---------------- | ---------- | ----------- |
-| sort      | string \| [Sort] | Placeholder parameter for [API Sort Extension](extensions/sort/README.md). |
+| Parameter | Type              | Description |
+| --------- | ----------------- | ----------- |
+| sort      | string \| \[Sort] | Placeholder parameter for [API Sort Extension](extensions/sort/README.md). |
 
 ### Query Extension
 
@@ -178,8 +180,8 @@ These parameters and fields are reserved for query extensions.
 
 All Extensions **should** use attribute names qualified from the root of Item, rather than Item Properties.
 
-| Parameter | Type                  | APIs       | Description |
-| --------  | --------------------- | ---------- | ----------- |
+| Parameter | Type                  | Description |
+| --------  | --------------------- | ----------- |
 | query     | string \| QueryFilter | Placeholder parameter for [API Query Extension](extensions/query/README.md) query value. |
 
  **query** Represents a query in the query language.
@@ -206,9 +208,9 @@ parameter name is defined by the implementor and is not necessarily part of the 
 
 The href may contain any arbitrary URL parameter:
 
-* `http://api.cool-sat.com/search?page=2`
-* `http://api.cool-sat.com/search?next=8a35eba9c`
-* `http://api.cool-sat.com/search?token=f32890a0bdb09ac3`
+- `http://api.cool-sat.com/search?page=2`
+- `http://api.cool-sat.com/search?next=8a35eba9c`
+- `http://api.cool-sat.com/search?token=f32890a0bdb09ac3`
 
 OAFeat does not support POST requests for searches, however the STAC API spec does. Hypermedia links are not designed 
 for anything other than GET requests, so providing a next link for a POST search request becomes problematic. STAC has 
@@ -217,12 +219,12 @@ execute a subsequent request for the next page of results.
 
 The following fields have been added to the `link` object specification for the API spec:
 
-| Parameter | Type             | Description |
-| --------- | ---------------- | ----------- |
-| method    | string           | The HTTP method of the request, usually `GET` or `POST`. Defaults to `GET` |
-| headers   | object           | A dictionary of header values that should be included in the next request |
-| body      | object           | A JSON object containing fields/values that should be included in the body of the next request |
-| merge     | boolean          | If `true`, the headers/body fields in the `next` link should be merged into the original request and be sent combined in the next request. Defaults to `false` | 
+| Parameter | Type    | Description |
+| --------- | ------- | ----------- |
+| method    | string  | The HTTP method of the request, usually `GET` or `POST`. Defaults to `GET` |
+| headers   | object  | A dictionary of header values that should be included in the next request |
+| body      | object  | A JSON object containing fields/values that should be included in the body of the next request |
+| merge     | boolean | If `true`, the headers/body fields in the `next` link should be merged into the original request and be sent combined in the next request. Defaults to `false` | 
 
 The implementor has the freedom to decide exactly how to apply these extended fields for their particular pagination 
 mechanism.  The same freedom that exists for GET requests, where the actual URL parameter used to defined the next page 
