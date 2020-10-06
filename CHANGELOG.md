@@ -9,13 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 ### Changed
+- Context Extension OpenAPI spec was updated to remove the no longer used `next` attribute
+- Added root endpoint Link `search` must have `type` of `application/geo+json`
+- Corrected the description of endpoint `/collections` to say it returns an object per OAFeat, instead of an array of Collection
 
 ### Deprecated
 
 ### Removed
 
 ### Fixed
-
 
 ## Older versions
 

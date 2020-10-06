@@ -90,14 +90,16 @@ The core OGC API - Features endpoints are shown below, with details provided in 
 | `/collections/{collectionId}/items`             | ItemCollection | GeoJSON FeatureCollection-conformant entity of Items in collection |
 | `/collections/{collectionId}/items/{featureId}` | Item           | Returns single Item (GeoJSON Feature) |
 
+The `/collections` endpoint returns an object with a field `collections` that is an array of Collection objects.
+
 The `/collections/{collection_id}/items` endpoint accepts parameters for filtering the results (also called filters). 
 Items in the collection should match all filters to be returned when querying. This implies a logical AND operation. If 
 an OR operation is needed, it should be specified through an extension filter.
 
-## STAC Endpoints
+## STAC API Endpoints
 
-STAC provides some additional endpoints for the root Catalog itself, as well as the capability to search the Catalog. 
-Note that a STAC API does not need to implement OAFeat, in which case it would only support the endpoints given below. 
+STAC API provides additional attributes for the root Catalog endpoint and defines an endpoint to search the Catalog. 
+Note that a STAC API does not need to implement OAFeat, in which case it would support only the endpoints below. 
 See the [OpenAPI specification document](openapi/STAC.yaml).
 
 | Endpoint  | Returns                                                        | Description |
@@ -105,16 +107,29 @@ See the [OpenAPI specification document](openapi/STAC.yaml).
 | `/`       | [Catalog](./stac-spec/catalog-spec/catalog-spec.md)            | Extends `/` from OAFeat to return a full STAC catalog. |
 | `/search` | [ItemCollection](./stac-spec/item-spec/itemcollection-spec.md) | Retrieves a group of Items matching the provided search predicates, probably containing search metadata from the `search` extension |
 
-The `/` endpoint should function as a complete `Catalog` representation of all the data contained in the API and linked 
-to in some way from root through `Collections` and `Items`.
+The root endpoint (`/`) is most useful when it presents a complete `Catalog` representation of all the data contained in the API, such that all `Collections` and `Items` can be navigated to by transitively traversing links from this root. This spec does not require any API endpoints from OAFeat or STAC API to be implemented, so these links may not exist if the endpoint has not been implemented.
 
-The `/search` endpoint is similar to the `/collections/{collectionId}/items` endpoint in OGC API - Features in that it 
-accepts parameters for filtering, however it performs the filtering across all collections. The parameters accepted are 
-the same as the Filter Parameters above, however the *[extensions](extensions/README.md)* also provide advanced querying 
+Links with these `rel` attributes should exist in the root endpoint if the reference API endpoint is implemented:
+- `data` with href to the OAFeat `/collections` endpoint
+- `child` (one or more) with href to a single `Collection` at the OAFeat `/collections/{collectionId}` endpoint
+- `search` with href to the `/search` endpoint (**required** if search endpoint is implemented)
+
+The `/search` endpoint is similar to the `/collections/{collectionId}/items` endpoint in OAFeat in that it 
+accepts parameters for filtering; however, it performs the filtering across all collections. The parameters accepted are 
+the same as the Filter Parameters above; however, the *[extensions](extensions/README.md)* also provide advanced querying 
 parameters.
 
-If the `/search` endpoint is implemented, it is **required** to add a link with the `rel` type set to `search` to the 
-`links` array in `/` that refers to the search endpoint in the `href` property.
+If the `/search` endpoint is implemented, it is **required** to add a Link to the root endpoint (`/`) with the `rel` type set to `search
+that refers to the search endpoint in the `href` property, with a `type` of `application/geo+json`.
+This Link should look like:
+```json
+{
+    "href": "https://example.com/search",
+    "rel": "search",
+    "title": "Search",
+    "type": "application/geo+json"
+}
+```
 
 ## Filter Parameters and Fields
 
@@ -210,7 +225,7 @@ The following fields have been added to the `link` object specification for the 
 | method    | string  | The HTTP method of the request, usually `GET` or `POST`. Defaults to `GET` |
 | headers   | object  | A dictionary of header values that should be included in the next request |
 | body      | object  | A JSON object containing fields/values that should be included in the body of the next request |
-| merge     | boolean | If `true`, the headers/body fields in the `next` link should be merged into the original request and be sent combined in the next request. Defaults to `false` | 
+| merge     | boolean | If `true`, the headers/body fields in the `next` link should be merged into the original request and be sent combined in the next request. Defaults to `false` |
 
 The implementor has the freedom to decide exactly how to apply these extended fields for their particular pagination 
 mechanism.  The same freedom that exists for GET requests, where the actual URL parameter used to defined the next page 
