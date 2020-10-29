@@ -35,7 +35,8 @@ stable for over a year and are used in twenty or more implementations.
 | Extension Name                                         | Scope*         | Description | Maturity |
 | ------------------------------------------------------ | -------------- | ----------- | -------- |
 | [Fields](fields/README.md)                             | *None*         | Adds parameter to control which fields are returned in the response. | *Pilot* |
-| [Query](query/README.md)                               | *None*         | Adds parameter to search Item and Collection properties. | *Pilot* |
+| [Query](query/README.md)                               | *None*         | Adds parameter to search Item and Collection properties. (old version) | *Deprecated* |
+| [Filter](filter/README.md)                             | *None*         | Adds parameter to search Item and Collection properties, based on OGC CQL | *Pilot* |
 | [Context](context/README.md)                           | ItemCollection | Adds search related metadata (context) to [ItemCollection](../stac-spec/item-spec/itemcollection-spec.md). | *Proposal* |
 | [Sort](sort/README.md)                                 | *None*         | Adds Parameter to control sorting of returns results. | *Pilot* |
 | [Transaction](transaction/README.md)                   | *None*         | Adds PUT and DELETE endpoints for the creation, editing, and deleting of items and Collections. | *Pilot* |
@@ -115,47 +116,3 @@ Point2D:
     - 35
 ```
 
-It is likely that there are schemas that should be used in common for types of filters that target different fields.
-We should define a common set of filter types that can be used in defining filters for different fields.
-
-- `NumberRange`
-- `TimeRange`
-- `Text`
-- `ArrayIncludes`
-- Etc.
-
-When defining a new filter fragment, you would reference these common filter types:
-
-```yaml
-CloudCover:
-  type: object
-  description: >-
-    Filter items by desired cloud coverage.
-  properties:
-    cloudcover:
-      $ref: "#/definitions/NumberRange"
-```
-
-Some additional extensions that have been discussed:
-
-CQL support for generic queries:
-
-```json
-{
-  "CQL": "CQL Select String"
-}
-```
-
-### Adding filters to search
-
-Filters should be documented as properties in the `searchBody`:
-
-```yaml
-searchBody:
-  description: The search criteria
-  type: object
-  allOf:
-    - $ref: "#/components/schema/bboxFilter"
-    - $ref: "#/components/schema/datetimeFilter"
-    - $ref: "#/components/schema/intersectsFilter"
-```

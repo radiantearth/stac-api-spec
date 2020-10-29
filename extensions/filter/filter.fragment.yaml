@@ -1,0 +1,47 @@
+## This is just a work in progress hack of 'query' attempting to get it in line with CQL. Needs much more work and validation
+
+paths:
+  /search:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/filter'
+components:
+  parameters:
+    filter:
+      name: filter
+      in: filter
+      description: Filter for properties in items. Uses OGC's CQL.
+      required: false
+      schema:
+        type: string
+  schemas:
+    searchBody:
+      allOf:
+        - $ref: '#/components/schemas/queryFilter'
+    queryFilter:
+      type: object
+      description: Allows users to query properties for specific values
+      properties:
+        filter:
+          $ref: '#/components/schemas/filter'
+    filter:
+      type: object
+      description: Define which properties to filter and the operatations to apply
+      additionalProperties:
+        $ref: '#/components/schemas/filterProp'
+      example:
+        and:
+          type: object
+          properties:
+            gt: 0
+            lt: 10
+    filterProp:
+      description: Apply filter operations to a specific property
+      anyOf:
+        - description: if the object doesn't contain any of the operators, it is equivalent to using the equals operator
+        - type: object
+          description: Match using an operator
+          properties:
+            eq:
+              description: Find items with a property that is equal to the specified value. For strings, a case-insensitive comparison must be performed.
+       
