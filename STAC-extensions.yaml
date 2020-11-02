@@ -531,6 +531,11 @@ components:
         maxItems: 6
         items:
           type: number
+        oneOf:
+          - minItems: 4
+            maxItems: 4
+          - minItems: 6
+            maxItems: 6
       style: form
       explode: false
     collectionId:
