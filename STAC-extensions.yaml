@@ -117,8 +117,8 @@ paths:
         '500':
           $ref: '#/components/responses/ServerError'
     post:
-      summary: add a new feature to a collection
-      description: create a new feature in a specific collection
+      summary: add a new STAC Item to a collection
+      description: create a new STAC Item in a specific collection
       operationId: postFeature
       tags:
         - Transaction Extension
@@ -136,7 +136,9 @@ paths:
           description: Status of the create request.
           headers:
             Location:
-              description: A link to the item
+              description: >-
+                The URL of the newly added resource (i.e. path of the resource
+                end point)
               schema:
                 type: string
                 format: url
