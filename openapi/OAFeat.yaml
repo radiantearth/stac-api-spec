@@ -153,10 +153,10 @@ components:
       schema:
         type: array
         oneOf:
-        - minItems: 4
-          maxItems: 4
-        - minItems: 6
-          maxItems: 6
+          - minItems: 4
+            maxItems: 4
+          - minItems: 6
+            maxItems: 6
         items:
           type: number
       style: form

@@ -137,8 +137,6 @@ components:
       explode: false
     # This schema extends OAFeat.yaml#/parameters/bbox.
     bbox:
-      name: bbox
-      in: query
       description: |-
         Only features that have a geometry that intersects the bounding box are selected.
         The bounding box is provided as four or six numbers, depending on
@@ -174,18 +172,6 @@ components:
         WGS 84 (from 160.6°E to 170°W and from 55.95°S to 25.89°S) would be
         represented in JSON as `[160.6, -55.95, -170, -25.89]` and in a query as
         `bbox=160.6,-55.95,-170,-25.89`.
-      required: false
-      schema:
-        type: array
-        oneOf:
-          - minItems: 4
-            maxItems: 4
-          - minItems: 6
-            maxItems: 6 
-        items:
-          type: number
-      style: form
-      explode: false
   responses:
     # This schema extends OAFeat.yaml#/components/responses/LandingPage.
     LandingPage:
