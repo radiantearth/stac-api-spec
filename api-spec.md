@@ -131,6 +131,60 @@ This Link should look like:
 }
 ```
 
+### Paging
+
+OGC API supports paging through hypermedia links and STAC follows the same pattern for the cross collection search. For 
+GET requests, a link with `rel` type `next` is supplied.  This link may contain any URL parameter that is necessary 
+for the implementation to understand how to provide the next page of results, eg: `page`, `next`, `token`, etc.  The 
+parameter name is defined by the implementor and is not necessarily part of the API specification.  For example:
+
+```json
+{
+    "type": "FeatureCollection",
+    "features": [],
+    "links": [
+        {
+            "rel": "next",
+            "href": "http://api.cool-sat.com/search?page=2"
+        }
+    ]
+}
+```
+
+The href may contain any arbitrary URL parameter:
+
+- `http://api.cool-sat.com/search?page=2`
+- `http://api.cool-sat.com/search?next=8a35eba9c`
+- `http://api.cool-sat.com/search?token=f32890a0bdb09ac3`
+
+OAFeat does not support POST requests for searches, however the STAC API spec does. Hypermedia links are not designed 
+for anything other than GET requests, so providing a next link for a POST search request becomes problematic. STAC has 
+decided to extend the `link` object to support additional fields that provide hints to the client as to how it should 
+execute a subsequent request for the next page of results.
+
+The following fields have been added to the `link` object specification for the API spec:
+
+| Parameter | Type    | Description |
+| --------- | ------- | ----------- |
+| method    | string  | The HTTP method of the request, usually `GET` or `POST`. Defaults to `GET` |
+| headers   | object  | A dictionary of header values that should be included in the next request |
+| body      | object  | A JSON object containing fields/values that should be included in the body of the next request |
+| merge     | boolean | If `true`, the headers/body fields in the `next` link should be merged into the original request and be sent combined in the next request. Defaults to `false` |
+
+The implementor has the freedom to decide exactly how to apply these extended fields for their particular pagination 
+mechanism.  The same freedom that exists for GET requests, where the actual URL parameter used to defined the next page 
+of results is purely up to the implementor and not defined in the API spec, if the implementor decides to use headers, 
+there are no specific or required header names defined in the specification.  Implementors may use any names or fields 
+of their choosing. Pagination can be provided solely through header values, solely through body values, or through some 
+combination.  
+
+To avoid returning the entire original request body in a POST response which may be arbitrarily large, the  `merge` 
+property can be specified. This indicates that the client should send the same post body that it sent in the original 
+request, but with the specified headers/body values merged in. This allows servers to indicate what needs to change 
+to get to the next page without mirroring the entire query structure back to the client.
+
+Example requests can be found in the [examples document](./examples.md#paging).
+
 ## Filter Parameters and Fields
 
 Unless otherwise noted by **Path-only**, these filters are passed as query string parameters, form parameters, or JSON 
@@ -186,57 +240,3 @@ All Extensions **should** use attribute names qualified from the root of Item, r
 | query     | string \| QueryFilter | Placeholder parameter for [API Query Extension](extensions/query/README.md) query value. |
 
  **query** Represents a query in the query language.
-
-### Paging Extension
-
-OGC API supports paging through hypermedia links and STAC follows the same pattern for the cross collection search. For 
-GET requests, a link with `rel` type `next` is supplied.  This link may contain any URL parameter that is necessary 
-for the implementation to understand how to provide the next page of results, eg: `page`, `next`, `token`, etc.  The 
-parameter name is defined by the implementor and is not necessarily part of the API specification.  For example:
-
-```json
-{
-    "type": "FeatureCollection",
-    "features": [],
-    "links": [
-        {
-            "rel": "next",
-            "href": "http://api.cool-sat.com/search?page=2"
-        }
-    ]
-}
-```
-
-The href may contain any arbitrary URL parameter:
-
-- `http://api.cool-sat.com/search?page=2`
-- `http://api.cool-sat.com/search?next=8a35eba9c`
-- `http://api.cool-sat.com/search?token=f32890a0bdb09ac3`
-
-OAFeat does not support POST requests for searches, however the STAC API spec does. Hypermedia links are not designed 
-for anything other than GET requests, so providing a next link for a POST search request becomes problematic. STAC has 
-decided to extend the `link` object to support additional fields that provide hints to the client as to how it should 
-execute a subsequent request for the next page of results.
-
-The following fields have been added to the `link` object specification for the API spec:
-
-| Parameter | Type    | Description |
-| --------- | ------- | ----------- |
-| method    | string  | The HTTP method of the request, usually `GET` or `POST`. Defaults to `GET` |
-| headers   | object  | A dictionary of header values that should be included in the next request |
-| body      | object  | A JSON object containing fields/values that should be included in the body of the next request |
-| merge     | boolean | If `true`, the headers/body fields in the `next` link should be merged into the original request and be sent combined in the next request. Defaults to `false` |
-
-The implementor has the freedom to decide exactly how to apply these extended fields for their particular pagination 
-mechanism.  The same freedom that exists for GET requests, where the actual URL parameter used to defined the next page 
-of results is purely up to the implementor and not defined in the API spec, if the implementor decides to use headers, 
-there are no specific or required header names defined in the specification.  Implementors may use any names or fields 
-of their choosing. Pagination can be provided solely through header values, solely through body values, or through some 
-combination.  
-
-To avoid returning the entire original request body in a POST response which may be arbitrarily large, the  `merge` 
-property can be specified. This indicates that the client should send the same post body that it sent in the original 
-request, but with the specified headers/body values merged in. This allows servers to indicate what needs to change 
-to get to the next page without mirroring the entire query structure back to the client.
-
-Example requests can be found in the [examples document](./examples.md#paging).
