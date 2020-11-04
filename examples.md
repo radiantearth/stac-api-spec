@@ -32,7 +32,7 @@ GET /collections/mycollection/items?datetime=2019-01-01T00:00:00Z/2019-03-31T23:
 
 The STAC API `/search/` endpoint can support the same requests as above, as POST.
 
-Request 100 results in `mycollection` that is in New Zealand from January 1st, 2019:
+Request 100 results in `mycollection` that is in New Zealand at anytime on January 1st, 2019:
 
 ```json
 {
