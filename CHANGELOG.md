@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 ### Fixed
+- BBOX openapi yaml to only allow 4 or 6 element arrays
 
 ## Older versions
 
