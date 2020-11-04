@@ -185,11 +185,30 @@ to get to the next page without mirroring the entire query structure back to the
 
 Example requests can be found in the [examples document](./examples.md#paging).
 
-## Filter Parameters and Fields
+## Query Parameters and Fields
 
-Unless otherwise noted by **Path-only**, these filters are passed as query string parameters, form parameters, or JSON 
-entity fields.  For filters that represent a set of values, query and form parameters should use comma-separated 
-string values and JSON entity attributes should use JSON Arrays. 
+The following list of parameters is used to narrow search queries. Most all of them can be represented as
+query string parameters in a GET request, or as JSON entity fields in a POST request. One parameter,
+`collectionId` is designated as **Path-only**, which means it should only be used as a query string parameter.
+The `collections` parameter works similarly, but takes multiple collectionId's in an array, so it can be used
+with a single value array in JSON if the same functionality is desired. For filters that represent a set of values, 
+query parameters should use comma-separated string values (with no outer brackets \[ or \]) and JSON entity 
+attributes should use JSON Arrays. 
+
+### Examples
+
+```http
+GET /search?collections=landsat8,sentinel&bbox=-10.415,36.066,3.779,44.213&limit=200&datetime=2017-05-05T00:00:00Z
+```
+
+```json
+{
+    "collections": ["landsat8","sentinel"],
+    "bbox": [10.415,36.066,3.779,44.213],
+    "limit": 200,
+    "datetime": "2017-05-05T00:00:00Z"
+}
+```
 
 | Parameter    | Type             | APIs         | Description |
 | -----------  | ---------------- | ------------ | ----------- |
@@ -202,7 +221,7 @@ string values and JSON entity attributes should use JSON Arrays.
 | collections  | \[string]        | STAC         | Array of Collection IDs to include in the search for items. Only Items in one of the provided Collections will be searched |
 
 Only one of either **intersects** or **bbox** should be specified.  If both are specified, a 400 Bad Request response 
-should be returned. 
+should be returned. See [examples](examples.md) to see sample requests.
 
 ## Reserved Parameters
 
