@@ -43,7 +43,6 @@ Request 100 results in `mycollection` that is in New Zealand from January 1st, 2
 }
 ```
 
-
 Use the *[Query](extensions/query/README.md)* extension to search for any data falling within a specific geometry 
 collected between Jan 1st and May 1st, 2019:
 
