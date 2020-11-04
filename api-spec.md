@@ -210,7 +210,6 @@ GET /search?collections=landsat8,sentinel&bbox=-10.415,36.066,3.779,44.213&limit
 }
 ```
 
-
 | Parameter    | Type             | APIs         | Description |
 | -----------  | ---------------- | ------------ | ----------- |
 | collectionId | string           | OAFeat       | **Path-only** Single Collection ID to include in the search for items. Only Items in one of the provided Collection will be searched |
