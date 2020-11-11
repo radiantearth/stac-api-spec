@@ -7,6 +7,7 @@ paths:
       operationId: postFeature
       tags:
         - Transaction Extension
+        - insert
       parameters:
         - $ref: '#/components/parameters/collectionId'
       requestBody:
@@ -30,16 +31,15 @@ paths:
                 type: string
               description: A string to ensure the item has not been modified
           content:
-            application/geo+json:
+            application/json:
               schema:
-                type: string
-            text/html:
-              schema:
-                type: string
+                $ref: '#/components/responses/Feature' 
         '400':
           $ref: '#/components/responses/BadRequest'
-        '5XX':
-          $ref: '#/components/responses/InternalServerError'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ServerError'
         default:
           description: An error occurred.
           content:
@@ -63,41 +63,36 @@ paths:
       description: >-
         Use this method to update an existing feature. Requires the entire
         GeoJSON  description be submitted.
-      operationId: putFeature
+      operationId: updateFeature
       tags:
         - Transaction Extension
+        - update
       parameters:
         - $ref: '#/components/parameters/collectionId'
         - $ref: '#/components/parameters/featureId'
         - $ref: '#/components/parameters/IfMatch'
       requestBody:
+        description: The request body shall contain a representation of the replacement item.
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/item'
       responses:
-        '200':
-          description: Status of the update request.
+        '204':
+          description: The item was replaced
           headers:
             ETag:
               schema:
                 type: string
-              description: A string to ensure the item has not been modified
-          content:
-            text/html:
-              schema:
-                type: string
-            application/json:
-              schema:
-                type: string
+              description: An updated string to track changes
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
         '412':
           $ref: '#/components/responses/PreconditionFailed'
-        '5XX':
-          $ref: '#/components/responses/InternalServerError'
+        '500':
+          $ref: '#/components/responses/ServerError'
         default:
           description: An error occurred.
           content:
@@ -111,7 +106,7 @@ paths:
       summary: update an existing feature by Id with a partial item definition
       description: >-
         Use this method to update an existing feature. Requires a GeoJSON
-        fragement (containing the fields to be updated) be submitted.
+        fragment (containing the fields to be updated) be submitted.
       operationId: patchFeature
       tags:
         - Transaction Extension
@@ -125,26 +120,19 @@ paths:
             schema:
               $ref: '#/components/schemas/partialItem'
       responses:
-        '200':
+        '204':
           description: Status of the update request.
           headers:
             ETag:
               schema:
                 type: string
               description: A string to ensure the item has not been modified
-          content:
-            text/html:
-              schema:
-                type: string
-            application/json:
-              schema:
-                type: string
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-        '5XX':
-          $ref: '#/components/responses/InternalServerError'
+        '500':
+          $ref: '#/components/responses/ServerError'
         default:
           description: An error occurred.
           content:
@@ -160,19 +148,20 @@ paths:
       operationId: deleteFeature
       tags:
         - Transaction Extension
+        - delete
       parameters:
         - $ref: '#/components/parameters/collectionId'
         - $ref: '#/components/parameters/featureId'
         - $ref: '#/components/parameters/IfMatch'
       responses:
         '204':
-          description: Status of the delete request.
+          description: The resource was deleted.
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-        '5XX':
-          $ref: '#/components/responses/InternalServerError'
+        '500':
+          $ref: '#/components/responses/ServerError'
         default:
           description: An error occurred.
           content:
