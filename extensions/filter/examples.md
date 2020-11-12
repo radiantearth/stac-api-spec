@@ -130,22 +130,12 @@ The temporal support in required core is pretty minimal, with just `ANYINTERACT`
 
 ```json
 {
-  "filter": {
-    "or": [
-            {
-               "gt": {
-                  "property": "sentinel:data_coverage",
-                  "value": 50
-               }
-            },
-            {
-               "lt": {
-                  "property": "eo:cloud_cover",
-                  "value": 10
-               }
-            }
-           ]
-    }
+ 	"filter": {
+    	"anyinteract": {
+    		"property": "datetime",
+    		"value": "2020-11-11"
+    	}
+	}
 }
 ```
 
