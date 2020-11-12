@@ -43,21 +43,26 @@ Request 100 results in `mycollection` that is in New Zealand at anytime on Janua
 }
 ```
 
-Use the *[Query](extensions/query/README.md)* extension to search for any data falling within a specific geometry 
+Use the *[Filter](extensions/filter/README.md)* extension to search for any data falling within a specific geometry 
 collected between Jan 1st and May 1st, 2019:
 
 Request to `POST /search`:
 ```json
 {
     "limit": 100,
-    "intersects": {
-        "type": "Polygon",
-        "coordinates": [[
-            [-77.0824, 38.7886], [-77.0189, 38.7886],
-            [-77.0189, 38.8351], [-77.0824, 38.8351],
-            [-77.0824, 38.7886]
-        ]]
-    },
+    "filter" {
+        "intersects": {
+                "property": "geometry",
+                "value": {
+                   "type": "Polygon",
+                   "coordinates": [[
+                        [-77.0824, 38.7886], [-77.0189, 38.7886],
+                        [-77.0189, 38.8351], [-77.0824, 38.8351],
+                        [-77.0824, 38.7886]
+                    ]]
+                }
+        }
+    },        
     "datetime": "2019-01-01/2019-05-01"
 }
 ```
