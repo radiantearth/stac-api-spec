@@ -9,32 +9,56 @@ components:
   parameters:
     filter:
       name: filter
-      in: filter
-      description: Filter for properties in items. Uses OGC's CQL.
+      in: query
+      description: Filter for properties in items. Uses OGC's Common Query Language (CQL) text (cql-text) from part 3 of OGC API - Features.
       required: false
       schema:
         type: string
+      style: form
+      explode: false
+    filter-lang:
+      name: filter-lang
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+          - 'cql-text'
+          - 'cql-json'
+        default: "cql-text"
+      style: form
   schemas:
     searchBody:
       allOf:
         - $ref: '#/components/schemas/queryFilter'
     queryFilter:
       type: object
-      description: Allows users to query properties for specific values
+      description: Filter for properties in items. Uses OGC's Common Query Language (CQL) JSON (cql-json) from part 3 of OGC API - Features.
       properties:
         filter:
           $ref: '#/components/schemas/filter'
     filter:
       type: object
-      description: Define which properties to filter and the operatations to apply
+      description: Filter for properties in items. Uses OGC's Common Query Language (CQL) JSON (cql-json) from part 3 of OGC API - Features.
       additionalProperties:
         $ref: '#/components/schemas/filterProp'
       example:
         and:
-          type: object
-          properties:
-            gt: 0
-            lt: 10
+          - lt: 
+              property: cloud_cover
+              value: 10
+          - eq: 
+              property: platform
+              value: 'landsat8'
+          - like:
+              property: pl:item_type
+              value: 'PSScene%'
+          - in: 
+              property: gsd
+              value:
+                - 10
+                - 15
+                - 20
     filterProp:
       description: Apply filter operations to a specific property
       anyOf:

@@ -337,7 +337,7 @@ paths:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/ids'
         - $ref: '#/components/parameters/collectionsArray'
-        - $ref: '#/components/parameters/query'
+        - $ref: '#/components/parameters/filter'
         - $ref: '#/components/parameters/sortby'
         - $ref: '#/components/parameters/fields'
       responses:
@@ -629,15 +629,28 @@ components:
       schema:
         $ref: '#/components/schemas/collectionsArray'
       explode: false
-    query:
-      name: query
+    filter:
+      name: filter
       in: query
       description: >-
-        query for properties in items. Use the JSON form of the queryFilter used
-        in POST.
+        Filter for properties in items. Uses OGC's Common Query Language (CQL)
+        text (cql-text) from part 3 of OGC API - Features.
       required: false
       schema:
         type: string
+      style: form
+      explode: false
+    filter-lang:
+      name: filter-lang
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+          - cql-text
+          - cql-json
+        default: cql-text
+      style: form
     sortby:
       name: sortby
       in: query
@@ -1831,37 +1844,38 @@ components:
             http://api.cool-sat.com/search?next=ANsXtp9mrqN0yrKWhf-y2PUpHRLQb1GT-mtxNcXou8TwkXhi1Jbk
     queryFilter:
       type: object
-      description: Allows users to query properties for specific values
+      description: >-
+        Filter for properties in items. Uses OGC's Common Query Language (CQL)
+        JSON (cql-json) from part 3 of OGC API - Features.
       properties:
-        query:
-          $ref: '#/components/schemas/query'
-    query:
+        filter:
+          $ref: '#/components/schemas/filter'
+    filter:
       type: object
-      description: Define which properties to query and the operatations to apply
+      description: >-
+        Filter for properties in items. Uses OGC's Common Query Language (CQL)
+        JSON (cql-json) from part 3 of OGC API - Features.
       additionalProperties:
-        $ref: '#/components/schemas/queryProp'
+        $ref: '#/components/schemas/filterProp'
       example:
-        'eo:cloud_cover':
-          gt: 8
-          lt: 50
-        platform:
-          eq: landsat-8
-        datetime:
-          gte: '2018-02-12T00:00:00Z'
-          lte: '2018-03-18T12:31:12Z'
-        'pl:item_type':
-          startsWith: PSScene
-        product:
-          in:
-            - foo
-            - bar
-            - baz
-        'eo:gsd':
-          in:
-            - 10
-            - 20
-    queryProp:
-      description: Apply query operations to a specific property
+        and:
+          - lt:
+              property: cloud_cover
+              value: 10
+          - eq:
+              property: platform
+              value: landsat8
+          - like:
+              property: 'pl:item_type'
+              value: PSScene%
+          - in:
+              property: gsd
+              value:
+                - 10
+                - 15
+                - 20
+    filterProp:
+      description: Apply filter operations to a specific property
       anyOf:
         - description: >-
             if the object doesn't contain any of the operators, it is equivalent
@@ -1873,76 +1887,6 @@ components:
               description: >-
                 Find items with a property that is equal to the specified value.
                 For strings, a case-insensitive comparison must be performed.
-              nullable: true
-              oneOf:
-                - type: string
-                - type: number
-                - type: boolean
-            neq:
-              description: >-
-                Find items that *don't* contain the specified value. For
-                strings, a case-insensitive comparison must be performed.
-              nullable: true
-              oneOf:
-                - type: string
-                - type: number
-                - type: boolean
-            gt:
-              description: >-
-                Find items with a property value greater than the specified
-                value.
-              oneOf:
-                - type: string
-                  format: date-time
-                - type: number
-            lt:
-              description: Find items with a property value less than the specified value.
-              oneOf:
-                - type: string
-                  format: date-time
-                - type: number
-            gte:
-              description: >-
-                Find items with a property value greater than or equal the
-                specified value.
-              oneOf:
-                - type: string
-                  format: date-time
-                - type: number
-            lte:
-              description: >-
-                Find items with a property value less than or equal the
-                specified value.
-              oneOf:
-                - type: string
-                  format: date-time
-                - type: number
-            startsWith:
-              description: >-
-                Find items with a property that begins with the specified
-                string. A case-insensitive comparison must be performed.
-              type: string
-            endsWith:
-              description: >-
-                Find items with a property that ends with the specified string.
-                A case-insensitive comparison must be performed.
-              type: string
-            contains:
-              description: >-
-                Find items with a property that contains the specified literal
-                string, e.g., matches ".*<STRING>.*". A case-insensitive
-                comparison must be performed.
-              type: string
-            in:
-              description: >-
-                Find items with a property that equals at least one entry in the
-                specified array. A case-insensitive comparison must be
-                performed.
-              type: array
-              items:
-                oneOf:
-                  - type: string
-                  - type: number
     sortFilter:
       type: object
       description: Sort the results
