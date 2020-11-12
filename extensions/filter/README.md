@@ -114,7 +114,5 @@ There is not yet a POST standard for OGC API - Features, but the way we fit it i
 }
 ```
 
-For now it is best to always include the `filter-lang` parameter here, but we will attempt to work with OGC API - Features to establish `cql-json` as the
-default, and servers should try to work with cql-json if the filter-lang isn't specified.
-
-
+For now it is best to always include the `filter-lang` parameter here, but we will attempt to work with OGC API - Features to 
+establish `cql-json` as the default, and servers should try to work with cql-json if the filter-lang isn't specified.

@@ -55,13 +55,13 @@ The following examples all are supported with the core CQL conformance class.
 Show me all imagery that has low cloud cover (less than 10), and high data coverage (50), as I'd like a cloud free image that is not just 
 a tiny sliver of data.
 
-#### cql-text (GET)
+#### AND cql-text (GET)
 
 ```http
 /search?filter=sentinel:data_coverage > 50 AND eo:cloud_cover < 10 
 ```
 
-#### cql-json (POST)
+#### AND cql-json (POST)
 
 ```json
 {
@@ -87,13 +87,13 @@ a tiny sliver of data.
 An 'or' is also supported, matching if either condition is true. Though it's not a sensible query you could get images that have full data 
 coverage or low cloud cover.
 
-#### cql-text (GET)
+#### OR cql-text (GET)
 
 ```http
 /search?filter=sentinel:data_coverage > 50 OR eo:cloud_cover < 10 
 ```
 
-#### cql-json (POST)
+#### OR cql-json (POST)
 
 ```json
 {
@@ -120,11 +120,13 @@ coverage or low cloud cover.
 
 The temporal support in required core is pretty minimal, with just `ANYINTERACT`
 
+#### ANYINTERACT cql-text (GET)
+
 ```http
 /search?filter=datetime ANYINTERACT 2020-11-11
 ```
 
-#### cql-json (POST)
+#### ANYINTERACT cql-json (POST)
 
 ```json
 {
@@ -151,8 +153,13 @@ The temporal support in required core is pretty minimal, with just `ANYINTERACT`
 
 Similarly in core there is only one geometry operator - `INTERSECTS`
 
+#### INTERSECTS cql-text (GET)
+
 ```http
 /search?filter=INTERSECTS(geometry,POLYGON((-77.0824 38.7886,-77.0189 38.7886,-77.0189 38.8351,-77.0824 38.8351,-77.0824 38.7886)))
+```
+
+#### INTERSECTS cql-json (POST)
 
 ```json
 {
@@ -171,4 +178,3 @@ Similarly in core there is only one geometry operator - `INTERSECTS`
     },        
 }
 ```
-

@@ -26,7 +26,6 @@ The syntax for the `query` filter is:
 Each property to search is an entry in the `query` filter. <operator> can be one of: `eq`, `neq`, `lt`, `lte`, `gt`, `gte`, `startsWith`, `endsWith`, `contains`, `in`. 
 Multiple operators may be provided for each property and are treated as a logical AND, where all conditions must be met.
 
-
 ## Examples
 
 Find scenes with cloud cover between 0 and 10%:
