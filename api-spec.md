@@ -61,7 +61,7 @@ operation to create an Item. Any query against a single OAFeat collection endpoi
 the collection name in the `collections` query parameter.
 
 It is recommended for clients use POST for querying (if the STAC API supports it), especially when using the 
-`intersects` query parameter, for one main reasons:
+`intersects` query parameter, for one main reason:
 
 1. In practice, the allowed size for an HTTP GET request is significantly less than that allowed for a POST request, 
 so if a large geometry is used in the query it may cause a GET request to fail.
@@ -214,7 +214,7 @@ GET /search?collections=landsat8,sentinel&bbox=-10.415,36.066,3.779,44.213&limit
 | limit        | integer          | OAFeat, STAC | The maximum number of results to return (page size). Defaults to 10 |
 | bbox         | \[number]        | OAFeat, STAC | Requested bounding box.  Represented using either 2D or 3D geometries. The length of the array must be 2*n where n is the number of dimensions. The array contains all axes of the southwesterly most extent followed by all axes of the northeasterly most extent specified in Longitude/Latitude or Longitude/Latitude/Elevation based on [WGS 84](http://www.opengis.net/def/crs/OGC/1.3/CRS84). When using 3D geometries, the elevation of the southwesterly most extent is the minimum elevation in meters and the elevation of the northeasterly most extent is the maximum. |
 | datetime     | string           | OAFeat, STAC | Single date+time, or a range ('/' seperator), formatted to [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). Use double dots `..` for open date ranges. |
-| intersects   | GeoJSON Geometry | STAC         | Searches items by performing intersection between their geometry and provided GeoJSON geometry.  All GeoJSON geometry types must be supported. |
+| intersects   | GeoJSON Geometry | STAC         | Searches items by performing intersection between their geometry and provided GeoJSON geometry.  All GeoJSON geometry types must be supported. *Deprecated - use filter extension with intersects operation instead*|
 | ids          | \[string]        | STAC         | Array of Item ids to return. All other filter parameters that further restrict the number of search results (except `next` and `limit`) are ignored |
 | collections  | \[string]        | STAC         | Array of Collection IDs to include in the search for items. Only Items in one of the provided Collections will be searched |
 
@@ -246,14 +246,13 @@ These parameters and fields are reserved for the Sort extension.
 | --------- | ----------------- | ----------- |
 | sort      | string \| \[Sort] | Placeholder parameter for [API Sort Extension](extensions/sort/README.md). |
 
-### Query Extension
+### Filter Extension
 
-These parameters and fields are reserved for query extensions. 
+These parameters and fields are reserved for filter extensions. 
 
-All Extensions **should** use attribute names qualified from the root of Item, rather than Item Properties.
+| Parameter   | Type                  | Description |
+| ----------- | --------------------- | ----------- |
+| filter      | string \| Filter | Placeholder parameter for [API Filter Extension](extensions/filter/README.md) CQL. |
+| filter-lang | string | Placeholder parameter from [OGC API - Features Part 3](https://github.com/opengeospatial/ogcapi-features/tree/master/extensions/cql) to specify which filter language |
 
-| Parameter | Type                  | Description |
-| --------  | --------------------- | ----------- |
-| query     | string \| QueryFilter | Placeholder parameter for [API Query Extension](extensions/query/README.md) query value. |
-
- **query** Represents a query in the query language.
+ **filter** Represents a query in the query language.

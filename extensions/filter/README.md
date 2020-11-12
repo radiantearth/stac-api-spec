@@ -21,54 +21,44 @@ with CQL's description of '[Cross-collection queries](http://docs.opengeospatial
 Before we dive deep into an overview of CQL, it is worth showing a concrete examples. A common query of STAC is to find items (implementing the EO 
 extension) with cloud cover between 0 and 10%. This would look like: 
 
-#### cql-text (GET)
+### cql-text (GET)
 
-```
-/search?filter=eo:cloud_cover > 0 AND eo:cloud_cover < 10 
+```http
+/search?filter=eo:cloud_cover < 10 
 ```
 
-#### cql-json (POST)
+### cql-json (POST)
 
 ```json
 {
   "filter": {
-    "and": [
-            {
                "gt": {
                   "property": "eo:cloud_cover",
                   "value": 0
                }
-            },
-            {
-               "lt": {
-                  "property": "eo:cloud_cover",
-                  "value": 10
-               }
             }
-           ]
-    }
 }
 ```
 
 ## Filtering Overview
 
-STAC's use of CQL requires full implementation of the "[Simple CQL](http://docs.opengeospatial.org/DRAFTS/19-079.html#cql-core) core requirements class.
-This includes a number of different operators: Comparison (equal to, less than, less than or equal to, greater than, greater than or equal to, like, is null,
-in and between), Logical operators (or, not), and then one each of a spatial operator (intersects) and a temporal operator (anyinteracts). There are then 
-optional additions for [Enhanced Spatial Operators](http://docs.opengeospatial.org/DRAFTS/19-079.html#enhanced-spatial-operators) (like within, crosses,
-overlaps), [Enhanced Temporal Operators](http://www.opengis.net/spec/ogcapi-features-3/1.0/req/enhanced-temporal-operators) (after, begun by, ends, etc), 
+STAC's use of CQL requires full implementation of the "[Simple CQL](http://docs.opengeospatial.org/DRAFTS/19-079.html#cql-core) core 
+requirements class. This includes a number of different operators: Comparison (equal to, less than, less than or equal to, greater than, 
+greater than or equal to, like, is null, in and between), Logical operators (or, not), and then one each of a spatial operator (intersects) 
+and a temporal operator (anyinteracts). There are then optional additions for [Enhanced Spatial 
+Operators](http://docs.opengeospatial.org/DRAFTS/19-079.html#enhanced-spatial-operators) (like within, crosses, overlaps), [Enhanced Temporal 
+Operators](http://www.opengis.net/spec/ogcapi-features-3/1.0/req/enhanced-temporal-operators) (after, begun by, ends, etc), 
 [Functions](http://docs.opengeospatial.org/DRAFTS/19-079.html#functions) (ability to run operations, like 'sin' or 'max'), and [Arithmetric 
 Expressions](http://docs.opengeospatial.org/DRAFTS/19-079.html#arithmetic) (multiply, add).
 
-STAC only requires the Simple CQL requirements to be implemented, but the additional operations are allowed. There is a 
+STAC only requires the Simple CQL requirements to be implemented, but the additional operations are allowed and encouraged. There is a 
 [BNF Notation](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form) for the CQL grammar (see 
-[Annex B](http://docs.opengeospatial.org/DRAFTS/19-079.html#_cql_bnf_normative)), which should make it easier to implement, and there are also 
-a handful of existing libraries that implement CQL. Dynamic STAC implementations that do not want to implement the full CQL standard can just
-implement the STAC Core, and then use another API implementation to offer search.
+[Annex B](http://docs.opengeospatial.org/DRAFTS/19-079.html#_cql_bnf_normative)), which should help implemententation, and there are also 
+a handful of existing libraries that implement CQL. 
 
-### Operator Examples
+### Operator Overview
 
-The following table aims to help get an idea of what the core CQL options are, and how they compare with the previous STAC language.
+The following table aims to help get an idea of what the core CQL options are, and how they compare with the previous STAC 'query' language.
 
 | **Operator**             | **cql-text**                                    | **cql-json**                                                                    | **stac-query** (deprecated)                                                  |
 |--------------------------|-------------------------------------------------|---------------------------------------------------------------------------------|-----------------|
@@ -84,15 +74,16 @@ The following table aims to help get an idea of what the core CQL options are, a
 | and                      | (exp1) AND (exp2)                               |  "and": { (exp1) }, { (exp2) } |       { (exp1) }, { (exp2) } (everything is default AND'ed                   |
 | or                       | (exp1) OR (exp2)                                | "or": { (exp1) }, { (exp2) }                                                    | not specified                                                                |
 | not                      | NOT (exp1)                                      | "not": { (exp1) }                                                               | not specified                                                                |
-| intersects               | INTERSECTS(geom, POINT(-118,33.8))              | "intersects": { "property": "geom", "value": { "type": "Point", "coordinates": [33.8,-118] } | "intersects": { "type": "Point", "coordinates": [33.8,-118] |
+| intersects               | INTERSECTS(geometry, POINT(-118,33.8))              | "intersects": { "property": "geometry", "value": { "type": "Point", "coordinates": \[33.8,-118\] } | "intersects": { "type": "Point", "coordinates": \[33.8,-118\] |
 | anyinteracts             | prop ANYINTERACTS 2020-10-23T20:44:22.23        | "anyinteracts": { "property": "prop", "value": "2020-10-23T20:44:22.23"          | "datetime": "2020-10-23T20:44:22.23" |
 
 #### filter-lang
 
-To make a full request you must include the `filter-lang` parameter. The values for CQL are `cql-text` and `cql-json`. 
+To make a full request you should include the [`filter-lang`](http://docs.opengeospatial.org/DRAFTS/19-079.html#filter-lang-param) parameter. 
+The values for CQL are `cql-text` and `cql-json`. The OGC specification says that the default value is `cql-text`, so if the parameter isn't
+specified then requests with that should work.
 
-
-```
+```http
 /search?filter-lang=cql-text&filter=eo:cloud_cover > 0 AND eo:cloud_cover < 10 
 ```
 
@@ -123,4 +114,7 @@ There is not yet a POST standard for OGC API - Features, but the way we fit it i
 }
 ```
 
-TODO: Figure out if we could make filter-lang default to cql-json for our spec / openapi yaml, so people don't have to specify it each time.
+For now it is best to always include the `filter-lang` parameter here, but we will attempt to work with OGC API - Features to establish `cql-json` as the
+default, and servers should try to work with cql-json if the filter-lang isn't specified.
+
+
