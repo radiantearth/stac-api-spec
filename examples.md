@@ -50,7 +50,7 @@ Request to `POST /search`:
 ```json
 {
     "limit": 100,
-    "filter" {
+    "filter": {
         "intersects": {
                 "property": "geometry",
                 "value": {
