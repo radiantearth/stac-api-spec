@@ -226,7 +226,7 @@ with a single value array in JSON if the same functionality is desired. For filt
 query parameters should use comma-separated string values (with no outer brackets \[ or \]) and JSON entity 
 attributes should use JSON Arrays. 
 
-### Examples
+### Query Examples
 
 ```http
 GET /search?collections=landsat8,sentinel&bbox=-10.415,36.066,3.779,44.213&limit=200&datetime=2017-05-05T00:00:00Z
@@ -240,6 +240,8 @@ GET /search?collections=landsat8,sentinel&bbox=-10.415,36.066,3.779,44.213&limit
     "datetime": "2017-05-05T00:00:00Z"
 }
 ```
+
+### Query Parameter Table
 
 | Parameter    | Type             | APIs         | Description |
 | -----------  | ---------------- | ------------ | ----------- |
