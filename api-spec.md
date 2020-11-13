@@ -31,9 +31,10 @@ The main STAC endpoint specified beyond what OAFeat offers is `/search`, which o
 use case of STAC is to search diverse imagery collections (like Landsat, Sentinel, MODIS) by location and cloud cover for any
 relevant image. So the ability to do searches across Collections is required, and is not yet specified by OAFeat. Due to the 
 limited parameter support in OGC API - Features, it is recommended to use the STAC API endpoint 
-`POST /search` for advanced queries, as it supports richer options.
-The filtering is made to be compatible between STAC API and OGC API - Features whenever feasible, and the two specs seek 
-to share the general query and filtering patterns, and STAC will align with OGC API when it offers advanced filtering.
+`POST /search` for advanced queries, as it supports richer options. 
+OGC API - Features is close to finalizing their default 
+advanced query language to be [CQL](https://github.com/opengeospatial/ogcapi-features/tree/master/extensions/cql), and they 
+have a [draft](http://docs.opengeospatial.org/DRAFTS/19-079.html), which the new STAC API Filter extension is based on. 
 
 Implementations may **optionally** provide support for the full superset of STAC API query parameters to the 
 `/collections/{collectionId}/items` endpoint,
