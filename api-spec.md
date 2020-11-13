@@ -91,9 +91,10 @@ The core OGC API - Features endpoints are shown below, with details provided in 
 
 The `/collections` endpoint returns an object with a field `collections` that is an array of Collection objects.
 
-The `/collections/{collection_id}/items` endpoint accepts parameters for filtering the results (also called filters). 
-Items in the collection should match all filters to be returned when querying. This implies a logical AND operation. If 
-an OR operation is needed, it should be specified through an extension filter.
+The `/collections/{collection_id}/items` endpoint accepts parameters for querying the results. 
+Items in the collection should match all query parameters to be returned when querying. This implies a logical AND operation. If 
+an OR operation is needed, it should be specified as [CQL](http://docs.opengeospatial.org/DRAFTS/19-079.html) with the 
+'[filter](extensions/filter/)' extension.
 
 ## STAC API Endpoints
 
@@ -114,9 +115,9 @@ Links with these `rel` attributes should exist in the root endpoint if the refer
 - `search` with href to the `/search` endpoint (**required** if search endpoint is implemented)
 
 The `/search` endpoint is similar to the `/collections/{collectionId}/items` endpoint in OAFeat in that it 
-accepts parameters for filtering; however, it performs the filtering across all collections. The parameters accepted are 
-the same as the Filter Parameters above; however, the *[extensions](extensions/README.md)* also provide advanced querying 
-parameters.
+accepts parameters for querying; however, it performs the querying across all collections. The parameters accepted are 
+the same as the [query parameters](#query-parameters-and-fields) below; however, the *[extensions](extensions/README.md)* 
+also provide advanced querying parameters.
 
 If the `/search` endpoint is implemented, it is **required** to add a Link to the root endpoint (`/`) with the `rel` type set to `search
 that refers to the search endpoint in the `href` property, with a `type` of `application/geo+json`.
