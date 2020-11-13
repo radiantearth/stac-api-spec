@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+ - Clearer language on compliance requirements
 
 ### Changed
 - Context Extension OpenAPI spec was updated to remove the no longer used `next` attribute
