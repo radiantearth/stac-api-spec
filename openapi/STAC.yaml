@@ -606,7 +606,7 @@ components:
       description: Only returns items that intersect with the provided polygon.
       properties:
         intersects:
-          $ref: 'https://geojson.org/schema/Geometry.json'
+          $ref: "#/components/schemas/geometryGeoJSON"
     limitFilter:
       type: object
       description: Only returns maximum number of results (page size)
@@ -714,7 +714,7 @@ components:
         bbox:
           $ref: '#/components/schemas/bbox'
         geometry:
-          $ref: 'https://geojson.org/schema/Geometry.json'
+          $ref: "#/components/schemas/geometryGeoJSON"
         type:
           $ref: '#/components/schemas/itemType'
         properties:
