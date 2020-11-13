@@ -259,3 +259,31 @@ All Extensions **should** use attribute names qualified from the root of Item, r
 | query     | string \| QueryFilter | Placeholder parameter for [API Query Extension](extensions/query/README.md) query value. |
 
  **query** Represents a query in the query language.
+
+## Conformance
+
+STAC API is evolving to properly utilize OAFeat's 
+'[Conformance](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_declaration_of_conformance_classes)' endpoint. For 
+STAC API 1.0.0-beta.1 this just means specifying which OAFeat conformance classes are used, and then adding STAC functionality
+as additional conformance classes. 
+
+**NOTE:** *By 1.0.0 we aim to have requirements classes specified in detail, as testable assertions, 
+like OGC does, but for now the core reference is just this spec document and the OpenAPI yaml. We also desire to have the
+URI's for conformance to actually resolve to machine-readable information clients can use.*
+
+### Core Conformance Classes
+
+There are 6 core conformance classes used in STAC API.
+
+| *Name*                    | *API*  | *URI*                                                          | *Description*                                                                                                                                              |
+|---------------------------|--------|----------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Core                      | OAFeat | http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core    | The core OGC API - Features endpoints & parameters ([reference](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_core))                         |
+| OpenAPI specification 3.0 | OAFeat | http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30   | Describes the API as OpenAPI 3.0 ([reference](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_oas30))                                          |
+| GeoJSON                   | OAFeat | http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson | Requires OGC API - Features responses to be in GeoJSON ([reference](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_geojson)) |
+| STAC Search               | STAC   | http://stacspec.org/spec/api/1.0.0-beta.1/req/stac-search      | Enables Cross-collection search, with the STAC `[/search](#stac-api-endpoints)` endpoint.                                                                  |
+| STAC Collections          | STAC   | http://stacspec.org/spec/api/1.0.0-beta.1/req/stac-collections | Returns one or more STAC Collections from the OAFeat `/collections` and `/collections/{collectionId}` endpoints. Depends on OAFeat Core.                   |
+| STAC Items                | STAC   | http://stacspec.org/spec/api/1.0.0-beta.1/req/stac-items       | Returns STAC Items from one or more `/collections/{collectionId}/items` endpoints. Depends on OAFeat Core.                                                 |
+
+A valid STAC API is required to implement either STAC Search or STAC Collections conformance classes. 
+
+Additional conformance classes are specified in the STAC Extensions.
