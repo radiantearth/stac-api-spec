@@ -527,8 +527,11 @@ components:
       required: false
       schema:
         type: array
-        minItems: 4
-        maxItems: 6
+        oneOf:
+          - minItems: 4
+            maxItems: 4
+          - minItems: 6
+            maxItems: 6
         items:
           type: number
       style: form
@@ -1644,9 +1647,12 @@ components:
         context:
           type: object
           required:
-            - next
             - returned
           properties:
+            returned:
+              type: integer
+              minimum: 0
+              example: 1
             limit:
               type: integer
               nullable: true
@@ -1655,11 +1661,7 @@ components:
             matched:
               type: integer
               minimum: 0
-              example: 1
-            returned:
-              type: integer
-              minimum: 0
-              example: 1
+              example: 314159
     item:
       description: >-
         A GeoJSON Feature augmented with foreign members that contain values

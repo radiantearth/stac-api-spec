@@ -3,7 +3,7 @@
   "$id": "schema.json#",
   "title": "Context Extension",
   "type": "object",
-  "description": "STAC search metadata",
+  "description": "STAC context metadata",
   "allOf": [
     {
       "$ref": "#/definitions/context"
@@ -22,15 +22,15 @@
             "returned"
           ],
           "properties": {
+            "returned": {
+              "type": "integer",
+              "minimum": 0
+            },
             "limit": {
               "type": ["integer", "null"],
               "minimum": 0
             },
             "matched": {
-              "type": "integer",
-              "minimum": 0
-            },
-            "returned": {
               "type": "integer",
               "minimum": 0
             }
