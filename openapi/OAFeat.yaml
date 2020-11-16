@@ -120,7 +120,18 @@ paths:
         - $ref: '#/components/parameters/featureId'
       responses:
         '200':
-          $ref: '#/components/responses/Feature'
+          # Moved from #/components/responses/Feature to allow merging with extensions
+          description: |-
+            fetch the feature with id `featureId` in the feature collection
+            with id `collectionId`
+          content:
+            application/geo+json:
+              schema:
+                $ref: '#/components/schemas/featureGeoJSON'
+              # Removed example, I can't override it from STAC.yaml
+            text/html:
+              schema:
+                type: string
         '404':
           $ref: '#/components/responses/NotFound'
         '500':
@@ -793,18 +804,6 @@ components:
         application/geo+json:
           schema:
             $ref: '#/components/schemas/featureCollectionGeoJSON'
-          # Removed example, I can't override it from STAC.yaml
-        text/html:
-          schema:
-            type: string
-    Feature:
-      description: |-
-        fetch the feature with id `featureId` in the feature collection
-        with id `collectionId`
-      content:
-        application/geo+json:
-          schema:
-            $ref: '#/components/schemas/featureGeoJSON'
           # Removed example, I can't override it from STAC.yaml
         text/html:
           schema:

@@ -113,6 +113,15 @@ paths:
             text/html:
               schema:
                 type: string
+  # This schema changes the OAFeat endpoint to replace the schema from featureGeoJson to item.
+  '/collections/{collectionId}/items/{featureId}':
+    get:
+      responses:
+        '200':
+          content:
+            application/geo+json:
+              schema:
+                $ref: '#/components/schemas/item'
 components:
   parameters:
     ids:
@@ -198,12 +207,6 @@ components:
                 rel: search
                 type: application/json
                 title: Search across feature collections
-    # This schema extends OAFeat.yaml#/components/responses/Feature change the schema from featureGeoJson to item.
-    Feature:
-      content:
-        application/geo+json:
-          schema:
-            $ref: '#/components/schemas/item'
   schemas:
     # This schema extends OAFeat.yaml#/components/schemas/collection to add and require additional fields and add an example.
     collection:

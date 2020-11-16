@@ -138,7 +138,16 @@ paths:
         - $ref: '#/components/parameters/featureId'
       responses:
         '200':
-          $ref: '#/components/responses/Feature'
+          description: |-
+            fetch the feature with id `featureId` in the feature collection
+            with id `collectionId`
+          content:
+            application/geo+json:
+              schema:
+                $ref: '#/components/schemas/item'
+            text/html:
+              schema:
+                type: string
         '404':
           $ref: '#/components/responses/NotFound'
         '500':
@@ -1715,17 +1724,6 @@ components:
         application/geo+json:
           schema:
             $ref: '#/components/schemas/featureCollectionGeoJSON'
-        text/html:
-          schema:
-            type: string
-    Feature:
-      description: |-
-        fetch the feature with id `featureId` in the feature collection
-        with id `collectionId`
-      content:
-        application/geo+json:
-          schema:
-            $ref: '#/components/schemas/item'
         text/html:
           schema:
             type: string
