@@ -63,6 +63,11 @@ paths:
       tags:
         - Capabilities
       summary: the feature collections in the dataset
+      description: >-
+        A body of Feature Collections that belong or are used together with
+        additional links.
+
+        Request may not return the full set of metadata per Feature Collection.
       operationId: getCollections
       responses:
         '200':
@@ -74,6 +79,11 @@ paths:
       tags:
         - Capabilities
       summary: describe the feature collection with id `collectionId`
+      description: >-
+        A single Feature Collection for the given if `collectionId`.
+
+        Request this endpoint to get a full list of metadata for the Feature
+        Collection.
       operationId: describeCollection
       parameters:
         - $ref: '#/components/parameters/collectionId'
@@ -405,10 +415,15 @@ components:
           type: string
           example: address
         description:
-          description: a description of the features in the collection
+          description: >-
+            Detailed multi-line description to fully explain the catalog or
+            collection.
+
+
+            [CommonMark 0.29](http://commonmark.org/) syntax MAY be used for
+            rich text representation.
           type: string
           example: An address.
-          $ref: '#/components/schemas/description'
         links:
           type: array
           items:
@@ -1102,14 +1117,6 @@ components:
       type: string
       format: date-time
       example: '2017-08-17T08:05:32Z'
-    description:
-      type: string
-      description: |-
-        Detailed multi-line description to fully explain the catalog or
-        collection.
-
-        [CommonMark 0.29](http://commonmark.org/) syntax MAY be used for rich
-        text representation.
     license:
       type: string
       description: |-
@@ -1148,7 +1155,8 @@ components:
               for hosts or basic contact information.
 
 
-              CommonMark 0.29 syntax MAY be used for rich text representation.
+              [CommonMark 0.29](http://commonmark.org/) syntax MAY be used for
+              rich text representation.
             type: string
           roles:
             description: |-
@@ -1472,8 +1480,9 @@ components:
             example: Thumbnail
           description:
             type: string
-            description: |-
+            description: >-
               Multi-line description to explain the asset.
+
 
               [CommonMark 0.29](http://commonmark.org/) syntax MAY be used for
               rich text representation.

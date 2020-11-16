@@ -28,6 +28,10 @@ tags:
     description: >-
       STAC-specific operations to add, remove, and edit items within OGC API -
       Features collections.
+  - name: Version Extension
+    description: >-
+      This version API extension defines the API resources and semantics for
+      creating and accessing versioned records.
 paths:
   /:
     get:
@@ -67,6 +71,11 @@ paths:
       tags:
         - Capabilities
       summary: the feature collections in the dataset
+      description: >-
+        A body of Feature Collections that belong or are used together with
+        additional links.
+
+        Request may not return the full set of metadata per Feature Collection.
       operationId: getCollections
       responses:
         '200':
@@ -78,6 +87,11 @@ paths:
       tags:
         - Capabilities
       summary: describe the feature collection with id `collectionId`
+      description: >-
+        A single Feature Collection for the given if `collectionId`.
+
+        Request this endpoint to get a full list of metadata for the Feature
+        Collection.
       operationId: describeCollection
       parameters:
         - $ref: '#/components/parameters/collectionId'
@@ -402,6 +416,7 @@ paths:
       description: returns a list of links for a versioned collection
       tags:
         - Version Extension
+      operationId: getCollectionVersions
       parameters:
         - $ref: '#/components/parameters/collectionId'
       responses:
@@ -419,6 +434,7 @@ paths:
       description: returns the requested version of a collection
       tags:
         - Version Extension
+      operationId: getCollectionVersion
       parameters:
         - $ref: '#/components/parameters/collectionId'
         - $ref: '#/components/parameters/versionId'
@@ -431,6 +447,7 @@ paths:
       description: returns a list of links for a versioned item
       tags:
         - Version Extension
+      operationId: getItemVersions
       parameters:
         - $ref: '#/components/parameters/collectionId'
         - $ref: '#/components/parameters/featureId'
@@ -449,6 +466,7 @@ paths:
       description: returns the requested version of an item
       tags:
         - Version Extension
+      operationId: getItemVersion
       parameters:
         - $ref: '#/components/parameters/collectionId'
         - $ref: '#/components/parameters/featureId'
@@ -701,10 +719,15 @@ components:
           type: string
           example: address
         description:
-          description: a description of the features in the collection
+          description: >-
+            Detailed multi-line description to fully explain the catalog or
+            collection.
+
+
+            [CommonMark 0.29](http://commonmark.org/) syntax MAY be used for
+            rich text representation.
           type: string
           example: An address.
-          $ref: '#/components/schemas/description'
         links:
           type: array
           items:
@@ -1398,14 +1421,6 @@ components:
       type: string
       format: date-time
       example: '2017-08-17T08:05:32Z'
-    description:
-      type: string
-      description: |-
-        Detailed multi-line description to fully explain the catalog or
-        collection.
-
-        [CommonMark 0.29](http://commonmark.org/) syntax MAY be used for rich
-        text representation.
     license:
       type: string
       description: |-
@@ -1444,7 +1459,8 @@ components:
               for hosts or basic contact information.
 
 
-              CommonMark 0.29 syntax MAY be used for rich text representation.
+              [CommonMark 0.29](http://commonmark.org/) syntax MAY be used for
+              rich text representation.
             type: string
           roles:
             description: |-
@@ -1789,8 +1805,9 @@ components:
             example: Thumbnail
           description:
             type: string
-            description: |-
+            description: >-
               Multi-line description to explain the asset.
+
 
               [CommonMark 0.29](http://commonmark.org/) syntax MAY be used for
               rich text representation.
@@ -2015,7 +2032,7 @@ components:
         bbox:
           $ref: '#/components/schemas/bbox'
         geometry:
-          $ref: 'https://geojson.org/schema/Geometry.json'
+          $ref: '#/components/schemas/geometryGeoJSON'
         type:
           $ref: '#/components/schemas/itemType'
         properties:
@@ -2058,7 +2075,14 @@ components:
           description: human readable title of the catalog
           type: string
         description:
-          $ref: '#/components/schemas/description'
+          description: >-
+            Detailed multi-line description to fully explain the catalog or
+            collection.
+
+
+            [CommonMark 0.29](http://commonmark.org/) syntax MAY be used for
+            rich text representation.
+          type: string
         links:
           type: array
           items:

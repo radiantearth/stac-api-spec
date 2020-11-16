@@ -205,14 +205,6 @@ components:
           schema:
             $ref: '#/components/schemas/item'
   schemas:
-    description:
-      type: string
-      description: |-
-        Detailed multi-line description to fully explain the catalog or
-        collection.
-
-        [CommonMark 0.29](http://commonmark.org/) syntax MAY be used for rich
-        text representation.
     # This schema extends OAFeat.yaml#/components/schemas/collection to add and require additional fields and add an example.
     collection:
       type: object
@@ -227,7 +219,13 @@ components:
         stac_extensions:
           $ref: '#/components/schemas/stac_extensions'
         description:
-          $ref: '#/components/schemas/description'
+          description: >-
+            Detailed multi-line description to fully explain the catalog or
+            collection.
+
+
+            [CommonMark 0.29](http://commonmark.org/) syntax MAY be used for
+            rich text representation.
         keywords:
           type: array
           description: List of keywords describing the collection.
@@ -478,7 +476,8 @@ components:
               for hosts or basic contact information.
 
 
-              CommonMark 0.29 syntax MAY be used for rich text representation.
+              [CommonMark 0.29](http://commonmark.org/) syntax MAY be used for
+              rich text representation.
             type: string
           roles:
             description: |-
@@ -815,8 +814,9 @@ components:
             example: Thumbnail
           description:
             type: string
-            description: |-
+            description: >-
               Multi-line description to explain the asset.
+
 
               [CommonMark 0.29](http://commonmark.org/) syntax MAY be used for
               rich text representation.

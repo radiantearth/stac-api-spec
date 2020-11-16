@@ -213,7 +213,7 @@ components:
         bbox:
           $ref: '#/components/schemas/bbox'
         geometry:
-          $ref: 'https://geojson.org/schema/Geometry.json'
+          $ref: '#/components/schemas/geometryGeoJSON'
         type:
           $ref: '#/components/schemas/itemType'
         properties:

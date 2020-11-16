@@ -1,4 +1,7 @@
 openapi: 3.0.1
+tags:
+  - name: Version Extension
+    description: This version API extension defines the API resources and semantics for creating and accessing versioned records.
 paths:
   '/collections/{collectionId}/versions':
     get:
@@ -6,6 +9,7 @@ paths:
       description: returns a list of links for a versioned collection
       tags:
         - Version Extension
+      operationId: getCollectionVersions
       parameters:
         - $ref: '#/components/parameters/collectionId'
       responses:
@@ -21,6 +25,7 @@ paths:
       description: returns the requested version of a collection
       tags:
         - Version Extension
+      operationId: getCollectionVersion
       parameters:
         - $ref: '#/components/parameters/collectionId'
         - $ref: '#/components/parameters/versionId'
@@ -33,6 +38,7 @@ paths:
       description: returns a list of links for a versioned item
       tags:
         - Version Extension
+      operationId: getItemVersions
       parameters:
         - $ref: '#/components/parameters/collectionId'
         - $ref: '#/components/parameters/featureId'
@@ -49,6 +55,7 @@ paths:
       description: returns the requested version of an item
       tags:
         - Version Extension
+      operationId: getItemVersion
       parameters:
         - $ref: '#/components/parameters/collectionId'
         - $ref: '#/components/parameters/featureId'
@@ -77,7 +84,14 @@ components:
           description: human readable title of the catalog
           type: string
         description:
-          $ref: '#/components/schemas/description'
+          description: >-
+            Detailed multi-line description to fully explain the catalog or
+            collection.
+
+
+            [CommonMark 0.29](http://commonmark.org/) syntax MAY be used for
+            rich text representation.
+          type: string
         links:
           type: array
           items:

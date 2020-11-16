@@ -46,6 +46,10 @@ paths:
       tags:
         - Capabilities
       summary: the feature collections in the dataset
+      # This description is derived from OGC API Commons to fulfill the CI requirement that each endpoint should have a description.
+      description: |-
+        A body of Feature Collections that belong or are used together with additional links.
+        Request may not return the full set of metadata per Feature Collection.
       operationId: getCollections
       responses:
         '200':
@@ -58,6 +62,10 @@ paths:
         - Capabilities
       summary: |-
         describe the feature collection with id `collectionId`
+      # This description is here to fulfill the CI requirement that each endpoint should have a description.
+      description: |-
+        A single Feature Collection for the given if `collectionId`.
+        Request this endpoint to get a full list of metadata for the Feature Collection.
       operationId: describeCollection
       parameters:
         - $ref: '#/components/parameters/collectionId'
@@ -429,6 +437,9 @@ components:
           $ref: "#/components/schemas/numberMatched"
         numberReturned:
           $ref: "#/components/schemas/numberReturned"
+    # The CI reports this is unused as this gets overriden by the STAC.yaml with a different schema.
+    # This this schema is only used in OAFeat.yaml, but never in the generated STAC.yaml
+    # Leaving it in for the sake of completeness
     featureGeoJSON:
       type: object
       required:
