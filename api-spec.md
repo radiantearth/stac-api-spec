@@ -105,7 +105,7 @@ See the [OpenAPI specification document](openapi/STAC.yaml).
 | Endpoint  | Returns                                                        | Description |
 | --------  | -------------------------------------------------------------- | ----------- |
 | `/`       | [Catalog](https://github.com/radiantearth/stac-spec/catalog-spec/catalog-spec.md)            | Extends `/` from OAFeat to return a full STAC catalog. |
-| `/search` | [ItemCollection](https://github.com/radiantearth/stac-spec/item-spec/itemcollection-spec.md) | Retrieves a group of Items matching the provided search predicates, probably containing search metadata from the `search` extension |
+| `/search` | ItemCollection | Retrieves a group of Items matching the provided search predicates, probably containing search metadata from the `search` extension |
 
 The root endpoint (`/`) is most useful when it presents a complete `Catalog` representation of all the data contained in the API, such that all `Collections` and `Items` can be navigated to by transitively traversing links from this root. This spec does not require any API endpoints from OAFeat or STAC API to be implemented, so these links may not exist if the endpoint has not been implemented.
 
