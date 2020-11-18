@@ -8,9 +8,21 @@ a subset of the entire catalog, such as for a certain date range, in a particula
 they care about. STAC API specifies those query parameters, and compliant servers return collections of STAC Items that
 match the user's preferences.
 
+## STAC API and STAC Core Spec
+
+The [STAC Core specification](stac-spec) provides most all the content of API responses - the STAC API is primarily concerned
+with the return of STAC [Items](stac-spec/item-spec/README.md) and [Collections](stac-spec/collection-spec/collections) through
+API's.
+
+This version of STAC API is intended to work with any STAC core specification version 0.9.x or 1.x.x (included betas), but is not 
+designed to work with STAC 2.0 and above (since we use [SemVer](https://semver.org/) it may introduce backwards incompatible changes). 
+The STAC API spec is released with the latest stable STAC core specification version included in the [`/stac-spec`](stac-spec/) 
+directory as a [submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules). To determine which version it is just check the 
+[`/stac-spec/CHANGELOG.md`](stac-spec/CHANGELOG.md) for the topmost version & release date.
+
 ## STAC API and OGC API - Features
 
-The vast majority of what STAC API does is specified in the *[OGC API - Features](https://ogcapi.ogc.org/features/)*
+The vast majority of the STAC API mechanics are specified in the *[OGC API - Features](https://ogcapi.ogc.org/features/)*
 standard ('OAFeat' for our shorthand). STAC API is fully compliant with [OAFeat - Part 1: Core, version 
 1.0](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html), and will be aligned with their additional extensions
 when they are finalized. Future STAC API releases will align with [upcoming versions](https://github.com/opengeospatial/ogcapi-features).
