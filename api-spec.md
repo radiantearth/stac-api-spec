@@ -32,7 +32,8 @@ thus are compliant with both OAFeat Collections and STAC Collections and are ret
 endpoint.
 
 In OAFeat Features are the individual records within a Collection and are usually provided in GeoJSON format. 
-[STAC Items](https://github.com/radiantearth/stac-spec/item-spec/README.md) are compliant with the OAFeat Features [GeoJSON requirements class](http://docs.ogc.org/is/17-069r3/17-069r3.html#_requirements_class_geojson),  and are returned from the 
+[STAC Items](https://github.com/radiantearth/stac-spec/item-spec/README.md) are compliant with the OAFeat Features 
+[GeoJSON requirements class](http://docs.ogc.org/is/17-069r3/17-069r3.html#_requirements_class_geojson), and are returned from the 
 `/collections/{collection_id}/items/{item_id}` endpoint. The return of other encodings 
 ([html](http://docs.ogc.org/is/17-069r3/17-069r3.html#rc_html), [gml](http://docs.ogc.org/is/17-069r3/17-069r3.html#rc_gmlsf0))
 is outside the scope of STAC API, as the [STAC Item](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md) is
