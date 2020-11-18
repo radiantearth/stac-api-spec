@@ -20,32 +20,32 @@ Continuous Integration testing.
 
 To release a new version of the STAC spec the following list of tasks must be done. 
 
-* **Update Issue Tracker**: Each release has a [milestone](https://github.com/radiantearth/stac-spec/milestones) in the github 
+- **Update Issue Tracker**: Each release has a [milestone](https://github.com/radiantearth/stac-spec/milestones) in the github 
 issue tracker, and before a release is done all open issues that are filed against it should be reviewed. All issues do not 
 need to be completed, but the core release team should all review the issues to make sure that the critical ones for the 
 release have been addressed. Issues that aren't seen as essential should be moved to future releases, so that there are no
 open issues against the milestone.
-* **Check dependencies**: STAC relies on OGC API - Features and STAC Core specifications at its core, and will likely rely
+- **Check dependencies**: STAC relies on OGC API - Features and STAC Core specifications at its core, and will likely rely
 on additional Features API extensions as well as OGC API - Commons. We aim to always reference the latest version of these,
 so before releasing we should check to make sure we are on the latest stable versions, and upgrade if it makes sense. We include
 the latest stable STAC core spec version as a 'submodule', so before release we should update that to be the latest.
-* **Agreement from core team**: The core STAC API team should meet (on video or on gitter) and decided that the release is ready.
+- **Agreement from core team**: The core STAC API team should meet (on video or on gitter) and decided that the release is ready.
 This should include review of the issues, as well as looking at the spec holistically, to make sure the new changes keep
 with a coherent whole.
-* **Final Spec Read Through**: There should be a final read through of the core specification to make sure it makes sense
+- **Final Spec Read Through**: There should be a final read through of the core specification to make sure it makes sense
 and there are no typos, errors, etc.
-* **Update the Changelog**: The [changelog](CHANGELOG.md) should be reviewed to make sure it includes all major improvements
+- **Update the Changelog**: The [changelog](CHANGELOG.md) should be reviewed to make sure it includes all major improvements
 in the release. And anything in 'unreleased' section should move to the version of the spec to be released.
-* **Merge dev to master**: As there is no 'build' process, since the specification *is* the markdown files in the github
+- **Merge dev to master**: As there is no 'build' process, since the specification *is* the markdown files in the github
 repository, the key step in a release is to merge the `dev` branch into `master`, as `master` is the current stable state 
 of the spec.
-* **Check Online API Docs**: Check to make sure the online API docs reflect the release at <https://stacspec.org/STAC-api.html> 
+- **Check Online API Docs**: Check to make sure the online API docs reflect the release at <https://stacspec.org/STAC-api.html> 
 and <https://stacspec.org/STAC-ext-api.html> (this step may go away once we are confident this works well, as this publishing is in flux)
-* **Release on Github**: The final step to create the release is to add a new 'release' on 
+- **Release on Github**: The final step to create the release is to add a new 'release' on 
 <https://github.com/radiantearth/stac-spec/releases>. This should use a tag like the others, with a 'v' prefix and then the 
 release number, like v0.5.2. The changelog should be copied over to be the release notes, and then also include a link to 
 the full milestone of everything closed in the issue tracker.
-* **Promote the release**: A blog post and tweet should be composed and sent out, and then inform those in the gitter channel
+- **Promote the release**: A blog post and tweet should be composed and sent out, and then inform those in the gitter channel
 to post / promote it.
 
 #### Release Candidates
@@ -69,4 +69,4 @@ Life or until a PSC is formed, so we don't get stuck waiting for votes when ther
 
 The longer term goal is to contribute STAC spec to the Open Geospatial Consortium, and indeed to align as much as possible
 with their next generation spec. The current plan is to contribute STAC API as an OGC 'community module' when we reach
-1.0.0, and to work to have it become part of the OGC API baseline.
+1.0.0, and to work to have it become part of the OGC API baseline.	
