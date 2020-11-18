@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## \[Unreleased\]
 
 ### Added
-- Clearer language on compliance requirements
+- More intro text
 
 ### Changed
 - Updated to STAC specification version 1.0.0-beta.2
