@@ -54,23 +54,6 @@ Implementations may **optionally** provide support for the full superset of STAC
 where the collection ID in the path is equivalent to providing that single value in the `collections` query parameter in 
 STAC API.
 
-### STAC API Compliance
-
-To be a compliant STAC API an implementation must either:
-
-1) Fully implement [OGC API - Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) core, and have one or more
-[Feature Collections](http://docs.ogc.org/is/17-069r3/17-069r3.html#_collections_) implement STAC 
-[Collections](https://github.com/radiantearth/stac-spec/blob/master/collection-spec/collection-spec.md), with its returned 
-[Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_items_) as valid STAC 
-[Items](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md).
-2) Implement the [STAC API Endpoints](#stac-api-endpoints), with `/` returning valid STAC 
-[Catalogs](https://github.com/radiantearth/stac-spec/blob/master/catalog-spec/catalog-spec.md) and `/search` returning valid
-[Items](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md).
-
-The recommendation is to implement both, with `/search` providing cross-collection search and then having each 
-`/collections/{collectionId}` describe a homogeneous set of STAC Items, but only one of the two is required to be a
-valid STAC API implementation.
-
 ## HTTP Request Methods and Content Types
 
 The OAFeat and STAC APIs follow a RESTful model. A core principal of this is the use of HTTP Request Methods ("verbs") and
