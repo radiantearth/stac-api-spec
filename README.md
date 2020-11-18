@@ -20,15 +20,14 @@ compatible and usable with any OGC API - Features clients. The STAC API can be t
 to search STAC Catalogs, where the features returned are STAC [Items](https://github.com/radiantearth/stac-spec/item-spec/item-spec.md), 
 that have common properties, links to their assets and geometries that represent the footprints of the geospatial assets.
 
-## WARNING
+## Stability Note
 
-This specification is approaching maturity, but will likely have some minor changes as we approach the 1.0-beta release and 
-fully align with [OGC API - Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html). This repo was also recently 
-split off from the main [stac-spec repository](https://github.com/radiantearth/stac-spec). Not all links and references have 
-been updated yet so should be considered a work in progress. To implement against a stable STAC API we recommend using 
-[STAC API Version 0.9.0](https://github.com/radiantearth/stac-spec/tree/v0.9.0/api-spec). This master branch will be 
-considered to be under active development until we release version 1.0-beta, at which time it will be stable, and a `dev` 
-branch will be created for active development.
+This specification has evolved over the past couple years, and is used in production in a variety of deployments. It is 
+currently in a 'beta' state, with no major changes anticipated. For 1.0-beta we remain fully aligned with  [OGC API - 
+Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) Version 1.0. We have further aligned STAC extensions
+with OGC API - Features extensions, particularly [CQL](https://github.com/opengeospatial/ogcapi-features/tree/master/extensions/cql/)
+and [Transactions](https://github.com/opengeospatial/ogcapi-features/tree/master/extensions/transactions). These are not
+yet entirely stable, so if they change then STAC will update to remain in line.
 
 ## Communication
 
