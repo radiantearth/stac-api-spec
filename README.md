@@ -52,6 +52,12 @@ Human-readable versions of the OpenAPI definitions can be viewed online for the 
 - [Only the core STAC API](https://stacspec.org/STAC-api.html) 
 - [STAC API including all extensions](https://stacspec.org/STAC-ext-api.html)
 
+**STAC Core Spec:** This repository includes a '[sub-module](https://git-scm.com/book/en/v2/Git-Tools-Submodules)', which
+is a copy of the [STAC Core Spec](https://github.com/radiantearth/stac-spec) tagged at the latest stable version. This allows
+us to refer to the core spec with relative links. Sub-modules aren't checked out by default, so to get the directory 
+populated either use `git submodule update --init --recursive` if you've already cloned it, or clone from the start with
+`git clone --recursive git@github.com:radiantearth/stac-api-spec.git`. 
+
 ## OpenAPI definitions
 
 The definitive specification for STAC API is provided as an [OpenAPI](http://openapis.org/) 3.0 specification that is
