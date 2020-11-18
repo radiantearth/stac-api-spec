@@ -14,4 +14,4 @@ jobs:
           command: npm install
       - run:
           name: validate
-          command: npm run check-markdown
+          command: npm run check
