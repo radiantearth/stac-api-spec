@@ -43,7 +43,7 @@ A typical OAFeat will have multiple collections, and each will just offer simple
 `GET /collections/{collectionId}/items`.
 The main STAC endpoint specified beyond what OAFeat offers is `/search`, which offers cross-collection search. A primary
 use case of STAC is to search diverse imagery collections (like Landsat, Sentinel, MODIS) by location and cloud cover for any
-relevant image. So the ability to do searches across Collections is very important, and is not yet specified by OAFeat. Due to the 
+matching item. So the ability to do searches across Collections is very important, and is not yet specified by OAFeat. Due to the 
 limited parameter support in OGC API - Features, it is recommended to use the STAC API endpoint 
 `POST /search` for advanced queries, as it supports richer options.
 The filtering is made to be compatible between STAC API and OGC API - Features whenever feasible, and the two specs seek 
