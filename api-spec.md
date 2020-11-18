@@ -2,7 +2,7 @@
 
 ## About
 
-The STAC API defines a RESTful JSON-based server to query [SpatioTemporal Asset Catalogs](https://github.com/radiantearth/stac-spec/) 
+The STAC API defines a RESTful JSON-based server to query [SpatioTemporal Asset Catalogs](stac-spec/) 
 (STAC). While the core STAC specification provides a structure and language to describe assets, users usually want to access
 a subset of the entire catalog, such as for a certain date range, in a particular area of interest, or matching properties
 they care about. STAC API specifies those query parameters, and compliant servers return collections of STAC Items that
@@ -11,7 +11,7 @@ match the user's preferences.
 ## STAC API and STAC Core Spec
 
 The [STAC Core specification](stac-spec) provides most all the content of API responses - the STAC API is primarily concerned
-with the return of STAC [Items](stac-spec/item-spec/README.md) and [Collections](stac-spec/collection-spec/collections) through
+with the return of STAC [Items](stac-spec/item-spec/README.md) and [Collections](stac-spec/collection-spec/README.md) through
 API's.
 
 This version of STAC API is intended to work with any STAC core specification version 0.9.x or 1.x.x (included betas), but is not 
@@ -30,7 +30,7 @@ STAC API adds certain requirements and extensions on top of the OAFeat core, to 
 
 The OGC API - Features is a standard API that represents collections of geospatial data. It defines the RESTful interface 
 to query geospatial data, with GeoJSON as a main return type. With OAFeat you can return any `Feature`, which is a geometry 
-plus any number of properties. The core [STAC Item spec](https://github.com/radiantearth/stac-spec/item-spec/README.md) 
+plus any number of properties. The core [STAC Item spec](stac-spec/item-spec/README.md) 
 enhances the core `Feature` with additional requirements and options to enable cataloging of spatiotemporal 'assets' like 
 satellite imagery. This STAC `Item` always links to an asset, and these assets always have a capture time, so it requires 
 fields for `datetime` and `assets`. 
@@ -38,17 +38,17 @@ fields for `datetime` and `assets`.
 OAFeat also defines the concept of a Collection, which contains Features. In OAFeat Collections are the sets of data that can 
 be queried ([7.11](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_collections_)), and each describes basic 
 information about the geospatial dataset, like its name and description, as well as the spatial and temporal extents of all 
-the data contained. [STAC collections](https://github.com/radiantearth/stac-spec/collection-spec/README.md) contain this same 
+the data contained. [STAC collections](stac-spec/collection-spec/README.md) contain this same 
 information, along with other STAC specific fields to provide additional metadata for searching spatiotemporal assets, and 
 thus are compliant with both OAFeat Collections and STAC Collections and are returned from the `/collections/{collection_id}` 
 endpoint.
 
 In OAFeat Features are the individual records within a Collection and are usually provided in GeoJSON format. 
-[STAC Items](https://github.com/radiantearth/stac-spec/item-spec/README.md) are compliant with the OAFeat Features 
+[STAC Items](stac-spec/item-spec/README.md) are compliant with the OAFeat Features 
 [GeoJSON requirements class](http://docs.ogc.org/is/17-069r3/17-069r3.html#_requirements_class_geojson), and are returned from the 
 `/collections/{collection_id}/items/{item_id}` endpoint. The return of other encodings 
 ([html](http://docs.ogc.org/is/17-069r3/17-069r3.html#rc_html), [gml](http://docs.ogc.org/is/17-069r3/17-069r3.html#rc_gmlsf0))
-is outside the scope of STAC API, as the [STAC Item](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md) is
+is outside the scope of STAC API, as the [STAC Item](stac-spec/item-spec/item-spec.md) is
 specified in GeoJSON.
 
 A typical OAFeat will have multiple collections, and each will just offer simple search for its particular collection at 
@@ -130,7 +130,7 @@ See the [OpenAPI specification document](openapi/STAC.yaml).
 
 | Endpoint  | Returns                                                        | Description |
 | --------  | -------------------------------------------------------------- | ----------- |
-| `/`       | [Catalog](https://github.com/radiantearth/stac-spec/catalog-spec/catalog-spec.md)            | Extends `/` from OAFeat to return a full STAC catalog. |
+| `/`       | [Catalog](stac-spec/catalog-spec/catalog-spec.md)            | Extends `/` from OAFeat to return a full STAC catalog. |
 | `/search` | ItemCollection | Retrieves a group of Items matching the provided search predicates, probably containing search metadata from the `search` extension |
 
 The root endpoint (`/`) is most useful when it presents a complete `Catalog` representation of all the data contained in the API, such that all `Collections` and `Items` can be navigated to by transitively traversing links from this root. This spec does not require any API endpoints from OAFeat or STAC API to be implemented, so these links may not exist if the endpoint has not been implemented.
