@@ -301,17 +301,129 @@ URI's for conformance to actually resolve to machine-readable information client
 
 ### Core Conformance Classes
 
-There are 6 core conformance classes used in STAC API.
+There are 7 core conformance classes used in STAC API.
 
 | *Name*                    | *API*  | *URI*                                                          | *Description*                                                                                                                                              |
 |---------------------------|--------|----------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Core                      | OAFeat | <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core>    | The core OGC API - Features endpoints & parameters ([reference](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_core))                         |
+| STAC API Core             | STAC   | <http://stacspec.org/spec/api/1.0.0-beta.1/req/stac-api-core>      | Specifies the STAC Landing page `/`, communicating conformance and available endpoints.          |
+| STAC Search               | STAC   | <http://stacspec.org/spec/api/1.0.0-beta.1/req/stac-search>      | Enables search of all STAC Items on the server, with the STAC `[/search](#stac-api-endpoints)` endpoint.               |
+| Commons Collections       | OACommon | <http://www.opengis.net/spec/ogcapi_common-2/1.0/req/collections> | Provides listing of OGC API Collections ([reference](http://docs.opengeospatial.org/DRAFTS/20-024.html#rc_collections-section)) |
+| STAC Response             | STAC | <http://stacspec.org/spec/api/1.0.0-beta.1/req/stac-response>    | Specifies that OAFeat's relevant responses conform to STAC: STAC Collections for OGC API Commons - [collections](http://docs.opengeospatial.org/DRAFTS/20-024.html#rc_collections-section) & STAC Items for OGC API's [Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_items_) Collections from the OAFeat `/collections` and `/collections/{collectionId}` endpoints.            |
+| OAFeat Core               | OAFeat | <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core>    | The core OGC API - Features endpoints & parameters Returns one or more STAC Collections from the OAFeat `/collections` and `/collections/{collectionId}` endpoints. Depends on OAFeat Core.         ([reference](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_core))                         |
 | OpenAPI specification 3.0 | OAFeat | <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30>   | Describes the API as OpenAPI 3.0 ([reference](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_oas30))                                          |
-| GeoJSON                   | OAFeat | <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson> | Requires OGC API - Features responses to be in GeoJSON ([reference](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_geojson)) |
-| STAC Search               | STAC   | <http://stacspec.org/spec/api/1.0.0-beta.1/req/stac-search>      | Enables Cross-collection search, with the STAC `[/search](#stac-api-endpoints)` endpoint.                                                                  |
-| STAC Collections          | STAC   | <http://stacspec.org/spec/api/1.0.0-beta.1/req/stac-collections> | Returns one or more STAC Collections from the OAFeat `/collections` and `/collections/{collectionId}` endpoints. Depends on OAFeat Core.                   |
-| STAC Items                | STAC   | <http://stacspec.org/spec/api/1.0.0-beta.1/req/stac-items>       | Returns STAC Items from one or more `/collections/{collectionId}/items` endpoints. Depends on OAFeat Core.                                                 |
-
-A valid STAC API is required to implement either STAC Search or STAC Collections conformance classes. 
+| GeoJSON                   | OAFeat | <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson> | Requires OGC API - Features responses to be in GeoJSON ([reference](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_geojson)) |                                             |
 
 Additional conformance classes are specified in the STAC Extensions.
+
+TODO: I'll fold these back into our main definitions above. For now I'm just aiming to get them fleshed out.
+
+### STAC API Core
+
+The core of a STAC API is its landing page, which is the starting point to discover STAC data and what the API supports.
+
+```json
+{
+    "stac_version": "1.0.0-beta.2",
+    "id": "example-stac",
+    "title": "A simple STAC API Example",
+    "description": "This Catalog aims to demonstrate the a simple landing page",
+    ""
+    "links": [
+        {
+            "rel": "child",
+            "href": "https://stacserver.org/collections/sentinel-2",
+        },
+        {
+            "rel": "child",
+            "href": "https://stacserver.org/collections/landsat-8",
+        },
+        {
+            "rel": "search",
+            "type": "application/json",
+            "href": "https://stacserver.org/search"
+        }
+    ],
+    "conformsTo" : [
+        "http://stacspec.org/spec/api/1.0.0-beta.1/req/stac-api-core",
+        "http://stacspec.org/spec/api/1.0.0-beta.1/req/stac-search"
+    ]
+}
+```
+
+There are a few things to note: 
+
+- The returned JSON is a valid [STAC Catalog](stac-spec/catalog-spec/catalog-spec.md), and it can provide any number of 'child' links
+to navigate down to additional Catalogs, Collections & Items.
+- The `links` section is a required part of STAC Catalog, and serves as the list of API endpoints. These can live at any location, the 
+client must inspect the the `rel` to understand what capabilities are offered at each location.
+- The `conformsTo` section follows exactly the structure of OGC API - Features [declaration of conformance 
+classes](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_declaration_of_conformance_classes), except is available directly under 
+the landing page. This is a slight break from how OGC API does things, as STAC feels it is important for clients to be able to understand
+conformance in a single request. To be conformant to OGC API's the `/conformance` endpoint must be implemented as well.
+
+This particular catalog provides the ability to browse down to STAC Collections through its `child` links, and also provides the search
+endpoint to be able to search across its collections. Note though that none of those links are required, other servers may provide
+different conformance classes and a different set of links. 
+
+The only requirements of the STAC API core class are to provide a valid STAC Catalog that includes a valid `conformsTo` JSON object
+in it. 
+
+### STAC Search
+
+TODO: This is mostly specified above. Should figure out the revamp that talks about them in the right place.
+
+STAC Search is the conformance class for the core search endpoint that has the `rel` of `search`. It does not require
+OAFeat to be implemented, but its query parameters are mostly the same, with some sensible additions like being able to specify
+which 'collections' to query. 
+
+It is required to implement GET, and POST is optional. 
+
+### Commons
+
+[OGC API - Common - Part 2: Geospatial Data](http://docs.opengeospatial.org/DRAFTS/20-024.html) specifies a [Collections requirements 
+class](http://docs.opengeospatial.org/DRAFTS/20-024.html#rc_collections-section) that describes how to request information on Collections
+from an API. This provides the `data` rel type, that links to a list of collections that can all be referred to by ID. It is most often used
+in conjunction with STAC Response, to return valid STAC Collections.
+
+### STAC Response
+
+The STAC Response conformance class specifies that returned OGC Collections should be valid STAC Collections, and that returned OGC Features
+should be valid STAC Items. An example landing page response that implements Commons and STAC Response is as follows:
+
+```json
+{
+    "stac_version": "1.0.0-beta.2",
+    "id": "example-stac",
+    "title": "A simple STAC API Example",
+    "description": "This Catalog aims to demonstrate the a simple landing page",
+    ""
+    "links": [
+        {
+            "rel": "data",
+            "href": "https://stacserver.org/v1.0/collections",
+            "type": "application/json",
+            "title": "Datasets"
+        },
+        {
+            "rel": "child",
+            "href": "https://stacserver.org/v1.0/collections/2019",
+        },
+        {
+            "rel": "conformance",
+            "href": "https://stacserver.org/v1.0/conformance",
+            "type": "application/json",
+            "title": "OGC Conformance classes"
+        }
+    ],
+    "conformsTo" : [
+        "http://stacspec.org/spec/api/1.0.0-beta.1/req/stac-api-core",
+        "http://www.opengis.net/spec/ogcapi_common-2/1.0/req/collections",
+        "http://stacspec.org/spec/api/1.0.0-beta.1/req/stac-response"
+    ]
+}
+```
+
+Note that this example has a 'child' link, that would provide a 'browse' list of some subset of the collections listed in the `data` rel.
+
+TODO: Describe the OGC conformance classes and how they fit in.
+TODO: Have a full example, likely put it in examples.md instead of muddying the main text.
