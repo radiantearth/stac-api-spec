@@ -113,6 +113,15 @@ paths:
             text/html:
               schema:
                 type: string
+  # This schema changes the OAFeat endpoint to replace the schema from featureGeoJson to item.
+  '/collections/{collectionId}/items/{featureId}':
+    get:
+      responses:
+        '200':
+          content:
+            application/geo+json:
+              schema:
+                $ref: '#/components/schemas/item'
 components:
   parameters:
     ids:
@@ -151,9 +160,7 @@ components:
         * Maximum value, coordinate axis 3 (optional)
 
         The coordinate reference system of the values is WGS 84
-        longitude/latitude (http://www.opengis.net/def/crs/OGC/1.3/CRS84) unless
-        a different coordinate reference system is specified in the parameter
-        `bbox-crs`.
+        longitude/latitude (http://www.opengis.net/def/crs/OGC/1.3/CRS84).
 
         For WGS 84 longitude/latitude the values are in most cases the sequence
         of minimum longitude, minimum latitude, maximum longitude and maximum
@@ -198,21 +205,7 @@ components:
                 rel: search
                 type: application/json
                 title: Search across feature collections
-    # This schema extends OAFeat.yaml#/components/responses/Feature change the schema from featureGeoJson to item.
-    Feature:
-      content:
-        application/geo+json:
-          schema:
-            $ref: '#/components/schemas/item'
   schemas:
-    description:
-      type: string
-      description: |-
-        Detailed multi-line description to fully explain the catalog or
-        collection.
-
-        [CommonMark 0.29](http://commonmark.org/) syntax MAY be used for rich
-        text representation.
     # This schema extends OAFeat.yaml#/components/schemas/collection to add and require additional fields and add an example.
     collection:
       type: object
@@ -227,7 +220,13 @@ components:
         stac_extensions:
           $ref: '#/components/schemas/stac_extensions'
         description:
-          $ref: '#/components/schemas/description'
+          description: >-
+            Detailed multi-line description to fully explain the catalog or
+            collection.
+
+
+            [CommonMark 0.29](http://commonmark.org/) syntax MAY be used for
+            rich text representation.
         keywords:
           type: array
           description: List of keywords describing the collection.
@@ -478,7 +477,8 @@ components:
               for hosts or basic contact information.
 
 
-              CommonMark 0.29 syntax MAY be used for rich text representation.
+              [CommonMark 0.29](http://commonmark.org/) syntax MAY be used for
+              rich text representation.
             type: string
           roles:
             description: |-
@@ -606,7 +606,7 @@ components:
       description: Only returns items that intersect with the provided polygon.
       properties:
         intersects:
-          $ref: 'https://geojson.org/schema/Geometry.json'
+          $ref: "#/components/schemas/geometryGeoJSON"
     limitFilter:
       type: object
       description: Only returns maximum number of results (page size)
@@ -714,7 +714,7 @@ components:
         bbox:
           $ref: '#/components/schemas/bbox'
         geometry:
-          $ref: 'https://geojson.org/schema/Geometry.json'
+          $ref: "#/components/schemas/geometryGeoJSON"
         type:
           $ref: '#/components/schemas/itemType'
         properties:
@@ -815,8 +815,9 @@ components:
             example: Thumbnail
           description:
             type: string
-            description: |-
+            description: >-
               Multi-line description to explain the asset.
+
 
               [CommonMark 0.29](http://commonmark.org/) syntax MAY be used for
               rich text representation.

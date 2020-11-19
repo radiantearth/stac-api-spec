@@ -1,35 +1,61 @@
 # STAC API Specification
 
-The STAC API is intended to be a superset of the *OGC API - Features - Part 1: Core* (OAFeat) standard. STAC API 
-currently is based on [OAFeat version 1.0](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html), previously known as 
-OGC Web Feature Service (WFS). Future STAC API releases will align with 
-[upcoming versions](https://github.com/opengeospatial/ogcapi-features).
+## About
+
+The STAC API defines a RESTful JSON-based server to query [SpatioTemporal Asset Catalogs](stac-spec/) 
+(STAC). While the core STAC specification provides a structure and language to describe assets, users usually want to access
+a subset of the entire catalog, such as for a certain date range, in a particular area of interest, or matching properties
+they care about. STAC API specifies those query parameters, and compliant servers return collections of STAC Items that
+match the user's preferences.
+
+## STAC API and STAC Core Spec
+
+The [STAC Core specification](stac-spec) provides most all the content of API responses - the STAC API is primarily concerned
+with the return of STAC [Items](stac-spec/item-spec/README.md) and [Collections](stac-spec/collection-spec/README.md) through
+API's.
+
+This version of STAC API is intended to work with any STAC core specification version 0.9.x or 1.x.x (included betas), but is not 
+designed to work with STAC 2.0 and above (since we use [SemVer](https://semver.org/) it may introduce backwards incompatible changes). 
+The STAC API spec is released with the latest stable STAC core specification version included in the [`/stac-spec`](stac-spec/) 
+directory as a [submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules). To determine which version it is just check the 
+[`/stac-spec/CHANGELOG.md`](stac-spec/CHANGELOG.md) for the topmost version & release date.
+
+## STAC API and OGC API - Features
+
+The vast majority of the STAC API mechanics are specified in the *[OGC API - Features](https://ogcapi.ogc.org/features/)*
+standard ('OAFeat' for our shorthand). STAC API is fully compliant with [OAFeat - Part 1: Core, version 
+1.0](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html), and will be aligned with their additional extensions
+when they are finalized. Future STAC API releases will align with [upcoming versions](https://github.com/opengeospatial/ogcapi-features).
+STAC API adds certain requirements and extensions on top of the OAFeat core, to meet its community's use cases, detailed below.
 
 The OGC API - Features is a standard API that represents collections of geospatial data. It defines the RESTful interface 
 to query geospatial data, with GeoJSON as a main return type. With OAFeat you can return any `Feature`, which is a geometry 
-plus any number of properties. The core [STAC Item spec](https://github.com/radiantearth/stac-spec/item-spec/README.md) 
+plus any number of properties. The core [STAC Item spec](stac-spec/item-spec/README.md) 
 enhances the core `Feature` with additional requirements and options to enable cataloging of spatiotemporal 'assets' like 
 satellite imagery. This STAC `Item` always links to an asset, and these assets always have a capture time, so it requires 
-fields for `datetime` and `assets`. The STAC API extends the OAFeat core with some key functionality to enable search of 
-geospatial assets, detailed below.
+fields for `datetime` and `assets`. 
 
 OAFeat also defines the concept of a Collection, which contains Features. In OAFeat Collections are the sets of data that can 
 be queried ([7.11](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_collections_)), and each describes basic 
 information about the geospatial dataset, like its name and description, as well as the spatial and temporal extents of all 
-the data contained. [STAC collections](https://github.com/radiantearth/stac-spec/collection-spec/README.md) contain this same 
+the data contained. [STAC collections](stac-spec/collection-spec/README.md) contain this same 
 information, along with other STAC specific fields to provide additional metadata for searching spatiotemporal assets, and 
 thus are compliant with both OAFeat Collections and STAC Collections and are returned from the `/collections/{collection_id}` 
 endpoint.
 
-In OAFeat Features are the individual records within a Collection and are provided in GeoJSON format. 
-[STAC Items](https://github.com/radiantearth/stac-spec/item-spec/README.md) are analogous to OAFeat Features, 
-are in GeoJSON, and are returned from the `/collections/{collection_id}/items/{item_id}` endpoint.
+In OAFeat Features are the individual records within a Collection and are usually provided in GeoJSON format. 
+[STAC Items](stac-spec/item-spec/README.md) are compliant with the OAFeat Features 
+[GeoJSON requirements class](http://docs.ogc.org/is/17-069r3/17-069r3.html#_requirements_class_geojson), and are returned from the 
+`/collections/{collection_id}/items/{item_id}` endpoint. The return of other encodings 
+([html](http://docs.ogc.org/is/17-069r3/17-069r3.html#rc_html), [gml](http://docs.ogc.org/is/17-069r3/17-069r3.html#rc_gmlsf0))
+is outside the scope of STAC API, as the [STAC Item](stac-spec/item-spec/item-spec.md) is
+specified in GeoJSON.
 
 A typical OAFeat will have multiple collections, and each will just offer simple search for its particular collection at 
 `GET /collections/{collectionId}/items`.
 The main STAC endpoint specified beyond what OAFeat offers is `/search`, which offers cross-collection search. A primary
 use case of STAC is to search diverse imagery collections (like Landsat, Sentinel, MODIS) by location and cloud cover for any
-relevant image. So the ability to do searches across Collections is required, and is not yet specified by OAFeat. Due to the 
+matching item. So the ability to do searches across Collections is very important, and is not yet specified by OAFeat. Due to the 
 limited parameter support in OGC API - Features, it is recommended to use the STAC API endpoint 
 `POST /search` for advanced queries, as it supports richer options. 
 OGC API - Features is close to finalizing their default 
@@ -104,8 +130,8 @@ See the [OpenAPI specification document](openapi/STAC.yaml).
 
 | Endpoint  | Returns                                                        | Description |
 | --------  | -------------------------------------------------------------- | ----------- |
-| `/`       | [Catalog](https://github.com/radiantearth/stac-spec/catalog-spec/catalog-spec.md)            | Extends `/` from OAFeat to return a full STAC catalog. |
-| `/search` | [ItemCollection](https://github.com/radiantearth/stac-spec/item-spec/itemcollection-spec.md) | Retrieves a group of Items matching the provided search predicates, probably containing search metadata from the `search` extension |
+| `/`       | [Catalog](stac-spec/catalog-spec/catalog-spec.md)            | Extends `/` from OAFeat to return a full STAC catalog. |
+| `/search` | ItemCollection | Retrieves a group of Items matching the provided search predicates, probably containing search metadata from the `search` extension |
 
 The root endpoint (`/`) is most useful when it presents a complete `Catalog` representation of all the data contained in the API, such that all `Collections` and `Items` can be navigated to by transitively traversing links from this root. This spec does not require any API endpoints from OAFeat or STAC API to be implemented, so these links may not exist if the endpoint has not been implemented.
 
@@ -195,7 +221,7 @@ with a single value array in JSON if the same functionality is desired. For filt
 query parameters should use comma-separated string values (with no outer brackets \[ or \]) and JSON entity 
 attributes should use JSON Arrays. 
 
-### Examples
+### Query Examples
 
 ```http
 GET /search?collections=landsat8,sentinel&bbox=-10.415,36.066,3.779,44.213&limit=200&datetime=2017-05-05T00:00:00Z
@@ -209,6 +235,8 @@ GET /search?collections=landsat8,sentinel&bbox=-10.415,36.066,3.779,44.213&limit
     "datetime": "2017-05-05T00:00:00Z"
 }
 ```
+
+### Query Parameter Table
 
 | Parameter    | Type             | APIs         | Description |
 | -----------  | ---------------- | ------------ | ----------- |
