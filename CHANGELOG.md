@@ -17,8 +17,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Corrected the description of endpoint `/collections` to say it returns an object per OAFeat, instead of an array of Collection
 
 ### Deprecated
- - Intersects query, replaced by the 'intersects' spatial comparison in CQL
- - Query extension, replaced by the Filter extension (CQL)
+- Intersects query, replaced by the 'intersects' spatial comparison in CQL
+- Query extension, replaced by the Filter extension (CQL)
 
 ### Removed
 
