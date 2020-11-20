@@ -8,8 +8,8 @@ The SpatioTemporal Asset Catalog (STAC) specification aims to standardize the wa
 A 'spatiotemporal asset' is any file that represents information about the earth captured in a certain space and 
 time. The core STAC specification lives at [gitub.com/radiantearth/stac-spec](https://github.com/radiantearth/stac-spec).
 
-A STAC API is the dynamic version of a SpatioTemporal Asset Catalog. It returns a STAC [Catalog](https://github.com/radiantearth/stac-spec/catalog-spec/catalog-spec.md), 
-[Collection](https://github.com/radiantearth/stac-spec/collection-spec/collection-spec.md), [Item](https://github.com/radiantearth/stac-spec/item-spec/item-spec.md), 
+A STAC API is the dynamic version of a SpatioTemporal Asset Catalog. It returns a STAC [Catalog](stac-spec/catalog-spec/catalog-spec.md), 
+[Collection](stac-spec/collection-spec/collection-spec.md), [Item](stac-spec/item-spec/item-spec.md), 
 or ItemCollection, depending on the endpoint.
 Catalogs and Collections are JSON, while Items and ItemCollections are GeoJSON-compliant entities with foreign members.  
 Typically, a Feature is used when returning a single Item, and FeatureCollection when multiple Items (rather than a JSON array of Item entities).
@@ -17,7 +17,7 @@ Typically, a Feature is used when returning a single Item, and FeatureCollection
 The API is compliant with the *[OGC API - Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html)* standard 
 (formerly known as *OGC Web Feature Service 3*), in that it defines many of the endpoints that STAC uses. A STAC API should be 
 compatible and usable with any OGC API - Features clients. The STAC API can be thought of as a specialized Features API 
-to search STAC Catalogs, where the features returned are STAC [Items](https://github.com/radiantearth/stac-spec/item-spec/item-spec.md), 
+to search STAC Catalogs, where the features returned are STAC [Items](stac-spec/item-spec/item-spec.md), 
 that have common properties, links to their assets and geometries that represent the footprints of the geospatial assets.
 
 ## Stability Note
@@ -50,6 +50,12 @@ YAML fragments are provided for each extension with details provided in the *[RE
 Human-readable versions of the OpenAPI definitions can be viewed online for the last release:
 - [Only the core STAC API](https://stacspec.org/STAC-api.html) 
 - [STAC API including all extensions](https://stacspec.org/STAC-ext-api.html)
+
+**STAC Core Spec:** This repository includes a '[sub-module](https://git-scm.com/book/en/v2/Git-Tools-Submodules)', which
+is a copy of the [STAC Core Spec](stac-spec/) tagged at the latest stable version. This allows
+us to refer to the core spec with relative links. Sub-modules aren't checked out by default, so to get the directory 
+populated either use `git submodule update --init --recursive` if you've already cloned it, or clone from the start with
+`git clone --recursive git@github.com:radiantearth/stac-api-spec.git`. 
 
 ## OpenAPI definitions
 

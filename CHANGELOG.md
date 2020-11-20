@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Updated to STAC specification version 1.0.0-beta.2
+- Named explicit supported STAC core versions to be from 0.9.0 up to (and not including) 2.0.0
 - Context Extension OpenAPI spec was updated to remove the no longer used `next` attribute
 - Added root endpoint Link `search` must have `type` of `application/geo+json`
 - Corrected the description of endpoint `/collections` to say it returns an object per OAFeat, instead of an array of Collection
