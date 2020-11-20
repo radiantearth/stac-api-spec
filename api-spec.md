@@ -138,7 +138,6 @@ Core, openapi & geojson
 ### Extensions
 Just overview, and links
 
-
 **Old structures, to be reworked:**
 
 ## STAC API and STAC Core Spec
@@ -423,8 +422,6 @@ All Extensions **should** use attribute names qualified from the root of Item, r
 
 ## Conformance
 
-
-
 ### Core Conformance Classes
 
 There are 7 core conformance classes used in STAC API.
@@ -443,9 +440,7 @@ Additional conformance classes are specified in the STAC Extensions.
 
 TODO: I'll fold these back into our main definitions above. For now I'm just aiming to get them fleshed out.
 
-
-
-### STAC Search
+### STAC Search (old)
 
 TODO: This is mostly specified above. Should figure out the revamp that talks about them in the right place.
 
