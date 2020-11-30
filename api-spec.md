@@ -24,15 +24,15 @@ It re-uses all of the OAFeat [query parameters](http://docs.opengeospatial.org/i
 in their 'core', and adds a couple more. It does not require a full implementation of OAFeat, it is instead a simplified 
 construct that can run a search across any set of indexed STAC [`Items`](stac-spec/item-spec/README.md). 
 
-The other common most common link relationship is `data`, which goes to a complete list of available 'Collections', along
-with a mechanism to request individual collections by ID. These are specified by OGC API, in the 
+The other most common link relationship is `data` (usually at the `/collections` endpoint), which links to a complete 
+list of available 'Collections', along with a mechanism to request individual collections by ID. These are specified in the 
 '[Collections](http://docs.opengeospatial.org/DRAFTS/20-024.html#rc_collections-section)' section of OGC API Common. 
 STAC's [Collection](stac-spec/collection-spec/README.md) extends the OGC Collection with a handful of [additional 
 fields](stac-spec/collection-spec/collection-spec.md#collection-fields). STAC API's are expected to return STAC
 compliant Collections.
 
-Some STAC API implementations just use it to describe their Collections, without providing search of individual
-items. Many implementations go further than just providing the `search` rel by becoming fully compliant with
+Some STAC API implementations only describe their Collections, without providing search of individual Items, indeed they may not 
+have Items. Many implementations go further than just providing the `search` rel by becoming fully compliant with
 [OGC API - Features Core](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_core), implementing
 following their [GeoJSON](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_geojson) and 
 [OpenAPI](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_openapi_3_0) options, as STAC 
@@ -40,7 +40,7 @@ is always in GeoJSON and OpenAPI is used to specify STAC API. Full compliance in
 individual `/collections/{collectionId}/items` endpoints that expose querying single collections, as OAFeat does
 not currently allow cross-collection search. And it adds a few other requirements, explained below. 
 
-Both STAC API and OAFeat then each specify a number of 'extensions' that can be added for additional functionality.
+Both STAC API and OAFeat allow 'extensions' that can be added for additional functionality.
 We are working to fully merge the extensions, so that every STAC extension is specified at the OGC API level, and
 STAC API just presents a curated set of extension options. 
 
