@@ -9,6 +9,7 @@ components:
       name: query
       in: query
       description: query for properties in items. Use the JSON form of the queryFilter used in POST.
+      deprecated: true
       required: false
       schema:
         type: string
@@ -25,6 +26,7 @@ components:
     query:
       type: object
       description: Define which properties to query and the operatations to apply
+      deprecated: true
       additionalProperties:
         $ref: '#/components/schemas/queryProp'
       example:
