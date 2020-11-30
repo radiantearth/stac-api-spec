@@ -175,8 +175,6 @@ API endpoints from OAFeat or STAC API to be implemented, so the following links 
 | `service-desc` | The OpenAPI description of this service | OAFeat OpenAPI   | Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API |
 | `conformance` | OGC `/conformance` endpoint            | OAFeat / OACommon  | Only required for OGC API Compliant implementations              |
 
-
-
 ### STAC Search
 
 | **Name**    | **URI**                                                     | **Dependencies** |
@@ -199,7 +197,6 @@ This link should look like:
     "type": "application/geo+json"
 }
 ```
-
 
 #### Query Parameters and Fields
 
@@ -237,7 +234,6 @@ The core parameters for STAC search are defined by OAFeat, and STAC adds a few p
 
 Only one of either **intersects** or **bbox** should be specified.  If both are specified, a 400 Bad Request response 
 should be returned. See [examples](examples.md) to see sample requests.
-
 
 ##### Reserved Parameters
 
@@ -400,7 +396,6 @@ implementations should implement it in both places, so clients of both services 
 
 TODO: Add table with conformance class names, links and descriptions. 
 
-
 ## HTTP Request Methods and Content Types
 
 The OAFeat and STAC APIs follow a RESTful model. A core principal of this is the use of HTTP Request Methods ("verbs") and
@@ -436,4 +431,3 @@ searching on specific Item properties.
 
 The other HTTP verbs are not supported in the core STAC specification. The [Transaction Extension](extensions/transaction/README.md)
 does implement them, for STAC and OAFeat implementations that want to enable writing and deleting items. 
-
