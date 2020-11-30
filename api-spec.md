@@ -88,8 +88,8 @@ operation to create an Item. Any query against a single OAFeat collection endpoi
 the collection name in the `collections` query parameter.
 
 It is recommended for clients use POST for querying (if the STAC API supports it), especially when using the 
-`intersects` query parameter, because in practice, the allowed size for an HTTP GET request is significantly less than that allowed for a POST request, 
-so if a large geometry is used in the query it may cause a GET request to fail.
+`intersects` query parameter, because in practice, the allowed size for an HTTP GET request is significantly less than that allowed 
+for a POST request, so if a large geometry is used in the query it may cause a GET request to fail.
 
 **STAC API extensions** allow for more sophisticated searching, such as the ability to search by geometries and 
 searching on specific Item properties.
