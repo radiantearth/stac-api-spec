@@ -32,14 +32,14 @@ stable for over a year and are used in twenty or more implementations.
 
 ## List of community extensions
 
-| Extension Name                                         | Scope*         | Description | Maturity |
-| ------------------------------------------------------ | -------------- | ----------- | -------- |
-| [Fields](fields/README.md)                             | *None*         | Adds parameter to control which fields are returned in the response. | *Pilot* |
-| [Query](query/README.md)                               | *None*         | Adds parameter to search Item and Collection properties. | *Pilot* |
-| [Context](context/README.md)                           | ItemCollection | Adds search related metadata (context) to ItemCollection. | *Proposal* |
-| [Sort](sort/README.md)                                 | *None*         | Adds Parameter to control sorting of returns results. | *Pilot* |
-| [Transaction](transaction/README.md)                   | *None*         | Adds PUT and DELETE endpoints for the creation, editing, and deleting of items and Collections. | *Pilot* |
-| [Items and Collections API Version](version/README.md) | *None*         | Adds GET versions resource to collections and items endpoints and provides semantics for a versioning scheme for collections and items. | *Proposal* |
+| Extension Name                                         | Scope*         | Conformance URI                                                 | Description                                                                                                                             | Maturity   |
+|--------------------------------------------------------|----------------|-----------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|------------|
+| [Fields](fields/README.md)                             | *None*         | <http://stacspec.org/spec/api/1.0.0-beta.1/req/fields>          | Adds parameter to control which fields are returned in the response.                                                                    | *Pilot*    |
+| [Query](query/README.md)                               | *None*         | <http://stacspec.org/spec/api/1.0.0-beta.1/req/query>           | Adds parameter to search Item and Collection properties.                                                                                | *Pilot*    |
+| [Context](context/README.md)                           | ItemCollection | <http://stacspec.org/spec/api/1.0.0-beta.1/req/context>         | Adds search related metadata (context) to ItemCollection.                                                                               | *Proposal* |
+| [Sort](sort/README.md)                                 | *None*         | <http://stacspec.org/spec/api/1.0.0-beta.1/req/sort>            | Adds Parameter to control sorting of returns results.                                                                                   | *Pilot*    |
+| [Transaction](transaction/README.md)                   | *None*         | <http://www.opengis.net/spec/ogcapi-features-4/1.0/conf/simpletx> | Adds PUT and DELETE endpoints for the creation, editing, and deleting of items and Collections.                                         | *Pilot*    |
+| [Items and Collections API Version](version/README.md) | *None*         | <http://stacspec.org/spec/api/1.0.0-beta.1/req/version>         | Adds GET versions resource to collections and items endpoints and provides semantics for a versioning scheme for collections and items. | *Proposal* |
 
 \* The scope refers to the STAC specifications an extension extends. As all extensions here are API extensions,
 the API is not mentioned explicitly as scope and only the core STAC specifications (Catalog, Collection, Item and ItemCollection) are listed.

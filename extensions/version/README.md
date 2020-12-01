@@ -1,6 +1,8 @@
 # Items and Collections API Version Extension
 
-**Extension [Maturity Classification](../README.md#extension-maturity): Proposal**
+| **Name**      | **Conformance URI** | **[Maturity Classification](../README.md#extension-maturity)** |
+|---------------|---------------------------------------------------------------|----------------------|
+| Fields        | <http://stacspec.org/spec/api/1.0.0-beta.1/req/version>       | Proposal             |
 
 The core API doesn't support semantics to creating and accessing different versions of an Item or Collection.
 This version API extension defines the API resources and semantics for creating and accessing versioned records.

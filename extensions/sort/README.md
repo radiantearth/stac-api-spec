@@ -1,6 +1,8 @@
 # Sort API Extension
 
-**Extension [Maturity Classification](../README.md#extension-maturity): Pilot**
+| **Name**      | **Conformance URI** | **[Maturity Classification](../README.md#extension-maturity)** |
+|---------------|---------------------------------------------------------------|----------------------|
+| Fields        | <http://stacspec.org/spec/api/1.0.0-beta.1/req/fields>        | Pilot                |
 
 By default, the STAC search endpoint `/search` returns results in no specified order.  Whatever order the results are in 
 is up to the implementor, and will typically default to an arbitrary order that is fastest for the underlying data store 

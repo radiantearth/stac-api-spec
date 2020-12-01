@@ -1,6 +1,8 @@
 # Context Extension Specification
 
-**Extension [Maturity Classification](../README.md#extension-maturity): Proposal**
+| **Name**      | **Conformance URI** | **[Maturity Classification](../README.md#extension-maturity)** |
+|---------------|---------------------------------------------------------------|----------------------|
+| Context       | <http://stacspec.org/spec/api/1.0.0-beta.1/req/context>       | Pilot                |
 
 This extension is intended to augment the core ItemCollection
 object when the ItemCollection is the result of a search, for example, from calling the `/search` API endpoint.

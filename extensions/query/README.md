@@ -1,6 +1,8 @@
 # Query API Extension
 
-**Extension [Maturity Classification](../README.md#extension-maturity): Pilot**
+| **Name**      | **Conformance URI** | **[Maturity Classification](../README.md#extension-maturity)** |
+|---------------|---------------------------------------------------------------|----------------------|
+| Query         | <http://stacspec.org/spec/api/1.0.0-beta.1/req/query>         | Pilot                |
 
 The STAC search endpoint, `/search`, by default only accepts the core filter parameters given in the *[api-spec](../../api-spec.md)*.
 The Query API extension adds additional filters for searching on the properties of Items.

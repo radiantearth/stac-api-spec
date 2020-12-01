@@ -1,6 +1,8 @@
 # Fields API Extension
 
-**Extension [Maturity Classification](../README.md#extension-maturity): Pilot**
+| **Name**      | **Conformance URI** | **[Maturity Classification](../README.md#extension-maturity)** |
+|---------------|---------------------------------------------------------------|----------------------|
+| Fields        | <http://stacspec.org/spec/api/1.0.0-beta.1/req/fields>        | Pilot                |
 
 By default, the STAC search endpoint `/search` returns all attributes of each Item, as there is no way to specify 
 exactly those attributes that should be returned. The Fields API Extension adds new functionality that allows the 

@@ -1,6 +1,8 @@
 # Transaction API Extension
 
-**Extension [Maturity Classification](../README.md#extension-maturity): Pilot**
+| **Name**      | **Conformance URI** | **[Maturity Classification](../README.md#extension-maturity)** |
+|---------------|-------------------------------------------------------------------|----------------------|
+| Fields        | <http://www.opengis.net/spec/ogcapi-features-4/1.0/conf/simpletx> | Pilot                |
 
 The core STAC API doesn't support adding, editing, or removing items.
 The transaction API extension supports the creation, editing, and deleting of items through POST, PUT, PATCH, and DELETE requests.
