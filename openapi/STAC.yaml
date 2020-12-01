@@ -600,7 +600,7 @@ components:
       type: object
       properties:
         datetime:
-          $ref: '#/components/schemas/datetime'
+          $ref: '#/components/schemas/datetime_interval'
     intersectsFilter:
       type: object
       description: Only returns items that intersect with the provided polygon.
@@ -625,13 +625,20 @@ components:
       properties:
         collections:
           $ref: '#/components/schemas/collectionsArray'
-    # - OAFeat.yaml#/components/parameters/datetime 
     datetime:
       type: string
+      format: date-time
+      nullable: true
       description: |-
-        Either a date-time or an interval, open or closed. Date and time
-        expressions adhere to RFC 3339. Open intervals are expressed using
-        double-dots.
+        The searchable date and time of the assets, in UTC.
+        It is formatted according to [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6).
+        `null` is allowed, but requires `start_datetime` and `end_datetime` from common metadata to be set.
+      example: '2018-02-12T00:00:00Z'
+    datetime_interval:
+      type: string
+      description: |-
+        Either a date-time or an interval, open or closed. Date and time expressions
+        adhere to RFC 3339. Open intervals are expressed using double-dots.
 
         Examples:
 
