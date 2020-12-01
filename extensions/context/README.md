@@ -7,6 +7,12 @@
 This extension is intended to augment the core ItemCollection
 object when the ItemCollection is the result of a search, for example, from calling the `/search` API endpoint.
 
+**Note**: *This extension is currently scoped to just the [STAC Search](../api-spec.md#stac-search) functionality.
+OGC API has their own way returning `numberMatched` and `numberReturned` at the top level, instead of in a context
+object. We are hoping to [align](https://github.com/opengeospatial/ogcapi-common/issues/82), but until then it
+is recommended to use STAC Context in the cross-collection `search` endpoint, and follow the OGC API way when
+implementing OGC API - Features.*
+
 - [Example](examples/example.json)
 - [JSON Schema](json-schema/schema.json)
 
