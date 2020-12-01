@@ -55,7 +55,7 @@ column is more of an example in most cases. OGC API makes some endpoint location
 | `/search`                                       | search             | ItemCollection | Retrieves a group of Items matching the provided search predicates, probably containing search metadata from the `search` extension |
 | **`/collections`**                                  | data               | JSON           | Object with a list of Collections contained in the catalog and links |
 | **`/conformance`**                              | conformance        | JSON | Info about standards to which the API conforms |
-| `/api`                                          | service-desc       | OpenAPI 3.0 JSON | The OpenAPI definition of the endpoints in this service            | 
+| `/api`                                          | service-desc       | OpenAPI 3.0 JSON | The OpenAPI definition of the endpoints in this service            |
 | **`/collections/{collectionId}`**               | collection         | Collection     | Returns single Collection JSON |
 | **`/collections/{collectionId}/items`**         | items                   | ItemCollection | GeoJSON FeatureCollection-conformant entity of Items in collection |
 | **`/collections/{collectionId}/items/{featureId}`** | Item           | Returns single Item (GeoJSON Feature) |
@@ -120,7 +120,6 @@ The core of a STAC API is its landing page, which is the starting point to disco
     "id": "example-stac",
     "title": "A simple STAC API Example",
     "description": "This Catalog aims to demonstrate the a simple landing page",
-    ""
     "links": [
         {
             "rel": "child",
