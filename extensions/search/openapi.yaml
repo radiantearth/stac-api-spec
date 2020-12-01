@@ -1,36 +1,17 @@
-openapi: 3.0.1
+openapi: 3.0.3
 info:
-  title: The SpatioTemporal Asset Catalog API
-  version: 0.9.0
+  title: The SpatioTemporal Asset Catalog API - Search
+  version: 1.0.0-beta.1
   description: >-
-    This is an OpenAPI definition of the core SpatioTemporal Asset Catalog API
-    specification. Any service that implements this endpoint to allow search of
-    spatiotemporal assets can be considered a STAC API. The endpoint is also
-    available as an OpenAPI fragment that can be integrated with other OpenAPI
-    definitions, and is designed to slot seamlessly into a OGC API - Features definition.
+    This is an OpenAPI definition of the SpatioTemporal Asset Catalog API Search
+    specification.
   contact:
     name: STAC Specification
     url: 'http://stacspec.org'
   license:
     name: Apache License 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0'
-servers:
-  - url: 'http://dev.cool-sat.com'
-    description: Development server
-  - url: 'http://www.cool-sat.com'
-    description: Production server
 paths:
-  '/':
-    get:
-      # Overriding the OAFeat description for this endpoint
-      description: |-
-        Returns the root STAC Catalog or STAC Collection that is the entry point
-        for users to browse with STAC Browser or for search engines to crawl.
-        This can either return a single STAC Collection or more commonly a STAC
-        catalog.
-
-        The landing page provides links to the API definition, the conformance
-        statements, the collections and sub-catalogs.
   /search:
     get:
       summary: Search STAC items with simple filtering.
@@ -113,15 +94,6 @@ paths:
             text/html:
               schema:
                 type: string
-  # This schema changes the OAFeat endpoint to replace the schema from featureGeoJson to item.
-  '/collections/{collectionId}/items/{featureId}':
-    get:
-      responses:
-        '200':
-          content:
-            application/geo+json:
-              schema:
-                $ref: '#/components/schemas/item'
 components:
   parameters:
     ids:

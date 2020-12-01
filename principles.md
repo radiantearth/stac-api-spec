@@ -13,7 +13,8 @@ changes should come in the form of pull requests, using code review functionalit
 are not considering legacy options. Forward looking protocols can be considered as extensions,
 but the default specifications should be in JSON, following best REST practices. HTTP caching and
 error codes should be leveraged at the core. GeoJSON has already defined the core geospatial JSON response,
-so it should also be core. [JSON API](http://jsonapi.org/) should be used as basis of decisions where possible.
+so it should also be core. As STAC APIs follow a RESTful model, a core principal is the use of HTTP Request Methods ("verbs") and
+the `Content-Type` header to drive behavior on resources ("nouns"). 
 
 - **Small Reusable Pieces Loosely Coupled** - Each specification should be as focused as possible,
 defining one core concept and refraining from describing lots of options. Additional options can be made
