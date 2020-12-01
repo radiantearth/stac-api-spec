@@ -7,7 +7,6 @@ paths:
       operationId: postFeature
       tags:
         - Transaction Extension
-        - insert
       parameters:
         - $ref: '#/components/parameters/collectionId'
       requestBody:
@@ -33,7 +32,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/Feature' 
+                $ref: '#/components/schemas/item'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
@@ -66,7 +65,6 @@ paths:
       operationId: updateFeature
       tags:
         - Transaction Extension
-        - update
       parameters:
         - $ref: '#/components/parameters/collectionId'
         - $ref: '#/components/parameters/featureId'
@@ -148,7 +146,6 @@ paths:
       operationId: deleteFeature
       tags:
         - Transaction Extension
-        - delete
       parameters:
         - $ref: '#/components/parameters/collectionId'
         - $ref: '#/components/parameters/featureId'
