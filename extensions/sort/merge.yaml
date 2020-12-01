@@ -1,0 +1,1 @@
+!!files_merge_append ["extensions/item-search/openapi.yaml", "extensions/sort/openapi.yaml"]

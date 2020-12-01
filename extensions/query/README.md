@@ -1,10 +1,10 @@
-# Query API Extension
+# STAC API - Query Extension
 
-| **Name**      | **Conformance URI** | **[Maturity Classification](../README.md#extension-maturity)** |
-|---------------|---------------------------------------------------------------|----------------------|
-| Query         | <http://stacspec.org/spec/api/1.0.0-beta.1/req/query>         | Pilot                |
+- **Conformance URI: <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/query>**
+- **Extension [Maturity Classification](../README.md#extension-maturity): Pilot** - likely to be deprecated in the future in favor of CQL.
+- **Dependencies**: [STAC API - Search](../search)
 
-The STAC search endpoint, `/search`, by default only accepts the core filter parameters given in the *[api-spec](../../api-spec.md)*.
+The STAC search endpoint, `/search`, by default only accepts a limited set of core filter parameters.
 The Query API extension adds additional filters for searching on the properties of Items.
 
 The syntax for the `query` filter is:
@@ -19,7 +19,7 @@ The syntax for the `query` filter is:
 }
 ```
 
-Each property to search is an entry in the `query` filter. <operator> can be one of: `eq`, `neq`, `lt`, `lte`, `gt`, `gte`, `startsWith`, `endsWith`, `contains`, `in`. 
+Each property to search is an entry in the `query` filter. `<operator>` can be one of: `eq`, `neq`, `lt`, `lte`, `gt`, `gte`, `startsWith`, `endsWith`, `contains`, `in`. 
 Multiple operators may be provided for each property and are treated as a logical AND, where all conditions must be met.
 
 ## Examples

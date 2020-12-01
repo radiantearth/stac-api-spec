@@ -37,7 +37,7 @@ paths:
         '200':
           $ref: '#/components/responses/LandingPage'
         '500':
-          $ref: '#/components/responses/ServerError'
+          $ref: 'commons.yaml#/components/responses/Error'
 components:
   responses:
     LandingPage:
@@ -49,7 +49,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/catalog'
+            $ref: 'commons.yaml#/components/schemas/catalog'
           example:
             stac_version: 1.0.0-beta.1
             id: sentinel
@@ -78,91 +78,3 @@ components:
                 rel: child
                 type: application/json
                 title: Sentinel 2 Catalog
-  schemas:
-    catalog:
-      type: object
-      required:
-        - stac_version
-        - id
-        - description
-        - links
-      properties:
-        stac_version:
-          $ref: '#/components/schemas/stac_version'
-        stac_extensions:
-          $ref: '#/components/schemas/stac_extensions'
-        id:
-          type: string
-        title:
-          type: string
-        description:
-          type: string
-        links:
-          type: array
-          items:
-            $ref: "#/components/schemas/link"
-    link:
-      title: Link
-      type: object
-      required:
-        - href
-        - rel
-      properties:
-        href:
-          type: string
-          format: uri
-          description: The location of the resource
-        rel:
-          type: string
-          description: Relation type of the link
-        type:
-          type: string
-          description: The media type of the resource
-        title:
-          type: string
-          description: Title of the resource
-        method:
-          type: string
-          enum:
-            - GET
-            - POST
-          default: GET
-          description: Specifies the HTTP method that the resource expects
-        headers:
-          type: object
-          description: Object key values pairs they map to headers
-          example:
-            Accept: application/json
-        body:
-          type: object
-          description: For POST requests, the resource can specify the HTTP body as a JSON object.
-        merge:
-          type: boolean
-          default: false
-          description: |-
-            This is only valid when the server is responding to POST request.
-
-            If merge is true, the client is expected to merge the body value
-            into the current request body before following the link.
-            This avoids passing large post bodies back and forth when following
-            links, particularly for navigating pages through the `POST /search`
-            endpoint.
-
-            NOTE: To support form encoding it is expected that a client be able
-            to merge in the key value pairs specified as JSON
-            `{"next": "token"}` will become `&next=token`.
-    stac_version:
-      title: STAC version
-      type: string
-      example: 1.0.0-beta.1
-    stac_extensions:
-      title: STAC extensions
-      type: array
-      uniqueItems: true
-      items:
-        anyOf:
-          - title: Reference to a JSON Schema
-            type: string
-            format: uri
-          - title: Reference to a core extension
-            type: string

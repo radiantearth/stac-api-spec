@@ -1,15 +1,15 @@
-# STAC API Search
+# STAC API - Item Search
 
-| **Name**      | **Conformance URI**                                           | **Dependencies** |
-|-------------|-------------------------------------------------------------|------------------|
-| STAC Search | <http://stacspec.org/spec/api/1.0.0-beta.1/req/stac-search> | STAC API Core    |
+- **Conformance URI: <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search>**
+- **Extension [Maturity Classification](../README.md#extension-maturity): Pilot**
+- **Dependencies**: [STAC API - Core](../../core)
 
 A search endpoint, linked to from the STAC landing page, provides the ability to query STAC `Items` across collections.
 It retrieving a group of Items that match the provided search predicates, wrapped in an ItemCollection (which is a 
 valid [GeoJSON FeatureCollection](https://tools.ietf.org/html/rfc7946#section-3.3) that contains STAC Items).
 
-If a search endpoint is implemented, it is **required** to add a Link to the root endpoint (`/`) with the `rel` type set to `search`
-that refers to the search endpoint in the `href` property, with a `type` of `application/geo+json`.
+It is **required** to add a Link to the root endpoint (`/`) with the `rel` type set to `search`
+that refers to the search endpoint in the `href` property, with a `type` of `application/geo+json` and a `method` of either `GET` or `POST`.
 This link should look like:
 
 ```json
@@ -17,7 +17,8 @@ This link should look like:
     "href": "https://example.com/search",
     "rel": "search",
     "title": "Search",
-    "type": "application/geo+json"
+    "type": "application/geo+json",
+    "method": "GET"
 }
 ```
 

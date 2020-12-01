@@ -6,9 +6,10 @@
   "license": "Apache-2.0",
   "scripts": {
     "serve": "redoc-cli serve core/openapi.yaml --watch --options.expandResponses \"200,201,202,203,204\" --options.pathInMiddlePanel true",
-    "check": "npm run check-markdown && npm run check-openapi",
+    "check": "npm run check-markdown && npm run check-openapi-core && npm run check-openapi-extensions",
     "check-markdown": "remark . -f -r .circleci/rc.yaml --no-ignore --ignore-pattern stac-spec/",
-    "check-openapi": "spectral lint core/openapi.yaml"
+    "check-openapi-core": "spectral lint core/*.yaml --ruleset .circleci/.spectral.yml",
+    "check-openapi-extensions": "spectral lint extensions/*/openapi.yaml --ruleset .circleci/.spectral.yml"
   },
   "dependencies": {
     "@stoplight/spectral": "^5.7.1",
