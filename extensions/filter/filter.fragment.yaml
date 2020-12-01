@@ -1,10 +1,12 @@
-## This is just a work in progress hack of 'query' attempting to get it in line with CQL. Needs much more work and validation
+# This is just a draft to get it in line with CQL,but needs much more work and validation.
+# It is also waiting for a final release of the OpenAPI document to replace the reference in the filter schema to the OAFeat master branch on GitHub
 
 paths:
   /search:
     get:
       parameters:
         - $ref: '#/components/parameters/filter'
+        - $ref: '#/components/parameters/filter-lang'
 components:
   parameters:
     filter:
@@ -15,7 +17,25 @@ components:
       schema:
         type: string
       style: form
-      explode: false
+      examples: 
+        cql-text: polarization is "HH+VV+HV+VH" and intersects geom(Washington DC)
+        cql-json:
+          and:
+            - lt: 
+                property: cloud_cover
+                value: 10
+            - eq: 
+                property: platform
+                value: 'landsat8'
+            - like:
+                property: pl:item_type
+                value: 'PSScene%'
+            - in: 
+                property: gsd
+                value:
+                  - 10
+                  - 15
+                  - 20
     filter-lang:
       name: filter-lang
       in: query
@@ -23,11 +43,12 @@ components:
       schema:
         type: string
         enum:
-          - 'cql-text'
-          - 'cql-json'
-        default: "cql-text"
+          - cql-text
+          - cql-json
+        default: cql-text
       style: form
   schemas:
+    filter-lang:
     searchBody:
       allOf:
         - $ref: '#/components/schemas/queryFilter'
@@ -37,35 +58,14 @@ components:
       properties:
         filter:
           $ref: '#/components/schemas/filter'
+        filter-lang:
+          type: string
+          enum:
+            - cql-text
+            - cql-json
+          default: cql-json
     filter:
-      type: object
       description: Filter for properties in items. Uses OGC's Common Query Language (CQL) JSON (cql-json) from part 3 of OGC API - Features.
-      additionalProperties:
-        $ref: '#/components/schemas/filterProp'
-      example:
-        and:
-          - lt: 
-              property: cloud_cover
-              value: 10
-          - eq: 
-              property: platform
-              value: 'landsat8'
-          - like:
-              property: pl:item_type
-              value: 'PSScene%'
-          - in: 
-              property: gsd
-              value:
-                - 10
-                - 15
-                - 20
-    filterProp:
-      description: Apply filter operations to a specific property
-      anyOf:
-        - description: if the object doesn't contain any of the operators, it is equivalent to using the equals operator
-        - type: object
-          description: Match using an operator
-          properties:
-            eq:
-              description: Find items with a property that is equal to the specified value. For strings, a case-insensitive comparison must be performed.
+      allOf:
+        - $ref: 'https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/extensions/cql/standard/schema/cql.yml#/components/schemas/predicates'
        
