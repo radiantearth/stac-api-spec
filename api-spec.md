@@ -94,7 +94,7 @@ a valid STAC API is 'STAC API Core', but the majority of implementations will im
 A majority of the conformance classes are defined by OGC (Commons and OAFeat), and the number will likely increase as OGC capabilities 
 expand and STAC works to align.
 
-| *Name*                    | *API*  | *URI*                                                          | *Description*                                                                                                                                              |
+| **Name**                  | **API** | **Conformance URI**                                                      | **Description**                                                                                                                                        |
 |---------------------------|--------|----------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | STAC API Core             | STAC   | <http://stacspec.org/spec/api/1.0.0-beta.1/req/stac-api-core>      | Specifies the STAC Landing page `/`, communicating conformance and available endpoints.          |
 | STAC Search               | STAC   | <http://stacspec.org/spec/api/1.0.0-beta.1/req/stac-search>      | Enables search of all STAC Items on the server, with the STAC `[/search](#stac-api-endpoints)` endpoint.               |
@@ -104,11 +104,11 @@ expand and STAC works to align.
 | OpenAPI specification 3.0 | OAFeat | <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30>   | Describes the API as OpenAPI 3.0 ([reference](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_oas30))                                          |
 | GeoJSON                   | OAFeat | <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson> | Requires OGC API - Features responses to be in GeoJSON ([reference](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_geojson)) |                                             |
 
-Additional conformance classes are specified in the STAC Extensions.
+Additional conformance classes are specified in the [STAC Extensions](extensions/README.md).
 
 ### STAC API Core
 
-| **Name**      | **URI**                                                       | **Dependencies** |
+| **Name**      | **Conformance URI**                                           | **Dependencies** |
 |---------------|---------------------------------------------------------------|------------------|
 | STAC API Core | <http://stacspec.org/spec/api/1.0.0-beta.1/req/stac-api-core> | None             |
 
@@ -177,7 +177,7 @@ API endpoints from OAFeat or STAC API to be implemented, so the following links 
 
 ### STAC Search
 
-| **Name**    | **URI**                                                     | **Dependencies** |
+| **Name**      | **Conformance URI**                                           | **Dependencies** |
 |-------------|-------------------------------------------------------------|------------------|
 | STAC Search | <http://stacspec.org/spec/api/1.0.0-beta.1/req/stac-search> | STAC API Core    |
 
@@ -316,7 +316,7 @@ Example requests can be found in the [examples document](./examples.md#paging).
 
 ### OGC API - Common - Part 2: Collections
 
-| **Name**             | **URI**                                                           | **Dependencies** |
+| **Name**             | **Conformance URI**                                           | **Dependencies** |
 |----------------------|-------------------------------------------------------------------|------------------|
 | OACommon Collections | <http://www.opengis.net/spec/ogcapi_common-2/1.0/req/collections> | None             |
 
@@ -330,7 +330,7 @@ we'd need to link to a particular commit to reference it.
 
 ### OGC API - Features
 
-| **Name**                  | **URI**                                                          | **Dependencies** | **Definition**                                                                                                      |   |
+| **Name**                  | **Conformance URI**                                              | **Dependencies** | **Definition**                                                                                                      |   |
 |---------------------------|------------------------------------------------------------------|------------------|---------------------------------------------------------------------------------------------------------------------|---|
 | OAFeat Core               | <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core>    | None             | [Requirements Class Core](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_core))                        |   |
 | OpenAPI specification 3.0 | <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30>   | OAFeat Core      | [Requirements Class OpenAPI 3.0](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_oas30))                |   |
@@ -394,7 +394,10 @@ implementations should implement it in both places, so clients of both services 
 
 ### Extensions
 
-TODO: Add table with conformance class names, links and descriptions. 
+In the [extensions/](extensions/) folder there is additional functionality that can be layered onto a STAC API. Most all of 
+them are compatible with OGC API - Features, and the plan is to fully align most of the functionality and have it be useful
+for all OAFeat implementations. The conformance classes of the extensions are listed in the folder's [README](extensions/README.md)
+and in each individual extension.
 
 ## HTTP Request Methods and Content Types
 
