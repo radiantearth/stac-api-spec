@@ -2,8 +2,8 @@ openapi: 3.0.1
 paths:
   '/collections/{collectionId}/items':
     post:
-      summary: add a new feature to a collection
-      description: create a new feature in a specific collection
+      summary: add a new STAC Item to a collection
+      description: create a new STAC Item in a specific collection
       operationId: postFeature
       tags:
         - Transaction Extension
@@ -21,7 +21,7 @@ paths:
           description: Status of the create request.
           headers:
             Location:
-              description: A link to the item
+              description: The URL of the newly added resource (i.e. path of the resource end point)
               schema:
                 type: string
                 format: url
@@ -30,16 +30,15 @@ paths:
                 type: string
               description: A string to ensure the item has not been modified
           content:
-            application/geo+json:
+            application/json:
               schema:
-                type: string
-            text/html:
-              schema:
-                type: string
+                $ref: '#/components/schemas/item'
         '400':
           $ref: '#/components/responses/BadRequest'
-        '5XX':
-          $ref: '#/components/responses/InternalServerError'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ServerError'
         default:
           description: An error occurred.
           content:
@@ -63,7 +62,7 @@ paths:
       description: >-
         Use this method to update an existing feature. Requires the entire
         GeoJSON  description be submitted.
-      operationId: putFeature
+      operationId: updateFeature
       tags:
         - Transaction Extension
       parameters:
@@ -71,33 +70,27 @@ paths:
         - $ref: '#/components/parameters/featureId'
         - $ref: '#/components/parameters/IfMatch'
       requestBody:
+        description: The request body shall contain a representation of the replacement item.
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/item'
       responses:
-        '200':
-          description: Status of the update request.
+        '204':
+          description: The item was replaced
           headers:
             ETag:
               schema:
                 type: string
-              description: A string to ensure the item has not been modified
-          content:
-            text/html:
-              schema:
-                type: string
-            application/json:
-              schema:
-                type: string
+              description: An updated string to track changes
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
         '412':
           $ref: '#/components/responses/PreconditionFailed'
-        '5XX':
-          $ref: '#/components/responses/InternalServerError'
+        '500':
+          $ref: '#/components/responses/ServerError'
         default:
           description: An error occurred.
           content:
@@ -111,7 +104,7 @@ paths:
       summary: update an existing feature by Id with a partial item definition
       description: >-
         Use this method to update an existing feature. Requires a GeoJSON
-        fragement (containing the fields to be updated) be submitted.
+        fragment (containing the fields to be updated) be submitted.
       operationId: patchFeature
       tags:
         - Transaction Extension
@@ -125,26 +118,19 @@ paths:
             schema:
               $ref: '#/components/schemas/partialItem'
       responses:
-        '200':
+        '204':
           description: Status of the update request.
           headers:
             ETag:
               schema:
                 type: string
               description: A string to ensure the item has not been modified
-          content:
-            text/html:
-              schema:
-                type: string
-            application/json:
-              schema:
-                type: string
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-        '5XX':
-          $ref: '#/components/responses/InternalServerError'
+        '500':
+          $ref: '#/components/responses/ServerError'
         default:
           description: An error occurred.
           content:
@@ -166,13 +152,13 @@ paths:
         - $ref: '#/components/parameters/IfMatch'
       responses:
         '204':
-          description: Status of the delete request.
+          description: The resource was deleted.
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-        '5XX':
-          $ref: '#/components/responses/InternalServerError'
+        '500':
+          $ref: '#/components/responses/ServerError'
         default:
           description: An error occurred.
           content:
