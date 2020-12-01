@@ -664,25 +664,7 @@ components:
       schema:
         type: string
       style: form
-      examples:
-        cql-text: polarization is "HH+VV+HV+VH" and intersects geom(Washington DC)
-        cql-json:
-          and:
-            - lt:
-                property: cloud_cover
-                value: 10
-            - eq:
-                property: platform
-                value: landsat8
-            - like:
-                property: 'pl:item_type'
-                value: PSScene%
-            - in:
-                property: gsd
-                value:
-                  - 10
-                  - 15
-                  - 20
+      example: polarization is "HH+VV+HV+VH" and intersects geom(Washington DC)
     filter-lang:
       name: filter-lang
       in: query
@@ -1895,7 +1877,6 @@ components:
         - rel: next
           href: >-
             http://api.cool-sat.com/search?next=ANsXtp9mrqN0yrKWhf-y2PUpHRLQb1GT-mtxNcXou8TwkXhi1Jbk
-    filter-lang: null
     queryFilter:
       type: object
       description: Allows users to query properties for specific values

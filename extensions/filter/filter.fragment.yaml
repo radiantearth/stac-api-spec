@@ -17,25 +17,8 @@ components:
       schema:
         type: string
       style: form
-      examples: 
-        cql-text: polarization is "HH+VV+HV+VH" and intersects geom(Washington DC)
-        cql-json:
-          and:
-            - lt: 
-                property: cloud_cover
-                value: 10
-            - eq: 
-                property: platform
-                value: 'landsat8'
-            - like:
-                property: pl:item_type
-                value: 'PSScene%'
-            - in: 
-                property: gsd
-                value:
-                  - 10
-                  - 15
-                  - 20
+      example: >-
+        polarization is "HH+VV+HV+VH" and intersects geom(Washington DC)
     filter-lang:
       name: filter-lang
       in: query
@@ -48,7 +31,6 @@ components:
         default: cql-text
       style: form
   schemas:
-    filter-lang:
     searchBody:
       allOf:
         - $ref: '#/components/schemas/queryFilter'
