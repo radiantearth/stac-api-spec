@@ -1,8 +1,8 @@
-# Fields API Extension
+# STAC API - Fields Fragment
 
-- **Conformance URI: <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/fields>**
-- **Extension [Maturity Classification](../README.md#extension-maturity): Pilot**
-- **Dependencies**: [STAC API - Item Search](../item-search)
+- **Fragment [Maturity Classification](../README.md#extension-maturity): Pilot**
+- **Dependents:**
+    - [Item Search](../../extensions/item-search)
 
 By default, the STAC search endpoint `/search` returns all attributes of each Item, as there is no way to specify 
 exactly those attributes that should be returned. The Fields API Extension adds new functionality that allows the 

@@ -48,7 +48,7 @@ paths:
               schema:
                 type: string
         default:
-          $ref: '../../core/commons.yaml#/components/responses/Error'
+          $ref: '../../fragments/commons/openapi.yaml#/components/responses/Error'
     post:
       summary: Search STAC items with full-featured filtering.
       description: |-
@@ -77,7 +77,7 @@ paths:
               schema:
                 type: string
         default:
-          $ref: '../../core/commons.yaml#/components/responses/Error'
+          $ref: '../../fragments/commons/openapi.yaml#/components/responses/Error'
 components:
   parameters:
     ids:
@@ -213,7 +213,7 @@ components:
       description: Only return items that intersect the provided bounding box.
       properties:
         bbox:
-          $ref: '../../core/commons.yaml#/components/schemas/bbox'
+          $ref: '../../fragments/commons/openapi.yaml#/components/schemas/bbox'
     collectionsArray:
       type: array
       description: |-
@@ -239,7 +239,7 @@ components:
       description: Only returns items that intersect with the provided polygon.
       properties:
         intersects:
-          $ref: "../../core/commons.yaml#/components/schemas/geometryGeoJSON"
+          $ref: "../../fragments/commons/openapi.yaml#/components/schemas/geometryGeoJSON"
     limitFilter:
       type: object
       description: Only returns maximum number of results (page size)
@@ -291,14 +291,14 @@ components:
         features:
           type: array
           items:
-            $ref: '../../core/commons.yaml#/components/schemas/item'
+            $ref: '../../fragments/commons/openapi.yaml#/components/schemas/item'
         links:
           type: array
           description: >-
             An array of links. Can be used for pagination, e.g. by providing a link
             with the `next` relation type.
           items:
-            $ref: '../../core/commons.yaml#/components/schemas/link'
+            $ref: '../../fragments/commons/openapi.yaml#/components/schemas/link'
           example:
             - rel: next
               href: >-

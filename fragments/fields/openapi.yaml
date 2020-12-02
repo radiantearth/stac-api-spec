@@ -1,14 +1,18 @@
-paths:
-  /search:
-    get:
-      parameters:
-        - $ref: '#/components/parameters/fields'
+openapi: 3.0.3
+info:
+  title: The SpatioTemporal Asset Catalog API - Fields
+  version: 1.0.0-beta.1
+paths: {}
 components:
   parameters:
     fields:
       name: fields
+      x-stac-api-fragment: fields
       in: query
-      description: Determines the shape of the features in the response
+      description: |-
+        **Optional Extension:** Fields
+
+        Determines the shape of the features in the response
       required: false
       schema:
         type: string
@@ -17,11 +21,12 @@ components:
       explode: false
   schemas:
     searchBody:
-      allOf:
-        - $ref: '#/components/schemas/fieldsFilter'
-    fieldsFilter:
       type: object
-      description: Determines the shape of the features in the response
+      x-stac-api-fragment: fields
+      description: |-
+        **Optional Extension:** Fields
+
+        Determines the shape of the features in the response
       properties:
         fields:
           $ref: '#/components/schemas/fields'

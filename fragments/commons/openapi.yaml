@@ -2,15 +2,7 @@ openapi: 3.0.3
 info:
   title: The SpatioTemporal Asset Catalog API - Commons
   version: 1.0.0-beta.1
-  description: >-
-    This is an OpenAPI definition of the common SpatioTemporal Asset Catalog API
-    building blocks for re-use in other OpenAPI documents.
-  contact:
-    name: STAC Specification
-    url: 'http://stacspec.org'
-  license:
-    name: Apache License 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0'
+paths: {}
 components:
   responses:
     Error:

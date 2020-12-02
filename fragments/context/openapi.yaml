@@ -1,7 +1,17 @@
+openapi: 3.0.3
+info:
+  title: The SpatioTemporal Asset Catalog API - Context
+  version: 1.0.0-beta.1
+paths: {}
 components:
   schemas:
     itemCollection:
       type: object
+      description: |-
+        **Optional Extension:** Context
+
+        Augments lists of resources with the number of returned and matches resource and the given limit for the request.
+      x-stac-api-fragment: context
       properties:
         'context':
           type: object

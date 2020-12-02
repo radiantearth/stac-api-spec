@@ -1,30 +1,36 @@
-paths:
-  /search:
-    get:
-      parameters:
-        - $ref: '#/components/parameters/query'
+openapi: 3.0.3
+info:
+  title: The SpatioTemporal Asset Catalog API - Query
+  version: 1.0.0-beta.1
+paths: {}
 components:
   parameters:
     query:
       name: query
+      x-stac-api-fragment: query
       in: query
-      description: query for properties in items. Use the JSON form of the queryFilter used in POST.
+      description: |-
+        **Optional Extension:** Query
+      
+        Query for properties in items.
+        Use the JSON form of the query used in POST.
       required: false
       schema:
         type: string
   schemas:
     searchBody:
-      allOf:
-        - $ref: '#/components/schemas/queryFilter'
-    queryFilter:
       type: object
-      description: Allows users to query properties for specific values
+      x-stac-api-fragment: query
+      description: |-
+        **Optional Extension:** Query
+      
+        Allows users to query properties for specific values
       properties:
         query:
           $ref: '#/components/schemas/query'
     query:
       type: object
-      description: Define which properties to query and the operatations to apply
+      description: Define which properties to query and the operations to apply
       additionalProperties:
         $ref: '#/components/schemas/queryProp'
       example:

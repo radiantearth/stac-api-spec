@@ -1,8 +1,8 @@
-# Context Extension Specification
+# STAC API - Context Fragment
 
-- **Conformance URI: <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/context>**
-- **Extension [Maturity Classification](../README.md#extension-maturity): Pilot**
-- **Dependencies**: [STAC Item Search](../item-search/)
+- **Fragment [Maturity Classification](../README.md#extension-maturity): Pilot**
+- **Dependents:**
+    - [Item Search](../../extensions/item-search)
 
 This extension is intended to augment the core ItemCollection
 object when the ItemCollection is the result of a search, for example, from calling the `/search` API endpoint.
