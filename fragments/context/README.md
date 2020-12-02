@@ -1,6 +1,6 @@
 # STAC API - Context Fragment
 
-- **Fragment [Maturity Classification](../README.md#extension-maturity): Pilot**
+- **Fragment [Maturity Classification](../README.md#extension-maturity):** Pilot
 - **Dependents:**
     - [Item Search](../../extensions/item-search)
 

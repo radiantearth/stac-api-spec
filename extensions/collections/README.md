@@ -1,7 +1,7 @@
 # STAC API - Collections
 
-- **Conformance URI: <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/collections>**
-- **Extension [Maturity Classification](../README.md#extension-maturity): Pilot**
+- **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/collections>
+- **Extension [Maturity Classification](../README.md#extension-maturity):** Pilot
 - **Dependencies**: [STAC API - Core](../../core)
 
 A STAC API can return information about all STAC [Collections](../../stac-spec/collection-spec/collection-spec.md) available using a link

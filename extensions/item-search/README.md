@@ -1,7 +1,7 @@
 # STAC API - Item Search
 
-- **Conformance URI: <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search>**
-- **Extension [Maturity Classification](../README.md#extension-maturity): Pilot**
+- **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search>
+- **Extension [Maturity Classification](../README.md#extension-maturity):** Pilot
 - **Dependencies**: [STAC API - Core](../../core)
 
 A search endpoint, linked to from the STAC landing page, provides the ability to query STAC `Items` across collections.
@@ -29,26 +29,26 @@ This link should look like:
 
 ### Context
 
-- **Conformance URI: <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#context>**
-- **Extension [Maturity Classification](../README.md#extension-maturity): Pilot**
+- **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#context>**
+- **Extension [Maturity Classification](../README.md#extension-maturity):** Pilot
 - **Dependencies**: [STAC API - Context Fragment](../../fragments/context/)
 
 ### Fields
 
-- **Conformance URI: <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#fields>**
-- **Extension [Maturity Classification](../README.md#extension-maturity): Pilot**
+- **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#fields>
+- **Extension [Maturity Classification](../README.md#extension-maturity):** Pilot
 - **Dependencies**: [STAC API - Fields Fragment](../../fragments/fields/)
 
 ### Query
 
-- **Conformance URI: <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#query>**
-- **Extension [Maturity Classification](../README.md#extension-maturity): Pilot**
+- **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#query>
+- **Extension [Maturity Classification](../README.md#extension-maturity):** Pilot
 - **Dependencies**: [STAC API - Query Fragment](../../fragments/query/)
 
 ### Sort
 
-- **Conformance URI: <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#sort>**
-- **Extension [Maturity Classification](../README.md#extension-maturity): Pilot**
+- **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#sort>
+- **Extension [Maturity Classification](../README.md#extension-maturity):** Pilot
 - **Dependencies**: [STAC API - Sort Fragment](../../fragments/sort/)
 
 ## Query Parameters and Fields

@@ -1,21 +1,19 @@
-# OGC API - Features
+# STAC API - Features (extends OGC API - Features - Part 1: Core)
 
-- **Conformance URI: <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core> (and see the [table](#conformance-table) below)**
-- **Extension [Maturity Classification](../README.md#extension-maturity): Mature**
-- **Dependencies**: [STAC API - Core](../../core)
+- **Conformance URIs:**
+    - <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/ogcapi-features>
+    - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core> - [Requirements Class Core](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_core))
+    - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30> - [Requirements Class OpenAPI 3.0](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_oas30))
+    - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson> - [Requirements Class GeoJSON](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_geojson))
+- **Extension [Maturity Classification](../README.md#extension-maturity):** Mature
+- **Dependencies**:
+    - [STAC API - Core](../../core)
+    - [OGC API - Features](https://www.ogc.org/standards/ogcapi-features)
 
 Adding OGC API - Features (OAFeat) to a STAC API means fully implementing all their requirements, and then returning STAC 
 [Items](../../stac-spec/item-spec/README.md) from their `/items` endpoints. In OAFeat OpenAPI 3.0 and GeoJSON are optional 
 conformance classes, enabling flexibility, but for STAC they are required, since STAC uses OpenAPI 3.0 and GeoJSON at its
 core.  So the full conformance class list is in the following table.
-
-## Conformance Table
-
-| **Name**                  | **Conformance URI**                                              | **Dependencies** | **Definition**                                                                                                      |   |
-|---------------------------|------------------------------------------------------------------|------------------|---------------------------------------------------------------------------------------------------------------------|---|
-| OAFeat Core               | <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core>    | None             | [Requirements Class Core](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_core))                        |   |
-| OpenAPI specification 3.0 | <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30>   | OAFeat Core      | [Requirements Class OpenAPI 3.0](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_oas30))                |   |
-| GeoJSON                   | <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson> | OAFeat Core      | [Requirements Class GeoJSON](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_geojson)) |   |
 
 Note that implementing OGC API - Features does not actually depend on [STAC API - Core](../../core), but we include it as a dependency since
 this extension discusses using it in the context of STAC. One could implement an OAFeat service, returning STAC 

@@ -1,6 +1,6 @@
 # STAC API - Query Fragment
 
-- **Extension [Maturity Classification](../README.md#extension-maturity): Pilot** - likely to be deprecated in the future in favor of CQL.
+- **Extension [Maturity Classification](../README.md#extension-maturity):** Pilot - likely to be deprecated in the future in favor of CQL.
 - **Dependents:**
     - [Item Search](../../extensions/item-search)
 
