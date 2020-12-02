@@ -8,8 +8,11 @@ A search endpoint, linked to from the STAC landing page, provides the ability to
 It retrieving a group of Items that match the provided search predicates, wrapped in an ItemCollection (which is a 
 valid [GeoJSON FeatureCollection](https://tools.ietf.org/html/rfc7946#section-3.3) that contains STAC Items).
 
+Implementing `GET /search` is **required**, `POST /search` is optional, but recommended.
+
 It is **required** to add a Link to the root endpoint (`/`) with the `rel` type set to `search`
-that refers to the search endpoint in the `href` property, with a `type` of `application/geo+json` and a `method` of either `GET` or `POST`.
+that refers to the search endpoint in the `href` property,
+with a `type` of `application/geo+json` and a `method` of either `GET` or `POST`.
 This link should look like:
 
 ```json
@@ -21,6 +24,32 @@ This link should look like:
     "method": "GET"
 }
 ```
+
+## Extensions
+
+### Context
+
+- **Conformance URI: <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#context>**
+- **Extension [Maturity Classification](../README.md#extension-maturity): Pilot**
+- **Dependencies**: [STAC API - Context Fragment](../../fragments/context/)
+
+### Fields
+
+- **Conformance URI: <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#fields>**
+- **Extension [Maturity Classification](../README.md#extension-maturity): Pilot**
+- **Dependencies**: [STAC API - Fields Fragment](../../fragments/fields/)
+
+### Query
+
+- **Conformance URI: <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#query>**
+- **Extension [Maturity Classification](../README.md#extension-maturity): Pilot**
+- **Dependencies**: [STAC API - Query Fragment](../../fragments/query/)
+
+### Sort
+
+- **Conformance URI: <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#sort>**
+- **Extension [Maturity Classification](../README.md#extension-maturity): Pilot**
+- **Dependencies**: [STAC API - Sort Fragment](../../fragments/sort/)
 
 ## Query Parameters and Fields
 
@@ -58,25 +87,6 @@ The core parameters for STAC search are defined by OAFeat, and STAC adds a few p
 
 Only one of either **intersects** or **bbox** should be specified.  If both are specified, a 400 Bad Request response 
 should be returned. See [examples](#examples) to see sample requests.
-
-### Reserved Parameters
-
- Additionally, there are several reserved parameters over STAC search that have no meaning in the base STAC API 
- specification, but which are reserved exclusively for the use of API Extensions.  API implementations are free to 
- add additional implementation-specific parameters, but they **MUST NOT** use following parameters unless implementing 
- the syntax and semantics of an API Extension attached to that parameter.  If no API Extension for that parameter is 
- implemented by an API, then if that parameter has a non-empty value in the request a 400 Bad Request status code must 
- be returned. 
-
-| Parameter | Type               | Description |
-| --------- | ------------------ | ----------- |
-| fields    | string \| \[Field] | Placeholder parameter for [API Fields Extension](../fields/README.md), used to request specific properties in the response. |
-| sort      | string \| \[Sort] | Placeholder parameter for [API Sort Extension](../sort/README.md), used to order the responses by property. |
-| query     | string \| QueryFilter | Placeholder parameter for [API Query Extension](../query/README.md) query value. |
-
-## GET & POST
-
-A GET response from the search endpoint is **required**. POST is optional, but recommended.
 
 ## Response
 
