@@ -70,9 +70,9 @@ should be returned. See [examples](#examples) to see sample requests.
 
 | Parameter | Type               | Description |
 | --------- | ------------------ | ----------- |
-| fields    | string \| \[Field] | Placeholder parameter for [API Fields Extension](extensions/fields/README.md), used to request specific properties in the response. |
-| sort      | string \| \[Sort] | Placeholder parameter for [API Sort Extension](extensions/sort/README.md), used to order the responses by property. |
-| query     | string \| QueryFilter | Placeholder parameter for [API Query Extension](extensions/query/README.md) query value. |
+| fields    | string \| \[Field] | Placeholder parameter for [API Fields Extension](../fields/README.md), used to request specific properties in the response. |
+| sort      | string \| \[Sort] | Placeholder parameter for [API Sort Extension](../sort/README.md), used to order the responses by property. |
+| query     | string \| QueryFilter | Placeholder parameter for [API Query Extension](../query/README.md) query value. |
 
 ## GET & POST
 
@@ -82,7 +82,7 @@ A GET response from the search endpoint is **required**. POST is optional, but r
 
 The response to a request (GET or POST) to the search endpoint should always be an `ItemCollection` - a valid [GeoJSON 
 FeatureCollection](https://tools.ietf.org/html/rfc7946#section-3.3) that consists entirely of STAC 
-[Items](stac-spec/item-spec/item-spec.md). 
+[Items](../../stac-spec/item-spec/item-spec.md). 
 
 ### Paging
 

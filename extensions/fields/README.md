@@ -1,8 +1,8 @@
 # Fields API Extension
 
-| **Name**      | **Conformance URI** | **[Maturity Classification](../README.md#extension-maturity)** |
-|---------------|---------------------------------------------------------------|----------------------|
-| Fields        | <http://stacspec.org/spec/api/1.0.0-beta.1/req/fields>        | Pilot                |
+- **Conformance URI: <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/fields>**
+- **Extension [Maturity Classification](../README.md#extension-maturity): Pilot**
+- **Dependencies**: [STAC API - Item Search](../item-search)
 
 By default, the STAC search endpoint `/search` returns all attributes of each Item, as there is no way to specify 
 exactly those attributes that should be returned. The Fields API Extension adds new functionality that allows the 
@@ -40,6 +40,10 @@ will not be a valid STAC Item.
 
 Implementations may return attributes not specified, e.g., id, but should avoid anything other than a minimal entity 
 representation. 
+
+**NOTE**: *This extension is built to be compatible [OAFeat](../features) endpoints, but does not yet have a conformance
+class to use in that way. Our goal is to align with OGC API functionality, which looks to be prioritized currently as
+[future work](https://github.com/opengeospatial/ogcapi-features/issues/451)*
 
 ## Include/Exclude Semantics 
 

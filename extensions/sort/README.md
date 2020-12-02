@@ -17,6 +17,10 @@ Fields may be sorted in ascending or descending order.  The syntax between GET r
 body vary.  The `sortby` value is an array, so multiple sort fields can be defined which will be used to sort 
 the data in the order provided (e.g., first by `datetime`, then by `eo:cloud_cover`).
 
+**NOTE**: *This extension is built to be compatible [OAFeat](../features) endpoints, but does not yet have a conformance
+class to use in that way. Our goal is to align with OGC API functionality, which is currently being worked on as part
+of OGC API - Records.*
+
 ## HTTP GET (or POST Form)
 
 When calling `/search` using GET (or POST with `Content-Type: application/x-www-form-urlencoded` or 
