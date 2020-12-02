@@ -140,4 +140,5 @@ searching on specific Item properties.
 #### PUT / PATCH / DELETE
 
 The other HTTP verbs are not supported in the core STAC specification. The [Transaction Extension](extensions/transaction/README.md)
-does implement them, for STAC and OAFeat implementations that want to enable writing and deleting items. 
+does implement them, for STAC and OAFeat implementations that want to enable writing and deleting items.
+
