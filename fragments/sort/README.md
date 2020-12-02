@@ -1,8 +1,9 @@
 # STAC API - Sort Fragment
 
+- **OpenAPI specification:** [openapi.yaml](openapi.yaml)
 - **Fragment [Maturity Classification](../README.md#extension-maturity):** Pilot
 - **Dependents:**
-    - [Item Search](../../extensions/item-search)
+  - [Item Search](../../extensions/item-search)
 
 By default, the STAC search endpoint `/search` returns results in no specified order. Whatever order the results are in 
 is up to the implementor, and will typically default to an arbitrary order that is fastest for the underlying data store 
@@ -17,7 +18,7 @@ Fields may be sorted in ascending or descending order.  The syntax between GET r
 body vary.  The `sortby` value is an array, so multiple sort fields can be defined which will be used to sort 
 the data in the order provided (e.g., first by `datetime`, then by `eo:cloud_cover`).
 
-**NOTE**: *This extension is built to be compatible [OAFeat](../ogcapi-features) endpoints, but does not yet have a conformance
+**NOTE**: *This extension is built to be compatible [OAFeat](../ogcapi-features/README.md) endpoints, but does not yet have a conformance
 class to use in that way. Our goal is to align with OGC API functionality, which is currently being worked on as part
 of OGC API - Records.*
 

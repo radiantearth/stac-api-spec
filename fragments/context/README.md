@@ -1,8 +1,9 @@
 # STAC API - Context Fragment
 
+- **OpenAPI specification:** [openapi.yaml](openapi.yaml)
 - **Fragment [Maturity Classification](../README.md#extension-maturity):** Pilot
 - **Dependents:**
-    - [Item Search](../../extensions/item-search)
+  - [Item Search](../../extensions/item-search)
 
 This extension is intended to augment the core ItemCollection
 object when the ItemCollection is the result of a search, for example, from calling the `/search` API endpoint.

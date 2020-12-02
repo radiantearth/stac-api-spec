@@ -1,5 +1,6 @@
 # STAC API - Collections
 
+- **OpenAPI specification:** Missing
 - **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/collections>
 - **Extension [Maturity Classification](../README.md#extension-maturity):** Pilot
 - **Dependencies**: [STAC API - Core](../../core)
