@@ -1,4 +1,6 @@
-# STAC API - Transaction (extends OGC API - Features - Part 4: Simple Transactions)
+# STAC API - Transaction 
+
+*based on [**OGC API - Features - Part 4: Simple Transactions**](https://www.ogc.org/standards/ogcapi-features)*
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
 - **Conformance URIs:**

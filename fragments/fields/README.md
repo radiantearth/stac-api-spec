@@ -1,7 +1,7 @@
 # STAC API - Fields Fragment
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
-- **Fragment [Maturity Classification](../README.md#extension-maturity):** Pilot
+- **Fragment [Maturity Classification](../../extensions/README.md#extension-maturity):** Pilot
 - **Dependents:**
   - [Item Search](../../extensions/item-search)
 
@@ -42,7 +42,8 @@ will not be a valid STAC Item.
 Implementations may return attributes not specified, e.g., id, but should avoid anything other than a minimal entity 
 representation. 
 
-**NOTE**: *This extension is built to be compatible [OAFeat](https://github.com/opengeospatial/ogcapi-features) endpoints, but does not yet have a conformance
+**NOTE**: *This extension is built to be compatible
+[OAFeat](https://github.com/opengeospatial/ogcapi-features) endpoints, but does not yet have a conformance
 class to use in that way. Our goal is to align with OGC API functionality, which looks to be prioritized currently as
 [future work](https://github.com/opengeospatial/ogcapi-features/issues/451)*
 

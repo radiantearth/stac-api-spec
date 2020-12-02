@@ -1,4 +1,6 @@
-# STAC API - Features (extends OGC API - Features - Part 1: Core)
+# STAC API - Features
+
+*based on [**OGC API - Features - Part 1: Core**](https://www.ogc.org/standards/ogcapi-features)*
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
 - **Conformance URIs:**
@@ -121,7 +123,7 @@ Request 100 results in `mycollection` that is in New Zealand at anytime on Janua
 }
 ```
 
-Use the *[Query](../query/README.md)* extension to search for any data falling within a specific geometry 
+Use the *[Query](../../fragments/query/README.md)* extension to search for any data falling within a specific geometry 
 collected between Jan 1st and May 1st, 2019:
 
 Request to `POST /search`:
