@@ -130,8 +130,6 @@ paths:
         Every feature in a dataset belongs to a collection. A dataset may
         consist of multiple feature collections. A feature collection is often a
         collection of features of a similar type, based on a common schema.
-
-        Use content negotiation to request HTML or GeoJSON.
       operationId: getFeatures
       parameters:
         - $ref: '#/components/parameters/collectionId'
@@ -155,8 +153,6 @@ paths:
       description: |-
         Fetch the feature with id `featureId` in the feature collection
         with id `collectionId`.
-
-        Use content negotiation to request HTML or GeoJSON.
       operationId: getFeature
       parameters:
         - $ref: '#/components/parameters/collectionId'

@@ -552,27 +552,13 @@ components:
         stac_extensions:
           $ref: '#/components/schemas/stac_extensions'
         id:
-          type: string
-          description: Provider identifier, a unique ID.
+          $ref: '#/components/schemas/itemId'
         bbox:
           $ref: '#/components/schemas/bbox'
         geometry:
           $ref: "#/components/schemas/geometryGeoJSON"
         type:
-          type: string
-          description: The GeoJSON type
-          enum:
-            - Feature
-        properties:
-          type: object
-          required:
-            - datetime
-          description: provides the core metatdata fields plus extensions
-          properties:
-            datetime:
-              $ref: '#/components/schemas/datetime'
-          additionalProperties:
-            description: Any additional properties added in via Item specification or extensions.
+          $ref: '#/components/schemas/itemType'
         links:
           $ref: '#/components/schemas/links'
         assets:
@@ -639,6 +625,24 @@ components:
           thumbnail:
             href: 'http://cool-sat.com/static-catalog/CS3/20160503_132130_04/thumbnail.png'
             title: Thumbnail
+    itemId:
+      type: string
+      description: Provider identifier, a unique ID.
+    itemType:
+      type: string
+      description: The GeoJSON type
+      enum:
+        - Feature
+    properties:
+      type: object
+      required:
+        - datetime
+      description: provides the core metatdata fields plus extensions
+      properties:
+        datetime:
+          $ref: '#/components/schemas/datetime'
+      additionalProperties:
+        description: Any additional properties added in via Item specification or extensions.
     assets:
       type: object
       additionalProperties:

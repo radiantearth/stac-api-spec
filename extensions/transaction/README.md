@@ -1,4 +1,4 @@
-# STAC API - Transactions (extends OGC API - Features - Part 4: Simple Transactions)
+# STAC API - Transaction (extends OGC API - Features - Part 4: Simple Transactions)
 
 - **Conformance URIs:**
     - <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/transaction>
