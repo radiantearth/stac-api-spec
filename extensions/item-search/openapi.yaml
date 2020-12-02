@@ -18,6 +18,7 @@ paths:
   /search:
     get:
       summary: Search STAC items with simple filtering.
+      operationId: getItemSearch
       description: |-
         Retrieve Items matching filters. Intended as a shorthand API for simple
         queries.
@@ -48,7 +49,7 @@ paths:
             application/geo+json:
               schema:
                 allOf:
-                - $ref: '#/components/schemas/itemCollection'
+                - $ref: '../../fragments/commons/openapi.yaml#/components/schemas/itemCollection'
                 # extensions
                 - $ref: '../../fragments/context/openapi.yaml#/components/schemas/itemCollection'
             text/html:
@@ -58,6 +59,7 @@ paths:
           $ref: '../../fragments/commons/openapi.yaml#/components/responses/Error'
     post:
       summary: Search STAC items with full-featured filtering.
+      operationId: postItemSearch
       description: |-
         retrieve items matching filters. Intended as the standard, full-featured
         query API.
@@ -84,7 +86,7 @@ paths:
           content:
             application/geo+json:
               schema:
-                $ref: '#/components/schemas/itemCollection'
+                $ref: '../../fragments/commons/openapi.yaml#/components/schemas/itemCollection'
             text/html:
               schema:
                 type: string
@@ -289,29 +291,3 @@ components:
         server whether only a single temporal property is used to determine
         the extent or all relevant temporal properties.
       example: '2018-02-12T00:00:00Z/2018-03-18T12:31:12Z'
-    itemCollection:
-      description: A GeoJSON FeatureCollection augmented with foreign members that contain values relevant to a STAC entity
-      type: object
-      required:
-        - features
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - FeatureCollection
-        features:
-          type: array
-          items:
-            $ref: '../../fragments/commons/openapi.yaml#/components/schemas/item'
-        links:
-          type: array
-          description: >-
-            An array of links. Can be used for pagination, e.g. by providing a link
-            with the `next` relation type.
-          items:
-            $ref: '../../fragments/commons/openapi.yaml#/components/schemas/link'
-          example:
-            - rel: next
-              href: >-
-                http://api.cool-sat.com/search?next=ANsXtp9mrqN0yrKWhf-y2PUpHRLQb1GT-mtxNcXou8TwkXhi1Jbk
