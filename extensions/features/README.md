@@ -25,7 +25,7 @@ with OAFeat clients. But specialized STAC clients will likely display results be
 ## Endpoints
 
 The core OGC API - Features endpoints are shown below, with details provided in an 
-[OpenAPI specification document](openapi/OAFeat.yaml).
+[OpenAPI specification document](openapi.yaml).
 
 | Endpoint                                        | Returns          | Description |
 | ----------------------------------------------- | ---------------- | ----------- |
@@ -72,7 +72,7 @@ protocol than STAC.
 ## API Evolution
 
 The STAC API is still a work in progress. It currently tries to adhere to the OGC API - Features (OAFeat) specification,
-with some STAC specific extensions. The OAFeat portion of the API is provided in the *[OAFeat.yaml](openapi/OAFeat.yaml)*
+with some STAC specific extensions. The OAFeat portion of the API is provided in the *[openapi.yaml](openapi.yaml)* in this directory,
 and represents the version of OAFeat that is currently being used by STAC. It may diverge some with the
 *[OAFeat](https://github.com/opengeospatial/ogcapi-features)* spec at any given time, either out of date or 'ahead',
 with proposals to align OAFeat. The long term goal is for STAC's API and OAFeat to completely align,

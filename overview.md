@@ -119,7 +119,7 @@ GET queries for all implementations, and generally aligns with OAFeat's single C
 ### POST
 
 1. **Recommended** STAC `/search` is strongly recommended to implement POST `Content-Type: application/json`, where the content body is a JSON 
-object representing a query and filter, as defined in the [STAC API OpenAPI specification document](STAC.yaml). 
+object representing a query and filter, as defined in [STAC Item Search](extensions/item-search). 
 2. **Prohibited** OAFeat: POST `Content-Type: application/json` on the `/collections/{collectionId}/items`, where the content body is a JSON 
 object representing a filter, is not allowed. This is prohibited due to conflict with the 
 [Transaction Extension](extensions/transaction/README.md), which defines a POST `Content-Type: application/json` 

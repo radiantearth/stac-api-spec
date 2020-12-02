@@ -1,6 +1,7 @@
 # STAC API - Core Specification
+
 - **Conformance URI: <http://stacspec.org/spec/api/1.0.0-beta.1/core>**
-- **Extension [Maturity Classification](../README.md#extension-maturity): Pilot**
+- **Extension [Maturity Classification](../extensions/README.md#extension-maturity): Pilot**
 - **Dependencies**: None
 
 The core of a STAC API is its landing page, which is the starting point to discover STAC data and what the API supports.
@@ -35,7 +36,7 @@ The core of a STAC API is its landing page, which is the starting point to disco
 
 There are a few requirements for the returned document:
 
-- The returned JSON must be a valid [STAC Catalog](stac-spec/catalog-spec/catalog-spec.md), and it can provide any number of 'child' links
+- The returned JSON must be a valid [STAC Catalog](../stac-spec/catalog-spec/catalog-spec.md), and it can provide any number of 'child' links
 to navigate down to additional Catalogs, Collections & Items.
 - The `links` section is a required part of STAC Catalog, and serves as the list of API endpoints. These can live at any location, the 
 client must inspect the the `rel` (relationship) to understand what capabilities are offered at each location.
@@ -59,7 +60,7 @@ The root endpoint (`/`) is most useful when it presents a complete `Catalog` rep
 that all `Collections` and `Items` can be navigated to by transitively traversing links from this root. This spec does not require any 
 API endpoints from OAFeat or STAC API to be implemented, so the following links may not exist if the endpoint has not been implemented.
 
-#### Potential Link Relations at `/`
+## Potential Link Relations at `/`
 
 | **`rel`** | **href to**                                | **From**           | **Description**                                                  |
 |-----------|--------------------------------------------|--------------------|------------------------------------------------------------------|
@@ -71,4 +72,3 @@ API endpoints from OAFeat or STAC API to be implemented, so the following links 
 
 It is also valid to have `item` links from the landing page, but most STAC API's are used to serve up a massive amount of features, so they typically
 use several layers of `child` links before getting to Items.
-
