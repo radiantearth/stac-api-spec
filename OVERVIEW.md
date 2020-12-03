@@ -19,7 +19,7 @@ off point for the more powerful capabilities - it contains a list of URL's, each
 most all the content of API responses - the STAC API is primarily concerned with the return of STAC 
 [Items](stac-spec/item-spec/README.md) and [Collections](stac-spec/collection-spec/README.md) through API functionality.
 
-There are then three major sets of functionality that build on the core, which are designed to be complementary, letting
+There are then two major sets of functionality that build on the core, which are designed to be complementary, letting
 implementations choose which parts they want to utilize. Most every STAC API implements at least one, and many follow
 two or all three.
 
