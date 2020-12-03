@@ -6,8 +6,10 @@
 - **Dependencies**: [STAC API - Core](../../core)
 
 A search endpoint, linked to from the STAC landing page, provides the ability to query STAC `Items` across collections.
-It retrieving a group of Items that match the provided search predicates, wrapped in an ItemCollection (which is a 
-valid [GeoJSON FeatureCollection](https://tools.ietf.org/html/rfc7946#section-3.3) that contains STAC Items).
+It retrieves a group of Items that match the provided parameters, wrapped in an ItemCollection (which is a 
+valid [GeoJSON FeatureCollection](https://tools.ietf.org/html/rfc7946#section-3.3) that contains STAC Items). Several core
+query parameters are defined by [OGC API - Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html), with
+a few additions specified in this document.
 
 Implementing `GET /search` is **required**, `POST /search` is optional, but recommended.
 
@@ -149,38 +151,33 @@ to get to the next page without mirroring the entire query structure back to the
 
 ## HTTP Request Methods and Content Types
 
-The STAC API, including its OAFeat components, follow a RESTful model. A core principal of this is the use of HTTP Request Methods ("verbs") and
-the `Content-Type` header to drive behavior on resources ("nouns"). This section describes how these are used in the OAFeat and STAC endpoints. 
+The STAC API follow a RESTful model. A core principal of this is the use of HTTP Request Methods ("verbs") and
+the `Content-Type` header to drive behavior on resources ("nouns"). This section describes how these are used with the `/search` endpoint 
 
 ### GET
 
-**Required**: OAFeat 1.0 only specifies GET query parameters, and they are all required. STAC's cross-collection `/search` also requires
-GET queries for all implementations, and generally aligns with OAFeat's single Collection search. 
+**Required**: STAC's cross-collection `/search` requires GET queries for all implementations, following OAFeat's precedent of 
+making GET required (it only specifies GET so far). 
 
 ### POST
 
-1. **Recommended** STAC `/search` is strongly recommended to implement POST `Content-Type: application/json`, where the content body is a JSON 
+**Recommended** STAC `/search` is strongly recommended to implement POST `Content-Type: application/json`, where the content body is a JSON 
 object representing a query and filter, as defined in [STAC Item Search](extensions/item-search). 
-2. **Prohibited** OAFeat: POST `Content-Type: application/json` on the `/collections/{collectionId}/items`, where the content body is a JSON 
-object representing a filter, is not allowed. This is prohibited due to conflict with the 
-[Transaction Extension](extensions/transaction/README.md), which defines a POST `Content-Type: application/json` 
-operation to create an Item. Any query against a single OAFeat collection endpoint should be possible against the STAC `/search` endpoint, specifying
-the collection name in the `collections` query parameter.
 
-It is recommended for clients use POST for querying (if the STAC API supports it), especially when using the 
+It is recommended that clients use POST for querying (if the STAC API supports it), especially when using the 
 `intersects` query parameter, for two reasons:
 
 1. In practice, the allowed size for an HTTP GET request is significantly less than that allowed for a POST request, 
 so if a large geometry is used in the query it may cause a GET request to fail.
 2. The parameters for a GET request must be escaped properly, making it more difficult to construct when using JSON 
-parameters (such as intersect).
+parameters (such as intersect, as well as additional filters from the query extension).
 
 **STAC API extensions** allow for more sophisticated searching, such as the ability to search by geometries and 
 searching on specific Item properties.
 
 #### PUT / PATCH / DELETE
 
-The other HTTP verbs are not supported in the core STAC specification. The [Transaction Extension](extensions/transaction/README.md)
+The other HTTP verbs are not supported in STAC Item Search. The [Transaction Extension](extensions/transaction/README.md)
 does implement them, for STAC and OAFeat implementations that want to enable writing and deleting items.
 
 #### Examples
