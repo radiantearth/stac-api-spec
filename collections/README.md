@@ -5,7 +5,7 @@
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Dependencies**: [STAC API - Core](../core)
 
-A STAC API can return information about all STAC [Collections](../../stac-spec/collection-spec/collection-spec.md) available using a link
+A STAC API can return information about all STAC [Collections](../stac-spec/collection-spec/collection-spec.md) available using a link
 from the landing page that uses the `data` rel, which links to an endpoint called `/collections`. Individual STAC collections can be accessed
 by providing the Collection `id` as a path past that endpoint: `/collections/{collectionId}`.
 

@@ -33,7 +33,7 @@ search across any set of indexed STAC [`Items`](stac-spec/item-spec/README.md).
 
 ### Collections
 
-The other most common set of functionality is [Collections](extensions/collections/). It is linked to with the `data` 
+The other most common set of functionality is [Collections](collections/). It is linked to with the `data` 
 relationship, and lives at the `/collections` endpoint/. The response is a complete list of available STAC 'Collections', 
 along with the requirement to have `/collection/{collectionId}` endpoints to request each collection individually, by ID. 
 This general pattern is  defined in OAFeat's [Feature Collections](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_collections_), 
