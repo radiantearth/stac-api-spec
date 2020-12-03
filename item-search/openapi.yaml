@@ -1,0 +1,293 @@
+openapi: 3.0.3
+info:
+  title: The SpatioTemporal Asset Catalog API - Item Search
+  version: 1.0.0-beta.1
+  description: >-
+    This is an OpenAPI definition of the SpatioTemporal Asset Catalog API Item Search
+    specification.
+  contact:
+    name: STAC Specification
+    url: 'http://stacspec.org'
+  license:
+    name: Apache License 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0'
+tags:
+  - name: Item Search
+    description: essential characteristics of a STAC API
+paths:
+  /search:
+    get:
+      summary: Search STAC items with simple filtering.
+      operationId: getItemSearch
+      description: |-
+        Retrieve Items matching filters. Intended as a shorthand API for simple
+        queries.
+        
+        This method is optional, but you MUST implement `POST /search` if you
+        want to implement this method.
+
+        If this endpoint is implemented on a server, it is required to add a
+        link referring to this endpoint with `rel` set to `search` to the
+        `links` array in `GET /`. As `GET` is the default method, the `method`
+        may not be set explicitly in the link.
+      tags:
+        - Item Search
+      parameters:
+        - $ref: '#/components/parameters/bbox'
+        - $ref: '#/components/parameters/datetime'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/ids'
+        - $ref: '#/components/parameters/collectionsArray'
+        # extensions
+        - $ref: '../fragments/fields/openapi.yaml#/components/parameters/fields'
+        - $ref: '../fragments/query/openapi.yaml#/components/parameters/query'
+        - $ref: '../fragments/sort/openapi.yaml#/components/parameters/sortby'
+      responses:
+        '200':
+          description: A feature collection.
+          content:
+            application/geo+json:
+              schema:
+                allOf:
+                - $ref: '../core/commons.yaml#/components/schemas/itemCollection'
+                # extensions
+                - $ref: '../fragments/context/openapi.yaml#/components/schemas/itemCollection'
+            text/html:
+              schema:
+                type: string
+        default:
+          $ref: '../core/commons.yaml#/components/responses/Error'
+    post:
+      summary: Search STAC items with full-featured filtering.
+      operationId: postItemSearch
+      description: |-
+        retrieve items matching filters. Intended as the standard, full-featured
+        query API.
+        
+        This method is mandatory to implement if `GET /search` is implemented.
+        If this endpoint is implemented on a server, it is required to add a
+        link referring to this endpoint with `rel` set to `search` and `method`
+        set to `POST` to the `links` array in `GET /`.
+      tags:
+        - Item Search
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+               - $ref: '#/components/schemas/searchBody'
+              # extensions
+               - $ref: '../fragments/fields/openapi.yaml#/components/schemas/searchBody'
+               - $ref: '../fragments/query/openapi.yaml#/components/schemas/searchBody'
+               - $ref: '../fragments/sort/openapi.yaml#/components/schemas/searchBody'
+      responses:
+        '200':
+          description: A feature collection.
+          content:
+            application/geo+json:
+              schema:
+                $ref: '../core/commons.yaml#/components/schemas/itemCollection'
+            text/html:
+              schema:
+                type: string
+        default:
+          $ref: '../core/commons.yaml#/components/responses/Error'
+components:
+  parameters:
+    ids:
+      name: ids
+      in: query
+      description: |-
+        Array of Item ids to return. All other filter parameters that further
+        restrict the number of search results are ignored
+      required: false
+      schema:
+        $ref: '#/components/schemas/ids'
+      explode: false
+    collectionsArray:
+      name: collections
+      in: query
+      description: |
+        Array of Collection IDs to include in the search for items.
+        Only Items in one of the provided Collections will be searched
+      required: false
+      schema:
+        $ref: '#/components/schemas/collectionsArray'
+      explode: false
+    datetime:
+      name: datetime
+      in: query
+      description: |-
+        Either a date-time or an interval, open or closed. Date and time expressions
+        adhere to RFC 3339. Open intervals are expressed using double-dots.
+
+        Examples:
+
+        * A date-time: "2018-02-12T23:20:50Z"
+        * A closed interval: "2018-02-12T00:00:00Z/2018-03-18T12:31:12Z"
+        * Open intervals: "2018-02-12T00:00:00Z/.." or "../2018-03-18T12:31:12Z"
+
+        Only features that have a temporal property that intersects the value of
+        `datetime` are selected.
+
+        If a feature has multiple temporal properties, it is the decision of the
+        server whether only a single temporal property is used to determine
+        the extent or all relevant temporal properties.
+      required: false
+      schema:
+        type: string
+      style: form
+      explode: false
+    bbox:
+      name: bbox
+      in: query
+      description: |-
+        Only features that have a geometry that intersects the bounding box are selected.
+        The bounding box is provided as four or six numbers, depending on
+        whether the coordinate reference system includes a vertical axis (height
+        or depth):
+
+        * Lower left corner, coordinate axis 1
+        * Lower left corner, coordinate axis 2
+        * Minimum value, coordinate axis 3 (optional)
+        * Upper right corner, coordinate axis 1
+        * Upper right corner, coordinate axis 2
+        * Maximum value, coordinate axis 3 (optional)
+
+        The coordinate reference system of the values is WGS 84
+        longitude/latitude (http://www.opengis.net/def/crs/OGC/1.3/CRS84).
+
+        For WGS 84 longitude/latitude the values are in most cases the sequence
+        of minimum longitude, minimum latitude, maximum longitude and maximum
+        latitude. However, in cases where the box spans the antimeridian the
+        first value (west-most box edge) is larger than the third value
+        (east-most box edge).
+
+        If the vertical axis is included, the third and the sixth number are
+        the bottom and the top of the 3-dimensional bounding box.
+
+        If a feature has multiple spatial geometry properties, it is the
+        decision of the server whether only a single spatial geometry property
+        is used to determine the extent or all relevant geometries.
+
+        Example: The bounding box of the New Zealand Exclusive Economic Zone in
+        WGS 84 (from 160.6°E to 170°W and from 55.95°S to 25.89°S) would be
+        represented in JSON as `[160.6, -55.95, -170, -25.89]` and in a query as
+        `bbox=160.6,-55.95,-170,-25.89`.
+      required: false
+      schema:
+        type: array
+        oneOf:
+          - minItems: 4
+            maxItems: 4
+          - minItems: 6
+            maxItems: 6
+        items:
+          type: number
+      style: form
+      explode: false
+    limit:
+      name: limit
+      in: query
+      description: |-
+        The optional limit parameter limits the number of items that are presented in the response document.
+
+        Only items are counted that are on the first level of the collection in the response document.
+        Nested objects contained within the explicitly requested items shall not be counted.
+
+        Minimum = 1. Maximum = 10000. Default = 10.
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 10000
+        default: 10
+      style: form
+      explode: false
+  schemas:
+    searchBody:
+      description: The search criteria
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/bboxFilter'
+        - $ref: '#/components/schemas/datetimeFilter'
+        - $ref: '#/components/schemas/intersectsFilter'
+        - $ref: '#/components/schemas/collectionsFilter'
+        - $ref: '#/components/schemas/idsFilter'
+        - $ref: '#/components/schemas/limitFilter'
+    limit:
+      type: integer
+      minimum: 1
+      example: 10
+      default: 10
+      maximum: 10000
+      description: The maximum number of results to return (page size). Defaults to 10
+    bboxFilter:
+      type: object
+      description: Only return items that intersect the provided bounding box.
+      properties:
+        bbox:
+          $ref: '../core/commons.yaml#/components/schemas/bbox'
+    collectionsArray:
+      type: array
+      description: |-
+        Array of Collection IDs to include in the search for items.
+        Only Items in one of the provided Collections will be searched.
+      items:
+        type: string
+    ids:
+      type: array
+      description: |-
+        Array of Item ids to return. All other filter parameters that further
+        restrict the number of search results are ignored
+      items:
+        type: string
+    datetimeFilter:
+      description: An object representing a date+time based filter.
+      type: object
+      properties:
+        datetime:
+          $ref: '#/components/schemas/datetime_interval'
+    intersectsFilter:
+      type: object
+      description: Only returns items that intersect with the provided polygon.
+      properties:
+        intersects:
+          $ref: "../core/commons.yaml#/components/schemas/geometryGeoJSON"
+    limitFilter:
+      type: object
+      description: Only returns maximum number of results (page size)
+      properties:
+        limit:
+          $ref: '#/components/schemas/limit'
+    idsFilter:
+      type: object
+      description: Only returns items that match the array of given ids
+      properties:
+        ids:
+          $ref: '#/components/schemas/ids'
+    collectionsFilter:
+      type: object
+      description: Only returns the collections specified
+      properties:
+        collections:
+          $ref: '#/components/schemas/collectionsArray'
+    datetime_interval:
+      type: string
+      description: |-
+        Either a date-time or an interval, open or closed. Date and time expressions
+        adhere to RFC 3339. Open intervals are expressed using double-dots.
+
+        Examples:
+
+        * A date-time: "2018-02-12T23:20:50Z"
+        * A closed interval: "2018-02-12T00:00:00Z/2018-03-18T12:31:12Z"
+        * Open intervals: "2018-02-12T00:00:00Z/.." or "../2018-03-18T12:31:12Z"
+
+        Only features that have a temporal property that intersects the value of
+        `datetime` are selected.
+
+        If a feature has multiple temporal properties, it is the decision of the
+        server whether only a single temporal property is used to determine
+        the extent or all relevant temporal properties.
+      example: '2018-02-12T00:00:00Z/2018-03-18T12:31:12Z'

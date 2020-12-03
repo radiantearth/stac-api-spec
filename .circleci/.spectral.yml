@@ -1,6 +1,6 @@
 extends: "spectral:oas"
 rules:
-  # Ported from Spectral 4.0
-  contact-properties: true
+  oas3-api-servers: off
+  oas3-schema: warn
   tag-description: true
   oas3-parameter-description: true
