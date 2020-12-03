@@ -39,20 +39,21 @@ the specification takes place in the [issue tracker](https://github.com/radiante
 
 ## In this repository
 
+The **[Overview](OVERVIEW.md)** document describes all the various parts of the STAC API and how they fit together.
+
 **STAC API - Core Specification:**
 The main description of the core STAC API specification is in the *[core](core/)* folder and
 allows browsing catalogs and retrieving the API capabilities.
-Usually an implementation wants to add extensions for broader functionality than just browsing catalogs.
+An implementation will most always add extensions for broader functionality than just browsing catalogs.
 
 **Extensions:**
 In the [extensions/](extensions/) folder there are additional endpoints defined that can be added to enrich the functionality of STAC API - Core.
-Most all of them are compatible with OGC API - Features, and the plan is to fully align most of the functionality and have it be useful
-for all OAFeat implementations.
 OpenAPI YAML documents are provided for each extension with additional documentation and examples provided in a README.
 
 **Fragments:**
 The [fragments/](fragments/) folder contains re-usable building blocks to be used in STAC API - Core and STAC API extensions.
-This includes the OpenAPI schemas for items, catalogs and collections, but also common schemas and parameters for behavior like sorting and querying.
+This includes the OpenAPI schemas for items, catalogs and collections, but also common schemas and parameters for behavior like sorting and querying. Most all of them are compatible with OGC API - Features, and the plan is to fully align most of the functionality and have it be useful
+for all OAFeat implementations.
 
 **STAC Specification:** This repository includes a '[sub-module](https://git-scm.com/book/en/v2/Git-Tools-Submodules)', which
 is a copy of the [STAC specification](stac-spec/) tagged at the latest stable version.
