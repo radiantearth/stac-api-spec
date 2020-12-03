@@ -15,7 +15,7 @@ Catalogs and Collections are JSON, while Items and ItemCollections are GeoJSON-c
 Typically, a Feature is used when returning a single Item, and FeatureCollection when multiple Items (rather than a JSON array of Item entities).
 
 The API can be implemented in compliance with the *[OGC API - Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html)* standard 
-(formerly known as *OGC Web Feature Service 3*). In this case it can be thought of as a specialized Features API 
+(we'll use OAFeat for shorthand). In this case STAC API can be thought of as a specialized Features API 
 to search STAC Catalogs, where the features returned are STAC [Items](stac-spec/item-spec/item-spec.md), 
 that have common properties, links to their assets and geometries that represent the footprints of the geospatial assets.
 
@@ -52,8 +52,9 @@ OpenAPI YAML documents are provided for each extension with additional documenta
 
 **Fragments:**
 The [fragments/](fragments/) folder contains re-usable building blocks to be used in STAC API - Core and STAC API extensions.
-This includes the OpenAPI schemas for items, catalogs and collections, but also common schemas and parameters for behavior like sorting and querying. Most all of them are compatible with OGC API - Features, and the plan is to fully align most of the functionality and have it be useful
-for all OAFeat implementations.
+This includes the OpenAPI schemas for items, catalogs and collections, but also common schemas and parameters for behavior like 
+sorting and querying. Most all of them are compatible with OGC API - Features, and the plan is to fully align the relevant 
+functionality and have it be useful for all OAFeat implementations.
 
 **STAC Specification:** This repository includes a '[sub-module](https://git-scm.com/book/en/v2/Git-Tools-Submodules)', which
 is a copy of the [STAC specification](stac-spec/) tagged at the latest stable version.
