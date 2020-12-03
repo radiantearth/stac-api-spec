@@ -19,7 +19,7 @@ tags:
 paths:
   '/collections/{collectionId}/items':
     parameters:
-      - $ref: '../../extensions/ogcapi-features/openapi.yaml#/components/parameters/collectionId'
+      - $ref: '../../openapi.yaml#/components/parameters/collectionId'
     post:
       summary: add a new STAC Item to a collection
       description: create a new STAC Item in a specific collection
@@ -31,8 +31,8 @@ paths:
           application/json:
             schema:
                 oneOf:
-                 - $ref: '../../fragments/commons/openapi.yaml#/components/schemas/item'
-                 - $ref: '../../fragments/commons/openapi.yaml#/components/schemas/itemCollection'
+                 - $ref: '../../../core/commons.yaml#/components/schemas/item'
+                 - $ref: '../../../core/commons.yaml#/components/schemas/itemCollection'
       responses:
         '201':
           description: Status of the create request.
@@ -49,23 +49,23 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../fragments/commons/openapi.yaml#/components/schemas/item'
+                $ref: '../../../core/commons.yaml#/components/schemas/item'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
-          $ref: '../../extensions/ogcapi-features/openapi.yaml#/components/responses/NotFound'
+          $ref: '../../openapi.yaml#/components/responses/NotFound'
         '500':
-          $ref: '../../extensions/ogcapi-features/openapi.yaml#/components/responses/ServerError'
+          $ref: '../../openapi.yaml#/components/responses/ServerError'
         default:
           description: An error occurred.
           content:
             application/json:
               schema:
-                $ref: '../../fragments/commons/openapi.yaml#/components/schemas/exception'
+                $ref: '../../../core/commons.yaml#/components/schemas/exception'
   '/collections/{collectionId}/items/{featureId}':
     parameters:
-      - $ref: '../../extensions/ogcapi-features/openapi.yaml#/components/parameters/collectionId'
-      - $ref: '../../extensions/ogcapi-features/openapi.yaml#/components/parameters/featureId'
+      - $ref: '../../openapi.yaml#/components/parameters/collectionId'
+      - $ref: '../../openapi.yaml#/components/parameters/featureId'
     get:
       tags:
         - Transaction
@@ -96,7 +96,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '../../fragments/commons/openapi.yaml#/components/schemas/item'
+              $ref: '../../../core/commons.yaml#/components/schemas/item'
       responses:
         '204':
           description: The item was replaced
@@ -108,17 +108,17 @@ paths:
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
-          $ref: '../../extensions/ogcapi-features/openapi.yaml#/components/responses/NotFound'
+          $ref: '../../openapi.yaml#/components/responses/NotFound'
         '412':
           $ref: '#/components/responses/PreconditionFailed'
         '500':
-          $ref: '../../extensions/ogcapi-features/openapi.yaml#/components/responses/ServerError'
+          $ref: '../../openapi.yaml#/components/responses/ServerError'
         default:
           description: An error occurred.
           content:
             application/json:
               schema:
-                $ref: '../../fragments/commons/openapi.yaml#/components/schemas/exception'
+                $ref: '../../../core/commons.yaml#/components/schemas/exception'
     patch:
       summary: update an existing feature by Id with a partial item definition
       description: >-
@@ -145,15 +145,15 @@ paths:
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
-          $ref: '../../extensions/ogcapi-features/openapi.yaml#/components/responses/NotFound'
+          $ref: '../../openapi.yaml#/components/responses/NotFound'
         '500':
-          $ref: '../../extensions/ogcapi-features/openapi.yaml#/components/responses/ServerError'
+          $ref: '../../openapi.yaml#/components/responses/ServerError'
         default:
           description: An error occurred.
           content:
             application/json:
               schema:
-                $ref: '../../fragments/commons/openapi.yaml#/components/schemas/exception'
+                $ref: '../../../core/commons.yaml#/components/schemas/exception'
     delete:
       summary: delete an existing feature by Id
       description: Use this method to delete an existing feature.
@@ -168,15 +168,15 @@ paths:
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
-          $ref: '../../extensions/ogcapi-features/openapi.yaml#/components/responses/NotFound'
+          $ref: '../../openapi.yaml#/components/responses/NotFound'
         '500':
-          $ref: '../../extensions/ogcapi-features/openapi.yaml#/components/responses/ServerError'
+          $ref: '../../openapi.yaml#/components/responses/ServerError'
         default:
           description: An error occurred.
           content:
             application/json:
               schema:
-                $ref: '../../fragments/commons/openapi.yaml#/components/schemas/exception'
+                $ref: '../../../core/commons.yaml#/components/schemas/exception'
 components:
   parameters:
     IfMatch:
@@ -200,25 +200,25 @@ components:
       type: object
       properties:
         stac_version:
-          $ref: '../../fragments/commons/openapi.yaml#/components/schemas/stac_version'
+          $ref: '../../../core/commons.yaml#/components/schemas/stac_version'
         stac_extensions:
-          $ref: '../../fragments/commons/openapi.yaml#/components/schemas/stac_extensions'
+          $ref: '../../../core/commons.yaml#/components/schemas/stac_extensions'
         id:
-          $ref: '../../fragments/commons/openapi.yaml#/components/schemas/itemId'
+          $ref: '../../../core/commons.yaml#/components/schemas/itemId'
         bbox:
-          $ref: '../../fragments/commons/openapi.yaml#/components/schemas/bbox'
+          $ref: '../../../core/commons.yaml#/components/schemas/bbox'
         geometry:
-          $ref: '../../fragments/commons/openapi.yaml#/components/schemas/geometryGeoJSON'
+          $ref: '../../../core/commons.yaml#/components/schemas/geometryGeoJSON'
         type:
-          $ref: '../../fragments/commons/openapi.yaml#/components/schemas/itemType'
+          $ref: '../../../core/commons.yaml#/components/schemas/itemType'
         properties:
           $ref: '#/components/schemas/partialItemProperties'
         links:
           type: array
           items:
-            $ref: '../../fragments/commons/openapi.yaml#/components/schemas/link'
+            $ref: '../../../core/commons.yaml#/components/schemas/link'
         assets:
-          $ref: '../../fragments/commons/openapi.yaml#/components/schemas/assets'
+          $ref: '../../../core/commons.yaml#/components/schemas/assets'
       example:
         assets:
           analytic:
@@ -230,17 +230,17 @@ components:
       additionalProperties: true
       properties:
         datetime:
-          $ref: '../../fragments/commons/openapi.yaml#/components/schemas/datetime'
+          $ref: '../../../core/commons.yaml#/components/schemas/datetime'
   responses:
     BadRequest:
       description: The request was malformed or semantically invalid
       content:
         application/json:
           schema:
-            $ref: '../../fragments/commons/openapi.yaml#/components/schemas/exception'
+            $ref: '../../../core/commons.yaml#/components/schemas/exception'
     PreconditionFailed:
       description: Some condition specified by the request could not be met in the server
       content:
         application/json:
           schema:
-            $ref: '../../fragments/commons/openapi.yaml#/components/schemas/exception'
+            $ref: '../../../core/commons.yaml#/components/schemas/exception'

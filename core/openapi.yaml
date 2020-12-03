@@ -37,7 +37,7 @@ paths:
         '200':
           $ref: '#/components/responses/LandingPage'
         '500':
-          $ref: '../fragments/commons/openapi.yaml#/components/responses/Error'
+          $ref: 'commons.yaml#/components/responses/Error'
 components:
   responses:
     LandingPage:
@@ -49,7 +49,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '../fragments/commons/openapi.yaml#/components/schemas/catalog'
+            $ref: 'commons.yaml#/components/schemas/catalog'
           example:
             stac_version: 1.0.0-beta.1
             id: sentinel

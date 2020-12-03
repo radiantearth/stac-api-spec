@@ -35,7 +35,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../fragments/commons/openapi.yaml#/components/schemas/catalog'
+                $ref: '../core/commons.yaml#/components/schemas/catalog'
               example:
                 stac_version: 1.0.0-beta.1
                 id: sentinel
@@ -271,11 +271,11 @@ components:
         - collections
       properties:
         links:
-          $ref: '../../fragments/commons/openapi.yaml#/components/schemas/links'
+          $ref: '../core/commons.yaml#/components/schemas/links'
         collections:
           type: array
           items:
-            $ref: '../../fragments/commons/openapi.yaml#/components/schemas/collection'
+            $ref: '../core/commons.yaml#/components/schemas/collection'
     confClasses:
       type: object
       required:
@@ -287,7 +287,7 @@ components:
             type: string
     featureCollectionGeoJSON:
       allOf:
-        - $ref: '../../fragments/commons/openapi.yaml#/components/schemas/featureCollectionGeoJSON'
+        - $ref: '../core/commons.yaml#/components/schemas/featureCollectionGeoJSON'
         - type: object
           required:
             - features
@@ -295,9 +295,9 @@ components:
             features:
               type: array
               items:
-                $ref: "../../fragments/commons/openapi.yaml#/components/schemas/item"
+                $ref: "../core/commons.yaml#/components/schemas/item"
             links:
-              $ref: '../../fragments/commons/openapi.yaml#/components/schemas/links'
+              $ref: '../core/commons.yaml#/components/schemas/links'
             timeStamp:
               $ref: "#/components/schemas/timeStamp"
             numberMatched:
@@ -384,7 +384,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '../../fragments/commons/openapi.yaml#/components/schemas/collection'
+            $ref: '../core/commons.yaml#/components/schemas/collection'
     Features:
       description: |-
         The response is a document consisting of features in the collection.
@@ -417,14 +417,14 @@ components:
       content:
         application/geo+json:
           schema:
-            $ref: "../../fragments/commons/openapi.yaml#/components/schemas/item"
+            $ref: "../core/commons.yaml#/components/schemas/item"
     InvalidParameter:
       description: |-
         A query parameter has an invalid value.
       content:
         application/json:
           schema:
-            $ref: '../../fragments/commons/openapi.yaml#/components/schemas/exception'
+            $ref: '../core/commons.yaml#/components/schemas/exception'
     NotFound:
       description: |-
         The requested URI was not found.
@@ -434,4 +434,4 @@ components:
       content:
         application/json:
           schema:
-            $ref: '../../fragments/commons/openapi.yaml#/components/schemas/exception'
+            $ref: '../core/commons.yaml#/components/schemas/exception'

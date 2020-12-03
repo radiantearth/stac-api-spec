@@ -39,9 +39,9 @@ paths:
         - $ref: '#/components/parameters/ids'
         - $ref: '#/components/parameters/collectionsArray'
         # extensions
-        - $ref: '../../fragments/fields/openapi.yaml#/components/parameters/fields'
-        - $ref: '../../fragments/query/openapi.yaml#/components/parameters/query'
-        - $ref: '../../fragments/sort/openapi.yaml#/components/parameters/sortby'
+        - $ref: '../fragments/fields/openapi.yaml#/components/parameters/fields'
+        - $ref: '../fragments/query/openapi.yaml#/components/parameters/query'
+        - $ref: '../fragments/sort/openapi.yaml#/components/parameters/sortby'
       responses:
         '200':
           description: A feature collection.
@@ -49,14 +49,14 @@ paths:
             application/geo+json:
               schema:
                 allOf:
-                - $ref: '../../fragments/commons/openapi.yaml#/components/schemas/itemCollection'
+                - $ref: '../core/commons.yaml#/components/schemas/itemCollection'
                 # extensions
-                - $ref: '../../fragments/context/openapi.yaml#/components/schemas/itemCollection'
+                - $ref: '../fragments/context/openapi.yaml#/components/schemas/itemCollection'
             text/html:
               schema:
                 type: string
         default:
-          $ref: '../../fragments/commons/openapi.yaml#/components/responses/Error'
+          $ref: '../core/commons.yaml#/components/responses/Error'
     post:
       summary: Search STAC items with full-featured filtering.
       operationId: postItemSearch
@@ -77,21 +77,21 @@ paths:
               allOf:
                - $ref: '#/components/schemas/searchBody'
               # extensions
-               - $ref: '../../fragments/fields/openapi.yaml#/components/schemas/searchBody'
-               - $ref: '../../fragments/query/openapi.yaml#/components/schemas/searchBody'
-               - $ref: '../../fragments/sort/openapi.yaml#/components/schemas/searchBody'
+               - $ref: '../fragments/fields/openapi.yaml#/components/schemas/searchBody'
+               - $ref: '../fragments/query/openapi.yaml#/components/schemas/searchBody'
+               - $ref: '../fragments/sort/openapi.yaml#/components/schemas/searchBody'
       responses:
         '200':
           description: A feature collection.
           content:
             application/geo+json:
               schema:
-                $ref: '../../fragments/commons/openapi.yaml#/components/schemas/itemCollection'
+                $ref: '../core/commons.yaml#/components/schemas/itemCollection'
             text/html:
               schema:
                 type: string
         default:
-          $ref: '../../fragments/commons/openapi.yaml#/components/responses/Error'
+          $ref: '../core/commons.yaml#/components/responses/Error'
 components:
   parameters:
     ids:
@@ -227,7 +227,7 @@ components:
       description: Only return items that intersect the provided bounding box.
       properties:
         bbox:
-          $ref: '../../fragments/commons/openapi.yaml#/components/schemas/bbox'
+          $ref: '../core/commons.yaml#/components/schemas/bbox'
     collectionsArray:
       type: array
       description: |-
@@ -253,7 +253,7 @@ components:
       description: Only returns items that intersect with the provided polygon.
       properties:
         intersects:
-          $ref: "../../fragments/commons/openapi.yaml#/components/schemas/geometryGeoJSON"
+          $ref: "../core/commons.yaml#/components/schemas/geometryGeoJSON"
     limitFilter:
       type: object
       description: Only returns maximum number of results (page size)

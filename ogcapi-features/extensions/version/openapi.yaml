@@ -23,14 +23,14 @@ paths:
         - Version
       operationId: getCollectionVersions
       parameters:
-        - $ref: '../ogcapi-features/openapi.yaml#/components/parameters/collectionId'
+        - $ref: '../../openapi.yaml#/components/parameters/collectionId'
       responses:
         '200':
           description: A catalog JSON definition the returns list of links of a collection versions
           content:
             application/json:
               schema:
-                $ref: '../../fragments/commons/openapi.yaml#/components/schemas/catalog'
+                $ref: '../../../core/commons.yaml#/components/schemas/catalog'
   '/collections/{collectionId}/versions/{versionId}':
     get:
       summary: returns the requested version of a collection
@@ -39,11 +39,11 @@ paths:
         - Version
       operationId: getCollectionVersion
       parameters:
-        - $ref: '../ogcapi-features/openapi.yaml#/components/parameters/collectionId'
+        - $ref: '../../openapi.yaml#/components/parameters/collectionId'
         - $ref: '#/components/parameters/versionId'
       responses:
         '200':
-          $ref: '../ogcapi-features/openapi.yaml#/components/responses/Collections'
+          $ref: '../../openapi.yaml#/components/responses/Collections'
   '/collections/{collectionId}/items/{featureId}/versions':
     get:
       summary: returns a list of links for a versioned item
@@ -52,15 +52,15 @@ paths:
         - Version
       operationId: getItemVersions
       parameters:
-        - $ref: '../ogcapi-features/openapi.yaml#/components/parameters/collectionId'
-        - $ref: '../ogcapi-features/openapi.yaml#/components/parameters/featureId'
+        - $ref: '../../openapi.yaml#/components/parameters/collectionId'
+        - $ref: '../../openapi.yaml#/components/parameters/featureId'
       responses:
         '200':
           description: A catalog JSON definition the returns list of links of an item versions
           content:
             application/json:
               schema:
-                $ref: '../../fragments/commons/openapi.yaml#/components/schemas/catalog'
+                $ref: '../../../core/commons.yaml#/components/schemas/catalog'
   '/collections/{collectionId}/items/{featureId}/versions/{versionId}':
     get:
       summary: returns the requested version of an item
@@ -69,12 +69,12 @@ paths:
         - Version
       operationId: getItemVersion
       parameters:
-        - $ref: '../ogcapi-features/openapi.yaml#/components/parameters/collectionId'
-        - $ref: '../ogcapi-features/openapi.yaml#/components/parameters/featureId'
+        - $ref: '../../openapi.yaml#/components/parameters/collectionId'
+        - $ref: '../../openapi.yaml#/components/parameters/featureId'
         - $ref: '#/components/parameters/versionId'
       responses:
         '200':
-          $ref: '../ogcapi-features/openapi.yaml#/components/responses/Collections'
+          $ref: '../../openapi.yaml#/components/responses/Collections'
 components:
   parameters:
     versionId:
