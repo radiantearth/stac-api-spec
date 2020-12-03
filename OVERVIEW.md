@@ -31,6 +31,17 @@ parameters](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_items_) sp
 couple more. It does not require a full implementation of OAFeat, it is instead a simplified construct that can run a 
 search across any set of indexed STAC [`Items`](stac-spec/item-spec/README.md). 
 
+### Collections
+
+The other most common set of functionality is [Collections](extensions/collections/). It is linked to with the `data` 
+relationship, and lives at the `/collections` endpoint/. The response is a complete list of available STAC 'Collections', 
+along with the requirement to have `/collection/{collectionId}` endpoints to request each collection individually, by ID. 
+This general pattern is  defined in OAFeat's [Feature Collections](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_collections_), 
+but STAC is currently just using a subset of the full OAFeat conformance class, so for now it is specified here.
+STAC's [Collection](stac-spec/collection-spec/README.md) extends the OGC Collection with a handful of [additional 
+fields](stac-spec/collection-spec/collection-spec.md#collection-fields). STAC API's are expected to return STAC
+compliant Collections.
+
 ### OGC API - Features
 
 The final major functionality for a STAC API is to [provide individual `item` query endpoints](ogcapi-features/) 
