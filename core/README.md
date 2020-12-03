@@ -1,7 +1,7 @@
 # STAC API - Core Specification
 
 - **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/core>
-- **Extension [Maturity Classification](../extensions/README.md#extension-maturity):** Pilot
+- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Dependencies**: None
 
 The core of a STAC API is its landing page, which is the starting point to discover STAC data and what the API supports.

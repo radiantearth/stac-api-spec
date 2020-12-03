@@ -25,26 +25,15 @@ two or all three.
 
 ### Item Search
 
-The [item search](extensions/item-search) functionality is one of the most common, provided by the `search` rel often 
+The [item search](item-search) functionality is one of the most common, provided by the `search` rel often 
 located at a `/search` endpoint. It re-uses all of the OAFeat [query 
 parameters](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_items_) specified in their 'core', and adds a 
 couple more. It does not require a full implementation of OAFeat, it is instead a simplified construct that can run a 
 search across any set of indexed STAC [`Items`](stac-spec/item-spec/README.md). 
 
-### Collections
-
-The other most common set of functionality is [Collections](extensions/collections/). It is linked to with the `data` 
-relationship, and lives at the `/collections` endpoint/. The response is a complete list of available STAC 'Collections', 
-along with the requirement to have `/collection/{collectionId}` endpoints to request each collection individually, by ID. 
-This general pattern is  defined in OAFeat's [Feature Collections](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_collections_), 
-but STAC is currently just using a subset of the full OAFeat conformance class, so for now it is specified here.
-STAC's [Collection](stac-spec/collection-spec/README.md) extends the OGC Collection with a handful of [additional 
-fields](stac-spec/collection-spec/collection-spec.md#collection-fields). STAC API's are expected to return STAC
-compliant Collections.
-
 ### OGC API - Features
 
-The final major functionality for a STAC API is to [provide individual `item` query endpoints]((extensions/features) 
+The final major functionality for a STAC API is to [provide individual `item` query endpoints](ogcapi-features/) 
 for each collection. Some STAC API implementations only describe their Collections, without providing search of individual 
 Items, indeed they may not have Items. Many implementations go further than just providing the `search` rel by becoming fully compliant with
 [OGC API - Features Core](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_core), implementing
@@ -53,7 +42,7 @@ following their [GeoJSON](http://docs.opengeospatial.org/is/17-069r3/17-069r3.ht
 is always in GeoJSON and OpenAPI is used to specify STAC API. Full compliance involves splitting STAC `Items` into
 individual `/collections/{collectionId}/items` endpoints that expose querying single collections, as OAFeat does
 not currently allow cross-collection search. And it adds a few other requirements, which are highlighted in the 
-[features description](extensions/features), in order to help STAC implementors understand OAFeat without having to
+[features description](ogcapi-features/), in order to help STAC implementors understand OAFeat without having to
 read the full spec from scratch.
 
 ### Extensions
@@ -120,4 +109,4 @@ expand and STAC works to align.
 | OpenAPI specification 3.0 | OAFeat | <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30>   | Describes the API as OpenAPI 3.0 ([reference](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_oas30))                                          |
 | GeoJSON                   | OAFeat | <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson> | Requires OGC API - Features responses to be in GeoJSON ([reference](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_geojson)) |                                             |
 
-Additional conformance classes are specified in the [STAC Extensions](extensions/README.md).
+Additional conformance classes are specified in the [STAC Extensions](extensions.md).

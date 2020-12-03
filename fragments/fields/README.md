@@ -1,9 +1,9 @@
 # STAC API - Fields Fragment
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
-- **Fragment [Maturity Classification](../../extensions/README.md#extension-maturity):** Pilot
+- **Fragment [Maturity Classification](../../extensions.md#extension-maturity):** Pilot
 - **Dependents:**
-  - [Item Search](../../extensions/item-search)
+  - [Item Search](../../item-search)
 
 By default, the STAC search endpoint `/search` returns all attributes of each Item, as there is no way to specify 
 exactly those attributes that should be returned. The Fields API Extension adds new functionality that allows the 

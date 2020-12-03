@@ -2,8 +2,8 @@
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
 - **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search>
-- **Extension [Maturity Classification](../README.md#extension-maturity):** Pilot
-- **Dependencies**: [STAC API - Core](../../core)
+- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
+- **Dependencies**: [STAC API - Core](../core)
 
 A search endpoint, linked to from the STAC landing page, provides the ability to query STAC `Items` across collections.
 It retrieves a group of Items that match the provided parameters, wrapped in an ItemCollection (which is a 
@@ -33,26 +33,26 @@ This link should look like:
 ### Context
 
 - **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#context>**
-- **Extension [Maturity Classification](../README.md#extension-maturity):** Pilot
-- **Dependencies**: [STAC API - Context Fragment](../../fragments/context/)
+- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
+- **Dependencies**: [STAC API - Context Fragment](../fragments/context/)
 
 ### Fields
 
 - **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#fields>
-- **Extension [Maturity Classification](../README.md#extension-maturity):** Pilot
-- **Dependencies**: [STAC API - Fields Fragment](../../fragments/fields/)
+- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
+- **Dependencies**: [STAC API - Fields Fragment](../fragments/fields/)
 
 ### Query
 
 - **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#query>
-- **Extension [Maturity Classification](../README.md#extension-maturity):** Pilot
-- **Dependencies**: [STAC API - Query Fragment](../../fragments/query/)
+- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
+- **Dependencies**: [STAC API - Query Fragment](../fragments/query/)
 
 ### Sort
 
 - **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#sort>
-- **Extension [Maturity Classification](../README.md#extension-maturity):** Pilot
-- **Dependencies**: [STAC API - Sort Fragment](../../fragments/sort/)
+- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
+- **Dependencies**: [STAC API - Sort Fragment](../fragments/sort/)
 
 ## Query Parameters and Fields
 
@@ -95,7 +95,7 @@ should be returned. See [examples](#examples) to see sample requests.
 
 The response to a request (GET or POST) to the search endpoint should always be an `ItemCollection` - a valid [GeoJSON 
 FeatureCollection](https://tools.ietf.org/html/rfc7946#section-3.3) that consists entirely of STAC 
-[Items](../../stac-spec/item-spec/item-spec.md). 
+[Items](../stac-spec/item-spec/item-spec.md). 
 
 ### Paging
 
@@ -162,7 +162,7 @@ making GET required (it only specifies GET so far).
 ### POST
 
 **Recommended** STAC `/search` is strongly recommended to implement POST `Content-Type: application/json`, where the content body is a JSON 
-object representing a query and filter, as defined in [STAC Item Search](extensions/item-search). 
+object representing a query and filter, as defined in this document. 
 
 It is recommended that clients use POST for querying (if the STAC API supports it), especially when using the 
 `intersects` query parameter, for two reasons:
@@ -177,7 +177,7 @@ searching on specific Item properties.
 
 #### PUT / PATCH / DELETE
 
-The other HTTP verbs are not supported in STAC Item Search. The [Transaction Extension](extensions/transaction/README.md)
+The other HTTP verbs are not supported in STAC Item Search. The [Transaction Extension](../ogcapi-features/extensions/transaction/README.md)
 does implement them, for STAC and OAFeat implementations that want to enable writing and deleting items.
 
 #### Examples

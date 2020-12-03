@@ -1,10 +1,10 @@
 # STAC API - Query Fragment
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
-- **Extension [Maturity Classification](../../extensions/README.md#extension-maturity):** Pilot
+- **Extension [Maturity Classification](../../extensions.md#extension-maturity):** Pilot
   Likely to get deprecated in the future in favor of CQL.
 - **Dependents:**
-  - [Item Search](../../extensions/item-search)
+  - [Item Search](../../item-search)
 
 The STAC search endpoint, `/search`, by default only accepts a limited set of core filter parameters.
 The Query API extension adds additional filters for searching on the properties of Items.

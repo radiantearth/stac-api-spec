@@ -47,7 +47,7 @@ allows browsing catalogs and retrieving the API capabilities.
 An implementation will most always add extensions for broader functionality than just browsing catalogs.
 
 **Extensions:**
-In the [extensions/](extensions/) folder there are additional endpoints defined that can be added to enrich the functionality of STAC API - Core.
+The [extensions/](extensions.md) document links to additional capabilities that can be added to enrich the functionality of STAC API - Core.
 OpenAPI YAML documents are provided for each extension with additional documentation and examples provided in a README.
 
 **Fragments:**

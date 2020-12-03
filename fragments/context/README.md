@@ -1,14 +1,14 @@
 # STAC API - Context Fragment
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
-- **Fragment [Maturity Classification](../../extensions/README.md#extension-maturity):** Pilot
+- **Fragment [Maturity Classification](../../extensions.md#extension-maturity):** Pilot
 - **Dependents:**
-  - [Item Search](../../extensions/item-search)
+  - [Item Search](../../item-search)
 
 This extension is intended to augment the core ItemCollection
 object when the ItemCollection is the result of a search, for example, from calling the `/search` API endpoint.
 
-**Note**: *This extension is currently scoped to just the [STAC Item Search](../../extensions/item-search) functionality.
+**Note**: *This extension is currently scoped to just the [STAC Item Search](../../item-search) functionality.
 OGC API has their own way returning `numberMatched` and `numberReturned` at the top level, instead of in a context
 object. We are hoping to [align](https://github.com/opengeospatial/ogcapi-common/issues/82), but until then it
 is recommended to use STAC Context in the cross-collection `search` endpoint, and follow the OGC API way when
