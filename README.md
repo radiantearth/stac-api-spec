@@ -46,7 +46,7 @@ The *[core](core/)* folder describes the core STAC API specification that enable
 retrieving the API capabilities. This includes the OpenAPI schemas for STAC items, catalogs and collections.
 
 **STAC API - Item Search Specification:**
-The *[item-search](itemsearch)* folder contains the Item Search specification, which enables 
+The *[item-search](item-search)* folder contains the Item Search specification, which enables 
 cross-collection search of STAC Items at a `search` endpoint, as well as a number of extensions. 
 
 **STAC API - Features:**

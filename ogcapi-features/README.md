@@ -69,19 +69,11 @@ STAC API.
 Implementing OAFeat enables a wider range of clients to access the API's STAC Items, as it is a more widely implemented
 protocol than STAC. 
 
-## API Evolution
-
-The STAC API is still a work in progress. It currently tries to adhere to the OGC API - Features (OAFeat) specification,
-with some STAC specific extensions. The OAFeat portion of the API is provided in the *[openapi.yaml](openapi.yaml)* in this directory,
-and represents the version of OAFeat that is currently being used by STAC. It may diverge some with the
-*[OAFeat](https://github.com/opengeospatial/ogcapi-features)* spec at any given time, either out of date or 'ahead',
-with proposals to align OAFeat. The long term goal is for STAC's API and OAFeat to completely align,
-ideally all of STAC API is made from OAFeat plus its extension ecosystem, and STAC just focuses on the content.
-But until then STAC will work to bring practical implementation experience to OAFeat. 
-
 ## Examples
 
-Note that the OAFeat endpoints *only* supports HTTP GET. HTTP POST requests are not supported.
+Note that the OAFeat endpoints *only* supports HTTP GET. HTTP POST requests are not supported. If POST is required it is 
+recommended to use STAC Item Search, as it can be constrained to a single collection to act the same as an OAFeat `items`
+endpoint.
 
 Request all the data in `mycollection` that is in New Zealand:
 
