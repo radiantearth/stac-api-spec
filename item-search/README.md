@@ -29,6 +29,8 @@ This link should look like:
 }
 ```
 
+Implementations that support POST should add a second link that is exactly the same, but has a `method` of `POST`. 
+
 ## Query Parameters and Fields
 
 The following list of parameters is used to narrow search queries. They can all be represented as query string parameters 
