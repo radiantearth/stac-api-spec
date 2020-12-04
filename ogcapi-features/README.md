@@ -2,13 +2,12 @@
 
 *based on [**OGC API - Features - Part 1: Core**](https://www.ogc.org/standards/ogcapi-features)*
 
-- **OpenAPI specification:** [openapi.yaml](openapi.yaml)
+- **OpenAPI specification:** [openapi.yaml](openapi.yaml) uses all the OGC API - Features openapi fragments to describe returning STAC Items.
 - **Conformance URIs:**
   - <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/ogcapi-features>
   - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core> - [Requirements Class Core](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_core))
   - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30> - [Requirements Class OpenAPI 3.0](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_oas30))
   - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson> - [Requirements Class GeoJSON](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_geojson))
-- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Mature
 - **Dependencies**:
   - [STAC API - Core](../core)
   - [OGC API - Features](https://www.ogc.org/standards/ogcapi-features)

@@ -2,7 +2,6 @@
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
 - **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search>
-- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Dependencies**: [STAC API - Core](../core)
 - **Examples**: [examples.md](examples.md)
 
