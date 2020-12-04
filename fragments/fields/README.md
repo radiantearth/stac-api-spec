@@ -1,4 +1,4 @@
-  # STAC API - Fields Fragment
+# STAC API - Fields Fragment
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
 - **Fragment [Maturity Classification](../../extensions.md#extension-maturity):** Pilot
