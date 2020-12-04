@@ -16,7 +16,7 @@ Implementing `GET /search` is **required**, `POST /search` is optional, but reco
 
 It is **required** to add a Link to the root endpoint (`/`) with the `rel` type set to `search`
 that refers to the search endpoint in the `href` property,
-with a `type` of `application/geo+json` and a `method` of either `GET` or `POST`.
+with a `type` of `application/geo+json` and a `method` of `GET`.
 This link should look like:
 
 ```json
@@ -28,6 +28,8 @@ This link should look like:
     "method": "GET"
 }
 ```
+
+Implementations that support `POST` must add a second link with the same structure, but has a `method` of `POST`. 
 
 ## Query Parameters and Fields
 
