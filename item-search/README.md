@@ -65,7 +65,7 @@ The core parameters for STAC search are defined by OAFeat, and STAC adds a few p
 | collections  | \[string]        | STAC         | Array of one or more Collection IDs to include in the search for items. Only Items in one of the provided Collections will be searched |
 
 Only one of either **intersects** or **bbox** should be specified.  If both are specified, a 400 Bad Request response 
-should be returned. See [examples](#examples) to see sample requests.
+should be returned. See [examples](examples.md) to see sample requests.
 
 ## Response
 
@@ -155,7 +155,6 @@ searching on specific Item properties.
 
 The other HTTP verbs are not supported in STAC Item Search. The [Transaction Extension](../ogcapi-features/extensions/transaction/README.md)
 does implement them, for STAC and OAFeat implementations that want to enable writing and deleting items.
-
 
 ## Extensions
 

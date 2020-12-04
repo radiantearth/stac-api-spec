@@ -11,8 +11,7 @@ semantics are exactly the same, so we put the shared openapi definition in this 
 
 | Fragment Name                          | Description                                                                |
 |----------------------------------------|----------------------------------------------------------------------------|
-| [Fields](fragments/fields/README.md)   | Adds parameter to control which fields are returned in the response.       |
-| [Query](fragments/query/README.md)     | Adds parameter to compare properties and only return the items that match  |
-| [Context](fragments/context/README.md) | Adds search related metadata (context) to GeoJSON Responses.               |
-| [Sort](fragments/sort/README.md)       | Adds Parameter to control sorting of returns results.                      | 
-
+| [Fields](fields/README.md)   | Adds parameter to control which fields are returned in the response.       |
+| [Query](query/README.md)     | Adds parameter to compare properties and only return the items that match  |
+| [Context](context/README.md) | Adds search related metadata (context) to GeoJSON Responses.               |
+| [Sort](sort/README.md)       | Adds Parameter to control sorting of returns results.                      | 

@@ -1,4 +1,4 @@
-    # STAC API - Sort Fragment
+# STAC API - Sort Fragment
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
 - **Fragment [Maturity Classification](../../extensions.md#extension-maturity):** Pilot
@@ -14,7 +14,9 @@ Fields may be sorted in ascending or descending order.  The syntax between GET r
 body vary.  The `sortby` value is an array, so multiple sort fields can be defined which will be used to sort 
 the data in the order provided (e.g., first by `datetime`, then by `eo:cloud_cover`).
 
-**NOTE**: *This fragment may change, as our goal is to align with OGC API functionality, and sorting is currently being worked on as part of OGC API - Records, see [this issue](https://github.com/opengeospatial/ogcapi-records/issues/22) for the latest discussion.*
+**NOTE**: *This fragment may change, as our goal is to align with OGC API functionality, and sorting is currently being 
+worked on as part of OGC API - Records, see [this issue](https://github.com/opengeospatial/ogcapi-records/issues/22) 
+for the latest discussion.*
 
 ## HTTP GET (or POST Form)
 
