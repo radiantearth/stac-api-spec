@@ -39,7 +39,7 @@ the specification takes place in the [issue tracker](https://github.com/radiante
 
 ## In this repository
 
-The **[Overview](OVERVIEW.md)** document describes all the various parts of the STAC API and how they fit together.
+The **[Overview](overview.md)** document describes all the various parts of the STAC API and how they fit together.
 
 **STAC API - Core Specification:**
 The *[core](core/)* folder describes the core STAC API specification that enables browsing catalogs and 
