@@ -1,6 +1,6 @@
 version: 2.1
 jobs:
-  build:
+  validate:
     working_directory: ~/stac
     docker:
       - image: circleci/node:12
@@ -15,3 +15,46 @@ jobs:
       - run:
           name: validate
           command: npm run check
+  build:
+    working_directory: ~/stac
+    docker:
+      - image: circleci/node:12
+    steps:
+      - checkout
+      - run:
+          name: build openapi
+          command: echo build openapi
+  publish:
+    working_directory: ~/stac
+    docker:
+      - image: circleci/node:12
+    steps:
+      - checkout
+      - run:
+          name: install
+          command: npm install
+      - add_ssh_keys:
+          fingerprints:
+            - "9b:0a:88:ff:12:d1:29:9a:ff:bb:72:ab:7d:81:df:59"
+      - run:
+          name: publish
+          command: echo publish openapi #npm run publish -- $CIRCLE_TAG
+
+workflows:
+  version: 2
+  ci:
+    jobs:
+      - validate
+      - build:
+          requires:
+            - validate
+      - publish:
+          requires:
+            - build
+          filters:
+            tags:
+              # All (future) tags
+              only: /.+/
+            branches:
+              # Only dev branch, not PRs
+              only: dev
