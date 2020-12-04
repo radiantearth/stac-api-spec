@@ -4,6 +4,7 @@
 - **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Dependencies**: [STAC API - Core](../core)
+- **Examples**: [examples.md](examples.md)
 
 A search endpoint, linked to from the STAC landing page, provides the ability to query STAC `Items` across collections.
 It retrieves a group of Items that match the provided parameters, wrapped in an ItemCollection (which is a 
@@ -28,32 +29,6 @@ This link should look like:
 }
 ```
 
-## Extensions
-
-### Context
-
-- **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#context>**
-- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
-- **Dependencies**: [STAC API - Context Fragment](../fragments/context/)
-
-### Fields
-
-- **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#fields>
-- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
-- **Dependencies**: [STAC API - Fields Fragment](../fragments/fields/)
-
-### Query
-
-- **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#query>
-- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
-- **Dependencies**: [STAC API - Query Fragment](../fragments/query/)
-
-### Sort
-
-- **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#sort>
-- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
-- **Dependencies**: [STAC API - Sort Fragment](../fragments/sort/)
-
 ## Query Parameters and Fields
 
 The following list of parameters is used to narrow search queries. They can all be represented as query string parameters 
@@ -75,6 +50,8 @@ GET /search?collections=landsat8,sentinel&bbox=-10.415,36.066,3.779,44.213&limit
 }
 ```
 
+For more examples see [examples.md](examples.md).
+
 ### Query Parameter Table
 
 The core parameters for STAC search are defined by OAFeat, and STAC adds a few parameters for convenience.
@@ -89,7 +66,7 @@ The core parameters for STAC search are defined by OAFeat, and STAC adds a few p
 | collections  | \[string]        | STAC         | Array of one or more Collection IDs to include in the search for items. Only Items in one of the provided Collections will be searched |
 
 Only one of either **intersects** or **bbox** should be specified.  If both are specified, a 400 Bad Request response 
-should be returned. See [examples](#examples) to see sample requests.
+should be returned. See [examples](examples.md) to see sample requests.
 
 ## Response
 
@@ -180,124 +157,61 @@ searching on specific Item properties.
 The other HTTP verbs are not supported in STAC Item Search. The [Transaction Extension](../ogcapi-features/extensions/transaction/README.md)
 does implement them, for STAC and OAFeat implementations that want to enable writing and deleting items.
 
-#### Examples
+## Extensions
 
-##### Simple GET based search
-Request:
-```http
-HTTP GET /search?bbox=-110,39.5,-105,40.5
-```
+These extensions provide additional functionality that enhances the core item search. All are specified as 
+[fragments](../fragments), as they are re-used by other extensions STAC API's that offer the following capabilities at
+the `search` endpoint must include the relevant **conformance URI** in the `conformsTo` response at
+the root (`/`) landing page, to indicate to clients that they will respond properly to requests from clients.
 
-Response with `200 OK`:
-```json
-{
-    "type": "FeatureCollection",
-    "features": [],
-    "links": [
-        {
-            "rel": "next",
-            "href": "http://api.cool-sat.com/search?page=2"
-        }
-    ]
-}
-```
-Following the link `http://api.cool-sat.com/search?page=2` will send the user to the next page of results.
+### Fields
 
-##### POST search with body and merge fields
-Request to `HTTP POST /search`:
-```json
-{
-    "bbox": [-110, 39.5, -105, 40.5]
-}
-```
+- **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#fields>
+- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
+- **Definition**: [STAC API - Fields Fragment](../fragments/fields/)
 
-Response with `200 OK`:
-```json
-{
-    "type": "FeatureCollection",
-    "features": [],
-    "links": [
-        {
-            "rel": "next",
-            "href": "http://api.cool-sat.com/search",
-            "method": "POST",
-            "body": {
-                "page": 2,
-                "limit": 10
-            },
-            "merge": true
-        }
-    ]
-}
-```
+By default, the STAC search endpoint `/search` returns all attributes of each Item, as there is no way to specify 
+exactly those attributes that should be returned. The Fields extension to Item Search adds new functionality that 
+allows the client to suggest to the server which Item attributes should be included or excluded in the response, 
+through the use of a `fields` parameter. The full description of how this extension works can be found in the 
+[fields fragment](../fragments/fields/). 
 
-This tells the client to POST to the search endpoint using the original request with the `page` and `limit` fields 
-merged in to obtain the next set of results:
+### Query
 
-Request to `POST /search`:
-```json
-{
-    "bbox": [-110, 39.5, -105, 40.5],
-    "page": 2,
-    "limit": 10
-}
-```
+- **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#query>
+- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
+- **Definition**: [STAC API - Query Fragment](../fragments/query/)
 
-This can be even more effective when using continuation tokens on the server, as the entire request body need not be 
-repeated in the subsequent request:
+The STAC search endpoint, `/search`, by default only accepts a limited set of parameters to limit the results
+by properties. The Query extension adds a new parameter, `query`, that can take a number of comparison operators to
+match predicates between the fields requested and the values of Items. It can be used with both GET and POST, though
+GET includes the exact same JSON. The full details on the JSON structure are specified in the [query 
+fragment](../fragments/query/).
 
-Response with `200 OK`:
-```json
-{
-    "rel": "next",
-    "href": "http://api.cool-sat.com/search",
-    "method": "POST",
-    "body": {
-        "next": "a9f3kfbc98e29a0da23"
-    }
-}
-```
-The above link tells the client not to merge (default of false) so it is only required to pass the next token in the body.
+### Sort
 
-Request to `POST /search`:
-```json
-{
-    "next": "a9f3kfbc98e29a0da23"
-}
-```
+- **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#sort>
+- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
+- **Definition**: [STAC API - Sort Fragment](../fragments/sort/)
 
-##### POST search using headers
-Request to `HTTP POST /search`:
-```json
-{
-    "bbox": [-110, 39.5, -105, 40.5],
-    "page": 2,
-    "limit": 10
-}
-```
+By default, the STAC search endpoint `/search` returns results in no specified order. Whatever order the results are in 
+is up to the implementor, and will typically default to an arbitrary order that is fastest for the underlying data store 
+to retrieve results. This extension adds a new parameter, `sortby`, that lets a user specify a comma separated list of
+field names to sort by, with an indication of direction. It can be used with both GET and POST, the former using '+' and
+'-' to indicate sort order, and the latter including a 'direction' field in JSON. The full description of the semantics
+of this extension can be found in the [sort fragment](../fragments/sort).
 
-Response with `200 OK`:
-```json
-{
-    "type": "FeatureCollection",
-    "features": [],
-    "links": [
-        {
-            "rel": "next",
-            "href": "http://api.cool-sat.com/search",
-            "method": "POST",
-            "headers": {
-                "Search-After": "LC81530752019135LGN00"
-            }
-        }
-    ]
-}
-```
+### Context
 
-This tells the client to POST to the search endpoint with the header `Search-After` to obtain the next set of results:
+- **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#context>**
+- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
+- **Definition**: [STAC API - Context Fragment](../fragments/context/)
 
-Request:
-```http
-POST /search
-Search-After: LC81530752019135LGN00
-```
+This extension is intended to augment the core ItemCollection responses from the `search` API endpoint with a
+JSON object called `context` that includes the number of items `matched`, `returned` and the `limit` requested.
+The full description and examples of this are found in the [context fragment](../fragments/context)
+
+STAC API's that support the context functionality must include the conformance class 
+<http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#context> in the `conformsTo` response at
+the root (`/`) landing page, to indicate to clients that they will to respond with a `context` JSON object in all
+responses from the `search` endpoint.
