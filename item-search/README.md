@@ -28,32 +28,6 @@ This link should look like:
 }
 ```
 
-## Extensions
-
-### Context
-
-- **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#context>**
-- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
-- **Dependencies**: [STAC API - Context Fragment](../fragments/context/)
-
-### Fields
-
-- **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#fields>
-- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
-- **Dependencies**: [STAC API - Fields Fragment](../fragments/fields/)
-
-### Query
-
-- **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#query>
-- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
-- **Dependencies**: [STAC API - Query Fragment](../fragments/query/)
-
-### Sort
-
-- **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#sort>
-- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
-- **Dependencies**: [STAC API - Sort Fragment](../fragments/sort/)
-
 ## Query Parameters and Fields
 
 The following list of parameters is used to narrow search queries. They can all be represented as query string parameters 
@@ -74,6 +48,8 @@ GET /search?collections=landsat8,sentinel&bbox=-10.415,36.066,3.779,44.213&limit
     "datetime": "2017-05-05T00:00:00Z"
 }
 ```
+
+For more examples see [examples.md](examples.md).
 
 ### Query Parameter Table
 
@@ -180,124 +156,30 @@ searching on specific Item properties.
 The other HTTP verbs are not supported in STAC Item Search. The [Transaction Extension](../ogcapi-features/extensions/transaction/README.md)
 does implement them, for STAC and OAFeat implementations that want to enable writing and deleting items.
 
-#### Examples
 
-##### Simple GET based search
-Request:
-```http
-HTTP GET /search?bbox=-110,39.5,-105,40.5
-```
+## Extensions
 
-Response with `200 OK`:
-```json
-{
-    "type": "FeatureCollection",
-    "features": [],
-    "links": [
-        {
-            "rel": "next",
-            "href": "http://api.cool-sat.com/search?page=2"
-        }
-    ]
-}
-```
-Following the link `http://api.cool-sat.com/search?page=2` will send the user to the next page of results.
+### Context
 
-##### POST search with body and merge fields
-Request to `HTTP POST /search`:
-```json
-{
-    "bbox": [-110, 39.5, -105, 40.5]
-}
-```
+- **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#context>**
+- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
+- **Dependencies**: [STAC API - Context Fragment](../fragments/context/)
 
-Response with `200 OK`:
-```json
-{
-    "type": "FeatureCollection",
-    "features": [],
-    "links": [
-        {
-            "rel": "next",
-            "href": "http://api.cool-sat.com/search",
-            "method": "POST",
-            "body": {
-                "page": 2,
-                "limit": 10
-            },
-            "merge": true
-        }
-    ]
-}
-```
+### Fields
 
-This tells the client to POST to the search endpoint using the original request with the `page` and `limit` fields 
-merged in to obtain the next set of results:
+- **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#fields>
+- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
+- **Dependencies**: [STAC API - Fields Fragment](../fragments/fields/)
 
-Request to `POST /search`:
-```json
-{
-    "bbox": [-110, 39.5, -105, 40.5],
-    "page": 2,
-    "limit": 10
-}
-```
+### Query
 
-This can be even more effective when using continuation tokens on the server, as the entire request body need not be 
-repeated in the subsequent request:
+- **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#query>
+- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
+- **Dependencies**: [STAC API - Query Fragment](../fragments/query/)
 
-Response with `200 OK`:
-```json
-{
-    "rel": "next",
-    "href": "http://api.cool-sat.com/search",
-    "method": "POST",
-    "body": {
-        "next": "a9f3kfbc98e29a0da23"
-    }
-}
-```
-The above link tells the client not to merge (default of false) so it is only required to pass the next token in the body.
+### Sort
 
-Request to `POST /search`:
-```json
-{
-    "next": "a9f3kfbc98e29a0da23"
-}
-```
+- **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#sort>
+- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
+- **Dependencies**: [STAC API - Sort Fragment](../fragments/sort/)
 
-##### POST search using headers
-Request to `HTTP POST /search`:
-```json
-{
-    "bbox": [-110, 39.5, -105, 40.5],
-    "page": 2,
-    "limit": 10
-}
-```
-
-Response with `200 OK`:
-```json
-{
-    "type": "FeatureCollection",
-    "features": [],
-    "links": [
-        {
-            "rel": "next",
-            "href": "http://api.cool-sat.com/search",
-            "method": "POST",
-            "headers": {
-                "Search-After": "LC81530752019135LGN00"
-            }
-        }
-    ]
-}
-```
-
-This tells the client to POST to the search endpoint with the header `Search-After` to obtain the next set of results:
-
-Request:
-```http
-POST /search
-Search-After: LC81530752019135LGN00
-```
