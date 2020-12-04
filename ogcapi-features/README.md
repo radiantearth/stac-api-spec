@@ -106,37 +106,3 @@ Request 10 results from the data in `mycollection` from between January 1st (inc
 ```http
 GET /collections/mycollection/items?datetime=2019-01-01T00:00:00Z/2019-03-31T23:59:59Z&limit=10
 ```
-
-## STAC API
-
-The STAC API `/search/` endpoint can support the same requests as above, as POST.
-
-Request 100 results in `mycollection` that is in New Zealand at anytime on January 1st, 2019:
-
-```json
-{
-    "collections": ["mycollection"],
-    "bbox": [160.6,-55.95,-170,-25.89],
-    "limit": 100,
-    "datetime": "2019-01-01T00:00:00Z/2019-01-01T23:59:59Z"
-}
-```
-
-Use the *[Query](../fragments/query/README.md)* extension to search for any data falling within a specific geometry 
-collected between Jan 1st and May 1st, 2019:
-
-Request to `POST /search`:
-```json
-{
-    "limit": 100,
-    "intersects": {
-        "type": "Polygon",
-        "coordinates": [[
-            [-77.0824, 38.7886], [-77.0189, 38.7886],
-            [-77.0189, 38.8351], [-77.0824, 38.8351],
-            [-77.0824, 38.7886]
-        ]]
-    },
-    "datetime": "2019-01-01/2019-05-01"
-}
-```

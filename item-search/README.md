@@ -125,6 +125,8 @@ property can be specified. This indicates that the client should send the same p
 request, but with the specified headers/body values merged in. This allows servers to indicate what needs to change 
 to get to the next page without mirroring the entire query structure back to the client.
 
+See the [paging examples](examples.md#paging-examples) for additional insight.
+
 ## HTTP Request Methods and Content Types
 
 The STAC API follow a RESTful model. A core principal of this is the use of HTTP Request Methods ("verbs") and
