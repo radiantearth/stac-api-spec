@@ -4,6 +4,7 @@
 - **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Dependencies**: [STAC API - Core](../core)
+- **Examples**: [examples.md](examples.md)
 
 A search endpoint, linked to from the STAC landing page, provides the ability to query STAC `Items` across collections.
 It retrieves a group of Items that match the provided parameters, wrapped in an ItemCollection (which is a 
