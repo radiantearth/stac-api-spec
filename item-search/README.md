@@ -171,6 +171,10 @@ does implement them, for STAC and OAFeat implementations that want to enable wri
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Dependencies**: [STAC API - Fields Fragment](../fragments/fields/)
 
+By default, the STAC search endpoint `/search` returns all attributes of each Item, as there is no way to specify 
+exactly those attributes that should be returned. The Fields Item Search API Extension adds new functionality that 
+allows the client to suggest to the server which Item attributes should be included or excluded in the response. 
+
 ### Query
 
 - **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#query>
