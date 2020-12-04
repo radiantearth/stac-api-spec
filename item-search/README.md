@@ -159,8 +159,9 @@ does implement them, for STAC and OAFeat implementations that want to enable wri
 ## Extensions
 
 These extensions provide additional functionality that enhances the core item search. All are specified as 
-[fragments](../fragments), as they are re-used by other extensions. The below conformance classes are used
-to indicate that the `search` endpoint can make use of them. 
+[fragments](../fragments), as they are re-used by other extensions STAC API's that offer the following capabilities at
+the `search` endpoint must include the relevant **conformance URI** in the `conformsTo` response at
+the root (`/`) landing page, to indicate to clients that they will respond properly to requests from clients.
 
 ### Fields
 
@@ -174,11 +175,6 @@ allows the client to suggest to the server which Item attributes should be inclu
 through the use of a `fields` parameter. The full description of how this extension works can be found in the 
 [fields fragment](../fragments/fields/). 
 
-STAC API's that support the fields functionality must include the conformance class 
-<http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#fields> in the `conformsTo` response at
-the root (`/`) landing page, to indicate to clients that they will respond properly to requests that use
-the `fields` parameter on the endpoint specified by the `search` rel.
-
 ### Query
 
 - **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#query>
@@ -190,11 +186,6 @@ by properties. The Query extension adds a new parameter, `query`, that can take 
 match predicates between the fields requested and the values of Items. It can be used with both GET and POST, though
 GET includes the exact same JSON. The full details on the JSON structure are specified in the [query 
 fragment](../fragments/query/).
-
-STAC API's that support the query functionality must include the conformance class 
-<http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#query> in the `conformsTo` response at
-the root (`/`) landing page, to indicate to clients that they will respond properly to requests that use
-the `query` parameter on the endpoint linked to by the `search` rel.
 
 ### Sort
 
@@ -208,11 +199,6 @@ to retrieve results. This extension adds a new parameter, `sortby`, that lets a 
 field names to sort by, with an indication of direction. It can be used with both GET and POST, the former using '+' and
 '-' to indicate sort order, and the latter including a 'direction' field in JSON. The full description of the semantics
 of this extension can be found in the [sort fragment](../fragments/sort).
-
-STAC API's that support the query functionality must include the conformance class 
-<http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#sort> in the `conformsTo` response at
-the root (`/`) landing page, to indicate to clients that they will respond properly to requests that use
-the `sortby` parameter on the endpoint specified by the `search` rel.
 
 ### Context
 

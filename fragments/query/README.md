@@ -10,7 +10,7 @@ The `query` parameter adds additional filters for searching on the properties of
 
 The syntax for the `query` filter is:
 
-```json
+```js
 {
   "query": {
     "<property_name>": {
