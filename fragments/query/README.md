@@ -2,16 +2,15 @@
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
 - **Extension [Maturity Classification](../../extensions.md#extension-maturity):** Pilot
-  Likely to get deprecated in the future in favor of CQL.
+  Likely to get deprecated in the future in favor of [CQL](http://docs.opengeospatial.org/DRAFTS/19-079.html).
 - **Dependents:**
   - [Item Search](../../item-search)
 
-The STAC search endpoint, `/search`, by default only accepts a limited set of core filter parameters.
-The Query API extension adds additional filters for searching on the properties of Items.
+The `query` parameter adds additional filters for searching on the properties of Items.
 
 The syntax for the `query` filter is:
 
-```js
+```json
 {
   "query": {
     "<property_name>": {

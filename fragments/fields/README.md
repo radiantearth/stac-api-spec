@@ -5,7 +5,7 @@
 - **Dependents:**
   - [Item Search](../../item-search)
 
-When used in a POST request with `Content-Type: application/json`, this extension adds an attribute `fields` with 
+When used in a POST request with `Content-Type: application/json`, this adds an attribute `fields` with 
 an object value to the core JSON search request body. The `fields` object contains two attributes with string array 
 values, `include` and `exclude`.
 

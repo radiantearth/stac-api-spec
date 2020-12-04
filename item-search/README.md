@@ -159,31 +159,73 @@ does implement them, for STAC and OAFeat implementations that want to enable wri
 
 ## Extensions
 
-### Context
-
-- **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#context>**
-- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
-- **Dependencies**: [STAC API - Context Fragment](../fragments/context/)
+These extensions provide additional functionality that enhances the core item search. All are specified as 
+[fragments](../fragments), as they are re-used by other extensions. The below conformance classes are used
+to indicate that the `search` endpoint can make use of them. 
 
 ### Fields
 
 - **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#fields>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
-- **Dependencies**: [STAC API - Fields Fragment](../fragments/fields/)
+- **Definition**: [STAC API - Fields Fragment](../fragments/fields/)
 
 By default, the STAC search endpoint `/search` returns all attributes of each Item, as there is no way to specify 
-exactly those attributes that should be returned. The Fields Item Search API Extension adds new functionality that 
-allows the client to suggest to the server which Item attributes should be included or excluded in the response. 
+exactly those attributes that should be returned. The Fields extension to Item Search adds new functionality that 
+allows the client to suggest to the server which Item attributes should be included or excluded in the response, 
+through the use of a `fields` parameter. The full description of how this extension works can be found in the 
+[fields fragment](../fragments/fields/). 
+
+STAC API's that support the fields functionality must include the conformance class 
+<http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#fields> in the `conformsTo` response at
+the root (`/`) landing page, to indicate to clients that they will respond properly to requests that use
+the `fields` parameter on the endpoint specified by the `search` rel.
 
 ### Query
 
 - **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#query>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
-- **Dependencies**: [STAC API - Query Fragment](../fragments/query/)
+- **Definition**: [STAC API - Query Fragment](../fragments/query/)
+
+The STAC search endpoint, `/search`, by default only accepts a limited set of parameters to limit the results
+by properties. The Query extension adds a new parameter, `query`, that can take a number of comparison operators to
+match predicates between the fields requested and the values of Items. It can be used with both GET and POST, though
+GET includes the exact same JSON. The full details on the JSON structure are specified in the [query 
+fragment](../fragments/query/).
+
+STAC API's that support the query functionality must include the conformance class 
+<http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#query> in the `conformsTo` response at
+the root (`/`) landing page, to indicate to clients that they will respond properly to requests that use
+the `query` parameter on the endpoint linked to by the `search` rel.
 
 ### Sort
 
 - **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#sort>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
-- **Dependencies**: [STAC API - Sort Fragment](../fragments/sort/)
+- **Definition**: [STAC API - Sort Fragment](../fragments/sort/)
 
+By default, the STAC search endpoint `/search` returns results in no specified order. Whatever order the results are in 
+is up to the implementor, and will typically default to an arbitrary order that is fastest for the underlying data store 
+to retrieve results. This extension adds a new parameter, `sortby`, that lets a user specify a comma separated list of
+field names to sort by, with an indication of direction. It can be used with both GET and POST, the former using '+' and
+'-' to indicate sort order, and the latter including a 'direction' field in JSON. The full description of the semantics
+of this extension can be found in the [sort fragment](../fragments/sort).
+
+STAC API's that support the query functionality must include the conformance class 
+<http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#sort> in the `conformsTo` response at
+the root (`/`) landing page, to indicate to clients that they will respond properly to requests that use
+the `sortby` parameter on the endpoint specified by the `search` rel.
+
+### Context
+
+- **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#context>**
+- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
+- **Definition**: [STAC API - Context Fragment](../fragments/context/)
+
+This extension is intended to augment the core ItemCollection responses from the `search` API endpoint with a
+JSON object called `context` that includes the number of items `matched`, `returned` and the `limit` requested.
+The full description and examples of this are found in the [context fragment](../fragments/context)
+
+STAC API's that support the context functionality must include the conformance class 
+<http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#context> in the `conformsTo` response at
+the root (`/`) landing page, to indicate to clients that they will to respond with a `context` JSON object in all
+responses from the `search` endpoint.
