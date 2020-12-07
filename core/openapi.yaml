@@ -49,7 +49,9 @@ components:
       content:
         application/json:
           schema:
-            $ref: 'commons.yaml#/components/schemas/catalog'
+            allOf:
+             - $ref: 'commons.yaml#/components/schemas/catalog'
+             - $ref: 'commons.yaml#/components/schemas/conformanceClasses'
           example:
             stac_version: 1.0.0-beta.1
             id: sentinel

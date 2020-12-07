@@ -276,15 +276,6 @@ components:
           type: array
           items:
             $ref: '../core/commons.yaml#/components/schemas/collection'
-    confClasses:
-      type: object
-      required:
-        - conformsTo
-      properties:
-        conformsTo:
-          type: array
-          items:
-            type: string
     featureCollectionGeoJSON:
       allOf:
         - $ref: '../core/commons.yaml#/components/schemas/featureCollectionGeoJSON'
@@ -340,7 +331,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/confClasses'
+            $ref: '../core/commons.yaml#/components/schemas/conformanceClasses'
           example:
             conformsTo:
               - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core'
