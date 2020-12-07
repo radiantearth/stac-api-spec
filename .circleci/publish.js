@@ -25,13 +25,15 @@ var folder = '.';
 for (let file of klaw(folder, {filter: filterFn})) {
 	if (!file.stats.isDirectory() && file.path.endsWith('openapi.yaml')) {
 		let target = 'build' + path.sep + tag + path.sep + path.relative(folder, file.path);
+		const dir = path.dirname(target)
+		if (!fs.existsSync(dir)){
+			fs.mkdirSync(dir, {recursive: true});
+		}
 		console.log(target);
 		loader
-			.loadSpec(file.path, options)            // Load the spec...
+			.loadSpec(file.path, options)
 			.then(spec => {
-				
 				fs.writeFileSync(target, JSON.stringify(spec))
-				
 			});
 		
 	}
