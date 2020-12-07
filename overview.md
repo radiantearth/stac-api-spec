@@ -59,7 +59,7 @@ column is more of an example in most cases. OGC API makes some endpoint location
 | Endpoint                                        | Link Relationship  | Returns                                           | Description |
 | ----------------------------------------------- | ------------------ | ------------------------------------------------- | ----------- |
 | `/`                                             | root               | [Catalog](stac-spec/catalog-spec/catalog-spec.md) | Extends `/` from OAFeat to return a full STAC catalog. |
-| `/search`                                       | search             | ItemCollection | Retrieves a group of Items matching the provided search predicates, probably containing search metadata from the `search` extension |
+| `/search`                                       | search             | [ItemCollection](core/itemcollection-spec.md) | Retrieves a group of Items matching the provided search predicates, probably containing search metadata from the `search` extension |
 | **`/collections`**                                  | data               | JSON           | Object with a list of Collections contained in the catalog and links |
 | **`/conformance`**                              | conformance        | JSON | Info about standards to which the API conforms |
 | `/api`                                          | service-desc       | OpenAPI 3.0 JSON | The OpenAPI definition of the endpoints in this service            |

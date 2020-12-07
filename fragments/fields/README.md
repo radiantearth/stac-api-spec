@@ -5,15 +5,15 @@
 - **Dependents:**
   - [Item Search](../../item-search)
 
-By default, the STAC search endpoint `/search` returns all attributes of each Item, as there is no way to specify 
-exactly those attributes that should be returned. The Fields API Extension adds new functionality that allows the 
-client to suggest to the server which Item attributes should be included or excluded in the response. 
+STAC API by default returns everything within an item. But Items can have hundreds of fields, or incredibly large
+geometries, and even smaller Items can get big when millions are requested but not all information is used. This
+fragment provides a mechanism for clients to request that servers to explicitly include or exclude certain fields. 
 
-When calling `/search` using POST with`Content-Type: application/json`, this extension adds an attribute `fields` with 
+When used in a POST request with `Content-Type: application/json`, this adds an attribute `fields` with 
 an object value to the core JSON search request body. The `fields` object contains two attributes with string array 
 values, `include` and `exclude`.
 
-When calling `/search` using GET or POST with `Content-Type: application/x-www-form-urlencoded` or 
+When used with GET or POST with `Content-Type: application/x-www-form-urlencoded` or 
 `Content-Type: multipart/form-data`, the semantics are the same, except the syntax is a single parameter `fields` with 
 a comma-separated list of attribute names, where `exclude` values are those prefixed by a `-` and `include` values are 
 those with no prefix, e.g., `-geometry`, or `id,-geometry,properties`.
@@ -29,23 +29,18 @@ polygons can be very large when reprojected to EPSG:4326, as in the case of a hi
 Implementations are also not required to implement semantics for nested values whereby one can include an object, but
 exclude attributes of that object, e.g., include `properties` but exclude `properties.datetime`.
 
-No error should be returned if a specified field has no value for it in the catalog.  For example, if the attribute 
+No error should be returned if a specified field has no value for it in the catalog. For example, if the attribute 
 "properties.eo:cloud_cover" is specified but there is no cloud cover value for an Item or the API does not even 
 support the EO Extension, a successful HTTP response should be returned and the Item entities will not contain that 
 attribute. 
 
-If no `fields` are specified, the response is **must** be a valid ItemCollection. If a client excludes
+If no `fields` are specified, the response is **must** be a valid [ItemCollection](../../core/itemcollection-spec.md). If a client excludes
 attributes that are required in a STAC Item, the server may return an invalid STAC Item. For example, if `type` 
 and `geometry` are excluded, the entity will not even be a valid GeoJSON Feature, or if `bbox` is excluded then the entity 
 will not be a valid STAC Item.
 
 Implementations may return attributes not specified, e.g., id, but should avoid anything other than a minimal entity 
 representation. 
-
-**NOTE**: *This extension is built to be compatible
-[OAFeat](https://github.com/opengeospatial/ogcapi-features) endpoints, but does not yet have a conformance
-class to use in that way. Our goal is to align with OGC API functionality, which looks to be prioritized currently as
-[future work](https://github.com/opengeospatial/ogcapi-features/issues/451)*
 
 ## Include/Exclude Semantics 
 

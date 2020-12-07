@@ -34,7 +34,7 @@ The core OGC API - Features endpoints are shown below, with details provided in 
 | `/conformance`                                  | JSON             | Info about standards to which the API conforms |
 | `/collections`                                  | JSON             | Object with a list of Collections contained in the catalog and links |
 | `/collections/{collectionId}`                   | Collection       | Returns single Collection JSON |
-| `/collections/{collectionId}/items`             | ItemCollection   | GeoJSON FeatureCollection-conformant entity of Items in collection |
+| `/collections/{collectionId}/items`             | [ItemCollection](../core/itemcollection-spec.md)   | GeoJSON FeatureCollection-conformant entity of Items in collection |
 | `/collections/{collectionId}/items/{featureId}` | Item             | Returns single Item (GeoJSON Feature) |
 | `/api`                                          | OpenAPI 3.0 JSON | Returns an OpenAPI description of the service from the `service-desc` link `rel` - not required to be `/api`, but the document is required |
 

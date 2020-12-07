@@ -5,10 +5,10 @@
 - **Dependents:**
   - [Item Search](../../item-search)
 
-This extension is intended to augment the core ItemCollection
+This extension is intended to augment the core [ItemCollection](../../core/itemcollection-spec.md)
 object when the ItemCollection is the result of a search, for example, from calling the `/search` API endpoint.
 
-**Note**: *This extension is currently scoped to just the [STAC Item Search](../../item-search) functionality.
+**Note**: *This extension is currently only used by [STAC Item Search](../../item-search) functionality.
 OGC API has their own way returning `numberMatched` and `numberReturned` at the top level, instead of in a context
 object. We are hoping to [align](https://github.com/opengeospatial/ogcapi-common/issues/82), but until then it
 is recommended to use STAC Context in the cross-collection `search` endpoint, and follow the OGC API way when
@@ -21,7 +21,7 @@ implementing OGC API - Features.*
 
 | Element   | Type                              | Description |
 | --------- | --------------------------------- | ----------- |
-| `context` | [Context Object](#context-object) | **REQUIRED.** The search-related metadata for the ItemCollection. |
+| `context` | [Context Object](#context-object) | **REQUIRED.** The search-related metadata for the [ItemCollection](../../core/itemcollection-spec.md). |
 
 ## Context Object
 
@@ -31,9 +31,9 @@ implementing OGC API - Features.*
 | limit    | integer \| null | The maximum number of results to which the result was limited. |
 | matched  | integer         | The count of total number of results that match for this query, possibly estimated, particularly in the context of NoSQL data stores. |
 
-  The default sort of query results should be stable, but may not be depending on the data store's sorting performance.
-   It is recommended that the [Sort API Extension](../sort/README.md) be implemented in conjunction with this extension
-   and that fields conducive to stable sorting have sorting enabled over them.
+The default sort of query results should be stable, but may not be depending on the data store's sorting performance.
+It is recommended that the [Sort API Extension](../sort/README.md) be implemented in conjunction with this extension
+and that fields conducive to stable sorting have sorting enabled over them.
 
 **limit** - The maximum number of results requested explicitly, the default limit used by the service implementation
 if no parameter was provided, or the maximum limit used by the service implementation if the limit parameter was larger.
