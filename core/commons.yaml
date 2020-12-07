@@ -23,6 +23,20 @@ components:
           type: string
         description:
           type: string
+    conformanceClasses:
+      type: object
+      required:
+        - conformsTo
+      properties:
+        conformsTo:
+          description: >-
+            A list of all conformance classes implemented by the server.
+            In addition to the STAC-specific conformance classes, all OGC-related
+            conformance classes listed at `GET /conformances` must be listed here.
+            This entry should mirror what `GET /conformances` returns, if implemented.
+          type: array
+          items:
+            type: string
     catalog:
       type: object
       required:
@@ -845,35 +859,3 @@ components:
         properties:
           type: object
           nullable: true
-    itemCollection:
-      description: >-
-        A GeoJSON FeatureCollection augmented with foreign members that contain values relevant to a STAC entity
-      type: object
-      required:
-        - stac_version
-        - features
-        - type
-      properties:
-        stac_version:
-          $ref: '#/components/schemas/stac_version'
-        stac_extensions:
-          $ref: '#/components/schemas/stac_extensions'
-        type:
-          type: string
-          enum:
-            - FeatureCollection
-        features:
-          type: array
-          items:
-            $ref: '#/components/schemas/item'
-        links:
-          type: array
-          description: >-
-            An array of links. Can be used for pagination, e.g. by providing a link
-            with the `next` relation type.
-          items:
-            $ref: '#/components/schemas/link'
-          example:
-            - rel: next
-              href: >-
-                http://api.cool-sat.com/search?next=ANsXtp9mrqN0yrKWhf-y2PUpHRLQb1GT-mtxNcXou8TwkXhi1Jbk
