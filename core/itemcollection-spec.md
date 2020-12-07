@@ -7,11 +7,6 @@ that is augmented with [foreign members](https://tools.ietf.org/html/rfc7946#sec
 Similarly to the relationship between a GeoJSON Feature and a STAC Item, a STAC ItemCollection should be a valid GeoJSON 
 FeatureCollection to allow interoperability with existing tools that support GeoJSON. 
 
-The same ItemCollection definition is currently only used by the [`/search`](../item-search) endpoint. 
-The search endpoint enables dynamic
-queries, for example selecting all Items in Hawaii on June 3, 2015, but the results they return are an
-ItemCollection of Items.
-
 Items are represented in JSON format and are very flexible. Any JSON object that contains all the
 required fields is a valid STAC ItemCollection.
 
@@ -19,14 +14,6 @@ required fields is a valid STAC ItemCollection.
   - See the [minimal example](examples/itemcollection-sample-minimal.json), as well as a [more complete 
     example](examples/itemcollection-sample-full.json). There are more real world inspired samples in the [examples/](examples/) folder.
 - [OpenAPI YAML](openapi.yaml)
-
-## WARNING
-
-**This is still an early version of the STAC spec, expect that there may be some changes before everything is finalized.**
-
-Implementations are encouraged, however, as good effort will be made to not change anything too drastically. Using the specification
-now will ensure that needed changes can be made before everything is locked in. So now is an ideal time to implement, as your 
-feedback will be directly incorporated. 
 
 ## ItemCollection fields
 
@@ -43,13 +30,12 @@ This object describes a STAC ItemCollection. The fields `type` and `features` ar
 **stac_version**: In general, STAC versions can be mixed, but please keep the [recommended best 
 practices](../stac-spec/best-practices.md#mixing-stac-versions) in mind.
 
-**stac_extensions**: A list of extensions the ItemCollection implements. The list contains URLs to the JSON Schema files it 
+**stac_extensions**: A list of STAC content extensions the ItemCollection implements. The list contains URLs to the JSON Schema files it 
 can be validated against. For official [content extensions](../stac-spec/extensions/README.md#list-of-content-extensions), a "shortcut"
 can be used. This means you can specify the folder name of the extension, for example `single-file-stac` for the Single File 
-STAC extension. This does *not* apply for API extensions. If the versions of the extension and the item diverge, you can 
-specify the URL of the JSON schema file.
-This list must only contain extensions that extend the ItemCollection itself, see the the 'Scope' column in the list of extensions. 
-It must not contain extensions that extend the Items, these must be specified in the Items directly.
+STAC extension. This does *not* apply for [API extensions](../extensions.md). If the versions of the extension and the item diverge, 
+you can specify the URL of the JSON schema file. This list must only contain extensions that extend the ItemCollection itself, see the 
+the 'Scope' column in the list of extensions. It must not contain extensions that extend the Items, these must be specified in the Items directly.
 
 ## Extensions
 
