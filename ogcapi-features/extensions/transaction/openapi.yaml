@@ -32,7 +32,7 @@ paths:
             schema:
                 oneOf:
                  - $ref: '../../../core/commons.yaml#/components/schemas/item'
-                 - $ref: '../../../core/commons.yaml#/components/schemas/itemCollection'
+                 - $ref: '../../../fragments/itemcollection/openapi.yaml#/components/schemas/itemCollection'
       responses:
         '201':
           description: Status of the create request.
