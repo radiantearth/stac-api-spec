@@ -56,7 +56,7 @@ paths:
               schema:
                 type: string
         default:
-          $ref: '../fragments/itemcollection/openapi.yaml#/components/responses/Error'
+          $ref: '../core/commons.yaml#/components/responses/Error'
     post:
       summary: Search STAC items with full-featured filtering.
       operationId: postItemSearch
