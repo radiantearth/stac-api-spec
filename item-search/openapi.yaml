@@ -49,14 +49,14 @@ paths:
             application/geo+json:
               schema:
                 allOf:
-                - $ref: '../core/commons.yaml#/components/schemas/itemCollection'
+                - $ref: '../fragments/itemcollection/openapi.yaml#/components/schemas/itemCollection'
                 # extensions
                 - $ref: '../fragments/context/openapi.yaml#/components/schemas/itemCollection'
             text/html:
               schema:
                 type: string
         default:
-          $ref: '../core/commons.yaml#/components/responses/Error'
+          $ref: '../fragments/itemcollection/openapi.yaml#/components/responses/Error'
     post:
       summary: Search STAC items with full-featured filtering.
       operationId: postItemSearch
@@ -86,7 +86,7 @@ paths:
           content:
             application/geo+json:
               schema:
-                $ref: '../core/commons.yaml#/components/schemas/itemCollection'
+                $ref: '../fragments/itemcollection/openapi.yaml#/components/schemas/itemCollection'
             text/html:
               schema:
                 type: string
