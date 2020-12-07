@@ -23,6 +23,20 @@ components:
           type: string
         description:
           type: string
+    conformanceClasses:
+      type: object
+      required:
+        - conformsTo
+      properties:
+        conformsTo:
+          description: >-
+            A list of all conformance classes implemented by the server.
+            In addition to the STAC-specific conformance classes, all OGC-related
+            conformance classes listed at `GET /conformances` must be listed here.
+            This entry should mirror what `GET /conformances` returns, if implemented.
+          type: array
+          items:
+            type: string
     catalog:
       type: object
       required:
