@@ -1,4 +1,4 @@
-# STAC ItemCollection Specification
+# STAC API - ItemCollection Fragment
 
 This document explains the structure and content of a SpatioTemporal Asset Catalog (STAC) ItemCollection. 
 An **ItemCollection** is a [GeoJSON](http://geojson.org/) [FeatureCollection](https://tools.ietf.org/html/rfc7946#section-3.3) 
