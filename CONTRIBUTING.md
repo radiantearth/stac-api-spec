@@ -39,7 +39,7 @@ you to change the base in GitHub's PR creation page.
 select breaking changes, but after 1.0 this will change)
 
 All pull requests should submit clean markdown, which is checked by the continuous integration
-system. Please use `check-markdown` locally, as described in the [next section](#using-check-markdown-locally), 
+system. Please use `npm run check-markdown` locally, as described in the [next section](#using-check-markdown-locally), 
 to ensure that the checks on the pull request succeed. If it does not then you can look at the
 mistakes online, which are the same as running `check-markdown` locally would surface.
 
