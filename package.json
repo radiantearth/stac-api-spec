@@ -14,7 +14,8 @@
     "check-openapi-ogcapi-features": "spectral lint ogcapi-features/openapi.yaml ogcapi-features/extensions/*/openapi.yaml --ruleset .circleci/.spectral.yml",
     "check-openapi-item-search": "spectral lint item-search/openapi.yaml --ruleset .circleci/.spectral.yml",
     "check-openapi-fragments": "spectral lint fragments/*/openapi.yaml --ruleset .circleci/.spectral-fragments.yml",
-    "publish": "node .circleci/publish.js"
+    "build-openapi": ".circleci/build-openapi.sh",
+    "publish-openapi": "node .circleci/publish.js"
   },
   "dependencies": {
     "@stoplight/spectral": "^5.7.1",

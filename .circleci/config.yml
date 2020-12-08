@@ -23,7 +23,7 @@ jobs:
       - checkout
       - run:
           name: build openapi
-          command: .circleci/build-openapi.sh
+          command: npm run build-openapi
   publish:
     working_directory: ~/stac
     docker:
@@ -38,7 +38,7 @@ jobs:
             - "9b:0a:88:ff:12:d1:29:9a:ff:bb:72:ab:7d:81:df:59"
       - run:
           name: publish
-          command: echo publish openapi #npm run publish -- $CIRCLE_TAG
+          command: npm run publish-openapi
 
 workflows:
   version: 2
