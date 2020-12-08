@@ -68,7 +68,7 @@ jobs:
       - *restore_build
       - add_ssh_keys:
           fingerprints:
-            - "SHA256:IgC7ttVAQfqV1bf8ppMXRYQkVuvlwfR6rMGPxFp9AX4"
+            - "e1:e0:a2:73:2c:5a:61:c4:51:8f:ec:ac:08:f3:a0:5b"
       - run:
           name: publish
           command: npm run publish-openapi -- $CIRCLE_TAG
