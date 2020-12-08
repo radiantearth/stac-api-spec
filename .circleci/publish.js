@@ -6,7 +6,7 @@ if (args.length && args[0].trim().length > 0) {
 	tag = args[0];
 }
 
-ghpages.publish('build/' + tag, {
+ghpages.publish('build/', {
 	src: '**',
 	dest: tag,
 	message: 'Publish JSON Schemas [ci skip]',
