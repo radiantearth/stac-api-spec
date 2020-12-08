@@ -1,8 +1,14 @@
 const ghpages = require('gh-pages');
 
+let args = process.argv.slice(2);
+let tag = 'dev';
+if (args.length && args[0].trim().length > 0) {
+	tag = args[0];
+}
 
-ghpages.publish('build/', {
+ghpages.publish('build/' + tag, {
 	src: '**',
+	dest: tag,
 	message: 'Publish JSON Schemas [ci skip]',
 	user: {
 	  name: 'STAC CI',
