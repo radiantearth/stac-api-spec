@@ -63,12 +63,12 @@ jobs:
     docker:
       - image: circleci/node:12
     steps:
-      - add_ssh_keys:
-          fingerprints:
-            - "9b:0a:88:ff:12:d1:29:9a:ff:bb:72:ab:7d:81:df:59"
       - *restore_repo
       - *restore_dependencies
       - *restore_build
+      - add_ssh_keys:
+          fingerprints:
+            - "SHA256:IgC7ttVAQfqV1bf8ppMXRYQkVuvlwfR6rMGPxFp9AX4"
       - run:
           name: publish
           command: npm run publish-openapi -- $CIRCLE_TAG
