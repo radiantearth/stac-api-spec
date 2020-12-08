@@ -23,7 +23,7 @@ jobs:
       - checkout
       - run:
           name: build openapi
-          command: echo build openapi
+          command: .circleci/build-openapi.sh
   publish:
     working_directory: ~/stac
     docker:
