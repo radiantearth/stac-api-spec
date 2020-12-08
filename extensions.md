@@ -57,7 +57,6 @@ are scoped against ogcapi-features*.
 | [Transaction](ogcapi-features/extensions/transaction/README.md)                   | [STAC - Features API](ogcapi-features) POST on `/items` endpoint, DELETE/PUT on `/items/{itemId}` endpoint | *none*                                 | <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/transaction>         | Adds PUT and DELETE endpoints for the creation, editing, and deleting of items and Collections.                                         | *Pilot*    |
 | [Items and Collections API Version](ogcapi-features/extensions/version/README.md) | [STAC - Features API](ogcapi-features) on `/items` endpoint                                                | *none*                                 | <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/version>             | Adds GET versions resource to collections and items endpoints and provides semantics for a versioning scheme for collections and items. | *Proposal* |
 
-
 ## Third-party / vendor extensions
 
 The following extensions are provided by third parties (vendors). They tackle very specific
@@ -81,4 +80,3 @@ The new extension can live anywhere online, with a recommendation of using a Git
 The first step in sharing the extension is to add it to the third-party / vendor extension table above. If it is of something
 that the wider community may be interested in then it should be added to the appropriate folder in the main repo as a pull 
 request. 
-
