@@ -2,13 +2,12 @@
 
 *based on [**OGC API - Features - Part 1: Core**](https://www.ogc.org/standards/ogcapi-features)*
 
-- **OpenAPI specification:** [openapi.yaml](openapi.yaml)
+- **OpenAPI specification:** [openapi.yaml](openapi.yaml) uses all the OGC API - Features openapi fragments to describe returning STAC Items.
 - **Conformance URIs:**
-  - <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/ogcapi-features>
+  - <http://stacspec.org/spec/api/1.0.0-beta.1/ogcapi-features>
   - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core> - [Requirements Class Core](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_core))
   - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30> - [Requirements Class OpenAPI 3.0](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_oas30))
   - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson> - [Requirements Class GeoJSON](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_geojson))
-- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Mature
 - **Dependencies**:
   - [STAC API - Core](../core)
   - [OGC API - Features](https://www.ogc.org/standards/ogcapi-features)
@@ -34,7 +33,7 @@ The core OGC API - Features endpoints are shown below, with details provided in 
 | `/conformance`                                  | JSON             | Info about standards to which the API conforms |
 | `/collections`                                  | JSON             | Object with a list of Collections contained in the catalog and links |
 | `/collections/{collectionId}`                   | Collection       | Returns single Collection JSON |
-| `/collections/{collectionId}/items`             | [ItemCollection](../core/itemcollection-spec.md)   | GeoJSON FeatureCollection-conformant entity of Items in collection |
+| `/collections/{collectionId}/items`             | [ItemCollection](../core/itemcollection.md)   | GeoJSON FeatureCollection-conformant entity of Items in collection |
 | `/collections/{collectionId}/items/{featureId}` | Item             | Returns single Item (GeoJSON Feature) |
 | `/api`                                          | OpenAPI 3.0 JSON | Returns an OpenAPI description of the service from the `service-desc` link `rel` - not required to be `/api`, but the document is required |
 
@@ -70,19 +69,11 @@ STAC API.
 Implementing OAFeat enables a wider range of clients to access the API's STAC Items, as it is a more widely implemented
 protocol than STAC. 
 
-## API Evolution
-
-The STAC API is still a work in progress. It currently tries to adhere to the OGC API - Features (OAFeat) specification,
-with some STAC specific extensions. The OAFeat portion of the API is provided in the *[openapi.yaml](openapi.yaml)* in this directory,
-and represents the version of OAFeat that is currently being used by STAC. It may diverge some with the
-*[OAFeat](https://github.com/opengeospatial/ogcapi-features)* spec at any given time, either out of date or 'ahead',
-with proposals to align OAFeat. The long term goal is for STAC's API and OAFeat to completely align,
-ideally all of STAC API is made from OAFeat plus its extension ecosystem, and STAC just focuses on the content.
-But until then STAC will work to bring practical implementation experience to OAFeat. 
-
 ## Examples
 
-Note that the OAFeat endpoints *only* supports HTTP GET. HTTP POST requests are not supported.
+Note that the OAFeat endpoints *only* supports HTTP GET. HTTP POST requests are not supported. If POST is required it is 
+recommended to use STAC Item Search, as it can be constrained to a single collection to act the same as an OAFeat `items`
+endpoint.
 
 Request all the data in `mycollection` that is in New Zealand:
 
@@ -106,38 +97,4 @@ Request 10 results from the data in `mycollection` from between January 1st (inc
 
 ```http
 GET /collections/mycollection/items?datetime=2019-01-01T00:00:00Z/2019-03-31T23:59:59Z&limit=10
-```
-
-## STAC API
-
-The STAC API `/search/` endpoint can support the same requests as above, as POST.
-
-Request 100 results in `mycollection` that is in New Zealand at anytime on January 1st, 2019:
-
-```json
-{
-    "collections": ["mycollection"],
-    "bbox": [160.6,-55.95,-170,-25.89],
-    "limit": 100,
-    "datetime": "2019-01-01T00:00:00Z/2019-01-01T23:59:59Z"
-}
-```
-
-Use the *[Query](../fragments/query/README.md)* extension to search for any data falling within a specific geometry 
-collected between Jan 1st and May 1st, 2019:
-
-Request to `POST /search`:
-```json
-{
-    "limit": 100,
-    "intersects": {
-        "type": "Polygon",
-        "coordinates": [[
-            [-77.0824, 38.7886], [-77.0189, 38.7886],
-            [-77.0189, 38.8351], [-77.0824, 38.8351],
-            [-77.0824, 38.7886]
-        ]]
-    },
-    "datetime": "2019-01-01/2019-05-01"
-}
 ```

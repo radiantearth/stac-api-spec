@@ -5,10 +5,10 @@
 - **Dependents:**
   - [Item Search](../../item-search)
 
-This extension is intended to augment the core [ItemCollection](../../core/itemcollection-spec.md)
+This extension is intended to augment the core [ItemCollection](../../core/itemcollection.md)
 object when the ItemCollection is the result of a search, for example, from calling the `/search` API endpoint.
 
-**Note**: *This extension is currently only used by [STAC Item Search](../../item-search) functionality.
+**Note**: *This fragment is currently scoped to just the STAC-specific functionality such as [STAC Item Search](../../item-search).
 OGC API has their own way returning `numberMatched` and `numberReturned` at the top level, instead of in a context
 object. We are hoping to [align](https://github.com/opengeospatial/ogcapi-common/issues/82), but until then it
 is recommended to use STAC Context in the cross-collection `search` endpoint, and follow the OGC API way when
@@ -21,7 +21,7 @@ implementing OGC API - Features.*
 
 | Element   | Type                              | Description |
 | --------- | --------------------------------- | ----------- |
-| `context` | [Context Object](#context-object) | **REQUIRED.** The search-related metadata for the [ItemCollection](../../core/itemcollection-spec.md). |
+| `context` | [Context Object](#context-object) | **REQUIRED.** The search-related metadata for the [ItemCollection](../../core/itemcollection.md). |
 
 ## Context Object
 

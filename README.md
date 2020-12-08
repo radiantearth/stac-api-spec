@@ -10,7 +10,7 @@ time. The core STAC specification lives at [gitub.com/radiantearth/stac-spec](ht
 
 A STAC API is the dynamic version of a SpatioTemporal Asset Catalog. It returns a STAC [Catalog](stac-spec/catalog-spec/catalog-spec.md), 
 [Collection](stac-spec/collection-spec/collection-spec.md), [Item](stac-spec/item-spec/item-spec.md), 
-or ItemCollection, depending on the endpoint.
+or a STAC API [ItemCollection](core/itemcollection.md), depending on the endpoint.
 Catalogs and Collections are JSON, while Items and ItemCollections are GeoJSON-compliant entities with foreign members.  
 Typically, a Feature is used when returning a single Item, and FeatureCollection when multiple Items (rather than a JSON array of Item entities).
 
@@ -25,10 +25,8 @@ The specification for STAC API is provided as an [OpenAPI](http://openapis.org/)
 
 This specification has evolved over the past couple years, and is used in production in a variety of deployments. It is 
 currently in a 'beta' state, with no major changes anticipated. For 1.0-beta we remain fully aligned with  [OGC API - 
-Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) Version 1.0. We have further aligned STAC extensions
-with OGC API - Features extensions, particularly [CQL](https://github.com/opengeospatial/ogcapi-features/tree/master/extensions/cql/)
-and [Transactions](https://github.com/opengeospatial/ogcapi-features/tree/master/extensions/transactions). These are not
-yet entirely stable, so if they change then STAC will update to remain in line.
+Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) Version 1.0, and we are working to stay aligned
+as the additional OGC API components mature. This may result in minor changes as things evolve.
 
 ## Communication
 
@@ -42,19 +40,29 @@ the specification takes place in the [issue tracker](https://github.com/radiante
 The **[Overview](overview.md)** document describes all the various parts of the STAC API and how they fit together.
 
 **STAC API - Core Specification:**
-The main description of the core STAC API specification is in the *[core](core/)* folder and
-allows browsing catalogs and retrieving the API capabilities.
-An implementation will most always add extensions for broader functionality than just browsing catalogs.
+The *[core](core/)* folder describes the core STAC API specification that enables browsing catalogs and 
+retrieving the API capabilities. This includes the OpenAPI schemas for STAC items, catalogs and collections.
+
+**STAC API - Item Search Specification:**
+The *[item-search](item-search)* folder contains the Item Search specification, which enables 
+cross-collection search of STAC Items at a `search` endpoint, as well as a number of extensions. 
+
+**STAC API - Features:**
+The *[ogcapi-features](ogcapi-features)* folder describes how a STAC API can fully implement [OGC API - 
+Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to expose individual `items` endpoints for search of
+each STAC collection. It also includes extensions that can be used to further enhance OAFeat.
 
 **Extensions:**
-The [extensions/](extensions.md) document links to additional capabilities that can be added to enrich the functionality of STAC API - Core.
-OpenAPI YAML documents are provided for each extension with additional documentation and examples provided in a README.
+The *[extensions](extensions.md) document* describes how STAC incubates new functionality, and it links to the existing
+
+extensions that can be added to enrich the functionality of a STAC API. Each has an OpenAPI yaml, but some of the yaml
+documents live as fragments in the [fragments/](fragments/) folder.
 
 **Fragments:**
-The [fragments/](fragments/) folder contains re-usable building blocks to be used in STAC API - Core and STAC API extensions.
-This includes the OpenAPI schemas for items, catalogs and collections, but also common schemas and parameters for behavior like 
-sorting and querying. Most all of them are compatible with OGC API - Features, and the plan is to fully align the relevant 
-functionality and have it be useful for all OAFeat implementations.
+The *[fragments/](fragments/)* folder contains re-usable building blocks to be used in a STAC API, including common OpenAPI 
+schemas and parameters for behavior like sorting and filtering. Most all of them are compatible with 
+OGC API - Features, and the plan is to fully align the relevant functionality and have it be useful for all OAFeat implementations.
+OpenAPI YAML documents are provided for each extension with additional documentation and examples provided in a README.
 
 **STAC Specification:** This repository includes a '[sub-module](https://git-scm.com/book/en/v2/Git-Tools-Submodules)', which
 is a copy of the [STAC specification](stac-spec/) tagged at the latest stable version.

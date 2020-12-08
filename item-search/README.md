@@ -1,13 +1,12 @@
 # STAC API - Item Search
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
-- **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search>
-- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
+- **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/item-search>
 - **Dependencies**: [STAC API - Core](../core)
 - **Examples**: [examples.md](examples.md)
 
 A search endpoint, linked to from the STAC landing page, provides the ability to query STAC `Items` across collections.
-It retrieves a group of Items that match the provided parameters, wrapped in an [ItemCollection](../core/itemcollection-spec.md) (which is a 
+It retrieves a group of Items that match the provided parameters, wrapped in an [ItemCollection](../core/itemcollection.md) (which is a 
 valid [GeoJSON FeatureCollection](https://tools.ietf.org/html/rfc7946#section-3.3) that contains STAC Items). Several core
 query parameters are defined by [OGC API - Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html), with
 a few additions specified in this document.
@@ -129,6 +128,8 @@ property can be specified. This indicates that the client should send the same p
 request, but with the specified headers/body values merged in. This allows servers to indicate what needs to change 
 to get to the next page without mirroring the entire query structure back to the client.
 
+See the [paging examples](examples.md#paging-examples) for additional insight.
+
 ## HTTP Request Methods and Content Types
 
 The STAC API follow a RESTful model. A core principal of this is the use of HTTP Request Methods ("verbs") and
@@ -206,7 +207,7 @@ of this extension can be found in the [sort fragment](../fragments/sort).
 
 ### Context
 
-- **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#context>**
+- **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#context>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Definition**: [STAC API - Context Fragment](../fragments/context/)
 
