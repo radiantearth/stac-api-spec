@@ -13,6 +13,7 @@ references:
       keys: 
         - v1-dependencies-{{ checksum "package.json"}}
         - v1-dependencies
+
   restore_build: &restore_build
     restore_cache:
       keys: 
@@ -39,7 +40,7 @@ jobs:
       - save_cache:
           key: v1-dependencies-{{ checksum "package.json"}}
           paths:
-            - ./node_modules
+            - ~/stac/node_modules
       - run:
           name: validate
           command: npm run check
@@ -56,7 +57,7 @@ jobs:
       - save_cache:
           key: v1-build-{{ .Branch }}-{{ .Revision }}
           paths:
-            - ./build
+            - ~/stac/build
   publish:
     working_directory: ~/stac
     docker:
