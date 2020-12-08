@@ -69,7 +69,9 @@ jobs:
       - add_ssh_keys
       - run:
           name: publish
-          command: npm run publish-openapi -- $CIRCLE_TAG
+          command: |
+            ssh-keyscan -p 443 ssh.github.com >> ~/.ssh/known_hosts
+            npm run publish-openapi -- $CIRCLE_TAG
 
 workflows:
   version: 2
