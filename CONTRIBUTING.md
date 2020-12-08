@@ -22,57 +22,61 @@ where a new change in one part of the spec might not yet be fully updated everyw
 a release. Once all the major issues are resolved the core team makes sure everything is consistent across the spec and
 examples.
 
-Any changes to the spec must be made as pull requests to the `dev` branch. Anyone is welcome and encouraged to bring ideas
-and improvements, to the issue tracker or (ideally) as pull requests. To merge a new pull request the work must be reviewed
-by at least two members of the STAC spec core team (who have write access to the main repository). It also must pass the
-Continuous Integration testing.
+### Submitting Pull Requests
+
+Any proposed changes to the specification should be done as pull requests. Please make these
+requests against the [`dev`](https://github.com/radiantearth/stac-api-spec/tree/dev) branch (this will
+require you to switch from the default of 'master', which we keep so it displays first). 
+
+Creating a Pull Request will show our PR template, which includes checkbox reminders for a number
+of things.
+
+- Adding an entry the [CHANGELOG](CHANGELOG.md). If the change is more editorial and minor then this 
+is not required, but any change to the actual specification should definitely have one.
+- Base the PR against dev, as mentioned above - even if the branch was made off of dev this reminds
+you to change the base in GitHub's PR creation page.
+- Highlight if the PR makes breaking changes to the specification (in beta there can still be
+select breaking changes, but after 1.0 this will change)
+
+All pull requests should submit clean markdown, which is checked by the continuous integration
+system. Please use `npm run check-markdown` locally, as described in the [next section](#using-check-markdown-locally), 
+to ensure that the checks on the pull request succeed. If it does not then you can look at the
+mistakes online, which are the same as running `check-markdown` locally would surface.
+
+All pull requests that modify or create JSON examples should use [JSON 
+formatter](https://jsonformatter.org/) to keep files consistent across the repo. 
+
+All pull requests additionally require a review of two STAC core team members. Releases are cut
+from dev to master (and require 3 approvals).
+
+### Using check-markdown locally
+
+The same check-markdown program that runs as a check on PR's is part of the repo and can be run locally. 
+To install you'll need npm, which is a standard part of any [node.js installation](https://nodejs.org/en/download/). 
+Alternatively, you can also use [yarn](https://yarnpkg.com/) instead of npm. In this case replace all occurrences of 
+`npm` with `yarn` below.
+
+First you'll need to install everything with npm once. Just navigate to the root of the stac-spec repo and on 
+your command line run:
+
+```bash
+npm install
+```
+Then to do the check on your markdown you run:
+
+```bash
+npm run check-markdown
+```
+
+This will spit out the same text that you see online, and you can then go and fix your markdown.
 
 ### Working with the OpenAPI files
 
 The definitive specification for STAC API is provided as an [OpenAPI](http://openapis.org/) 3.0 specification that is
-contained within several YAML files in the various directories.
-
-TODO: Update with the latest folders / structure, and update the below instructions if they change
-
-```bash
-npm install
-npm run generate-all
-```
-
-You can also dynamically serve a human-readable version of your edited files at `http://127.0.0.1:8080` using the following commands:
-- Only the core STAC API:
-  ```bash
-  npm install
-  npm run serve
-  ```
-- The STAC API including all extensions:
-  ```bash
-  npm install
-  npm run serve-ext
-  ```
-
-Create your own OpenAPI document by combining the STAC definition with the extensions you want by creating a `myapi.merge.yaml` file.
-This file should contain a line indicating the files that need to be merged:
-
-```yaml
-!!files_merge_append ["STAC.yaml", "extensions/query/query.fragment.yaml"]
-```
-
-Then, run the [yaml-files](https://www.npmjs.com/package/yaml-files) command line tool:
-
-```bash
-npm -g install
-yaml-files myapi.merge.yaml myapi.yaml
-```
-
-The commands above require root/administrator level access to install the npm packages globally.
-If you do not have the required permissions or do not want to install the packages globally for any other reason check the
-npm documentation for your platform for instructions to install and run local packages. Unix bash users for instance may use:
-
-```bash
-npm install
-$(npm bin)/yaml-files myapi.merge.yaml myapi.yaml
-```
+contained within several YAML files in the various directories. These live in the same place as the markdown defining
+various parts of the specification. Currently we expect developers to be up to speed with
+OpenAPI and using their own tools to modify things. In the future we will provide tools to make it easier to work with.
+We do publish full OpenAPI files online, at TODO: Matt to add final location.
 
 ## Release Process
 

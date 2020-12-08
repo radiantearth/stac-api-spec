@@ -1,6 +1,26 @@
-#### Examples
+## Item Search Examples
 
-##### Simple GET based search
+### Single Collection example
+
+This example shows how you can request Items from a single collection from the `search` endpoint, without having to using
+OGC API - Features. It requests 100 results in `mycollection` that is in New Zealand at anytime on January 1st, 2019:
+
+```json
+{
+    "collections": ["mycollection"],
+    "bbox": [160.6,-55.95,-170,-25.89],
+    "limit": 100,
+    "datetime": "2019-01-01T00:00:00Z/2019-01-01T23:59:59Z"
+}
+```
+
+```http
+GET /search?collections=mycollection&bbox=160.6,-55.95,-170,-25.89&limit=100&datetime=2019-01-01T00:00:00Z/2019-01-01T23:59:59Z
+```
+
+### Paging Examples
+
+#### Simple GET based search
 Request:
 ```http
 HTTP GET /search?bbox=-110,39.5,-105,40.5
@@ -21,7 +41,7 @@ Response with `200 OK`:
 ```
 Following the link `http://api.cool-sat.com/search?page=2` will send the user to the next page of results.
 
-##### POST search with body and merge fields
+#### POST search with body and merge fields
 Request to `HTTP POST /search`:
 ```json
 {
@@ -84,7 +104,7 @@ Request to `POST /search`:
 }
 ```
 
-##### POST search using headers
+#### POST search using headers
 Request to `HTTP POST /search`:
 ```json
 {
