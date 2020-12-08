@@ -34,7 +34,7 @@ No error should be returned if a specified field has no value for it in the cata
 support the EO Extension, a successful HTTP response should be returned and the Item entities will not contain that 
 attribute. 
 
-If no `fields` are specified, the response is **must** be a valid [ItemCollection](../../core/itemcollection-spec.md). If a client excludes
+If no `fields` are specified, the response is **must** be a valid [ItemCollection](../../core/itemcollection.md). If a client excludes
 attributes that are required in a STAC Item, the server may return an invalid STAC Item. For example, if `type` 
 and `geometry` are excluded, the entity will not even be a valid GeoJSON Feature, or if `bbox` is excluded then the entity 
 will not be a valid STAC Item.
