@@ -22,6 +22,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: install
+          command: npm install
+      - run:
           name: build openapi
           command: npm run build-openapi
   publish:
@@ -30,12 +33,15 @@ jobs:
       - image: circleci/node:12
     steps:
       - checkout
-      - run:
-          name: install
-          command: npm install
       - add_ssh_keys:
           fingerprints:
             - "9b:0a:88:ff:12:d1:29:9a:ff:bb:72:ab:7d:81:df:59"
+      - run:
+          name: install
+          command: npm install
+      - run:
+          name: build openapi
+          command: npm run build-openapi
       - run:
           name: publish
           command: npm run publish-openapi
