@@ -13,10 +13,14 @@
     "check-openapi-commons": "spectral lint core/commons.yaml --ruleset .circleci/.spectral-fragments.yml",
     "check-openapi-ogcapi-features": "spectral lint ogcapi-features/openapi.yaml ogcapi-features/extensions/*/openapi.yaml --ruleset .circleci/.spectral.yml",
     "check-openapi-item-search": "spectral lint item-search/openapi.yaml --ruleset .circleci/.spectral.yml",
-    "check-openapi-fragments": "spectral lint fragments/*/openapi.yaml --ruleset .circleci/.spectral-fragments.yml"
+    "check-openapi-fragments": "spectral lint fragments/*/openapi.yaml --ruleset .circleci/.spectral-fragments.yml",
+    "build-openapi": ".circleci/build-openapi.sh",
+    "publish-openapi": "node .circleci/publish.js"
   },
   "dependencies": {
     "@stoplight/spectral": "^5.7.1",
+    "gh-pages": "^3.1.0",
+    "klaw-sync": "^6.0.0",
     "redoc-cli": "^0.10.2",
     "remark-cli": "^8.0.1",
     "remark-lint": "^7.0.1",
@@ -25,6 +29,7 @@
     "remark-preset-lint-markdown-style-guide": "^3.0.1",
     "remark-preset-lint-recommended": "^4.0.1",
     "remark-validate-links": "^10.0.2",
+    "speccy": "^0.11.0",
     "yaml-files": "^1.1.0"
   }
 }
