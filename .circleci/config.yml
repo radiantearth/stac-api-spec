@@ -4,20 +4,20 @@ references:
   restore_repo: &restore_repo
     restore_cache:
       keys:
-        - v1-repo-{{ .Branch }}-{{ .Revision }}
-        - v1-repo-{{ .Branch }}
-        - v1-repo
+        - v0-repo-{{ .Branch }}-{{ .Revision }}
+        - v0-repo-{{ .Branch }}
+        - v0-repo
 
   restore_dependencies: &restore_dependencies
     restore_cache:
       keys: 
-        - v1-dependencies-{{ checksum "package.json"}}
-        - v1-dependencies
+        - v0-dependencies-{{ checksum "package.json"}}
+        - v0-dependencies
 
   restore_build: &restore_build
     restore_cache:
       keys: 
-        - v1-build-{{ .Branch }}-{{ .Revision }}
+        - v0-build-{{ .Branch }}-{{ .Revision }}
 
 
 jobs:
@@ -31,14 +31,14 @@ jobs:
           name: init_submodules
           command: git submodule update --init --recursive
       - save_cache:
-          key: v1-repo-{{ .Branch }}-{{ .Revision }}
+          key: v0-repo-{{ .Branch }}-{{ .Revision }}
           paths:
             - ~/stac
       - run:
           name: install
           command: npm install
       - save_cache:
-          key: v1-dependencies-{{ checksum "package.json"}}
+          key: v0-dependencies-{{ checksum "package.json"}}
           paths:
             - ~/stac/node_modules
       - run:
@@ -55,7 +55,7 @@ jobs:
           name: build openapi
           command: npm run build-openapi -- $CIRCLE_TAG
       - save_cache:
-          key: v1-build-{{ .Branch }}-{{ .Revision }}
+          key: v0-build-{{ .Branch }}-{{ .Revision }}
           paths:
             - ~/stac/build
   publish:
