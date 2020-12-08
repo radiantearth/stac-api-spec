@@ -32,14 +32,14 @@ jobs:
       - save_cache:
           key: v1-repo-{{ .Branch }}-{{ .Revision }}
           paths:
-            - ./
+            - ~/stac
       - run:
           name: install
           command: npm install
       - save_cache:
           key: v1-dependencies-{{ checksum "package.json"}}
           paths:
-            - node_modules
+            - ./node_modules
       - run:
           name: validate
           command: npm run check
@@ -56,7 +56,7 @@ jobs:
       - save_cache:
           key: v1-build-{{ .Branch }}-{{ .Revision }}
           paths:
-            - build
+            - ./build
   publish:
     working_directory: ~/stac
     docker:
