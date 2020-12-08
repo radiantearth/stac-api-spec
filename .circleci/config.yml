@@ -77,17 +77,22 @@ workflows:
   version: 2
   ci:
     jobs:
-      - validate
+      - validate:
+          filters:
+            tags:
+              only: /^v.*/
       - build:
           requires:
             - validate
+          filters:
+            tags:
+              only: /^v.*/
       - publish:
           requires:
             - build
           filters:
             tags:
-              # All (future) tags
-              only: /.+/
+              only: /^v.*/
             branches:
               # Only dev branch, not PRs
               only: dev
