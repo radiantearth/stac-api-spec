@@ -1,4 +1,23 @@
 version: 2.1
+
+references:
+  restore_repo: &restore_repo
+    restore_cache:
+      keys:
+        - v1-repo-{{ .Branch }}-{{ .Revision }}
+        - v1-repo-{{ .Branch }}
+        - v1-repo
+  restore_dependencies:
+    restore_cache:
+      keys: 
+        - v1-dependencies-{{ checksum "package.json"}}
+        - v1-dependencies
+  restore_build:
+    restore_cache:
+      keys: 
+        - v1-build-{{ .Branch }}-{{ .Revision }}
+
+        
 jobs:
   validate:
     working_directory: ~/stac
@@ -9,9 +28,17 @@ jobs:
       - run:
           name: init_submodules
           command: git submodule update --init --recursive
+      - save_cache:
+          key: v1-repo-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - ./
       - run:
           name: install
           command: npm install
+      - save_cache:
+          key: v1-dependencies-{{ checksum "package.json"}}
+          paths:
+            - ~/node_modules
       - run:
           name: validate
           command: npm run check
@@ -20,31 +47,29 @@ jobs:
     docker:
       - image: circleci/node:12
     steps:
-      - checkout
-      - run:
-          name: install
-          command: npm install
+      - *restore_repo
+      - *restore_dependencies
       - run:
           name: build openapi
-          command: npm run build-openapi
+          command: npm run build-openapi -- $CIRCLE_TAG
+      - save_cache:
+          key: v1-build-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - ~/build
   publish:
     working_directory: ~/stac
     docker:
       - image: circleci/node:12
     steps:
-      - checkout
       - add_ssh_keys:
           fingerprints:
             - "e1:e0:a2:73:2c:5a:61:c4:51:8f:ec:ac:08:f3:a0:5b"
-      - run:
-          name: install
-          command: npm install
-      - run:
-          name: build openapi
-          command: npm run build-openapi
+      - *restore_repo
+      - *restore_dependencies
+      - *restore_build
       - run:
           name: publish
-          command: npm run publish-openapi
+          command: npm run publish-openapi -- $CIRCLE_TAG
 
 workflows:
   version: 2
