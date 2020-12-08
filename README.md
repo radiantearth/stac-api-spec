@@ -25,10 +25,8 @@ The specification for STAC API is provided as an [OpenAPI](http://openapis.org/)
 
 This specification has evolved over the past couple years, and is used in production in a variety of deployments. It is 
 currently in a 'beta' state, with no major changes anticipated. For 1.0-beta we remain fully aligned with  [OGC API - 
-Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) Version 1.0. We have further aligned STAC extensions
-with OGC API - Features extensions, particularly [CQL](https://github.com/opengeospatial/ogcapi-features/tree/master/extensions/cql/)
-and [Transactions](https://github.com/opengeospatial/ogcapi-features/tree/master/extensions/transactions). These are not
-yet entirely stable, so if they change then STAC will update to remain in line.
+Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) Version 1.0, and we are working to stay aligned
+as the additional OGC API components mature. This may result in minor changes as things evolve.
 
 ## Communication
 
