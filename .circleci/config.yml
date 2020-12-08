@@ -66,6 +66,7 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - "e1:e0:a2:73:2c:5a:61:c4:51:8f:ec:ac:08:f3:a0:5b"
+            - "SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8"
       - *restore_repo
       - *restore_dependencies
       - *restore_build
