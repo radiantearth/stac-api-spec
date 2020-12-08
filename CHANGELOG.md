@@ -8,9 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - The landing page returns the conformance classes in a property `conformsTo`, which mirrors `GET /conformances` from OGC APIs.
-- Fragments - reusable OpenAPI documents for sort, filter, fields and context, along with explanation of how they work.
-- `conformsTo` JSON object in the landing page, to communicate what functionality a server implements.
-- Conformance classes for all the major functionality and extensions, to be referenced in the `conformsTo`.
+- Conformance classes for all the major functionality and extensions, to be referenced in a new `conformsTo` JSON object in the landing page.
+- Fragments: reusable OpenAPI documents for sort, filter, fields and context, along with explanation of how they work.
 - ItemCollection moved from [STAC Core](https://github.com/radiantearth/stac-spec/blob/v0.9.0/item-spec/itemcollection-spec.md) to this repo.
 
 ### Changed

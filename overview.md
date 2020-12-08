@@ -65,10 +65,9 @@ curated set of extension options.
 
 ## STAC Core and OGC Versions
 
-This version of STAC API depends on OGC API - Features - Part 1: Core [Version 1.0](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html),
-and on [OGC API - Commons - Part 2: Collections](https://github.com/opengeospatial/ogcapi-common/blob/cc8ca2f011d7e1b19721268c4bf2b97c163d160a/20-024.pdf)
-from the [August 18 V2 Commit](https://github.com/opengeospatial/ogcapi-common/tree/cc8ca2f011d7e1b19721268c4bf2b97c163d160a/collections) 
-(we hope they will publish at least a 'beta' version that we can point to soon).
+This version of STAC API depends on OGC API - Features - Part 1: Core [Version 1.0](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html).
+Future versions will likely depend on [OGC API Common](https://github.com/opengeospatial/ogcapi-common) and additional parts of
+Features as components evolve and mature.
 
 This version of STAC API is intended to work with any STAC core specification version 0.9.x or 1.x.x (included betas), but is not 
 designed to work with STAC 2.0 and above (since we use [SemVer](https://semver.org/) it may introduce backwards incompatible changes). 
@@ -111,11 +110,8 @@ URI's for conformance to actually resolve to machine-readable information client
 
 | **Name**                  | **Specified in**           | **Conformance URI**                                              | **Description**                                                                                                                                                                                                                                                                     |
 |---------------------------|----------------------------|------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| STAC Core                 | [Core](core)               | <http://stacspec.org/spec/api/1.0.0-beta.1/item-search>          | Specifies the STAC Landing page `/`, communicating conformance and available endpoints.                                                                                                                                                                                             |
+| STAC Core                 | [Core](core)               | <http://stacspec.org/spec/api/1.0.0-beta.1/core>          | Specifies the STAC Landing page `/`, communicating conformance and available endpoints.                                                                                                                                                                                             |
 | Item Search               | [Item Search](item-search) | <http://stacspec.org/spec/api/1.0.0-beta.1/item-search>          | Enables search of all STAC Items on the server, with the STAC `[/search](#stac-api-endpoints)` endpoint.                                                                                                                                                                            |
 | STAC Features             | [OAFeat](ogcapi-features)  | <http://stacspec.org/spec/api/1.0.0-beta.1/ogcapi-features>      | Specifies the use of OGC API - Features to serve STAC Items and Collections                                                                                                                                                                                                         |
-| OAFeat Core               | OAFeat                     | <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core>    | The core OGC API - Features endpoints & parameters Returns one or more STAC Collections from the OAFeat `/collections` and `/collections/{collectionId}` endpoints. Depends on OAFeat Core.         ([reference](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_core)) |
-| OpenAPI specification 3.0 | OAFeat                     | <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30>   | Describes the API as OpenAPI 3.0 ([reference](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_oas30))                                                                                                                                                                   |
-| GeoJSON                   | OAFeat                     | <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson> | Requires OGC API - Features responses to be in GeoJSON ([reference](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_geojson))                                                                                                                          |                              |
 
-Additional conformance classes are specified in the [STAC Extensions](extensions.md).
+Additional conformance classes are specified in the [STAC Extensions](extensions.md#Conformance-classes-of-extensions).
