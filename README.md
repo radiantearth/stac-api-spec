@@ -55,7 +55,8 @@ Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to expose in
 each STAC collection. It also includes extensions that can be used to further enhance OAFeat.
 
 **Extensions:**
-The *[extensions/](extensions.md) document* describes how STAC incubates new functionality, and it links to the existing
+The *[extensions](extensions.md) document* describes how STAC incubates new functionality, and it links to the existing
+
 extensions that can be added to enrich the functionality of a STAC API. Each has an OpenAPI yaml, but some of the yaml
 documents live as fragments in the [fragments/](fragments/) folder.
 
