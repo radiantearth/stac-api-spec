@@ -1909,7 +1909,7 @@ components:
                       geometries:
                         type: array
                         items:
-                          $ref: '#/paths/~1collections~1%7BcollectionId%7D~1items~1%7BfeatureId%7D/get/responses/200/content/application~1geo%2Bjson/schema/properties/geometry'
+                          type: object
               type:
                 type: string
                 description: The GeoJSON type
@@ -2855,7 +2855,7 @@ components:
                     enum:
                       - Feature
                   geometry:
-                    $ref: '#/paths/~1collections~1%7BcollectionId%7D~1items~1%7BfeatureId%7D/get/responses/200/content/application~1geo%2Bjson/schema/properties/geometry'
+                    type: object
                   properties:
                     type: object
                     nullable: true
