@@ -22,7 +22,6 @@ that have common properties, links to their assets and geometries that represent
 The specification for STAC API is provided as files that follow the [OpenAPI](http://openapis.org/) 3.0 specification, 
 rendered online into HTML at <http://api.stacspec.org/>, in addition to human-readable documentation.  
 
-
 ## Stability Note
 
 This specification has evolved over the past couple years, and is used in production in a variety of deployments. It is 
