@@ -98,7 +98,7 @@ column is more of an example in some cases. OGC API makes some endpoint location
 
 STAC API is evolving to utilize OAFeat's 
 '[Conformance](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_declaration_of_conformance_classes)' JSON structure. For 
-STAC API v1.0.0-beta.1 we declare new STAC Conformance classes, and specify which OAFeat ones to use. These are detailed in the relevant
+STAC API 1.0.0-beta.1 we declare new STAC Conformance classes, and specify which OAFeat ones to use. These are detailed in the relevant
 sections below. The core STAC conformance classes communicate the conformance JSON only in the root (`/`) document, while OGC API 
 requires they also live at the `/conformance` endpoint. STAC's conformance structure is detailed in the [core](core/).
 
