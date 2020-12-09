@@ -702,21 +702,21 @@ components:
       - $ref: "#/components/schemas/multilinestringGeoJSON"
       - $ref: "#/components/schemas/polygonGeoJSON"
       - $ref: "#/components/schemas/multipolygonGeoJSON"
-    #  - $ref: "#/components/schemas/geometrycollectionGeoJSON"
-    #geometrycollectionGeoJSON:
-    #  type: object
-    #  required:
-    #    - type
-    #    - geometries
-    #  properties:
-    #    type:
-    #      type: string
-    #      enum:
-    #        - GeometryCollection
-    #    geometries:
-    #      type: array
-    #      items:
-    #        $ref: "#/components/schemas/geometryGeoJSON"
+      - $ref: "#/components/schemas/geometrycollectionGeoJSON"
+    geometrycollectionGeoJSON:
+      type: object
+      required:
+        - type
+        - geometries
+      properties:
+        type:
+          type: string
+          enum:
+            - GeometryCollection
+        geometries:
+          type: array
+          items:
+            $ref: "#/components/schemas/geometryGeoJSON"
     linestringGeoJSON:
       type: object
       required:
