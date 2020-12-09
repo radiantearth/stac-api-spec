@@ -1038,6 +1038,19 @@ components:
                               minItems: 2
                               items:
                                 type: number
+                  - type: object
+                    required:
+                      - type
+                      - geometries
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                          - GeometryCollection
+                      geometries:
+                        type: array
+                        items:
+                          $ref: '#/paths/~1collections~1%7BcollectionId%7D~1items~1%7BfeatureId%7D/get/responses/200/content/application~1geo%2Bjson/schema/properties/geometry'
               type:
                 type: string
                 description: The GeoJSON type

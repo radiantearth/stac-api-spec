@@ -829,6 +829,19 @@ components:
                         minItems: 2
                         items:
                           type: number
+            - type: object
+              required:
+                - type
+                - geometries
+              properties:
+                type:
+                  type: string
+                  enum:
+                    - GeometryCollection
+                geometries:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/intersectsFilter/properties/intersects'
     limitFilter:
       type: object
       description: Only returns maximum number of results (page size)
