@@ -12,11 +12,20 @@ info:
 tags:
   - name: Core
     description: essential characteristics of a STAC API
+  - name: Item Search
+    description: essential characteristics of a STAC API
+  - name: Features
+    description: 'All endpoints related to OGC API - Features - Part 1: Core'
+  - name: Transaction
+    description: 'STAC-specific operations to add, remove, and edit items within OGC API - Features collections.'
+  - name: Version
+    description: This version API extension defines the API resources and semantics for creating and accessing versioned records.
 paths:
   /:
     get:
       tags:
         - Core
+        - Features
       summary: landing page
       description: |-
         Returns the root STAC Catalog or STAC Collection that is the entry point
@@ -357,7 +366,7 @@ paths:
                                     - type: string
                                     - type: number
                       example:
-                        eo:cloud_cover:
+                        'eo:cloud_cover':
                           gt: 8
                           lt: 50
                         platform:
@@ -365,14 +374,14 @@ paths:
                         datetime:
                           gte: '2018-02-12T00:00:00Z'
                           lte: '2018-03-18T12:31:12Z'
-                        pl:item_type:
+                        'pl:item_type':
                           startsWith: PSScene
                         product:
                           in:
                             - foo
                             - bar
                             - baz
-                        eo:gsd:
+                        'eo:gsd':
                           in:
                             - 10
                             - 20
@@ -786,6 +795,7 @@ paths:
     get:
       tags:
         - Features
+        - Transaction
       summary: fetch a single feature
       description: |-
         Fetch the feature with id `featureId` in the feature collection
@@ -2130,6 +2140,10 @@ components:
       schema:
         type: array
         oneOf:
+          - minItems: 4
+            maxItems: 4
+          - minItems: 6
+            maxItems: 6
           - minItems: 4
             maxItems: 4
           - minItems: 6
