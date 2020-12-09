@@ -47,7 +47,7 @@ jobs:
   build:
     working_directory: ~/stac
     docker:
-      - image: cimg/node:12
+      - image: cimg/python:3.8.5-node
     steps:
       - *restore_repo
       - *restore_dependencies
@@ -63,7 +63,7 @@ jobs:
   publish:
     working_directory: ~/stac
     docker:
-      - image: cimg/python:3.8.5-node
+      - image: circleci/node:12
     steps:
       - *restore_repo
       - *restore_dependencies
