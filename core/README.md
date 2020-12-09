@@ -1,7 +1,7 @@
 # STAC API - Core Specification
 
-- **Conformance URI:** <http://api.stacspec.org/v1.0.0-beta.1/core> ([rendered version](http://api.stacspec.org/spec/v1.0.0-beta.1/core))
-- **Conformance URI:** <http://api.stacspec.org/v1.0.0-beta.1/core>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.1/core> ([rendered version](https://api.stacspec.org/spec/v1.0.0-beta.1/core))
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.1/core>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Dependencies**: None
 - **OpenAPI Specifications**: [openapi.yaml](openapi.yaml) describes the core endpoints, and [commons.yaml](commons.yaml) is the OpenAPI 
@@ -31,8 +31,8 @@ The core of a STAC API is its landing page, which is the starting point to disco
         }
     ],
     "conformsTo" : [
-        "http://api.stacspec.org/v1.0.0-beta.1/core",
-        "http://api.stacspec.org/v1.0.0-beta.1/item-search"
+        "https://api.stacspec.org/v1.0.0-beta.1/core",
+        "https://api.stacspec.org/v1.0.0-beta.1/item-search"
     ]
 }
 ```

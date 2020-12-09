@@ -1,7 +1,7 @@
 # STAC API - Item Search
 
-- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](http://api.stacspec.org/spec/v1.0.0-beta.1/item-search))
-- **Conformance URI:** <http://api.stacspec.org/v1.0.0-beta.1/item-search>
+- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/spec/v1.0.0-beta.1/item-search))
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.1/item-search>
 - **Dependencies**: [STAC API - Core](../core)
 - **Examples**: [examples.md](examples.md)
 
@@ -170,7 +170,7 @@ the root (`/`) landing page, to indicate to clients that they will respond prope
 
 ### Fields
 
-- **Conformance URI:** <http://api.stacspec.org/v1.0.0-beta.1/item-search#fields>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.1/item-search#fields>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Definition**: [STAC API - Fields Fragment](../fragments/fields/)
 
@@ -182,7 +182,7 @@ through the use of a `fields` parameter. The full description of how this extens
 
 ### Query
 
-- **Conformance URI:** <http://api.stacspec.org/v1.0.0-beta.1/item-search#query>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.1/item-search#query>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Definition**: [STAC API - Query Fragment](../fragments/query/)
 
@@ -194,7 +194,7 @@ fragment](../fragments/query/).
 
 ### Sort
 
-- **Conformance URI:** <http://api.stacspec.org/v1.0.0-beta.1/item-search#sort>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.1/item-search#sort>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Definition**: [STAC API - Sort Fragment](../fragments/sort/)
 
@@ -207,7 +207,7 @@ of this extension can be found in the [sort fragment](../fragments/sort).
 
 ### Context
 
-- **Conformance URI:** <http://api.stacspec.org/v1.0.0-beta.1/item-search#context>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.1/item-search#context>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Definition**: [STAC API - Context Fragment](../fragments/context/)
 

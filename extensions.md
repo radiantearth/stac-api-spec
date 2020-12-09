@@ -66,12 +66,12 @@ the service supports. This are listed at the top of each extension description, 
 
 | Extension Name                                                                    | Conformance URI                                                            |
 |-----------------------------------------------------------------------------------|----------------------------------------------------------------------------|
-| [Fields](item-search/README.md#fields)                                            | <http://api.stacspec.org/v1.0.0-beta.1/item-search#fields>  |
-| [Query](item-search/README.md#query)                                              | <http://api.stacspec.org/v1.0.0-beta.1/item-search#query>   |
-| [Context](item-search/README.md#context)                                          | <http://api.stacspec.org/v1.0.0-beta.1/item-search#context> |
-| [Sort](item-search/README.md#sort)                                                | <http://api.stacspec.org/v1.0.0-beta.1/item-search#sort>    |
-| [Transaction](ogcapi-features/extensions/transaction/README.md)                   | <http://api.stacspec.org/v1.0.0-beta.1/ogcapi-features/extensions/transaction>         |
-| [Items and Collections API Version](ogcapi-features/extensions/version/README.md) | <http://api.stacspec.org/v1.0.0-beta.1/ogcapi-features/extensions/version>             |
+| [Fields](item-search/README.md#fields)                                            | <https://api.stacspec.org/v1.0.0-beta.1/item-search#fields>  |
+| [Query](item-search/README.md#query)                                              | <https://api.stacspec.org/v1.0.0-beta.1/item-search#query>   |
+| [Context](item-search/README.md#context)                                          | <https://api.stacspec.org/v1.0.0-beta.1/item-search#context> |
+| [Sort](item-search/README.md#sort)                                                | <https://api.stacspec.org/v1.0.0-beta.1/item-search#sort>    |
+| [Transaction](ogcapi-features/extensions/transaction/README.md)                   | <https://api.stacspec.org/v1.0.0-beta.1/ogcapi-features/extensions/transaction>         |
+| [Items and Collections API Version](ogcapi-features/extensions/version/README.md) | <https://api.stacspec.org/v1.0.0-beta.1/ogcapi-features/extensions/version>             |
 
 ## Third-party / vendor extensions
 
