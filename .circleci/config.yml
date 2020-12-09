@@ -47,13 +47,15 @@ jobs:
   build:
     working_directory: ~/stac
     docker:
-      - image: circleci/node:12
+      - image: cimg/node:12
     steps:
       - *restore_repo
       - *restore_dependencies
       - run:
           name: build openapi
-          command: npm run build-openapi
+          command: |
+            pip install -y yq
+            npm run build-openapi
       - save_cache:
           key: v0-build-{{ .Branch }}-{{ .Revision }}
           paths:
@@ -61,7 +63,7 @@ jobs:
   publish:
     working_directory: ~/stac
     docker:
-      - image: circleci/node:12
+      - image: cimg/python:3.8.5-node
     steps:
       - *restore_repo
       - *restore_dependencies

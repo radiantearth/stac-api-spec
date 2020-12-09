@@ -31,6 +31,7 @@
     "remark-preset-lint-recommended": "^4.0.1",
     "remark-validate-links": "^10.0.2",
     "speccy": "^0.11.0",
+    "swagger-cli": "^4.0.4",
     "yaml-files": "^1.1.0"
   }
 }
