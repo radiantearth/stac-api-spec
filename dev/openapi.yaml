@@ -30,6 +30,7 @@ paths:
         or items (link relation `item`).
 
         Extensions may add additional links with new relation types.
+      operationId: getLandingPage
       responses:
         '200':
           $ref: '#/components/responses/LandingPage'
