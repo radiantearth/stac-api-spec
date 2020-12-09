@@ -58,7 +58,7 @@ paths:
                 title: Copernicus Sentinel Imagery
                 description: Catalog of Copernicus Sentinel 1 and 2 imagery.
                 conformsTo:
-                  - 'http://stacspec.org/spec/api/1.0.0-beta.1/core'
+                  - 'https://api.stacspec.org/v1.0.0-beta.1/core'
                   - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core'
                   - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30'
                   - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson'
@@ -355,7 +355,7 @@ components:
               stac_version:
                 title: STAC version
                 type: string
-                example: 0.9.0
+                example: 1.0.0-beta.2
               stac_extensions:
                 title: STAC extensions
                 type: array
@@ -605,7 +605,7 @@ components:
                             - type: string
                             - type: number
             example:
-              stac_version: 0.9.0
+              stac_version: 1.0.0-beta.2
               stac_extensions: []
               id: Sentinel-2
               title: 'Sentinel-2 MSI: MultiSpectral Instrument, Level-1C'
