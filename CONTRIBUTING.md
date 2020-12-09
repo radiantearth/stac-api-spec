@@ -76,7 +76,7 @@ The definitive specification for STAC API is provided as an [OpenAPI](http://ope
 contained within several YAML files in the various directories. These live in the same place as the markdown defining
 various parts of the specification. Currently we expect developers to be up to speed with
 OpenAPI and using their own tools to modify things. In the future we will provide tools to make it easier to work with.
-We do publish full OpenAPI files online, at TODO: Matt to add final location.
+There are html version of the OpenAPI files online at http://api.stacspec.org/
 
 ## Release Process
 
@@ -101,10 +101,10 @@ in the release. And anything in 'unreleased' section should move to the version 
 - **Merge dev to master**: As there is no 'build' process, since the specification *is* the markdown files in the github
 repository, the key step in a release is to merge the `dev` branch into `master`, as `master` is the current stable state 
 of the spec.
-- **Check Online API Docs**: Check to make sure the online API docs reflect the release at <https://stacspec.org/STAC-api.html> 
-and <https://stacspec.org/STAC-ext-api.html> (this step may go away once we are confident this works well, as this publishing is in flux)
+- **Check Online API Docs**: Check to make sure the online API docs reflect the release at <https://api.stacspec.org/> 
+(this step may go away once we are confident this works well, as this publishing is in flux)
 - **Release on Github**: The final step to create the release is to add a new 'release' on 
-<https://github.com/radiantearth/stac-spec/releases>. This should use a tag like the others, with a 'v' prefix and then the 
+<https://github.com/radiantearth/stac-api-spec/releases>. This should use a tag like the others, with a 'v' prefix and then the 
 release number, like v0.5.2. The changelog should be copied over to be the release notes, and then also include a link to 
 the full milestone of everything closed in the issue tracker.
 - **Promote the release**: A blog post and tweet should be composed and sent out, and then inform those in the gitter channel

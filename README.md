@@ -19,7 +19,9 @@ The API can be implemented in compliance with the *[OGC API - Features](http://d
 to search STAC Catalogs, where the features returned are STAC [Items](stac-spec/item-spec/item-spec.md), 
 that have common properties, links to their assets and geometries that represent the footprints of the geospatial assets.
 
-The specification for STAC API is provided as an [OpenAPI](http://openapis.org/) 3.0 specification in addition to human-readable documentation.
+The specification for STAC API is provided as files that follow the [OpenAPI](http://openapis.org/) 3.0 specification, 
+rendered online into HTML at <http://api.stacspec.org/>, in addition to human-readable documentation.  
+
 
 ## Stability Note
 

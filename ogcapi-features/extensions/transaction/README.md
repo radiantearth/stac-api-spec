@@ -4,7 +4,7 @@
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
 - **Conformance URIs:**
-  - <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/transaction>
+  - <http://api.stacspec.org/v1.0.0-beta.1/ogcapi-features/extensions/transaction>
   - <http://www.opengis.net/spec/ogcapi-features-4/1.0/conf/simpletx>
 - **Extension [Maturity Classification](../../../extensions.md#extension-maturity):** Pilot
 - **Dependencies**: [STAC API - Features](../../README.md)

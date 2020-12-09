@@ -1,6 +1,6 @@
 # STAC API - Core Specification
 
-- **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/core>
+- **Conformance URI:** <http://api.stacspec.org/1.0.0-beta.1/core>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Dependencies**: None
 - **OpenAPI Specifications**: [openapi.yaml](openapi.yaml) describes the core endpoints, and [commons.yaml](commons.yaml) is the OpenAPI 
@@ -30,8 +30,8 @@ The core of a STAC API is its landing page, which is the starting point to disco
         }
     ],
     "conformsTo" : [
-        "http://stacspec.org/spec/api/1.0.0-beta.1/core",
-        "http://stacspec.org/spec/api/1.0.0-beta.1/stac-search"
+        "http://api.stacspec.org/1.0.0-beta.1/core",
+        "http://api.stacspec.org/1.0.0-beta.1/item-search"
     ]
 }
 ```
@@ -51,7 +51,7 @@ the landing page. This is a slight break from how OGC API does things, as STAC f
 conformance in a single request. To be conformant to OGC API's the `/conformance` endpoint must be implemented as well.
 
 This particular catalog provides the ability to browse down to STAC Collections through its `child` links, and also provides the search
-endpoint to be able to search across its collections. Note though that none of those links are required, other servers may provide
+endpoint to be able to search across items in its collections. Note though that none of those links are required, other servers may provide
 different conformance classes and a different set of links. 
 
 The only requirements of the STAC API core class are to provide a valid STAC Catalog that includes a valid `conformsTo` JSON object

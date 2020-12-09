@@ -1,7 +1,7 @@
 # STAC API - Item Search
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
-- **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/item-search>
+- **Conformance URI:** <http://api.stacspec.org/v1.0.0-beta.1/item-search>
 - **Dependencies**: [STAC API - Core](../core)
 - **Examples**: [examples.md](examples.md)
 
@@ -170,7 +170,7 @@ the root (`/`) landing page, to indicate to clients that they will respond prope
 
 ### Fields
 
-- **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#fields>
+- **Conformance URI:** <http://api.stacspec.org/v1.0.0-beta.1/item-search#fields>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Definition**: [STAC API - Fields Fragment](../fragments/fields/)
 
@@ -182,7 +182,7 @@ through the use of a `fields` parameter. The full description of how this extens
 
 ### Query
 
-- **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#query>
+- **Conformance URI:** <http://api.stacspec.org/v1.0.0-beta.1/item-search#query>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Definition**: [STAC API - Query Fragment](../fragments/query/)
 
@@ -194,7 +194,7 @@ fragment](../fragments/query/).
 
 ### Sort
 
-- **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#sort>
+- **Conformance URI:** <http://api.stacspec.org/v1.0.0-beta.1/item-search#sort>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Definition**: [STAC API - Sort Fragment](../fragments/sort/)
 
@@ -207,15 +207,10 @@ of this extension can be found in the [sort fragment](../fragments/sort).
 
 ### Context
 
-- **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#context>
+- **Conformance URI:** <http://api.stacspec.org/v1.0.0-beta.1/item-search#context>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Definition**: [STAC API - Context Fragment](../fragments/context/)
 
 This extension is intended to augment the core ItemCollection responses from the `search` API endpoint with a
 JSON object called `context` that includes the number of items `matched`, `returned` and the `limit` requested.
-The full description and examples of this are found in the [context fragment](../fragments/context)
-
-STAC API's that support the context functionality must include the conformance class 
-<http://stacspec.org/spec/api/1.0.0-beta.1/extensions/item-search#context> in the `conformsTo` response at
-the root (`/`) landing page, to indicate to clients that they will to respond with a `context` JSON object in all
-responses from the `search` endpoint.
+The full description and examples of this are found in the [context fragment](../fragments/context).
