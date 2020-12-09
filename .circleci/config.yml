@@ -53,8 +53,7 @@ jobs:
       - *restore_dependencies
       - run:
           name: build openapi
-          command: |
-            npm run build-openapi
+          command: npm run build-openapi
       - save_cache:
           key: v0-build-{{ .Branch }}-{{ .Revision }}
           paths:
