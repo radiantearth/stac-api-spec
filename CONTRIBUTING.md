@@ -76,7 +76,7 @@ The definitive specification for STAC API is provided as an [OpenAPI](http://ope
 contained within several YAML files in the various directories. These live in the same place as the markdown defining
 various parts of the specification. Currently we expect developers to be up to speed with
 OpenAPI and using their own tools to modify things. In the future we will provide tools to make it easier to work with.
-There are html version of the OpenAPI files online at <http://api.stacspec.org/>.
+There are html version of the OpenAPI files online at `http://api.stacspec.org/{version_number}` with `{version_number}` being the git tag or `dev`.
 
 ## Release Process
 
