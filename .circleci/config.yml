@@ -47,17 +47,13 @@ jobs:
   build:
     working_directory: ~/stac
     docker:
-      - image: cimg/python:3.8.5-node
+      - image: circleci/node:12
     steps:
       - *restore_repo
       - *restore_dependencies
       - run:
           name: build openapi
           command: |
-            sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys CC86BB64
-            sudo add-apt-repository -y ppa:rmescandon/yq
-            sudo apt update
-            sudo apt install yq -y
             npm run build-openapi
       - save_cache:
           key: v0-build-{{ .Branch }}-{{ .Revision }}
