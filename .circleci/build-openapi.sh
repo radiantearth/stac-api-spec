@@ -15,7 +15,7 @@ for fin in $FNAMES; do
 done
 
 # use swagger-combine
-swagger-combine build/swagger.yaml -o build/openapi.yaml
+swagger-combine build/swagger-config.yaml -o build/openapi.yaml
 
 # use openapi-merge-cli
 #openapi-merge-cli -c build/openapi-merge-config.json
