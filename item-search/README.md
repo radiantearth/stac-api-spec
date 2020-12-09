@@ -6,7 +6,7 @@
 - **Examples**: [examples.md](examples.md)
 
 A search endpoint, linked to from the STAC landing page, provides the ability to query STAC `Items` across collections.
-It retrieves a group of Items that match the provided parameters, wrapped in an [ItemCollection](../core/itemcollection.md) (which is a 
+It retrieves a group of Items that match the provided parameters, wrapped in an [ItemCollection](../fragments/itemcollection/README.md) (which is a 
 valid [GeoJSON FeatureCollection](https://tools.ietf.org/html/rfc7946#section-3.3) that contains STAC Items). Several core
 query parameters are defined by [OGC API - Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html), with
 a few additions specified in this document.
