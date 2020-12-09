@@ -31,36 +31,27 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                required:
-                  - stac_version
-                  - id
-                  - description
-                  - links
-                properties:
-                  stac_version:
-                    title: STAC version
-                    type: string
-                    example: 0.9.0
-                  stac_extensions:
-                    title: STAC extensions
-                    type: array
-                    uniqueItems: true
-                    items:
-                      anyOf:
-                        - title: Reference to a JSON Schema
-                          type: string
-                          format: uri
-                        - title: Reference to a core extension
-                          type: string
-                  id:
-                    type: string
-                  title:
-                    type: string
-                  description:
-                    type: string
-                  links:
-                    $ref: '#/components/schemas/collections/properties/links'
+                allOf:
+                  - type: object
+                    required:
+                      - stac_version
+                      - id
+                      - description
+                      - links
+                    properties:
+                      stac_version:
+                        $ref: '#/paths/~1collections~1%7BcollectionId%7D/get/responses/200/content/application~1json/schema/properties/stac_version'
+                      stac_extensions:
+                        $ref: '#/paths/~1collections~1%7BcollectionId%7D/get/responses/200/content/application~1json/schema/properties/stac_extensions'
+                      id:
+                        type: string
+                      title:
+                        type: string
+                      description:
+                        type: string
+                      links:
+                        $ref: '#/components/schemas/collections/properties/links'
+                  - $ref: '#/components/responses/ConformanceDeclaration/content/application~1json/schema'
               example:
                 stac_version: 1.0.0-beta.1
                 id: sentinel
@@ -68,6 +59,9 @@ paths:
                 description: Catalog of Copernicus Sentinel 1 and 2 imagery.
                 conformsTo:
                   - 'http://stacspec.org/spec/api/1.0.0-beta.1/core'
+                  - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core'
+                  - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30'
+                  - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson'
                 links:
                   - href: 'http://data.example.org/'
                     rel: self
@@ -359,9 +353,20 @@ components:
               - links
             properties:
               stac_version:
-                $ref: '#/paths/~1/get/responses/200/content/application~1json/schema/properties/stac_version'
+                title: STAC version
+                type: string
+                example: 0.9.0
               stac_extensions:
-                $ref: '#/paths/~1/get/responses/200/content/application~1json/schema/properties/stac_extensions'
+                title: STAC extensions
+                type: array
+                uniqueItems: true
+                items:
+                  anyOf:
+                    - title: Reference to a JSON Schema
+                      type: string
+                      format: uri
+                    - title: Reference to a core extension
+                      type: string
               id:
                 description: 'identifier of the collection used, for example, in URIs'
                 type: string
@@ -876,9 +881,9 @@ components:
               - assets
             properties:
               stac_version:
-                $ref: '#/paths/~1/get/responses/200/content/application~1json/schema/properties/stac_version'
+                $ref: '#/paths/~1collections~1%7BcollectionId%7D/get/responses/200/content/application~1json/schema/properties/stac_version'
               stac_extensions:
-                $ref: '#/paths/~1/get/responses/200/content/application~1json/schema/properties/stac_extensions'
+                $ref: '#/paths/~1collections~1%7BcollectionId%7D/get/responses/200/content/application~1json/schema/properties/stac_extensions'
               id:
                 type: string
                 description: 'Provider identifier, a unique ID.'

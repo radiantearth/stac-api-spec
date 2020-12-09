@@ -48,6 +48,98 @@ paths:
                   description:
                     type: string
 components:
+  schemas:
+    landingPage:
+      allOf:
+        - type: object
+          required:
+            - stac_version
+            - id
+            - description
+            - links
+          properties:
+            stac_version:
+              title: STAC version
+              type: string
+              example: 0.9.0
+            stac_extensions:
+              title: STAC extensions
+              type: array
+              uniqueItems: true
+              items:
+                anyOf:
+                  - title: Reference to a JSON Schema
+                    type: string
+                    format: uri
+                  - title: Reference to a core extension
+                    type: string
+            id:
+              type: string
+            title:
+              type: string
+            description:
+              type: string
+            links:
+              type: array
+              items:
+                title: Link
+                type: object
+                required:
+                  - href
+                  - rel
+                properties:
+                  href:
+                    type: string
+                    format: uri
+                    description: The location of the resource
+                  rel:
+                    type: string
+                    description: Relation type of the link
+                  type:
+                    type: string
+                    description: The media type of the resource
+                  title:
+                    type: string
+                    description: Title of the resource
+                  method:
+                    type: string
+                    enum:
+                      - GET
+                      - POST
+                    default: GET
+                    description: Specifies the HTTP method that the resource expects
+                  headers:
+                    type: object
+                    description: Object key values pairs they map to headers
+                    example:
+                      Accept: application/json
+                  body:
+                    type: object
+                    description: 'For POST requests, the resource can specify the HTTP body as a JSON object.'
+                  merge:
+                    type: boolean
+                    default: false
+                    description: |-
+                      This is only valid when the server is responding to POST request.
+
+                      If merge is true, the client is expected to merge the body value
+                      into the current request body before following the link.
+                      This avoids passing large post bodies back and forth when following
+                      links, particularly for navigating pages through the `POST /search`
+                      endpoint.
+
+                      NOTE: To support form encoding it is expected that a client be able
+                      to merge in the key value pairs specified as JSON
+                      `{"next": "token"}` will become `&next=token`.
+        - type: object
+          required:
+            - conformsTo
+          properties:
+            conformsTo:
+              description: 'A list of all conformance classes implemented by the server. In addition to the STAC-specific conformance classes, all OGC-related conformance classes listed at `GET /conformances` must be listed here. This entry should mirror what `GET /conformances` returns, if implemented.'
+              type: array
+              items:
+                type: string
   responses:
     LandingPage:
       description: |-
@@ -58,96 +150,7 @@ components:
       content:
         application/json:
           schema:
-            allOf:
-              - type: object
-                required:
-                  - stac_version
-                  - id
-                  - description
-                  - links
-                properties:
-                  stac_version:
-                    title: STAC version
-                    type: string
-                    example: 0.9.0
-                  stac_extensions:
-                    title: STAC extensions
-                    type: array
-                    uniqueItems: true
-                    items:
-                      anyOf:
-                        - title: Reference to a JSON Schema
-                          type: string
-                          format: uri
-                        - title: Reference to a core extension
-                          type: string
-                  id:
-                    type: string
-                  title:
-                    type: string
-                  description:
-                    type: string
-                  links:
-                    type: array
-                    items:
-                      title: Link
-                      type: object
-                      required:
-                        - href
-                        - rel
-                      properties:
-                        href:
-                          type: string
-                          format: uri
-                          description: The location of the resource
-                        rel:
-                          type: string
-                          description: Relation type of the link
-                        type:
-                          type: string
-                          description: The media type of the resource
-                        title:
-                          type: string
-                          description: Title of the resource
-                        method:
-                          type: string
-                          enum:
-                            - GET
-                            - POST
-                          default: GET
-                          description: Specifies the HTTP method that the resource expects
-                        headers:
-                          type: object
-                          description: Object key values pairs they map to headers
-                          example:
-                            Accept: application/json
-                        body:
-                          type: object
-                          description: 'For POST requests, the resource can specify the HTTP body as a JSON object.'
-                        merge:
-                          type: boolean
-                          default: false
-                          description: |-
-                            This is only valid when the server is responding to POST request.
-
-                            If merge is true, the client is expected to merge the body value
-                            into the current request body before following the link.
-                            This avoids passing large post bodies back and forth when following
-                            links, particularly for navigating pages through the `POST /search`
-                            endpoint.
-
-                            NOTE: To support form encoding it is expected that a client be able
-                            to merge in the key value pairs specified as JSON
-                            `{"next": "token"}` will become `&next=token`.
-              - type: object
-                required:
-                  - conformsTo
-                properties:
-                  conformsTo:
-                    description: 'A list of all conformance classes implemented by the server. In addition to the STAC-specific conformance classes, all OGC-related conformance classes listed at `GET /conformances` must be listed here. This entry should mirror what `GET /conformances` returns, if implemented.'
-                    type: array
-                    items:
-                      type: string
+            $ref: '#/components/schemas/landingPage'
           example:
             stac_version: 1.0.0-beta.1
             id: sentinel
