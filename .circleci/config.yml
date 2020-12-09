@@ -54,7 +54,7 @@ jobs:
       - run:
           name: build openapi
           command: |
-            pip install -y yq
+            pip install yq
             npm run build-openapi
       - save_cache:
           key: v0-build-{{ .Branch }}-{{ .Revision }}
