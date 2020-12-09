@@ -22,7 +22,7 @@ done
 #json2yaml build/STAC-complete.json > build/STAC-complete.yml
 
 # use yq
-yq merge \
+yq merge -a \
     build/core/openapi.yaml \
     build/item-search/openapi.yaml \
     build/ogcapi-features/openapi.yaml \
