@@ -20,6 +20,7 @@ paths:
     get:
       tags:
         - Features
+      summary: landing page
       description: |-
         The landing page provides links to the sub-resources.
       operationId: getLandingPage
