@@ -12,8 +12,8 @@ apis:
   #  dereference:
   #    circular: ignore
   - url: 'build/item-search/openapi.yaml'
-    dereference:
-      circular: ignore
+    #dereference:
+    #  circular: ignore
   - url: 'build/ogcapi-features/extensions/version/openapi.yaml'
-    dereference:
-      circular: ignore
+    #dereference:
+    #  circular: ignore

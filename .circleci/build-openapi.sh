@@ -10,12 +10,12 @@ for fin in $FNAMES; do
     fout=./build/$fin
     mkdir -p ${fout%/*}
     #speccy resolve $fin > $fout
-    swagger-cli bundle $fin -o $fout -t yaml -r
+    swagger-cli bundle $fin -o $fout -t yaml
     cp build/index.html ${fout%/*}/
 done
 
 # use swagger-combine
-swagger-combine build/swagger-config.yaml --continueOnConflictingPaths -o build/openapi.yaml 
+#swagger-combine build/swagger-config.yaml --continueOnConflictingPaths -o build/openapi.yaml 
 
 # use openapi-merge-cli
 #openapi-merge-cli -c build/openapi-merge-config.json
