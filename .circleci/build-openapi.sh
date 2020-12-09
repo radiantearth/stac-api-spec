@@ -14,6 +14,8 @@ for fin in $FNAMES; do
     cp build/index.html ${fout%/*}/
 done
 
+cp build/core/openapi.yaml build/openapi.yaml
+
 # use swagger-combine
 #swagger-combine build/swagger-config.yaml --continueOnConflictingPaths -o build/openapi.yaml 
 
