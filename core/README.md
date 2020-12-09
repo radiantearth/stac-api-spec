@@ -1,6 +1,6 @@
 # STAC API - Core Specification
 
-- **Conformance URI:** <http://api.stacspec.org/1.0.0-beta.1/core>
+- **Conformance URI:** <http://api.stacspec.org/1.0.0-beta.1/core> ([rendered version](http://api.stacspec.org/spec/v1.0.0-beta.1/core))
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Dependencies**: None
 - **OpenAPI Specifications**: [openapi.yaml](openapi.yaml) describes the core endpoints, and [commons.yaml](commons.yaml) is the OpenAPI 
