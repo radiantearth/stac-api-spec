@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased][]
 
+## [v1.0.0-beta.1][] - 2020-12-10
+
 ### Added
 - The landing page returns the conformance classes in a property `conformsTo`, which mirrors `GET /conformances` from OGC APIs.
 - Conformance classes for all the major functionality and extensions, to be referenced in a new `conformsTo` JSON object in the landing page.
@@ -39,3 +41,4 @@ See the [stac-spec CHANGELOG](https://github.com/radiantearth/stac-spec/blob/v0.
 for STAC API releases prior to or equal to version 0.9.0.
 
 [Unreleased]: <https://github.com/radiantearth/stac-api-spec/compare/master...dev>
+[v1.0.0-beta.1]: <https://github.com/radiantearth/stac-api-spec/tree/v1.0.0-beta.1>
