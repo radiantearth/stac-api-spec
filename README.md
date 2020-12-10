@@ -27,7 +27,9 @@ rendered online into HTML at <https://api.stacspec.org/v1.0.0-beta.1>, in additi
 This specification has evolved over the past couple years, and is used in production in a variety of deployments. It is 
 currently in a 'beta' state, with no major changes anticipated. For 1.0-beta we remain fully aligned with [OGC API - 
 Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) Version 1.0, and we are working to stay aligned
-as the additional OGC API components mature. This may result in minor changes as things evolve.
+as the additional OGC API components mature. This may result in minor changes as things evolve. The STAC specification 
+follows [Semantic Versioning](https://semver.org/), so once 1.0.0 is reached any breaking change will require the spec to 
+go to 2.0.0. 
 
 ## Communication
 
