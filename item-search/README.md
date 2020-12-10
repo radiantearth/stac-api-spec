@@ -153,7 +153,7 @@ so if a large geometry is used in the query it may cause a GET request to fail.
 2. The parameters for a GET request must be escaped properly, making it more difficult to construct when using JSON 
 parameters (such as intersect, as well as additional filters from the query extension).
 
-**STAC API extensions** allow for more sophisticated searching, such as the ability to search by geometries and 
+**STAC API extensions** allow for more sophisticated searching, such as the ability to sort, select which fields you want returned, and 
 searching on specific Item properties.
 
 #### PUT / PATCH / DELETE
