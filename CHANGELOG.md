@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased][]
 
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+## [v1.0.0-beta.1] - 2020-12-10
+
+### Added
 - The landing page returns the conformance classes in a property `conformsTo`, which mirrors `GET /conformances` from OGC APIs.
 - Conformance classes for all the major functionality and extensions, to be referenced in a new `conformsTo` JSON object in the landing page.
 - Fragments: reusable OpenAPI documents for sort, filter, fields and context, along with explanation of how they work.
