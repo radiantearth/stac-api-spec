@@ -101,8 +101,9 @@ column is more of an example in some cases. OGC API makes some endpoint location
 
 STAC API is evolving to utilize OAFeat's 
 '[Conformance](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_declaration_of_conformance_classes)' JSON structure. For 
-STAC API 1.0.0-beta.1 we declare new STAC Conformance classes, and specify which OAFeat ones to use. These are detailed in the relevant
-sections below. The core STAC conformance classes communicate the conformance JSON only in the root (`/`) document, while OGC API 
+STAC API 1.0.0-beta.1 we declare new STAC Conformance classes, with the core ones detailed in the table below. [STAC 
+Features](ogcapi-features) requires the core OAFeat conformance classes, and declares that those endpoints return STAC Collections
+and Features. The core STAC conformance classes communicate the conformance JSON only in the root (`/`) document, while OGC API 
 requires they also live at the `/conformance` endpoint. STAC's conformance structure is detailed in the [core](core/). Note all 
 conformance URI's serve up a rendered HTML version of the corresponding OpenAPI document at the given location.
 
@@ -116,6 +117,6 @@ URI's for conformance to actually resolve to machine-readable information client
 |---------------------------|----------------------------|------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | STAC Core                 | [Core](core)               | <https://api.stacspec.org/v1.0.0-beta.1/core>          | Specifies the STAC Landing page `/`, communicating conformance and available endpoints.                                                                                                                                                                                             |
 | Item Search               | [Item Search](item-search) | <https://api.stacspec.org/v1.0.0-beta.1/item-search>          | Enables search of all STAC Items on the server, with the STAC `[/search](#stac-api-endpoints)` endpoint.                                                                                                                                                                            |
-| STAC Features             | [OAFeat](ogcapi-features)  | <https://api.stacspec.org/v1.0.0-beta.1/ogcapi-features>      | Specifies the use of OGC API - Features to serve STAC Items and Collections                                                                                                                                                                                                         |
+| STAC Features             | [STAC API - Features](ogcapi-features)  | <https://api.stacspec.org/v1.0.0-beta.1/ogcapi-features>      | Specifies the use of OGC API - Features to serve STAC Items and Collections                                                                                                                                                                                                         |
 
 Additional conformance classes are specified in the [STAC Extensions](extensions.md#Conformance-classes-of-extensions).
