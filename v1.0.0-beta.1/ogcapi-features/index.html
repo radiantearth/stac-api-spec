@@ -1,0 +1,20 @@
+<html lang="en">
+ <head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width,initial-scale=1">
+   <meta http-equiv="x-ua-compatible" content="ie=edge">
+   <link rel="shortcut icon" href="../assets/images/favicon.png">
+   <title>STAC API</title>
+ </head>
+ <body>
+   <div id="content"></div>
+   <script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"> </script>
+   <script type="text/javascript">
+     Redoc.init('openapi.yaml', {
+       expandResponses:"200,201,202,203,204",
+       pathInMiddlePanel: true,
+       hideDownloadButton: true
+     }, document.getElementById('content'));
+   </script>
+ </body>
+</html>
