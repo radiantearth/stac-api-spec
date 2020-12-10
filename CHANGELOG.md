@@ -6,17 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased][]
 
-### Added
-
-### Changed
-
-### Deprecated
-
-### Removed
-
-### Fixed
-
-## [v1.0.0-beta.1] - 2020-12-10
+## [v1.0.0-beta.1][] - 2020-12-10
 
 ### Added
 - The landing page returns the conformance classes in a property `conformsTo`, which mirrors `GET /conformances` from OGC APIs.
