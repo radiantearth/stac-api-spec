@@ -1,0 +1,19 @@
+openapi: 3.0.3
+info:
+  title: STAC API - Complete
+  version: 1.0.0-beta.1
+apis:
+  - url: 'build/core/openapi.yaml'
+    paths:
+      exclude:
+        - "^\/$"
+  - url: 'build/ogcapi-features/openapi.yaml'
+  #- url: 'build/ogcapi-features/extensions/transaction/openapi.yaml'
+  #  dereference:
+  #    circular: ignore
+  - url: 'build/item-search/openapi.yaml'
+    #dereference:
+    #  circular: ignore
+  - url: 'build/ogcapi-features/extensions/version/openapi.yaml'
+    #dereference:
+    #  circular: ignore
