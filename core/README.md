@@ -1,6 +1,6 @@
 # STAC API - Core Specification
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.1/core> ([rendered version](https://api.stacspec.org/spec/v1.0.0-beta.1/core))
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.1/core> ([rendered version](https://api.stacspec.org/v1.0.0-beta.1/core))
 - **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.1/core>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Dependencies**: None

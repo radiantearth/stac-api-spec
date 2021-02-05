@@ -1,6 +1,6 @@
 # STAC API - Item Search
 
-- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/spec/v1.0.0-beta.1/item-search))
+- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.1/item-search))
 - **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.1/item-search>
 - **Dependencies**: [STAC API - Core](../core)
 - **Examples**: [examples.md](examples.md)
