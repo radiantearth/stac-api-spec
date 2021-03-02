@@ -32,3 +32,6 @@ components:
               type: integer
               minimum: 0
               example: 314159
+            description:
+              type: string
+              nullable: true

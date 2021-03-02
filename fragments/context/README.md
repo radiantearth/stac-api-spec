@@ -29,7 +29,8 @@ implementing OGC API - Features.*
 | -------- | --------------- | ----------- |
 | returned | integer         | **REQUIRED** The count of results returned by this response. Equal to the cardinality of features array. |
 | limit    | integer \| null | The maximum number of results to which the result was limited. |
-| matched  | integer         | The count of total number of results that match for this query, possibly estimated, particularly in the context of NoSQL data stores. |
+| matched  | integer         | The count of total number of results that match for this query, possibly estimated. |
+| description | string \| null | A text description of these search results. |
 
 The default sort of query results should be stable, but may not be depending on the data store's sorting performance.
 It is recommended that the [Sort API Extension](../sort/README.md) be implemented in conjunction with this extension
@@ -48,7 +49,8 @@ if no parameter was provided, or the maximum limit used by the service implement
   "context": {
     "returned": 9,
     "limit": 10, 
-    "matched": 1092873
+    "matched": 9,
+    "description": "My awesome search results"
   }
 }
 ```
