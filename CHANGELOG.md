@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- The [context extension](./fragments/context/README.md) gained a nullable `description` field from the former Single File STAC extension
+
 ### Changed
 - The first extent in a Collection is always the overall extent, followed by more specific extents. [opengeospatial/ogcapi-features#520](https://github.com/opengeospatial/ogcapi-features/pull/520)
 
