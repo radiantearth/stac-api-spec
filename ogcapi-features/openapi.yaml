@@ -37,7 +37,6 @@ paths:
             application/json:
               schema:
                 $ref: '../core/openapi.yaml#/components/schemas/landingPage'
-                $ref: '../core/commons.yaml#/components/schemas/catalog'
               example:
                 stac_version: 1.0.0-beta.1
                 type: Catalog
