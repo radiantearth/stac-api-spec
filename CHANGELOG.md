@@ -6,6 +6,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Catalog now has required field "type"
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+- Updated text description of root ('/') endpoint (also called landing page) that the return type is a Catalog
+
 ## [v1.0.0-beta.1] - 2020-12-10
 
 ### Added
