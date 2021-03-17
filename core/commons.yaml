@@ -42,6 +42,7 @@ components:
       type: object
       required:
         - stac_version
+        - type
         - id
         - description
         - links
@@ -50,6 +51,8 @@ components:
           $ref: '#/components/schemas/stac_version'
         stac_extensions:
           $ref: '#/components/schemas/stac_extensions'
+        type:
+          type: string
         id:
           type: string
         title:
