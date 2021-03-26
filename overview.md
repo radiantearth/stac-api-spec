@@ -1,6 +1,7 @@
 # About
 
-The STAC API defines a RESTful JSON-based server to browse and query [SpatioTemporal Asset Catalogs](stac-spec/) 
+The STAC API defines a RESTful JSON-based server to browse and query 
+[SpatioTemporal Asset Catalogs](https://github.com/radiantearth/stac-spec/blob/v1.0.0-rc.1/) 
 (STAC). While the core STAC specification provides a structure and language to describe assets, users usually want to access
 a subset of the entire catalog, such as for a certain date range, in a particular area of interest, or matching properties
 they care about. STAC API extensions specifies those query parameters, and compliant servers return collections of STAC Items that
@@ -10,12 +11,14 @@ shorthand).
 
 ## STAC API Description
 
-The [core](core/) of STAC API simply returns a valid [STAC Catalog](stac-spec/catalog-spec/catalog-spec.md) and a description
-of what parts of the fuller STAC API specification it conforms to. The `links` section of the Catalog is the jumping
+The [core](core/) of STAC API simply returns a valid 
+[STAC Catalog](https://github.com/radiantearth/stac-spec/blob/v1.0.0-rc.1/catalog-spec/catalog-spec.md) and a description of 
+what parts of the fuller STAC API specification it conforms to. The `links` section of the Catalog is the jumping
 off point for the more powerful capabilities - it contains a list of URL's, each described by particular link 
 'relationships' (`rel`) to indicate their functionality. Note that the [STAC Core specification](stac-spec) provides 
 most all the content of API responses - the STAC API is primarily concerned with the return of STAC 
-[Items](stac-spec/item-spec/README.md) and [Collections](stac-spec/collection-spec/README.md) through API functionality.
+[Items](https://github.com/radiantearth/stac-spec/blob/v1.0.0-rc.1/item-spec/README.md) and 
+[Collections](https://github.com/radiantearth/stac-spec/blob/v1.0.0-rc.1/collection-spec/README.md) through API functionality.
 See the [rendered OpenAPI document](https://api.stacspec.org/v1.0.0-beta.1/core) for more details.
 
 There are then two major sets of functionality that build on the core, which are designed to be complementary, letting
@@ -28,8 +31,8 @@ The [item search](item-search) functionality is one of the most common, provided
 located at a `/search` endpoint. It re-uses all of the OAFeat [query 
 parameters](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_items_) specified in their 'core', and adds a 
 couple more. It does not require a full implementation of OAFeat, it is instead a simplified construct that can run a 
-search across any set of indexed STAC [`Items`](stac-spec/item-spec/README.md). See the [rendered OpenAPI 
-document](https://api.stacspec.org/v1.0.0-beta.1/item-spec) for more details.
+search across any set of indexed STAC [`Items`](https://github.com/radiantearth/stac-spec/blob/v1.0.0-rc.1/item-spec/README.md). 
+See the [rendered OpenAPI document](https://api.stacspec.org/v1.0.0-beta.1/item-spec) for more details.
 
 ### OGC API - Features
 
@@ -74,9 +77,10 @@ Features as components evolve and mature.
 
 This version of STAC API is intended to work with any STAC core specification version 0.9.x or 1.x.x (included betas), but is not 
 designed to work with STAC 2.0 and above (since we use [SemVer](https://semver.org/) it may introduce backwards incompatible changes). 
-The STAC API spec is released with the latest stable STAC core specification version included in the [`/stac-spec`](stac-spec/) 
+The STAC API spec is released with the latest stable STAC core specification version included in the 
+[`/stac-spec`](https://github.com/radiantearth/stac-spec/blob/v1.0.0-rc.1/) 
 directory as a [submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules). To determine which version it is just check the 
-[`/stac-spec/CHANGELOG.md`](stac-spec/CHANGELOG.md) for the topmost version & release date.
+[`/stac-spec/CHANGELOG.md`](https://github.com/radiantearth/stac-spec/blob/v1.0.0-rc.1/CHANGELOG.md) for the topmost version & release date.
 
 ## Capabilities List
 
@@ -88,7 +92,7 @@ column is more of an example in some cases. OGC API makes some endpoint location
 
 | Endpoint                                            | Specified in               | Link Relationship | Returns                                           | Description                                                                                                                         |
 |-----------------------------------------------------|----------------------------|-------------------|---------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
-| `/`                                                 | [Core](core)               | root              | [Catalog](stac-spec/catalog-spec/catalog-spec.md) | Extends `/` from OAFeat to return a full STAC catalog.                                                                              |
+| `/`                                                 | [Core](core)               | root              | [Catalog](https://github.com/radiantearth/stac-spec/blob/v1.0.0-rc.1/catalog-spec/catalog-spec.md) | Extends `/` from OAFeat to return a full STAC catalog.                                                                              |
 | `/search`                                           | [Item Search](item-search) | search            | [ItemCollection](fragments/itemcollection/README.md)                                    | Retrieves a group of Items matching the provided search predicates, probably containing search metadata from the `search` extension |
 | **`/collections`**                                  | [OAFeat](ogcapi-features)  | data              | JSON                                              | Object with a list of Collections contained in the catalog and links                                                                |
 | **`/conformance`**                                  | [OAFeat](ogcapi-features)  | conformance       | JSON                                              | Info about standards to which the API conforms                                                                                      |
