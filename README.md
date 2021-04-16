@@ -1,3 +1,4 @@
+<!--lint disable no-html-->
 <img src="https://github.com/radiantearth/stac-site/raw/master/images/logo/stac-030-long.png" alt="stac-logo" width="700"/>
 
 # STAC API
