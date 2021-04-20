@@ -27,9 +27,6 @@ jobs:
       - image: circleci/node:12
     steps:
       - checkout
-      - run:
-          name: init_submodules
-          command: git submodule update --init --recursive
       - save_cache:
           key: v0-repo-{{ .Branch }}-{{ .Revision }}
           paths:
