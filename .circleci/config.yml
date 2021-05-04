@@ -69,6 +69,16 @@ jobs:
           command: |
             ssh-keyscan github.com >> ~/.ssh/known_hosts
             npm run publish-openapi -- $CIRCLE_TAG
+  check-core-changes:
+    working_directory: ~/stac
+    docker:
+      - image: circleci/node:12
+    steps:
+      - *restore_repo
+      - *restore_dependencies
+      - run:
+          name: check-core-changes
+          command: npm run check-stac-spec-changes --compare-to=<< pipeline.git.base_revision >>
 
 workflows:
   version: 2
@@ -79,6 +89,12 @@ workflows:
             tags:
               only: /^v.*/
       - build:
+          requires:
+            - validate
+          filters:
+            tags:
+              only: /^v.*/
+      - check-core-changes:
           requires:
             - validate
           filters:
