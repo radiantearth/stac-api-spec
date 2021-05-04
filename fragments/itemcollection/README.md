@@ -31,7 +31,7 @@ This object describes a STAC ItemCollection. The fields `type` and `features` ar
 practices](../../stac-spec/best-practices.md#mixing-stac-versions) in mind.
 
 **stac_extensions**: A list of STAC content extensions the ItemCollection implements. The list contains URLs to the JSON Schema files it 
-can be validated against. For official [content extensions](../../stac-spec/extensions/README.md#list-of-content-extensions), a "shortcut"
+can be validated against. For official [STAC extensions](https://stac-extensions.github.io/#list-of-stac-extensions), a "shortcut"
 can be used. This means you can specify the folder name of the extension, for example `single-file-stac` for the Single File 
 STAC extension. This does *not* apply for [API extensions](../../extensions.md). If the versions of the extension and the item diverge, 
 you can specify the URL of the JSON schema file. This list must only contain extensions that extend the ItemCollection itself, see the 
@@ -41,5 +41,5 @@ the 'Scope' column in the list of extensions. It must not contain extensions tha
 
 - The [Context Extension](../../item-search/README.md#context) adds additional fields to STAC ItemCollection relevant 
   to their use as search results.
-- The [Single File STAC Extension](../../stac-spec/extensions/single-file-stac/README.md) provides a set of Collections and Items 
+- The [Single File STAC Extension](https://github.com/stac-extensions/single-file-stac/blob/main/README.md) provides a set of Collections and Items 
   as a single file catalog.
