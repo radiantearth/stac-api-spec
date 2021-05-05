@@ -237,8 +237,7 @@ components:
     ids:
       type: array
       description: |-
-        Array of Item ids to return. All other filter parameters that further
-        restrict the number of search results are ignored
+        Array of Item ids to return.
       items:
         type: string
     datetimeFilter:
