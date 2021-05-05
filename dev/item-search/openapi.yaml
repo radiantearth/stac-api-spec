@@ -525,9 +525,7 @@ components:
     ids:
       name: ids
       in: query
-      description: |-
-        Array of Item ids to return. All other filter parameters that further
-        restrict the number of search results are ignored
+      description: Array of Item ids to return.
       required: false
       schema:
         $ref: '#/components/schemas/ids'
@@ -706,9 +704,7 @@ components:
         type: string
     ids:
       type: array
-      description: |-
-        Array of Item ids to return. All other filter parameters that further
-        restrict the number of search results are ignored
+      description: Array of Item ids to return.
       items:
         type: string
     datetimeFilter:
