@@ -1,8 +1,8 @@
 # STAC API - Query Fragment
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
-- **Extension [Maturity Classification](../../extensions.md#extension-maturity):** Pilot
-  Likely to get deprecated in the future in favor of [CQL](http://docs.opengeospatial.org/DRAFTS/19-079.html).
+- **Extension [Maturity Classification](../../extensions.md#extension-maturity):** Deprecated in  
+  favor of the [Filter Extension](../filter/README.md) using [CQL](http://docs.opengeospatial.org/DRAFTS/19-079.html).
 - **Dependents:**
   - [Item Search](../../item-search)
 

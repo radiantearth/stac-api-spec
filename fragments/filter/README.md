@@ -69,7 +69,7 @@ Todo: briefly describe which pieces of this are in each CC.
 Additional, the implementation must support at least one of "CQL Text" (`http://www.opengis.net/spec/ogcapi-features-3/1.0/req/cql-text`) or "CQL JSON" (`http://www.opengis.net/spec/ogcapi-features-3/1.0/req/cql-json`).  It is recommended that (at least) GET requests support CQL Text and POST requests support CQL JSON.  
 
 The Filter extension does **not** require support for the Enhanced Spatial Operators, Enhanced Temporal Operators,
-Functions, Arithmetic Expressions, or Arrays conformance classes.
+Functions, Arithmetic Expressions, or Arrays conformance classes, but implementing these additional conformance classes and their operations is both allowed and encouraged. 
 
 There will likely be a change to Simple CQL where this conformance class only requires support of expressions with a property name of the left hand side and a literal on the right hand side (e.g., `eo:cloud_cover <= 10`), and additional conformance classes will support arbitrary uses of properties and literals in expression. The primary motivation for this is to allow implementations that use datastores that do not easily support arbitrary expressions like these to implement Simple CQL (e.g., Elasticsearch). 
 
@@ -92,7 +92,7 @@ Queryables can be static or dynamically derived. For example, `cloud_cover` migh
 
 This extension adds three query parameters or JSON fields to a request:
 
-- filter-lang:`cql-text` or `cql-json`
+- filter-lang:`cql-text` or `cql-json`. If undefined, defaults to `cql-text`.
 - filter-crs: recommended to not be passed, but server must only accept `http://www.opengis.net/def/crs/OGC/1.3/CRS84` as a valid value, may reject any others
 - filter: CQL filter expression
 
@@ -190,6 +190,8 @@ Notice in this schema that instead of directly defining the type information abo
 While these do seem quite complex to write and understand, keep in mind that query construction will likely be done with a more ergonomic SDK, and query parsing will be done with the help of a ABNF grammar and OpenAPI schema.
 
 From the Queryables above, a client could then form the following example filter expressions. 
+
+These parameters/fields must be supported by the Item Search endpoint. It is recommended that they also be supported in the collection items endpoint (`/collections/$collectionId/items`).
 
 ### Example 1
 
