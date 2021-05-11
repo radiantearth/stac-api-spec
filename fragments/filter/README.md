@@ -60,16 +60,21 @@ implementing functionality they do not need, or may not be able to implement fun
 
 The Filter extension **requires** support of these three conformance classes:
 
-- Filter (`http://www.opengis.net/spec/ogcapi-features-3/1.0/req/filter`)
-- Features Filter (`http://www.opengis.net/spec/ogcapi-features-3/1.0/req/features-filter`)
-- Simple CQL (`http://www.opengis.net/spec/ogcapi-features-3/1.0/req/simple-cql`)
+- Filter (`http://www.opengis.net/spec/ogcapi-features-3/1.0/req/filter`) - defines the Queryables mechanism and 
+  parameters `filter-lang`, filter-crs`, and `filter`
+- Features Filter (`http://www.opengis.net/spec/ogcapi-features-3/1.0/req/features-filter`) - defines that the parameters defined in `Filter` apply to the Features endpoint (`/collections/{collectionId}/items`) defined by OAFeat Part 1. 
+- Simple CQL (`http://www.opengis.net/spec/ogcapi-features-3/1.0/req/simple-cql`) - defines the query language used for the `filter` parameter defined by Filter
 
-Todo: briefly describe which pieces of this are in each CC.
+This STAC Filter extension extends the Features Filter conformance class such that these parameters also apply
+to the STAC Item Search resource (/search).
 
 Additional, the implementation must support at least one of "CQL Text" (`http://www.opengis.net/spec/ogcapi-features-3/1.0/req/cql-text`) or "CQL JSON" (`http://www.opengis.net/spec/ogcapi-features-3/1.0/req/cql-json`).  It is recommended that (at least) GET requests support CQL Text and POST requests support CQL JSON.  
 
 The Filter extension does **not** require support for the Enhanced Spatial Operators, Enhanced Temporal Operators,
-Functions, Arithmetic Expressions, or Arrays conformance classes, but implementing these additional conformance classes and their operations is both allowed and encouraged. 
+Functions, Arithmetic Expressions, or Arrays conformance classes, but implementing these additional conformance 
+classes and their operations is both allowed and encouraged. Implementation of these is often limited by the 
+operations supported by the implementation's datastore, for example, Elasticsearch does not support the spatial 
+operations required by the Enhanced Spatial Operators.
 
 There will likely be a change to Simple CQL where this conformance class only requires support of expressions with a property name of the left hand side and a literal on the right hand side (e.g., `eo:cloud_cover <= 10`), and additional conformance classes will support arbitrary uses of properties and literals in expression. The primary motivation for this is to allow implementations that use datastores that do not easily support arbitrary expressions like these to implement Simple CQL (e.g., Elasticsearch). 
 
@@ -88,15 +93,18 @@ These queryable variables are mapped by the service to filter Items. For example
 
 Queryables can be static or dynamically derived. For example, `cloud_cover` might be specified to have a value 0 to 100 or a field may have a set of enumerated values dynamically determined by an aggreation at runtime.  This schema can be used by a UI or interactive client to dynamically expose to the user the fields that are available for filtering, and provide a precise group of options for the values of these variables.
 
+TBD: What is the recommended naming scheme for queryables? Root item fields should have the same name. Properties should have the short name not prefixed by `properties`. Everything else should be fully-qualified? 
+
 ## GET Query Parameters and POST JSON fields
 
-This extension adds three query parameters or JSON fields to a request:
+This extension adds three GET query parameters or POST JSON fields to a request:
 
-- filter-lang:`cql-text` or `cql-json`. If undefined, defaults to `cql-text`.
+- filter-lang:`cql-text` or `cql-json`. If undefined, defaults to `cql-text` for a GET request and `cql-json` for a POST request.
 - filter-crs: recommended to not be passed, but server must only accept `http://www.opengis.net/def/crs/OGC/1.3/CRS84` as a valid value, may reject any others
 - filter: CQL filter expression
 
- Clients are recommended to use `cql-text` for GET and `cql-json` for POST JSON. TBD what requirements we put around supporting both for each method.
+API implementations advertise which `filter-lang` values are supported via conformance classes in the Landing Page.
+At least one must be implemented, but it is recommended to implement both. If both are advertised as conformance classes, the server should process either for a GET request, but may only process cql-json for a POST request. If POST of cql-text is not supported, the server must return a 400 error if `filter-lang=cql-text`.
 
 ## Interaction with Endpoints
 
@@ -281,3 +289,167 @@ Using `filter-lang=cql-json`:
   }
 }
 ```
+
+
+## Additional Examples
+
+We'll be imagining these as queries against [EarthSearch Sentinel 2 
+COG](https://stacindex.org/catalogs/earth-search#/Cnz1sryATwWudkxyZekxWx6356v9RmvvCcLLw79uHWJUDvt2?t=items)' data.
+A sample STAC Item (leaving off all the asset info) is: 
+
+```json
+{
+  "type": "Feature",
+  "stac_version": "1.0.0-beta.2",
+  "stac_extensions": [
+    "eo",
+    "view",
+    "proj"
+  ],
+  "id": "S2A_60HWB_20201111_0_L2A",
+  "bbox": [ 176.9997779369264, -39.83783732066656, 178.14624317719924, -38.842842449352425],
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [[[176.9997779369264, -39.83783732066656],[176.99978104582647,-38.84846679951431],
+            [178.14624317719924, -38.842842449352425],[177.8514661209684,-39.83471270154608],
+            [176.9997779369264, -39.83783732066656]]]
+  },
+  "properties": {
+    "datetime": "2020-11-11T22:16:58Z",
+    "platform": "sentinel-2a",
+    "constellation": "sentinel-2",
+    "instruments": ["msi"],
+    "gsd": 10,
+    "view:off_nadir": 0,
+    "proj:epsg": 32760,
+    "sentinel:utm_zone": 60,
+    "sentinel:latitude_band": "H",
+    "sentinel:grid_square": "WB",
+    "sentinel:sequence": "0",
+    "sentinel:product_id": "S2A_MSIL2A_20201111T221611_N0214_R129_T60HWB_20201111T235959",
+    "sentinel:data_coverage": 78.49,
+    "eo:cloud_cover": 0.85,
+    "sentinel:valid_cloud_cover": true,
+    "created": "2020-11-12T02:08:31.563Z",
+    "updated": "2020-11-12T02:08:31.563Z"
+},
+```
+
+One problem in working with Sentinel-2 data is that many scenes only contain a tiny "sliver" of data, where the satellite's recording path intersection only a corner of a grid square. This examples shows 
+Show me all imagery that has low cloud cover (less than 10), and high data coverage (50), as I'd like a cloud free image that is not just 
+a tiny sliver of data.
+
+#### AND cql-text (GET)
+
+```http
+/search?filter=sentinel:data_coverage > 50 AND eo:cloud_cover < 10 
+```
+
+#### AND cql-json (POST)
+
+```json
+{
+  "filter": {
+    "and": [
+            {
+               "gt": {
+                  "property": "sentinel:data_coverage",
+                  "value": 50
+               }
+            },
+            {
+               "lt": {
+                  "property": "eo:cloud_cover",
+                  "value": 10
+               }
+            }
+           ]
+    }
+}
+```
+
+An 'or' is also supported, matching if either condition is true. Though it's not a sensible query you could get images that have full data 
+coverage or low cloud cover.
+
+#### OR cql-text (GET)
+
+```http
+/search?filter=sentinel:data_coverage > 50 OR eo:cloud_cover < 10 
+```
+
+#### OR cql-json (POST)
+
+```json
+{
+  "filter": {
+    "or": [
+            {
+               "gt": {
+                  "property": "sentinel:data_coverage",
+                  "value": 50
+               }
+            },
+            {
+               "lt": {
+                  "property": "eo:cloud_cover",
+                  "value": 10
+               }
+            }
+           ]
+    }
+}
+```
+
+### Temporal
+
+The temporal support in required core is pretty minimal, with just `ANYINTERACT`
+
+#### ANYINTERACT cql-text (GET)
+
+```http
+/search?filter=datetime ANYINTERACT 2020-11-11
+```
+
+#### ANYINTERACT cql-json (POST)
+
+```json
+{
+  "filter": {
+      "anyinteract": {
+        "property": "datetime",
+        "value": "2020-11-11"
+      }
+  }
+}
+```
+
+### Geometry
+
+Similarly in core there is only one geometry operator - `INTERSECTS`
+
+#### INTERSECTS cql-text (GET)
+
+```http
+/search?filter=INTERSECTS(geometry,POLYGON((-77.0824 38.7886,-77.0189 38.7886,-77.0189 38.8351,-77.0824 38.8351,-77.0824 38.7886)))
+```
+
+#### INTERSECTS cql-json (POST)
+
+```json
+{
+    "filter": {
+        "intersects": {
+                "property": "geometry",
+                "value": {
+                   "type": "Polygon",
+                   "coordinates": [[
+                        [-77.0824, 38.7886], [-77.0189, 38.7886],
+                        [-77.0189, 38.8351], [-77.0824, 38.8351],
+                        [-77.0824, 38.7886]
+                    ]]
+                }
+        }
+    },        
+}
+```
+
