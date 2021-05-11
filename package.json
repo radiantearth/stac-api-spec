@@ -15,7 +15,8 @@
     "check-openapi-item-search": "spectral lint item-search/openapi.yaml --ruleset .circleci/.spectral.yml",
     "check-openapi-fragments": "spectral lint fragments/*/openapi.yaml --ruleset .circleci/.spectral-fragments.yml",
     "build-openapi": ".circleci/build-openapi.sh",
-    "publish-openapi": "node .circleci/publish.js"
+    "publish-openapi": "node .circleci/publish.js",
+    "check-stac-spec-changes": "git diff --quiet HEAD ${npm_config_compare_to} -- stac-spec"
   },
   "dependencies": {
     "@stoplight/spectral": "^5.7.1",
