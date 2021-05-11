@@ -1,5 +1,8 @@
 # STAC API - Core Specification
 
+- [STAC API - Core Specification](#stac-api---core-specification)
+  - [Potential Link Relations at `/`](#potential-link-relations-at-)
+
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml) describes the core endpoints ([rendered version](https://api.stacspec.org/v1.0.0-beta.1/core)),
   and [commons.yaml](commons.yaml) is the OpenAPI version of the core [STAC spec](../stac-spec) JSON Schemas.
 - **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.1/core>

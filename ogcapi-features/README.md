@@ -1,5 +1,9 @@
 # STAC API - Features
 
+- [STAC API - Features](#stac-api---features)
+  - [Endpoints](#endpoints)
+  - [Examples](#examples)
+
 *based on [**OGC API - Features - Part 1: Core**](https://www.ogc.org/standards/ogcapi-features)*
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.1/ogcapi-features)) 

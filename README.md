@@ -3,6 +3,13 @@
 
 # STAC API
 
+- [STAC API](#stac-api)
+  - [About](#about)
+  - [Stability Note](#stability-note)
+  - [Communication](#communication)
+  - [In this repository](#in-this-repository)
+  - [Contributing](#contributing)
+
 ## About
 
 The SpatioTemporal Asset Catalog (STAC) specification aims to standardize the way geospatial assets are exposed online and queried. 
