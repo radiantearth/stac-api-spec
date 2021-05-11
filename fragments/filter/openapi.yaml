@@ -3,44 +3,62 @@ info:
   title: The SpatioTemporal Asset Catalog API - Filter
   description: Adds parameters to compare properties and only return the items that match
   version: 1.0.0-beta.1
-paths: {}
 
-# todo: add /queryables endpoint
+paths:
+  /queryables:
+    get:
+      summary: Get the JSON Schema defining the list of variable terms that can be used in CQL expressions.
+      operationId: getQueryables
+      description: |-
+        This endpoint returns a list of variable terms that can be used in CQL expressions. The
+        precise definition of this can be found in the OGC API - Features - Part 3: Filtering and the 
+        Common Query Language (CQL) specification.
+      tags:
+        - Queryables
+      # parameters:
+      # todo: may have collections parameter in the future
+      responses: 
+        '200':
+          description: A JSON Schema defining the Queryables
+          content:
+            application/schema+json:
+              schema:
+                $ref: '' # TBD
+        default:
+          $ref: '../core/commons.yaml#/components/responses/Error'
 components:
   parameters:
     filter:
       name: filter
-      x-stac-api-fragment: query
+      x-stac-api-fragment: filter
       in: query
       description: |-
-        **Extension:** Query
+        **Extension:** Filter
       
-        Query for properties in items.
-        Use the JSON form of the query used in POST.
-      required: false
+        A filter for properties in Items.
+      required: true
       schema:
         type: string
     filter-lang:
       name: filter-lang
-      x-stac-api-fragment: query
+      x-stac-api-fragment: filter
       in: query
       description: |-
-        **Extension:** Query
+        **Extension:** Filter
       
-        Query for properties in items.
-        Use the JSON form of the query used in POST.
+        The Filter Language using in the text in the filter parameter. Must be one of 'cql-text' or 'cql-json'.
       required: false
       schema:
         type: string
     filter-crs:
       name: filter-crs
-      x-stac-api-fragment: query
+      x-stac-api-fragment: filter
       in: query
       description: |-
-        **Extension:** Query
+        **Extension:** Filter
       
-        Query for properties in items.
-        Use the JSON form of the query used in POST.
+        The CRS used by spatial predicates in the filter parameter. In STAC API, only value that must be accepted
+        is 'http://www.opengis.net/def/crs/OGC/1.3/CRS84'.
       required: false
       schema:
         type: string
@@ -49,95 +67,28 @@ components:
       type: object
       x-stac-api-fragment: filter
       description: |-
-        **Extension:** Filter
-      
-        Allows users to filter results by property values
+        **Optional Extension:** Filter
+
+        A filter for properties in Items.      
       properties:
         filter:
           $ref: '#/components/schemas/filter'
-    query:
+        filter-lang:
+          $ref: '#/components/schemas/filter-lang'
+        filter-crs:
+          $ref: '#/components/schemas/filter-crs'
+    filter:
+      description: |
+        TBD
       type: object
-      description: Define which properties to query and the operations to apply
-      additionalProperties:
-        $ref: '#/components/schemas/queryProp'
-      example:
-        eo:cloud_cover:
-          gt: 8
-          lt: 50
-        platform:
-          eq: 'landsat-8'
-        datetime:
-          gte: '2018-02-12T00:00:00Z'
-          lte: '2018-03-18T12:31:12Z'
-        pl:item_type:
-          startsWith: PSScene
-        product:
-          in:
-            - foo
-            - bar
-            - baz
-        eo:gsd:
-          in:
-            - 10
-            - 20
-    queryProp:
-      description: Apply query operations to a specific property
-      anyOf:
-        - description: if the object doesn't contain any of the operators, it is equivalent to using the equals operator
-        - type: object
-          description: Match using an operator
-          properties:
-            eq:
-              description: Find items with a property that is equal to the specified value. For strings, a case-insensitive comparison must be performed.
-              nullable: true
-              oneOf:
-                - type: string
-                - type: number
-                - type: boolean
-            neq:
-              description: Find items that *don't* contain the specified value. For strings, a case-insensitive comparison must be performed.
-              nullable: true
-              oneOf:
-                - type: string
-                - type: number
-                - type: boolean
-            gt:
-              description: Find items with a property value greater than the specified value.
-              oneOf:
-                - type: string
-                  format: date-time
-                - type: number
-            lt:
-              description: Find items with a property value less than the specified value.
-              oneOf:
-                - type: string
-                  format: date-time
-                - type: number
-            gte:
-              description: Find items with a property value greater than or equal the specified value.
-              oneOf:
-                - type: string
-                  format: date-time
-                - type: number
-            lte:
-              description: Find items with a property value less than or equal the specified value.
-              oneOf:
-                - type: string
-                  format: date-time
-                - type: number
-            startsWith:
-              description: Find items with a property that begins with the specified string. A case-insensitive comparison must be performed.
-              type: string
-            endsWith:
-              description: Find items with a property that ends with the specified string. A case-insensitive comparison must be performed.
-              type: string
-            contains:
-              description: Find items with a property that contains the specified literal string, e.g., matches ".*<STRING>.*". A case-insensitive comparison must be performed.
-              type: string
-            in:
-              description: Find items with a property that equals at least one entry in the specified array. A case-insensitive comparison must be performed.
-              type: array
-              items:
-                oneOf:
-                  - type: string
-                  - type: number
+    filter-lang:
+      description: |
+        TBD
+      type: string
+      enum: 
+        - 'cql-text'
+        - 'cql-json'
+    filter-crs:
+      description: |
+        TBD
+      type: string
