@@ -5,6 +5,17 @@ info:
   version: 1.0.0-beta.1
 
 paths:
+  "/":
+    get:
+      responses:
+        '200':
+          description: Landing Page
+          links:
+            queryables:
+              operationId: getQueryables
+              description: |-
+                A link with rel=queryables for the entire catalog.
+
   /queryables:
     get:
       summary: Get the JSON Schema defining the list of variable terms that can be used in CQL expressions.
@@ -19,11 +30,40 @@ paths:
       # todo: may have collections parameter in the future
       responses: 
         '200':
-          description: A JSON Schema defining the Queryables
+          description: A JSON Schema defining the Queryables allowed in CQL expressions
           content:
             application/schema+json:
               schema:
-                $ref: '' # TBD
+                $ref: 'https://json-schema.org/draft/2019-09/schema'
+        default:
+          $ref: '../core/commons.yaml#/components/responses/Error'
+  /collections/{collectionId}:
+    get:
+      responses:
+        '200':
+          description: Collection description
+          links:
+            queryables:
+              operationId: getQueryables
+              description: |-
+                A link with rel=queryables for queryables to only apply to this collection.        
+  /collections/{collectionId}/queryables:
+    get:
+      summary: Get the JSON Schema defining the list of variable terms that can be used in CQL expressions.
+      operationId: getQueryables
+      description: |-
+        This endpoint returns a list of variable terms that can be used in CQL expressions. The
+        precise definition of this can be found in the OGC API - Features - Part 3: Filtering and the 
+        Common Query Language (CQL) specification.
+      tags:
+        - Queryables
+      responses: 
+        '200':
+          description: A JSON Schema defining the Queryables allowed in CQL expressions filtering only that collection
+          content:
+            application/schema+json:
+              schema:
+                $ref: 'https://json-schema.org/draft/2019-09/schema'
         default:
           $ref: '../core/commons.yaml#/components/responses/Error'
 components:
@@ -35,10 +75,12 @@ components:
       description: |-
         **Extension:** Filter
       
-        A filter for properties in Items.
+        A CQL filter expression for filtering items.
       required: true
       schema:
-        type: string
+        oneOf:
+          - $ref: '#/components/schemas/filter-cql-json'
+          - $ref: '#/components/schemas/filter-cql-text'
     filter-lang:
       name: filter-lang
       x-stac-api-fragment: filter
@@ -46,10 +88,10 @@ components:
       description: |-
         **Extension:** Filter
       
-        The Filter Language using in the text in the filter parameter. Must be one of 'cql-text' or 'cql-json'.
+        The CQL filter encoding that the 'filter' value uses. Must be one of 'cql-text' or 'cql-json'.
       required: false
       schema:
-        type: string
+         $ref: '#/components/schemas/filter-lang'
     filter-crs:
       name: filter-crs
       x-stac-api-fragment: filter
@@ -61,7 +103,7 @@ components:
         is 'http://www.opengis.net/def/crs/OGC/1.3/CRS84'.
       required: false
       schema:
-        type: string
+        $ref: '#/components/schemas/filter-crs'
   schemas:
     searchBody:
       type: object
@@ -72,23 +114,29 @@ components:
         A filter for properties in Items.      
       properties:
         filter:
-          $ref: '#/components/schemas/filter'
+          $ref: '#/components/schemas/filter-cql-json'
         filter-lang:
           $ref: '#/components/schemas/filter-lang'
         filter-crs:
           $ref: '#/components/schemas/filter-crs'
-    filter:
+    filter-cql-text:
       description: |
-        TBD
-      type: object
+        A CQL filter expression in the 'cql-text' encoding.
+      type: string
+    filter-cql-json:
+      description: |
+        A CQL filter expression in the 'cql-json' encoding.
+      $ref: './cql_schema.json'
     filter-lang:
       description: |
-        TBD
+        The CQL filter encoding that the 'filter' value uses.
       type: string
       enum: 
         - 'cql-text'
         - 'cql-json'
     filter-crs:
       description: |
-        TBD
+        The coordinate reference system (CRS) used by spatial literals in the 'filter' value.  The only value that STAC APIs must
+        accept is 'http://www.opengis.net/def/crs/OGC/1.3/CRS84'.
       type: string
+      format: uri

@@ -10,6 +10,7 @@
   - [Limitations of Item Search](#limitations-of-item-search)
   - [Filter expressiveness](#filter-expressiveness)
   - [OAFeat Part 3 Conformance Classes](#oafeat-part-3-conformance-classes)
+  - [Grammar and schemas](#grammar-and-schemas)
   - [Queryables](#queryables)
   - [GET Query Parameters and POST JSON fields](#get-query-parameters-and-post-json-fields)
   - [Interaction with Endpoints](#interaction-with-endpoints)
@@ -101,7 +102,7 @@ This STAC Filter extension extends the Filter conformance class such that these 
 to the STAC Item Search resource (/search). The OAFeat Filter conformance class already requires that these
 parameters work for GET requests to the Items resource (/collections/collectionId/items). POST with a JSON body to the Items resource is not supported, as POST is used by the Transactions Extension for creating Item objects.
 
-Additional, the implementation must support at least one of "CQL Text" (`http://www.opengis.net/spec/ogcapi-features-3/1.0/req/cql-text`) or "CQL JSON" (`http://www.opengis.net/spec/ogcapi-features-3/1.0/req/cql-json`).  It is recommended that (at least) GET requests support CQL Text and POST requests support CQL JSON.  
+Additional, the implementation must support at least one of "CQL Text" (`http://www.opengis.net/spec/ogcapi-features-3/1.0/req/cql-text`) or "CQL JSON" (`http://www.opengis.net/spec/ogcapi-features-3/1.0/req/cql-json`). If both are advertised as being supported, it is only required that both be supported for GET query parameters, and that only that CQL JSON be supported for POST JSON requests. It is recommended that clients use CQL Text in GET requests and CQL JSON in POST requests. 
 
 The Filter extension does **not** require support for the Enhanced Spatial Operators, Enhanced Temporal Operators,
 Functions, Arithmetic Expressions, or Arrays conformance classes, but implementing these additional conformance 
@@ -114,6 +115,15 @@ There will likely be a change to Simple CQL where this conformance class only re
 There will also likely be a change where the Simple CQL conformance class is decomposed into several other 
 conformance classes to aid composition. After these changes, it is possible that this extension will not require 
 the implementation of the operators IN, BETWEEN, LIKE, and IS NULL predicates.
+
+## Grammar and schemas
+
+- The [OAFeat (CQL) spec](https://portal.ogc.org/files/96288) includes an ABNF for cql-text and both JSON Schema and OpenAPI specifications for cql-json. The standalone files are:
+  - [cql.bnf](https://github.com/opengeospatial/ogcapi-features/blob/master/extensions/cql/standard/schema/cql.bnf)
+  - [cql.json](https://github.com/opengeospatial/ogcapi-features/blob/master/extensions/cql/standard/schema/cql.json)
+  - [cql.yml](https://github.com/opengeospatial/ogcapi-features/blob/master/extensions/cql/standard/schema/cql.yml)
+- A JSON Schema for only the parts of the CQL JSON encoding required by this extension is [here](cql_schema.json)
+- xtraplatform-spatial has a CQL [ANTLR 4 grammer](https://github.com/interactive-instruments/xtraplatform-spatial/tree/master/xtraplatform-cql/src/main/antlr/de/ii/xtraplatform/cql/infra)
 
 ## Queryables
 
@@ -506,8 +516,6 @@ GeoJSON geometries.
 
 ## Implementation
 
-* The ABNF for cql-text and OpenAPI for cql-json are in the [OAFeat (CQL) spec](https://portal.ogc.org/files/96288) 
-* xtraplatform-spatial has a CQL [ANTLR 4 grammer](https://github.com/interactive-instruments/xtraplatform-spatial/tree/master/xtraplatform-cql/src/main/antlr/de/ii/xtraplatform/cql/infra)
 * [GeoPython PyCQL](https://github.com/geopython/pycql/tree/master/pycql), and the [Bitner fork](https://github.com/bitner/pycql) to be used in stac-fastapi
 * [https://github.com/azavea/franklin](Franklin) is working on it.
 
