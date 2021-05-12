@@ -236,7 +236,7 @@ While these do seem quite complex to write and understand, keep in mind that que
 
 From the Queryables above, a client could then form the following example filter expressions. 
 
-These parameters/fields must be supported by the Item Search endpoint. It is recommended that they also be supported in the collection items endpoint (`/collections/$collectionId/items`).
+These parameters/fields must be supported by the Item Search endpoint and Items resource (`/collections/$collectionId/items`).
 
 ## Examples
 
