@@ -55,6 +55,7 @@ components:
         - type: object
           required:
             - stac_version
+            - type
             - id
             - description
             - links
@@ -74,6 +75,8 @@ components:
                     format: uri
                   - title: Reference to a core extension
                     type: string
+            type:
+              type: string
             id:
               type: string
             title:
@@ -153,6 +156,7 @@ components:
           schema:
             $ref: '#/components/schemas/landingPage'
           example:
+            type: Catalog
             stac_version: 1.0.0-beta.1
             id: sentinel
             title: Copernicus Sentinel Imagery

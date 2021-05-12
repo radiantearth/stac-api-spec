@@ -36,6 +36,7 @@ paths:
                 type: object
                 required:
                   - stac_version
+                  - type
                   - id
                   - description
                   - links
@@ -55,6 +56,8 @@ paths:
                           format: uri
                         - title: Reference to a core extension
                           type: string
+                  type:
+                    type: string
                   id:
                     type: string
                   title:
@@ -157,6 +160,7 @@ paths:
                       type: object
                       required:
                         - stac_version
+                        - type
                         - id
                         - description
                         - license
@@ -167,6 +171,8 @@ paths:
                           $ref: '#/paths/~1collections~1%7BcollectionId%7D~1versions/get/responses/200/content/application~1json/schema/properties/stac_version'
                         stac_extensions:
                           $ref: '#/paths/~1collections~1%7BcollectionId%7D~1versions/get/responses/200/content/application~1json/schema/properties/stac_extensions'
+                        type:
+                          type: string
                         id:
                           description: 'identifier of the collection used, for example, in URIs'
                           type: string
@@ -177,7 +183,6 @@ paths:
                           type: string
                           description: |-
                             Detailed multi-line description to fully explain the catalog or collection.
-
                             [CommonMark 0.29](http://commonmark.org/) syntax MAY be used for rich text representation.
                         keywords:
                           type: array
@@ -420,6 +425,7 @@ paths:
                       example:
                         stac_version: 1.0.0-beta.2
                         stac_extensions: []
+                        type: Collection
                         id: Sentinel-2
                         title: 'Sentinel-2 MSI: MultiSpectral Instrument, Level-1C'
                         description: |
