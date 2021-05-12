@@ -6,7 +6,7 @@ a subset of the entire catalog, such as for a certain date range, in a particula
 they care about. STAC API extensions specifies those query parameters, and compliant servers return collections of STAC Items that
 match the user's preferences. A lot of additional functionality can added through the [OGC API](https://ogcapi.ogc.org/) family of
 standards, particularly [OGC API - Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) (OAFeat, for our
-shorthand). 
+shorthand).  Notes on implementation recommendations may be found [here](implementation.md).
 
 ## STAC API Description
 

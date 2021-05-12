@@ -81,6 +81,9 @@ Sub-modules aren't checked out by default, so to get the directory populated
 either use `git submodule update --init --recursive` if you've already cloned it,
 or clone from the start with `git clone --recursive git@github.com:radiantearth/stac-api-spec.git`. 
 
+**Implementation Recommendations:** Recommendations for implementing a STAC API may be found [here](implementation.md). 
+These are mostly concerns that apply to an entire API implementation and are not part of the specification itself.
+
 ## Contributing
 
 Anyone building software that catalogs imagery or other geospatial assets is welcome to collaborate.
