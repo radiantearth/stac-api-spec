@@ -370,7 +370,8 @@ A sample STAC Item (leaving off all the asset info) is:
     "sentinel:valid_cloud_cover": true,
     "created": "2020-11-12T02:08:31.563Z",
     "updated": "2020-11-12T02:08:31.563Z"
-},
+  }
+}
 ```
 
 One problem in working with Sentinel-2 data is that many scenes only contain a tiny "sliver" of data, where the satellite's recording path intersection only a corner of a grid square. This examples shows 
