@@ -19,12 +19,12 @@ time. The core STAC specification lives at [gitub.com/radiantearth/stac-spec](ht
 A STAC API is the dynamic version of a SpatioTemporal Asset Catalog. It returns a STAC [Catalog](stac-spec/catalog-spec/catalog-spec.md), 
 [Collection](stac-spec/collection-spec/collection-spec.md), [Item](stac-spec/item-spec/item-spec.md), 
 or a STAC API [ItemCollection](fragments/itemcollection/README.md), depending on the endpoint.
-Catalogs and Collections are JSON, while Items and ItemCollections are GeoJSON-compliant entities with foreign members.  
-Typically, a Feature is used when returning a single Item, and FeatureCollection when multiple Items (rather than a JSON array of Item entities).
+Catalog and Collection objects are JSON, while Item and ItemCollection objects are GeoJSON-compliant entities with foreign members.  
+Typically, a Feature is used when returning a single Item object, and FeatureCollection when multiple Item objects (rather than a JSON array of Item entities).
 
 The API can be implemented in compliance with the *[OGC API - Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html)* standard 
 (we'll use OAFeat for shorthand). In this case STAC API can be thought of as a specialized Features API 
-to search STAC Catalogs, where the features returned are STAC [Items](stac-spec/item-spec/item-spec.md), 
+to search STAC catalogs, where the features returned are STAC [Item](stac-spec/item-spec/item-spec.md) objects, 
 that have common properties, links to their assets and geometries that represent the footprints of the geospatial assets.
 
 The specification for STAC API is provided as files that follow the [OpenAPI](http://openapis.org/) 3.0 specification, 
@@ -35,10 +35,9 @@ rendered online into HTML at <https://api.stacspec.org/v1.0.0-beta.1>, in additi
 This specification has evolved over the past couple years, and is used in production in a variety of deployments. It is 
 currently in a 'beta' state, with no major changes anticipated. For 1.0-beta we remain fully aligned with [OGC API - 
 Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) Version 1.0, and we are working to stay aligned
-as the additional OGC API components mature. This may result in minor changes as things evolve. The STAC API specification 
-
-follows [Semantic Versioning](https://semver.org/), so once 1.0.0 is reached any breaking change will require the spec to 
-go to 2.0.0. 
+as the additional OGC API components mature. This may result in minor changes as things evolve. The STAC API 
+specification follows [Semantic Versioning](https://semver.org/), so once 1.0.0 is reached any breaking change 
+will require the spec to go to 2.0.0. 
 
 ## Communication
 
@@ -53,11 +52,11 @@ The **[Overview](overview.md)** document describes all the various parts of the 
 
 **STAC API - Core Specification:**
 The *[core](core/)* folder describes the core STAC API specification that enables browsing catalogs and 
-retrieving the API capabilities. This includes the OpenAPI schemas for STAC items, catalogs and collections.
+retrieving the API capabilities. This includes the OpenAPI schemas for STAC Item, Catalog and Collection objects.
 
 **STAC API - Item Search Specification:**
 The *[item-search](item-search)* folder contains the Item Search specification, which enables 
-cross-collection search of STAC Items at a `search` endpoint, as well as a number of extensions. 
+cross-collection search of STAC Item objects at a `search` endpoint, as well as a number of extensions. 
 
 **STAC API - Features:**
 The *[ogcapi-features](ogcapi-features)* folder describes how a STAC API can fully implement [OGC API - 
