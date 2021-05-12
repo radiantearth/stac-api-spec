@@ -24,7 +24,7 @@ core.  So the full conformance class list is in the following table.
 
 Note that implementing OGC API - Features does not actually depend on [STAC API - Core](../core), but we include it as a dependency since
 this extension discusses using it in the context of STAC. One could implement an OAFeat service, returning STAC 
-[Items](../stac-spec/item-spec/README.md) and [Collections](../stac-spec/collection-spec/README.md) from their endpoints, and it will work
+[Item](../stac-spec/item-spec/README.md) and [Collection](../stac-spec/collection-spec/README.md) objects from their endpoints, and it will work
 with OAFeat clients. But specialized STAC clients will likely display results better, and depend on the STAC landing page.
 
 ## Endpoints
@@ -34,12 +34,12 @@ The core OGC API - Features endpoints are shown below, with details provided in 
 
 | Endpoint                                        | Returns          | Description |
 | ----------------------------------------------- | ---------------- | ----------- |
-| `/`                                             | JSON             | Landing page, links to API capabilities |
-| `/conformance`                                  | JSON             | Info about standards to which the API conforms |
-| `/collections`                                  | JSON             | Object with a list of Collections contained in the catalog and links |
-| `/collections/{collectionId}`                   | Collection       | Returns single Collection JSON |
+| `/`                                             | [Catalog](../stac-spec/catalog-spec/README.md) | Landing page, links to API capabilities |
+| `/conformance`                                  | JSON | Info about standards to which the API conforms |
+| `/collections`                                  | JSON | Object containing an array of Collections within the Catalog and Links |
+| `/collections/{collectionId}`                   | [Collection](../stac-spec/collection-spec/README.md) | Returns single Collection JSON |
 | `/collections/{collectionId}/items`             | [ItemCollection](../fragments/itemcollection/README.md) | GeoJSON FeatureCollection-conformant entity of Items in collection |
-| `/collections/{collectionId}/items/{featureId}` | Item             | Returns single Item (GeoJSON Feature) |
+| `/collections/{collectionId}/items/{featureId}` | [Item](../stac-spec/item-spec/README.md) | Returns single Item (GeoJSON Feature) |
 | `/api`                                          | OpenAPI 3.0 JSON | Returns an OpenAPI description of the service from the `service-desc` link `rel` - not required to be `/api`, but the document is required |
 
 The OGC API - Features is a standard API that represents collections of geospatial data. It defines the RESTful interface 
@@ -76,9 +76,9 @@ protocol than STAC.
 
 ## Examples
 
-Note that the OAFeat endpoints *only* supports HTTP GET. HTTP POST requests are not supported. If POST is required it is 
-recommended to use STAC Item Search, as it can be constrained to a single collection to act the same as an OAFeat `items`
-endpoint.
+Note that the OAFeat endpoints *only* allow HTTP GET. HTTP POST requests are not supported. If POST is required,
+it is recommended to use STAC Item Search, as it can be constrained to a single collection to act the same as 
+an OAFeat `items` endpoint.
 
 Request all the data in `mycollection` that is in New Zealand:
 

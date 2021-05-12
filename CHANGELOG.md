@@ -6,9 +6,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Catalog and Collection definitions now have required field "type"
+
 ### Changed
 - Passing the `ids` parameter to an item search does not deactivate other query parameters [#125](https://github.com/radiantearth/stac-api-spec/pull/125)
 - The first extent in a Collection is always the overall extent, followed by more specific extents. [opengeospatial/ogcapi-features#520](https://github.com/opengeospatial/ogcapi-features/pull/520)
+
+### Deprecated
+
+### Removed
+
+### Fixed
+- Updated text description of root ('/') endpoint (also called landing page) that the return type is a Catalog
 
 ## [v1.0.0-beta.1] - 2020-12-10
 
