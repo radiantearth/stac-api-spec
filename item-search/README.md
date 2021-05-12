@@ -1,5 +1,21 @@
 # STAC API - Item Search
 
+- [STAC API - Item Search](#stac-api---item-search)
+  - [Query Parameters and Fields](#query-parameters-and-fields)
+    - [Query Examples](#query-examples)
+    - [Query Parameter Table](#query-parameter-table)
+  - [Response](#response)
+    - [Paging](#paging)
+  - [HTTP Request Methods and Content Types](#http-request-methods-and-content-types)
+    - [GET](#get)
+    - [POST](#post)
+      - [PUT / PATCH / DELETE](#put--patch--delete)
+  - [Extensions](#extensions)
+    - [Fields](#fields)
+    - [Query](#query)
+    - [Sort](#sort)
+    - [Context](#context)
+
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.1/item-search))
 - **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.1/item-search>
 - **Dependencies**: [STAC API - Core](../core)
@@ -10,6 +26,13 @@ It retrieves a group of Items that match the provided parameters, wrapped in an 
 valid [GeoJSON FeatureCollection](https://tools.ietf.org/html/rfc7946#section-3.3) that contains STAC Items). Several core
 query parameters are defined by [OGC API - Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html), with
 a few additions specified in this document.
+
+The Item Search endpoint intentionally defines only a limited group of operations. It is expected that 
+most behavior will be defined in [Extensions](#extensions). These extensions can be composed by an implementer to 
+cover only the set of functionality the implementer requires. For example, the query capability defined by 
+Item Search is limited, and only adds cross-collection and spatial intersects query operators to the capabilities 
+already defined by OAFeat. For example, the Query Extension (soon to be superseded by the Filter Extension) 
+provides a more expressive set of operators. 
 
 Implementing `GET /search` is **required**, `POST /search` is optional, but recommended.
 
