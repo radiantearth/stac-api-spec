@@ -4,7 +4,8 @@ The STAC API defines a RESTful JSON-based web API to browse and query [SpatioTem
 (STAC) objects. While the core STAC specification provides a structure and language to describe assets, users 
 usually want to access
 a subset of the entire catalog, such as for a certain date range, in a particular area of interest, or matching properties
-they care about. STAC API extensions specify those query parameters, and compliant servers return STAC [Item](stac-spec/item-spec/README.md) objects that
+they care about. STAC API extensions specify those query parameters, and compliant servers return STAC [Item](stac-spec/item-spec/README.md) 
+objects that
 match the user's preferences. A lot of additional functionality can added through the [OGC API](https://ogcapi.ogc.org/) family of
 standards, particularly [OGC API - Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) (OAFeat, for our
 shorthand). 

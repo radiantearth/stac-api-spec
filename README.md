@@ -20,7 +20,8 @@ A STAC API is the dynamic version of a SpatioTemporal Asset Catalog. It returns 
 [Collection](stac-spec/collection-spec/collection-spec.md), [Item](stac-spec/item-spec/item-spec.md), 
 or a STAC API [ItemCollection](fragments/itemcollection/README.md), depending on the endpoint.
 Catalog and Collection objects are JSON, while Item and ItemCollection objects are GeoJSON-compliant entities with foreign members.  
-Typically, a Feature is used when returning a single Item object, and FeatureCollection when multiple Item objects (rather than a JSON array of Item entities).
+Typically, a Feature is used when returning a single Item object, and FeatureCollection when multiple Item objects (rather than a 
+JSON array of Item entities).
 
 The API can be implemented in compliance with the *[OGC API - Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html)* standard 
 (we'll use OAFeat for shorthand). In this case STAC API can be thought of as a specialized Features API 

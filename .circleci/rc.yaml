@@ -2,6 +2,7 @@ plugins:
 # Check links
   - validate-links
 # Apply some recommended defaults for consistency
+  - remark-preset-lint-markdown-style-guide
   - remark-preset-lint-consistent
   - remark-preset-lint-recommended
   - lint-no-html
@@ -41,3 +42,12 @@ plugins:
 # Tables
   - remark-lint-table-pipes
   - remark-lint-no-literal-urls
+# Other
+  - - remark-lint-no-duplicate-headings
+    - false
+  - - remark-lint-table-pipe-alignment
+    - false
+  - - remark-lint-list-item-spacing
+    - false
+  - - remark-lint-no-file-name-irregular-characters
+    - false

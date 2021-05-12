@@ -21,8 +21,10 @@
 - **Dependencies**: [STAC API - Core](../core)
 - **Examples**: [examples.md](examples.md)
 
-A search endpoint, linked to from the STAC landing page, provides the ability to query STAC [Item](stac-spec/item-spec/README.md) objects across collections.
-It retrieves a group of Item objects that match the provided parameters, wrapped in an [ItemCollection](../fragments/itemcollection/README.md) (which is a 
+A search endpoint, linked to from the STAC landing page, provides the ability to query STAC [Item](../stac-spec/item-spec/README.md) 
+objects across collections.
+It retrieves a group of Item objects that match the provided parameters, wrapped in an 
+[ItemCollection](../fragments/itemcollection/README.md) (which is a 
 valid [GeoJSON FeatureCollection](https://tools.ietf.org/html/rfc7946#section-3.3) that contains STAC Item objects). Several core
 query parameters are defined by [OGC API - Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html), with
 a few additions specified in this document.
@@ -87,7 +89,7 @@ The core parameters for STAC search are defined by OAFeat, and STAC adds a few p
 | datetime     | string           | OAFeat       | Single date+time, or a range ('/' seperator), formatted to [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). Use double dots `..` for open date ranges. |
 | intersects   | GeoJSON Geometry | STAC         | Searches items by performing intersection between their geometry and provided GeoJSON geometry.  All GeoJSON geometry types must be supported. |
 | ids          | \[string]        | STAC         | Array of Item ids to return. |
-| collections  | \[string]        | STAC         | Array of one or more Collection IDs that each matching Item must be in.|
+| collections  | \[string]        | STAC         | Array of one or more Collection IDs that each matching Item must be in. |
 
 Only one of either **intersects** or **bbox** should be specified.  If both are specified, a 400 Bad Request response 
 should be returned. See [examples](examples.md) to see sample requests.

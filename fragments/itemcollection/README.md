@@ -35,11 +35,12 @@ can be validated against. For official [STAC extensions](https://stac-extensions
 can be used. This means you can specify the folder name of the extension, for example `single-file-stac` for the Single File 
 STAC extension. This does *not* apply for [API extensions](../../extensions.md). If the versions of the extension and the item diverge, 
 you can specify the URL of the JSON schema file. This list must only contain extensions that extend the ItemCollection itself, see the 
-the 'Scope' column in the list of extensions. It must not contain extensions that extend the Item objects, these must be specified in the Item object directly.
+the 'Scope' column in the list of extensions. It must not contain extensions that extend the Item objects, these must be specified in the 
+Item object directly.
 
 ## Extensions
 
 - The [Context Extension](../../item-search/README.md#context) adds additional fields to STAC ItemCollection relevant 
   to their use as search results.
-- The [Single File STAC Extension](https://github.com/stac-extensions/single-file-stac/blob/main/README.md) provides a set of Collection and Item objects
-  as a single file catalog.
+- The [Single File STAC Extension](https://github.com/stac-extensions/single-file-stac/blob/main/README.md) provides a set of Collection 
+  and Item objects as a single file catalog.

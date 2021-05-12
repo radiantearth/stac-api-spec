@@ -42,7 +42,7 @@ The core of a STAC API is its landing page, which is the starting point to disco
 There are a few requirements for the returned document:
 
 - The returned JSON must be a valid [STAC Catalog](../stac-spec/catalog-spec/catalog-spec.md), and it can provide any number of 'child' links
-to navigate down to additional Catalog, [Collection](stac-spec/collection-spec/README.md), and [Item](stac-spec/item-spec/README.md) objects.
+to navigate down to additional Catalog, [Collection](../stac-spec/collection-spec/README.md), and [Item](../stac-spec/item-spec/README.md) objects.
 - The `links` section is a required part of STAC Catalog, and serves as the list of API endpoints. These can live at any location, the 
 client must inspect the the `rel` (relationship) to understand what capabilities are offered at each location.
 - The `conformsTo` section must provide the capabilities of this service. The relevant conformance URI's are listed in each part of the

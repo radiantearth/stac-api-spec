@@ -54,5 +54,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 See the [stac-spec CHANGELOG](https://github.com/radiantearth/stac-spec/blob/v0.9.0/CHANGELOG.md)
 for STAC API releases prior to or equal to version 0.9.0.
 
-[Unreleased]: <https://github.com/radiantearth/stac-api-spec/compare/master...dev>
+[unreleased]: <https://github.com/radiantearth/stac-api-spec/compare/master...dev>
 [v1.0.0-beta.1]: <https://github.com/radiantearth/stac-api-spec/tree/v1.0.0-beta.1>
