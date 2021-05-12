@@ -65,7 +65,8 @@ no way to express the filter "item.properties.eo:cloud_cover is less than 10".
 
 ## Filter expressiveness 
 
-This extension expands the capabilities of Item Search with [OAFeat Part 3 CQL](https://portal.ogc.org/files/96288) 
+This extension expands the capabilities of Item Search and the OAFeat Items resource with 
+[OAFeat Part 3 CQL](https://portal.ogc.org/files/96288) 
 by providing an expressive query language to construct more complex filter predicates. The operators are similar to 
 those provided by SQL. The Simple CQL conformance class requires the logical operators `AND`, `OR`, and `NOT`; 
 the comparison operators '=', `<`, `<=`, `>`, `>=`, `LIKE`, `IS NULL`, `BETWEEN`, `IN`; the spatial operator 
@@ -97,7 +98,8 @@ The Filter extension **requires** support of these three conformance classes:
 - Simple CQL (`http://www.opengis.net/spec/ogcapi-features-3/1.0/req/simple-cql`) - defines the query language used for the `filter` parameter defined by Filter
 
 This STAC Filter extension extends the Filter conformance class such that these parameters also apply
-to the STAC Item Search resource (/search).
+to the STAC Item Search resource (/search). The OAFeat Filter conformance class already requires that these
+parameters work for GET requests to the Items resource (/collections/collectionId/items). POST with a JSON body to the Items resource is not supported, as POST is used by the Transactions Extension for creating Item objects.
 
 Additional, the implementation must support at least one of "CQL Text" (`http://www.opengis.net/spec/ogcapi-features-3/1.0/req/cql-text`) or "CQL JSON" (`http://www.opengis.net/spec/ogcapi-features-3/1.0/req/cql-json`).  It is recommended that (at least) GET requests support CQL Text and POST requests support CQL JSON.  
 
@@ -132,7 +134,7 @@ Queryables can be static or dynamically derived. For example, `cloud_cover` migh
 
 ## GET Query Parameters and POST JSON fields
 
-This extension adds three GET query parameters or POST JSON fields to a request:
+This extension adds three GET query parameters or POST JSON fields to an Item Search request:
 
 - filter-lang:`cql-text` or `cql-json`. If undefined, defaults to `cql-text` for a GET request and `cql-json` for a POST request.
 - filter-crs: recommended to not be passed, but server must only accept `http://www.opengis.net/def/crs/OGC/1.3/CRS84` as a valid value, may reject any others
