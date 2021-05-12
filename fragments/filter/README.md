@@ -47,7 +47,7 @@ the [SRU (Search/Retrieve via URL) Contextual Query Language](https://www.loc.go
 known as Common Query Language) or the [Cassandra Query Language](https://cassandra.apache.org/doc/latest/cql/) used by the Cassandra database.
 
 OGC CQL has been previously described 
-in the [https://www.ogc.org/standards/filter](OGC Filter Encoding) standard and [OGC Catalogue Services 3.0 - General Model](http://docs.opengeospatial.org/is/12-168r6/12-168r6.html#62) (including a BNF grammar in Annex B). 
+in [OGC Filter Encoding](https://www.ogc.org/standards/filter) and [OGC Catalogue Services 3.0 - General Model](http://docs.opengeospatial.org/is/12-168r6/12-168r6.html#62) (including a BNF grammar in Annex B). 
 OAFeat Part 3 CQL formally defines syntax for both a text format (cql-text) as an ABNF grammar (largely similar to the BNF grammar in the General Model) and a JSON format (cql-json) as an OpenAPI schema, and provides a precise natural language description of the declarative semantics.
 
 ## Limitations of Item Search 
@@ -60,10 +60,13 @@ The STAC Item Search specification extends the functionality of OAFeat in a few 
 - It allows filtering by Item ID (`ids` parameter)
 - It allows filtering based on a single GeoJSON Geometry, rather than only a bbox (`intersects` parameter)
 
+However, it does not contain a formalized way to filter based on arbitrary fields in an Item. For example, there is 
+no way to express the filter "item.properties.eo:cloud_cover is less than 10".
+
 ## Filter expressiveness 
 
-This extension expands this functionality further with [OAFeat Part 3 CQL](https://portal.ogc.org/files/96288) 
-by providing an expressive query language to construct more complex predicates. The operators are similar to 
+This extension expands the capabilities of Item Search with [OAFeat Part 3 CQL](https://portal.ogc.org/files/96288) 
+by providing an expressive query language to construct more complex filter predicates. The operators are similar to 
 those provided by SQL. The Simple CQL conformance class requires the logical operators `AND`, `OR`, and `NOT`; 
 the comparison operators '=', `<`, `<=`, `>`, `>=`, `LIKE`, `IS NULL`, `BETWEEN`, `IN`; the spatial operator 
 `INTERSECTS` and the temporal operator `ANYINTERACTS`. 
@@ -140,7 +143,7 @@ At least one must be implemented, but it is recommended to implement both. If bo
 
 ## Interaction with Endpoints
 
-Landing Page (/) returns:
+Landing Page (`/`) returns:
 
 ```json
 {
@@ -179,7 +182,7 @@ Landing Page (/) returns:
   "stac_extensions": [],
   "stac_version": "1.0.0",
 }
-```json
+```
 
 Client can use the link with `"rel": "http://www.opengis.net/def/rel/ogc/1.0/queryables"` to retrieve the queryables.
 
@@ -433,11 +436,11 @@ coverage or low cloud cover.
                ]
             },
             {
-               "lt": {
+               "lt": [
                   { "property": "eo:cloud_cover" },
                   10
                }
-            }
+               ]
            ]
     }
 }
