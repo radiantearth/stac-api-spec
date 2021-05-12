@@ -5,6 +5,34 @@
 - **Dependents:**
   - [Item Search](../../item-search)
 
+- [STAC API - Filter Fragment](#stac-api---filter-fragment)
+  - [Overview](#overview)
+  - [Limitations of Item Search](#limitations-of-item-search)
+  - [Filter expressiveness](#filter-expressiveness)
+  - [OAFeat Part 3 Conformance Classes](#oafeat-part-3-conformance-classes)
+  - [Queryables](#queryables)
+  - [GET Query Parameters and POST JSON fields](#get-query-parameters-and-post-json-fields)
+  - [Interaction with Endpoints](#interaction-with-endpoints)
+  - [Examples](#examples)
+    - [Example 1](#example-1)
+      - [GET with cql-text](#get-with-cql-text)
+      - [POST with cql-json](#post-with-cql-json)
+    - [Example 2](#example-2)
+      - [GET with cql-text](#get-with-cql-text-1)
+      - [POST with cql-json](#post-with-cql-json-1)
+  - [Additional Examples](#additional-examples)
+      - [AND cql-text (GET)](#and-cql-text-get)
+      - [AND cql-json (POST)](#and-cql-json-post)
+      - [OR cql-text (GET)](#or-cql-text-get)
+      - [OR cql-json (POST)](#or-cql-json-post)
+    - [Temporal](#temporal)
+      - [ANYINTERACTS cql-text (GET)](#anyinteracts-cql-text-get)
+      - [ANYINTERACTS cql-json (POST)](#anyinteracts-cql-json-post)
+    - [Spatial](#spatial)
+      - [INTERSECTS cql-text (GET)](#intersects-cql-text-get)
+      - [INTERSECTS cql-json (POST)](#intersects-cql-json-post)
+  - [Implementation](#implementation)
+
 ## Overview
 
 The Filter extension provides an expressive mechanism for searching based on Item attributes.
@@ -12,15 +40,15 @@ The Filter extension provides an expressive mechanism for searching based on Ite
 This extension uses several conformance classes defined in the 
 [OGC API - Features - Part 3: Filtering and the Common Query Language (CQL)](https://portal.ogc.org/files/96288)
 specification. As of May 2020, this specification is in draft status but, due to its long-standing use within 
-geospatial software, is expected to remain largely the same in final. 
+geospatial software (e.g., GeoServer), is expected to remain largely the same in final. 
 
 It should be noted that the "CQL" referred to here is OGC CQL. It is **not** referencing or related two other "CQL" languages, 
 the [SRU (Search/Retrieve via URL) Contextual Query Language](https://www.loc.gov/standards/sru/cql/index.html) (formerly 
 known as Common Query Language) or the [Cassandra Query Language](https://cassandra.apache.org/doc/latest/cql/) used by the Cassandra database.
 
 OGC CQL has been previously described 
-(but not formally defined) in the [https://www.ogc.org/standards/filter](OGC Filter Encoding) standard. 
-OAFeat Part 3 CQL formally defines syntax for both a text format (cql-text) as an ABNF grammar and a JSON format (cql-json) as an OpenAPI schema, and provides a precise natural language description of the declarative semantics.
+in the [https://www.ogc.org/standards/filter](OGC Filter Encoding) standard and [OGC Catalogue Services 3.0 - General Model](http://docs.opengeospatial.org/is/12-168r6/12-168r6.html#62) (including a BNF grammar in Annex B). 
+OAFeat Part 3 CQL formally defines syntax for both a text format (cql-text) as an ABNF grammar (largely similar to the BNF grammar in the General Model) and a JSON format (cql-json) as an OpenAPI schema, and provides a precise natural language description of the declarative semantics.
 
 ## Limitations of Item Search 
 
@@ -65,7 +93,7 @@ The Filter extension **requires** support of these three conformance classes:
 - Features Filter (`http://www.opengis.net/spec/ogcapi-features-3/1.0/req/features-filter`) - defines that the parameters defined in `Filter` apply to the Features endpoint (`/collections/{collectionId}/items`) defined by OAFeat Part 1. 
 - Simple CQL (`http://www.opengis.net/spec/ogcapi-features-3/1.0/req/simple-cql`) - defines the query language used for the `filter` parameter defined by Filter
 
-This STAC Filter extension extends the Features Filter conformance class such that these parameters also apply
+This STAC Filter extension extends the Filter conformance class such that these parameters also apply
 to the STAC Item Search resource (/search).
 
 Additional, the implementation must support at least one of "CQL Text" (`http://www.opengis.net/spec/ogcapi-features-3/1.0/req/cql-text`) or "CQL JSON" (`http://www.opengis.net/spec/ogcapi-features-3/1.0/req/cql-json`).  It is recommended that (at least) GET requests support CQL Text and POST requests support CQL JSON.  
@@ -78,10 +106,16 @@ operations required by the Enhanced Spatial Operators.
 
 There will likely be a change to Simple CQL where this conformance class only requires support of expressions with a property name of the left hand side and a literal on the right hand side (e.g., `eo:cloud_cover <= 10`), and additional conformance classes will support arbitrary uses of properties and literals in expression. The primary motivation for this is to allow implementations that use datastores that do not easily support arbitrary expressions like these to implement Simple CQL (e.g., Elasticsearch). 
 
+There will also likely be a change where the Simple CQL conformance class is decomposed into several other 
+conformance classes to aid composition. After these changes, it is possible that this extension will not require 
+the implementation of the operators IN, BETWEEN, LIKE, and IS NULL predicates.
+
 ## Queryables
 
-The Queryables mechanism allows a client to discover what variables are available for use when writing filter
-expressions.  These variables can be defined per-collection, and the intersection of these variables over all collections is what is available for filtering when there are no collection restrictions. These queryables are the only variables that may be used in filter expressions, and if any variable is used in expression that is not defined as a queryable, a 400 Bad Request exception should be returned. 
+The Queryables mechanism allows a client to discover what variable terms are available for use when writing filter
+expressions.  These variables can be defined per-collection, and the intersection of these variables over all collections is what is available for filtering when there are no collection restrictions. These queryables are the only variables that may be used in filter expressions, and if any variable is used in expression that is not defined as a queryable, a 400 Bad Request exception should be returned.
+
+Implementers should add queryables for all root Item fields (e.g., id, collection, geometry) with those names. Fields in Item Properties should also be exposed with their names, and not require expressions to prefix them with  `properties`. **Everything else should be fully-qualified? How to do more deeply-nested queries and those on lists is an open question. How to disambiguate names that could appear in multiple places in an Item?** 
 
 (TBD: there is a proposal to allow finding what queryables are available for a subset of collections, e.g., `/queryables?collections=c1,c3`).  
 
@@ -92,8 +126,6 @@ The queryables endpoint returns a JSON Schema describing the names and types var
 These queryable variables are mapped by the service to filter Items. For example, the service may define a queryable with the name "cloud_cover" that can be used in a CQL expression like `cloud_cover <= 10`, with the semantics that only Items where the `properties.eo:cloud_cover` value was <= 10 would match the filter. The server would then translate this into an appropriate query for the data within its datastore.
 
 Queryables can be static or dynamically derived. For example, `cloud_cover` might be specified to have a value 0 to 100 or a field may have a set of enumerated values dynamically determined by an aggreation at runtime.  This schema can be used by a UI or interactive client to dynamically expose to the user the fields that are available for filtering, and provide a precise group of options for the values of these variables.
-
-TBD: What is the recommended naming scheme for queryables? Root item fields should have the same name. Properties should have the short name not prefixed by `properties`. Everything else should be fully-qualified? 
 
 ## GET Query Parameters and POST JSON fields
 
@@ -201,16 +233,26 @@ From the Queryables above, a client could then form the following example filter
 
 These parameters/fields must be supported by the Item Search endpoint. It is recommended that they also be supported in the collection items endpoint (`/collections/$collectionId/items`).
 
+## Examples
+
+Note: the GET examples with query parameters are unescaped to make them easier to read. 
+
 ### Example 1
 
-todo: url escape this
-```
-GET filter-lang=cql-text&filter=id='LC08_L1TP_060247_20180905_20180912_01_T1_L1TP' AND collection='landsat8_l1tp'
-```
+#### GET with cql-text
 
-Using `filter-lang=cql-json`:
+Note that `filter-lang` defaults to `cql-text` in this case, so this is only shown for completeness. 
 
 ```
+GET /search?filter-lang=cql-text&filter=id='LC08_L1TP_060247_20180905_20180912_01_T1_L1TP' AND collection='landsat8_l1tp'
+```
+
+#### POST with cql-json
+
+Note that `filter-lang` defaults to `cql-json` and `filter-crs` defaults to `http://www.opengis.net/def/crs/OGC/1.3/CRS84` in this case.
+
+```
+POST /search
 { 
   "filter-lang"="cql-json",
   "filter-crs":"http://www.opengis.net/def/crs/OGC/1.3/CRS84",
@@ -230,24 +272,21 @@ Using `filter-lang=cql-json`:
 ```
 
 ### Example 2
-Using `filter-lang=cql-text`:
+
+#### GET with cql-text
 
 ```
-GET filter-lang=cql-text&filter= <filter value>
-```
-
-where `<filter value>` is:
-```
-collection = 'landsat8_l1tp' 
+GET /search?filter=collection = 'landsat8_l1tp' 
   AND gsd <= 30
   AND eo:cloud_cover <= 10 
   AND datetime ANYINTERACTS 2021-04-08T04:39:23Z/2021-05-07T12:27:57Z 
   AND INTERSECTS(geometry, POLYGON((43.5845 -79.5442, 43.6079 -79.4893, 43.5677 -79.4632, 43.6129 -79.3925, 43.6223 -79.3238, 43.6576 -79.3163, 43.7945 -79.1178, 43.8144 -79.1542, 43.8555 -79.1714, 43.7509 -79.6390, 43.5845 -79.5442)) 
 ```
 
-Using `filter-lang=cql-json`:
+#### POST with cql-json
 
 ```
+POST /search
 { 
   "filter-lang"="cql-json",
   "filter": {
@@ -289,7 +328,6 @@ Using `filter-lang=cql-json`:
   }
 }
 ```
-
 
 ## Additional Examples
 
@@ -349,21 +387,25 @@ a tiny sliver of data.
 
 ```json
 {
-  "filter": {
-    "and": [
+    "filter": {
+        "and": [
             {
-               "gt": {
-                  "property": "sentinel:data_coverage",
-                  "value": 50
-               }
+                "gt": [
+                    {
+                        "property": "sentinel:data_coverage"
+                    },
+                    50
+                ]
             },
             {
-               "lt": {
-                  "property": "eo:cloud_cover",
-                  "value": 10
-               }
+                "lt": [
+                    {
+                        "property": "eo:cloud_cover"
+                    },
+                    10
+                ]
             }
-           ]
+        ]
     }
 }
 ```
@@ -384,15 +426,15 @@ coverage or low cloud cover.
   "filter": {
     "or": [
             {
-               "gt": {
-                  "property": "sentinel:data_coverage",
-                  "value": 50
-               }
+               "gt": [
+                  { "property": "sentinel:data_coverage" },
+                  50
+               ]
             },
             {
                "lt": {
-                  "property": "eo:cloud_cover",
-                  "value": 10
+                  { "property": "eo:cloud_cover" },
+                  10
                }
             }
            ]
@@ -402,30 +444,33 @@ coverage or low cloud cover.
 
 ### Temporal
 
-The temporal support in required core is pretty minimal, with just `ANYINTERACT`
+The only temporal operator required is `ANYINTERACTS`, which follows the same semantics as the existing 
+`datetime` parameter. This is effectively that the datetime or interval operands have any overlap between them.
 
-#### ANYINTERACT cql-text (GET)
+#### ANYINTERACTS cql-text (GET)
 
 ```http
-/search?filter=datetime ANYINTERACT 2020-11-11
+/search?filter=datetime ANYINTERACTS 2020-11-11
 ```
 
-#### ANYINTERACT cql-json (POST)
+#### ANYINTERACTS cql-json (POST)
 
 ```json
 {
   "filter": {
-      "anyinteract": {
-        "property": "datetime",
-        "value": "2020-11-11"
-      }
+      "anyinteracts": [
+        { "property": "datetime" },
+        "2020-11-11"
+      ]
   }
 }
 ```
 
-### Geometry
+### Spatial
 
-Similarly in core there is only one geometry operator - `INTERSECTS`
+The only spatial operator that must be implemented is `INTERSECTS`. This has the same semantics as the one provided
+in the Item Search `intersects` parameter.  The `cql-text` format uses WKT geometries and the `cql-json` format uses 
+GeoJSON geometries.
 
 #### INTERSECTS cql-text (GET)
 
@@ -438,9 +483,9 @@ Similarly in core there is only one geometry operator - `INTERSECTS`
 ```json
 {
     "filter": {
-        "intersects": {
-                "property": "geometry",
-                "value": {
+        "intersects": [
+                { "property": "geometry" } ,
+                {
                    "type": "Polygon",
                    "coordinates": [[
                         [-77.0824, 38.7886], [-77.0189, 38.7886],
@@ -448,8 +493,19 @@ Similarly in core there is only one geometry operator - `INTERSECTS`
                         [-77.0824, 38.7886]
                     ]]
                 }
-        }
+        ]
     },        
 }
 ```
 
+## Implementation
+
+* The ABNF for cql-text and OpenAPI for cql-json are in the [OAFeat (CQL) spec](https://portal.ogc.org/files/96288) 
+* xtraplatform-spatial has a CQL [ANTLR 4 grammer](https://github.com/interactive-instruments/xtraplatform-spatial/tree/master/xtraplatform-cql/src/main/antlr/de/ii/xtraplatform/cql/infra)
+* [GeoPython PyCQL](https://github.com/geopython/pycql/tree/master/pycql), and the [Bitner fork](https://github.com/bitner/pycql) to be used in stac-fastapi
+* [https://github.com/azavea/franklin](Franklin) is working on it.
+
+Note that the [xbib CQL library (JVM)](https://github.com/xbib/cql) is the OASIS Contextual Query Language, not 
+OGC CQL, and should not be used to implement this extension, as they are significantly different query languages.
+[Stacatto](https://github.com/planetlabs/staccato) uses this for their query language implementation, but it is 
+not compliant with this extension.
