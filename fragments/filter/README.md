@@ -54,7 +54,7 @@ OAFeat Part 3 CQL formally defines syntax for both a text format (cql-text) as a
 ## Limitations of Item Search 
 
 OAFeat defines a limited set of filtering capabilities. Filtering can only be done over a single collection and 
-with only a bbox and datetime parameter. 
+with only a single `bbox` (rectangular spatial filter) parameter and a single datetime (instant or interval) parameter. 
 
 The STAC Item Search specification extends the functionality of OAFeat in a few key ways:
 - It allows cross-collection filtering, whereas OAFeat only allows filtering within a single collection. (`collections` parameter, accepting 0 or more collections)
@@ -62,7 +62,8 @@ The STAC Item Search specification extends the functionality of OAFeat in a few 
 - It allows filtering based on a single GeoJSON Geometry, rather than only a bbox (`intersects` parameter)
 
 However, it does not contain a formalized way to filter based on arbitrary fields in an Item. For example, there is 
-no way to express the filter "item.properties.eo:cloud_cover is less than 10".
+no way to express the filter "item.properties.eo:cloud_cover is less than 10". It also does not have a way to logically combine
+multiple spatial or temporal filters.
 
 ## Filter expressiveness 
 
@@ -70,12 +71,12 @@ This extension expands the capabilities of Item Search and the OAFeat Items reso
 [OAFeat Part 3 CQL](https://portal.ogc.org/files/96288) 
 by providing an expressive query language to construct more complex filter predicates. The operators are similar to 
 those provided by SQL. The Simple CQL conformance class requires the logical operators `AND`, `OR`, and `NOT`; 
-the comparison operators '=', `<`, `<=`, `>`, `>=`, `LIKE`, `IS NULL`, `BETWEEN`, `IN`; the spatial operator 
-`INTERSECTS` and the temporal operator `ANYINTERACTS`. 
+the comparison operators '=', `<`, `<=`, `>`, `>=`, `LIKE`, `IS NULL`, `BETWEEN`, and `IN`; the spatial operator 
+`INTERSECTS`; and the temporal operator `ANYINTERACTS`. 
 
 The ANYINTERACTS operator has effectively the same semantics as the existing `datetime` filter.
 
-For example:
+CQL enables these types of queries:
 - Use of Item Property values in predicates (e.g., `item.properties.eo:cloud_cover`), using comparison operators
 - Items whose `datetime` values are in the month of August of the years 2017-2021, using OR and ANYINTERACTS
 - Items whose `geometry` values intersect any one of several Polygons, using OR and INTERSECTS
@@ -141,6 +142,8 @@ The queryables endpoint returns a JSON Schema describing the names and types var
 These queryable variables are mapped by the service to filter Items. For example, the service may define a queryable with the name "cloud_cover" that can be used in a CQL expression like `cloud_cover <= 10`, with the semantics that only Items where the `properties.eo:cloud_cover` value was <= 10 would match the filter. The server would then translate this into an appropriate query for the data within its datastore.
 
 Queryables can be static or dynamically derived. For example, `cloud_cover` might be specified to have a value 0 to 100 or a field may have a set of enumerated values dynamically determined by an aggreation at runtime.  This schema can be used by a UI or interactive client to dynamically expose to the user the fields that are available for filtering, and provide a precise group of options for the values of these variables.
+
+Queryables can also be used to advertise synthesized property values. The only requirement in CQL is that the property have a type and evaluate to literal value of that type or NULL. For example, a filter like "Items must have an Asset with an eo:band with the common_name of 'nir'" can be expressed. A Queryable `assets_bands` could be defined to have a type of array of string and have the semantics that it contains all of `common_name` values across all assets and bands for an Item. This could then be filtered with the CQL expression `'nir' in assets_bands`. Implementations would then expand this expression into the appropriate query against its datastore. (TBD if this will actually work or not. This is also related to the upcoming restriction on property/literal comparisons)
 
 ## GET Query Parameters and POST JSON fields
 
@@ -231,6 +234,10 @@ Queryables endpoint (`/queryables`) returns:
     "gsd" : {
       "title" : "Ground Sample Distance",
       "$ref": "https://schemas.stacspec.org/v1.0.0/item-spec/json-schema/instrument.json#/properties/gsd"
+    },
+    "assets_bands" : {
+      "title" : "Asset eo:bands common names",
+      "$ref": "https://stac-extensions.github.io/eo/v1.0.0/schema.json#/properties/eo:bands/common_name"    
     }
   }
 }
