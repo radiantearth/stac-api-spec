@@ -6,7 +6,7 @@
 - **Dependents:**
   - [Item Search](../../item-search)
 
-The `query` parameter adds additional filters for searching on the properties of Items.
+The `query` parameter adds additional filters for searching on the properties of Item objects.
 
 The syntax for the `query` filter is:
 

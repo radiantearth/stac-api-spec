@@ -2,7 +2,7 @@
 
 ### Single Collection example
 
-This example shows how you can request Items from a single collection from the `search` endpoint, without having to using
+This example shows how you can request Item objects from a single collection from the `search` endpoint, without having to using
 OGC API - Features. It requests 100 results in `mycollection` that is in New Zealand at anytime on January 1st, 2019:
 
 ```json

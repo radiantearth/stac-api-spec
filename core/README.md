@@ -42,7 +42,7 @@ The core of a STAC API is its landing page, which is the starting point to disco
 There are a few requirements for the returned document:
 
 - The returned JSON must be a valid [STAC Catalog](../stac-spec/catalog-spec/catalog-spec.md), and it can provide any number of 'child' links
-to navigate down to additional Catalogs, Collections & Items.
+to navigate down to additional Catalog, [Collection](../stac-spec/collection-spec/README.md), and [Item](../stac-spec/item-spec/README.md) objects.
 - The `links` section is a required part of STAC Catalog, and serves as the list of API endpoints. These can live at any location, the 
 client must inspect the the `rel` (relationship) to understand what capabilities are offered at each location.
 - The `conformsTo` section must provide the capabilities of this service. The relevant conformance URI's are listed in each part of the
@@ -53,7 +53,7 @@ classes](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_declaration_o
 the landing page. This is a slight break from how OGC API does things, as STAC feels it is important for clients to be able to understand
 conformance in a single request. To be conformant to OGC API's the `/conformance` endpoint must be implemented as well.
 
-This particular catalog provides the ability to browse down to STAC Collections through its `child` links, and also provides the search
+This particular catalog provides the ability to browse down to child STAC Collection objects through its `child` links, and also provides the search
 endpoint to be able to search across items in its collections. Note though that none of those links are required, other servers may provide
 different conformance classes and a different set of links. 
 
@@ -62,18 +62,18 @@ in it. Any API implementing that is considered a valid STAC API, and clients can
 capabilities are on offer and how to reach them.
 
 The root endpoint (`/`) is most useful when it presents a complete `Catalog` representation of all the data contained in the API, such 
-that all `Collections` and `Items` can be navigated to by transitively traversing links from this root. This spec does not require any 
+that all `Collection` and `Item` objects can be navigated to by transitively traversing links from this root. This spec does not require any 
 API endpoints from OAFeat or STAC API to be implemented, so the following links may not exist if the endpoint has not been implemented.
 
 ## Potential Link Relations at `/`
 
 | **`rel`** | **href to**                                | **From**           | **Description**                                                  |
 |-----------|--------------------------------------------|--------------------|------------------------------------------------------------------|
-| `child`   | The child STAC Catalogs & Collections      | STAC Core          | Provides curated paths to get to STAC Collections and Items      |
-| `data`    | OAFeat/OACommon `/collections` endpoint    | Commons Collection | The full list of Collections provided by the API                 |
-| `search`  | The STAC search endpoint (often `/search`) | STAC Search        | Cross-collection query endpoint to select sub-sets of STAC Items |
+| `child`   | The child STAC Catalog & Collection objects     | STAC Core          | Provides curated paths to get to STAC Collection and Item objects      |
+| `data`    | OAFeat/OACommon `/collections` endpoint    | Commons Collection | The full list of Collection objects provided by the API                 |
+| `search`  | The STAC search endpoint (often `/search`) | STAC Search        | Cross-collection query endpoint to select sub-sets of STAC `Item` objects |
 | `service-desc` | The OpenAPI description of this service | OAFeat OpenAPI   | Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API |
 | `conformance` | OGC `/conformance` endpoint            | OAFeat / OACommon  | Only required for OGC API Compliant implementations              |
 
 It is also valid to have `item` links from the landing page, but most STAC API's are used to serve up a massive amount of features, so they typically
-use several layers of `child` links before getting to Items.
+use several layers of `child` links before getting to `Item` objects.
