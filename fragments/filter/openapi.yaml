@@ -6,6 +6,7 @@ info:
 
 paths:
   "/":
+    description: Landing Page
     get:
       responses:
         '200':
@@ -126,7 +127,7 @@ components:
     filter-cql-json:
       description: |
         A CQL filter expression in the 'cql-json' encoding.
-      $ref: './cql_schema.json'
+      $ref: './cql.yml'
     filter-lang:
       description: |
         The CQL filter encoding that the 'filter' value uses.

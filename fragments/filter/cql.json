@@ -11,10 +11,6 @@
    ],
    "$recursiveAnchor": true,
    "$defs": {
-      "$comment": "=======================================================",
-      "$comment": "=  BOOLEAN VALUE EXPRESSION                           =",
-      "$comment": "=======================================================",
-
       "andExpression": {
          "type": "object",
          "required": ["and"],
@@ -57,10 +53,6 @@
             }
          }
       },
-
-      "$comment": "=======================================================",
-      "$comment": "=  COMPARISON PREDICATES                              =",
-      "$comment": "=======================================================",
 
       "comparisonPredicate" : {
          "oneOf": [
@@ -208,10 +200,6 @@
          }
       },
 
-      "$comment": "=======================================================",
-      "$comment": "=  SPATIAL PREDICATES                                 =",
-      "$comment": "=======================================================",
-
       "spatialPredicate" : {
          "oneOf": [
            {"$ref": "#/$defs/intersectsExpression"}
@@ -241,10 +229,6 @@
             {"$ref": "#/$defs/propertyRef"}
          ]
       },
-
-      "$comment": "=======================================================",
-      "$comment": "=  TEMPORAL EXPRESSIONS                               =",
-      "$comment": "=======================================================",
 
       "temporalPredicate" : {
          "oneOf": [
@@ -276,9 +260,6 @@
          ]
       },
 
-      "$comment": "=======================================================",
-      "$comment": "=  PROPERTY REFERENCE                                 =",
-      "$comment": "=======================================================",
       "propertyRef": {
          "type": "object",
          "required": ["property"],
@@ -286,10 +267,6 @@
             "propertyName": { "type": "string" }
          }
       },
-
-      "$comment": "=======================================================",
-      "$comment": "=  LITERALS                                           =",
-      "$comment": "=======================================================",
 
       "scalarLiteral": {
          "oneOf": [

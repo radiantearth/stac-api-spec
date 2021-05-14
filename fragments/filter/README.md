@@ -16,23 +16,27 @@
   - [Interaction with Endpoints](#interaction-with-endpoints)
   - [Examples](#examples)
     - [Example 1](#example-1)
-      - [GET with cql-text](#get-with-cql-text)
-      - [POST with cql-json](#post-with-cql-json)
+      - [Example 1: GET with cql-text](#example-1-get-with-cql-text)
+      - [Example 1: POST with cql-json](#example-1-post-with-cql-json)
     - [Example 2](#example-2)
-      - [GET with cql-text](#get-with-cql-text-1)
-      - [POST with cql-json](#post-with-cql-json-1)
-  - [Additional Examples](#additional-examples)
-      - [AND cql-text (GET)](#and-cql-text-get)
-      - [AND cql-json (POST)](#and-cql-json-post)
-      - [OR cql-text (GET)](#or-cql-text-get)
-      - [OR cql-json (POST)](#or-cql-json-post)
-    - [Temporal](#temporal)
-      - [ANYINTERACTS cql-text (GET)](#anyinteracts-cql-text-get)
-      - [ANYINTERACTS cql-json (POST)](#anyinteracts-cql-json-post)
-    - [Spatial](#spatial)
-      - [INTERSECTS cql-text (GET)](#intersects-cql-text-get)
-      - [INTERSECTS cql-json (POST)](#intersects-cql-json-post)
-  - [Implementation](#implementation)
+      - [Example 2: GET with cql-text](#example-2-get-with-cql-text)
+      - [Example 2: POST with cql-json](#example-2-post-with-cql-json)
+    - [Example 3](#example-3)
+      - [Example 3: GET with cql-text](#example-3-get-with-cql-text)
+      - [Example 3: POST with cql-json](#example-3-post-with-cql-json)
+    - [Example 4](#example-4)
+      - [Example 4: AND cql-text (GET)](#example-4-and-cql-text-get)
+      - [Example 4: AND cql-json (POST)](#example-4-and-cql-json-post)
+    - [Example 5](#example-5)
+      - [Example 5: OR cql-text (GET)](#example-5-or-cql-text-get)
+      - [Example 5: OR cql-json (POST)](#example-5-or-cql-json-post)
+    - [Example 6: Temporal](#example-6-temporal)
+      - [Example 6: ANYINTERACTS cql-text (GET)](#example-6-anyinteracts-cql-text-get)
+      - [Example 6: ANYINTERACTS cql-json (POST)](#example-6-anyinteracts-cql-json-post)
+    - [Example 6: Spatial](#example-6-spatial)
+      - [Example 6: INTERSECTS cql-text (GET)](#example-6-intersects-cql-text-get)
+      - [Example 6: INTERSECTS cql-json (POST)](#example-6-intersects-cql-json-post)
+  - [Implementations](#implementations)
 
 ## Overview
 
@@ -123,7 +127,8 @@ the implementation of the operators IN, BETWEEN, LIKE, and IS NULL predicates.
   - [cql.bnf](https://github.com/opengeospatial/ogcapi-features/blob/master/extensions/cql/standard/schema/cql.bnf)
   - [cql.json](https://github.com/opengeospatial/ogcapi-features/blob/master/extensions/cql/standard/schema/cql.json)
   - [cql.yml](https://github.com/opengeospatial/ogcapi-features/blob/master/extensions/cql/standard/schema/cql.yml)
-- A JSON Schema for only the parts of the CQL JSON encoding required by this extension is [here](cql_schema.json)
+- A JSON Schema for only the parts of the CQL JSON encoding required by this extension is [here](cql.json)
+- A OpenAPI specification for only the parts of the CQL JSON encoding required by this extension is [here](cql.yml)
 - xtraplatform-spatial has a CQL [ANTLR 4 grammer](https://github.com/interactive-instruments/xtraplatform-spatial/tree/master/xtraplatform-cql/src/main/antlr/de/ii/xtraplatform/cql/infra)
 
 ## Queryables
@@ -212,31 +217,31 @@ Queryables endpoint (`/queryables`) returns:
   "description" : "Queryable names for the example STAC API Item Search filter.",
   "properties" : {
     "id" : {
-      "title" : "ID",
+      "description" : "ID",
       "$ref": "https://schemas.stacspec.org/v1.0.0/item-spec/json-schema/item.json#/id"
     },
     "collection" : {
-      "title" : "Collection",
+      "description" : "Collection",
       "$ref": "https://schemas.stacspec.org/v1.0.0/item-spec/json-schema/item.json#/collection"
     },
     "geometry" : {
-      "title" : "Geometry",
+      "description" : "Geometry",
       "$ref": "https://schemas.stacspec.org/v1.0.0/item-spec/json-schema/item.json#/geometry"
     },
     "datetime" : {
-      "title" : "Datetime",
+      "description" : "Datetime",
       "$ref": "https://schemas.stacspec.org/v1.0.0/item-spec/json-schema/datetime.json#/properties/datetime"
     },
     "eo:cloud_cover" : {
-      "title" : "Cloud Cover",
+      "description" : "Cloud Cover",
       "$ref": "https://stac-extensions.github.io/eo/v1.0.0/schema.json#/properties/eo:cloud_cover"
     },
     "gsd" : {
-      "title" : "Ground Sample Distance",
+      "description" : "Ground Sample Distance",
       "$ref": "https://schemas.stacspec.org/v1.0.0/item-spec/json-schema/instrument.json#/properties/gsd"
     },
     "assets_bands" : {
-      "title" : "Asset eo:bands common names",
+      "description" : "Asset eo:bands common names",
       "$ref": "https://stac-extensions.github.io/eo/v1.0.0/schema.json#/properties/eo:bands/common_name"    
     }
   }
@@ -261,19 +266,21 @@ Note: the GET examples with query parameters are unescaped to make them easier t
 
 ### Example 1
 
-#### GET with cql-text
+This example uses the queryables definition in (Interaction with Endpoints)(#interaction-with-endpoints).
+
+#### Example 1: GET with cql-text
 
 Note that `filter-lang` defaults to `cql-text` in this case, so this is only shown for completeness. 
 
-```
+```http
 GET /search?filter-lang=cql-text&filter=id='LC08_L1TP_060247_20180905_20180912_01_T1_L1TP' AND collection='landsat8_l1tp'
 ```
 
-#### POST with cql-json
+#### Example 1: POST with cql-json
 
 Note that `filter-lang` defaults to `cql-json` and `filter-crs` defaults to `http://www.opengis.net/def/crs/OGC/1.3/CRS84` in this case.
 
-```
+```http
 POST /search
 { 
   "filter-lang"="cql-json",
@@ -295,9 +302,11 @@ POST /search
 
 ### Example 2
 
-#### GET with cql-text
+This example uses the queryables definition in (Interaction with Endpoints)(#interaction-with-endpoints).
 
-```
+#### Example 2: GET with cql-text
+
+```http
 GET /search?filter=collection = 'landsat8_l1tp' 
   AND gsd <= 30
   AND eo:cloud_cover <= 10 
@@ -305,9 +314,9 @@ GET /search?filter=collection = 'landsat8_l1tp'
   AND INTERSECTS(geometry, POLYGON((43.5845 -79.5442, 43.6079 -79.4893, 43.5677 -79.4632, 43.6129 -79.3925, 43.6223 -79.3238, 43.6576 -79.3163, 43.7945 -79.1178, 43.8144 -79.1542, 43.8555 -79.1714, 43.7509 -79.6390, 43.5845 -79.5442)) 
 ```
 
-#### POST with cql-json
+#### Example 2: POST with cql-json
 
-```
+```http
 POST /search
 { 
   "filter-lang"="cql-json",
@@ -351,11 +360,95 @@ POST /search
 }
 ```
 
-## Additional Examples
+### Example 3
+
+Queryable properties can be used on either side of an operator. This is a generic example, as there are are few STAC properties
+that are comparable in a meaningful way. This example uses a contrived example of two proprietary properties, `prop1` and `prop2` that are of the 
+same type. 
+
+This queryables JSON Schema is used in these examples:
+
+```json
+{
+  "$schema" : "https://json-schema.org/draft/2019-09/schema",
+  "$id" : "https://example.org/queryables",
+  "type" : "object",
+  "title" : "Queryables for Example STAC API",
+  "description" : "Queryable names for the example STAC API Item Search filter.",
+  "properties" : {
+    "prop1" : {
+      "description" : "Property 1",
+      "type": "integer"
+    },
+    "prop2" : {
+      "description" : "Property 2",
+      "type": "integer"    
+    }
+  }
+}
+```
+
+#### Example 3: GET with cql-text
+
+```http
+GET /search?filter=prop1 = prop2
+```
+
+#### Example 3: POST with cql-json
+
+```http
+POST /search
+{ 
+  "filter-lang"="cql-json",
+  "filter": {
+    "eq": [
+      { "property": "prop1" },
+      { "property": "prop2" }
+    ]
+  }
+}
+```
+
+### Example 4
 
 We'll be imagining these as queries against [EarthSearch Sentinel 2 
 COG](https://stacindex.org/catalogs/earth-search#/Cnz1sryATwWudkxyZekxWx6356v9RmvvCcLLw79uHWJUDvt2?t=items)' data.
-A sample STAC Item (leaving off all the asset info) is: 
+
+The queryables defined are as follows:
+
+```json
+{
+  "$schema" : "https://json-schema.org/draft/2019-09/schema",
+  "$id" : "https://example.org/queryables",
+  "type" : "object",
+  "title" : "Queryables for Example STAC API",
+  "description" : "Queryable names for the example STAC API Item Search filter.",
+  "properties" : {
+    "geometry" : {
+      "description" : "Geometry",
+      "$ref": "https://schemas.stacspec.org/v1.0.0/item-spec/json-schema/item.json#/geometry"
+    },
+    "datetime" : {
+      "description" : "Datetime",
+      "$ref": "https://schemas.stacspec.org/v1.0.0/item-spec/json-schema/datetime.json#/properties/datetime"
+    },
+    "eo:cloud_cover" : {
+      "description" : "Cloud Cover",
+      "$ref": "https://stac-extensions.github.io/eo/v1.0.0/schema.json#/properties/eo:cloud_cover"
+    },
+    "sentinel:data_coverage" : {
+      "description" : "Sentinel Data Coverage",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100
+    }
+  }
+}
+```
+
+Note that `sentinel:data_coverage` is a proprietary extension (e.g., not defined in a formal, public way), and must be defined directly within the schema.
+
+A sample STAC Item (excluding `assets`) is: 
 
 ```json
 {
@@ -396,17 +489,18 @@ A sample STAC Item (leaving off all the asset info) is:
 }
 ```
 
-One problem in working with Sentinel-2 data is that many scenes only contain a tiny "sliver" of data, where the satellite's recording path intersection only a corner of a grid square. This examples shows 
+One problem in working with Sentinel-2 data is that many scenes only contain a tiny "sliver" of data, where the satellite's 
+recording path intersection only a corner of a grid square. This examples shows 
 Show me all imagery that has low cloud cover (less than 10), and high data coverage (50), as I'd like a cloud free image that is not just 
 a tiny sliver of data.
 
-#### AND cql-text (GET)
+#### Example 4: AND cql-text (GET)
 
 ```http
 /search?filter=sentinel:data_coverage > 50 AND eo:cloud_cover < 10 
 ```
 
-#### AND cql-json (POST)
+#### Example 4: AND cql-json (POST)
 
 ```json
 {
@@ -436,13 +530,17 @@ a tiny sliver of data.
 An 'or' is also supported, matching if either condition is true. Though it's not a sensible query you could get images that have full data 
 coverage or low cloud cover.
 
-#### OR cql-text (GET)
+### Example 5
+
+This uses the same queryables as Example 4.
+
+#### Example 5: OR cql-text (GET)
 
 ```http
 /search?filter=sentinel:data_coverage > 50 OR eo:cloud_cover < 10 
 ```
 
-#### OR cql-json (POST)
+#### Example 5: OR cql-json (POST)
 
 ```json
 {
@@ -465,18 +563,20 @@ coverage or low cloud cover.
 }
 ```
 
-### Temporal
+### Example 6: Temporal
+
+This uses the same queryables as Example 4.
 
 The only temporal operator required is `ANYINTERACTS`, which follows the same semantics as the existing 
 `datetime` parameter. This is effectively that the datetime or interval operands have any overlap between them.
 
-#### ANYINTERACTS cql-text (GET)
+#### Example 6: ANYINTERACTS cql-text (GET)
 
 ```http
 /search?filter=datetime ANYINTERACTS 2020-11-11
 ```
 
-#### ANYINTERACTS cql-json (POST)
+#### Example 6: ANYINTERACTS cql-json (POST)
 
 ```json
 {
@@ -489,19 +589,19 @@ The only temporal operator required is `ANYINTERACTS`, which follows the same se
 }
 ```
 
-### Spatial
+### Example 6: Spatial
 
 The only spatial operator that must be implemented is `INTERSECTS`. This has the same semantics as the one provided
 in the Item Search `intersects` parameter.  The `cql-text` format uses WKT geometries and the `cql-json` format uses 
 GeoJSON geometries.
 
-#### INTERSECTS cql-text (GET)
+#### Example 6: INTERSECTS cql-text (GET)
 
 ```http
 /search?filter=INTERSECTS(geometry,POLYGON((-77.0824 38.7886,-77.0189 38.7886,-77.0189 38.8351,-77.0824 38.8351,-77.0824 38.7886)))
 ```
 
-#### INTERSECTS cql-json (POST)
+#### Example 6: INTERSECTS cql-json (POST)
 
 ```json
 {
@@ -521,10 +621,10 @@ GeoJSON geometries.
 }
 ```
 
-## Implementation
+## Implementations
 
 * [GeoPython PyCQL](https://github.com/geopython/pycql/tree/master/pycql), and the [Bitner fork](https://github.com/bitner/pycql) to be used in stac-fastapi
-* [https://github.com/azavea/franklin](Franklin) is working on it.
+* [Franklin](https://github.com/azavea/franklin) is working on it.
 
 Note that the [xbib CQL library (JVM)](https://github.com/xbib/cql) is the OASIS Contextual Query Language, not 
 OGC CQL, and should not be used to implement this extension, as they are significantly different query languages.

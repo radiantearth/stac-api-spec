@@ -41,7 +41,7 @@ paths:
         - $ref: '#/components/parameters/collectionsArray'
         # extensions
         - $ref: '../fragments/fields/openapi.yaml#/components/parameters/fields'
-        - $ref: '../fragments/query/openapi.yaml#/components/parameters/filter'
+        - $ref: '../fragments/filter/openapi.yaml#/components/parameters/filter'
         - $ref: '../fragments/sort/openapi.yaml#/components/parameters/sortby'
       responses:
         '200':
