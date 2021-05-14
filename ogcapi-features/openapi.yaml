@@ -31,7 +31,7 @@ paths:
             (link relations `service-desc` and `service-doc`),
             the Conformance declaration (path `/conformance`,
             link relation `conformance`), and the Feature
-            Collection (path `/collections`, link relation
+            Collections (path `/collections`, link relation
             `data`).
           content:
             application/json:
@@ -97,7 +97,7 @@ paths:
         - Features
       summary: the feature collections in the dataset
       description: |-
-        A body of Feature Collection objects that belong or are used together with additional links.
+        A body of Feature Collections that belong or are used together with additional links.
         Request may not return the full set of metadata per Feature Collection.
       operationId: getCollections
       responses:
