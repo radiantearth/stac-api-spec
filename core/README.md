@@ -70,7 +70,6 @@ navigation.
         "https://api.stacspec.org/v1.0.0-beta.1/core",
         "https://api.stacspec.org/v1.0.0-beta.1/item-search",
         "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core",
-        "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core",
         "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30",
         "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson"
     ]
