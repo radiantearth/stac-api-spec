@@ -21,9 +21,11 @@
 - **Dependencies**: [STAC API - Core](../core)
 - **Examples**: [examples.md](examples.md)
 
-A search endpoint, linked to from the STAC landing page, provides the ability to query STAC `Items` across collections.
-It retrieves a group of Items that match the provided parameters, wrapped in an [ItemCollection](../fragments/itemcollection/README.md) (which is a 
-valid [GeoJSON FeatureCollection](https://tools.ietf.org/html/rfc7946#section-3.3) that contains STAC Items). Several core
+A search endpoint, linked to from the STAC landing page, provides the ability to query STAC [Item](../stac-spec/item-spec/README.md) 
+objects across collections.
+It retrieves a group of Item objects that match the provided parameters, wrapped in an 
+[ItemCollection](../fragments/itemcollection/README.md) (which is a 
+valid [GeoJSON FeatureCollection](https://tools.ietf.org/html/rfc7946#section-3.3) that contains STAC Item objects). Several core
 query parameters are defined by [OGC API - Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html), with
 a few additions specified in this document.
 
@@ -87,7 +89,7 @@ The core parameters for STAC search are defined by OAFeat, and STAC adds a few p
 | datetime     | string           | OAFeat       | Single date+time, or a range ('/' seperator), formatted to [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). Use double dots `..` for open date ranges. |
 | intersects   | GeoJSON Geometry | STAC         | Searches items by performing intersection between their geometry and provided GeoJSON geometry.  All GeoJSON geometry types must be supported. |
 | ids          | \[string]        | STAC         | Array of Item ids to return. |
-| collections  | \[string]        | STAC         | Array of one or more Collection IDs to include in the search for items. Only Items in one of the provided Collections will be searched |
+| collections  | \[string]        | STAC         | Array of one or more Collection IDs that each matching Item must be in. |
 
 Only one of either **intersects** or **bbox** should be specified.  If both are specified, a 400 Bad Request response 
 should be returned. See [examples](examples.md) to see sample requests.
@@ -95,9 +97,9 @@ should be returned. See [examples](examples.md) to see sample requests.
 ## Response
 
 The response to a request (GET or POST) to the search endpoint should always be an 
-`[ItemCollection](../core/itemcollection-spec.md)` - a valid [GeoJSON 
+`[ItemCollection](../core/itemcollection-spec.md)` object - a valid [GeoJSON 
 FeatureCollection](https://tools.ietf.org/html/rfc7946#section-3.3) that consists entirely of STAC 
-[Items](../stac-spec/item-spec/item-spec.md). 
+[Item](../stac-spec/item-spec/item-spec.md) objects. 
 
 ### Paging
 
@@ -211,7 +213,7 @@ through the use of a `fields` parameter. The full description of how this extens
 
 The STAC search endpoint, `/search`, by default only accepts a limited set of parameters to limit the results
 by properties. The Query extension adds a new parameter, `query`, that can take a number of comparison operators to
-match predicates between the fields requested and the values of Items. It can be used with both GET and POST, though
+match predicates between the fields requested and the values of Item objects. It can be used with both GET and POST, though
 GET includes the exact same JSON. The full details on the JSON structure are specified in the [query 
 fragment](../fragments/query/).
 

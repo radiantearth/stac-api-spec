@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Catalog and Collection definitions now have required field "type"
+- Added recommendation to enable CORS for public APIs
 
 ### Changed
 - Passing the `ids` parameter to an item search does not deactivate other query parameters [#125](https://github.com/radiantearth/stac-api-spec/pull/125)

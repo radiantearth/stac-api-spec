@@ -108,7 +108,7 @@ components:
       in: query
       description: |
         Array of Collection IDs to include in the search for items.
-        Only Items in one of the provided Collections will be searched
+        Only Item objects in one of the provided collections will be searched
       required: false
       schema:
         $ref: '#/components/schemas/collectionsArray'
@@ -231,7 +231,7 @@ components:
       type: array
       description: |-
         Array of Collection IDs to include in the search for items.
-        Only Items in one of the provided Collections will be searched.
+        Only Item objects in one of the provided collections will be searched.
       items:
         type: string
     ids:

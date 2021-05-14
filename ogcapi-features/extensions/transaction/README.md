@@ -15,7 +15,7 @@ The transaction API extension supports the creation, editing, and deleting of it
 STAC Transactions are based on the [OGC API - Features](https://ogcapi.ogc.org/features/) transactions, as 
 specified in [Part 4: Simple Transactions](http://docs.opengeospatial.org/DRAFTS/20-002.html). The core
 OGC standard lays out the end points for transactions, without specifying any content types. For STAC we
-use STAC Items in our transactions, and those transaction must be done at the OGC API - Features endpoints,
+use STAC Item objects in our transactions, and those transaction must be done at the OGC API - Features endpoints,
 under `/collections/{collectionID}/items`. The OpenAPI document (specified as an OpenAPI fragment that 
 gets build in the full STAC OpenAPI document) simply gives the STAC examples of using the
 Simple Transactions API mechanism.
