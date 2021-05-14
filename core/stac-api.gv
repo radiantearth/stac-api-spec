@@ -1,0 +1,110 @@
+# All have self link to self (self edge)
+# All have root link to root
+
+digraph g {
+    label = <STAC API Links>;
+    labelloc = "t"; 
+    fontsize = "24"
+ 
+    graph [
+        rankdir = "LR"
+    ];
+
+    node [
+        fontsize = "16"
+        shape = "ellipse"
+    ];
+
+    edge [
+    ];
+
+    "/" [
+        label = "Landing Page\n/|<l9>links[rel=conformance]\l|<l8>links[rel=service-doc]\l|<l7>links[rel=service-desc]\l|<l3>links[rel=data]\l|<l4>links[rel=child]\l|<l5>links[rel=child]\l|<l6>links[rel=search]\l"
+        shape = "record"
+     ];
+
+    "collections" [
+        label = "<f0> Collections\n/collections|<c1>collections[0].links[rel=self]\l|<c2>collections[1].links[rel=self]\l"
+        shape = "record"
+    ];
+
+    "collectionY" [
+        label = "<f0> Collection y\n/collections/y|<l0>links[rel=items]\l"
+        shape = "record"
+    ];
+
+    "collectionX" [
+        label = "<f0> Collection x\n/collections/x|<l0>links[rel=items]\l"
+        shape = "record"
+    ];
+
+    "service-desc" [
+        label = "OpenAPI Spec\n/api"
+        shape = "record"
+    ];
+
+    "service-doc" [
+        label = "Service Doc\n/api.html"
+        shape = "record"
+    ];
+
+    "conformance" [
+        label = "Conformance\n/conformance"
+        shape = "record"
+    ];
+
+    "collectionY-items" [
+        label = "<f0> Collection y Items\n/collections/y/items|<f1> features[0].links[rel=self]"
+        shape = "record"
+    ];
+
+    "collectionX-items" [
+        label = "<f0> Collection x Items\n/collections/x/items|<f1> features[0].links[rel=self]"
+        shape = "record"
+    ];
+
+    "collectionY-item1" [
+        label = "<f0> Item y:1\n/collections/y/items/1|<l0>links[rel=parent]\l|<l1>links[rel=collection]\l"
+        shape = "record"
+    ];
+
+    "collectionX-item1" [
+        label = "<f0> Item x:1\n/collections/x/items/1|<l0>links[rel=parent]\l|<l1>links[rel=collection]\l"
+        shape = "record"
+    ];
+
+    "item-search" [
+        label = "<f0> Item Search\n/items|<f1>features[0].links[rel=self]\l|<f2>features[1].links[rel=self]\l"
+        shape = "record"
+    ];
+
+    "/":l3 -> "collections":f0;
+    "/":l4 -> "collectionX":f0;
+    "/":l5 -> "collectionY":f0;
+    "/":l6 -> "item-search":f0;
+    "/":l7 -> "service-desc";
+    "/":l8 -> "service-doc";
+    "/":l9 -> "conformance";
+    
+    "item-search":f1 -> "collectionX-item1":f0;
+    "item-search":f2 -> "collectionY-item1":f0;
+
+    "collections":c2 -> "collectionY":f0;
+    "collections":c1 -> "collectionX":f0;
+
+    "collectionY":l0 -> "collectionY-items":f0;
+    "collectionY-items":f1 -> "collectionY-item1":f0;
+    cxi2 [shape=point,width=0.01,height=0.01];
+    cxi2 -> "collectionY":f0;
+	"collectionY-item1":l0 -> cxi2 [dir=none];
+	"collectionY-item1":l1 -> cxi2 [dir=none];
+
+    "collectionX":l0 -> "collectionX-items":f0;
+    "collectionX-items":f1 -> "collectionX-item1":f0;
+    cxi1 [shape=point,width=0.01,height=0.01];
+    cxi1 -> "collectionX":f0;
+	"collectionX-item1":l0 -> cxi1 [dir=none];
+	"collectionX-item1":l1 -> cxi1 [dir=none];
+
+ 
+}
