@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Catalog and Collection definitions now have required field "type"
+- Added recommendation to enable CORS for public APIs
 
 ### Changed
 - Added Filter extension to integrate OAFeat Part 3 CQL
@@ -19,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 ### Fixed
+- Updated text description of root ('/') endpoint (also called landing page) that the return type is a Catalog
 
 ## [v1.0.0-beta.1] - 2020-12-10
 
