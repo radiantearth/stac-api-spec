@@ -127,7 +127,7 @@ components:
     filter-cql-json:
       description: |
         A CQL filter expression in the 'cql-json' encoding.
-      $ref: './cql.yml'
+      $ref: './cql.yml#/components/schemas/booleanValueExpression'
     filter-lang:
       description: |
         The CQL filter encoding that the 'filter' value uses.
