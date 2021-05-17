@@ -2,7 +2,7 @@
 
 - [STAC API - Core Specification](#stac-api---core-specification)
   - [Recommended Link Relations at `/`](#recommended-link-relations-at-)
-  - [Example Landing Page with for STAC API - Core](#example-landing-page-with-for-stac-api---core)
+  - [Example Landing Page for STAC API - Core](#example-landing-page-for-stac-api---core)
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml) describes the core endpoints ([rendered version](https://api.stacspec.org/v1.0.0-beta.1/core)),
   and [commons.yaml](commons.yaml) is the OpenAPI version of the core [STAC spec](../stac-spec) JSON Schemas.
@@ -59,7 +59,7 @@ It is also valid to have `item` links from the landing page, but most STAC API s
 serve up a large number of features, so they typically
 use several layers of intermediate `child` links before getting to Item objects.
 
-## Example Landing Page with for STAC API - Core
+## Example Landing Page for STAC API - Core
 
 This document is what would be expected from an api that only implements STAC API - Core. In practice, 
 most APIs will also implement other conformance classes, and those will be reflected in the `links` and `conformsTo` fields.
