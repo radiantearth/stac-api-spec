@@ -1,7 +1,7 @@
 # STAC API - Core Specification
 
 - [STAC API - Core Specification](#stac-api---core-specification)
-  - [Potential Link Relations at `/`](#potential-link-relations-at-)
+  - [Recommended Link Relations at `/`](#recommended-link-relations-at-)
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml) describes the core endpoints ([rendered version](https://api.stacspec.org/v1.0.0-beta.1/core)),
   and [commons.yaml](commons.yaml) is the OpenAPI version of the core [STAC spec](../stac-spec) JSON Schemas.
@@ -9,7 +9,9 @@
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Dependencies**: None
 
-The core of a STAC API is its landing page, which is the starting point to discover STAC data and what the API supports.
+The base of a STAC API is its landing page. This resource is the starting point to discover what behaviors the API supports via link relations. 
+This behavior in a RESTful API is known as Hypermedia as the Engine of Application State (HATEOAS). STAC API relies heavily on hypermedia for API endpoint
+navigation. 
 
 ```json
 {
@@ -19,22 +21,57 @@ The core of a STAC API is its landing page, which is the starting point to disco
     "description": "This Catalog aims to demonstrate the a simple landing page",
     "links": [
         {
+            "rel": "self",
+            "type": "application/json",
+            "href": "https://stacserver.org"
+        },
+        {
+            "rel": "root",
+            "type": "application/json",
+            "href": "https://stacserver.org"
+        },
+        {
+            "rel": "conformance",
+            "type": "application/json",
+            "href": "https://stacserver.org/conformance"
+        },
+        {
+            "rel": "service-desc",
+            "type": "application/vnd.oai.openapi+json;version=3.0",
+            "href": "https://stacserver.org/api"
+        },
+        {
+            "rel": "service-doc",
+            "type": "text/html",
+            "href": "https://stacserver.org/api.html"
+        },
+        {
+            "rel": "data",
+            "type": "application/json",
+            "href": "https://stacserver.org/collections"
+        },
+        {
             "rel": "child",
+            "type": "application/json",
             "href": "https://stacserver.org/collections/sentinel-2",
         },
         {
             "rel": "child",
+            "type": "application/json",
             "href": "https://stacserver.org/collections/landsat-8",
         },
         {
             "rel": "search",
-            "type": "application/json",
+            "type": "application/geo+json",
             "href": "https://stacserver.org/search"
         }
     ],
     "conformsTo" : [
         "https://api.stacspec.org/v1.0.0-beta.1/core",
-        "https://api.stacspec.org/v1.0.0-beta.1/item-search"
+        "https://api.stacspec.org/v1.0.0-beta.1/item-search",
+        "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core",
+        "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30",
+        "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson"
     ]
 }
 ```
@@ -65,15 +102,23 @@ The root endpoint (`/`) is most useful when it presents a complete `Catalog` rep
 that all `Collection` and `Item` objects can be navigated to by transitively traversing links from this root. This spec does not require any 
 API endpoints from OAFeat or STAC API to be implemented, so the following links may not exist if the endpoint has not been implemented.
 
-## Potential Link Relations at `/`
+## Recommended Link Relations at `/`
+
+![Diagram of STAC link relations](stac-api.png)
+
+In each node of the diagram above, there is also a `self` and `root` link that are not depicted to keep the digram more concise.
+
 
 | **`rel`** | **href to**                                | **From**           | **Description**                                                  |
 |-----------|--------------------------------------------|--------------------|------------------------------------------------------------------|
-| `child`   | The child STAC Catalog & Collection objects     | STAC Core          | Provides curated paths to get to STAC Collection and Item objects      |
-| `data`    | OAFeat/OACommon `/collections` endpoint    | Commons Collection | The full list of Collection objects provided by the API                 |
-| `search`  | The STAC search endpoint (often `/search`) | STAC Search        | Cross-collection query endpoint to select sub-sets of STAC `Item` objects |
-| `service-desc` | The OpenAPI description of this service | OAFeat OpenAPI   | Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API |
+| `root`    | The root URI                               | STAC Core          | Reference to self URI |
+| `self`    | The root URI                               | OAFeat             | Reference to self URI  |
 | `conformance` | OGC `/conformance` endpoint            | OAFeat / OACommon  | Only required for OGC API Compliant implementations              |
+| `service-desc` | The OpenAPI service description       | OAFeat OpenAPI   | Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API |
+| `service-doc`  | An HTML service description           | OAFeat OpenAPI   | Uses the `text/html` media type to refer to a human-consumable description of the service |
+| `data`    | OAFeat/OACommon `/collections` endpoint    | Commons Collection | The full list of Collection objects provided by the API                 |
+| `child`   | The child STAC Catalogs & Collections      | STAC Core          | Provides curated paths to get to STAC Collection and Item objects      |
+| `search`  | The STAC search endpoint (often `/search`) | STAC Search        | Cross-collection query endpoint to select sub-sets of STAC Item objects |
 
-It is also valid to have `item` links from the landing page, but most STAC API's are used to serve up a massive amount of features, so they typically
-use several layers of `child` links before getting to `Item` objects.
+It is also valid to have `item` links from the landing page, but most STAC API's are used to serve up a large number of features, so they typically
+use several layers of intermediate `child` links before getting to Items.
