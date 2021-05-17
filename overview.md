@@ -12,6 +12,8 @@ shorthand).  Notes on implementation recommendations may be found [here](impleme
 
 ## STAC API Description
 
+### Core
+
 The [core](core/) of STAC API simply returns a valid [STAC Catalog](stac-spec/catalog-spec/catalog-spec.md) and a description
 of what parts of the fuller STAC API specification it conforms to. The `links` section of the Catalog is the jumping
 off point for the more powerful capabilities - it contains a list of URL's, each described by particular link 
@@ -125,3 +127,76 @@ have the URI's for conformance to actually resolve to machine-readable informati
 | STAC Features             | [STAC API - Features](ogcapi-features)  | <https://api.stacspec.org/v1.0.0-beta.1/ogcapi-features>      | Specifies the use of OGC API - Features to serve STAC Item and Collection objects                                                                                                                                                                                                        |
 
 Additional conformance classes are specified in the [STAC Extensions](extensions.md#Conformance-classes-of-extensions).
+
+## Recommended Link Relations at `/` 
+
+When all three conformance classes (Core, Features, Item Search) are implemented, the relationships among
+various resources are shown in the following diagram. In each node, there is also a `self` and `root` link that are not depicted to keep the diagram more concise.
+
+![Diagram of STAC link relations](stac-api.png)
+
+These Landing Page will at least have the following:
+
+```json
+{
+    "stac_version": "1.0.0-beta.2",
+    "id": "example-stac",
+    "title": "A simple STAC API Example",
+    "description": "This Catalog aims to demonstrate the a simple landing page",
+    "conformsTo" : [
+        "https://api.stacspec.org/v1.0.0-beta.1/core",
+        "https://api.stacspec.org/v1.0.0-beta.1/item-search",
+        "https://api.stacspec.org/v1.0.0-beta.1/ogcapi-features",
+        "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core",
+        "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30",
+        "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson"
+    ],
+    "links": [
+        {
+            "rel": "self",
+            "type": "application/json",
+            "href": "https://stacserver.org"
+        },
+        {
+            "rel": "root",
+            "type": "application/json",
+            "href": "https://stacserver.org"
+        },
+        {
+            "rel": "conformance",
+            "type": "application/json",
+            "href": "https://stacserver.org/conformance"
+        },
+        {
+            "rel": "service-desc",
+            "type": "application/vnd.oai.openapi+json;version=3.0",
+            "href": "https://stacserver.org/api"
+        },
+        {
+            "rel": "service-doc",
+            "type": "text/html",
+            "href": "https://stacserver.org/api.html"
+        },
+        {
+            "rel": "data",
+            "type": "application/json",
+            "href": "https://stacserver.org/collections"
+        },
+        {
+            "rel": "child",
+            "type": "application/json",
+            "href": "https://stacserver.org/collections/sentinel-2",
+        },
+        {
+            "rel": "child",
+            "type": "application/json",
+            "href": "https://stacserver.org/collections/landsat-8",
+        },
+        {
+            "rel": "search",
+            "type": "application/geo+json",
+            "href": "https://stacserver.org/search"
+        }
+    ]
+}
+```
