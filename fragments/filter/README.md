@@ -44,16 +44,25 @@ The Filter extension provides an expressive mechanism for searching based on Ite
 
 This extension uses several conformance classes defined in the 
 [OGC API - Features - Part 3: Filtering and the Common Query Language (CQL)](https://portal.ogc.org/files/96288)
-specification. As of May 2020, this specification is in draft status but, due to its long-standing use within 
-geospatial software (e.g., GeoServer), is expected to remain largely the same in final. 
+specification. As of May 2020, this specification is in draft status. The only anticipated change before final is to the 
+division of behavior among conformance classes, as described further 
+in [OAFeat Part 3 Conformance Classes](#oafeat-part-3-conformance-classes). 
+
+OAFeat Part 3 CQL formally defines syntax for both a text format (cql-text) as an ABNF grammar (largely similar to the BNF grammar 
+in the General Model) and a JSON format (cql-json) as an OpenAPI schema, and provides a precise natural language description of 
+the declarative semantics.
+The CQL Text format has long-standing use within 
+geospatial software (e.g., GeoServer), is expected not to change before final. 
+OGC CQL Text has been previously described 
+in [OGC Filter Encoding](https://www.ogc.org/standards/filter) and 
+[OGC Catalogue Services 3.0 - General Model](http://docs.opengeospatial.org/is/12-168r6/12-168r6.html#62) 
+(including a BNF grammar in Annex B). The CQL JSON format is newly-defined, but also not
+expected to change before final.
 
 It should be noted that the "CQL" referred to here is OGC CQL. It is **not** referencing or related two other "CQL" languages, 
 the [SRU (Search/Retrieve via URL) Contextual Query Language](https://www.loc.gov/standards/sru/cql/index.html) (formerly 
-known as Common Query Language) or the [Cassandra Query Language](https://cassandra.apache.org/doc/latest/cql/) used by the Cassandra database.
-
-OGC CQL has been previously described 
-in [OGC Filter Encoding](https://www.ogc.org/standards/filter) and [OGC Catalogue Services 3.0 - General Model](http://docs.opengeospatial.org/is/12-168r6/12-168r6.html#62) (including a BNF grammar in Annex B). 
-OAFeat Part 3 CQL formally defines syntax for both a text format (cql-text) as an ABNF grammar (largely similar to the BNF grammar in the General Model) and a JSON format (cql-json) as an OpenAPI schema, and provides a precise natural language description of the declarative semantics.
+known as Common Query Language) or the [Cassandra Query Language](https://cassandra.apache.org/doc/latest/cql/) used by the 
+Cassandra database.
 
 ## Limitations of Item Search 
 
@@ -61,7 +70,8 @@ OAFeat defines a limited set of filtering capabilities. Filtering can only be do
 with only a single `bbox` (rectangular spatial filter) parameter and a single datetime (instant or interval) parameter. 
 
 The STAC Item Search specification extends the functionality of OAFeat in a few key ways:
-- It allows cross-collection filtering, whereas OAFeat only allows filtering within a single collection. (`collections` parameter, accepting 0 or more collections)
+- It allows cross-collection filtering, whereas OAFeat only allows filtering within a single collection. 
+  (`collections` parameter, accepting 0 or more collections)
 - It allows filtering by Item ID (`ids` parameter)
 - It allows filtering based on a single GeoJSON Geometry, rather than only a bbox (`intersects` parameter)
 
@@ -92,22 +102,46 @@ predicates.
 
 ## OAFeat Part 3 Conformance Classes
 
-OAFeat CQL defines several conformance classes that allow implementers to create arbitrary compositions of 
+OAFeat CQL defines several conformance classes that allow implementers to create compositions of 
 functionality that support whatever expressiveness they need.  Implementers many choose not to incur the cost of 
-implementing functionality they do not need, or may not be able to implement functionality that is not supported by their underlying datastore.  For example, Elasticsearch does not support the spatial predicates required by the Enhanced Spatial Operators conformance class.
+implementing functionality they do not need, or may not be able to implement functionality that is not supported by 
+their underlying datastore.  For example, Elasticsearch does not support the spatial predicates required by the 
+Enhanced Spatial Operators conformance class.
 
-The Filter extension **requires** support of these three conformance classes:
+It is likely that the OAFeat "Simple CQL" conformance class will be decomposed into several smaller conformance classes,
+as described [here](https://github.com/opengeospatial/ogcapi-features/issues/579).  Until the OAFeat CQL reaches final, it is
+considered compliant within a STAC API to advertise the Simple CQL conformance class but only partially-implement it, e.g., to 
+only implement the logical and comparison operators. It is recommended
+to provide an out-of-band way for users to discover what operators from the Simple CQL class are implemented. After OAFeat CQL is
+finalized, implementations will be expected to provide correct conformance classes with respect to their implementation of CQL.
+
+An additional change that may be made to the Simple CQL conformance class is to only require support of expressions with a property
+name of the left hand side and a literal on the right hand side (e.g., `eo:cloud_cover <= 10`), and additional conformance classes to
+will support arbitrary uses of properties and literals in expressions on either side. The primary motivation for this is to allow 
+implementations that use datastores that do not easily support right-hand side properties to implement Simple CQL 
+(e.g., Elasticsearch). Implementers should feel free to only implement `property operand literal` expressions at this time.
+
+The Filter extension **requires** these two conformance classes from OAFeat Part 3:
 
 - Filter (`http://www.opengis.net/spec/ogcapi-features-3/1.0/req/filter`) - defines the Queryables mechanism and 
   parameters `filter-lang`, filter-crs`, and `filter`
-- Features Filter (`http://www.opengis.net/spec/ogcapi-features-3/1.0/req/features-filter`) - defines that the parameters defined in `Filter` apply to the Features endpoint (`/collections/{collectionId}/items`) defined by OAFeat Part 1. 
-- Simple CQL (`http://www.opengis.net/spec/ogcapi-features-3/1.0/req/simple-cql`) - defines the query language used for the `filter` parameter defined by Filter
+- Simple CQL (`http://www.opengis.net/spec/ogcapi-features-3/1.0/req/simple-cql`) - defines the query language used 
+  for the `filter` parameter defined by Filter
 
-This STAC Filter extension extends the Filter conformance class such that these parameters also apply
-to the STAC Item Search resource (/search). The OAFeat Filter conformance class already requires that these
-parameters work for GET requests to the Items resource (/collections/collectionId/items). POST with a JSON body to the Items resource is not supported, as POST is used by the Transactions Extension for creating Item objects.
+Additionally, it is **recommended** that the OAFeat Part 3 Features Filter conformance class 
+(`http://www.opengis.net/spec/ogcapi-features-3/1.0/req/features-filter`) be implemented, which "binds" the Filter and Simple CQL
+conformance classes to the OAFeat Part 1 Features endpoint (`/collections/{collectionId}/items`). Note that POST with a JSON body 
+to the Features resource is not supported, as POST is used by the 
+[Transaction Extension](../../ogcapi-features/extensions/transaction/README.md) for creating items.
 
-Additional, the implementation must support at least one of "CQL Text" (`http://www.opengis.net/spec/ogcapi-features-3/1.0/req/cql-text`) or "CQL JSON" (`http://www.opengis.net/spec/ogcapi-features-3/1.0/req/cql-json`). If both are advertised as being supported, it is only required that both be supported for GET query parameters, and that only that CQL JSON be supported for POST JSON requests. It is recommended that clients use CQL Text in GET requests and CQL JSON in POST requests. 
+This STAC Filter extension operates similarly to OAFeat Part 3 Features Filter, in that it binds the OAFeat Filter and Simple CQL 
+conformance classes to the STAC Item Search resource (`/search`). 
+
+Additionally, the implementation must support at least one of "CQL Text" 
+(`http://www.opengis.net/spec/ogcapi-features-3/1.0/req/cql-text`) or "CQL JSON" 
+(`http://www.opengis.net/spec/ogcapi-features-3/1.0/req/cql-json`). If both are advertised as being supported, it is only 
+required that both be supported for GET query parameters, and that only that CQL JSON be supported for POST JSON requests. 
+It is recommended that clients use CQL Text in GET requests and CQL JSON in POST requests. 
 
 The Filter extension does **not** require support for the Enhanced Spatial Operators, Enhanced Temporal Operators,
 Functions, Arithmetic Expressions, or Arrays conformance classes, but implementing these additional conformance 
@@ -115,15 +149,10 @@ classes and their operations is both allowed and encouraged. Implementation of t
 operations supported by the implementation's datastore, for example, Elasticsearch does not support the spatial 
 operations required by the Enhanced Spatial Operators.
 
-There will likely be a change to Simple CQL where this conformance class only requires support of expressions with a property name of the left hand side and a literal on the right hand side (e.g., `eo:cloud_cover <= 10`), and additional conformance classes will support arbitrary uses of properties and literals in expression. The primary motivation for this is to allow implementations that use datastores that do not easily support arbitrary expressions like these to implement Simple CQL (e.g., Elasticsearch). 
-
-There will also likely be a change where the Simple CQL conformance class is decomposed into several other 
-conformance classes to aid composition. After these changes, it is possible that this extension will not require 
-the implementation of the operators IN, BETWEEN, LIKE, and IS NULL predicates.
-
 ## Grammar and schemas
 
-- The [OAFeat (CQL) spec](https://portal.ogc.org/files/96288) includes an ABNF for cql-text and both JSON Schema and OpenAPI specifications for cql-json. The standalone files are:
+- The [OAFeat (CQL) spec](https://portal.ogc.org/files/96288) includes an ABNF for cql-text and both JSON Schema and 
+  OpenAPI specifications for cql-json. The standalone files are:
   - [cql.bnf](https://github.com/opengeospatial/ogcapi-features/blob/master/extensions/cql/standard/schema/cql.bnf)
   - [cql.json](https://github.com/opengeospatial/ogcapi-features/blob/master/extensions/cql/standard/schema/cql.json)
   - [cql.yml](https://github.com/opengeospatial/ogcapi-features/blob/master/extensions/cql/standard/schema/cql.yml)
@@ -134,32 +163,80 @@ the implementation of the operators IN, BETWEEN, LIKE, and IS NULL predicates.
 ## Queryables
 
 The Queryables mechanism allows a client to discover what variable terms are available for use when writing filter
-expressions.  These variables can be defined per-collection, and the intersection of these variables over all collections is what is available for filtering when there are no collection restrictions. These queryables are the only variables that may be used in filter expressions, and if any variable is used in expression that is not defined as a queryable, a 400 Bad Request exception should be returned.
+expressions.  These variables can be defined per-collection, and the intersection of these variables over all collections is what 
+is available for filtering when there are no collection restrictions. These queryables are the only variables that may be used 
+in filter expressions, and if any variable is used in expression that is not defined as a queryable and error should be 
+returned according to OAFeat Part 3. It is recognized that this is a severe restriction in STAC APIs that have highly variable 
+and dynamic content. It is possible that this will change in the OAFeat Part 3 spec, see 
+this [issue](https://github.com/opengeospatial/ogcapi-features/issues/582). For now, implementers may choose to allow 
+fully-qualified property 
+names not advertised in queryables (e.g., `properties.eo:cloud_cover`, in anticipation that there be some
+mechanism to explicitly allow or advertise this in the future.
 
-Implementers should add queryables for all root Item fields (e.g., id, collection, geometry) with those names. Fields in Item Properties should also be exposed with their names, and not require expressions to prefix them with  `properties`. **Everything else should be fully-qualified? How to do more deeply-nested queries and those on lists is an open question. How to disambiguate names that could appear in multiple places in an Item?** 
+Queryables are advertised via a JSON Schema document retrieved from the `/queryables` endpoint. An example that advertises 
+that only the `eo:cloud_cover` property may be used in filter expressions looks like:
 
-(TBD: there is a proposal to allow finding what queryables are available for a subset of collections, e.g., `/queryables?collections=c1,c3`).  
+```json
+{
+  "$schema" : "https://json-schema.org/draft/2019-09/schema",
+  "$id" : "https://example.org/queryables",
+  "type" : "object",
+  "title" : "Queryables for Example STAC API",
+  "description" : "Queryable names for the example STAC API Item Search filter.",
+  "properties" : {
+    "eo:cloud_cover" : {
+      "description" : "Cloud Cover",
+      "$ref": "https://stac-extensions.github.io/eo/v1.0.0/schema.json#/properties/eo:cloud_cover"
+    }
+  }
+}
+```
 
-The Landing Page endpoint (`/`) will have a Link with rel `http://www.opengis.net/def/rel/ogc/1.0/queryables` with an href to the endpoint `/queryables` (TBD: hopefully, this will have a parameter `collections` defined on it to query for the intersection of the queryables in a group of collections). Additionally, each Collection resource will have a Link to the queryables resource for that collection, e.g., `/collections/collection1/queryables`. 
+Implementers should add queryables for all root Item fields (e.g., id, collection, geometry) with those names. Fields in Item 
+Properties should also be exposed with their names, and not require expressions to prefix them with  `properties`. 
 
-The queryables endpoint returns a JSON Schema describing the names and types variables that may be used in filter expressions. This response is defined in JSON Schema because it is a well-specified typed schema, but it is not used for validating a JSON document derived from it. This schema defines the variables that may be used in a CQL filter.
+There may also be support for finding what queryables are available for a subset of collections, e.g., 
+`/queryables?collections=c1,c3`) as described in [this issue](https://github.com/opengeospatial/ogcapi-features/issues/576).  
 
-These queryable variables are mapped by the service to filter Items. For example, the service may define a queryable with the name "cloud_cover" that can be used in a CQL expression like `cloud_cover <= 10`, with the semantics that only Items where the `properties.eo:cloud_cover` value was <= 10 would match the filter. The server would then translate this into an appropriate query for the data within its datastore.
+The Landing Page endpoint (`/`) will have a Link with rel `http://www.opengis.net/def/rel/ogc/1.0/queryables` with an href to 
+the endpoint `/queryables`. Additionally, each Collection resource will have a Link to the queryables resource for that 
+collection, e.g., `/collections/collection1/queryables`. 
 
-Queryables can be static or dynamically derived. For example, `cloud_cover` might be specified to have a value 0 to 100 or a field may have a set of enumerated values dynamically determined by an aggreation at runtime.  This schema can be used by a UI or interactive client to dynamically expose to the user the fields that are available for filtering, and provide a precise group of options for the values of these variables.
+The queryables endpoint returns a JSON Schema describing the names and types variables that may be used in filter expressions. 
+This response is defined in JSON Schema because it is a well-specified typed schema, but it is not used for validating a JSON 
+document derived from it. This schema defines the variables that may be used in a CQL filter.
 
-Queryables can also be used to advertise synthesized property values. The only requirement in CQL is that the property have a type and evaluate to literal value of that type or NULL. For example, a filter like "Items must have an Asset with an eo:band with the common_name of 'nir'" can be expressed. A Queryable `assets_bands` could be defined to have a type of array of string and have the semantics that it contains all of `common_name` values across all assets and bands for an Item. This could then be filtered with the CQL expression `'nir' in assets_bands`. Implementations would then expand this expression into the appropriate query against its datastore. (TBD if this will actually work or not. This is also related to the upcoming restriction on property/literal comparisons)
+These queryable variables are mapped by the service to filter Items. For example, the service may define a queryable with the 
+name "cloud_cover" that can be used in a CQL expression like `cloud_cover <= 10`, with the semantics that only Items where the 
+`properties.eo:cloud_cover` value was <= 10 would match the filter. The server would then translate this into an appropriate 
+query for the data within its datastore.
+
+Queryables can be static or dynamically derived. For example, `cloud_cover` might be specified to have a value 0 to 100 or a field 
+may have a set of enumerated values dynamically determined by an aggreation at runtime.  This schema can be used by a UI or 
+interactive client to dynamically expose to the user the fields that are available for filtering, and provide a precise group 
+of options for the values of these variables.
+
+Queryables can also be used to advertise synthesized property values. The only requirement in CQL is that the property have a type 
+and evaluate to literal value of that type or NULL. For example, a filter like "Items must have an Asset with an eo:band with 
+the common_name of 'nir'" can be expressed. A Queryable `assets_bands` could be defined to have a type of array of string and 
+have the semantics that it contains all of `common_name` values across all assets and bands for an Item. This could then be 
+filtered with the CQL expression `'nir' in assets_bands`. Implementations would then expand this expression into the 
+appropriate query against its datastore. (TBD if this will actually work or not. This is also related to the upcoming 
+restriction on property/literal comparisons)
 
 ## GET Query Parameters and POST JSON fields
 
 This extension adds three GET query parameters or POST JSON fields to an Item Search request:
 
 - filter-lang:`cql-text` or `cql-json`. If undefined, defaults to `cql-text` for a GET request and `cql-json` for a POST request.
-- filter-crs: recommended to not be passed, but server must only accept `http://www.opengis.net/def/crs/OGC/1.3/CRS84` as a valid value, may reject any others
+- filter-crs: recommended to not be passed, but server must only accept `http://www.opengis.net/def/crs/OGC/1.3/CRS84` as 
+  a valid value, may reject any others
 - filter: CQL filter expression
 
 API implementations advertise which `filter-lang` values are supported via conformance classes in the Landing Page.
-At least one must be implemented, but it is recommended to implement both. If both are advertised as conformance classes, the server should process either for a GET request, but may only process cql-json for a POST request. If POST of cql-text is not supported, the server must return a 400 error if `filter-lang=cql-text`.
+At least one must be implemented, but it is recommended to implement both. If both are advertised as conformance classes, the 
+server should process either for a GET request, but may only process cql-json for a POST request. If POST of cql-text is not 
+supported, the server must return a 400 error if `filter-lang=cql-text`.
 
 ## Interaction with Endpoints
 
@@ -252,9 +329,15 @@ Alternately, the client could retrieve the queryables for a single collection wi
 `/collections/collections1/queryables`, which may have more queryables than available for the entire catalog, since
 there may be queryables that are only relevant to that collection. 
 
-Notice in this schema that instead of directly defining the type information about each field, we have instead used the JSON Schema `$ref` mechanism to refer to a STAC schema definition. This not only allows the reuse of these JSON Schema definitions, but also binds an arbitrarily-named Queryable to a specific STAC field. For example, in the above we know that the `eo:cloud_cover` field is referring to the field of the same name in the EO Extension not because they happen to have the same name, but rather because the `$ref` indicates it. The field could just as well be named "cloud_cover", "CloudCover", or "cc", and we would still know it filtered on the EO extension `eo:cloud_cover` field.
+Notice in this schema that instead of directly defining the type information about each field, we have instead used the JSON 
+Schema `$ref` mechanism to refer to a STAC schema definition. This not only allows the reuse of these JSON Schema definitions,
+but also binds an arbitrarily-named Queryable to a specific STAC field. For example, in the above we know that the 
+`eo:cloud_cover` field is referring to the field of the same name in the EO Extension not because they happen to have the same 
+name, but rather because the `$ref` indicates it. The field could just as well be named "cloud_cover", "CloudCover", or "cc", 
+and we would still know it filtered on the EO extension `eo:cloud_cover` field.
 
-While these do seem quite complex to write and understand, keep in mind that query construction will likely be done with a more ergonomic SDK, and query parsing will be done with the help of a ABNF grammar and OpenAPI schema.
+While these do seem quite complex to write and understand, keep in mind that query construction will likely be done with a 
+more ergonomic SDK, and query parsing will be done with the help of a ABNF grammar and OpenAPI schema.
 
 From the Queryables above, a client could then form the following example filter expressions. 
 
@@ -264,27 +347,30 @@ These parameters/fields must be supported by the Item Search endpoint and Items 
 
 Note: the GET examples with query parameters are unescaped to make them easier to read. 
 
+The parameter `filter-crs` always defaults to `http://www.opengis.net/def/crs/OGC/1.3/CRS84` for a STAC API, so is not shown 
+in any of these examples.
+
 ### Example 1
 
 This example uses the queryables definition in (Interaction with Endpoints)(#interaction-with-endpoints).
 
 #### Example 1: GET with cql-text
 
-Note that `filter-lang` defaults to `cql-text` in this case, so this is only shown for completeness. 
+Note that `filter-lang` defaults to `cql-text` in this case. The parameter `filter-crs` defaults 
+to `http://www.opengis.net/def/crs/OGC/1.3/CRS84` for a STAC API.
 
 ```http
-GET /search?filter-lang=cql-text&filter=id='LC08_L1TP_060247_20180905_20180912_01_T1_L1TP' AND collection='landsat8_l1tp'
+GET /search?filter=id='LC08_L1TP_060247_20180905_20180912_01_T1_L1TP' AND collection='landsat8_l1tp'
 ```
 
 #### Example 1: POST with cql-json
 
-Note that `filter-lang` defaults to `cql-json` and `filter-crs` defaults to `http://www.opengis.net/def/crs/OGC/1.3/CRS84` in this case.
+Note that `filter-lang` defaults to `cql-json` in this case. The parameter `filter-crs` defaults 
+to `http://www.opengis.net/def/crs/OGC/1.3/CRS84` for a STAC API.
 
 ```http
 POST /search
 { 
-  "filter-lang"="cql-json",
-  "filter-crs":"http://www.opengis.net/def/crs/OGC/1.3/CRS84",
   "filter": {
     "and": [
       "eq": [
@@ -446,7 +532,8 @@ The queryables defined are as follows:
 }
 ```
 
-Note that `sentinel:data_coverage` is a proprietary extension (e.g., not defined in a formal, public way), and must be defined directly within the schema.
+Note that `sentinel:data_coverage` is a proprietary extension (e.g., not defined in a formal, public way), and must 
+be defined directly within the schema.
 
 A sample STAC Item (excluding `assets`) is: 
 
@@ -556,9 +643,9 @@ This uses the same queryables as Example 4.
                "lt": [
                   { "property": "eo:cloud_cover" },
                   10
-               }
                ]
-           ]
+            }
+      ]
     }
 }
 ```
@@ -623,8 +710,9 @@ GeoJSON geometries.
 
 ## Implementations
 
-* [GeoPython PyCQL](https://github.com/geopython/pycql/tree/master/pycql), and the [Bitner fork](https://github.com/bitner/pycql) to be used in stac-fastapi
-* [Franklin](https://github.com/azavea/franklin) is working on it.
+- [GeoPython PyCQL](https://github.com/geopython/pycql/tree/master/pycql), and the 
+  [Bitner fork](https://github.com/bitner/pycql) to be used in stac-fastapi
+- [Franklin](https://github.com/azavea/franklin) is working on it.
 
 Note that the [xbib CQL library (JVM)](https://github.com/xbib/cql) is the OASIS Contextual Query Language, not 
 OGC CQL, and should not be used to implement this extension, as they are significantly different query languages.

@@ -10,7 +10,8 @@
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Dependencies**: None
 
-The base of a STAC API is its landing page. This resource is the starting point to discover what behaviors the API supports via the `conformsTo` values and link relations. 
+The base of a STAC API is its landing page. This resource is the starting point to discover what behaviors 
+the API supports via the `conformsTo` values and link relations. 
 This behavior in a RESTful API is known as 
 [Hypermedia as the Engine of Application State (HATEOAS)](https://en.wikipedia.org/wiki/HATEOAS). 
 STAC API relies heavily on hypermedia for API resource navigation. 
@@ -29,7 +30,8 @@ client must inspect the the `rel` (relationship) to understand what capabilities
 Note the `conformsTo` JSON object follows exactly the structure of OGC API - Features [declaration of conformance 
 classes](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_declaration_of_conformance_classes), except is available directly under 
 the landing page. This is a slight break from how OGC API does things, as STAC feels it is important for clients to be able to understand
-conformance in a single request. Implementers choosing to also implement the OGC API - Features and/or STAC API - Features conformance classes must also implment the `/conformance` endpoint.
+conformance in a single request. Implementers choosing to also implement the OGC API - Features and/or 
+STAC API - Features conformance classes must also implment the `/conformance` endpoint.
 
 This particular catalog provides the ability to browse down to child STAC Collection objects through its `child` links, and also provides the search
 endpoint to be able to search across items in its collections. Note though that none of those links are required, other servers may provide
@@ -47,13 +49,13 @@ API endpoints from OAFeat or STAC API to be implemented, so the following links 
 
 When implementing the STAC API Core conformance class, it it recommended to implement these Link relations.
 
-| **`rel`** | **href to**                                | **From**           | **Description**                                                  |
-|-----------|--------------------------------------------|--------------------|------------------------------------------------------------------|
-| `root`    | The root URI                               | STAC Core          | Reference to self URI |
-| `self`    | The root URI                               | OAFeat             | Reference to self URI  |
-| `service-desc` | The OpenAPI service description       | OAFeat OpenAPI   | Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API |
-| `service-doc`  | An HTML service description           | OAFeat OpenAPI   | Uses the `text/html` media type to refer to a human-consumable description of the service |
-| `child`   | The child STAC Catalogs & Collections      | STAC Core          | Provides curated paths to get to STAC Collection and Item objects      |
+| **`rel`**      | **href to**                           | **From**       | **Description**                                                                                                                        |
+| -------------- | ------------------------------------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `root`         | The root URI                          | STAC Core      | Reference to self URI                                                                                                                  |
+| `self`         | The root URI                          | OAFeat         | Reference to self URI                                                                                                                  |
+| `service-desc` | The OpenAPI service description       | OAFeat OpenAPI | Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API |
+| `service-doc`  | An HTML service description           | OAFeat OpenAPI | Uses the `text/html` media type to refer to a human-consumable description of the service                                              |
+| `child`        | The child STAC Catalogs & Collections | STAC Core      | Provides curated paths to get to STAC Collection and Item objects                                                                      |
 
 It is also valid to have `item` links from the landing page, but most STAC API services are used to 
 serve up a large number of features, so they typically

@@ -112,7 +112,6 @@ most APIs will also implement other conformance classes, and those will be refle
 `conformsTo` fields.  A more typical Landing Page example is in 
 the [overview](../overview.md#example-landing-page) document.
 
-
 ```json
 {
     "stac_version": "1.0.0-beta.2",
