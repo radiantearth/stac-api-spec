@@ -207,6 +207,11 @@ use several layers of intermediate `child` links before getting to Item objects.
 
 ## Example Landing Page for STAC API - Item Search
 
+This JSON is what would be expected from an api that only implements STAC API - Item Search. In practice, 
+most APIs will also implement other conformance classes, and those will be reflected in the `links` and 
+`conformsTo` fields.  A more typical Landing Page example is in 
+the [overview](../overview.md#example-landing-page) document.
+
 ```json
 {
     "stac_version": "1.0.0-beta.2",

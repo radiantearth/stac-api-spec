@@ -128,14 +128,14 @@ have the URI's for conformance to actually resolve to machine-readable informati
 
 Additional conformance classes are specified in the [STAC Extensions](extensions.md#Conformance-classes-of-extensions).
 
-## Recommended Link Relations at `/` 
+## Example Landing Page 
 
 When all three conformance classes (Core, Features, Item Search) are implemented, the relationships among
 various resources are shown in the following diagram. In each node, there is also a `self` and `root` link that are not depicted to keep the diagram more concise.
 
 ![Diagram of STAC link relations](stac-api.png)
 
-These Landing Page will at least have the following:
+The Landing Page will at least have the following `conformsTo` and `links`:
 
 ```json
 {
