@@ -10,6 +10,8 @@
     - [GET](#get)
     - [POST](#post)
       - [PUT / PATCH / DELETE](#put--patch--delete)
+  - [Recommended Link Relations at `/`](#recommended-link-relations-at-)
+  - [Example Landing Page for STAC API - Item Search](#example-landing-page-for-stac-api---item-search)
   - [Extensions](#extensions)
     - [Fields](#fields)
     - [Query](#query)
@@ -185,6 +187,70 @@ searching on specific Item properties.
 
 The other HTTP verbs are not supported in STAC Item Search. The [Transaction Extension](../ogcapi-features/extensions/transaction/README.md)
 does implement them, for STAC and OAFeat implementations that want to enable writing and deleting items.
+
+## Recommended Link Relations at `/`
+
+When implementing the STAC API - Item Search conformance class, it it recommended to implement these Link relations.
+
+| **`rel`** | **href to**                                | **From**           | **Description**                                                  |
+|-----------|--------------------------------------------|--------------------|------------------------------------------------------------------|
+| `root`    | The root URI                               | STAC Core          | Reference to self URI |
+| `self`    | The root URI                               | OAFeat             | Reference to self URI  |
+| `service-desc` | The OpenAPI service description       | OAFeat OpenAPI   | Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API |
+| `service-doc`  | An HTML service description           | OAFeat OpenAPI   | Uses the `text/html` media type to refer to a human-consumable description of the service |
+| `child`   | The child STAC Catalogs & Collections      | STAC Core          | Provides curated paths to get to STAC Collection and Item objects      |
+| `search`  | The STAC search endpoint (often `/search`) | STAC Search        | Cross-collection query endpoint to select sub-sets of STAC Item objects |
+
+It is also valid to have `item` links from the landing page, but most STAC API services are used to 
+serve up a large number of features, so they typically
+use several layers of intermediate `child` links before getting to Item objects.
+
+## Example Landing Page for STAC API - Item Search
+
+This JSON is what would be expected from an api that only implements STAC API - Item Search. In practice, 
+most APIs will also implement other conformance classes, and those will be reflected in the `links` and 
+`conformsTo` fields.  A more typical Landing Page example is in 
+the [overview](../overview.md#example-landing-page) document.
+
+```json
+{
+    "stac_version": "1.0.0-beta.2",
+    "id": "example-stac",
+    "title": "A simple STAC API Example",
+    "description": "This Catalog aims to demonstrate the a simple landing page",
+    "conformsTo" : [
+        "https://api.stacspec.org/v1.0.0-beta.1/core",
+        "https://api.stacspec.org/v1.0.0-beta.1/item-search"
+    ],
+    "links": [
+        {
+            "rel": "self",
+            "type": "application/json",
+            "href": "https://stacserver.org"
+        },
+        {
+            "rel": "root",
+            "type": "application/json",
+            "href": "https://stacserver.org"
+        },
+        {
+            "rel": "service-desc",
+            "type": "application/vnd.oai.openapi+json;version=3.0",
+            "href": "https://stacserver.org/api"
+        },
+        {
+            "rel": "service-doc",
+            "type": "text/html",
+            "href": "https://stacserver.org/api.html"
+        },
+        {
+            "rel": "search",
+            "type": "application/geo+json",
+            "href": "https://stacserver.org/search"
+        }
+    ]
+}
+```
 
 ## Extensions
 

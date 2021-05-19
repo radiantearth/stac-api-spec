@@ -3,6 +3,7 @@
 - [STAC API - Features](#stac-api---features)
   - [Endpoints](#endpoints)
   - [Examples](#examples)
+  - [Example Landing Page for STAC API - Features](#example-landing-page-for-stac-api---features)
 
 *based on [**OGC API - Features - Part 1: Core**](https://www.ogc.org/standards/ogcapi-features)*
 
@@ -102,4 +103,60 @@ Request 10 results from the data in `mycollection` from between January 1st (inc
 
 ```http
 GET /collections/mycollection/items?datetime=2019-01-01T00:00:00Z/2019-03-31T23:59:59Z&limit=10
+```
+
+## Example Landing Page for STAC API - Features
+
+This JSON is what would be expected from an api that only implements STAC API - Features. In practice, 
+most APIs will also implement other conformance classes, and those will be reflected in the `links` and 
+`conformsTo` fields.  A more typical Landing Page example is in 
+the [overview](../overview.md#example-landing-page) document.
+
+
+```json
+{
+    "stac_version": "1.0.0-beta.2",
+    "id": "example-stac",
+    "title": "A simple STAC API Example",
+    "description": "This Catalog aims to demonstrate the a simple landing page",
+    "conformsTo" : [
+        "https://api.stacspec.org/v1.0.0-beta.1/core",
+        "https://api.stacspec.org/v1.0.0-beta.1/ogcapi-features",
+        "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core",
+        "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30",
+        "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson"
+    ],
+    "links": [
+        {
+            "rel": "self",
+            "type": "application/json",
+            "href": "https://stacserver.org"
+        },
+        {
+            "rel": "root",
+            "type": "application/json",
+            "href": "https://stacserver.org"
+        },
+        {
+            "rel": "conformance",
+            "type": "application/json",
+            "href": "https://stacserver.org/conformance"
+        },
+        {
+            "rel": "service-desc",
+            "type": "application/vnd.oai.openapi+json;version=3.0",
+            "href": "https://stacserver.org/api"
+        },
+        {
+            "rel": "service-doc",
+            "type": "text/html",
+            "href": "https://stacserver.org/api.html"
+        },
+        {
+            "rel": "data",
+            "type": "application/json",
+            "href": "https://stacserver.org/collections"
+        }
+    ]
+}
 ```
