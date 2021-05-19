@@ -124,7 +124,7 @@ implementations that use datastores that do not easily support right-hand side p
 The Filter extension **requires** these two conformance classes from OAFeat Part 3:
 
 - Filter (`http://www.opengis.net/spec/ogcapi-features-3/1.0/req/filter`) - defines the Queryables mechanism and 
-  parameters `filter-lang`, filter-crs`, and `filter`
+  parameters `filter-lang`, `filter-crs`, and `filter`
 - Simple CQL (`http://www.opengis.net/spec/ogcapi-features-3/1.0/req/simple-cql`) - defines the query language used 
   for the `filter` parameter defined by Filter
 
@@ -405,7 +405,7 @@ GET /search?filter=collection = 'landsat8_l1tp'
 ```http
 POST /search
 { 
-  "filter-lang"="cql-json",
+  "filter-lang": "cql-json",
   "filter": {
     "and": [
       "eq": [
@@ -485,7 +485,7 @@ GET /search?filter=prop1 = prop2
 ```http
 POST /search
 { 
-  "filter-lang"="cql-json",
+  "filter-lang": "cql-json",
   "filter": {
     "eq": [
       { "property": "prop1" },
@@ -498,7 +498,7 @@ POST /search
 ### Example 4
 
 We'll be imagining these as queries against [EarthSearch Sentinel 2 
-COG](https://stacindex.org/catalogs/earth-search#/Cnz1sryATwWudkxyZekxWx6356v9RmvvCcLLw79uHWJUDvt2?t=items)' data.
+COG](https://stacindex.org/catalogs/earth-search#/Cnz1sryATwWudkxyZekxWx6356v9RmvvCcLLw79uHWJUDvt2?t=items) data.
 
 The queryables defined are as follows:
 
@@ -712,7 +712,8 @@ GeoJSON geometries.
 
 - [GeoPython PyCQL](https://github.com/geopython/pycql/tree/master/pycql), and the 
   [Bitner fork](https://github.com/bitner/pycql) to be used in stac-fastapi
-- [Franklin](https://github.com/azavea/franklin) is working on it.
+- [Franklin](https://github.com/azavea/franklin) is working on it in [this PR](https://github.com/azavea/franklin/pull/750).
+- [Geotools](https://github.com/geotools/geotools) has support for [CQL text](https://github.com/geotools/geotools/tree/main/modules/library/cql/src/main/java/org/geotools/filter/text/cql2)
 
 Note that the [xbib CQL library (JVM)](https://github.com/xbib/cql) is the OASIS Contextual Query Language, not 
 OGC CQL, and should not be used to implement this extension, as they are significantly different query languages.
