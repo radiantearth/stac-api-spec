@@ -91,7 +91,7 @@ This extension expands the capabilities of Item Search and the OAFeat Items reso
 [OAFeat Part 3 CQL](https://portal.ogc.org/files/96288) 
 by providing an expressive query language to construct more complex filter predicates. The operators are similar to 
 those provided by SQL. The Simple CQL conformance class requires the logical operators `AND`, `OR`, and `NOT`; 
-the comparison operators '=', `<`, `<=`, `>`, `>=`, `LIKE`, `IS NULL`, `BETWEEN`, and `IN`; the spatial operator 
+the comparison operators `=`, `<`, `<=`, `>`, `>=`, `LIKE`, `IS NULL`, `BETWEEN`, and `IN`; the spatial operator 
 `INTERSECTS`; and the temporal operator `ANYINTERACTS`. 
 
 The ANYINTERACTS operator has effectively the same semantics as the existing `datetime` filter.
