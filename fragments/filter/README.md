@@ -21,7 +21,7 @@
   - [Limitations of Item Search](#limitations-of-item-search)
   - [Filter expressiveness](#filter-expressiveness)
   - [Conformance Classes](#conformance-classes)
-  - [Grammar and schemas](#grammar-and-schemas)
+  - [Getting Started with Implementation](#getting-started-with-implementation)
   - [Queryables](#queryables)
   - [GET Query Parameters and POST JSON fields](#get-query-parameters-and-post-json-fields)
   - [Interaction with Endpoints](#interaction-with-endpoints)
@@ -47,25 +47,22 @@
     - [Example 6: Spatial](#example-6-spatial)
       - [Example 6: INTERSECTS cql-text (GET)](#example-6-intersects-cql-text-get)
       - [Example 6: INTERSECTS cql-json (POST)](#example-6-intersects-cql-json-post)
-  - [Implementations](#implementations)
 
 ## Overview
 
 The Filter extension provides an expressive mechanism for searching based on Item attributes.
 
-This extension uses several conformance classes defined in the 
+This extension references behavior defined in the 
 [OGC API - Features - Part 3: Filtering and the Common Query Language (CQL)](https://portal.ogc.org/files/96288)
 specification. As of May 2020, this specification is in draft status. The only anticipated change before final is to the 
 division of behavior among conformance classes, as described further 
-in [OAFeat Part 3 Conformance Classes](#oafeat-part-3-conformance-classes). 
+in the [Conformance Classes](#conformance-classes) section. 
 
 OAFeat Part 3 CQL formally defines syntax for both a text format (cql-text) as an ABNF grammar (largely similar to the BNF grammar 
-in the General Model) and a JSON format (cql-json) as an OpenAPI schema, and provides a precise natural language description of 
-the declarative semantics.
-The CQL Text format has long-standing use within 
+in the General Model) and a JSON format (cql-json) as a JSON Schema and OpenAPI schema, and provides a precise natural 
+language description of the declarative semantics.  The CQL Text format has long-standing use within 
 geospatial software (e.g., GeoServer), is expected not to change before final. 
-OGC CQL Text has been previously described 
-in [OGC Filter Encoding](https://www.ogc.org/standards/filter) and 
+OGC CQL Text has been previously described in [OGC Filter Encoding](https://www.ogc.org/standards/filter) and 
 [OGC Catalogue Services 3.0 - General Model](http://docs.opengeospatial.org/is/12-168r6/12-168r6.html#62) 
 (including a BNF grammar in Annex B). The CQL JSON format is newly-defined, but also not
 expected to change before final.
@@ -114,8 +111,9 @@ predicates.
 ## Conformance Classes
 
 OAFeat CQL defines several conformance classes that allow implementers to create compositions of 
-functionality that support whatever expressiveness they need.  Implementers many choose not to incur the cost of 
-implementing functionality they do not need, or may not be able to implement functionality that is not supported by 
+functionality that support whatever expressiveness they need. This allows implementers to incrementally support CQL
+syntax, without needing to implement a huge spec all at once.  Some implementers choose not to incur the cost of 
+implementing functionality they do not need or may not be able to implement functionality that is not supported by 
 their underlying datastore, e.g., Elasticsearch does not support the spatial predicates required by the 
 Enhanced Spatial Operators conformance class.
 
@@ -168,7 +166,20 @@ will support arbitrary uses of properties and literals in expressions on either 
 implementations that use datastores that do not easily support right-hand side properties to implement Simple CQL 
 (e.g., Elasticsearch). Implementers should feel free to only implement `property operand literal` expressions at this time.
 
-## Grammar and schemas
+## Getting Started with Implementation
+
+It recommended that implementers start with fully implementing only a subset of functionality. As stated previously, 
+until the OAFeat CQL spec is finalized, it is legal in a STAC API implementation to advertise that the Simple CQL conformance 
+class is implemented, but that only a subset of that functionality is implemented. 
+
+A good place to start is 
+implementing only the logical and simple comparison operators (`=`, `<`, `<=`, `>`, `>=`), defining a static Queryables 
+schema with no queryables advertised, and only implementing CQL Text. Following from that can be support for 
+INTERSECTS and ANYINTERACTS, defining a static Queryables schema with only the basic Item properties, and also 
+implementing CQL JSON. From there, other comparison operators can be implemented and a more 
+dynamic Queryables schema (if desired).
+
+Formal definitions and grammars for CQL can be found here: 
 
 - The [OAFeat (CQL) spec](https://portal.ogc.org/files/96288) includes an ABNF for cql-text and both JSON Schema and 
   OpenAPI specifications for cql-json. The standalone files are:
@@ -178,6 +189,18 @@ implementations that use datastores that do not easily support right-hand side p
 - A JSON Schema for only the parts of the CQL JSON encoding required by this extension is [here](cql.json)
 - A OpenAPI specification for only the parts of the CQL JSON encoding required by this extension is [here](cql.yml)
 - xtraplatform-spatial has a CQL [ANTLR 4 grammer](https://github.com/interactive-instruments/xtraplatform-spatial/tree/master/xtraplatform-cql/src/main/antlr/de/ii/xtraplatform/cql/infra)
+
+These projects have or are developing CQL support:
+
+- [GeoPython PyCQL](https://github.com/geopython/pycql/tree/master/pycql), and the 
+  [Bitner fork](https://github.com/bitner/pycql) to be used in stac-fastapi
+- [Franklin](https://github.com/azavea/franklin) is working on it in [this PR](https://github.com/azavea/franklin/pull/750).
+- [Geotools](https://github.com/geotools/geotools) has support for [CQL text](https://github.com/geotools/geotools/tree/main/modules/library/cql/src/main/java/org/geotools/filter/text/cql2)
+
+Note that the [xbib CQL library (JVM)](https://github.com/xbib/cql) is the OASIS Contextual Query Language, not 
+OGC CQL, and should not be used to implement this extension, as they are significantly different query languages.
+[Stacatto](https://github.com/planetlabs/staccato) uses this for their query language implementation, but it is 
+not compliant with this extension.
 
 ## Queryables
 
@@ -761,15 +784,3 @@ GeoJSON geometries.
     },        
 }
 ```
-
-## Implementations
-
-- [GeoPython PyCQL](https://github.com/geopython/pycql/tree/master/pycql), and the 
-  [Bitner fork](https://github.com/bitner/pycql) to be used in stac-fastapi
-- [Franklin](https://github.com/azavea/franklin) is working on it in [this PR](https://github.com/azavea/franklin/pull/750).
-- [Geotools](https://github.com/geotools/geotools) has support for [CQL text](https://github.com/geotools/geotools/tree/main/modules/library/cql/src/main/java/org/geotools/filter/text/cql2)
-
-Note that the [xbib CQL library (JVM)](https://github.com/xbib/cql) is the OASIS Contextual Query Language, not 
-OGC CQL, and should not be used to implement this extension, as they are significantly different query languages.
-[Stacatto](https://github.com/planetlabs/staccato) uses this for their query language implementation, but it is 
-not compliant with this extension.
