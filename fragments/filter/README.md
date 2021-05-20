@@ -2,11 +2,11 @@
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
 - **Conformance Classes:** 
-  - Filter (`https://api.stacspec.org/v1.0.0-beta.1/item-search#filter:filter`) 
-  - Simple CQL (`https://api.stacspec.org/v1.0.0-beta.1/item-search#filter:simple-cql`)
-  - Item Search Filter (`https://api.stacspec.org/v1.0.0-beta.1/item-search#filter:item-search-filter`) 
-  - CQL Text (`https://api.stacspec.org/v1.0.0-beta.1/item-search#filter:cql-text`)
-  - CQL JSON (`https://api.stacspec.org/v1.0.0-beta.1/item-search#filter:cql-json`)
+  - Filter: <https://api.stacspec.org/v1.0.0-beta.1/item-search#filter:filter>
+  - Simple CQL: <https://api.stacspec.org/v1.0.0-beta.1/item-search#filter:simple-cql>
+  - Item Search Filter: <https://api.stacspec.org/v1.0.0-beta.1/item-search#filter:item-search-filter>
+  - CQL Text: <https://api.stacspec.org/v1.0.0-beta.1/item-search#filter:cql-text>
+  - CQL JSON: <https://api.stacspec.org/v1.0.0-beta.1/item-search#filter:cql-json>
 - **Extension [Maturity Classification](../../extensions.md#extension-maturity):** Pilot
 - **Dependents:**
   - [Item Search](../../item-search)
