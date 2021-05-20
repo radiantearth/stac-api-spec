@@ -404,7 +404,10 @@ POST /search
 
 ### Example 2
 
-This example uses the queryables definition in (Interaction with Endpoints)(#interaction-with-endpoints).
+This example uses the queryables definition in [Interaction with Endpoints](#interaction-with-endpoints).
+
+Note that filtering on the `collection` field is relevant in Item Search, since the queries are cross-collection, whereas 
+OGC API Features filters only operate against a single collection already.
 
 #### Example 2: GET with cql-text
 
@@ -538,18 +541,24 @@ The queryables defined are as follows:
       "description" : "Cloud Cover",
       "$ref": "https://stac-extensions.github.io/eo/v1.0.0/schema.json#/properties/eo:cloud_cover"
     },
-    "sentinel:data_coverage" : {
-      "description" : "Sentinel Data Coverage",
+    "acme:data_coverage" : {
+      "description" : "Acme Sat Data Coverage",
       "type": "integer",
       "minimum": 0,
       "maximum": 100
+    },
+    "acme:grid_id" : {
+      "description" : "Acme Sat Grid ID",
+      "type": "string"
     }
   }
 }
 ```
 
-Note that `sentinel:data_coverage` is a proprietary extension (e.g., not defined in a formal, public way), and must 
-be defined directly within the schema.
+Note that `acme:data_coverage` and `acme:grid_id` are properties that are not defined in an extension schema, and are intended to
+represent vendor-specific properties. Because of this, they are fully specified directly in the JSON Schema. However, it is 
+recommended that vendor-specific properties be published as part of a well-defined extension schema, so these only represent ones 
+that have not followed that recommendation.
 
 A sample STAC Item (excluding `assets`) is: 
 
