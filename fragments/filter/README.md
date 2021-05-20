@@ -1,6 +1,12 @@
 # STAC API - Filter Fragment
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
+- **Conformance Classes:** 
+  - Filter (`https://api.stacspec.org/v1.0.0-beta.1/extensions/filter/filter`) 
+  - Simple CQL (`https://api.stacspec.org/v1.0.0-beta.1/extensions/filter/simple-cql`)
+  - Item Search Filter (`https://api.stacspec.org/v1.0.0-beta.1/extensions/filter/item-search-filter`) 
+  - CQL Text (`https://api.stacspec.org/v1.0.0-beta.1/extensions/filter/cql-text`)
+  - CQL JSON (`https://api.stacspec.org/v1.0.0-beta.1/extensions/filter/cql-json`)
 - **Extension [Maturity Classification](../../extensions.md#extension-maturity):** Pilot
 - **Dependents:**
   - [Item Search](../../item-search)
@@ -9,7 +15,7 @@
   - [Overview](#overview)
   - [Limitations of Item Search](#limitations-of-item-search)
   - [Filter expressiveness](#filter-expressiveness)
-  - [OAFeat Part 3 Conformance Classes](#oafeat-part-3-conformance-classes)
+  - [Conformance Classes](#conformance-classes)
   - [Grammar and schemas](#grammar-and-schemas)
   - [Queryables](#queryables)
   - [GET Query Parameters and POST JSON fields](#get-query-parameters-and-post-json-fields)
@@ -100,13 +106,51 @@ CQL enables these types of queries:
 This extension also supports the Queryables mechanism that allows discovery of what Item fields can be used in 
 predicates.
 
-## OAFeat Part 3 Conformance Classes
+## Conformance Classes
 
 OAFeat CQL defines several conformance classes that allow implementers to create compositions of 
 functionality that support whatever expressiveness they need.  Implementers many choose not to incur the cost of 
 implementing functionality they do not need, or may not be able to implement functionality that is not supported by 
-their underlying datastore.  For example, Elasticsearch does not support the spatial predicates required by the 
+their underlying datastore, e.g., Elasticsearch does not support the spatial predicates required by the 
 Enhanced Spatial Operators conformance class.
+
+The STAC API Filter Extension reuses the definitions of several conformance classes defined in OAFeat CQL, but with a prefix of 
+`https://api.stacspec.org/v1.0.0-beta.1/extensions/filter/` instead of `https://api.stacspec.org/v1.0.0-beta.1/extensions/filter/`.
+
+The implementation must support both of these conformance classes:
+
+- Filter (`https://api.stacspec.org/v1.0.0-beta.1/extensions/filter/filter`) defines the Queryables mechanism and 
+  parameters `filter-lang`, `filter-crs`, and `filter`.
+- Simple CQL (`https://api.stacspec.org/v1.0.0-beta.1/extensions/filter/simple-cql`) defines the query language used 
+  for the `filter` parameter defined by Filter.
+
+In place of the OAFeat CQL Features Filter class that binds Filter and Simple CQL to the Features resource 
+(`/collections/{cid}/items`), the Filter Extension instead defines this conformance class:
+
+- Item Search Filter (`https://api.stacspec.org/v1.0.0-beta.1/extensions/filter/item-search-filter`) binds the Filter and Simple CQL
+  conformance classes to apply to the Item Search endpoint (`/search`). 
+
+The implementation must support at least one of the "CQL Text" or "CQL JSON" conformance classes that define the CQL format
+used in the filter parameter:
+
+- CQL Text (`https://api.stacspec.org/v1.0.0-beta.1/extensions/filter/cql-text`) defines that the CQL Text format is supported by Item Search.
+- CQL JSON (`https://api.stacspec.org/v1.0.0-beta.1/extensions/filter/cql-json`) defines that the CQL JSON format is supported by Item Search
+
+If both are advertised as being supported, it is only 
+required that both be supported for GET query parameters, and that only that CQL JSON be supported for POST JSON requests. 
+It is recommended that clients use CQL Text in GET requests and CQL JSON in POST requests. 
+
+The Filter Extension does **not** require support for the Enhanced Spatial Operators, Enhanced Temporal Operators,
+Functions, Arithmetic Expressions, or Arrays conformance classes, but implementing these additional conformance 
+classes and their operations is both allowed and encouraged. Implementation of these is often limited by the 
+operations supported by the implementation's datastore, for example, Elasticsearch does not support the spatial 
+operations required by the Enhanced Spatial Operators.
+
+Additionally, if an API implements the OGC API Features endpoint, it is **recommended** that the OAFeat Part 3 Filter, 
+Features Filter, and Simple CQL conformance classes be implemented, which allow use of CQL filters against the 
+OAFeat Part 1 Features endpoint (`/collections/{collectionId}/items`). Note that POST with a JSON body 
+to the Features resource is not supported, as POST is used by the 
+[Transaction Extension](../../ogcapi-features/extensions/transaction/README.md) for creating items.
 
 It is likely that the OAFeat "Simple CQL" conformance class will be decomposed into several smaller conformance classes,
 as described [here](https://github.com/opengeospatial/ogcapi-features/issues/579).  Until the OAFeat CQL reaches final, it is
@@ -120,34 +164,6 @@ name of the left hand side and a literal on the right hand side (e.g., `eo:cloud
 will support arbitrary uses of properties and literals in expressions on either side. The primary motivation for this is to allow 
 implementations that use datastores that do not easily support right-hand side properties to implement Simple CQL 
 (e.g., Elasticsearch). Implementers should feel free to only implement `property operand literal` expressions at this time.
-
-The Filter extension **requires** these two conformance classes from OAFeat Part 3:
-
-- Filter (`http://www.opengis.net/spec/ogcapi-features-3/1.0/req/filter`) - defines the Queryables mechanism and 
-  parameters `filter-lang`, `filter-crs`, and `filter`
-- Simple CQL (`http://www.opengis.net/spec/ogcapi-features-3/1.0/req/simple-cql`) - defines the query language used 
-  for the `filter` parameter defined by Filter
-
-Additionally, it is **recommended** that the OAFeat Part 3 Features Filter conformance class 
-(`http://www.opengis.net/spec/ogcapi-features-3/1.0/req/features-filter`) be implemented, which "binds" the Filter and Simple CQL
-conformance classes to the OAFeat Part 1 Features endpoint (`/collections/{collectionId}/items`). Note that POST with a JSON body 
-to the Features resource is not supported, as POST is used by the 
-[Transaction Extension](../../ogcapi-features/extensions/transaction/README.md) for creating items.
-
-This STAC Filter extension operates similarly to OAFeat Part 3 Features Filter, in that it binds the OAFeat Filter and Simple CQL 
-conformance classes to the STAC Item Search resource (`/search`). 
-
-Additionally, the implementation must support at least one of "CQL Text" 
-(`http://www.opengis.net/spec/ogcapi-features-3/1.0/req/cql-text`) or "CQL JSON" 
-(`http://www.opengis.net/spec/ogcapi-features-3/1.0/req/cql-json`). If both are advertised as being supported, it is only 
-required that both be supported for GET query parameters, and that only that CQL JSON be supported for POST JSON requests. 
-It is recommended that clients use CQL Text in GET requests and CQL JSON in POST requests. 
-
-The Filter extension does **not** require support for the Enhanced Spatial Operators, Enhanced Temporal Operators,
-Functions, Arithmetic Expressions, or Arrays conformance classes, but implementing these additional conformance 
-classes and their operations is both allowed and encouraged. Implementation of these is often limited by the 
-operations supported by the implementation's datastore, for example, Elasticsearch does not support the spatial 
-operations required by the Enhanced Spatial Operators.
 
 ## Grammar and schemas
 
@@ -252,11 +268,11 @@ Landing Page (`/`) returns:
     
     "http://www.opengis.net/spec/ogcapi_common-2/1.0/req/collections",
 
-    "http://www.opengis.net/spec/ogcapi-features-3/1.0/req/filter",
-    "http://www.opengis.net/spec/ogcapi-features-3/1.0/req/features-filter",
-    "http://www.opengis.net/spec/ogcapi-features-3/1.0/req/simple-cql",
-    "http://www.opengis.net/spec/ogcapi-features-3/1.0/req/cql-text",
-    "http://www.opengis.net/spec/ogcapi-features-3/1.0/req/cql-json",
+    "https://api.stacspec.org/v1.0.0-beta.1/extensions/filter/filter",
+    "https://api.stacspec.org/v1.0.0-beta.1/extensions/filter/features-filter",
+    "https://api.stacspec.org/v1.0.0-beta.1/extensions/filter/simple-cql",
+    "https://api.stacspec.org/v1.0.0-beta.1/extensions/filter/cql-text",
+    "https://api.stacspec.org/v1.0.0-beta.1/extensions/filter/cql-json",
 
     "http://stacspec.org/spec/api/1.0.0-beta.1/core",
     "http://stacspec.org/spec/api/1.0.0-beta.1/req/stac-search",
