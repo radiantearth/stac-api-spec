@@ -1,6 +1,7 @@
 # STAC API - Query Fragment
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
+- **Conformance Class:** <https://api.stacspec.org/v1.0.0-beta.1/item-search#query>
 - **Extension [Maturity Classification](../../extensions.md#extension-maturity):** Deprecated in  
   favor of the [Filter Extension](../filter/README.md) using [CQL](http://docs.opengeospatial.org/DRAFTS/19-079.html).
 - **Dependents:**
