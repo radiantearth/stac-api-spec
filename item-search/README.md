@@ -313,6 +313,9 @@ The full description and examples of this are found in the [context fragment](..
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Deprecated
 - **Definition**: [STAC API - Query Fragment](../fragments/query/)
 
+**Note** - the Query Extension is deprecated as of 1.0.0. Implementers
+are encouraged to use the Filter Extension instead.
+
 The STAC search endpoint, `/search`, by default only accepts a limited set of parameters to limit the results
 by properties. The Query extension adds a new parameter, `query`, that can take a number of comparison operators to
 match predicates between the fields requested and the values of Item objects. It can be used with both GET and POST, though

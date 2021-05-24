@@ -96,7 +96,8 @@ those provided by SQL. The Simple CQL conformance class requires the logical ope
 the comparison operators `=`, `<`, `<=`, `>`, `>=`, `LIKE`, `IS NULL`, `BETWEEN`, and `IN`; the spatial operator 
 `INTERSECTS`; and the temporal operator `ANYINTERACTS`. 
 
-The ANYINTERACTS operator has effectively the same semantics as the existing `datetime` filter.
+The ANYINTERACTS operator has effectively the same semantics as the `datetime` parameter
+in Item Search.
 
 CQL enables these types of queries:
 - Use of Item Property values in predicates (e.g., `item.properties.eo:cloud_cover`), using comparison operators
@@ -194,6 +195,7 @@ These projects have or are developing CQL support:
 
 - [GeoPython PyCQL](https://github.com/geopython/pycql/tree/master/pycql), and the 
   [Bitner fork](https://github.com/bitner/pycql) to be used in stac-fastapi
+- [pygeofilter](https://github.com/geopython/pygeofilter) has support for ECQL (a superset of CQL Text) and CQL JSON
 - [Franklin](https://github.com/azavea/franklin) is working on it in [this PR](https://github.com/azavea/franklin/pull/750).
 - [Geotools](https://github.com/geotools/geotools) has support for [CQL text](https://github.com/geotools/geotools/tree/main/modules/library/cql/src/main/java/org/geotools/filter/text/cql2)
 
@@ -215,7 +217,12 @@ fully-qualified property
 names not advertised in queryables (e.g., `properties.eo:cloud_cover`, in anticipation that there be some
 mechanism to explicitly allow or advertise this in the future.
 
-Queryables are advertised via a JSON Schema document retrieved from the `/queryables` endpoint. A basic Queryables
+Queryables are advertised via a JSON Schema document retrieved from the `/queryables` endpoint. This endpoint at the root 
+retrieves queryables that apply to all collections. When used as a subresource of the collection resource 
+(e.g. /collections/collection1/queryables), it returns queryables pertaining only to that single collection. 
+
+It is required to implement both of these endpoints, but for a STAC API, this may simply be a static document of the 
+STAC-specific fields.  A basic Queryables
 definitions for STAC Items should include at least the fields id, collection, geometry, and datetime. 
 
 ```json
@@ -404,7 +411,8 @@ Schema `$ref` mechanism to refer to a STAC schema definition. This not only allo
 but also binds an arbitrarily-named Queryable to a specific STAC field. For example, in the above we know that the 
 `eo:cloud_cover` field is referring to the field of the same name in the EO Extension not because they happen to have the same 
 name, but rather because the `$ref` indicates it. The field could just as well be named "cloud_cover", "CloudCover", or "cc", 
-and we would still know it filtered on the EO extension `eo:cloud_cover` field.
+and we would still know it filtered on the EO extension `eo:cloud_cover` field. For example, if the queryable was named 
+"CloudCover", a CQL expression using that queryable would look like `CloudCover <= 10`.
 
 While these do seem quite complex to write and understand, keep in mind that query construction will likely be done with a 
 more ergonomic SDK, and query parsing will be done with the help of a ABNF grammar and OpenAPI schema.
@@ -427,7 +435,7 @@ This example uses the queryables definition in (Interaction with Endpoints)(#int
 Note that `filter-lang` defaults to `cql-text` in this case. The parameter `filter-crs` defaults 
 to `http://www.opengis.net/def/crs/OGC/1.3/CRS84` for a STAC API.
 
-```http
+```javascript
 GET /search?filter=id='LC08_L1TP_060247_20180905_20180912_01_T1_L1TP' AND collection='landsat8_l1tp'
 ```
 
@@ -436,7 +444,7 @@ GET /search?filter=id='LC08_L1TP_060247_20180905_20180912_01_T1_L1TP' AND collec
 Note that `filter-lang` defaults to `cql-json` in this case. The parameter `filter-crs` defaults 
 to `http://www.opengis.net/def/crs/OGC/1.3/CRS84` for a STAC API.
 
-```http
+```javascript
 POST /search
 { 
   "filter": {
@@ -463,7 +471,7 @@ OGC API Features filters only operate against a single collection already.
 
 #### Example 2: GET with cql-text
 
-```http
+```javascript
 GET /search?filter=collection = 'landsat8_l1tp' 
   AND gsd <= 30
   AND eo:cloud_cover <= 10 
@@ -473,7 +481,7 @@ GET /search?filter=collection = 'landsat8_l1tp'
 
 #### Example 2: POST with cql-json
 
-```http
+```javascript
 POST /search
 { 
   "filter-lang": "cql-json",
@@ -547,13 +555,13 @@ This queryables JSON Schema is used in these examples:
 
 #### Example 3: GET with cql-text
 
-```http
+```javascript
 GET /search?filter=prop1 = prop2
 ```
 
 #### Example 3: POST with cql-json
 
-```http
+```javascript
 POST /search
 { 
   "filter-lang": "cql-json",
@@ -660,7 +668,7 @@ a tiny sliver of data.
 
 #### Example 4: AND cql-text (GET)
 
-```http
+```javascript
 /search?filter=sentinel:data_coverage > 50 AND eo:cloud_cover < 10 
 ```
 
@@ -700,7 +708,7 @@ This uses the same queryables as Example 4.
 
 #### Example 5: OR cql-text (GET)
 
-```http
+```javascript
 /search?filter=sentinel:data_coverage > 50 OR eo:cloud_cover < 10 
 ```
 
@@ -736,7 +744,7 @@ The only temporal operator required is `ANYINTERACTS`, which follows the same se
 
 #### Example 6: ANYINTERACTS cql-text (GET)
 
-```http
+```javascript
 /search?filter=datetime ANYINTERACTS 2020-11-11
 ```
 
@@ -761,7 +769,7 @@ GeoJSON geometries.
 
 #### Example 6: INTERSECTS cql-text (GET)
 
-```http
+```javascript
 /search?filter=INTERSECTS(geometry,POLYGON((-77.0824 38.7886,-77.0189 38.7886,-77.0189 38.8351,-77.0824 38.8351,-77.0824 38.7886)))
 ```
 
