@@ -87,8 +87,8 @@ The core parameters for STAC search are defined by OAFeat, and STAC adds a few p
 | Parameter    | Type             | Source API   | Description |
 | -----------  | ---------------- | ------------ | ----------- |
 | limit        | integer          | OAFeat       | The maximum number of results to return (page size). Defaults to 10 |
-| bbox         | \[number]        | OAFeat       | Requested bounding box.  Represented using either 2D or 3D geometries. The length of the array must be 2*n where n is the number of dimensions. The array contains all axes of the southwesterly most extent followed by all axes of the northeasterly most extent specified in Longitude/Latitude or Longitude/Latitude/Elevation based on [WGS 84](http://www.opengis.net/def/crs/OGC/1.3/CRS84). When using 3D geometries, the elevation of the southwesterly most extent is the minimum elevation in meters and the elevation of the northeasterly most extent is the maximum. |
-| datetime     | string           | OAFeat       | Single date+time, or a range ('/' seperator), formatted to [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). Use double dots `..` for open date ranges. |
+| bbox         | \[number]        | OAFeat       | Requested bounding box.  Represented using either 2D or 3D geometries. The length of the array must be 2\*n where n is the number of dimensions. The array contains all axes of the southwesterly most extent followed by all axes of the northeasterly most extent specified in Longitude/Latitude or Longitude/Latitude/Elevation based on [WGS 84](http://www.opengis.net/def/crs/OGC/1.3/CRS84). When using 3D geometries, the elevation of the southwesterly most extent is the minimum elevation in meters and the elevation of the northeasterly most extent is the maximum. |
+| datetime     | string           | OAFeat       | Single date+time, or a range ('/' separator), formatted to [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). Use double dots `..` for open date ranges. |
 | intersects   | GeoJSON Geometry | STAC         | Searches items by performing intersection between their geometry and provided GeoJSON geometry.  All GeoJSON geometry types must be supported. |
 | ids          | \[string]        | STAC         | Array of Item ids to return. |
 | collections  | \[string]        | STAC         | Array of one or more Collection IDs that each matching Item must be in. |
@@ -99,7 +99,7 @@ should be returned. See [examples](examples.md) to see sample requests.
 ## Response
 
 The response to a request (GET or POST) to the search endpoint should always be an 
-`[ItemCollection](../core/itemcollection-spec.md)` object - a valid [GeoJSON 
+[ItemCollection](../fragments/itemcollection/README.md) object - a valid [GeoJSON 
 FeatureCollection](https://tools.ietf.org/html/rfc7946#section-3.3) that consists entirely of STAC 
 [Item](../stac-spec/item-spec/item-spec.md) objects. 
 
