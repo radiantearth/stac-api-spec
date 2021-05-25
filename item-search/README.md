@@ -112,7 +112,6 @@ parameter name is defined by the implementor and is not necessarily part of the 
 
 ```json
 {
-    "stac_version": "1.0.0-beta.2",
     "type": "FeatureCollection",
     "features": [],
     "links": [
