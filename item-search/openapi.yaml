@@ -34,13 +34,14 @@ paths:
         - Item Search
       parameters:
         - $ref: '#/components/parameters/bbox'
+        - $ref: '#/components/parameters/intersects'
         - $ref: '#/components/parameters/datetime'
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/ids'
         - $ref: '#/components/parameters/collectionsArray'
         # extensions
         - $ref: '../fragments/fields/openapi.yaml#/components/parameters/fields'
-        - $ref: '../fragments/query/openapi.yaml#/components/parameters/query'
+        - $ref: '../fragments/filter/openapi.yaml#/components/parameters/filter'
         - $ref: '../fragments/sort/openapi.yaml#/components/parameters/sortby'
       responses:
         '200':
@@ -78,7 +79,7 @@ paths:
                - $ref: '#/components/schemas/searchBody'
               # extensions
                - $ref: '../fragments/fields/openapi.yaml#/components/schemas/searchBody'
-               - $ref: '../fragments/query/openapi.yaml#/components/schemas/searchBody'
+               - $ref: '../fragments/filter/openapi.yaml#/components/schemas/searchBody'
                - $ref: '../fragments/sort/openapi.yaml#/components/schemas/searchBody'
       responses:
         '200':
@@ -201,6 +202,17 @@ components:
         minimum: 1
         maximum: 10000
         default: 10
+      style: form
+      explode: false
+    intersects:
+      name: intersects
+      in: query
+      description: |-
+        The optional intersects parameter filters the result Items in the same was as bbox, only with
+        a GeoJSON Geometry rather than a bbox. 
+      required: false
+      schema:
+        $ref: "../core/commons.yaml#/components/schemas/geometryGeoJSON"
       style: form
       explode: false
   schemas:

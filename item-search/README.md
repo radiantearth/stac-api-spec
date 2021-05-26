@@ -14,9 +14,10 @@
   - [Example Landing Page for STAC API - Item Search](#example-landing-page-for-stac-api---item-search)
   - [Extensions](#extensions)
     - [Fields](#fields)
-    - [Query](#query)
+    - [Filter](#filter)
     - [Sort](#sort)
     - [Context](#context)
+    - [Query](#query)
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.1/item-search))
 - **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.1/item-search>
@@ -271,17 +272,17 @@ allows the client to suggest to the server which Item attributes should be inclu
 through the use of a `fields` parameter. The full description of how this extension works can be found in the 
 [fields fragment](../fragments/fields/). 
 
-### Query
+### Filter
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.1/item-search#query>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.1/item-search#filter>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
-- **Definition**: [STAC API - Query Fragment](../fragments/query/)
+- **Definition**: [STAC API - Filter Fragment](../fragments/filter/)
 
 The STAC search endpoint, `/search`, by default only accepts a limited set of parameters to limit the results
-by properties. The Query extension adds a new parameter, `query`, that can take a number of comparison operators to
-match predicates between the fields requested and the values of Item objects. It can be used with both GET and POST, though
-GET includes the exact same JSON. The full details on the JSON structure are specified in the [query 
-fragment](../fragments/query/).
+by properties. The Filter extension adds a new parameter, `filter`, that can take a number of comparison operators to
+match predicates between the fields requested and the values of Item objects. It can be used with both GET and POST and supports two
+query formats, `cql-text` and `cql-json`. The full details on the JSON structure are specified in the [filter 
+fragment](../fragments/filter/).
 
 ### Sort
 
@@ -305,3 +306,18 @@ of this extension can be found in the [sort fragment](../fragments/sort).
 This extension is intended to augment the core ItemCollection responses from the `search` API endpoint with a
 JSON object called `context` that includes the number of items `matched`, `returned` and the `limit` requested.
 The full description and examples of this are found in the [context fragment](../fragments/context).
+
+### Query
+
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.1/item-search#query>
+- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Deprecated
+- **Definition**: [STAC API - Query Fragment](../fragments/query/)
+
+**Note** - the Query Extension is deprecated as of 1.0.0. Implementers
+are encouraged to use the Filter Extension instead.
+
+The STAC search endpoint, `/search`, by default only accepts a limited set of parameters to limit the results
+by properties. The Query extension adds a new parameter, `query`, that can take a number of comparison operators to
+match predicates between the fields requested and the values of Item objects. It can be used with both GET and POST, though
+GET includes the exact same JSON. The full details on the JSON structure are specified in the [query 
+fragment](../fragments/query/).
