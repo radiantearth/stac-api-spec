@@ -1,7 +1,7 @@
 # STAC API - Context Fragment
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
-- **Conformance Class:** <https://api.stacspec.org/v1.0.0-beta.1/item-search#context>
+- **Conformance Class:** <https://api.stacspec.org/v1.0.0-beta.2/item-search#context>
 - **Fragment [Maturity Classification](../../extensions.md#extension-maturity):** Pilot
 - **Dependents:**
   - [Item Search](../../item-search)
@@ -20,16 +20,16 @@ implementing OGC API - Features.*
 
 ## ItemCollection fields
 
-| Element   | Type                              | Description |
-| --------- | --------------------------------- | ----------- |
+| Element   | Type                              | Description                                                                                      |
+| --------- | --------------------------------- | ------------------------------------------------------------------------------------------------ |
 | `context` | [Context Object](#context-object) | **REQUIRED.** The search-related metadata for the [ItemCollection](../itemcollection/README.md). |
 
 ## Context Object
 
-| Element  | Type            | Description |
-| -------- | --------------- | ----------- |
-| returned | integer         | **REQUIRED** The count of results returned by this response. Equal to the cardinality of features array. |
-| limit    | integer \| null | The maximum number of results to which the result was limited. |
+| Element  | Type            | Description                                                                                                                           |
+| -------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| returned | integer         | **REQUIRED** The count of results returned by this response. Equal to the cardinality of features array.                              |
+| limit    | integer \| null | The maximum number of results to which the result was limited.                                                                        |
 | matched  | integer         | The count of total number of results that match for this query, possibly estimated, particularly in the context of NoSQL data stores. |
 
 The default sort of query results should be stable, but may not be depending on the data store's sorting performance.

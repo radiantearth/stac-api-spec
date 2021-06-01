@@ -7,10 +7,10 @@
 
 *based on [**OGC API - Features - Part 1: Core**](https://www.ogc.org/standards/ogcapi-features)*
 
-- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.1/ogcapi-features)) 
+- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.2/ogcapi-features)) 
   uses all the OGC API - Features openapi fragments to describe returning STAC Item objects.
 - **Conformance URIs:**
-  - <https://api.stacspec.org/v1.0.0-beta.1/ogcapi-features> 
+  - <https://api.stacspec.org/v1.0.0-beta.2/ogcapi-features> 
   - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core> - [Requirements Class Core](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_core))
   - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30> - [Requirements Class OpenAPI 3.0](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_oas30))
   - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson> - [Requirements Class GeoJSON](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_geojson))
@@ -33,15 +33,15 @@ with OAFeat clients. But specialized STAC clients will likely display results be
 The core OGC API - Features endpoints are shown below, with details provided in an 
 [OpenAPI specification document](openapi.yaml).
 
-| Endpoint                                        | Returns          | Description |
-| ----------------------------------------------- | ---------------- | ----------- |
-| `/`                                             | [Catalog](../stac-spec/catalog-spec/README.md) | Landing page, links to API capabilities |
-| `/conformance`                                  | JSON | Info about standards to which the API conforms |
-| `/collections`                                  | JSON | Object containing an array of Collection objects in the Catalog, and Link relations |
-| `/collections/{collectionId}`                   | [Collection](../stac-spec/collection-spec/README.md) | Returns single Collection JSON |
-| `/collections/{collectionId}/items`             | [ItemCollection](../fragments/itemcollection/README.md) | GeoJSON FeatureCollection-conformant entity of Item objects in collection |
-| `/collections/{collectionId}/items/{featureId}` | [Item](../stac-spec/item-spec/README.md) | Returns single Item (GeoJSON Feature) |
-| `/api`                                          | OpenAPI 3.0 JSON | Returns an OpenAPI description of the service from the `service-desc` link `rel` - not required to be `/api`, but the document is required |
+| Endpoint                                        | Returns                                                 | Description                                                                                                                                |
+| ----------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `/`                                             | [Catalog](../stac-spec/catalog-spec/README.md)          | Landing page, links to API capabilities                                                                                                    |
+| `/conformance`                                  | JSON                                                    | Info about standards to which the API conforms                                                                                             |
+| `/collections`                                  | JSON                                                    | Object containing an array of Collection objects in the Catalog, and Link relations                                                        |
+| `/collections/{collectionId}`                   | [Collection](../stac-spec/collection-spec/README.md)    | Returns single Collection JSON                                                                                                             |
+| `/collections/{collectionId}/items`             | [ItemCollection](../fragments/itemcollection/README.md) | GeoJSON FeatureCollection-conformant entity of Item objects in collection                                                                  |
+| `/collections/{collectionId}/items/{featureId}` | [Item](../stac-spec/item-spec/README.md)                | Returns single Item (GeoJSON Feature)                                                                                                      |
+| `/api`                                          | OpenAPI 3.0 JSON                                        | Returns an OpenAPI description of the service from the `service-desc` link `rel` - not required to be `/api`, but the document is required |
 
 The OGC API - Features is a standard API that represents collections of geospatial data. It defines the RESTful interface 
 to query geospatial data, with GeoJSON as a main return type. With OAFeat you can return any `Feature`, which is a geometry 
@@ -114,13 +114,13 @@ the [overview](../overview.md#example-landing-page) document.
 
 ```json
 {
-    "stac_version": "1.0.0-beta.2",
+    "stac_version": "1.0.0",
     "id": "example-stac",
     "title": "A simple STAC API Example",
     "description": "This Catalog aims to demonstrate the a simple landing page",
     "conformsTo" : [
-        "https://api.stacspec.org/v1.0.0-beta.1/core",
-        "https://api.stacspec.org/v1.0.0-beta.1/ogcapi-features",
+        "https://api.stacspec.org/v1.0.0-beta.2/core",
+        "https://api.stacspec.org/v1.0.0-beta.2/ogcapi-features",
         "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core",
         "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30",
         "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson"

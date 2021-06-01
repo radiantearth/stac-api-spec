@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: The SpatioTemporal Asset Catalog API - Transaction
-  version: 1.0.0-beta.1
+  version: 1.0.0-beta.2
   description: >-
     This is an OpenAPI definition of the SpatioTemporal Asset Catalog API Transaction
     specification.
@@ -30,9 +30,9 @@ paths:
         content:
           application/json:
             schema:
-                oneOf:
-                 - $ref: '../../../core/commons.yaml#/components/schemas/item'
-                 - $ref: '../../../fragments/itemcollection/openapi.yaml#/components/schemas/itemCollection'
+              oneOf:
+                - $ref: '../../../core/commons.yaml#/components/schemas/item'
+                - $ref: '../../../fragments/itemcollection/openapi.yaml#/components/schemas/itemCollection'
       responses:
         '201':
           description: Status of the create request.
