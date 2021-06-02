@@ -335,9 +335,9 @@ In an implementation that supports Simple CQL, the Landing Page (`/`) should ret
     "https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:cql-text",
     "https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:cql-json",
 
-    "http://stacspec.org/spec/api/1.0.0-beta.2/core",
-    "http://stacspec.org/spec/api/1.0.0-beta.2/req/stac-search",
-    "http://stacspec.org/spec/api/1.0.0-beta.2/req/stac-response"
+    "http://api.stacspec.org/v1.0.0-beta.2/core",
+    "http://api.stacspec.org/v1.0.0-beta.2/req/stac-search",
+    "http://api.stacspec.org/v1.0.0-beta.2/req/stac-response"
   ],
   "links": [
     {
