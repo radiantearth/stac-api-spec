@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: The SpatioTemporal Asset Catalog API - Commons
   description: This is the OpenAPI version of the core STAC spec JSON Schemas.
-  version: 1.0.0-beta.1
+  version: 1.0.0-beta.2
 paths: {}
 components:
   responses:
@@ -100,7 +100,7 @@ components:
         license:
           $ref: '#/components/schemas/license'
         extent:
-          $ref: "#/components/schemas/extent"
+          $ref: '#/components/schemas/extent'
         providers:
           $ref: '#/components/schemas/providers'
         links:
@@ -148,7 +148,7 @@ components:
                       - type: string
                       - type: number
       example:
-        stac_version: 1.0.0-beta.2
+        stac_version: 1.0.0
         stac_extensions: []
         type: Collection
         id: Sentinel-2
@@ -272,7 +272,7 @@ components:
             bbox:
               description: |-
                 One or more bounding boxes that describe the spatial extent of the dataset.
-                
+
                 The first bounding box describes the overall spatial
                 extent of the data. All subsequent bounding boxes describe 
                 more precise bounding boxes, e.g., to identify clusters of data.
@@ -437,7 +437,7 @@ components:
         `proprietary` if the license is not on the SPDX license list or
         `various` if multiple licenses apply. In these two cases links to the
         license texts SHOULD be added, see the `license` link relation type.
-        
+
         Non-SPDX licenses SHOULD add a link to the license text with the
         `license` relation in the links section. The license text MUST NOT be
         provided as a value of this field. If there is no public license URL
@@ -556,7 +556,7 @@ components:
     stac_version:
       title: STAC version
       type: string
-      example: 1.0.0-beta.2
+      example: 1.0.0
     stac_extensions:
       title: STAC extensions
       type: array
@@ -569,7 +569,7 @@ components:
           - title: Reference to a core extension
             type: string
     item:
-      description:  A GeoJSON Feature augmented with foreign members that contain values relevant to a STAC entity
+      description: A GeoJSON Feature augmented with foreign members that contain values relevant to a STAC entity
       type: object
       required:
         - stac_version
@@ -590,7 +590,7 @@ components:
         bbox:
           $ref: '#/components/schemas/bbox'
         geometry:
-          $ref: "#/components/schemas/geometryGeoJSON"
+          $ref: '#/components/schemas/geometryGeoJSON'
         type:
           $ref: '#/components/schemas/itemType'
         links:
@@ -713,16 +713,16 @@ components:
               type: string
             description: Purposes of the asset
             example:
-                  - thumbnail
+              - thumbnail
     geometryGeoJSON:
       oneOf:
-      - $ref: "#/components/schemas/pointGeoJSON"
-      - $ref: "#/components/schemas/multipointGeoJSON"
-      - $ref: "#/components/schemas/linestringGeoJSON"
-      - $ref: "#/components/schemas/multilinestringGeoJSON"
-      - $ref: "#/components/schemas/polygonGeoJSON"
-      - $ref: "#/components/schemas/multipolygonGeoJSON"
-      - $ref: "#/components/schemas/geometrycollectionGeoJSON"
+        - $ref: '#/components/schemas/pointGeoJSON'
+        - $ref: '#/components/schemas/multipointGeoJSON'
+        - $ref: '#/components/schemas/linestringGeoJSON'
+        - $ref: '#/components/schemas/multilinestringGeoJSON'
+        - $ref: '#/components/schemas/polygonGeoJSON'
+        - $ref: '#/components/schemas/multipolygonGeoJSON'
+        - $ref: '#/components/schemas/geometrycollectionGeoJSON'
     geometrycollectionGeoJSON:
       type: object
       required:
@@ -736,7 +736,7 @@ components:
         geometries:
           type: array
           items:
-            $ref: "#/components/schemas/geometryGeoJSON"
+            $ref: '#/components/schemas/geometryGeoJSON'
     linestringGeoJSON:
       type: object
       required:
@@ -862,7 +862,7 @@ components:
         features:
           type: array
           items:
-            $ref: "#/components/schemas/featureGeoJSON"
+            $ref: '#/components/schemas/featureGeoJSON'
     featureGeoJSON:
       type: object
       required:
@@ -875,7 +875,7 @@ components:
           enum:
             - Feature
         geometry:
-          $ref: "#/components/schemas/geometryGeoJSON"
+          $ref: '#/components/schemas/geometryGeoJSON'
         properties:
           type: object
           nullable: true

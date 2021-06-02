@@ -22,7 +22,7 @@ on the extension.
 | Pilot                   | 1           | Idea is fleshed out, with examples and a JSON schema, and implemented in one or more catalogs. Additional implementations encouraged to help give feedback | Approaching stability - breaking changes are not anticipated but can easily come from additional feedback |
 | Candidate               | 3           | A number of implementers are using it and are standing behind it as a solid extension. Can generally count on an extension at this maturity level | Mostly stable, breaking changes require a new version and minor changes are unlikely. |
 | Stable                  | 6           | Highest current level of maturity. The community of extension maintainers commits to a STAC review process for any changes, which are not made lightly. | Completely stable, all changes require a new version number and review process. |
-| Deprecated              | N/A         | A previous extension that has likely been superceded by a newer one or did not work out for some reason. | DO NOT USE, is not supported |
+| Deprecated              | N/A         | A previous extension that has likely been superseded by a newer one or did not work out for some reason. | DO NOT USE, is not supported |
 
 Maturity mostly comes through diverse implementations, so the minimum number of implementations
 column is the main gating function for an extension to mature. But extension authors can also
@@ -67,14 +67,13 @@ the service supports. This are listed at the top of each extension description, 
 
 | Extension Name | Conformance Class URIs  |
 |---------------|-------------------------|
-| [Fields](item-search/README.md#fields)   | <https://api.stacspec.org/v1.0.0-beta.1/item-search#fields>  |
-| [Filter](item-search/README.md#filter)   | <https://api.stacspec.org/v1.0.0-beta.1/item-search#filter:filter><br/><https://api.stacspec.org/v1.0.0-beta.1/item-search#filter:simple-cql><br/><https://api.stacspec.org/v1.0.0-beta.1/item-search#filter:item-search-filter><br/><https://api.stacspec.org/v1.0.0-beta.1/item-search#filter:cql-text><br/><https://api.stacspec.org/v1.0.0-beta.1/item-search#filter:cql-json> |
-| [Context](item-search/README.md#context) | <https://api.stacspec.org/v1.0.0-beta.1/item-search#context> |
-| [Sort](item-search/README.md#sort)       | <https://api.stacspec.org/v1.0.0-beta.1/item-search#sort>    |
-| [Transaction](ogcapi-features/extensions/transaction/README.md) | <https://api.stacspec.org/v1.0.0-beta.1/ogcapi-features/extensions/transaction> |
-| [Items and Collections API Version](ogcapi-features/extensions/version/README.md) | <https://api.stacspec.org/v1.0.0-beta.1/ogcapi-features/extensions/version> |
-| [Query](item-search/README.md#query)     | <https://api.stacspec.org/v1.0.0-beta.1/item-search#query> |
-
+| [Fields](item-search/README.md#fields)   | <https://api.stacspec.org/v1.0.0-beta.2/item-search#fields>  |
+| [Filter](item-search/README.md#filter)   | <https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:filter><br/><https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:simple-cql><br/><https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:item-search-filter><br/><https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:cql-text><br/><https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:cql-json> |
+| [Context](item-search/README.md#context) | <https://api.stacspec.org/v1.0.0-beta.2/item-search#context> |
+| [Sort](item-search/README.md#sort)       | <https://api.stacspec.org/v1.0.0-beta.2/item-search#sort>    |
+| [Transaction](ogcapi-features/extensions/transaction/README.md) | <https://api.stacspec.org/v1.0.0-beta.2/ogcapi-features/extensions/transaction> |
+| [Items and Collections API Version](ogcapi-features/extensions/version/README.md) | <https://api.stacspec.org/v1.0.0-beta.2/ogcapi-features/extensions/version> |
+| [Query](item-search/README.md#query)     | <https://api.stacspec.org/v1.0.0-beta.2/item-search#query> |
 
 ## Third-party / vendor extensions
 
