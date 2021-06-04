@@ -1,13 +1,15 @@
 # Extensions
 
 - [Overview](#overview)
-- [General Conventions](#general-conventions)
+- [Using Extensions](#using-extensions)
+  - [Extension IDs in `stac_extensions`](#extension-ids-in-stac_extensions)
 - [Stable STAC Extensions](#stable-stac-extensions)
 - [Community Extensions](#community-extensions)
-  - [Extension Maturity](#extension-maturity)
   - [Proposed extensions](#proposed-extensions)
 - [Extending STAC](#extending-stac)
+  - [General Conventions](#general-conventions)
   - [Proposing new extensions](#proposing-new-extensions)
+  - [Extension Maturity](#extension-maturity)
   - [Prefixes](#prefixes)
   - [Use of arrays and objects](#use-of-arrays-and-objects)
 
@@ -33,13 +35,38 @@ can be aware of it.
 
 Each extension has at least one *owner*. You can find extension owners in each extension's README.
 
-## General Conventions
+## Using Extensions
 
-1. Additional attributes relating to an [Item](../item-spec/item-spec.md) should be added into the Item Properties object, rather than directly in the Item object.
-2. In general, additional attributes that apply to an Item Asset should also be allowed in Item Properties and vice-versa.
-For example, the `eo:bands` attribute may be used in Item Properties to describe the aggregation of all bands available in
-the Item Asset objects contained in the Item, but may also be used in an individual Item Asset to describe only the bands available in that asset.
-3. Additional attributes relating to a [Catalog](../catalog-spec/catalog-spec.md) or [Collection](../collection-spec/collection-spec.md) should be added to the root of the object.
+When deciding how to model data in STAC it is highly recommended to first look at the [list of 
+extensions](https://stac-extensions.github.io/) and re-use fields there instead of creating your own version. This
+increases interoperability, as users know that the meaning of your fields is the same as in other STAC 
+implementations. Many clients will also understand more mature extensions for better display and querying. 
+
+To incorporate an extension in STAC the 'extension ID' of the extension must be added to the `stac_extensions`
+array of the STAC [Catalog](../catalog-spec/catalog-spec.md#stac_extensions), 
+[Collection](../collection-spec/collection-spec.md#stac_extensions) or [Item](../item-spec/item-spec.md#stac_extensions)
+object. This identifier is a link to the JSON Schema URL that validates the fields in the extension, so STAC validators
+can fetch the Schema to validate that the STAC object properly follows the extension. These JSON Schema URLs also act as 
+identifiers for specific version of the extension that the STAC object implements. The extension ID can be
+found listed as the 'identifier' in the second line of the README of any extension made with the [extension 
+template](https://github.com/stac-extensions/template), and new ones get published automatically with any release made 
+with the template.
+
+### Extension IDs in `stac_extensions`
+
+The logic for when an object should list an extension ID in its `stac_extension` array is as follows:
+
+- If the object directly implements the extension (by following the specified requirements - usually by including 
+fields, but occasionally implementing alternate behaviors), the  `stac_extensions` of that object should contain the extension ID.
+- If an Asset implements fields of the extension, then `stac_extensions` of the Item or Collection which holds that
+  Asset should contain the extension ID.
+- If a Collection [summary](../collection-spec/collection-spec.md#summaries) contains Item fields that implement an extension, then
+  the `stac_extensions` array of that Collection should list the extension ID. For example, if a Collection `summaries` field
+  contains a summary of `eo:bands`, then that Collection should have the EO extension JSON Schema URL in the `stac_extensions` array.
+- If an object implements an extension that results in fields from a separate extension to be referenced, then the latter extension
+  ID should be included in the `stac_extensions` array for that object. For example, if a Collection implements the
+  [item_assets](https://github.com/stac-extensions/item-assets) extension, and in the `item_assets` field there is an Asset Definition
+  which includes `eo:bands`, then the EO extension ID should be listed in that Collection's `stac_extensions`.
 
 ## Stable STAC Extensions
 
@@ -77,9 +104,25 @@ with existing extensions as well as possible and may even re-use fields and thei
 into a new extension that combines commonly used fields across multiple extensions.
 Best practices for extension proposals are still emerging in this section.
 
+### General Conventions
+
+Creating a new extension usually involves defining a set of logically grouped fields, and specifying what the allowed values
+for those fields are. This should be done in the extension text and in JSON Schema, to provide validation. While one 
+can theoretically add fields anywhere in JSON there are some conventions as to where to add them in STAC objects.
+
+1. Additional attributes relating to an [Item](../item-spec/item-spec.md) should be added into the Item Properties object,
+   rather than directly in the Item object.
+2. In general, additional attributes that apply to an Item Asset should also be allowed in Item Properties and vice-versa.
+   For example, the `eo:bands` attribute may be used in Item Properties to describe the aggregation of all bands available in
+   the Item Asset objects contained in the Item, but may also be used in an individual Item Asset to describe only the bands available in that asset.
+3. Additional attributes relating to a [Catalog](../catalog-spec/catalog-spec.md) or
+   [Collection](../collection-spec/collection-spec.md) should be added to the root of the object.
+4. Extensions may also extend other extensions, declaring that dependency in the text and JSON Schema.
+
 ### Proposing new extensions
 
-Extensions can be hosted anywhere, but should use the [extension template](https://github.com/stac-extensions/stac-extensions.github.io#using-the-stac-extensions-template) 
+Extensions can be hosted anywhere, but should use the
+[extension template](https://github.com/stac-extensions/stac-extensions.github.io#using-the-stac-extensions-template) 
 as a starting point. If you'd like to add a repository to the [stac-extensions](https://github.com/stac-extensions) 
 GitHub organization, just ask on [Gitter](https://gitter.im/SpatioTemporal-Asset-Catalog/Lobby)! This is fine for 
 work-in-progress extensions. You can also host the extension repository in your own GitHub account, and optionally 
@@ -163,10 +206,20 @@ For extensions, it is recommended to
 1. Use arrays only as enumerations/lists (possibly sorted), without implying additional meaning (such as order)
 2. To avoid using nested objects, in favor of multiple attributes with a similar naming scheme.
 
-For example, if one would like to define an extension to contain a start and a end date, there are multiple options (tl;dr: option **3** is recommended):
+For example, if one would like to define an extension to contain a start and a end date,
+there are multiple options (tl;dr: option **3** is recommended):
 
-1. Define an object, for example: `"date_range": {"start": "2018-01-01", "end": "2018-01-31"}`. This is **discouraged** as it is more complex to search in objects.
-2. Define an two-element array where the first element is the start date and the second element is the end date, for example `"date_range": ["2018-01-01", "2018-01-31"]`. This is **discouraged** as it would conflict with Collection `summaries`, which always considers arrays as true (potentially sorted) enumeration without any additional meaning.
-3. Define two separate fields, e.g. `"date_range_start": "2018-01-01", "date_range_end": "2018-01-31"`. This is **recommended** as it avoids the conflicts above and is usually better displayed in software that only understands GeoJSON but has no clue about STAC. This is due to the fact that most legacy software can not display arrays or objects GeoJSON `properties` properly.
+1. Define an object, for example: `"date_range": {"start": "2018-01-01", "end": "2018-01-31"}`.
+   This is **discouraged** as it is more complex to search in objects.
+2. Define an two-element array where the first element is the start date and the second element is the end date,
+   for example `"date_range": ["2018-01-01", "2018-01-31"]`.
+   This is **discouraged** as it would conflict with Collection `summaries`,
+   which always considers arrays as true (potentially sorted) enumeration without any additional meaning.
+3. Define two separate fields, e.g. `"date_range_start": "2018-01-01", "date_range_end": "2018-01-31"`.
+   This is **recommended** as it avoids the conflicts above and is usually better displayed in software that only understands GeoJSON
+   but has no clue about STAC.
+   This is due to the fact that most legacy software can not display arrays or objects GeoJSON `properties` properly.
 
-This rules only applies to the fields defined directly for the Item's `properties`. For fields and structures defined on other levels (e.g. in the root of an Item or in an array), extension authors can freely define the structure. So an array of objects such as the `eo:bands` are fine to use, but keep in mind that the drawbacks mentioned above usually still apply.
+This rules only applies to the fields defined directly for the Item's `properties`.
+For fields and structures defined on other levels (e.g. in the root of an Item or in an array), extension authors can freely define the structure.
+So an array of objects such as the `eo:bands` are fine to use, but keep in mind that the drawbacks mentioned above usually still apply.
