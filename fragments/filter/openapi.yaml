@@ -32,14 +32,21 @@ paths:
       responses:
         '200':
           description: A JSON Schema defining the Queryables allowed in CQL expressions
-          content:
-            application/schema+json:
-              schema:
-                $ref: 'https://json-schema.org/draft/2019-09/schema'
+          # content:
+          #   application/schema+json:
+          #     schema:
+          #       $ref: 'https://json-schema.org/draft/2019-09/schema'
         default:
           $ref: '../../core/commons.yaml#/components/responses/Error'
   /collections/{collectionId}:
     get:
+      parameters:
+        - in: path
+          name: collectionId
+          schema:
+            type: string
+          required: true
+          description: ID of Collection
       responses:
         '200':
           description: Collection description
@@ -56,15 +63,22 @@ paths:
         This endpoint returns a list of variable terms that can be used in CQL expressions. The
         precise definition of this can be found in the OGC API - Features - Part 3: Filtering and the 
         Common Query Language (CQL) specification.
+      parameters:
+        - in: path
+          name: collectionId
+          schema:
+            type: string
+          required: true
+          description: ID of Collection
       tags:
         - Queryables
       responses:
         '200':
           description: A JSON Schema defining the Queryables allowed in CQL expressions filtering only that collection
-          content:
-            application/schema+json:
-              schema:
-                $ref: 'https://json-schema.org/draft/2019-09/schema'
+          # content:
+          #   application/schema+json:
+          #     schema:
+          #       $ref: 'https://json-schema.org/draft/2019-09/schema'
         default:
           $ref: '../../core/commons.yaml#/components/responses/Error'
 components:
@@ -125,8 +139,6 @@ components:
         A CQL filter expression in the 'cql-text' encoding.
       type: string
     filter-cql-json:
-      description: |
-        A CQL filter expression in the 'cql-json' encoding.
       $ref: './cql.yml#/components/schemas/booleanValueExpression'
     filter-lang:
       description: |
