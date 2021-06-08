@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: The SpatioTemporal Asset Catalog API - Transaction
-  version: 1.0.0-beta.1
+  version: 1.0.0-beta.2
   description: This is an OpenAPI definition of the SpatioTemporal Asset Catalog API Transaction specification.
   contact:
     name: STAC Specification
@@ -323,7 +323,7 @@ components:
         stac_version:
           title: STAC version
           type: string
-          example: 1.0.0-beta.2
+          example: 1.0.0
         stac_extensions:
           title: STAC extensions
           type: array

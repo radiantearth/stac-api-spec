@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: The SpatioTemporal Asset Catalog API - Item Search
-  version: 1.0.0-beta.1
+  version: 1.0.0-beta.2
   description: This is an OpenAPI definition of the SpatioTemporal Asset Catalog API Item Search specification.
   contact:
     name: STAC Specification
@@ -44,7 +44,7 @@ paths:
                   stac_version:
                     title: STAC version
                     type: string
-                    example: 1.0.0-beta.2
+                    example: 1.0.0
                   stac_extensions:
                     title: STAC extensions
                     type: array
@@ -423,7 +423,7 @@ paths:
                                       - type: string
                                       - type: number
                       example:
-                        stac_version: 1.0.0-beta.2
+                        stac_version: 1.0.0
                         stac_extensions: []
                         type: Collection
                         id: Sentinel-2

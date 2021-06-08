@@ -1,7 +1,7 @@
 openapi: 3.0.2
 info:
   title: 'STAC API - Features (extends OGC API - Features - Part 1: Core)'
-  version: 1.0.0-beta.1
+  version: 1.0.0-beta.2
   description: This is an OpenAPI definition of the SpatioTemporal Asset Catalog API Item Search specification.
   contact:
     name: STAC Specification
@@ -57,13 +57,13 @@ paths:
                         $ref: '#/components/schemas/collections/properties/links'
                   - $ref: '#/components/responses/ConformanceDeclaration/content/application~1json/schema'
               example:
-                stac_version: 1.0.0-beta.1
+                stac_version: 1.0.0-beta.2
                 type: Catalog
                 id: sentinel
                 title: Copernicus Sentinel Imagery
                 description: Catalog of Copernicus Sentinel 1 and 2 imagery.
                 conformsTo:
-                  - 'https://api.stacspec.org/v1.0.0-beta.1/core'
+                  - 'https://api.stacspec.org/v1.0.0-beta.2/core'
                   - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core'
                   - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30'
                   - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson'
@@ -361,7 +361,7 @@ components:
               stac_version:
                 title: STAC version
                 type: string
-                example: 1.0.0-beta.2
+                example: 1.0.0
               stac_extensions:
                 title: STAC extensions
                 type: array
@@ -625,7 +625,7 @@ components:
                             - type: string
                             - type: number
             example:
-              stac_version: 1.0.0-beta.2
+              stac_version: 1.0.0
               stac_extensions: []
               type: Collection
               id: Sentinel-2
