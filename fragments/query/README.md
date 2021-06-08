@@ -1,12 +1,13 @@
 # STAC API - Query Fragment
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
-- **Extension [Maturity Classification](../../extensions.md#extension-maturity):** Pilot
-  Likely to get deprecated in the future in favor of [CQL](http://docs.opengeospatial.org/DRAFTS/19-079.html).
+- **Conformance Class:** <https://api.stacspec.org/v1.0.0-beta.2/item-search#query>
+- **Extension [Maturity Classification](../../extensions.md#extension-maturity):** Deprecated in  
+  favor of the [Filter Extension](../filter/README.md) using [CQL](http://docs.opengeospatial.org/DRAFTS/19-079.html).
 - **Dependents:**
   - [Item Search](../../item-search)
 
-The `query` parameter adds additional filters for searching on the properties of Items.
+The `query` parameter adds additional filters for searching on the properties of Item objects.
 
 The syntax for the `query` filter is:
 

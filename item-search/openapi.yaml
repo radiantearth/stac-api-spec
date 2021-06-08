@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: The SpatioTemporal Asset Catalog API - Item Search
-  version: 1.0.0-beta.1
+  version: 1.0.0-beta.2
   description: >-
     This is an OpenAPI definition of the SpatioTemporal Asset Catalog API Item Search
     specification.
@@ -22,7 +22,7 @@ paths:
       description: |-
         Retrieve Items matching filters. Intended as a shorthand API for simple
         queries.
-        
+
         This method is optional, but you MUST implement `POST /search` if you
         want to implement this method.
 
@@ -34,13 +34,14 @@ paths:
         - Item Search
       parameters:
         - $ref: '#/components/parameters/bbox'
+        - $ref: '#/components/parameters/intersects'
         - $ref: '#/components/parameters/datetime'
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/ids'
         - $ref: '#/components/parameters/collectionsArray'
         # extensions
         - $ref: '../fragments/fields/openapi.yaml#/components/parameters/fields'
-        - $ref: '../fragments/query/openapi.yaml#/components/parameters/query'
+        - $ref: '../fragments/filter/openapi.yaml#/components/parameters/filter'
         - $ref: '../fragments/sort/openapi.yaml#/components/parameters/sortby'
       responses:
         '200':
@@ -49,9 +50,9 @@ paths:
             application/geo+json:
               schema:
                 allOf:
-                - $ref: '../fragments/itemcollection/openapi.yaml#/components/schemas/itemCollection'
-                # extensions
-                - $ref: '../fragments/context/openapi.yaml#/components/schemas/itemCollection'
+                  - $ref: '../fragments/itemcollection/openapi.yaml#/components/schemas/itemCollection'
+                  # extensions
+                  - $ref: '../fragments/context/openapi.yaml#/components/schemas/itemCollection'
             text/html:
               schema:
                 type: string
@@ -63,7 +64,7 @@ paths:
       description: |-
         retrieve items matching filters. Intended as the standard, full-featured
         query API.
-        
+
         This method is mandatory to implement if `GET /search` is implemented.
         If this endpoint is implemented on a server, it is required to add a
         link referring to this endpoint with `rel` set to `search` and `method`
@@ -75,11 +76,11 @@ paths:
           application/json:
             schema:
               allOf:
-               - $ref: '#/components/schemas/searchBody'
-              # extensions
-               - $ref: '../fragments/fields/openapi.yaml#/components/schemas/searchBody'
-               - $ref: '../fragments/query/openapi.yaml#/components/schemas/searchBody'
-               - $ref: '../fragments/sort/openapi.yaml#/components/schemas/searchBody'
+                - $ref: '#/components/schemas/searchBody'
+                # extensions
+                - $ref: '../fragments/fields/openapi.yaml#/components/schemas/searchBody'
+                - $ref: '../fragments/filter/openapi.yaml#/components/schemas/searchBody'
+                - $ref: '../fragments/sort/openapi.yaml#/components/schemas/searchBody'
       responses:
         '200':
           description: A feature collection.
@@ -98,8 +99,7 @@ components:
       name: ids
       in: query
       description: |-
-        Array of Item ids to return. All other filter parameters that further
-        restrict the number of search results are ignored
+        Array of Item ids to return.
       required: false
       schema:
         $ref: '#/components/schemas/ids'
@@ -109,7 +109,7 @@ components:
       in: query
       description: |
         Array of Collection IDs to include in the search for items.
-        Only Items in one of the provided Collections will be searched
+        Only Item objects in one of the provided collections will be searched
       required: false
       schema:
         $ref: '#/components/schemas/collectionsArray'
@@ -204,6 +204,17 @@ components:
         default: 10
       style: form
       explode: false
+    intersects:
+      name: intersects
+      in: query
+      description: |-
+        The optional intersects parameter filters the result Items in the same was as bbox, only with
+        a GeoJSON Geometry rather than a bbox.
+      required: false
+      schema:
+        $ref: '../core/commons.yaml#/components/schemas/geometryGeoJSON'
+      style: form
+      explode: false
   schemas:
     searchBody:
       description: The search criteria
@@ -232,14 +243,13 @@ components:
       type: array
       description: |-
         Array of Collection IDs to include in the search for items.
-        Only Items in one of the provided Collections will be searched.
+        Only Item objects in one of the provided collections will be searched.
       items:
         type: string
     ids:
       type: array
       description: |-
-        Array of Item ids to return. All other filter parameters that further
-        restrict the number of search results are ignored
+        Array of Item ids to return.
       items:
         type: string
     datetimeFilter:
@@ -253,7 +263,7 @@ components:
       description: Only returns items that intersect with the provided polygon.
       properties:
         intersects:
-          $ref: "../core/commons.yaml#/components/schemas/geometryGeoJSON"
+          $ref: '../core/commons.yaml#/components/schemas/geometryGeoJSON'
     limitFilter:
       type: object
       description: Only returns maximum number of results (page size)

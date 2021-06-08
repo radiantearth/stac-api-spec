@@ -1,13 +1,13 @@
 {
   "name": "api-spec",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "description": "STAC API helpers to generate, serve and check the API spec.",
   "repository": "https://github.com/radiantearth/stac-api-spec",
   "license": "Apache-2.0",
   "scripts": {
     "serve": "redoc-cli serve core/openapi.yaml --watch --options.expandResponses \"200,201,202,203,204\" --options.pathInMiddlePanel true",
     "check": "npm run check-markdown && npm run check-openapi",
-    "check-markdown": "remark . -f -r .circleci/rc.yaml --no-ignore --ignore-pattern stac-spec/",
+    "check-markdown": "remark . -f -r .circleci/rc.yaml --ignore-pattern stac-spec/",
     "check-openapi": "npm run check-openapi-core && npm run check-openapi-commons && npm run check-openapi-ogcapi-features && npm run check-openapi-item-search && npm run check-openapi-fragments",
     "check-openapi-core": "spectral lint core/openapi.yaml --ruleset .circleci/.spectral.yml",
     "check-openapi-commons": "spectral lint core/commons.yaml --ruleset .circleci/.spectral-fragments.yml",
@@ -15,7 +15,8 @@
     "check-openapi-item-search": "spectral lint item-search/openapi.yaml --ruleset .circleci/.spectral.yml",
     "check-openapi-fragments": "spectral lint fragments/*/openapi.yaml --ruleset .circleci/.spectral-fragments.yml",
     "build-openapi": ".circleci/build-openapi.sh",
-    "publish-openapi": "node .circleci/publish.js"
+    "publish-openapi": "node .circleci/publish.js",
+    "check-stac-spec-changes": "git diff --quiet HEAD ${npm_config_compare_to} -- stac-spec"
   },
   "dependencies": {
     "@stoplight/spectral": "^5.7.1",

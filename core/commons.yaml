@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: The SpatioTemporal Asset Catalog API - Commons
   description: This is the OpenAPI version of the core STAC spec JSON Schemas.
-  version: 1.0.0-beta.1
+  version: 1.0.0-beta.2
 paths: {}
 components:
   responses:
@@ -42,6 +42,7 @@ components:
       type: object
       required:
         - stac_version
+        - type
         - id
         - description
         - links
@@ -50,6 +51,8 @@ components:
           $ref: '#/components/schemas/stac_version'
         stac_extensions:
           $ref: '#/components/schemas/stac_extensions'
+        type:
+          type: string
         id:
           type: string
         title:
@@ -62,6 +65,7 @@ components:
       type: object
       required:
         - stac_version
+        - type
         - id
         - description
         - license
@@ -72,6 +76,8 @@ components:
           $ref: '#/components/schemas/stac_version'
         stac_extensions:
           $ref: '#/components/schemas/stac_extensions'
+        type:
+          type: string
         id:
           description: identifier of the collection used, for example, in URIs
           type: string
@@ -84,7 +90,6 @@ components:
             Detailed multi-line description to fully explain the catalog or
             collection.
 
-
             [CommonMark 0.29](http://commonmark.org/) syntax MAY be used for
             rich text representation.
         keywords:
@@ -95,7 +100,7 @@ components:
         license:
           $ref: '#/components/schemas/license'
         extent:
-          $ref: "#/components/schemas/extent"
+          $ref: '#/components/schemas/extent'
         providers:
           $ref: '#/components/schemas/providers'
         links:
@@ -143,8 +148,9 @@ components:
                       - type: string
                       - type: number
       example:
-        stac_version: 1.0.0-beta.2
+        stac_version: 1.0.0
         stac_extensions: []
+        type: Collection
         id: Sentinel-2
         title: 'Sentinel-2 MSI: MultiSpectral Instrument, Level-1C'
         description: |
@@ -246,6 +252,12 @@ components:
         The extent of the features in the collection. In the Core only spatial and temporal
         extents are specified. Extensions may add additional members to represent other
         extents, for example, thermal or pressure ranges.
+
+        The first item in the array describes the overall extent of
+        the data. All subsequent items describe more precise extents, 
+        e.g., to identify clusters of data.
+        Clients only interested in the overall extent will only need to
+        access the first item in each array.
       required:
         - spatial
         - temporal
@@ -260,9 +272,12 @@ components:
             bbox:
               description: |-
                 One or more bounding boxes that describe the spatial extent of the dataset.
-                In the Core only a single bounding box is supported. Extensions may support
-                additional areas. If multiple areas are provided, the union of the bounding
-                boxes describes the spatial extent.
+
+                The first bounding box describes the overall spatial
+                extent of the data. All subsequent bounding boxes describe 
+                more precise bounding boxes, e.g., to identify clusters of data.
+                Clients only interested in the overall spatial extent will
+                only need to access the first item in each array.
               type: array
               minItems: 1
               items:
@@ -324,10 +339,12 @@ components:
             interval:
               description: |-
                 One or more time intervals that describe the temporal extent of the dataset.
-                The value `null` is supported and indicates an open time intervall.
-                In the Core only a single time interval is supported. Extensions may support
-                multiple intervals. If multiple intervals are provided, the union of the
-                intervals describes the temporal extent.
+
+                The first time interval describes the overall
+                temporal extent of the data. All subsequent time intervals describe 
+                more precise time intervals, e.g., to identify clusters of data.
+                Clients only interested in the overall extent will only need
+                to access the first item in each array.
               type: array
               minItems: 1
               items:
@@ -335,6 +352,8 @@ components:
                   Begin and end times of the time interval. The timestamps
                   are in the coordinate reference system specified in `trs`. By default
                   this is the Gregorian calendar.
+
+                  The value `null` is supported and indicates an open time interval.
                 type: array
                 minItems: 2
                 maxItems: 2
@@ -418,7 +437,7 @@ components:
         `proprietary` if the license is not on the SPDX license list or
         `various` if multiple licenses apply. In these two cases links to the
         license texts SHOULD be added, see the `license` link relation type.
-        
+
         Non-SPDX licenses SHOULD add a link to the license text with the
         `license` relation in the links section. The license text MUST NOT be
         provided as a value of this field. If there is no public license URL
@@ -537,7 +556,7 @@ components:
     stac_version:
       title: STAC version
       type: string
-      example: 1.0.0-beta.2
+      example: 1.0.0
     stac_extensions:
       title: STAC extensions
       type: array
@@ -550,7 +569,7 @@ components:
           - title: Reference to a core extension
             type: string
     item:
-      description:  A GeoJSON Feature augmented with foreign members that contain values relevant to a STAC entity
+      description: A GeoJSON Feature augmented with foreign members that contain values relevant to a STAC entity
       type: object
       required:
         - stac_version
@@ -571,7 +590,7 @@ components:
         bbox:
           $ref: '#/components/schemas/bbox'
         geometry:
-          $ref: "#/components/schemas/geometryGeoJSON"
+          $ref: '#/components/schemas/geometryGeoJSON'
         type:
           $ref: '#/components/schemas/itemType'
         links:
@@ -694,16 +713,16 @@ components:
               type: string
             description: Purposes of the asset
             example:
-                  - thumbnail
+              - thumbnail
     geometryGeoJSON:
       oneOf:
-      - $ref: "#/components/schemas/pointGeoJSON"
-      - $ref: "#/components/schemas/multipointGeoJSON"
-      - $ref: "#/components/schemas/linestringGeoJSON"
-      - $ref: "#/components/schemas/multilinestringGeoJSON"
-      - $ref: "#/components/schemas/polygonGeoJSON"
-      - $ref: "#/components/schemas/multipolygonGeoJSON"
-      - $ref: "#/components/schemas/geometrycollectionGeoJSON"
+        - $ref: '#/components/schemas/pointGeoJSON'
+        - $ref: '#/components/schemas/multipointGeoJSON'
+        - $ref: '#/components/schemas/linestringGeoJSON'
+        - $ref: '#/components/schemas/multilinestringGeoJSON'
+        - $ref: '#/components/schemas/polygonGeoJSON'
+        - $ref: '#/components/schemas/multipolygonGeoJSON'
+        - $ref: '#/components/schemas/geometrycollectionGeoJSON'
     geometrycollectionGeoJSON:
       type: object
       required:
@@ -717,7 +736,7 @@ components:
         geometries:
           type: array
           items:
-            $ref: "#/components/schemas/geometryGeoJSON"
+            $ref: '#/components/schemas/geometryGeoJSON'
     linestringGeoJSON:
       type: object
       required:
@@ -843,7 +862,7 @@ components:
         features:
           type: array
           items:
-            $ref: "#/components/schemas/featureGeoJSON"
+            $ref: '#/components/schemas/featureGeoJSON'
     featureGeoJSON:
       type: object
       required:
@@ -856,7 +875,7 @@ components:
           enum:
             - Feature
         geometry:
-          $ref: "#/components/schemas/geometryGeoJSON"
+          $ref: '#/components/schemas/geometryGeoJSON'
         properties:
           type: object
           nullable: true

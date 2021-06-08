@@ -1,3 +1,0 @@
-[submodule "stac-spec"]
-	path = stac-spec
-	url = https://github.com/radiantearth/stac-spec

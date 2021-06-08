@@ -1,7 +1,7 @@
 openapi: 3.0.2
 info:
-  title: "STAC API - Features (extends OGC API - Features - Part 1: Core)"
-  version: '1.0.0-beta.1'
+  title: 'STAC API - Features (extends OGC API - Features - Part 1: Core)'
+  version: '1.0.0-beta.2'
   description: >-
     This is an OpenAPI definition of the SpatioTemporal Asset Catalog API Item Search
     specification.
@@ -38,12 +38,13 @@ paths:
               schema:
                 $ref: '../core/openapi.yaml#/components/schemas/landingPage'
               example:
-                stac_version: 1.0.0-beta.1
+                stac_version: 1.0.0-beta.2
+                type: Catalog
                 id: sentinel
                 title: Copernicus Sentinel Imagery
                 description: Catalog of Copernicus Sentinel 1 and 2 imagery.
                 conformsTo:
-                  - 'https://api.stacspec.org/v1.0.0-beta.1/core'
+                  - 'https://api.stacspec.org/v1.0.0-beta.2/core'
                   - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core'
                   - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30'
                   - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson'
@@ -290,15 +291,15 @@ components:
             features:
               type: array
               items:
-                $ref: "../core/commons.yaml#/components/schemas/item"
+                $ref: '../core/commons.yaml#/components/schemas/item'
             links:
               $ref: '../core/commons.yaml#/components/schemas/links'
             timeStamp:
-              $ref: "#/components/schemas/timeStamp"
+              $ref: '#/components/schemas/timeStamp'
             numberMatched:
-              $ref: "#/components/schemas/numberMatched"
+              $ref: '#/components/schemas/numberMatched'
             numberReturned:
-              $ref: "#/components/schemas/numberReturned"
+              $ref: '#/components/schemas/numberReturned'
     numberMatched:
       description: |-
         The number of features of the feature type that match the selection
@@ -412,7 +413,7 @@ components:
       content:
         application/geo+json:
           schema:
-            $ref: "../core/commons.yaml#/components/schemas/item"
+            $ref: '../core/commons.yaml#/components/schemas/item'
     InvalidParameter:
       description: |-
         A query parameter has an invalid value.

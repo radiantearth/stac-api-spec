@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: The SpatioTemporal Asset Catalog API - Item Collection
   description: The specification for a set of items, e.g. returned by a search.
-  version: 1.0.0-beta.1
+  version: 1.0.0-beta.2
 paths: {}
 components:
   schemas:

@@ -1,7 +1,7 @@
 # Items and Collections API Version Extension
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.1/ogcapi-features/extensions/version>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.2/ogcapi-features/extensions/version>
 - **Extension [Maturity Classification](../../../extensions.md#extension-maturity):** Proposal
 - **Dependencies**: [STAC API - Features](../../README.md)
 
@@ -12,12 +12,12 @@ incubated in STAC.
 
 ## Methods
 
-| Path                                                                     | Content-Type Header | Description |
-| ------------------------------------------------------------------------ | ------------------- | ----------- |
+| Path                                                                     | Content-Type Header | Description                                                                  |
+| ------------------------------------------------------------------------ | ------------------- | ---------------------------------------------------------------------------- |
 | `GET /collections/{collectionID}/versions`                               | `application/json`  | Returns a catalog response with links to all versions of a given collection. |
-| `GET /collections/{collectionID}/versions/{versionId}`                   | `application/json`  | Returns a collection record. |
-| `GET /collections/{collectionID}/items/{featureId}/versions`             | `application/json`  | Returns a catalog response with links to all versions of a given item. |
-| `GET /collections/{collectionID}/items/{featureId}/versions/{versionId}` | `application/json`  | Returns an item record. |
+| `GET /collections/{collectionID}/versions/{versionId}`                   | `application/json`  | Returns a collection record.                                                 |
+| `GET /collections/{collectionID}/items/{featureId}/versions`             | `application/json`  | Returns a catalog response with links to all versions of a given item.       |
+| `GET /collections/{collectionID}/items/{featureId}/versions/{versionId}` | `application/json`  | Returns an item record.                                                      |
 
 ## How It Works
 
@@ -50,12 +50,12 @@ There are many options for a versioning schema including:
 
 The extension uses [RFC5829](https://tools.ietf.org/html/rfc5829) rel types to link to different versions:
 
-| Type                | Description |
-| ------------------- | ----------- |
-| latest-version      | Points to the latest version of the record. |
-| version-history     | Points to the list of versions. |
-| predecessor-version | Points to the previous version of the document. |
-| successor-version   | Points to the successor version in the version history. |
+| Type                | Description                                                                                                                                                                           |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| latest-version      | Points to the latest version of the record.                                                                                                                                           |
+| version-history     | Points to the list of versions.                                                                                                                                                       |
+| predecessor-version | Points to the previous version of the document.                                                                                                                                       |
+| successor-version   | Points to the successor version in the version history.                                                                                                                               |
 | permalink           | Points to the permanent location of the record. This location points to a specific version, remains accessible and will not change even when there are future versions of the record. |
 
 ## Example

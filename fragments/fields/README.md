@@ -1,12 +1,13 @@
 # STAC API - Fields Fragment
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
+- **Conformance Class:** <https://api.stacspec.org/v1.0.0-beta.2/item-search#fields>
 - **Fragment [Maturity Classification](../../extensions.md#extension-maturity):** Pilot
 - **Dependents:**
   - [Item Search](../../item-search)
 
-STAC API by default returns everything within an item. But Items can have hundreds of fields, or incredibly large
-geometries, and even smaller Items can get big when millions are requested but not all information is used. This
+STAC API by default returns everything within an item. But Item objects can have hundreds of fields, or incredibly large
+geometries, and even smaller Item objects can get big when millions are requested but not all information is used. This
 fragment provides a mechanism for clients to request that servers to explicitly include or exclude certain fields. 
 
 When used in a POST request with `Content-Type: application/json`, this adds an attribute `fields` with 
@@ -24,7 +25,7 @@ contract about what the response will be. Implementations are still considered c
 are in the response or ones specified as part of `exclude` are.  For example, implementations may choose to always 
 include simple string fields like `id` and `type` regardless of the `exclude` specification. However, it is recommended 
 that implementations honor excludes for attributes with more complex and arbitrarily large values 
-(e.g., `geometry`, `assets`).  For example, some Items may have a geometry with a simple 5 point polygon, but these 
+(e.g., `geometry`, `assets`).  For example, some Item objects may have a geometry with a simple 5 point polygon, but these 
 polygons can be very large when reprojected to EPSG:4326, as in the case of a highly-decimated sinusoidal polygons.
 Implementations are also not required to implement semantics for nested values whereby one can include an object, but
 exclude attributes of that object, e.g., include `properties` but exclude `properties.datetime`.

@@ -1,15 +1,43 @@
 # STAC API - Item Search
 
-- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.1/item-search))
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.1/item-search>
+- [STAC API - Item Search](#stac-api---item-search)
+  - [Query Parameters and Fields](#query-parameters-and-fields)
+    - [Query Examples](#query-examples)
+    - [Query Parameter Table](#query-parameter-table)
+  - [Response](#response)
+    - [Paging](#paging)
+  - [HTTP Request Methods and Content Types](#http-request-methods-and-content-types)
+    - [GET](#get)
+    - [POST](#post)
+      - [PUT / PATCH / DELETE](#put--patch--delete)
+  - [Recommended Link Relations at `/`](#recommended-link-relations-at-)
+  - [Example Landing Page for STAC API - Item Search](#example-landing-page-for-stac-api---item-search)
+  - [Extensions](#extensions)
+    - [Fields](#fields)
+    - [Filter](#filter)
+    - [Sort](#sort)
+    - [Context](#context)
+    - [Query](#query)
+
+- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.2/item-search))
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.2/item-search>
 - **Dependencies**: [STAC API - Core](../core)
 - **Examples**: [examples.md](examples.md)
 
-A search endpoint, linked to from the STAC landing page, provides the ability to query STAC `Items` across collections.
-It retrieves a group of Items that match the provided parameters, wrapped in an [ItemCollection](../fragments/itemcollection/README.md) (which is a 
-valid [GeoJSON FeatureCollection](https://tools.ietf.org/html/rfc7946#section-3.3) that contains STAC Items). Several core
+A search endpoint, linked to from the STAC landing page, provides the ability to query STAC [Item](../stac-spec/item-spec/README.md) 
+objects across collections.
+It retrieves a group of Item objects that match the provided parameters, wrapped in an 
+[ItemCollection](../fragments/itemcollection/README.md) (which is a 
+valid [GeoJSON FeatureCollection](https://tools.ietf.org/html/rfc7946#section-3.3) that contains STAC Item objects). Several core
 query parameters are defined by [OGC API - Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html), with
 a few additions specified in this document.
+
+The Item Search endpoint intentionally defines only a limited group of operations. It is expected that 
+most behavior will be defined in [Extensions](#extensions). These extensions can be composed by an implementer to 
+cover only the set of functionality the implementer requires. For example, the query capability defined by 
+Item Search is limited, and only adds cross-collection and spatial intersects query operators to the capabilities 
+already defined by OAFeat. For example, the Query Extension (soon to be superseded by the Filter Extension) 
+provides a more expressive set of operators. 
 
 Implementing `GET /search` is **required**, `POST /search` is optional, but recommended.
 
@@ -60,11 +88,11 @@ The core parameters for STAC search are defined by OAFeat, and STAC adds a few p
 | Parameter    | Type             | Source API   | Description |
 | -----------  | ---------------- | ------------ | ----------- |
 | limit        | integer          | OAFeat       | The maximum number of results to return (page size). Defaults to 10 |
-| bbox         | \[number]        | OAFeat       | Requested bounding box.  Represented using either 2D or 3D geometries. The length of the array must be 2*n where n is the number of dimensions. The array contains all axes of the southwesterly most extent followed by all axes of the northeasterly most extent specified in Longitude/Latitude or Longitude/Latitude/Elevation based on [WGS 84](http://www.opengis.net/def/crs/OGC/1.3/CRS84). When using 3D geometries, the elevation of the southwesterly most extent is the minimum elevation in meters and the elevation of the northeasterly most extent is the maximum. |
-| datetime     | string           | OAFeat       | Single date+time, or a range ('/' seperator), formatted to [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). Use double dots `..` for open date ranges. |
+| bbox         | \[number]        | OAFeat       | Requested bounding box.  Represented using either 2D or 3D geometries. The length of the array must be 2\*n where n is the number of dimensions. The array contains all axes of the southwesterly most extent followed by all axes of the northeasterly most extent specified in Longitude/Latitude or Longitude/Latitude/Elevation based on [WGS 84](http://www.opengis.net/def/crs/OGC/1.3/CRS84). When using 3D geometries, the elevation of the southwesterly most extent is the minimum elevation in meters and the elevation of the northeasterly most extent is the maximum. |
+| datetime     | string           | OAFeat       | Single date+time, or a range ('/' separator), formatted to [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). Use double dots `..` for open date ranges. |
 | intersects   | GeoJSON Geometry | STAC         | Searches items by performing intersection between their geometry and provided GeoJSON geometry.  All GeoJSON geometry types must be supported. |
-| ids          | \[string]        | STAC         | Array of Item ids to return. All other filter parameters that further restrict the number of search results (except `next` and `limit`) are ignored |
-| collections  | \[string]        | STAC         | Array of one or more Collection IDs to include in the search for items. Only Items in one of the provided Collections will be searched |
+| ids          | \[string]        | STAC         | Array of Item ids to return. |
+| collections  | \[string]        | STAC         | Array of one or more Collection IDs that each matching Item must be in. |
 
 Only one of either **intersects** or **bbox** should be specified.  If both are specified, a 400 Bad Request response 
 should be returned. See [examples](examples.md) to see sample requests.
@@ -72,9 +100,9 @@ should be returned. See [examples](examples.md) to see sample requests.
 ## Response
 
 The response to a request (GET or POST) to the search endpoint should always be an 
-`[ItemCollection](../core/itemcollection-spec.md)` - a valid [GeoJSON 
+[ItemCollection](../fragments/itemcollection/README.md) object - a valid [GeoJSON 
 FeatureCollection](https://tools.ietf.org/html/rfc7946#section-3.3) that consists entirely of STAC 
-[Items](../stac-spec/item-spec/item-spec.md). 
+[Item](../stac-spec/item-spec/item-spec.md) objects. 
 
 ### Paging
 
@@ -161,6 +189,70 @@ searching on specific Item properties.
 The other HTTP verbs are not supported in STAC Item Search. The [Transaction Extension](../ogcapi-features/extensions/transaction/README.md)
 does implement them, for STAC and OAFeat implementations that want to enable writing and deleting items.
 
+## Recommended Link Relations at `/`
+
+When implementing the STAC API - Item Search conformance class, it it recommended to implement these Link relations.
+
+| **`rel`** | **href to**                                | **From**           | **Description**                                                  |
+|-----------|--------------------------------------------|--------------------|------------------------------------------------------------------|
+| `root`    | The root URI                               | STAC Core          | Reference to self URI |
+| `self`    | The root URI                               | OAFeat             | Reference to self URI  |
+| `service-desc` | The OpenAPI service description       | OAFeat OpenAPI   | Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API |
+| `service-doc`  | An HTML service description           | OAFeat OpenAPI   | Uses the `text/html` media type to refer to a human-consumable description of the service |
+| `child`   | The child STAC Catalogs & Collections      | STAC Core          | Provides curated paths to get to STAC Collection and Item objects      |
+| `search`  | The STAC search endpoint (often `/search`) | STAC Search        | Cross-collection query endpoint to select sub-sets of STAC Item objects |
+
+It is also valid to have `item` links from the landing page, but most STAC API services are used to 
+serve up a large number of features, so they typically
+use several layers of intermediate `child` links before getting to Item objects.
+
+## Example Landing Page for STAC API - Item Search
+
+This JSON is what would be expected from an api that only implements STAC API - Item Search. In practice, 
+most APIs will also implement other conformance classes, and those will be reflected in the `links` and 
+`conformsTo` fields.  A more typical Landing Page example is in 
+the [overview](../overview.md#example-landing-page) document.
+
+```json
+{
+    "stac_version": "1.0.0",
+    "id": "example-stac",
+    "title": "A simple STAC API Example",
+    "description": "This Catalog aims to demonstrate the a simple landing page",
+    "conformsTo" : [
+        "https://api.stacspec.org/v1.0.0-beta.2/core",
+        "https://api.stacspec.org/v1.0.0-beta.2/item-search"
+    ],
+    "links": [
+        {
+            "rel": "self",
+            "type": "application/json",
+            "href": "https://stacserver.org"
+        },
+        {
+            "rel": "root",
+            "type": "application/json",
+            "href": "https://stacserver.org"
+        },
+        {
+            "rel": "service-desc",
+            "type": "application/vnd.oai.openapi+json;version=3.0",
+            "href": "https://stacserver.org/api"
+        },
+        {
+            "rel": "service-doc",
+            "type": "text/html",
+            "href": "https://stacserver.org/api.html"
+        },
+        {
+            "rel": "search",
+            "type": "application/geo+json",
+            "href": "https://stacserver.org/search"
+        }
+    ]
+}
+```
+
 ## Extensions
 
 These extensions provide additional functionality that enhances the core item search. All are specified as 
@@ -170,7 +262,7 @@ the root (`/`) landing page, to indicate to clients that they will respond prope
 
 ### Fields
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.1/item-search#fields>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.2/item-search#fields>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Definition**: [STAC API - Fields Fragment](../fragments/fields/)
 
@@ -180,21 +272,21 @@ allows the client to suggest to the server which Item attributes should be inclu
 through the use of a `fields` parameter. The full description of how this extension works can be found in the 
 [fields fragment](../fragments/fields/). 
 
-### Query
+### Filter
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.1/item-search#query>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.2/item-search#filter>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
-- **Definition**: [STAC API - Query Fragment](../fragments/query/)
+- **Definition**: [STAC API - Filter Fragment](../fragments/filter/)
 
 The STAC search endpoint, `/search`, by default only accepts a limited set of parameters to limit the results
-by properties. The Query extension adds a new parameter, `query`, that can take a number of comparison operators to
-match predicates between the fields requested and the values of Items. It can be used with both GET and POST, though
-GET includes the exact same JSON. The full details on the JSON structure are specified in the [query 
-fragment](../fragments/query/).
+by properties. The Filter extension adds a new parameter, `filter`, that can take a number of comparison operators to
+match predicates between the fields requested and the values of Item objects. It can be used with both GET and POST and supports two
+query formats, `cql-text` and `cql-json`. The full details on the JSON structure are specified in the [filter 
+fragment](../fragments/filter/).
 
 ### Sort
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.1/item-search#sort>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.2/item-search#sort>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Definition**: [STAC API - Sort Fragment](../fragments/sort/)
 
@@ -207,10 +299,25 @@ of this extension can be found in the [sort fragment](../fragments/sort).
 
 ### Context
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.1/item-search#context>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.2/item-search#context>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Definition**: [STAC API - Context Fragment](../fragments/context/)
 
 This extension is intended to augment the core ItemCollection responses from the `search` API endpoint with a
 JSON object called `context` that includes the number of items `matched`, `returned` and the `limit` requested.
 The full description and examples of this are found in the [context fragment](../fragments/context).
+
+### Query
+
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.2/item-search#query>
+- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Deprecated
+- **Definition**: [STAC API - Query Fragment](../fragments/query/)
+
+**Note** - the Query Extension is deprecated as of 1.0.0. Implementers
+are encouraged to use the Filter Extension instead.
+
+The STAC search endpoint, `/search`, by default only accepts a limited set of parameters to limit the results
+by properties. The Query extension adds a new parameter, `query`, that can take a number of comparison operators to
+match predicates between the fields requested and the values of Item objects. It can be used with both GET and POST, though
+GET includes the exact same JSON. The full details on the JSON structure are specified in the [query 
+fragment](../fragments/query/).

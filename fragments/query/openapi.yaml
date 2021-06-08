@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: The SpatioTemporal Asset Catalog API - Query
   description: Adds parameter to compare properties and only return the items that match
-  version: 1.0.0-beta.1
+  version: 1.0.0-beta.2
 paths: {}
 components:
   parameters:
@@ -12,7 +12,7 @@ components:
       in: query
       description: |-
         **Optional Extension:** Query
-      
+
         Query for properties in items.
         Use the JSON form of the query used in POST.
       required: false
@@ -24,7 +24,7 @@ components:
       x-stac-api-fragment: query
       description: |-
         **Optional Extension:** Query
-      
+
         Allows users to query properties for specific values
       properties:
         query:

@@ -4,9 +4,39 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased][]
+## [Unreleased]
 
-## [v1.0.0-beta.1][] - 2020-12-10
+### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+  
+## [v1.0.0-beta.2] - 2020-06-01
+
+### Added
+- Added Filter extension to integrate OAFeat Part 3 CQL
+- Catalog and Collection definitions now have required field "type"
+- Added recommendation to enable CORS for public APIs
+
+### Changed
+- Updated all STAC versions to 1.0.0
+- Passing the `ids` parameter to an item search does not deactivate other query parameters [#125](https://github.com/radiantearth/stac-api-spec/pull/125)
+- The first extent in a Collection is always the overall extent, followed by more specific extents. [opengeospatial/ogcapi-features#520](https://github.com/opengeospatial/ogcapi-features/pull/520)
+
+### Deprecated
+- Query extension is now deprecated. Replaced by the Filter extension using OGC CQL.
+
+### Removed
+
+### Fixed
+- Updated text description of root ('/') endpoint (also called landing page) that the return type is a Catalog
+
+## [v1.0.0-beta.1] - 2020-12-10
 
 ### Added
 - The landing page returns the conformance classes in a property `conformsTo`, which mirrors `GET /conformances` from OGC APIs.
@@ -42,3 +72,4 @@ for STAC API releases prior to or equal to version 0.9.0.
 
 [Unreleased]: <https://github.com/radiantearth/stac-api-spec/compare/master...dev>
 [v1.0.0-beta.1]: <https://github.com/radiantearth/stac-api-spec/tree/v1.0.0-beta.1>
+[v1.0.0-beta.2]: <https://github.com/radiantearth/stac-api-spec/tree/v1.0.0-beta.2>
