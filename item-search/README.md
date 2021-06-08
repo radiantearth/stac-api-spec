@@ -310,10 +310,10 @@ The full description and examples of this are found in the [context fragment](..
 ### Query
 
 - **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.2/item-search#query>
-- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Deprecated
+- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot, scheduled to be Deprecated
 - **Definition**: [STAC API - Query Fragment](../fragments/query/)
 
-**Note** - the Query Extension is deprecated as of 1.0.0. Implementers
+**Note** - the Query Extension will possibly be deprecated as of 1.0.0. Implementers
 are encouraged to use the Filter Extension instead.
 
 The STAC search endpoint, `/search`, by default only accepts a limited set of parameters to limit the results
