@@ -1,0 +1,186 @@
+openapi: 3.0.3
+info:
+  title: The SpatioTemporal Asset Catalog API - Core
+  version: 1.0.0-beta.2
+  description: This is an OpenAPI definition of the core SpatioTemporal Asset Catalog API specification. Any service that implements this endpoint to allow discovery of spatiotemporal assets can be considered a STAC API.
+  contact:
+    name: STAC Specification
+    url: 'http://stacspec.org'
+  license:
+    name: Apache License 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0'
+tags:
+  - name: Core
+    description: essential characteristics of a STAC API
+paths:
+  /:
+    get:
+      tags:
+        - Core
+      summary: landing page
+      description: |-
+        Returns the root STAC Catalog or STAC Collection that is the entry point
+        for users to browse with STAC Browser or for search engines to crawl.
+        This can either return a single STAC Collection or more commonly a STAC
+        catalog.
+
+        The landing page provides links to the
+        API definition (link relations `service-desc` and `service-doc`)
+        and the STAC records such as collections/catalogs (link relation `child`)
+        or items (link relation `item`).
+
+        Extensions may add additional links with new relation types.
+      operationId: getLandingPage
+      responses:
+        '200':
+          $ref: '#/components/responses/LandingPage'
+        '500':
+          description: An error occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: 'Information about the exception: an error code plus an optional description.'
+                required:
+                  - code
+                properties:
+                  code:
+                    type: string
+                  description:
+                    type: string
+components:
+  schemas:
+    landingPage:
+      allOf:
+        - type: object
+          required:
+            - stac_version
+            - type
+            - id
+            - description
+            - links
+          properties:
+            stac_version:
+              title: STAC version
+              type: string
+              example: 1.0.0
+            stac_extensions:
+              title: STAC extensions
+              type: array
+              uniqueItems: true
+              items:
+                anyOf:
+                  - title: Reference to a JSON Schema
+                    type: string
+                    format: uri
+                  - title: Reference to a core extension
+                    type: string
+            type:
+              type: string
+            id:
+              type: string
+            title:
+              type: string
+            description:
+              type: string
+            links:
+              type: array
+              items:
+                title: Link
+                type: object
+                required:
+                  - href
+                  - rel
+                properties:
+                  href:
+                    type: string
+                    format: uri
+                    description: The location of the resource
+                  rel:
+                    type: string
+                    description: Relation type of the link
+                  type:
+                    type: string
+                    description: The media type of the resource
+                  title:
+                    type: string
+                    description: Title of the resource
+                  method:
+                    type: string
+                    enum:
+                      - GET
+                      - POST
+                    default: GET
+                    description: Specifies the HTTP method that the resource expects
+                  headers:
+                    type: object
+                    description: Object key values pairs they map to headers
+                    example:
+                      Accept: application/json
+                  body:
+                    type: object
+                    description: 'For POST requests, the resource can specify the HTTP body as a JSON object.'
+                  merge:
+                    type: boolean
+                    default: false
+                    description: |-
+                      This is only valid when the server is responding to POST request.
+
+                      If merge is true, the client is expected to merge the body value
+                      into the current request body before following the link.
+                      This avoids passing large post bodies back and forth when following
+                      links, particularly for navigating pages through the `POST /search`
+                      endpoint.
+
+                      NOTE: To support form encoding it is expected that a client be able
+                      to merge in the key value pairs specified as JSON
+                      `{"next": "token"}` will become `&next=token`.
+        - type: object
+          required:
+            - conformsTo
+          properties:
+            conformsTo:
+              description: 'A list of all conformance classes implemented by the server. In addition to the STAC-specific conformance classes, all OGC-related conformance classes listed at `GET /conformances` must be listed here. This entry should mirror what `GET /conformances` returns, if implemented.'
+              type: array
+              items:
+                type: string
+  responses:
+    LandingPage:
+      description: |-
+        The landing page provides links to the API definition
+        (link relations `service-desc` and `service-doc`)
+        and the Feature Collection (path `/collections`, link relation
+        `data`).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/landingPage'
+          example:
+            type: Catalog
+            stac_version: 1.0.0
+            id: sentinel
+            title: Copernicus Sentinel Imagery
+            description: Catalog of Copernicus Sentinel 1 and 2 imagery.
+            conformsTo:
+              - 'https://api.stacspec.org/v1.0.0-beta.2/core'
+            links:
+              - href: 'http://data.example.org/'
+                rel: self
+                type: application/json
+                title: this document
+              - href: 'http://data.example.org/api'
+                rel: service-desc
+                type: application/vnd.oai.openapi+json;version=3.0
+                title: the API definition
+              - href: 'http://data.example.org/api.html'
+                rel: service-doc
+                type: text/html
+                title: the API documentation
+              - href: 'http://data.example.org/sentinel-1'
+                rel: child
+                type: application/json
+                title: Sentinel 1 Catalog
+              - href: 'http://data.example.org/sentinel-2'
+                rel: child
+                type: application/json
+                title: Sentinel 2 Catalog
