@@ -313,7 +313,7 @@ The full description and examples of this are found in the [context fragment](..
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot, scheduled to be Deprecated
 - **Definition**: [STAC API - Query Fragment](../fragments/query/)
 
-**Note** - the Query Extension will possibly be deprecated as of 1.0.0. Implementers
+**Note** - the Query Extension will be deprecated at some point in 1.x. Implementers
 are encouraged to use the Filter Extension instead.
 
 The STAC search endpoint, `/search`, by default only accepts a limited set of parameters to limit the results
