@@ -22,7 +22,7 @@ on the extension.
 | Pilot                   | 1           | Idea is fleshed out, with examples and a JSON schema, and implemented in one or more catalogs. Additional implementations encouraged to help give feedback | Approaching stability - breaking changes are not anticipated but can easily come from additional feedback |
 | Candidate               | 3           | A number of implementers are using it and are standing behind it as a solid extension. Can generally count on an extension at this maturity level | Mostly stable, breaking changes require a new version and minor changes are unlikely. |
 | Stable                  | 6           | Highest current level of maturity. The community of extension maintainers commits to a STAC review process for any changes, which are not made lightly. | Completely stable, all changes require a new version number and review process. |
-| Deprecated              | N/A         | A previous extension that has likely been superseded by a newer one or did not work out for some reason. | DO NOT USE, is not supported |
+| Deprecated              | N/A         | A previous extension that has likely been superseded by a newer one or did not work out for some reason. | Will not be updated and may be removed in an upcoming major release. |
 
 Maturity mostly comes through diverse implementations, so the minimum number of implementations
 column is the main gating function for an extension to mature. But extension authors can also
@@ -58,7 +58,7 @@ This is the list of all extensions that are contained in the stac-api-spec repos
 | [Sort](item-search/README.md#sort)                                                | [Item Search](item-search/) request                                                                        | Adds Parameter to control sorting of returns results.                                                                                   | *Pilot*    |
 | [Transaction](ogcapi-features/extensions/transaction/README.md)                   | [STAC - Features API](ogcapi-features) POST on `/items` endpoint, DELETE/PUT on `/items/{itemId}` endpoint | Adds PUT and DELETE endpoints for the creation, editing, and deleting of Item objects.                                         | *Pilot*    |
 | [Items and Collections API Version](ogcapi-features/extensions/version/README.md) | [STAC - Features API](ogcapi-features) on `/items` endpoint                                                | Adds GET versions resource to Collection and Item endpoints and provides semantics for a versioning scheme for Collection and Item objects. | *Proposal* |
-| [Query](item-search/README.md#query) | [Item Search](item-search/) request | Adds parameter to search Item and Collection properties. | *Deprecated* |
+| [Query](item-search/README.md#query) | [Item Search](item-search/) request | Adds parameter to search Item and Collection properties. | *Pilot*, scheduled to be *Deprecated* |
 
 ### Conformance classes of extensions
 
