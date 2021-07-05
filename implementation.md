@@ -42,7 +42,7 @@ RFC 3339 is a profile of ISO 8601, adding these constraints to the allowed value
 A simple regex for an RFC 3339 datetime is:
 
 ```
-^(\d\d\d\d)\-(\d\d)\-(\d\d)(T|t)(\d\d):(\d\d):(\d\d)(\.\d+)?(Z|([-+])(\d\d):(\d\d))$
+^(\d\d\d\d)\-(\d\d)\-(\d\d)(T|t)(\d\d):(\d\d):(\d\d)([,.]\d+)?(Z|([-+])(\d\d):(\d\d))$
 ```
 
 This is not a precise regex, as it matches some strings that violate semantics. There are additional restrictions, for example, 
@@ -58,9 +58,11 @@ Thereby, the recommended process for parsing the datetime is:
 5. ISO8601 parse datetime strings using a library such as [pyiso8601](https://github.com/micktwomey/pyiso8601) or 
    [dateutil](https://dateutil.readthedocs.io/en/stable/parser.html#dateutil.parser.isoparse). Frequently, date libraries built into language standard libraries do not parse ISO8601 datetimes correctly, for example, the built-in Python datetime library does not handle `Z` as a timezone.
 
-Below are a few examples of valid RFC 3339 datetimes. Note the uses of fractional seconds, Z or z as a timezone, 
-positive and negative arbitrary offset timezones, and T or t as a separator between date and time. While the RFC3339 spec does not define
-the required number of fractional seconds, STAC API only requires up to 9 digits be supported.
+Below are a few examples of valid RFC 3339 datetimes. Note the uses of fractional seconds, the use of `.` or
+ `,` as the fractional seconds separator, Z or z as a timezone, 
+positive and negative arbitrary offset timezones, and T or t as a separator between date and time. While 
+the RFC3339 spec does not define the required number of fractional seconds, STAC API only requires up to 
+9 digits be supported.
 
 - 1990-12-31T23:59:59Z (no fractional seconds, Z timezone)
 - 1990-12-31T23:59:23.123Z (fractional seconds, Z timezone)
