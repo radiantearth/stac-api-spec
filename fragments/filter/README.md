@@ -102,10 +102,10 @@ This extension expands the capabilities of Item Search and the OAFeat Items reso
 [OAFeat Part 3 CQL](https://portal.ogc.org/files/96288) 
 by providing an expressive query language to construct more complex filter predicates. The operators are similar to 
 those provided by SQL. The Basic CQL conformance class requires the logical operators `AND`, `OR`, and `NOT`; 
-the comparison operators `=`, `<`, `<=`, `>`, `>=`, `LIKE`, `IS NULL`, `BETWEEN`, and `IN`; the spatial operator 
-`INTERSECTS`; and the temporal operator `ANYINTERACTS`. 
+the comparison operators `=`, `<`, `<=`, `>`, `>=`; and the `IS NULL` operator. Other conformance classes add additional
+filtering capabilities.
 
-The ANYINTERACTS operator has effectively the same semantics as the `datetime` parameter
+The `ANYINTERACTS` operator has effectively the same semantics as the `datetime` parameter
 in Item Search.
 
 CQL enables these types of queries:
@@ -139,7 +139,8 @@ The implementation **must** support these conformance classes:
 - Filter (`https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:filter`) defines the Queryables mechanism and 
   parameters `filter-lang`, `filter-crs`, and `filter`.
 - Basic CQL (`https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:basic-cql`) defines the basic operations allowed in 
-  the query language used for the `filter` parameter defined by Filter.
+  the query language used for the `filter` parameter defined by Filter. This includes logical operators (`AND`, `OR`, `NOT`), 
+  comparison operators (`=`, `<`, `<=`, `>`, `>=`), and `IS NULL`.
 - Item Search Filter (`https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:item-search-filter`) binds the Filter and 
   Basic CQL conformance classes to apply to the Item Search endpoint (`/search`).  This class is the correlate of the OAFeat CQL Features 
   Filter class that binds Filter and Basic CQL to the Features resource (`/collections/{cid}/items`).
