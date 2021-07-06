@@ -54,7 +54,7 @@ Thereby, the recommended process for parsing the datetime is:
 
 1. uppercase the string (this avoids needing to match on both (t|T) and (z|Z))
 2. split the string on `/` to determine if it is a single datetime or an interval
-3. For each value of the split, check if it is either an open interval (the empty string or `..`), or if it matches the RFC3339 datetime regex
+3. For each value of the split, check if it is either an open interval (the empty string or `..`), or if it matches the RFC3339 datetime regex. Only one of the interval ends may be open.
 5. ISO8601 parse datetime strings using a library such as [pyiso8601](https://github.com/micktwomey/pyiso8601) or 
    [dateutil](https://dateutil.readthedocs.io/en/stable/parser.html#dateutil.parser.isoparse). Frequently, date libraries built into language standard libraries do not parse ISO8601 datetimes correctly, for example, the built-in Python datetime library does not handle `Z` as a timezone.
 
@@ -72,10 +72,6 @@ the RFC3339 spec does not define the required number of fractional seconds, STAC
 
 These are several examples of datetime intervals:
 
-- `/`
-- `../..`
-- `../`
-- `/..`
 - `/1990-12-31T23:59:59Z`
 - `/1990-12-31T23:59:59Z`
 - `../1990-12-31T23:59:59Z`
