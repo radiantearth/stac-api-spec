@@ -30,8 +30,8 @@ permitting the `If-Match` request header.
 
 The datetime parameter used by the Item Search and Features conformance classes allows the same values as the 
 [OAF datetime](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_parameter_datetime) parameter. This allows for 
-either a single [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) datetime or an open or closed interval that also 
-uses RFC 3339 datetimes.
+either a single [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) datetime (e.g., `1990-12-31T23:59:59Z`) or a closed or single open ended interval that also 
+uses RFC 3339 datetimes (e.g., `1990-12-31T23:59:59Z/..`).
 
 RFC 3339 is a profile of ISO 8601, adding these constraints to the allowed values:
 - a complete representation of date and time (fractional seconds optional).
@@ -50,13 +50,13 @@ the month (01-12), the day (01-31), the hour (0-24), minute (0-60), seconds (0-9
 strategy is to use this regex to ensure the datetime conforms to the the RFC3339 profile and then us an ISO8601 parser to produce
 a valid datetime object from the datetime string.
 
-Thereby, the recommended process for parsing the datetime is:
+Thereby, the recommended process for parsing the datetime value (which may consist of a single
+RFC 3339 datetime or an interval) is:
 
 1. uppercase the string (this avoids needing to match on both (t|T) and (z|Z))
 2. split the string on `/` to determine if it is a single datetime or an interval
-3. For each value of the split, check if it is either an open interval (the empty string or `..`), or if it matches the RFC3339 datetime regex. Only one of the interval ends may be open.
-5. ISO8601 parse datetime strings using a library such as [pyiso8601](https://github.com/micktwomey/pyiso8601) or 
-   [dateutil](https://dateutil.readthedocs.io/en/stable/parser.html#dateutil.parser.isoparse). Frequently, date libraries built into language standard libraries do not parse ISO8601 datetimes correctly, for example, the built-in Python datetime library does not handle `Z` as a timezone.
+3. For the single value or each value of the split, check if it is either an open interval (the empty string or `..`), or if it matches the RFC3339 datetime regex. Only one of the interval ends may be open.
+5. ISO8601 parse datetime strings using a library such as [pyiso8601](https://github.com/micktwomey/pyiso8601) (Python), [dateutil](https://dateutil.readthedocs.io/en/stable/parser.html#dateutil.parser.isoparse) (Python), or [Luxon](https://github.com/moment/luxon/) (JavaScript). Frequently, date libraries built into language standard libraries do not parse ISO8601 datetimes correctly, for example, the built-in Python datetime library does not handle `Z` as a timezone.
 
 Below are a few examples of valid RFC 3339 datetimes. Note the uses of fractional seconds, the use of `.` or
  `,` as the fractional seconds separator, Z or z as a timezone, 
