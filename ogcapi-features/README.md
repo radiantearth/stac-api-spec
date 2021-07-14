@@ -4,6 +4,7 @@
   - [Endpoints](#endpoints)
   - [Examples](#examples)
   - [Example Landing Page for STAC API - Features](#example-landing-page-for-stac-api---features)
+  - [Example Collection for STAC API - Features](#example-collection-for-stac-api---features)
 
 *based on [**OGC API - Features - Part 1: Core**](https://www.ogc.org/standards/ogcapi-features)*
 
@@ -43,7 +44,7 @@ The core OGC API - Features endpoints are shown below, with details provided in 
 | `/collections/{collectionId}/items/{featureId}` | [Item](../stac-spec/item-spec/README.md)                | Returns single Item (GeoJSON Feature)                                                                                                      |
 | `/api`                                          | OpenAPI 3.0 JSON                                        | Returns an OpenAPI description of the service from the `service-desc` link `rel` - not required to be `/api`, but the document is required |
 
-The OGC API - Features is a standard API that represents collections of geospatial data. It defines the RESTful interface 
+The OGC API - Features is a standard API that represents collections of geospatial data. It defines a RESTful interface 
 to query geospatial data, with GeoJSON as a main return type. With OAFeat you can return any `Feature`, which is a geometry 
 plus any number of properties. The core [STAC Item spec](../stac-spec/item-spec/README.md) 
 enhances the core `Feature` with additional requirements and options to enable cataloging of spatiotemporal 'assets' like 
@@ -65,8 +66,15 @@ In OAFeat, Features are the individual records within a Collection and are usual
 is outside the scope of STAC API, as the [STAC Item](../stac-spec/item-spec/item-spec.md) is
 specified in GeoJSON.
 
-A typical OAFeat will have multiple collections, and each will just offer simple search for its particular collection at 
-`GET /collections/{collectionId}/items`. It is recommended to have each OAFeat Collection correspond to a STAC Collection,
+A typical OAFeat will have multiple collections. Simple search for items within a collection can be done
+with the resource endpoint `GET /collections/{collectionId}/items`. This endpoint should be exposed via a 
+link in the Collection with `rel=items`, as shown in the [Example Landing Page diagram](../overview.md#example-landing-page). 
+Unlike static STAC catalogs, it is recommended **not** to use `item` relations, but instead rely on 
+the collection resource linking to a paginated endpoint returning items through a link relation 
+`items`, e.g., `/collections/{collectionId}` has a link with relation `items` linking 
+to `/collections/{collectionId}/items`.  
+
+It is recommended to have each OAFeat Collection correspond to a STAC Collection,
 and the `/collections/{collectionId}/items` endpoint can be used as a single collection search. Implementations may **optionally** 
 provide support for the full superset of STAC API query parameters to the `/collections/{collectionId}/items` endpoint,
 where the collection ID in the path is equivalent to providing that single value in the `collections` query parameter in 
@@ -157,5 +165,43 @@ the [overview](../overview.md#example-landing-page) document.
             "href": "https://stacserver.org/collections"
         }
     ]
+}
+```
+
+## Example Collection for STAC API - Features
+
+The landing page `data` relation points to an endpoint to retrieve all collections. Each collection then has
+a link relation to its `items` resource through the link with a rel value `items`.  Note here that, unlike 
+as is typical with a static STAC Collection, there are no links here with rel value `item`. 
+
+`https://stacserver.org/collections/aster-l1t`
+
+```
+{
+  "id": "aster-l1t",
+  "type": "Collection",
+  "title": "ASTER L1T",
+  "links": [
+    {
+      "rel": "items",
+      "type": "application/geo+json",
+      "href": "https://stacserver.org/collections/aster-l1t/items"
+    },
+    {
+      "rel": "parent",
+      "type": "application/json",
+      "href": "https://stacserver.org"
+    },
+    {
+      "rel": "root",
+      "type": "application/json",
+      "href": "https://stacserver.org"
+    },
+    {
+      "rel": "self",
+      "type": "application/json",
+      "href": "https://stacserver.org/collections/aster-l1t"
+    }
+  ]
 }
 ```
