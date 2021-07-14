@@ -62,7 +62,7 @@ Implementations that support `POST` must add a second link with the same structu
 
 The following list of parameters is used to narrow search queries. They can all be represented as query string parameters 
 in a GET request, or as JSON entity fields in a POST request. For filters that represent a set of values, query parameters 
-should use comma-separated string values (with no outer brackets \[ or \]) and JSON entity attributes should use JSON Arrays. 
+should use comma-separated string values with no enclosing brackets (\[ or \]) and no whitespace between values, and JSON entity attributes should use JSON Arrays. 
 
 ### Query Examples
 
@@ -88,7 +88,7 @@ The core parameters for STAC search are defined by OAFeat, and STAC adds a few p
 | Parameter    | Type             | Source API   | Description |
 | -----------  | ---------------- | ------------ | ----------- |
 | limit        | integer          | OAFeat       | The maximum number of results to return (page size). Defaults to 10 |
-| bbox         | \[number]        | OAFeat       | Requested bounding box.  Represented using either 2D or 3D geometries. The length of the array must be 2\*n where n is the number of dimensions. The array contains all axes of the southwesterly most extent followed by all axes of the northeasterly most extent specified in Longitude/Latitude or Longitude/Latitude/Elevation based on [WGS 84](http://www.opengis.net/def/crs/OGC/1.3/CRS84). When using 3D geometries, the elevation of the southwesterly most extent is the minimum elevation in meters and the elevation of the northeasterly most extent is the maximum. |
+| bbox         | \[number]        | OAFeat       | Requested bounding box. |
 | datetime     | string           | OAFeat       | Single date+time, or a range ('/' separator), formatted to [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). Use double dots `..` for open date ranges. |
 | intersects   | GeoJSON Geometry | STAC         | Searches items by performing intersection between their geometry and provided GeoJSON geometry.  All GeoJSON geometry types must be supported. |
 | ids          | \[string]        | STAC         | Array of Item ids to return. |
@@ -96,6 +96,9 @@ The core parameters for STAC search are defined by OAFeat, and STAC adds a few p
 
 Only one of either **intersects** or **bbox** should be specified.  If both are specified, a 400 Bad Request response 
 should be returned. See [examples](examples.md) to see sample requests.
+
+**bbox** Represented using either 2D or 3D geometries. The length of the array must be 2\*n where n is the number of dimensions. The array contains all axes of the southwesterly most extent followed by all axes of the northeasterly most extent specified in Longitude/Latitude or Longitude/Latitude/Elevation based on [WGS 84](http://www.opengis.net/def/crs/OGC/1.3/CRS84). When using 3D geometries, the elevation of the southwesterly most extent is the minimum elevation in meters and the elevation of the northeasterly most extent is the maximum.  
+
 
 ## Response
 
