@@ -99,7 +99,7 @@ column is more of an example in some cases. OGC API makes some endpoint location
 | `/api`                                              | [OAFeat](ogcapi-features)  | service-desc      | OpenAPI 3.0 JSON                                  | The OpenAPI definition of the endpoints in this service                                                                             |
 | **`/collections/{collectionId}`**                   | [OAFeat](ogcapi-features)  | collection        | Collection                                        | Returns single Collection JSON                                                                                                      |
 | **`/collections/{collectionId}/items`**             | [OAFeat](ogcapi-features)  | items             | ItemCollection                                    | GeoJSON FeatureCollection-conformant entity of Item objects in collection                                                                  |
-| **`/collections/{collectionId}/items/{featureId}`** | [OAFeat](ogcapi-features)  | Item              | Returns single Item (GeoJSON Feature)             |                                                                                                                                     |
+| **`/collections/{collectionId}/items/{featureId}`** | [OAFeat](ogcapi-features)  | item              | Returns single Item (GeoJSON Feature). This relation is defined by STAC, but its use is discouraged in STAC API, as Items should be referenced through their containing Collection rather than directly.            |                                                                                                                                     |
 
 ## Conformance Classes
 
