@@ -627,9 +627,9 @@ A sample STAC Item (excluding `assets`) is:
   "type": "Feature",
   "stac_version": "1.0.0",
   "stac_extensions": [
-    "eo",
-    "view",
-    "proj"
+    "https://stac-extensions.github.io/eo/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/view/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/projection/v1.0.0/schema.json"
   ],
   "id": "S2A_60HWB_20201111_0_L2A",
   "bbox": [ 176.9997779369264, -39.83783732066656, 178.14624317719924, -38.842842449352425],
