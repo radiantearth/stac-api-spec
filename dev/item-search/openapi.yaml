@@ -575,25 +575,9 @@ paths:
                 description: A GeoJSON FeatureCollection augmented with foreign members that contain values relevant to a STAC entity
                 type: object
                 required:
-                  - stac_version
                   - features
                   - type
                 properties:
-                  stac_version:
-                    title: STAC version
-                    type: string
-                    example: 1.0.0
-                  stac_extensions:
-                    title: STAC extensions
-                    type: array
-                    uniqueItems: true
-                    items:
-                      anyOf:
-                        - title: Reference to a JSON Schema
-                          type: string
-                          format: uri
-                        - title: Reference to a core extension
-                          type: string
                   type:
                     type: string
                     enum:
@@ -614,9 +598,20 @@ paths:
                         - assets
                       properties:
                         stac_version:
-                          $ref: '#/paths/~1search/post/responses/200/content/application~1geo%2Bjson/schema/properties/stac_version'
+                          title: STAC version
+                          type: string
+                          example: 1.0.0
                         stac_extensions:
-                          $ref: '#/paths/~1search/post/responses/200/content/application~1geo%2Bjson/schema/properties/stac_extensions'
+                          title: STAC extensions
+                          type: array
+                          uniqueItems: true
+                          items:
+                            anyOf:
+                              - title: Reference to a JSON Schema
+                                type: string
+                                format: uri
+                              - title: Reference to a core extension
+                                type: string
                         id:
                           type: string
                           description: 'Provider identifier, a unique ID.'
@@ -670,8 +665,8 @@ paths:
                       example:
                         stac_version: 1.0.0
                         stac_extensions:
-                          - eo
-                          - view
+                          - 'https://stac-extensions.github.io/eo/v1.0.0/schema.json'
+                          - 'https://stac-extensions.github.io/view/v1.0.0/schema.json'
                           - 'https://example.com/cs-extension/1.0/schema.json'
                         type: Feature
                         id: CS3-20160503_132131_05

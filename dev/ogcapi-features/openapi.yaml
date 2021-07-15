@@ -1116,8 +1116,8 @@ components:
             example:
               stac_version: 1.0.0
               stac_extensions:
-                - eo
-                - view
+                - 'https://stac-extensions.github.io/eo/v1.0.0/schema.json'
+                - 'https://stac-extensions.github.io/view/v1.0.0/schema.json'
                 - 'https://example.com/cs-extension/1.0/schema.json'
               type: Feature
               id: CS3-20160503_132131_05
