@@ -74,15 +74,15 @@ the service supports. This are listed at the top of each extension description, 
   - <https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:cql-text>
   - <https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:cql-json>
 - [Context](item-search/README.md#context)
-  - <https://api.stacspec.org/v1.0.0-beta.2/item-search#context> |
+  - <https://api.stacspec.org/v1.0.0-beta.2/item-search#context>
 - [Sort](item-search/README.md#sort)
-  - <https://api.stacspec.org/v1.0.0-beta.2/item-search#sort>    |
+  - <https://api.stacspec.org/v1.0.0-beta.2/item-search#sort>
 - [Transaction](ogcapi-features/extensions/transaction/README.md)
-  - <https://api.stacspec.org/v1.0.0-beta.2/ogcapi-features/extensions/transaction> |
+  - <https://api.stacspec.org/v1.0.0-beta.2/ogcapi-features/extensions/transaction>
 - [Items and Collections API Version](ogcapi-features/extensions/version/README.md)
   - <https://api.stacspec.org/v1.0.0-beta.2/ogcapi-features/extensions/version>
 - [Query](item-search/README.md#query)
-  - <https://api.stacspec.org/v1.0.0-beta.2/item-search#query> |
+  - <https://api.stacspec.org/v1.0.0-beta.2/item-search#query>
 
 ## Third-party / vendor extensions
 
