@@ -97,8 +97,14 @@ The core parameters for STAC search are defined by OAFeat, and STAC adds a few p
 Only one of either **intersects** or **bbox** should be specified.  If both are specified, a 400 Bad Request response 
 should be returned. See [examples](examples.md) to see sample requests.
 
-**bbox** Represented using either 2D or 3D geometries. The length of the array must be 2\*n where n is the number of dimensions. The array contains all axes of the southwesterly most extent followed by all axes of the northeasterly most extent specified in Longitude/Latitude or Longitude/Latitude/Elevation based on [WGS 84](http://www.opengis.net/def/crs/OGC/1.3/CRS84). When using 3D geometries, the elevation of the southwesterly most extent is the minimum elevation in meters and the elevation of the northeasterly most extent is the maximum.  
-
+**bbox** Represented using either 2D or 3D geometries. The length of the array must be 2\*n where 
+*n* is the number of dimensions. The array contains all axes of the southwesterly most extent 
+followed by all axes of the northeasterly most extent specified in Longitude/Latitude or 
+Longitude/Latitude/Elevation based on [WGS 84](http://www.opengis.net/def/crs/OGC/1.3/CRS84). 
+When using 3D geometries, the elevation of the southwesterly most extent is the minimum elevation 
+in meters and the elevation of the northeasterly most extent is the maximum. When filtering with 
+a 3D bbox over Items with 2D geometries, it is assumed that the 2D geometries are at 
+elevation 0.
 
 ## Response
 
