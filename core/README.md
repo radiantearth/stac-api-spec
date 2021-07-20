@@ -1,7 +1,7 @@
 # STAC API - Core Specification
 
 - [STAC API - Core Specification](#stac-api---core-specification)
-  - [Recommended Link Relations at `/`](#recommended-link-relations-at-)
+  - [Link Relations](#link-relations)
   - [Example Landing Page for STAC API - Core](#example-landing-page-for-stac-api---core)
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml) describes the core endpoints ([rendered version](https://api.stacspec.org/v1.0.0-beta.2/core)),
@@ -45,21 +45,27 @@ The root endpoint (`/`) is most useful when it presents a complete `Catalog` rep
 that all `Collection` and `Item` objects can be navigated to by transitively traversing links from this root. This spec does not require any 
 API endpoints from OAFeat or STAC API to be implemented, so the following links may not exist if the endpoint has not been implemented.
 
-## Recommended Link Relations at `/`
+## Link Relations
 
-When implementing the STAC API Core conformance class, it it recommended to implement these Link relations.
+The following Link relations should exist in the Landing Page (root).
 
-| **`rel`**      | **href to**                           | **From**       | **Description**                                                                                                                        |
-| -------------- | ------------------------------------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| `root`         | The root URI                          | STAC Core      | Reference to self URI                                                                                                                  |
-| `self`         | The root URI                          | OAFeat         | Reference to self URI                                                                                                                  |
-| `service-desc` | The OpenAPI service description       | OAFeat OpenAPI | Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API |
-| `service-doc`  | An HTML service description           | OAFeat OpenAPI | Uses the `text/html` media type to refer to a human-consumable description of the service                                              |
-| `child`        | The child STAC Catalogs & Collections | STAC Core      | Provides curated paths to get to STAC Collection and Item objects                                                                      |
+| **rel**        | **href**             | **From**       | **Description** |
+| -------------- | -------------------- | -------------- | ---------------- |
+| `root`         | `/`                  | STAC Core      | The root URI |
+| `self`         | `/`                  | OAFeat         | Self reference, same as root URI |
+| `service-desc` | `/api` (recommended) | OAFeat OpenAPI | The OpenAPI service description. Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API |
+| `child`        | various              | STAC Core      | The child STAC Catalogs & Collections. Provides curated paths to get to STAC Collection and Item objects
+
+Additionally, a `service-doc` endpoint is recommended.
+
+| **rel**      | **href** | **From**       | **Description** |
+| ------------ | -------- | -------------- |----------------- |
+| `service-doc`  | `/api.html` (recommended) | OAFeat OpenAPI | An HTML service description.  Uses the `text/html` media type to refer to a human-consumable description of the service |
 
 It is also valid to have `item` links from the landing page, but most STAC API services are used to 
 serve up a large number of features, so they typically
-use several layers of intermediate `child` links before getting to Item objects.
+use several layers of intermediate `child` links before getting to Item objects.  Note that the `items` (plural)
+link will be used by APIs implementing STAC API - Features to link from a Collection to the items in that collection.
 
 ## Example Landing Page for STAC API - Core
 
