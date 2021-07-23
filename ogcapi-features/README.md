@@ -4,6 +4,9 @@
   - [Endpoints](#endpoints)
   - [Examples](#examples)
   - [Example Landing Page for STAC API - Features](#example-landing-page-for-stac-api---features)
+  - [Extensions](#extensions)
+    - [Transaction](#transaction)
+    - [Items and Collections API Version Extension](#items-and-collections-api-version-extension)
 
 *based on [**OGC API - Features - Part 1: Core**](https://www.ogc.org/standards/ogcapi-features)*
 
@@ -159,3 +162,34 @@ the [overview](../overview.md#example-landing-page) document.
     ]
 }
 ```
+
+## Extensions
+
+These extensions provide additional functionality that enhances STAC API - Features. 
+All are specified as [fragments](../fragments), as they are re-used by extensions to other STAC APIs.
+STAC APIs that offer the following capabilities must include the relevant **conformance URI** in the 
+`conformsTo` response at the root (`/`) landing page, to indicate to clients that they will respond properly 
+to requests from clients.
+
+### Transaction
+
+- **Conformance URIs:**
+  - <https://api.stacspec.org/v1.0.0-beta.2/ogcapi-features/extensions/transaction>
+  - <http://www.opengis.net/spec/ogcapi-features-4/1.0/conf/simpletx>
+- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
+- **Definition**: [STAC API - Transaction Fragment](extensions/transaction/)
+
+The core STAC API only supports retrieving existing Items.
+The Transaction extension supports the creation, editing, and deleting of items through the use of the 
+POST, PUT, PATCH, and DELETE methods. The full description of how this extension works can be found in the 
+[transaction fragment](extensions/transaction/). 
+
+### Items and Collections API Version Extension
+
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.2/ogcapi-features/extensions/version>
+- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
+- **Definition**: [STAC API - Version](extensions/version/)
+
+The core API only supports semantics for creating and accessing a single version of an Item or Collection.
+The Version Extension defines the API resources and semantics for creating and accessing versioned records.
+It is the STAC API equivalent of [OGC API - Features - Part 4: Create, Replace, Update and Delete](https://docs.ogc.org/DRAFTS/20-002.html).

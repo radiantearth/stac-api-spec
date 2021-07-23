@@ -60,9 +60,10 @@ Implementations that support `POST` must add a second link with the same structu
 
 ## Query Parameters and Fields
 
-The following list of parameters is used to narrow search queries. They can all be represented as query string parameters 
-in a GET request, or as JSON entity fields in a POST request. For filters that represent a set of values, query parameters 
-should use comma-separated string values with no enclosing brackets (\[ or \]) and no whitespace between values, and JSON entity attributes should use JSON Arrays. 
+The following list of parameters is used to narrow search queries. They can all be represented as query 
+string parameters in a GET request, or as JSON entity fields in a POST request. For filters that represent 
+a set of values, query parameters should use comma-separated string values with no enclosing brackets 
+(\[ or \]) and no whitespace between values, and JSON entity attributes should use JSON Arrays. 
 
 ### Query Examples
 
@@ -98,7 +99,6 @@ Only one of either **intersects** or **bbox** should be specified.  If both are 
 should be returned. See [examples](examples.md) to see sample requests.
 
 **bbox** Represented using either 2D or 3D geometries. The length of the array must be 2\*n where n is the number of dimensions. The array contains all axes of the southwesterly most extent followed by all axes of the northeasterly most extent specified in Longitude/Latitude or Longitude/Latitude/Elevation based on [WGS 84](http://www.opengis.net/def/crs/OGC/1.3/CRS84). When using 3D geometries, the elevation of the southwesterly most extent is the minimum elevation in meters and the elevation of the northeasterly most extent is the maximum.  
-
 
 ## Response
 
@@ -258,7 +258,7 @@ the [overview](../overview.md#example-landing-page) document.
 
 ## Extensions
 
-These extensions provide additional functionality that enhances the core item search. All are specified as 
+These extensions provide additional functionality that enhances Item Search. All are specified as 
 [fragments](../fragments), as they are re-used by other extensions STAC API's that offer the following capabilities at
 the `search` endpoint must include the relevant **conformance URI** in the `conformsTo` response at
 the root (`/`) landing page, to indicate to clients that they will respond properly to requests from clients.

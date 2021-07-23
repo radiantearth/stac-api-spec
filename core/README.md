@@ -3,6 +3,7 @@
 - [STAC API - Core Specification](#stac-api---core-specification)
   - [Recommended Link Relations at `/`](#recommended-link-relations-at-)
   - [Example Landing Page for STAC API - Core](#example-landing-page-for-stac-api---core)
+  - [Extensions](#extensions)
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml) describes the core endpoints ([rendered version](https://api.stacspec.org/v1.0.0-beta.2/core)),
   and [commons.yaml](commons.yaml) is the OpenAPI version of the core [STAC spec](../stac-spec) JSON Schemas.
@@ -111,3 +112,7 @@ the [overview](../overview.md#example-landing-page) document.
     ]
 }
 ```
+
+## Extensions
+
+None.
