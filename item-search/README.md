@@ -1,6 +1,7 @@
 # STAC API - Item Search
 
 - [STAC API - Item Search](#stac-api---item-search)
+  - [Link Relations](#link-relations)
   - [Query Parameters and Fields](#query-parameters-and-fields)
     - [Query Examples](#query-examples)
     - [Query Parameter Table](#query-parameter-table)
@@ -24,7 +25,7 @@
 - **Dependencies**: [STAC API - Core](../core)
 - **Examples**: [examples.md](examples.md)
 
-A search endpoint, linked to from the STAC landing page, provides the ability to query STAC [Item](../stac-spec/item-spec/README.md) 
+A search endpoint provides the ability to query STAC [Item](../stac-spec/item-spec/README.md) 
 objects across collections.
 It retrieves a group of Item objects that match the provided parameters, wrapped in an 
 [ItemCollection](../fragments/itemcollection/README.md) (which is a 
@@ -41,6 +42,23 @@ provides a more expressive set of operators.
 
 Implementing `GET /search` is **required**, `POST /search` is optional, but recommended.
 
+## Link Relations
+
+The following Link relations should exist in the Landing Page (root).
+
+| **rel**        | **href**             | **From**       | **Description** |
+| -------------- | -------------------- | -------------- | ---------------- |
+| `root`         | `/`                  | STAC Core      | The root URI |
+| `self`         | `/`                  | OAFeat         | Self reference, same as root URI |
+| `service-desc` | `/api` (recommended) | OAFeat OpenAPI | The OpenAPI service description. Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API |
+| search     | `/search`                | STAC Item Search | URI for the Search endpoint |
+
+Additionally, a `service-doc` endpoint is recommended.
+
+| **rel**      | **href** | **From**       | **Description**  |
+| ------------ | -------- | -------------- |----------------- |
+| `service-doc`  | `/api.html` (recommended) | OAFeat OpenAPI | An HTML service description.  Uses the `text/html` media type to refer to a human-consumable description of the service |
+
 It is **required** to add a Link to the root endpoint (`/`) with the `rel` type set to `search`
 that refers to the search endpoint in the `href` property,
 with a `type` of `application/geo+json` and a `method` of `GET`.
@@ -56,7 +74,7 @@ This link should look like:
 }
 ```
 
-Implementations that support `POST` must add a second link with the same structure, but has a `method` of `POST`. 
+Implementations that support `POST` should add a second link with the same structure but with a `method` of `POST`. 
 
 ## Query Parameters and Fields
 
