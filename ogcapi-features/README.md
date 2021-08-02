@@ -68,11 +68,14 @@ specified in GeoJSON.
 
 A typical OAFeat will have multiple collections. Simple search for items within a collection can be done
 with the resource endpoint `GET /collections/{collectionId}/items`. This endpoint should be exposed via a 
-link in the Collection with `rel=items`, as shown in the [Example Landing Page diagram](../overview.md#example-landing-page). 
-Unlike static STAC catalogs, it is recommended **not** to use `item` relations, but instead rely on 
+link in the individual collection's endpoint with `rel=items`, as shown in the 
+[Example Landing Page diagram](../overview.md#example-landing-page). Note that this relation is `items`, which is
+distinct from the `item` relation defined in STAC for linking to a single Item. Most APIs will not use 
+`item` relations directly, but instead rely on 
 the collection resource linking to a paginated endpoint returning items through a link relation 
 `items`, e.g., `/collections/{collectionId}` has a link with relation `items` linking 
-to `/collections/{collectionId}/items`.  
+to `/collections/{collectionId}/items`. However, static catalogs and APIs can be exposed via the same 
+endpoints, so APIs may contain `item` relations.
 
 It is recommended to have each OAFeat Collection correspond to a STAC Collection,
 and the `/collections/{collectionId}/items` endpoint can be used as a single collection search. Implementations may **optionally** 
