@@ -147,8 +147,10 @@ The implementation **must** support these conformance classes:
 
 It is **recommended** that the implementation also support the Basic Spatial Operators and Basic Temporal Operators classes:
 
-- Basic Spatial Operators (`https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:basic-spatial-operators`) defines the `INTERSECTS` predicate
-- Basic Temporal Operators: (`https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:basic-temporal-operators`) defines the `ANYINTERACTS` predicate
+- Basic Spatial Operators (`https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:basic-spatial-operators`)
+  defines the `INTERSECTS` predicate
+- Basic Temporal Operators: (`https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:basic-temporal-operators`)
+  defines the `ANYINTERACTS` predicate
   
 Additionally, the implementation **must** support at least one of the "CQL Text" or "CQL JSON" conformance classes that define 
 the CQL format used in the filter parameter:
@@ -163,19 +165,25 @@ CQL JSON in POST requests.
 The Filter Extension defines support for implementing the following conformance 
 classes. Implementation of these is often limited by the 
 operations supported by the implementation's datastore, for example, Elasticsearch does not support the spatial 
-operations required by the Enhanced Spatial Operators. If implemented for Item Search, the conformance class URI should follow
-the same pattern relative to OAFeat CQL.
+operations required by the Enhanced Spatial Operators. If implemented for Item Search, the conformance class 
+URI should follow the same pattern relative to OAFeat CQL.
 
-- Enhanced Comparison Operators (`https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:enhanced-comparison-operators`) defines the `LIKE`, `BETWEEN`, and `IN` operators. It is **recommended** to implement this class.
-- Enhanced Spatial Operators (`https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:enhanced-spatial-operators`) defines the same operators as OAF Part 3 CQL Enhanced Spatial Operators.
-- Enhanced Temporal Operators (`https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:enhanced-temporal-operators`) defines the same operators as OAF Part 3 CQL Enhanced Temporal Operators.
+- Enhanced Comparison Operators 
+  (`https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:enhanced-comparison-operators`) defines the `LIKE`, 
+  `BETWEEN`, and `IN` operators. It is **recommended** to implement this class.
+- Enhanced Spatial Operators 
+  (`https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:enhanced-spatial-operators`) defines the 
+  same operators as OAF Part 3 CQL Enhanced Spatial Operators.
+- Enhanced Temporal Operators 
+  (`https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:enhanced-temporal-operators`) defines the 
+  same operators as OAF Part 3 CQL Enhanced Temporal Operators.
 - Functions (`https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:functions`) defines the same operators as OAF Part 3 CQL Functions.
 - Arithmetic: (`https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:arithmetic`) defines the same operators as OAF Part 3 CQL Arithmetic.
 - Arrays: (`https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:arrays`) defines the same operators as OAF Part 3 CQL Arrays.
-- Queryable Operands: (`https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:queryable-operands`) allows the use 
-  of queryables (e.g., properties) in any position of a clause, not just in the first position. This allows predicates 
-  like `property1 == property2` be expressed, whereas the Basic CQL conformance class only requires comparisons against literal
-  values.
+- Queryable Operands: (`https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:queryable-operands`) allows the 
+  use of queryables (e.g., properties) in any position of a clause, not just in the first position. This allows 
+  predicates like `property1 == property2` be expressed, whereas the Basic CQL conformance class only requires
+  comparisons against literal values.
 
 Additionally, if an API implements the OGC API Features endpoint, it is **recommended** that the OAFeat Part 3 Filter, 
 Features Filter, and Basic CQL conformance classes be implemented, which allow use of CQL filters against the 

@@ -1,20 +1,27 @@
-<html lang="en">
- <head>
-   <meta charset="utf-8">
-   <meta name="viewport" content="width=device-width,initial-scale=1">
-   <meta http-equiv="x-ua-compatible" content="ie=edge">
-   <link rel="shortcut icon" href="../assets/images/favicon.png">
-   <title>STAC API</title>
- </head>
- <body>
-   <div id="content"></div>
-   <script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"> </script>
-   <script type="text/javascript">
-     Redoc.init('openapi.yaml', {
-       expandResponses:"200,201,202,203,204",
-       pathInMiddlePanel: true,
-       hideDownloadButton: true
-     }, document.getElementById('content'));
-   </script>
- </body>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>STAC API</title>
+  <!-- needed for adaptive design -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet">
+
+  <!--
+    ReDoc doesn't change outer page styles
+    -->
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <redoc spec-url='openapi.yaml'></redoc>
+  <script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"> </script>
+</body>
+
 </html>
