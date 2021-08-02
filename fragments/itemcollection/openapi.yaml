@@ -11,14 +11,9 @@ components:
         A GeoJSON FeatureCollection augmented with foreign members that contain values relevant to a STAC entity
       type: object
       required:
-        - stac_version
         - features
         - type
       properties:
-        stac_version:
-          $ref: '../../core/commons.yaml#/components/schemas/stac_version'
-        stac_extensions:
-          $ref: '../../core/commons.yaml#/components/schemas/stac_extensions'
         type:
           type: string
           enum:
