@@ -46,7 +46,7 @@ from dev to master (and require 3 approvals).
 
 ### Check files
 
-The same check-markdown and check-examples programs that runs as a check on PR's is part of the repo and can be run locally. 
+The same check-markdown and check-openapi programs that runs as a check on PR's is part of the repo and can be run locally. 
 To install you'll need npm, which is a standard part of any [node.js installation](https://nodejs.org/en/download/).
 Alternatively, you can also use [yarn](https://yarnpkg.com/) instead of npm. In this case replace all occurrences of `npm` with `yarn` below.
 
@@ -65,10 +65,16 @@ npm run check
 
 This will spit out the same texts that you see online, and you can then go and fix your markdown or examples.
 
-To just check the markdown run:
+To just check the markdown, run:
 
 ```bash
 npm run check-markdown
+```
+
+To just validate the OpenAPI definitions, run:
+
+```bash
+npm run check-openapi
 ```
 
 ### Working with the OpenAPI files
