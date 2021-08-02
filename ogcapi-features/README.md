@@ -1,6 +1,7 @@
 # STAC API - Features
 
 - [STAC API - Features](#stac-api---features)
+  - [Link Relations](#link-relations)
   - [Endpoints](#endpoints)
   - [Examples](#examples)
   - [Example Landing Page for STAC API - Features](#example-landing-page-for-stac-api---features)
@@ -30,6 +31,24 @@ Note that implementing OGC API - Features does not actually depend on [STAC API 
 this extension discusses using it in the context of STAC. One could implement an OAFeat service, returning STAC 
 [Item](../stac-spec/item-spec/README.md) and [Collection](../stac-spec/collection-spec/README.md) objects from their endpoints, and it will work
 with OAFeat clients. But specialized STAC clients will likely display results better, and depend on the STAC landing page.
+
+## Link Relations
+
+The following Link relations should exist in the Landing Page (root).
+
+| **rel**        | **href**             | **From**       | **Description** |
+| -------------- | -------------------- | -------------- | ---------------- |
+| `root`         | `/`                  | STAC Core      | The root URI |
+| `self`         | `/`                  | OAFeat         | Self reference, same as root URI |
+| `conformance`  | `/conformance`       | OAFeat         | Conformance URI |
+| `service-desc` | `/api` (recommended) | OAFeat OpenAPI | The OpenAPI service description. Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API |
+| `data`         | `/collections`       | OAFeat | List of Collections |
+
+Additionally, a `service-doc` endpoint is recommended.
+
+| **rel**      | **href** | **From**       | **Description**  |
+| ------------ | -------- | -------------- |----------------- |
+| `service-doc`  | `/api.html` (recommended) | OAFeat OpenAPI | An HTML service description.  Uses the `text/html` media type to refer to a human-consumable description of the service |
 
 ## Endpoints
 
