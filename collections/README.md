@@ -7,7 +7,7 @@
 	- [Conformance](#conformance)
 
 - **OpenAPI specification:** Missing
-- **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.1/extensions/collections>
+- **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.2/extensions/collections>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Dependencies**: [STAC API - Core](../core)
 
@@ -98,7 +98,7 @@ and if the canonical location is elsewhere it is recommended to include a `rel` 
 
 ## Conformance
 
-Any implementation that provides the STAC Collection functionality described above must add `http://stacspec.org/spec/api/1.0.0-beta.1/collections`,
+Any implementation that provides the STAC Collection functionality described above must add `http://stacspec.org/spec/api/1.0.0-beta.2/collections`,
 the conformance URI, to the `conformsTo` JSON at the landing page.
 
 The core STAC landing page (`/`) must also include a link with a `rel` of `data` that links to the `/collections` endpoint.
