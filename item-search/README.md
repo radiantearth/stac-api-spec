@@ -94,8 +94,12 @@ The core parameters for STAC search are defined by OAFeat, and STAC adds a few p
 | ids          | \[string]        | STAC         | Array of Item ids to return. |
 | collections  | \[string]        | STAC         | Array of one or more Collection IDs that each matching Item must be in. |
 
+See [examples](examples.md) for some example requests.
+
 Only one of either **intersects** or **bbox** should be specified.  If both are specified, a 400 Bad Request response 
-should be returned. See [examples](examples.md) to see sample requests.
+should be returned. 
+
+**datetime** The datetime parameter use the same allowed values as the [OAF datetime](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_parameter_datetime) parameter. This allows for either a single [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) datetime or an open or closed interval that also uses RFC 3339 datetimes. Additional details about this parameter can be found in the [Implementation Recommendations](../implementation.md#datetime-parameter-handling).
 
 **bbox** Represented using either 2D or 3D geometries. The length of the array must be 2\*n where n is the number of dimensions. The array contains all axes of the southwesterly most extent followed by all axes of the northeasterly most extent specified in Longitude/Latitude or Longitude/Latitude/Elevation based on [WGS 84](http://www.opengis.net/def/crs/OGC/1.3/CRS84). When using 3D geometries, the elevation of the southwesterly most extent is the minimum elevation in meters and the elevation of the northeasterly most extent is the maximum.  
 
