@@ -1,6 +1,7 @@
 # STAC API - Item Search
 
 - [STAC API - Item Search](#stac-api---item-search)
+  - [Link Relations](#link-relations)
   - [Query Parameters and Fields](#query-parameters-and-fields)
     - [Query Examples](#query-examples)
     - [Query Parameter Table](#query-parameter-table)
@@ -24,7 +25,7 @@
 - **Dependencies**: [STAC API - Core](../core)
 - **Examples**: [examples.md](examples.md)
 
-A search endpoint, linked to from the STAC landing page, provides the ability to query STAC [Item](../stac-spec/item-spec/README.md) 
+A search endpoint provides the ability to query STAC [Item](../stac-spec/item-spec/README.md) 
 objects across collections.
 It retrieves a group of Item objects that match the provided parameters, wrapped in an 
 [ItemCollection](../fragments/itemcollection/README.md) (which is a 
@@ -41,6 +42,23 @@ provides a more expressive set of operators.
 
 Implementing `GET /search` is **required**, `POST /search` is optional, but recommended.
 
+## Link Relations
+
+The following Link relations should exist in the Landing Page (root).
+
+| **rel**        | **href**             | **From**       | **Description** |
+| -------------- | -------------------- | -------------- | ---------------- |
+| `root`         | `/`                  | STAC Core      | The root URI |
+| `self`         | `/`                  | OAFeat         | Self reference, same as root URI |
+| `service-desc` | `/api` (recommended) | OAFeat OpenAPI | The OpenAPI service description. Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API |
+| search     | `/search`                | STAC Item Search | URI for the Search endpoint |
+
+Additionally, a `service-doc` endpoint is recommended.
+
+| **rel**      | **href** | **From**       | **Description**  |
+| ------------ | -------- | -------------- |----------------- |
+| `service-doc`  | `/api.html` (recommended) | OAFeat OpenAPI | An HTML service description.  Uses the `text/html` media type to refer to a human-consumable description of the service |
+
 It is **required** to add a Link to the root endpoint (`/`) with the `rel` type set to `search`
 that refers to the search endpoint in the `href` property,
 with a `type` of `application/geo+json` and a `method` of `GET`.
@@ -56,13 +74,14 @@ This link should look like:
 }
 ```
 
-Implementations that support `POST` must add a second link with the same structure, but has a `method` of `POST`. 
+Implementations that support `POST` should add a second link with the same structure but with a `method` of `POST`. 
 
 ## Query Parameters and Fields
 
-The following list of parameters is used to narrow search queries. They can all be represented as query string parameters 
-in a GET request, or as JSON entity fields in a POST request. For filters that represent a set of values, query parameters 
-should use comma-separated string values with no enclosing brackets (\[ or \]) and no whitespace between values, and JSON entity attributes should use JSON Arrays. 
+The following list of parameters is used to narrow search queries. They can all be represented as query 
+string parameters in a GET request, or as JSON entity fields in a POST request. For filters that represent 
+a set of values, query parameters should use comma-separated string values with no enclosing brackets 
+(\[ or \]) and no whitespace between values, and JSON entity attributes should use JSON Arrays. 
 
 ### Query Examples
 
@@ -101,8 +120,14 @@ should be returned.
 
 **datetime** The datetime parameter use the same allowed values as the [OAF datetime](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_parameter_datetime) parameter. This allows for either a single [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) datetime or an open or closed interval that also uses RFC 3339 datetimes. Additional details about this parameter can be found in the [Implementation Recommendations](../implementation.md#datetime-parameter-handling).
 
-**bbox** Represented using either 2D or 3D geometries. The length of the array must be 2\*n where n is the number of dimensions. The array contains all axes of the southwesterly most extent followed by all axes of the northeasterly most extent specified in Longitude/Latitude or Longitude/Latitude/Elevation based on [WGS 84](http://www.opengis.net/def/crs/OGC/1.3/CRS84). When using 3D geometries, the elevation of the southwesterly most extent is the minimum elevation in meters and the elevation of the northeasterly most extent is the maximum.  
-
+**bbox** Represented using either 2D or 3D geometries. The length of the array must be 2\*n where 
+*n* is the number of dimensions. The array contains all axes of the southwesterly most extent 
+followed by all axes of the northeasterly most extent specified in Longitude/Latitude or 
+Longitude/Latitude/Elevation based on [WGS 84](http://www.opengis.net/def/crs/OGC/1.3/CRS84). 
+When using 3D geometries, the elevation of the southwesterly most extent is the minimum elevation 
+in meters and the elevation of the northeasterly most extent is the maximum. When filtering with 
+a 3D bbox over Items with 2D geometries, it is assumed that the 2D geometries are at 
+elevation 0.
 
 ## Response
 
@@ -262,7 +287,7 @@ the [overview](../overview.md#example-landing-page) document.
 
 ## Extensions
 
-These extensions provide additional functionality that enhances the core item search. All are specified as 
+These extensions provide additional functionality that enhances Item Search. All are specified as 
 [fragments](../fragments), as they are re-used by other extensions STAC API's that offer the following capabilities at
 the `search` endpoint must include the relevant **conformance URI** in the `conformsTo` response at
 the root (`/`) landing page, to indicate to clients that they will respond properly to requests from clients.
