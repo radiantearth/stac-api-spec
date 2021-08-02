@@ -78,9 +78,10 @@ Implementations that support `POST` should add a second link with the same struc
 
 ## Query Parameters and Fields
 
-The following list of parameters is used to narrow search queries. They can all be represented as query string parameters 
-in a GET request, or as JSON entity fields in a POST request. For filters that represent a set of values, query parameters 
-should use comma-separated string values with no enclosing brackets (\[ or \]) and no whitespace between values, and JSON entity attributes should use JSON Arrays. 
+The following list of parameters is used to narrow search queries. They can all be represented as query 
+string parameters in a GET request, or as JSON entity fields in a POST request. For filters that represent 
+a set of values, query parameters should use comma-separated string values with no enclosing brackets 
+(\[ or \]) and no whitespace between values, and JSON entity attributes should use JSON Arrays. 
 
 ### Query Examples
 
@@ -286,7 +287,7 @@ the [overview](../overview.md#example-landing-page) document.
 
 ## Extensions
 
-These extensions provide additional functionality that enhances the core item search. All are specified as 
+These extensions provide additional functionality that enhances Item Search. All are specified as 
 [fragments](../fragments), as they are re-used by other extensions STAC API's that offer the following capabilities at
 the `search` endpoint must include the relevant **conformance URI** in the `conformsTo` response at
 the root (`/`) landing page, to indicate to clients that they will respond properly to requests from clients.
