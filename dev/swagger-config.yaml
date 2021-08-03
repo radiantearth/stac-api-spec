@@ -7,13 +7,7 @@ apis:
     paths:
       exclude:
         - "^\/$"
-  - url: 'build/ogcapi-features/openapi.yaml'
-  #- url: 'build/ogcapi-features/extensions/transaction/openapi.yaml'
-  #  dereference:
-  #    circular: ignore
   - url: 'build/item-search/openapi.yaml'
-    #dereference:
-    #  circular: ignore
+  - url: 'build/ogcapi-features/openapi.yaml'
   - url: 'build/ogcapi-features/extensions/version/openapi.yaml'
-    #dereference:
-    #  circular: ignore
+  - url: 'build/ogcapi-features/extensions/transaction/openapi.yaml'
