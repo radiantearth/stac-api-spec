@@ -118,7 +118,11 @@ See [examples](examples.md) for some example requests.
 Only one of either **intersects** or **bbox** should be specified.  If both are specified, a 400 Bad Request response 
 should be returned. 
 
-**datetime** The datetime parameter use the same allowed values as the [OAF datetime](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_parameter_datetime) parameter. This allows for either a single [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) datetime or an open or closed interval that also uses RFC 3339 datetimes. Additional details about this parameter can be found in the [Implementation Recommendations](../implementation.md#datetime-parameter-handling).
+**datetime** The datetime parameter use the same allowed values as the 
+[OAF datetime](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_parameter_datetime) parameter. 
+This allows for either a single [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) datetime or an 
+open or closed interval that also uses RFC 3339 datetimes. Additional details about this parameter can be 
+found in the [Implementation Recommendations](../implementation.md#datetime-parameter-handling).
 
 **bbox** Represented using either 2D or 3D geometries. The length of the array must be 2\*n where 
 *n* is the number of dimensions. The array contains all axes of the southwesterly most extent 

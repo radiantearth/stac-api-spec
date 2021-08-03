@@ -55,7 +55,7 @@ The following Link relations should exist in the Landing Page (root).
 | `root`         | `/`                  | STAC Core      | The root URI |
 | `self`         | `/`                  | OAFeat         | Self reference, same as root URI |
 | `service-desc` | `/api` (recommended) | OAFeat OpenAPI | The OpenAPI service description. Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API |
-| `child`        | various              | STAC Core      | The child STAC Catalogs & Collections. Provides curated paths to get to STAC Collection and Item objects
+| `child`        | various              | STAC Core      | The child STAC Catalogs & Collections. Provides curated paths to get to STAC Collection and Item objects |
 
 Additionally, a `service-doc` endpoint is recommended.
 
