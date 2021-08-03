@@ -20,7 +20,12 @@
 </head>
 
 <body>
-  <redoc spec-url='openapi.yaml'></redoc>
+  <redoc 
+    spec-url='openapi.yaml'
+    expandResponses='200,201,202,203,204'
+    pathInMiddlePanel='true'
+    hideDownloadButton='true'
+  ></redoc>
   <script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"> </script>
 </body>
 
