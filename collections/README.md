@@ -39,6 +39,22 @@ Additionally, a `service-doc` endpoint is recommended.
 | ------------ | -------- | -------------- |----------------- |
 | `service-doc`  | `/api.html` (recommended) | OAFeat OpenAPI | An HTML service description.  Uses the `text/html` media type to refer to a human-consumable description of the service |
 
+The following Link relations should exist in the `/collections` endpoint response.
+
+| **rel**        | **href**             | **From**       | **Description** |
+| -------------- | -------------------- | -------------- | ---------------- |
+| `root`         | `/`                  | STAC Core      | The root URI |
+| `self`         | `/`                  | OAFeat         | Self reference |
+
+The following Link relations should exist in the `/collections/{collectionId}` endpoint response.
+
+| **rel**        | **href**             | **From**       | **Description** |
+| -------------- | -------------------- | -------------- | ---------------- |
+| `root`         | `/`                  | STAC Core      | The root URI |
+| `parent`       | `/`                  | OAFeat         | Parent reference, usually the root Catalog |
+| `self`         | `/`                  | OAFeat         | Self reference |
+| `items`        | `/`                  | OAFeat         | Items within Collection |
+
 ## Endpoints
 
 | Endpoint                                        | Returns          | Description |
@@ -55,7 +71,7 @@ of an array of all STAC Collections and an array of Links.
 {
 	"collections": [
 		{
-			"stac_version": "1.0.0-beta.2",
+			"stac_version": "1.0.0",
 			"stac_extensions": [ ],
 			"id": "cool-data",
 			"title": "Cool Data from X Satellite",
@@ -71,14 +87,34 @@ of an array of all STAC Collections and an array of Links.
 			},
 			"links": [
 				{
+					"rel": "root",
+					"type": "application/json",
+					"href": "https://myservice.com"
+				},
+				{
+					"rel": "parent",
+					"type": "application/json",
+					"href": "https://myservice.com"
+				},
+				{
 					"rel": "self",
 					"type": "application/json",
 					"href": "https://myservice.com/collections/cool-data"
 				},
+				{
+					"rel": "items",
+					"type": "application/json",
+					"href": "https://myservice.com/collections/cool-data/items"
+				}
 			],
 		}
 	],
 	"links": [
+		{
+			"rel": "root",
+			"type": "application/json",
+			"href": "https://myservice.com"
+		},
 		{
 			"rel": "self",
 			"type": "application/json",
