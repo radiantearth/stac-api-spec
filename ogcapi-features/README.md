@@ -96,7 +96,7 @@ distinct from the `item` relation defined in STAC for linking to a single Item. 
 `item` relations directly, but instead rely on 
 the collection resource linking to a paginated endpoint returning items through a link relation 
 `items`, e.g., `/collections/{collectionId}` has a link with relation `items` linking 
-to `/collections/{collectionId}/items`. However, static catalogs and APIs can be exposed via the same 
+to `/collections/{collectionId}/items`. However, static catalogs and other parts of the API can be combined 
 endpoints, so APIs may contain `item` relations.
 
 It is recommended to have each OAFeat Collection correspond to a STAC Collection,
