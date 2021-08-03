@@ -92,7 +92,7 @@ A typical OAFeat will have multiple collections. Simple search for items within 
 with the resource endpoint `GET /collections/{collectionId}/items`. This endpoint should be exposed via a 
 link in the individual collection's endpoint with `rel=items`, as shown in the 
 [Example Landing Page diagram](../overview.md#example-landing-page). Note that this relation is `items`, which is
-distinct from the `item` relation defined in STAC for linking to a single Item. Most APIs will not use 
+distinct from the `item` relation defined in STAC for linking to a single Item. The part of the API implementing OAFeat will usually not use 
 `item` relations directly, but instead rely on 
 the collection resource linking to a paginated endpoint returning items through a link relation 
 `items`, e.g., `/collections/{collectionId}` has a link with relation `items` linking 
