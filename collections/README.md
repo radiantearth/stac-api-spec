@@ -44,7 +44,7 @@ The following Link relations should exist in the `/collections` endpoint respons
 | **rel**        | **href**             | **From**       | **Description** |
 | -------------- | -------------------- | -------------- | ---------------- |
 | `root`         | `/`                  | STAC Core      | The root URI |
-| `self`         | `/`                  | OAFeat         | Self reference |
+| `self`         | `/collections`       | OAFeat         | Self reference |
 
 The following Link relations should exist in the `/collections/{collectionId}` endpoint response.
 
@@ -52,8 +52,8 @@ The following Link relations should exist in the `/collections/{collectionId}` e
 | -------------- | -------------------- | -------------- | ---------------- |
 | `root`         | `/`                  | STAC Core      | The root URI |
 | `parent`       | `/`                  | OAFeat         | Parent reference, usually the root Catalog |
-| `self`         | `/`                  | OAFeat         | Self reference |
-| `items`        | `/`                  | OAFeat         | Items within Collection |
+| `self`         | `/collections/{collectionId}` | OAFeat | Self reference |
+| `items`        | `/collections/{collectionId}/items` | OAFeat | Items within Collection |
 
 ## Endpoints
 
