@@ -94,7 +94,7 @@ Please contact a STAC maintainer or open a Pull Request to add your extension to
 
 | Name     | Scope | Description | Vendor |
 | -------- | ----- | ----------- | ------ |
-| None yet |       |             |        |
+| [Free-text Search](https://github.com/cedadev/stac-freetext-search) | [Item Search](item-search/) request | Adds `q` parameter and free-text search against item properties | [CEDA, STFC, UKRI](https://github.com/cedadev) |
 
 ## Creating new extensions
 
