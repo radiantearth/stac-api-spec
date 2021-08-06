@@ -1,9 +1,9 @@
 openapi: 3.0.3
 info:
-  title: The SpatioTemporal Asset Catalog API - Core
+  title: STAC API - Core
   version: 1.0.0-beta.2
   description: >-
-    This is an OpenAPI definition of the core SpatioTemporal Asset Catalog API
+    This is an OpenAPI definition of the SpatioTemporal Asset Catalog API - Core
     specification. Any service that implements this endpoint to allow discovery of
     spatiotemporal assets can be considered a STAC API.
   contact:

@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Added STAC API - Collections definition (subset of STAC API - Features)
 
 ### Changed
 - Query extension not deprecated; recommendation to use Filter (https://github.com/radiantearth/stac-api-spec/pull/157)
