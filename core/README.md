@@ -5,9 +5,9 @@
   - [Example Landing Page for STAC API - Core](#example-landing-page-for-stac-api---core)
   - [Extensions](#extensions)
 
-- **OpenAPI specification:** [openapi.yaml](openapi.yaml) describes the core endpoints ([rendered version](https://api.stacspec.org/v1.0.0-beta.2/core)),
+- **OpenAPI specification:** [openapi.yaml](openapi.yaml) describes the core endpoints ([rendered version](https://api.stacspec.org/v1.0.0-beta.3/core)),
   and [commons.yaml](commons.yaml) is the OpenAPI version of the core [STAC spec](../stac-spec) JSON Schemas.
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.2/core>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.3/core>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Dependencies**: None
 
@@ -50,18 +50,18 @@ API endpoints from OAFeat or STAC API to be implemented, so the following links 
 
 The following Link relations should exist in the Landing Page (root).
 
-| **rel**        | **href**             | **From**       | **Description** |
-| -------------- | -------------------- | -------------- | ---------------- |
-| `root`         | `/`                  | STAC Core      | The root URI |
-| `self`         | `/`                  | OAFeat         | Self reference, same as root URI |
+| **rel**        | **href**             | **From**       | **Description**                                                                                                                                                         |
+| -------------- | -------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `root`         | `/`                  | STAC Core      | The root URI                                                                                                                                                            |
+| `self`         | `/`                  | OAFeat         | Self reference, same as root URI                                                                                                                                        |
 | `service-desc` | `/api` (recommended) | OAFeat OpenAPI | The OpenAPI service description. Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API |
-| `child`        | various              | STAC Core      | The child STAC Catalogs & Collections. Provides curated paths to get to STAC Collection and Item objects |
+| `child`        | various              | STAC Core      | The child STAC Catalogs & Collections. Provides curated paths to get to STAC Collection and Item objects                                                                |
 
 Additionally, a `service-doc` endpoint is recommended.
 
-| **rel**      | **href** | **From**       | **Description** |
-| ------------ | -------- | -------------- |----------------- |
-| `service-doc`  | `/api.html` (recommended) | OAFeat OpenAPI | An HTML service description.  Uses the `text/html` media type to refer to a human-consumable description of the service |
+| **rel**       | **href**                  | **From**       | **Description**                                                                                                         |
+| ------------- | ------------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `service-doc` | `/api.html` (recommended) | OAFeat OpenAPI | An HTML service description.  Uses the `text/html` media type to refer to a human-consumable description of the service |
 
 It is also valid to have `item` links from the landing page, but most STAC API services are used to 
 serve up a large number of features, so they typically
@@ -82,7 +82,7 @@ the [overview](../overview.md#example-landing-page) document.
     "title": "A simple STAC API Example",
     "description": "This Catalog aims to demonstrate the a simple landing page",
     "conformsTo" : [
-        "https://api.stacspec.org/v1.0.0-beta.2/core"
+        "https://api.stacspec.org/v1.0.0-beta.3/core"
     ],
     "links": [
         {

@@ -2,20 +2,20 @@
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
 - **Conformance Classes:** 
-  - Filter: <https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:filter>
-  - Item Search Filter: <https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:item-search-filter>
-  - CQL Text: <https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:cql-text>
-  - CQL JSON: <https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:cql-json>
-  - Basic CQL: <https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:basic-cql>
-  - Basic Spatial Operators: <https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:basic-spatial-operators>
-  - Basic Temporal Operators: <https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:basic-temporal-operators>
-  - Enhanced Comparison Operators: <https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:enhanced-comparison-operators>
-  - Enhanced Spatial Operators: <https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:enhanced-spatial-operators>
-  - Enhanced Temporal Operators: <https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:enhanced-temporal-operators>
-  - Functions: <https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:functions>
-  - Arithmetic: <https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:arithmetic>
-  - Arrays: <https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:arrays>
-  - Queryable First Operand: <https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:queryable-first-operand>
+  - Filter: <https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:filter>
+  - Item Search Filter: <https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:item-search-filter>
+  - CQL Text: <https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:cql-text>
+  - CQL JSON: <https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:cql-json>
+  - Basic CQL: <https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:basic-cql>
+  - Basic Spatial Operators: <https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:basic-spatial-operators>
+  - Basic Temporal Operators: <https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:basic-temporal-operators>
+  - Enhanced Comparison Operators: <https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:enhanced-comparison-operators>
+  - Enhanced Spatial Operators: <https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:enhanced-spatial-operators>
+  - Enhanced Temporal Operators: <https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:enhanced-temporal-operators>
+  - Functions: <https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:functions>
+  - Arithmetic: <https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:arithmetic>
+  - Arrays: <https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:arrays>
+  - Queryable First Operand: <https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:queryable-first-operand>
 - **Extension [Maturity Classification](../../extensions.md#extension-maturity):** Pilot
 - **Dependents:**
   - [Item Search](../../item-search)
@@ -131,32 +131,32 @@ The precise decomposition of the OAFeat conformance classes is still a work in p
 (see [ogcapi-features/issues/579](https://github.com/opengeospatial/ogcapi-features/issues/579)). 
 The STAC API Filter Extension reuses the definitions in OAFeat CQL, but divides them into different conformance classes
 that better fit the use cases of STAC API.  This extension uses conformance classes with a prefix of 
-`https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:`.  We hope the conformance
+`https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:`.  We hope the conformance
 classes defined here and in OGC API Features Part 3 will re-align at some point but, for now, they do not.
 
 The implementation **must** support these conformance classes:
 
-- Filter (`https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:filter`) defines the Queryables mechanism and 
+- Filter (`https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:filter`) defines the Queryables mechanism and 
   parameters `filter-lang`, `filter-crs`, and `filter`.
-- Basic CQL (`https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:basic-cql`) defines the basic operations allowed in 
+- Basic CQL (`https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:basic-cql`) defines the basic operations allowed in 
   the query language used for the `filter` parameter defined by Filter. This includes logical operators (`AND`, `OR`, `NOT`), 
   comparison operators (`=`, `<`, `<=`, `>`, `>=`), and `IS NULL`.
-- Item Search Filter (`https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:item-search-filter`) binds the Filter and 
+- Item Search Filter (`https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:item-search-filter`) binds the Filter and 
   Basic CQL conformance classes to apply to the Item Search endpoint (`/search`).  This class is the correlate of the OAFeat CQL Features 
   Filter class that binds Filter and Basic CQL to the Features resource (`/collections/{cid}/items`).
 
 It is **recommended** that the implementation also support the Basic Spatial Operators and Basic Temporal Operators classes:
 
-- Basic Spatial Operators (`https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:basic-spatial-operators`)
+- Basic Spatial Operators (`https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:basic-spatial-operators`)
   defines the `INTERSECTS` predicate
-- Basic Temporal Operators: (`https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:basic-temporal-operators`)
+- Basic Temporal Operators: (`https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:basic-temporal-operators`)
   defines the `ANYINTERACTS` predicate
   
 Additionally, the implementation **must** support at least one of the "CQL Text" or "CQL JSON" conformance classes that define 
 the CQL format used in the filter parameter:
 
-- CQL Text (`https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:cql-text`) defines that the CQL Text format is supported by Item Search.
-- CQL JSON (`https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:cql-json`) defines that the CQL JSON format is supported by Item Search
+- CQL Text (`https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:cql-text`) defines that the CQL Text format is supported by Item Search.
+- CQL JSON (`https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:cql-json`) defines that the CQL JSON format is supported by Item Search
 
 If both are advertised as being supported, it is only required that both be supported for GET query parameters, and that 
 only that CQL JSON be supported for POST JSON requests.  It is recommended that clients use CQL Text in GET requests and 
@@ -169,18 +169,18 @@ operations required by the Enhanced Spatial Operators. If implemented for Item S
 URI should follow the same pattern relative to OAFeat CQL.
 
 - Enhanced Comparison Operators 
-  (`https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:enhanced-comparison-operators`) defines the `LIKE`, 
+  (`https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:enhanced-comparison-operators`) defines the `LIKE`, 
   `BETWEEN`, and `IN` operators. It is **recommended** to implement this class.
 - Enhanced Spatial Operators 
-  (`https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:enhanced-spatial-operators`) defines the 
+  (`https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:enhanced-spatial-operators`) defines the 
   same operators as OAF Part 3 CQL Enhanced Spatial Operators.
 - Enhanced Temporal Operators 
-  (`https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:enhanced-temporal-operators`) defines the 
+  (`https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:enhanced-temporal-operators`) defines the 
   same operators as OAF Part 3 CQL Enhanced Temporal Operators.
-- Functions (`https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:functions`) defines the same operators as OAF Part 3 CQL Functions.
-- Arithmetic: (`https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:arithmetic`) defines the same operators as OAF Part 3 CQL Arithmetic.
-- Arrays: (`https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:arrays`) defines the same operators as OAF Part 3 CQL Arrays.
-- Queryable Operands: (`https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:queryable-operands`) allows the 
+- Functions (`https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:functions`) defines the same operators as OAF Part 3 CQL Functions.
+- Arithmetic: (`https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:arithmetic`) defines the same operators as OAF Part 3 CQL Arithmetic.
+- Arrays: (`https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:arrays`) defines the same operators as OAF Part 3 CQL Arrays.
+- Queryable Operands: (`https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:queryable-operands`) allows the 
   use of queryables (e.g., properties) in any position of a clause, not just in the first position. This allows 
   predicates like `property1 == property2` be expressed, whereas the Basic CQL conformance class only requires
   comparisons against literal values.
@@ -354,18 +354,18 @@ at least these values:
     
     "http://www.opengis.net/spec/ogcapi_common-2/1.0/req/collections",
 
-    "http://api.stacspec.org/v1.0.0-beta.2/core",
-    "http://api.stacspec.org/v1.0.0-beta.2/stac-search",
-    "http://api.stacspec.org/v1.0.0-beta.2/stac-response",
+    "http://api.stacspec.org/v1.0.0-beta.3/core",
+    "http://api.stacspec.org/v1.0.0-beta.3/stac-search",
+    "http://api.stacspec.org/v1.0.0-beta.3/stac-response",
 
-    "https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:filter",
-    "https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:features-filter",
-    "https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:basic-cql",
-    "https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:cql-text",
-    "https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:cql-json",
-    "https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:basic-spatial-operators",
-    "https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:basic-temporal-operators",
-    "https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:enhanced-comparison-operators"
+    "https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:filter",
+    "https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:features-filter",
+    "https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:basic-cql",
+    "https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:cql-text",
+    "https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:cql-json",
+    "https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:basic-spatial-operators",
+    "https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:basic-temporal-operators",
+    "https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:enhanced-comparison-operators"
 
   ],
   "links": [

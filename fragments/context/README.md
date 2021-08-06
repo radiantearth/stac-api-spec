@@ -1,7 +1,7 @@
 # STAC API - Context Fragment
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
-- **Conformance Class:** <https://api.stacspec.org/v1.0.0-beta.2/item-search#context>
+- **Conformance Class:** <https://api.stacspec.org/v1.0.0-beta.3/item-search#context>
 - **Fragment [Maturity Classification](../../extensions.md#extension-maturity):** Pilot
 - **Dependents:**
   - [Item Search](../../item-search)

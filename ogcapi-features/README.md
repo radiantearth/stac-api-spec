@@ -12,10 +12,10 @@
 
 *based on [**OGC API - Features - Part 1: Core**](https://www.ogc.org/standards/ogcapi-features)*
 
-- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.2/ogcapi-features)) 
+- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.3/ogcapi-features)) 
   uses all the OGC API - Features openapi fragments to describe returning STAC Item objects.
 - **Conformance URIs:**
-  - <https://api.stacspec.org/v1.0.0-beta.2/ogcapi-features> 
+  - <https://api.stacspec.org/v1.0.0-beta.3/ogcapi-features> 
   - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core> - [Requirements Class Core](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_core))
   - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30> - [Requirements Class OpenAPI 3.0](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_oas30))
   - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson> - [Requirements Class GeoJSON](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_geojson))
@@ -37,19 +37,19 @@ with OAFeat clients. But specialized STAC clients will likely display results be
 
 The following Link relations should exist in the Landing Page (root).
 
-| **rel**        | **href**             | **From**       | **Description** |
-| -------------- | -------------------- | -------------- | ---------------- |
-| `root`         | `/`                  | STAC Core      | The root URI |
-| `self`         | `/`                  | OAFeat         | Self reference, same as root URI |
-| `conformance`  | `/conformance`       | OAFeat         | Conformance URI |
+| **rel**        | **href**             | **From**       | **Description**                                                                                                                                                         |
+| -------------- | -------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `root`         | `/`                  | STAC Core      | The root URI                                                                                                                                                            |
+| `self`         | `/`                  | OAFeat         | Self reference, same as root URI                                                                                                                                        |
+| `conformance`  | `/conformance`       | OAFeat         | Conformance URI                                                                                                                                                         |
 | `service-desc` | `/api` (recommended) | OAFeat OpenAPI | The OpenAPI service description. Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API |
-| `data`         | `/collections`       | OAFeat | List of Collections |
+| `data`         | `/collections`       | OAFeat         | List of Collections                                                                                                                                                     |
 
 Additionally, a `service-doc` endpoint is recommended.
 
-| **rel**      | **href** | **From**       | **Description**  |
-| ------------ | -------- | -------------- |----------------- |
-| `service-doc`  | `/api.html` (recommended) | OAFeat OpenAPI | An HTML service description.  Uses the `text/html` media type to refer to a human-consumable description of the service |
+| **rel**       | **href**                  | **From**       | **Description**                                                                                                         |
+| ------------- | ------------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `service-doc` | `/api.html` (recommended) | OAFeat OpenAPI | An HTML service description.  Uses the `text/html` media type to refer to a human-consumable description of the service |
 
 ## Endpoints
 
@@ -151,8 +151,8 @@ the [overview](../overview.md#example-landing-page) document.
     "title": "A simple STAC API Example",
     "description": "This Catalog aims to demonstrate the a simple landing page",
     "conformsTo" : [
-        "https://api.stacspec.org/v1.0.0-beta.2/core",
-        "https://api.stacspec.org/v1.0.0-beta.2/ogcapi-features",
+        "https://api.stacspec.org/v1.0.0-beta.3/core",
+        "https://api.stacspec.org/v1.0.0-beta.3/ogcapi-features",
         "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core",
         "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30",
         "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson"
@@ -241,7 +241,7 @@ to requests from clients.
 ### Transaction
 
 - **Conformance URIs:**
-  - <https://api.stacspec.org/v1.0.0-beta.2/ogcapi-features/extensions/transaction>
+  - <https://api.stacspec.org/v1.0.0-beta.3/ogcapi-features/extensions/transaction>
   - <http://www.opengis.net/spec/ogcapi-features-4/1.0/conf/simpletx>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Definition**: [STAC API - Transaction Fragment](extensions/transaction/)
@@ -253,7 +253,7 @@ POST, PUT, PATCH, and DELETE methods. The full description of how this extension
 
 ### Items and Collections API Version Extension
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.2/ogcapi-features/extensions/version>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.3/ogcapi-features/extensions/version>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Definition**: [STAC API - Version](extensions/version/)
 
