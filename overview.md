@@ -141,6 +141,7 @@ have the URI's for conformance to actually resolve to machine-readable informati
 | STAC Core     | [Core](core)                           | <https://api.stacspec.org/v1.0.0-beta.3/core>            | Specifies the STAC Landing page `/`, communicating conformance and available endpoints.                         |
 | Item Search   | [Item Search](item-search)             | <https://api.stacspec.org/v1.0.0-beta.3/item-search>     | Enables search of all STAC Item objects on the server, with the STAC `[/search](#stac-api-endpoints)` endpoint. |
 | STAC Features | [STAC API - Features](ogcapi-features) | <https://api.stacspec.org/v1.0.0-beta.3/ogcapi-features> | Specifies the use of OGC API - Features to serve STAC Item and Collection objects                               |
+| Collections | [Collections](collections) | <https://api.stacspec.org/v1.0.0-beta.3/collections> | Specifies the use of a subset of OGC API - Features to serve Collection objects                               |
 
 Additional conformance classes are specified in the [STAC Extensions](extensions.md#Conformance-classes-of-extensions).
 
@@ -164,6 +165,7 @@ The Landing Page will at least have the following `conformsTo` and `links`:
         "https://api.stacspec.org/v1.0.0-beta.3/core",
         "https://api.stacspec.org/v1.0.0-beta.3/item-search",
         "https://api.stacspec.org/v1.0.0-beta.3/ogcapi-features",
+        "https://api.stacspec.org/v1.0.0-beta.3/collections",
         "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core",
         "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30",
         "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson"
