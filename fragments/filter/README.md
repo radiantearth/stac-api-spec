@@ -213,9 +213,11 @@ Formal definitions and grammars for CQL can be found here:
 
 These projects have or are developing CQL support:
 
-Also ECQL is the old CQL standard defined in some old OGC CSW spec, not a superset of the current CQL Text standard from OGC API Features. (Which will be implemented soon).
+Also ECQL is the old CQL standard defined in some old OGC CSW spec, not a superset of the current CQL Text 
+standard from OGC API Features. (Which will be implemented soon).
 
-- [pygeofilter](https://github.com/geopython/pygeofilter) has support for the older ECQL standard (similar to CQL Text) and will soon have support for OGC API Part 3 CQL
+- [pygeofilter](https://github.com/geopython/pygeofilter) has support for the older ECQL standard 
+  (similar to CQL Text) and will soon have support for OGC API Part 3 CQL
 - [GeoPython PyCQL](https://github.com/geopython/pycql/tree/master/pycql) (discontinued), and the 
   [Bitner fork](https://github.com/bitner/pycql) to be used in stac-fastapi
 - [Franklin](https://github.com/azavea/franklin) is working on it in [this PR](https://github.com/azavea/franklin/pull/750).

@@ -1,10 +1,10 @@
 # STAC API - Collections
 
 - [STAC API - Collections](#stac-api---collections)
-	- [Link Relations](#link-relations)
-	- [Endpoints](#endpoints)
-	- [Example](#example)
-	- [Conformance](#conformance)
+  - [Link Relations](#link-relations)
+  - [Endpoints](#endpoints)
+  - [Example](#example)
+  - [Conformance](#conformance)
 
 - **OpenAPI specification:** Missing
 - **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.2/extensions/collections>

@@ -200,7 +200,7 @@ as is typical with a static STAC Collection, there are no links here with rel va
 
 `https://stacserver.org/collections/aster-l1t`
 
-```
+```json
 {
   "id": "aster-l1t",
   "type": "Collection",
