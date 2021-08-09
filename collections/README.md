@@ -7,7 +7,7 @@
   - [Conformance](#conformance)
 
 - **OpenAPI specification:** Missing
-- **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.2/extensions/collections>
+- **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.3/extensions/collections>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Dependencies**: [STAC API - Core](../core)
 
@@ -25,42 +25,42 @@ aim to align with it. But it still seems to be in flux.*
 
 The following Link relations should exist in the Landing Page (root).
 
-| **rel**        | **href**             | **From**       | **Description** |
-| -------------- | -------------------- | -------------- | ---------------- |
-| `root`         | `/`                  | STAC Core      | The root URI |
-| `self`         | `/`                  | OAFeat         | Self reference, same as root URI |
+| **rel**        | **href**             | **From**       | **Description**                                                                                                                                                         |
+| -------------- | -------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `root`         | `/`                  | STAC Core      | The root URI                                                                                                                                                            |
+| `self`         | `/`                  | OAFeat         | Self reference, same as root URI                                                                                                                                        |
 | `service-desc` | `/api` (recommended) | OAFeat OpenAPI | The OpenAPI service description. Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API |
-| `child`        | various              | STAC Core      | The child STAC Catalogs & Collections. Provides curated paths to get to STAC Collection and Item objects |
-| `data` | `/collections` | OAFeat | List of Collections |
+| `child`        | various              | STAC Core      | The child STAC Catalogs & Collections. Provides curated paths to get to STAC Collection and Item objects                                                                |
+| `data`         | `/collections`       | OAFeat         | List of Collections                                                                                                                                                     |
 
 Additionally, a `service-doc` endpoint is recommended.
 
-| **rel**      | **href** | **From**       | **Description** |
-| ------------ | -------- | -------------- |----------------- |
-| `service-doc`  | `/api.html` (recommended) | OAFeat OpenAPI | An HTML service description.  Uses the `text/html` media type to refer to a human-consumable description of the service |
+| **rel**       | **href**                  | **From**       | **Description**                                                                                                         |
+| ------------- | ------------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `service-doc` | `/api.html` (recommended) | OAFeat OpenAPI | An HTML service description.  Uses the `text/html` media type to refer to a human-consumable description of the service |
 
 The following Link relations should exist in the `/collections` endpoint response.
 
-| **rel**        | **href**             | **From**       | **Description** |
-| -------------- | -------------------- | -------------- | ---------------- |
-| `root`         | `/`                  | STAC Core      | The root URI |
-| `self`         | `/collections`       | OAFeat         | Self reference |
+| **rel** | **href**       | **From**  | **Description** |
+| ------- | -------------- | --------- | --------------- |
+| `root`  | `/`            | STAC Core | The root URI    |
+| `self`  | `/collections` | OAFeat    | Self reference  |
 
 The following Link relations should exist in the `/collections/{collectionId}` endpoint response.
 
-| **rel**        | **href**             | **From**       | **Description** |
-| -------------- | -------------------- | -------------- | ---------------- |
-| `root`         | `/`                  | STAC Core      | The root URI |
-| `parent`       | `/`                  | OAFeat         | Parent reference, usually the root Catalog |
-| `self`         | `/collections/{collectionId}` | OAFeat | Self reference |
-| `items`        | `/collections/{collectionId}/items` | OAFeat | Items within Collection |
+| **rel**  | **href**                            | **From**  | **Description**                            |
+| -------- | ----------------------------------- | --------- | ------------------------------------------ |
+| `root`   | `/`                                 | STAC Core | The root URI                               |
+| `parent` | `/`                                 | OAFeat    | Parent reference, usually the root Catalog |
+| `self`   | `/collections/{collectionId}`       | OAFeat    | Self reference                             |
+| `items`  | `/collections/{collectionId}/items` | OAFeat    | Items within Collection                    |
 
 ## Endpoints
 
-| Endpoint                                        | Returns          | Description |
-| ----------------------------------------------- | ---------------- | ----------- |
-| `/collections`                                  | JSON             | Object with a list of Collections contained in the catalog and links |
-| `/collections/{collectionId}`                   | Collection       | Returns single Collection JSON |
+| Endpoint                      | Returns    | Description                                                          |
+| ----------------------------- | ---------- | -------------------------------------------------------------------- |
+| `/collections`                | JSON       | Object with a list of Collections contained in the catalog and links |
+| `/collections/{collectionId}` | Collection | Returns single Collection JSON                                       |
 
 STAC API's implementing the Collections class must support HTTP GET operation at `/collections`, with the return JSON document consisting
 of an array of all STAC Collections and an array of Links.
@@ -134,7 +134,7 @@ and if the canonical location is elsewhere it is recommended to include a `rel` 
 
 ## Conformance
 
-Any implementation that provides the STAC Collection functionality described above must add `http://stacspec.org/spec/api/1.0.0-beta.2/collections`,
+Any implementation that provides the STAC Collection functionality described above must add `http://stacspec.org/spec/api/1.0.0-beta.3/collections`,
 the conformance URI, to the `conformsTo` JSON at the landing page.
 
 The core STAC landing page (`/`) must also include a link with a `rel` of `data` that links to the `/collections` endpoint.

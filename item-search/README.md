@@ -20,8 +20,8 @@
     - [Context](#context)
     - [Query](#query)
 
-- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.2/item-search))
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.2/item-search>
+- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.3/item-search))
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.3/item-search>
 - **Dependencies**: [STAC API - Core](../core)
 - **Examples**: [examples.md](examples.md)
 
@@ -46,18 +46,18 @@ Implementing `GET /search` is **required**, `POST /search` is optional, but reco
 
 The following Link relations should exist in the Landing Page (root).
 
-| **rel**        | **href**             | **From**       | **Description** |
-| -------------- | -------------------- | -------------- | ---------------- |
-| `root`         | `/`                  | STAC Core      | The root URI |
-| `self`         | `/`                  | OAFeat         | Self reference, same as root URI |
-| `service-desc` | `/api` (recommended) | OAFeat OpenAPI | The OpenAPI service description. Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API |
-| search     | `/search`                | STAC Item Search | URI for the Search endpoint |
+| **rel**        | **href**             | **From**         | **Description**                                                                                                                                                         |
+| -------------- | -------------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `root`         | `/`                  | STAC Core        | The root URI                                                                                                                                                            |
+| `self`         | `/`                  | OAFeat           | Self reference, same as root URI                                                                                                                                        |
+| `service-desc` | `/api` (recommended) | OAFeat OpenAPI   | The OpenAPI service description. Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API |
+| search         | `/search`            | STAC Item Search | URI for the Search endpoint                                                                                                                                             |
 
 Additionally, a `service-doc` endpoint is recommended.
 
-| **rel**      | **href** | **From**       | **Description**  |
-| ------------ | -------- | -------------- |----------------- |
-| `service-doc`  | `/api.html` (recommended) | OAFeat OpenAPI | An HTML service description.  Uses the `text/html` media type to refer to a human-consumable description of the service |
+| **rel**       | **href**                  | **From**       | **Description**                                                                                                         |
+| ------------- | ------------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `service-doc` | `/api.html` (recommended) | OAFeat OpenAPI | An HTML service description.  Uses the `text/html` media type to refer to a human-consumable description of the service |
 
 It is **required** to add a Link to the root endpoint (`/`) with the `rel` type set to `search`
 that refers to the search endpoint in the `href` property,
@@ -104,14 +104,14 @@ For more examples see [examples.md](examples.md).
 
 The core parameters for STAC search are defined by OAFeat, and STAC adds a few parameters for convenience.
 
-| Parameter    | Type             | Source API   | Description |
-| -----------  | ---------------- | ------------ | ----------- |
-| limit        | integer          | OAFeat       | The maximum number of results to return (page size). Defaults to 10 |
-| bbox         | \[number]        | OAFeat       | Requested bounding box. |
-| datetime     | string           | OAFeat       | Single date+time, or a range ('/' separator), formatted to [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). Use double dots `..` for open date ranges. |
-| intersects   | GeoJSON Geometry | STAC         | Searches items by performing intersection between their geometry and provided GeoJSON geometry.  All GeoJSON geometry types must be supported. |
-| ids          | \[string]        | STAC         | Array of Item ids to return. |
-| collections  | \[string]        | STAC         | Array of one or more Collection IDs that each matching Item must be in. |
+| Parameter   | Type             | Source API | Description                                                                                                                                                                     |
+| ----------- | ---------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| limit       | integer          | OAFeat     | The maximum number of results to return (page size). Defaults to 10                                                                                                             |
+| bbox        | \[number]        | OAFeat     | Requested bounding box.                                                                                                                                                         |
+| datetime    | string           | OAFeat     | Single date+time, or a range ('/' separator), formatted to [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). Use double dots `..` for open date ranges. |
+| intersects  | GeoJSON Geometry | STAC       | Searches items by performing intersection between their geometry and provided GeoJSON geometry.  All GeoJSON geometry types must be supported.                                  |
+| ids         | \[string]        | STAC       | Array of Item ids to return.                                                                                                                                                    |
+| collections | \[string]        | STAC       | Array of one or more Collection IDs that each matching Item must be in.                                                                                                         |
 
 See [examples](examples.md) for some example requests.
 
@@ -173,11 +173,11 @@ execute a subsequent request for the next page of results.
 
 The following fields have been added to the `link` object specification for the API spec:
 
-| Parameter | Type    | Description |
-| --------- | ------- | ----------- |
-| method    | string  | The HTTP method of the request, usually `GET` or `POST`. Defaults to `GET` |
-| headers   | object  | A dictionary of header values that should be included in the next request |
-| body      | object  | A JSON object containing fields/values that should be included in the body of the next request |
+| Parameter | Type    | Description                                                                                                                                                    |
+| --------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| method    | string  | The HTTP method of the request, usually `GET` or `POST`. Defaults to `GET`                                                                                     |
+| headers   | object  | A dictionary of header values that should be included in the next request                                                                                      |
+| body      | object  | A JSON object containing fields/values that should be included in the body of the next request                                                                 |
 | merge     | boolean | If `true`, the headers/body fields in the `next` link should be merged into the original request and be sent combined in the next request. Defaults to `false` |
 
 The implementor has the freedom to decide exactly how to apply these extended fields for their particular pagination 
@@ -229,14 +229,14 @@ does implement them, for STAC and OAFeat implementations that want to enable wri
 
 When implementing the STAC API - Item Search conformance class, it it recommended to implement these Link relations.
 
-| **`rel`** | **href to**                                | **From**           | **Description**                                                  |
-|-----------|--------------------------------------------|--------------------|------------------------------------------------------------------|
-| `root`    | The root URI                               | STAC Core          | Reference to self URI |
-| `self`    | The root URI                               | OAFeat             | Reference to self URI  |
-| `service-desc` | The OpenAPI service description       | OAFeat OpenAPI   | Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API |
-| `service-doc`  | An HTML service description           | OAFeat OpenAPI   | Uses the `text/html` media type to refer to a human-consumable description of the service |
-| `child`   | The child STAC Catalogs & Collections      | STAC Core          | Provides curated paths to get to STAC Collection and Item objects      |
-| `search`  | The STAC search endpoint (often `/search`) | STAC Search        | Cross-collection query endpoint to select sub-sets of STAC Item objects |
+| **`rel`**      | **href to**                                | **From**       | **Description**                                                                                                                        |
+| -------------- | ------------------------------------------ | -------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `root`         | The root URI                               | STAC Core      | Reference to self URI                                                                                                                  |
+| `self`         | The root URI                               | OAFeat         | Reference to self URI                                                                                                                  |
+| `service-desc` | The OpenAPI service description            | OAFeat OpenAPI | Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API |
+| `service-doc`  | An HTML service description                | OAFeat OpenAPI | Uses the `text/html` media type to refer to a human-consumable description of the service                                              |
+| `child`        | The child STAC Catalogs & Collections      | STAC Core      | Provides curated paths to get to STAC Collection and Item objects                                                                      |
+| `search`       | The STAC search endpoint (often `/search`) | STAC Search    | Cross-collection query endpoint to select sub-sets of STAC Item objects                                                                |
 
 It is also valid to have `item` links from the landing page, but most STAC API services are used to 
 serve up a large number of features, so they typically
@@ -256,8 +256,8 @@ the [overview](../overview.md#example-landing-page) document.
     "title": "A simple STAC API Example",
     "description": "This Catalog aims to demonstrate the a simple landing page",
     "conformsTo" : [
-        "https://api.stacspec.org/v1.0.0-beta.2/core",
-        "https://api.stacspec.org/v1.0.0-beta.2/item-search"
+        "https://api.stacspec.org/v1.0.0-beta.3/core",
+        "https://api.stacspec.org/v1.0.0-beta.3/item-search"
     ],
     "links": [
         {
@@ -298,7 +298,7 @@ the root (`/`) landing page, to indicate to clients that they will respond prope
 
 ### Fields
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.2/item-search#fields>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.3/item-search#fields>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Definition**: [STAC API - Fields Fragment](../fragments/fields/)
 
@@ -310,7 +310,7 @@ through the use of a `fields` parameter. The full description of how this extens
 
 ### Filter
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.2/item-search#filter>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.3/item-search#filter>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Definition**: [STAC API - Filter Fragment](../fragments/filter/)
 
@@ -322,7 +322,7 @@ fragment](../fragments/filter/).
 
 ### Sort
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.2/item-search#sort>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.3/item-search#sort>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Definition**: [STAC API - Sort Fragment](../fragments/sort/)
 
@@ -335,7 +335,7 @@ of this extension can be found in the [sort fragment](../fragments/sort).
 
 ### Context
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.2/item-search#context>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.3/item-search#context>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Definition**: [STAC API - Context Fragment](../fragments/context/)
 
@@ -345,7 +345,7 @@ The full description and examples of this are found in the [context fragment](..
 
 ### Query
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.2/item-search#query>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.3/item-search#query>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot, scheduled to be Deprecated
 - **Definition**: [STAC API - Query Fragment](../fragments/query/)
 
