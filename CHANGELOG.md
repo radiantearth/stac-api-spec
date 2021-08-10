@@ -21,10 +21,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Added STAC API - Collections definition (subset of STAC API - Features)
+- More thorough definitions for valid `datetime` and `bbox` query parameter values.
 
 ### Changed
 - Query extension not deprecated; recommendation to use Filter (https://github.com/radiantearth/stac-api-spec/pull/157)
 - Filter Extension conformance classes refactored to better align with STAC API use cases.
+- Renamed conformance class "Queryable First Operand" 
+  (https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:queryable-first-operand) to 
+  "Queryable Second Operand" 
+  (https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:queryable-second-operand)
 
 ### Deprecated
 
