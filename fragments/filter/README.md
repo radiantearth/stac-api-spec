@@ -2,16 +2,20 @@
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
 - **Conformance Classes:** 
-  - Filter: <https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:filter>
-  - Simple CQL: <https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:simple-cql>
-  - Item Search Filter: <https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:item-search-filter>
-  - CQL Text: <https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:cql-text>
-  - CQL JSON: <https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:cql-json>
-  - Enhanced Spatial Operators: <https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:enhanced-spatial-operators>
-  - Enhanced Temporal Operators: <https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:enhanced-temporal-operators>
-  - Functions: <https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:functions>
-  - Arithmetic: <https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:arithmetic>
-  - Arrays: <https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:arrays>
+  - Filter: <https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:filter>
+  - Item Search Filter: <https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:item-search-filter>
+  - CQL Text: <https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:cql-text>
+  - CQL JSON: <https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:cql-json>
+  - Basic CQL: <https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:basic-cql>
+  - Basic Spatial Operators: <https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:basic-spatial-operators>
+  - Basic Temporal Operators: <https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:basic-temporal-operators>
+  - Enhanced Comparison Operators: <https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:enhanced-comparison-operators>
+  - Enhanced Spatial Operators: <https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:enhanced-spatial-operators>
+  - Enhanced Temporal Operators: <https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:enhanced-temporal-operators>
+  - Functions: <https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:functions>
+  - Arithmetic: <https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:arithmetic>
+  - Arrays: <https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:arrays>
+  - Queryable Second Operand: <https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:queryable-second-operand>
 - **Extension [Maturity Classification](../../extensions.md#extension-maturity):** Pilot
 - **Dependents:**
   - [Item Search](../../item-search)
@@ -54,12 +58,15 @@ The Filter extension provides an expressive mechanism for searching based on Ite
 
 This extension references behavior defined in the 
 [OGC API - Features - Part 3: Filtering and the Common Query Language (CQL)](https://portal.ogc.org/files/96288)
-specification. As of May 2020, this specification is in draft status. The only anticipated change before final is to the 
-division of behavior among conformance classes, as described further 
-in the [Conformance Classes](#conformance-classes) section. 
+specification. As of July 2021, this specification is in draft status. The only major anticipated change before final 
+is to the division of behavior among conformance classes, as described
+in the [Conformance Classes](#conformance-classes) section. While this makes implementing this spec somewhat of a moving
+target, implementers are encouraged to move ahead with support with the expectation that they will be able to precisely
+advertise behavior through conformance classes prior to STAC API 1.0.0 final. 
 
-OAFeat Part 3 CQL formally defines syntax for both a text format (cql-text) as an ABNF grammar (largely similar to the BNF grammar 
-in the General Model) and a JSON format (cql-json) as a JSON Schema and OpenAPI schema, and provides a precise natural 
+OAFeat Part 3 CQL formally defines the syntax of "CQL2" as both a text format (cql-text) as an ABNF grammar 
+(largely similar to the BNF grammar in the General Model for CQL) and a JSON format (cql-json) as a JSON Schema and 
+OpenAPI schema, and provides a precise natural 
 language description of the declarative semantics.  The CQL Text format has long-standing use within 
 geospatial software (e.g., GeoServer), is expected not to change before final. 
 OGC CQL Text has been previously described in [OGC Filter Encoding](https://www.ogc.org/standards/filter) and 
@@ -67,7 +74,9 @@ OGC CQL Text has been previously described in [OGC Filter Encoding](https://www.
 (including a BNF grammar in Annex B). The CQL JSON format is newly-defined, but also not
 expected to change before final.
 
-It should be noted that the "CQL" referred to here is OGC CQL. It is **not** referencing or related two other "CQL" languages, 
+It should be noted that the "CQL" referred to here is "CQL2" defined in OGC API Features Part 3 CQL. This is a related, but 
+different language to the "classic" OGC CQL defined in the General Model.  CQL is also **not** referencing or related two 
+other "CQL" languages, 
 the [SRU (Search/Retrieve via URL) Contextual Query Language](https://www.loc.gov/standards/sru/cql/index.html) (formerly 
 known as Common Query Language) or the [Cassandra Query Language](https://cassandra.apache.org/doc/latest/cql/) used by the 
 Cassandra database.
@@ -92,11 +101,11 @@ multiple spatial or temporal filters.
 This extension expands the capabilities of Item Search and the OAFeat Items resource with 
 [OAFeat Part 3 CQL](https://portal.ogc.org/files/96288) 
 by providing an expressive query language to construct more complex filter predicates. The operators are similar to 
-those provided by SQL. The Simple CQL conformance class requires the logical operators `AND`, `OR`, and `NOT`; 
-the comparison operators `=`, `<`, `<=`, `>`, `>=`, `LIKE`, `IS NULL`, `BETWEEN`, and `IN`; the spatial operator 
-`INTERSECTS`; and the temporal operator `ANYINTERACTS`. 
+those provided by SQL. The Basic CQL conformance class requires the logical operators `AND`, `OR`, and `NOT`; 
+the comparison operators `=`, `<`, `<=`, `>`, `>=`; and the `IS NULL` operator. Other conformance classes add additional
+filtering capabilities.
 
-The ANYINTERACTS operator has effectively the same semantics as the `datetime` parameter
+The `ANYINTERACTS` operator has effectively the same semantics as the `datetime` parameter
 in Item Search.
 
 CQL enables these types of queries:
@@ -118,63 +127,74 @@ implementing functionality they do not need or may not be able to implement func
 their underlying datastore, e.g., Elasticsearch does not support the spatial predicates required by the 
 Enhanced Spatial Operators conformance class.
 
-The STAC API Filter Extension reuses the definitions of several conformance classes defined in OAFeat CQL, but with a prefix of 
-`https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:` instead of `http://www.opengis.net/spec/ogcapi-features-3/1.0/req/`.
+The precise decomposition of the OAFeat conformance classes is still a work in progress 
+(see [ogcapi-features/issues/579](https://github.com/opengeospatial/ogcapi-features/issues/579)). 
+The STAC API Filter Extension reuses the definitions in OAFeat CQL, but divides them into different conformance classes
+that better fit the use cases of STAC API.  This extension uses conformance classes with a prefix of 
+`https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:`.  We hope the conformance
+classes defined here and in OGC API Features Part 3 will re-align at some point but, for now, they do not.
 
-The implementation must support these conformance classes:
+The implementation **must** support these conformance classes:
 
-- Filter (`https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:filter`) defines the Queryables mechanism and 
+- Filter (`https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:filter`) defines the Queryables mechanism and 
   parameters `filter-lang`, `filter-crs`, and `filter`.
-- Simple CQL (`https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:simple-cql`) defines the query language used 
-  for the `filter` parameter defined by Filter.
-- Item Search Filter (`https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:item-search-filter`) binds the Filter and Simple CQL
-  conformance classes to apply to the Item Search endpoint (`/search`).  This class is the correlate of the OAFeat CQL Features 
-  Filter class that binds Filter and Simple CQL to the Features resource (`/collections/{cid}/items`).
+- Basic CQL (`https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:basic-cql`) defines the basic operations allowed in 
+  the query language used for the `filter` parameter defined by Filter. This includes logical operators (`AND`, `OR`, `NOT`), 
+  comparison operators (`=`, `<`, `<=`, `>`, `>=`), and `IS NULL`.
+- Item Search Filter (`https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:item-search-filter`) binds the Filter and 
+  Basic CQL conformance classes to apply to the Item Search endpoint (`/search`).  This class is the correlate of the OAFeat CQL Features 
+  Filter class that binds Filter and Basic CQL to the Features resource (`/collections/{cid}/items`).
 
-The implementation must support at least one of the "CQL Text" or "CQL JSON" conformance classes that define the CQL format
-used in the filter parameter:
+It is **recommended** that the implementation also support the Basic Spatial Operators and Basic Temporal Operators classes:
 
-- CQL Text (`https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:cql-text`) defines that the CQL Text format is supported by Item Search.
-- CQL JSON (`https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:cql-json`) defines that the CQL JSON format is supported by Item Search
+- Basic Spatial Operators (`https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:basic-spatial-operators`)
+  defines the `INTERSECTS` predicate
+- Basic Temporal Operators: (`https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:basic-temporal-operators`)
+  defines the `ANYINTERACTS` predicate
+  
+Additionally, the implementation **must** support at least one of the "CQL Text" or "CQL JSON" conformance classes that define 
+the CQL format used in the filter parameter:
 
-If both are advertised as being supported, it is only 
-required that both be supported for GET query parameters, and that only that CQL JSON be supported for POST JSON requests. 
-It is recommended that clients use CQL Text in GET requests and CQL JSON in POST requests. 
+- CQL Text (`https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:cql-text`) defines that the CQL Text format is supported by Item Search.
+- CQL JSON (`https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:cql-json`) defines that the CQL JSON format is supported by Item Search
 
-The Filter Extension defines support for the Enhanced Spatial Operators, Enhanced Temporal Operators,
-Functions, Arithmetic Expressions, or Arrays conformance classes defined in OAFeat CQL. Implementing these conformance 
-classes and their operations is encouraged but not required. Implementation of these is often limited by the 
+If both are advertised as being supported, it is only required that both be supported for GET query parameters, and that 
+only that CQL JSON be supported for POST JSON requests.  It is recommended that clients use CQL Text in GET requests and 
+CQL JSON in POST requests. 
+
+The Filter Extension defines support for implementing the following conformance 
+classes. Implementation of these is often limited by the 
 operations supported by the implementation's datastore, for example, Elasticsearch does not support the spatial 
-operations required by the Enhanced Spatial Operators. If implemented for Item Search, the conformance class URI should follow
-the same pattern relative to OAFeat CQL.
+operations required by the Enhanced Spatial Operators. If implemented for Item Search, the conformance class 
+URI should follow the same pattern relative to OAFeat CQL.
+
+- Enhanced Comparison Operators 
+  (`https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:enhanced-comparison-operators`) defines the `LIKE`, 
+  `BETWEEN`, and `IN` operators. It is **recommended** to implement this class.
+- Enhanced Spatial Operators 
+  (`https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:enhanced-spatial-operators`) defines the 
+  same operators as OAF Part 3 CQL Enhanced Spatial Operators.
+- Enhanced Temporal Operators 
+  (`https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:enhanced-temporal-operators`) defines the 
+  same operators as OAF Part 3 CQL Enhanced Temporal Operators.
+- Functions (`https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:functions`) defines the same operators as OAF Part 3 CQL Functions.
+- Arithmetic: (`https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:arithmetic`) defines the same operators as OAF Part 3 CQL Arithmetic.
+- Arrays: (`https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:arrays`) defines the same operators as OAF Part 3 CQL Arrays.
+- Queryable Second Operand: (`https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:queryable-second-operand`) allows the 
+  use of queryables (e.g., properties) in any position of a clause, not just in the first position. This allows 
+  predicates like `property1 == property2` be expressed, whereas the Basic CQL conformance class only requires
+  comparisons against literal values.
 
 Additionally, if an API implements the OGC API Features endpoint, it is **recommended** that the OAFeat Part 3 Filter, 
-Features Filter, and Simple CQL conformance classes be implemented, which allow use of CQL filters against the 
+Features Filter, and Basic CQL conformance classes be implemented, which allow use of CQL filters against the 
 OAFeat Part 1 Features endpoint (`/collections/{collectionId}/items`). Note that POST with a JSON body 
 to the Features resource is not supported, as POST is used by the 
 [Transaction Extension](../../ogcapi-features/extensions/transaction/README.md) for creating items.
 
-It is likely that the OAFeat "Simple CQL" conformance class will be decomposed into several smaller conformance classes,
-as described [here](https://github.com/opengeospatial/ogcapi-features/issues/579).  Until the OAFeat CQL reaches final, it is
-considered compliant within a STAC API to advertise the Simple CQL conformance class but only partially-implement it, e.g., to 
-only implement the logical and comparison operators. It is recommended
-to provide an out-of-band way for users to discover what operators from the Simple CQL class are implemented. After OAFeat CQL is
-finalized, implementations will be expected to provide correct conformance classes with respect to their implementation of CQL.
-
-An additional change that may be made to the Simple CQL conformance class is to only require support of expressions with a property
-name of the left hand side and a literal on the right hand side (e.g., `eo:cloud_cover <= 10`), and additional conformance classes to
-will support arbitrary uses of properties and literals in expressions on either side. The primary motivation for this is to allow 
-implementations that use datastores that do not easily support right-hand side properties to implement Simple CQL 
-(e.g., Elasticsearch). Implementers should feel free to only implement `property operand literal` expressions at this time.
-
 ## Getting Started with Implementation
 
-It recommended that implementers start with fully implementing only a subset of functionality. As stated previously, 
-until the OAFeat CQL spec is finalized, it is legal in a STAC API implementation to advertise that the Simple CQL conformance 
-class is implemented, but that only a subset of that functionality is implemented. 
-
-A good place to start is 
-implementing only the logical and simple comparison operators (`=`, `<`, `<=`, `>`, `>=`), defining a static Queryables 
+It recommended that implementers start with fully implementing only a subset of functionality. A good place to start is 
+implementing only the Basic CQL conformance class of logical and comparison operators, defining a static Queryables 
 schema with no queryables advertised, and only implementing CQL Text. Following from that can be support for 
 INTERSECTS and ANYINTERACTS, defining a static Queryables schema with only the basic Item properties, and also 
 implementing CQL JSON. From there, other comparison operators can be implemented and a more 
@@ -193,9 +213,13 @@ Formal definitions and grammars for CQL can be found here:
 
 These projects have or are developing CQL support:
 
-- [GeoPython PyCQL](https://github.com/geopython/pycql/tree/master/pycql), and the 
+Also ECQL is the old CQL standard defined in some old OGC CSW spec, not a superset of the current CQL Text 
+standard from OGC API Features. (Which will be implemented soon).
+
+- [pygeofilter](https://github.com/geopython/pygeofilter) has support for the older ECQL standard 
+  (similar to CQL Text) and will soon have support for OGC API Part 3 CQL
+- [GeoPython PyCQL](https://github.com/geopython/pycql/tree/master/pycql) (discontinued), and the 
   [Bitner fork](https://github.com/bitner/pycql) to be used in stac-fastapi
-- [pygeofilter](https://github.com/geopython/pygeofilter) has support for ECQL (a superset of CQL Text) and CQL JSON
 - [Franklin](https://github.com/azavea/franklin) is working on it in [this PR](https://github.com/azavea/franklin/pull/750).
 - [Geotools](https://github.com/geotools/geotools) has support for [CQL text](https://github.com/geotools/geotools/tree/main/modules/library/cql/src/main/java/org/geotools/filter/text/cql2)
 
@@ -317,7 +341,8 @@ supported, the server must return a 400 error if `filter-lang=cql-text`.
 
 ## Interaction with Endpoints
 
-In an implementation that supports Simple CQL, the Landing Page (`/`) should return a document including at least these values:
+In an implementation that supports several operator classes, the Landing Page (`/`) should return a document including 
+at least these values:
 
 ```json
 {
@@ -329,15 +354,19 @@ In an implementation that supports Simple CQL, the Landing Page (`/`) should ret
     
     "http://www.opengis.net/spec/ogcapi_common-2/1.0/req/collections",
 
-    "https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:filter",
-    "https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:features-filter",
-    "https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:simple-cql",
-    "https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:cql-text",
-    "https://api.stacspec.org/v1.0.0-beta.2/item-search#filter:cql-json",
+    "http://api.stacspec.org/v1.0.0-beta.3/core",
+    "http://api.stacspec.org/v1.0.0-beta.3/stac-search",
+    "http://api.stacspec.org/v1.0.0-beta.3/stac-response",
 
-    "http://api.stacspec.org/v1.0.0-beta.2/core",
-    "http://api.stacspec.org/v1.0.0-beta.2/req/stac-search",
-    "http://api.stacspec.org/v1.0.0-beta.2/req/stac-response"
+    "https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:filter",
+    "https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:features-filter",
+    "https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:basic-cql",
+    "https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:cql-text",
+    "https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:cql-json",
+    "https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:basic-spatial-operators",
+    "https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:basic-temporal-operators",
+    "https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:enhanced-comparison-operators"
+
   ],
   "links": [
     {
@@ -627,9 +656,9 @@ A sample STAC Item (excluding `assets`) is:
   "type": "Feature",
   "stac_version": "1.0.0",
   "stac_extensions": [
-    "eo",
-    "view",
-    "proj"
+    "https://stac-extensions.github.io/eo/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/view/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/projection/v1.0.0/schema.json"
   ],
   "id": "S2A_60HWB_20201111_0_L2A",
   "bbox": [ 176.9997779369264, -39.83783732066656, 178.14624317719924, -38.842842449352425],

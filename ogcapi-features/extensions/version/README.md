@@ -1,14 +1,13 @@
 # Items and Collections API Version Extension
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.2/ogcapi-features/extensions/version>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.3/ogcapi-features/extensions/version>
 - **Extension [Maturity Classification](../../../extensions.md#extension-maturity):** Proposal
 - **Dependencies**: [STAC API - Features](../../README.md)
 
 The core API doesn't support semantics to creating and accessing different versions of an Item or Collection.
 This version API extension defines the API resources and semantics for creating and accessing versioned records.
-It is done on the OGC API - Features endpoints, and ideally should evolve to be an extension there, but it is
-incubated in STAC.
+It is the STAC API equivalent of [OGC API - Features - Part 4: Create, Replace, Update and Delete](https://docs.ogc.org/DRAFTS/20-002.html).
 
 ## Methods
 

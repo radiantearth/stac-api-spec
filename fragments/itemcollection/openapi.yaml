@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: The SpatioTemporal Asset Catalog API - Item Collection
   description: The specification for a set of items, e.g. returned by a search.
-  version: 1.0.0-beta.2
+  version: 1.0.0-beta.3
 paths: {}
 components:
   schemas:
@@ -11,14 +11,9 @@ components:
         A GeoJSON FeatureCollection augmented with foreign members that contain values relevant to a STAC entity
       type: object
       required:
-        - stac_version
         - features
         - type
       properties:
-        stac_version:
-          $ref: '../../core/commons.yaml#/components/schemas/stac_version'
-        stac_extensions:
-          $ref: '../../core/commons.yaml#/components/schemas/stac_extensions'
         type:
           type: string
           enum:

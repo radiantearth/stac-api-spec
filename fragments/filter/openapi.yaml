@@ -2,12 +2,24 @@ openapi: 3.0.3
 info:
   title: The SpatioTemporal Asset Catalog API - Filter
   description: Adds parameters to compare properties and only return the items that match
-  version: 1.0.0-beta.2
+  version: 1.0.0-beta.3
+
+tags:
+  - name: STAC API - Core
+    description: Part of STAC API - Core definition
+  - name: STAC API - Features
+    description: Part of STAC API - Features definition
+  - name: STAC API - Collections
+    description: Part of STAC API - Collections definition
+  - name: STAC API - Filter Extension
+    description: Part of STAC API - Filter extension definition
 
 paths:
   '/':
-    description: Landing Page
     get:
+      description: Landing Page
+      tags:
+        - STAC API - Core
       responses:
         '200':
           description: Landing Page
@@ -26,20 +38,21 @@ paths:
         precise definition of this can be found in the OGC API - Features - Part 3: Filtering and the 
         Common Query Language (CQL) specification.
       tags:
-        - Queryables
+        - STAC API - Filter Extension
       # parameters:
       # todo: may have collections parameter in the future
       responses:
         '200':
-          description: A JSON Schema defining the Queryables allowed in CQL expressions
-          # content:
-          #   application/schema+json:
-          #     schema:
-          #       $ref: 'https://json-schema.org/draft/2019-09/schema'
+          $ref: '#/components/responses/Queryables'
         default:
           $ref: '../../core/commons.yaml#/components/responses/Error'
   /collections/{collectionId}:
     get:
+      description: |-
+        This endpoint returns a list of Collections.
+      tags:
+        - STAC API - Features
+        - STAC API - Collections
       parameters:
         - in: path
           name: collectionId
@@ -71,14 +84,10 @@ paths:
           required: true
           description: ID of Collection
       tags:
-        - Queryables
+        - STAC API - Filter Extension
       responses:
         '200':
-          description: A JSON Schema defining the Queryables allowed in CQL expressions filtering only that collection
-          # content:
-          #   application/schema+json:
-          #     schema:
-          #       $ref: 'https://json-schema.org/draft/2019-09/schema'
+          $ref: '#/components/responses/Queryables'
         default:
           $ref: '../../core/commons.yaml#/components/responses/Error'
 components:
@@ -153,3 +162,10 @@ components:
         accept is 'http://www.opengis.net/def/crs/OGC/1.3/CRS84'.
       type: string
       format: uri
+  responses:
+    Queryables:
+      description: A JSON Schema defining the Queryables allowed in CQL expressions
+      content:
+        application/schema+json:
+          schema:
+            type: object

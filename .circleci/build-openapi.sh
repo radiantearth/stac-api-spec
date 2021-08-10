@@ -9,8 +9,7 @@ FNAMES=`find . -name "openapi.yaml" -not -path "./fragments/*" -not -path "./nod
 for fin in $FNAMES; do
     fout=./build/$fin
     mkdir -p ${fout%/*}
-    #speccy resolve $fin > $fout
-    swagger-cli bundle $fin -o $fout -t yaml
+    openapi bundle --ext yaml --output $fout $fin
     cp build/index.html ${fout%/*}/
 done
 

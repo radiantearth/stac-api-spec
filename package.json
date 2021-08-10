@@ -1,11 +1,11 @@
 {
   "name": "api-spec",
-  "version": "1.0.0-beta.2",
+  "version": "1.0.0-beta.3",
   "description": "STAC API helpers to generate, serve and check the API spec.",
   "repository": "https://github.com/radiantearth/stac-api-spec",
   "license": "Apache-2.0",
   "scripts": {
-    "serve": "redoc-cli serve core/openapi.yaml --watch --options.expandResponses \"200,201,202,203,204\" --options.pathInMiddlePanel true",
+    "serve": "redoc-cli serve $npm_config_class/openapi.yaml --watch --options.expandResponses \"200,201,202,203,204\" --options.pathInMiddlePanel true",
     "check": "npm run check-markdown && npm run check-openapi",
     "check-markdown": "remark . -f -r .circleci/rc.yaml --ignore-pattern stac-spec/",
     "check-openapi": "npm run check-openapi-core && npm run check-openapi-commons && npm run check-openapi-ogcapi-features && npm run check-openapi-item-search && npm run check-openapi-fragments",
@@ -19,16 +19,16 @@
     "check-stac-spec-changes": "git diff --quiet HEAD ${npm_config_compare_to} -- stac-spec"
   },
   "dependencies": {
-    "@stoplight/spectral": "^5.7.1",
-    "gh-pages": "^3.1.0",
+    "@redocly/openapi-cli": "^1.0.0-beta.54",
+    "@stoplight/spectral": "^5.9.2",
+    "gh-pages": "^3.2.3",
+    "redoc-cli": "^0.12.2",
     "remark-cli": "^8.0.1",
     "remark-lint": "^7.0.1",
     "remark-lint-no-html": "^2.0.1",
     "remark-preset-lint-consistent": "^3.0.1",
     "remark-preset-lint-markdown-style-guide": "^3.0.1",
     "remark-preset-lint-recommended": "^4.0.1",
-    "remark-validate-links": "^10.0.2",
-    "swagger-cli": "^4.0.4",
-    "swagger-combine": "^1.3.0"
+    "remark-validate-links": "^10.0.2"
   }
 }
