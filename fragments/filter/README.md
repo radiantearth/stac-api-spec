@@ -15,7 +15,7 @@
   - Functions: <https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:functions>
   - Arithmetic: <https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:arithmetic>
   - Arrays: <https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:arrays>
-  - Queryable First Operand: <https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:queryable-first-operand>
+  - Queryable Second Operand: <https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:queryable-second-operand>
 - **Extension [Maturity Classification](../../extensions.md#extension-maturity):** Pilot
 - **Dependents:**
   - [Item Search](../../item-search)
@@ -180,7 +180,7 @@ URI should follow the same pattern relative to OAFeat CQL.
 - Functions (`https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:functions`) defines the same operators as OAF Part 3 CQL Functions.
 - Arithmetic: (`https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:arithmetic`) defines the same operators as OAF Part 3 CQL Arithmetic.
 - Arrays: (`https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:arrays`) defines the same operators as OAF Part 3 CQL Arrays.
-- Queryable Operands: (`https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:queryable-operands`) allows the 
+- Queryable Second Operand: (`https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:queryable-second-operand`) allows the 
   use of queryables (e.g., properties) in any position of a clause, not just in the first position. This allows 
   predicates like `property1 == property2` be expressed, whereas the Basic CQL conformance class only requires
   comparisons against literal values.
