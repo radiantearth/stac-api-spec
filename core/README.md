@@ -5,9 +5,9 @@
   - [Example Landing Page for STAC API - Core](#example-landing-page-for-stac-api---core)
   - [Extensions](#extensions)
 
-- **OpenAPI specification:** [openapi.yaml](openapi.yaml) describes the core endpoints ([rendered version](https://api.stacspec.org/v1.0.0-beta.3/core)),
+- **OpenAPI specification:** [openapi.yaml](openapi.yaml) describes the core endpoints ([rendered version](https://api.stacspec.org/v1.0.0-beta.4/core)),
   and [commons.yaml](commons.yaml) is the OpenAPI version of the core [STAC spec](../stac-spec) JSON Schemas.
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.3/core>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.4/core>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Dependencies**: None
 
@@ -82,7 +82,7 @@ the [overview](../overview.md#example-landing-page) document.
     "title": "A simple STAC API Example",
     "description": "This Catalog aims to demonstrate the a simple landing page",
     "conformsTo" : [
-        "https://api.stacspec.org/v1.0.0-beta.3/core"
+        "https://api.stacspec.org/v1.0.0-beta.4/core"
     ],
     "links": [
         {
