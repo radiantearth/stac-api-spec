@@ -99,7 +99,7 @@ Please contact a STAC maintainer or open a Pull Request to add your extension to
 ## Creating new extensions
 
 Creating new extensions requires creating an OpenAPI fragment to define it, along with a README markdown file that gives 
-an overview of the functionality. In the README a conformance URI should be provided, so clients can use it to tell if
+an overview of the functionality. In the README, a conformance URI should be provided, so clients can use it to tell if
 a service has the indicated functionality. It is also recommended to note the 'extension maturity', as defined above,
 so others can know how widely it is used.
 

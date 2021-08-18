@@ -44,7 +44,7 @@ Implementing `GET /search` is **required**, `POST /search` is optional, but reco
 
 ## Link Relations
 
-The following Link relations should exist in the Landing Page (root).
+The following Link relations shall exist in the Landing Page (root).
 
 | **rel**        | **href**             | **From**         | **Description**                                                                                                                                                         |
 | -------------- | -------------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -53,7 +53,7 @@ The following Link relations should exist in the Landing Page (root).
 | `service-desc` | `/api` (recommended) | OAFeat OpenAPI   | The OpenAPI service description. Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API |
 | search         | `/search`            | STAC Item Search | URI for the Search endpoint                                                                                                                                             |
 
-Additionally, a `service-doc` endpoint is recommended.
+A `service-doc` endpoint is recommended, but not required.
 
 | **rel**       | **href**                  | **From**       | **Description**                                                                                                         |
 | ------------- | ------------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------- |
