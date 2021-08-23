@@ -12,10 +12,10 @@
 
 *based on [**OGC API - Features - Part 1: Core**](https://www.ogc.org/standards/ogcapi-features)*
 
-- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.3/ogcapi-features)) 
+- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features)) 
   uses all the OGC API - Features openapi fragments to describe returning STAC Item objects.
 - **Conformance URIs:**
-  - <https://api.stacspec.org/v1.0.0-beta.3/ogcapi-features> 
+  - <https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features> 
   - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core> - [Requirements Class Core](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_core))
   - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30> - [Requirements Class OpenAPI 3.0](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_oas30))
   - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson> - [Requirements Class GeoJSON](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_geojson))
@@ -151,8 +151,8 @@ the [overview](../overview.md#example-landing-page) document.
     "title": "A simple STAC API Example",
     "description": "This Catalog aims to demonstrate the a simple landing page",
     "conformsTo" : [
-        "https://api.stacspec.org/v1.0.0-beta.3/core",
-        "https://api.stacspec.org/v1.0.0-beta.3/ogcapi-features",
+        "https://api.stacspec.org/v1.0.0-beta.4/core",
+        "https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features",
         "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core",
         "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30",
         "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson"
@@ -241,7 +241,7 @@ to requests from clients.
 ### Transaction
 
 - **Conformance URIs:**
-  - <https://api.stacspec.org/v1.0.0-beta.3/ogcapi-features/extensions/transaction>
+  - <https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features/extensions/transaction>
   - <http://www.opengis.net/spec/ogcapi-features-4/1.0/conf/simpletx>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Definition**: [STAC API - Transaction Fragment](extensions/transaction/)
@@ -253,7 +253,7 @@ POST, PUT, PATCH, and DELETE methods. The full description of how this extension
 
 ### Items and Collections API Version Extension
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.3/ogcapi-features/extensions/version>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features/extensions/version>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Definition**: [STAC API - Version](extensions/version/)
 
