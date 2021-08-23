@@ -5,11 +5,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
-## [Unreleased]
+## [Unreleased - v1.0.0-beta4] - TBD
 
 ### Added
 
 ### Changed
+
+- Filter Extension - query language is now referred to as "CQL2" rather than CQL
+- Filter Extension - The following changes have been made to the Filter Extension conformance classes to align with changes to the OAFeat CQL draft. All classes
+  whose names have changed also have changed conformance URI strings.
+  - "Basic CQL" now includes the "not equal" operator (`<>`)
+  - "Basic CQL" has always supported datetime comparisons, but this is now explicitly mentioned
+  - "Enhanced Comparison Operators" has been renamed "Advanced Comparison Operators". This is the same as the OAFeat CQL definition, except
+    that it does not require the `upper` and `lower` functions.
+  - "Enhanced Spatial Operators" has been renamed to just "Spatial Operators" (not to be confused with Basic Spatial Operators)
+  - "Basic Temporal Operators" and "Enhanced Temporal Operators" have merged into "Temporal Operators"
+  - "Functions" has been renamed "Custom Functions"
+  - "Arithmetic" has been renamed "Arithmetic Expressions"
+  - "Arrays" has been renamed "Array Operators"
+  - "Queryable Second Operand" has been renamed "Property-Property Comparisons"
 
 ### Deprecated
 
