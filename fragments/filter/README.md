@@ -13,7 +13,7 @@
   - Temporal Operators: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:temporal-operators>
   - Custom Functions: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:functions>
   - Arithmetic Expressions: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:arithmetic>
-  - Array Operators: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:array-operators-operators>
+  - Array Operators: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:array-operators>
   - Property-Property Comparisons: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:property-property>
 - **Extension [Maturity Classification](../../extensions.md#extension-maturity):** Pilot
 - **Dependents:**
@@ -162,7 +162,7 @@ For additional capabilities, the following classes can be implemented:
   same operators as OAF Part 3 CQL Custom Functions.
 - Arithmetic Expressions: (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:arithmetic`) defines 
   the same operators as OAF Part 3 CQL Arithmetic Expressions.
-- Array Operators: (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:array-operators-operators`) 
+- Array Operators: (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:array-operators`) 
   defines the same operators as OAF Part 3 CQL Array Operators.
 - Property-Property Comparisons: (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:property-property`) allows the 
   use of queryables (e.g., properties) in both positions of a clause, not just in the first position. This allows 

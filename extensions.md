@@ -79,7 +79,7 @@ the service supports. This are listed at the top of each extension description, 
   - <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:temporal-operators>
   - <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:functions>
   - <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:arithmetic>
-  - <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:array-operators-operators>
+  - <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:array-operators>
   - <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:property-property>
 - [Context](item-search/README.md#context)
   - <https://api.stacspec.org/v1.0.0-beta.4/item-search#context>
