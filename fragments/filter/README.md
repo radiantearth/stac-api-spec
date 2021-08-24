@@ -119,8 +119,8 @@ implementing functionality they do not need or may not be able to implement func
 their underlying datastore, e.g., Elasticsearch does not support the spatial predicates required by the 
 Spatial Operators conformance class, only the `intersects` operator in the Basic Spatial Operators class.
 
-The precise decomposition of the OAFeat conformance classes is still a work in progress, but rapidly being finalized
-(see [ogcapi-features/issues/579](https://github.com/opengeospatial/ogcapi-features/issues/579)). 
+The precise decomposition of the OAFeat conformance classes is still a work in progress, but is being finalized
+rapidly (see [ogcapi-features/issues/579](https://github.com/opengeospatial/ogcapi-features/issues/579)). 
 The STAC API Filter Extension reuses the definitions and conformance classes in OAFeat CQL, with a single minor exception
 described below.  This extension uses conformance classes with a prefix of `https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:`.
 
