@@ -317,7 +317,7 @@ through the use of a `fields` parameter. The full description of how this extens
 The STAC search endpoint, `/search`, by default only accepts a limited set of parameters to limit the results
 by properties. The Filter extension adds a new parameter, `filter`, that can take a number of comparison operators to
 match predicates between the fields requested and the values of Item objects. It can be used with both GET and POST and supports two
-query formats, `cql2-text` and `cql2-json`. The full details on the JSON structure are specified in the [filter 
+query formats, `cql-text` and `cql-json`. The full details on the JSON structure are specified in the [filter 
 fragment](../fragments/filter/).
 
 ### Sort

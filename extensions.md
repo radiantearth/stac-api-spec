@@ -69,18 +69,18 @@ the service supports. This are listed at the top of each extension description, 
   - <https://api.stacspec.org/v1.0.0-beta.4/item-search#fields>
 - [Filter](item-search/README.md#filter)
   - <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:filter>
-  - <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:basic-cql2>
+  - <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:basic-cql>
   - <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:item-search-filter>
-  - <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:cql2-text>
-  - <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:cql2-json>
+  - <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:cql-text>
+  - <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:cql-json>
   - <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:advanced-comparison-operators>
   - <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:basic-spatial-operators>
   - <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:spatial-operators>
   - <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:temporal-operators>
-  - <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:custom-functions>
-  - <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:arithmetic-expressions>
-  - <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:array-operators>
-  - <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:property-property-comparisons>
+  - <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:functions>
+  - <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:arithmetic>
+  - <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:array-operators-operators>
+  - <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:property-property>
 - [Context](item-search/README.md#context)
   - <https://api.stacspec.org/v1.0.0-beta.4/item-search#context>
 - [Sort](item-search/README.md#sort)
