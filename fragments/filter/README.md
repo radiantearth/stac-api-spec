@@ -158,9 +158,12 @@ For additional capabilities, the following classes can be implemented:
 - Temporal Operators 
   (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:temporal-operators`) defines the 
   same operators as OAF Part 3 CQL Enhanced Temporal Operators.
-- Custom Functions (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:functions`) defines the same operators as OAF Part 3 CQL Custom Functions.
-- Arithmetic Expressions: (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:arithmetic`) defines the same operators as OAF Part 3 CQL Arithmetic Expressions.
-- Array Operators: (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:array-operators-operators`) defines the same operators as OAF Part 3 CQL Array Operators.
+- Custom Functions (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:functions`) defines the
+  same operators as OAF Part 3 CQL Custom Functions.
+- Arithmetic Expressions: (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:arithmetic`) defines 
+  the same operators as OAF Part 3 CQL Arithmetic Expressions.
+- Array Operators: (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:array-operators-operators`) 
+  defines the same operators as OAF Part 3 CQL Array Operators.
 - Property-Property Comparisons: (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:property-property`) allows the 
   use of queryables (e.g., properties) in both positions of a clause, not just in the first position. This allows 
   predicates like `property1 == property2` be expressed, whereas the Basic CQL conformance class only requires
