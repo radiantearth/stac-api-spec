@@ -4,8 +4,8 @@
 - **Conformance Classes:** 
   - Filter: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:filter>
   - Item Search Filter: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:item-search-filter>
-  - CQL2 Text: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:cql-text>
-  - CQL2 JSON: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:cql-json>
+  - CQL Text: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:cql-text>
+  - CQL JSON: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:cql-json>
   - Basic CQL: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:basic-cql>
   - Advanced Comparison Operators: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:advanced-comparison-operators>
   - Basic Spatial Operators: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:basic-spatial-operators>
@@ -136,14 +136,14 @@ The implementation **must** support these conformance classes:
   Basic CQL conformance classes to apply to the Item Search endpoint (`/search`).  This class is the correlate of the OAFeat CQL Features 
   Filter class that binds Filter and Basic CQL to the Features resource (`/collections/{cid}/items`).
 
-The implementation **must** support at least one of the "CQL2 Text" or "CQL2 JSON" conformance classes that define 
+The implementation **must** support at least one of the "CQL Text" or "CQL JSON" conformance classes that define 
 the CQL format used in the filter parameter:
 
-- CQL2 Text (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:cql-text`) defines that the CQL2 Text format is supported by Item Search
+- CQL Text (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:cql-text`) defines that the CQL Text format is supported by Item Search
 - CQL JSON (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:cql-json`) defines that the CQL JSON format is supported by Item Search
 
 If both are advertised as being supported, it is only required that both be supported for GET query parameters, and that 
-only that CQL JSON be supported for POST JSON requests.  It is recommended that clients use CQL2 Text in GET requests and 
+only that CQL JSON be supported for POST JSON requests.  It is recommended that clients use CQL Text in GET requests and 
 CQL JSON in POST requests. 
 
 For additional capabilities, the following classes can be implemented:
@@ -179,7 +179,7 @@ to the Features resource is not supported, as POST is used by the
 
 It recommended that implementers start with fully implementing only a subset of functionality. A good place to start is 
 implementing only the Basic CQL conformance class of logical and comparison operators, defining a static Queryables 
-schema with no queryables advertised, and only implementing CQL2 Text. Following from that can be support for 
+schema with no queryables advertised, and only implementing CQL Text. Following from that can be support for 
 INTERSECTS, defining a static Queryables schema with only the basic Item properties, and 
 implementing CQL JSON. From there, other comparison operators can be implemented and a more 
 dynamic Queryables schema.
