@@ -149,8 +149,9 @@ CQL JSON in POST requests.
 For additional capabilities, the following classes can be implemented:
 - Advanced Comparison Operators 
   (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:advanced-comparison-operators`) defines the `LIKE`, 
-  `BETWEEN`, and `IN` operators. This conformance class in Filter Extension does **not** require implementing `lower` and 
-  `upper` functions as the OAFeat CQL conformance class requires.
+  `BETWEEN`, and `IN` operators. Note: this conformance class does **not** require implementing the
+  `lower` and `upper` functions as defined in the latest OAFeat CQL spec, as these will soon be
+  removed from the corresponding OAFeat CQL conformance class.
 - Basic Spatial Operators (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:basic-spatial-operators`) defines the `INTERSECTS` predicate.
 - Spatial Operators 
   (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:spatial-operators`) defines the 
@@ -179,7 +180,8 @@ to the Features resource is not supported, as POST is used by the
 
 It recommended that implementers start with fully implementing only a subset of functionality. A good place to start is 
 implementing only the Basic CQL conformance class of logical and comparison operators, defining a static Queryables 
-schema with no queryables advertised, and only implementing CQL Text. Following from that can be support for 
+schema with no queryables advertised and the `additionalProperties` field set to `true`, and 
+only implementing CQL Text. Following from that can be support for 
 INTERSECTS, defining a static Queryables schema with only the basic Item properties, and 
 implementing CQL JSON. From there, other comparison operators can be implemented and a more 
 dynamic Queryables schema.
@@ -214,16 +216,15 @@ not compliant with this extension.
 
 ## Queryables
 
-The Queryables mechanism allows a client to discover what variable terms are available for use when writing filter
-expressions.  These variables can be defined per-collection, and the intersection of these variables over all collections is what 
-is available for filtering when there are no collection restrictions. These queryables are the only variables that may be used 
-in filter expressions, and if any variable is used in expression that is not defined as a queryable and error should be 
+The Queryables mechanism allows a client to discover what terms are available for use when writing filter
+expressions.  These terms can be defined per-collection, and the intersection of these terms over all collections is what 
+is available for filtering when there are no collection restrictions. By default, these queryables are the only terms that may be used 
+in filter expressions, and if any term is used in expression that is not defined as a queryable and error should be 
 returned according to OAFeat Part 3. It is recognized that this is a severe restriction in STAC APIs that have highly variable 
-and dynamic content. It is possible that this will change in the OAFeat Part 3 spec, see 
-this [issue](https://github.com/opengeospatial/ogcapi-features/issues/582). For now, implementers may choose to allow 
-fully-qualified property 
-names not advertised in queryables (e.g., `properties.eo:cloud_cover`, in anticipation that there be some
-mechanism to explicitly allow or advertise this in the future.
+and dynamic content, so this behavior may be modified by setting the `additionalProperties` attribute in the
+queryables definition to `true`.  As such, any syntactically-valid term for a property will be accepted, and the
+matching semantics are such that, if an Item does not have an attribute by that name, the value is assumed to be
+`null`.  It is recommended to use fully-qualified property names (e.g., `properties.eo:cloud_cover`).
 
 Queryables are advertised via a JSON Schema document retrieved from the `/queryables` endpoint. This endpoint at the root 
 retrieves queryables that apply to all collections. When used as a subresource of the collection resource 
@@ -257,7 +258,8 @@ definitions for STAC Items should include at least the fields id, collection, ge
       "description" : "Datetime",
       "$ref": "https://schemas.stacspec.org/v1.0.0/item-spec/json-schema/datetime.json#/properties/datetime"
     }
-  }
+  },
+  "additionalProperties": true
 }
 ```
 
@@ -271,11 +273,11 @@ The Landing Page endpoint (`/`) will have a Link with rel `http://www.opengis.ne
 the endpoint `/queryables`. Additionally, each Collection resource will have a Link to the queryables resource for that 
 collection, e.g., `/collections/collection1/queryables`. 
 
-The queryables endpoint returns a JSON Schema describing the names and types variables that may be used in filter expressions. 
+The queryables endpoint returns a JSON Schema describing the names and types of terms that may be used in filter expressions. 
 This response is defined in JSON Schema because it is a well-specified typed schema, but it is not used for validating a JSON 
-document derived from it. This schema defines the variables that may be used in a CQL filter.
+document derived from it. This schema defines the terms that may be used in a CQL filter.
 
-These queryable variables are mapped by the service to filter Items. For example, the service may define a queryable with the 
+These queryable terms are mapped by the service to filter Items. For example, the service may define a queryable with the 
 name "eo:cloud_cover" that can be used in a CQL expression like `eo:cloud_cover <= 10`, with the semantics that only Items where the 
 `properties.eo:cloud_cover` value was <= 10 would match the filter. The server would then translate this into an appropriate 
 query for the data within its datastore.
@@ -283,7 +285,7 @@ query for the data within its datastore.
 Queryables can be static or dynamically derived. For example, `cloud_cover` might be specified to have a value 0 to 100 or a field 
 may have a set of enumerated values dynamically determined by an aggreation at runtime.  This schema can be used by a UI or 
 interactive client to dynamically expose to the user the fields that are available for filtering, and provide a precise group 
-of options for the values of these variables.
+of options for the values of these terms.
 
 Queryables can also be used to advertise synthesized property values. The only requirement in CQL is that the property have a type 
 and evaluate to literal value of that type or NULL. For example, a filter like "Items must have an Asset with an eo:band with 
@@ -305,7 +307,8 @@ in STAC API by the Filter Extension. In this case, the queryables endpoint (`/qu
   "title" : "Queryables for Example STAC API",
   "description" : "Queryable names for the example STAC API Item Search filter.",
   "properties" : {
-  }
+  },
+  "additionalProperties": true
 }
 ```
 
@@ -410,7 +413,8 @@ The Queryables endpoint (`/queryables`) returns something like the following:
       "description" : "Asset eo:bands common names",
       "$ref": "https://stac-extensions.github.io/eo/v1.0.0/schema.json#/properties/eo:bands/common_name"    
     }
-  }
+  },
+  "additionalProperties": true
 }
 ```
 
