@@ -475,17 +475,22 @@ to `http://www.opengis.net/def/crs/OGC/1.3/CRS84` for a STAC API.
 
 ```javascript
 POST /search
-{ 
+{
   "filter": {
-    "and": [
-      "eq": [
-        { "property": "id" },
-        "LC08_L1TP_060247_20180905_20180912_01_T1_L1TP"
-      ],
-      "eq": [
-        { "property": "collection" },
-        "landsat8_l1tp"
-      ]
+    "and": [{
+        "eq": [{
+            "property": "id"
+          },
+          "LC08_L1TP_060247_20180905_20180912_01_T1_L1TP"
+        ]
+      },
+      {
+        "eq": [{
+            "property": "collection"
+          },
+          "landsat8_l1tp"
+        ]
+      }
     ]
   }
 }
@@ -512,43 +517,54 @@ GET /search?filter=collection = 'landsat8_l1tp'
 
 ```javascript
 POST /search
-{ 
+{
   "filter-lang": "cql-json",
   "filter": {
-    "and": [
-      "eq": [
-        { "property": "collection" },
-        "landsat8_l1tp"
-      ],
-      "lte": [
-        { "property": "eo:cloud_cover" },
-        "10"
-      ],
-      "anyinteracts": [
-        { "property": "datetime" },
-        [ "2021-04-08T04:39:23Z", "2021-05-07T12:27:57Z" ]
-      ],
-      "intersects": [
-        { "property": "geometry" },
-        {
-          "type": "Polygon",
-          "coordinates": [
+    "and": [{
+        "eq": [{
+            "property": "collection"
+          },
+          "landsat8_l1tp"
+        ]
+      },
+      {
+        "lte": [{
+            "property": "eo:cloud_cover"
+          },
+          "10"
+        ]
+      },
+      {
+        "anyinteracts": [{
+            "property": "datetime"
+          },
+          ["2021-04-08T04:39:23Z", "2021-05-07T12:27:57Z"]
+        ]
+      },
+      {
+        "intersects": [{
+            "property": "geometry"
+          },
+          {
+            "type": "Polygon",
+            "coordinates": [
               [
-                  [43.5845,-79.5442],
-                  [43.6079,-79.4893],
-                  [43.5677,-79.4632],
-                  [43.6129,-79.3925],
-                  [43.6223,-79.3238],
-                  [43.6576,-79.3163],
-                  [43.7945,-79.1178],
-                  [43.8144,-79.1542],
-                  [43.8555,-79.1714],
-                  [43.7509,-79.6390],
-                  [43.5845,-79.5442]
+                [43.5845, -79.5442],
+                [43.6079, -79.4893],
+                [43.5677, -79.4632],
+                [43.6129, -79.3925],
+                [43.6223, -79.3238],
+                [43.6576, -79.3163],
+                [43.7945, -79.1178],
+                [43.8144, -79.1542],
+                [43.8555, -79.1714],
+                [43.7509, -79.6390],
+                [43.5845, -79.5442]
               ]
-          ]
-        }
-      ]
+            ]
+          }
+        ]
+      }
     ]
   }
 }
