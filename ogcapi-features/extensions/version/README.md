@@ -65,6 +65,7 @@ Request to `GET /collections/my_collection/items/this_is_my_id`:
 ```json
 {
     "id": "this_is_my_id",
+    "type": "Feature",
     "bbox": [],
     "geometry": {},
     "properties": {},
@@ -97,6 +98,7 @@ Request to `GET /collections/my_collection/items/this_is_my_id/versions/02`:
 ```json
 {
     "id": "this_is_my_id",
+    "type": "Feature",
     "bbox": [],
     "geometry": {},
     "properties": {},
@@ -129,6 +131,7 @@ Request to `GET /collections/my_collection/items/this_is_my_id/versions/01`:
 ```json
 {
     "id": "this_is_my_id",
+    "type": "Feature",
     "bbox": [],
     "geometry": {},
     "properties": {},
