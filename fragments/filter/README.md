@@ -384,6 +384,7 @@ at least these values:
   ],
   "stac_extensions": [],
   "stac_version": "1.0.0",
+  "type": "Catalog",
 }
 ```
 

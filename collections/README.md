@@ -76,6 +76,7 @@ of an array of all STAC Collections and an array of Links.
 			"id": "cool-data",
 			"title": "Cool Data from X Satellite",
 			"description": "A lot of awesome words describing the data",
+			"type": "Collection",
 			"license": "CC-BY",
 			"extent": {
 				"spatial": {

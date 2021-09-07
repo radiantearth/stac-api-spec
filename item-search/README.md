@@ -255,6 +255,7 @@ the [overview](../overview.md#example-landing-page) document.
     "id": "example-stac",
     "title": "A simple STAC API Example",
     "description": "This Catalog aims to demonstrate the a simple landing page",
+    "type": "Catalog",
     "conformsTo" : [
         "https://api.stacspec.org/v1.0.0-beta.4/core",
         "https://api.stacspec.org/v1.0.0-beta.4/item-search"
