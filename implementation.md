@@ -2,6 +2,12 @@
 
 This document describes implementation recommendations for a STAC API.
 
+## Identifiers
+
+It is recommended that all items presented through a STAC API be part of a collection. STAC
+allows items to not be contained in a collection, though this is rarely done in practice.
+For each STAC Item, the Collection ID and Item ID must for a globally-unique tuple, e.g., item IDs are unique within a collection.
+
 ## CORS
 
 Web browsers enforce a mechanism called [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) to prevent 
