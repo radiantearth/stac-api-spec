@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Filter Extension - query language is now referred to as "CQL2" rather than CQL
+- Filter Extension now uses OAFeat Part 3 conformance class URIs
 - Filter Extension - The following changes have been made to the Filter Extension conformance classes to align with changes to the OAFeat CQL draft. All classes
   whose names have changed also have changed conformance URI strings.
   - "Basic CQL" now includes the "not equal" operator (`<>`)
@@ -24,7 +25,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - "Arithmetic" has been renamed "Arithmetic Expressions"
   - "Arrays" has been renamed "Array Operators"
   - "Queryable Second Operand" has been renamed "Property-Property Comparisons"
-
 ### Deprecated
 
 ### Removed

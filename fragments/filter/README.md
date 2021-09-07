@@ -2,19 +2,19 @@
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
 - **Conformance Classes:** 
-  - Filter: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:filter>
+  - Filter: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/filter>
   - Item Search Filter: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:item-search-filter>
-  - CQL Text: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:cql-text>
-  - CQL JSON: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:cql-json>
-  - Basic CQL: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:basic-cql>
-  - Advanced Comparison Operators: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:advanced-comparison-operators>
-  - Basic Spatial Operators: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:basic-spatial-operators>
-  - Spatial Operators: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:spatial-operators>
-  - Temporal Operators: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:temporal-operators>
-  - Custom Functions: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:functions>
-  - Arithmetic Expressions: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:arithmetic>
-  - Array Operators: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:array-operators>
-  - Property-Property Comparisons: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:property-property>
+  - CQL Text: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql-text>
+  - CQL JSON: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql-json>
+  - Basic CQL: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-cql>
+  - Advanced Comparison Operators: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/advanced-comparison-operators>
+  - Basic Spatial Operators: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-spatial-operators>
+  - Spatial Operators: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/spatial-operators>
+  - Temporal Operators: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/temporal-operators>
+  - Custom Functions: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/functions>
+  - Arithmetic Expressions: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/arithmetic>
+  - Array Operators: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/array-operators>
+  - Property-Property Comparisons: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/property-property>
 - **Extension [Maturity Classification](../../extensions.md#extension-maturity):** Pilot
 - **Dependents:**
   - [Item Search](../../item-search)
@@ -112,7 +112,7 @@ CQL enables more expressive queries than supported by STAC API Item Search. Thes
 
 ## Conformance Classes
 
-OAFeat CQL defines several conformance classes that allow implementers to create compositions of 
+OAFeat Part 3 CQL defines several conformance classes that allow implementers to create compositions of 
 functionality that support whatever expressiveness they need. This allows implementers to incrementally support CQL
 syntax, without needing to implement a huge spec all at once.  Some implementers choose not to incur the cost of 
 implementing functionality they do not need or may not be able to implement functionality that is not supported by 
@@ -121,14 +121,16 @@ Spatial Operators conformance class, only the `intersects` operator in the Basic
 
 The precise decomposition of the OAFeat conformance classes is still a work in progress, but is being finalized
 rapidly (see [ogcapi-features/issues/579](https://github.com/opengeospatial/ogcapi-features/issues/579)). 
-The STAC API Filter Extension reuses the definitions and conformance classes in OAFeat CQL, with a single minor exception
-described below.  This extension uses conformance classes with a prefix of `https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:`.
+The STAC API Filter Extension reuses the definitions and conformance classes in OAFeat CQL,
+adding only the Item Search Filter conformance class
+(`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:item-search-filter`) to bind 
+the CQL filter behavior to the Item Search resource.
 
 The implementation **must** support these conformance classes:
 
-- Filter (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:filter`) defines the Queryables mechanism and 
+- Filter (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/filter`) defines the Queryables mechanism and 
   parameters `filter-lang`, `filter-crs`, and `filter`.
-- Basic CQL (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:basic-cql`) defines the basic operations allowed in 
+- Basic CQL (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-cql`) defines the basic operations allowed in 
   the query language used for the `filter` parameter defined by Filter. This includes logical operators (`AND`, `OR`, `NOT`), 
   comparison operators (`=`, `<>`, `<`, `<=`, `>`, `>=`), and `IS NULL`. The comparison operators are allowed against string, numeric, boolean,
   and datetime types.
@@ -139,8 +141,8 @@ The implementation **must** support these conformance classes:
 The implementation **must** support at least one of the "CQL Text" or "CQL JSON" conformance classes that define 
 the CQL format used in the filter parameter:
 
-- CQL Text (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:cql-text`) defines that the CQL Text format is supported by Item Search
-- CQL JSON (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:cql-json`) defines that the CQL JSON format is supported by Item Search
+- CQL Text (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql-text`) defines that the CQL Text format is supported by Item Search
+- CQL JSON (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql-json`) defines that the CQL JSON format is supported by Item Search
 
 If both are advertised as being supported, it is only required that both be supported for GET query parameters, and that 
 only that CQL JSON be supported for POST JSON requests.  It is recommended that clients use CQL Text in GET requests and 
@@ -148,24 +150,24 @@ CQL JSON in POST requests.
 
 For additional capabilities, the following classes can be implemented:
 - Advanced Comparison Operators 
-  (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:advanced-comparison-operators`) defines the `LIKE`, 
+  (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/advanced-comparison-operators`) defines the `LIKE`, 
   `BETWEEN`, and `IN` operators. Note: this conformance class does **not** require implementing the
   `lower` and `upper` functions as defined in the latest OAFeat CQL spec, as these will soon be
   removed from the corresponding OAFeat CQL conformance class.
-- Basic Spatial Operators (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:basic-spatial-operators`) defines the `INTERSECTS` predicate.
+- Basic Spatial Operators (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-spatial-operators`) defines the `INTERSECTS` predicate.
 - Spatial Operators 
-  (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:spatial-operators`) defines the 
+  (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/spatial-operators`) defines the 
   same operators as OAF Part 3 CQL Advanced Spatial Operators.
 - Temporal Operators 
-  (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:temporal-operators`) defines the 
+  (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/temporal-operators`) defines the 
   same operators as OAF Part 3 CQL Enhanced Temporal Operators.
-- Custom Functions (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:functions`) defines the
+- Custom Functions (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/functions`) defines the
   same operators as OAF Part 3 CQL Custom Functions.
-- Arithmetic Expressions: (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:arithmetic`) defines 
+- Arithmetic Expressions: (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/arithmetic`) defines 
   the same operators as OAF Part 3 CQL Arithmetic Expressions.
-- Array Operators: (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:array-operators`) 
+- Array Operators: (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/array-operators`) 
   defines the same operators as OAF Part 3 CQL Array Operators.
-- Property-Property Comparisons: (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:property-property`) allows the 
+- Property-Property Comparisons: (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/property-property`) allows the 
   use of queryables (e.g., properties) in both positions of a clause, not just in the first position. This allows 
   predicates like `property1 == property2` be expressed, whereas the Basic CQL conformance class only requires
   comparisons against literal values.
@@ -339,19 +341,19 @@ at least these values:
     "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30",
     "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson",
     
-    "http://www.opengis.net/spec/ogcapi_common-2/1.0/req/collections",
+    "http://www.opengis.net/spec/ogcapi_common-2/1.0/conf/collections",
 
     "http://api.stacspec.org/v1.0.0-beta.4/core",
     "http://api.stacspec.org/v1.0.0-beta.4/stac-search",
     "http://api.stacspec.org/v1.0.0-beta.4/stac-response",
 
-    "https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:filter",
-    "https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:features-filter",
-    "https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:basic-cql",
-    "https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:cql-text",
-    "https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:cql-json",
-    "https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:basic-spatial-operators",
-    "https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:advanced-comparison-operators"
+    "http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/filter",
+    "http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/features-filter",
+    "http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-cql",
+    "http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql-text",
+    "http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql-json",
+    "http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-spatial-operators",
+    "http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/advanced-comparison-operators"
 
   ],
   "links": [
