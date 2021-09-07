@@ -67,6 +67,7 @@ the service supports. This are listed at the top of each extension description, 
 
 - [Fields](item-search/README.md#fields)
   - <https://api.stacspec.org/v1.0.0-beta.4/item-search#fields>
+  - <https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features#fields>
 - [Filter](item-search/README.md#filter)
   - <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:filter>
   - <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:simple-cql>
@@ -75,8 +76,10 @@ the service supports. This are listed at the top of each extension description, 
   - <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:cql-json>
 - [Context](item-search/README.md#context)
   - <https://api.stacspec.org/v1.0.0-beta.4/item-search#context>
+  - <https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features#context>
 - [Sort](item-search/README.md#sort)
   - <https://api.stacspec.org/v1.0.0-beta.4/item-search#sort>
+  - <https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features#sort>
 - [Transaction](ogcapi-features/extensions/transaction/README.md)
   - <https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features/extensions/transaction>
 - [Items and Collections API Version](ogcapi-features/extensions/version/README.md)
