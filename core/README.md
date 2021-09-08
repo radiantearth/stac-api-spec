@@ -57,15 +57,16 @@ The following Link relations shall exist in the Landing Page (root).
 | `service-desc` | `/api` (recommended) | OAFeat OpenAPI | The OpenAPI service description. Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API |
 
 A `service-doc` endpoint is recommended, but not required.
+
 | **rel**       | **href**                  | **From**       | **Description**                                                                                                         |
 | ------------- | ------------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------- |
 | `service-doc` | `/api.html` (recommended) | OAFeat OpenAPI | An HTML service description.  Uses the `text/html` media type to refer to a human-consumable description of the service |
 
 Additionally, `child` relations may exist to individual catalogs and collections.
+
 | **rel**        | **href**             | **From**       | **Description**                                                                                                                                                         |
 | -------------- | -------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `child`        | various              | STAC Core      | The child STAC Catalogs & Collections. Provides curated paths to get to STAC Collection and Item objects |
-
 
 It is also valid to have `item` links from the landing page, but most STAC API services are used to 
 serve up a large number of features, so they typically

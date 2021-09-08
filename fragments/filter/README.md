@@ -47,9 +47,15 @@
     - [Example 6: Temporal](#example-6-temporal)
       - [Example 6: ANYINTERACTS cql-text (GET)](#example-6-anyinteracts-cql-text-get)
       - [Example 6: ANYINTERACTS cql-json (POST)](#example-6-anyinteracts-cql-json-post)
-    - [Example 6: Spatial](#example-6-spatial)
-      - [Example 6: INTERSECTS cql-text (GET)](#example-6-intersects-cql-text-get)
-      - [Example 6: INTERSECTS cql-json (POST)](#example-6-intersects-cql-json-post)
+    - [Example 7: Spatial](#example-7-spatial)
+      - [Example 7: INTERSECTS cql-text (GET)](#example-7-intersects-cql-text-get)
+      - [Example 7: INTERSECTS cql-json (POST)](#example-7-intersects-cql-json-post)
+    - [Example 8: Spatial Disjunction](#example-8-spatial-disjunction)
+      - [Example 8: INTERSECTS cql-text (GET)](#example-8-intersects-cql-text-get)
+      - [Example 8: INTERSECTS cql-json (POST)](#example-8-intersects-cql-json-post)
+    - [Example 9: Using IS NULL](#example-9-using-is-null)
+      - [Example 9: cql-text (GET)](#example-9-cql-text-get)
+      - [Example 9: cql-json (POST)](#example-9-cql-json-post)
 
 ## Overview
 
@@ -467,20 +473,9 @@ to `http://www.opengis.net/def/crs/OGC/1.3/CRS84` for a STAC API.
 POST /search
 {
   "filter": {
-    "and": [{
-        "eq": [{
-            "property": "id"
-          },
-          "LC08_L1TP_060247_20180905_20180912_01_T1_L1TP"
-        ]
-      },
-      {
-        "eq": [{
-            "property": "collection"
-          },
-          "landsat8_l1tp"
-        ]
-      }
+    "and": [
+      { "eq": [ { "property": "id" }, "LC08_L1TP_060247_20180905_20180912_01_T1_L1TP" ] },
+      { "eq": [ { "property": "collection" }, "landsat8_l1tp" ] }
     ]
   }
 }
@@ -511,29 +506,13 @@ POST /search
 {
   "filter-lang": "cql-json",
   "filter": {
-    "and": [{
-        "eq": [{
-            "property": "collection"
-          },
-          "landsat8_l1tp"
-        ]
-      },
+    "and": [
+      { "eq": [ { "property": "collection" }, "landsat8_l1tp" ] },
+      { "lte": [ { "property": "eo:cloud_cover" }, "10" ] },
+      { "gte": [ { "property": "datetime" }, "2021-04-08T04:39:23Z" ] },
       {
-        "lte": [{
-            "property": "eo:cloud_cover"
-          },
-          "10"
-        ]
-      },
-      { 
-        "gte": [{
-            "property": "datetime" 
-          },
-          "2021-04-08T04:39:23Z"
-        ]
-      },
-      {
-        "intersects": [{
+        "intersects": [
+          {
             "property": "geometry"
           },
           {
@@ -712,26 +691,13 @@ a tiny sliver of data.
 
 ```json
 {
-    "filter": {
-        "and": [
-            {
-                "gt": [
-                    {
-                        "property": "sentinel:data_coverage"
-                    },
-                    50
-                ]
-            },
-            {
-                "lt": [
-                    {
-                        "property": "eo:cloud_cover"
-                    },
-                    10
-                ]
-            }
-        ]
-    }
+  "filter-lang": "cql-json",
+  "filter": {
+    "and": [
+      { "gt": [ { "property": "sentinel:data_coverage" }, 50 ] },
+      { "lt": [ { "property": "eo:cloud_cover" }, 10 ] }
+    ]
+  }
 }
 ```
 
@@ -752,22 +718,13 @@ This uses the same queryables as Example 4.
 
 ```json
 {
+  "filter-lang": "cql-json",
   "filter": {
     "or": [
-            {
-               "gt": [
-                  { "property": "sentinel:data_coverage" },
-                  50
-               ]
-            },
-            {
-               "lt": [
-                  { "property": "eo:cloud_cover" },
-                  10
-               ]
-            }
-      ]
-    }
+      { "gt": [ { "property": "sentinel:data_coverage" }, 50 ] },
+      { "lt": [ { "property": "eo:cloud_cover" }, 10 ] }
+    ]
+  }
 }
 ```
 
@@ -788,43 +745,126 @@ have any overlap between them.
 
 ```json
 {
+  "filter-lang": "cql-json",
   "filter": {
-      "anyinteracts": [
-        { "property": "datetime" },
-        [ "2020-11-11T00:00:00Z", "2020-11-12T00:00:00Z"]
-      ]
+    "anyinteracts": [
+      { "property": "datetime" },
+      [ "2020-11-11T00:00:00Z", "2020-11-12T00:00:00Z"]
+    ]
   }
 }
 ```
 
-### Example 6: Spatial
+### Example 7: Spatial
 
-The only spatial operator that must be implemented is `INTERSECTS`. This has the same semantics as the one provided
-in the Item Search `intersects` parameter.  The `cql-text` format uses WKT geometries and the `cql-json` format uses 
-GeoJSON geometries.
+The only spatial operator that must be implemented for Basic Spatial Operators 
+is `INTERSECTS`. This has the same semantics as the one provided
+in the Item Search `intersects` parameter.  The `cql-text` format uses WKT geometries and the `cql-json`
+format uses GeoJSON geometries.
 
-#### Example 6: INTERSECTS cql-text (GET)
+#### Example 7: INTERSECTS cql-text (GET)
 
 ```javascript
 /search?filter=INTERSECTS(geometry,POLYGON((-77.0824 38.7886,-77.0189 38.7886,-77.0189 38.8351,-77.0824 38.8351,-77.0824 38.7886)))
 ```
 
-#### Example 6: INTERSECTS cql-json (POST)
+#### Example 7: INTERSECTS cql-json (POST)
 
 ```json
 {
-    "filter": {
-        "intersects": [
-                { "property": "geometry" } ,
-                {
-                   "type": "Polygon",
-                   "coordinates": [[
-                        [-77.0824, 38.7886], [-77.0189, 38.7886],
-                        [-77.0189, 38.8351], [-77.0824, 38.8351],
-                        [-77.0824, 38.7886]
-                    ]]
-                }
+  "filter-lang": "cql-json",
+  "filter": {
+    "intersects": [
+      { "property": "geometry" } ,
+      {
+        "type": "Polygon",
+        "coordinates": [[
+            [-77.0824, 38.7886], [-77.0189, 38.7886],
+            [-77.0189, 38.8351], [-77.0824, 38.8351],
+            [-77.0824, 38.7886]
+        ]]
+      }
+    ]
+  }
+}
+```
+
+### Example 8: Spatial Disjunction
+
+One limitation of the `intersects` parameter is that only a single geometry may be provided. While most
+GeoJSON geometries can be combined to form a composite (e.g., multiple Polygons can be combined to form a
+MultiPolygon), this is much easier to do in the query by combining `INTERSECTS` predicates with the `OR`
+logical operator.
+
+#### Example 8: INTERSECTS cql-text (GET)
+
+```javascript
+/search?filter=INTERSECTS(geometry,POLYGON((-77.0824 38.7886,-77.0189 38.7886,-77.0189 38.8351,-77.0824 38.8351,-77.0824 38.7886))) OR INTERSECTS(geometry,POLYGON((-79.0935 38.7886,-79.0290 38.7886,-79.0290 38.8351,-79.0935 38.8351,-79.0935 38.7886)))
+```
+
+#### Example 8: INTERSECTS cql-json (POST)
+
+```json
+{
+  "filter": { 
+    "or" : [
+      "intersects": [
+        { "property": "geometry" } ,
+        {
+          "type": "Polygon",
+          "coordinates": [[
+            [-77.0824, 38.7886], [-77.0189, 38.7886],
+            [-77.0189, 38.8351], [-77.0824, 38.8351],
+            [-77.0824, 38.7886]
+          ]]
+        }
+      ],
+      "intersects": [
+        { "property": "geometry" } ,
+        {
+          "type": "Polygon",
+          "coordinates": [[
+            [-79.0935, 38.7886], [-79.0290, 38.7886],
+            [-79.0290, 38.8351], [-79.0935, 38.8351],
+            [-79.0935, 38.7886]
+          ]]
+        }
+      ]
+    ]
+  }        
+}
+```
+
+### Example 9: Using IS NULL
+
+One of the main use cases for STAC API is doing cross-collection query. Commonly, this means that items have
+different sets of properties. For example, a collection of Sentinel 2 data may have a property
+`sentinel:data_coverage` and a collection of Landsat 8 data may have a corresponding property
+`landsat:coverage_percent`, both representing what percentage of a given gridded scene actually contains
+data.  However, we many also want to also include in our result items that do not have a value defined for
+either of those properties. 
+
+#### Example 9: cql-text (GET)
+
+```javascript
+/search?filter=sentinel:data_coverage > 50 OR landsat:coverage_percent < 10 OR (sentinel:data_coverage IS NULL AND landsat:coverage_percent IS NULL)
+```
+
+#### Example 9: cql-json (POST)
+
+```json
+{
+  "filter": {
+    "or": [
+      { "gte": [ { "property": "sentinel:data_coverage" }, 50 ] },
+      { "gte": [ { "property": "landsat:coverage_percent" }, 50 ] },
+      {
+        "and": [
+          { "isNull": { "property": "sentinel:data_coverage" } },
+          { "isNull": { "property": "landsat:coverage_percent" } }
         ]
-    },        
+      }
+    ]
+  }
 }
 ```
