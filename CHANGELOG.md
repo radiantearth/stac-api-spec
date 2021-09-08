@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Support binding Sort, Fields, and Context Extensions to STAC Features items resource
+  endpoint (`/collections/{collection_id}/items`)
+
 ### Changed
 
 - The required Link Relations and endpoints for each conformance class now use the wording of 'shall' 
