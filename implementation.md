@@ -2,6 +2,12 @@
 
 This document describes implementation recommendations for a STAC API.
 
+## Identifiers
+
+It is recommended that all items presented through a STAC API be part of a collection. STAC
+allows items to not be contained in a collection, though this is rarely done in practice.
+For each STAC Item, the Collection ID and Item ID must for a globally-unique tuple, e.g., item IDs are unique within a collection.
+
 ## CORS
 
 Web browsers enforce a mechanism called [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) to prevent 
@@ -42,12 +48,12 @@ RFC 3339 is a profile of ISO 8601, adding these constraints to the allowed value
 A simple regex for an RFC 3339 datetime is:
 
 ```regex
-^(\d\d\d\d)\-(\d\d)\-(\d\d)(T|t)(\d\d):(\d\d):(\d\d)([,.]\d+)?(Z|([-+])(\d\d):(\d\d))$
+^(\d\d\d\d)\-(\d\d)\-(\d\d)(T|t)(\d\d):(\d\d):(\d\d)([.]\d+)?(Z|([-+])(\d\d):(\d\d))$
 ```
 
 This is not a precise regex, as it matches some strings that violate semantics. There are additional restrictions, for example, 
 the month (01-12), the day (01-31), the hour (0-24), minute (0-60), seconds (0-9), and timezone offsets.  However, the best 
-strategy is to use this regex to ensure the datetime conforms to the the RFC3339 profile and then us an ISO8601 parser to produce
+strategy is to use this regex to ensure the datetime conforms to the the RFC 3339 profile and then us an ISO8601 parser to produce
 a valid datetime object from the datetime string.
 
 Thereby, the recommended process for parsing the datetime value (which may consist of a single
@@ -55,18 +61,18 @@ RFC 3339 datetime or an interval) is:
 
 1. uppercase the string (this avoids needing to match on both (t|T) and (z|Z))
 2. split the string on `/` to determine if it is a single datetime or an interval
-3. For the single value or each value of the split, check if it is either an open interval (the empty string or `..`), 
-   or if it matches the RFC3339 datetime regex. Only one of the interval ends may be open.
-4. ISO8601 parse datetime strings using a library such as [pyiso8601](https://github.com/micktwomey/pyiso8601) (Python), 
-   [dateutil](https://dateutil.readthedocs.io/en/stable/parser.html#dateutil.parser.isoparse) (Python), or 
-   [Luxon](https://github.com/moment/luxon/) (JavaScript). Frequently, date libraries built into language 
-   standard libraries do not parse ISO8601 datetimes correctly, for example, the built-in Python datetime 
-   library does not handle `Z` as a timezone.
+3. For the single value or each value of the split, check if it is either an open interval
+   (the empty string or `..`), or a datetime value. Only one of the interval ends may be open.
+4. Either use an RFC 3339 datetime parser like in [ciso8601](https://github.com/closeio/ciso8601), or
+   match the datetime value against the RFC 3339 regex, upper case the string, and use an 
+   ISO8601 parser such as [pyiso8601](https://github.com/micktwomey/pyiso8601) (Python) or
+   [Luxon](https://github.com/moment/luxon/) (JavaScript). Frequently, date libraries built into
+   language standard libraries do not parse ISO8601 datetimes correctly, for example, the built-in
+   Python datetime library does not handle `Z` as a timezone.
 
-Below are a few examples of valid RFC 3339 datetimes. Note the uses of fractional seconds, the use of `.` or
- `,` as the fractional seconds separator, Z or z as a timezone, 
+Below are a few examples of valid RFC 3339 datetimes. Note the uses of fractional seconds, the use of `.` as the fractional seconds separator, Z or z as a timezone, 
 positive and negative arbitrary offset timezones, and T or t as a separator between date and time. While 
-the RFC3339 spec does not define the required number of fractional seconds, STAC API only requires up to 
+the RFC 3339 spec does not define the required number of fractional seconds, STAC API only requires up to 
 9 digits be supported.
 
 - 1990-12-31T23:59:59Z (no fractional seconds, Z timezone)

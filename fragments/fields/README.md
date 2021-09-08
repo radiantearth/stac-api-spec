@@ -1,14 +1,22 @@
 # STAC API - Fields Fragment
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
-- **Conformance Class:** <https://api.stacspec.org/v1.0.0-beta.4/item-search#fields>
+- **Conformance Classes:** 
+  - Item Search binding: <https://api.stacspec.org/v1.0.0-beta.4/item-search#fields>
+  - STAC Features binding: <https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features#fields>
 - **Fragment [Maturity Classification](../../extensions.md#extension-maturity):** Pilot
 - **Dependents:**
   - [Item Search](../../item-search)
+  - [STAC Features](../../ogcapi-features)
 
-STAC API by default returns everything within an item. But Item objects can have hundreds of fields, or incredibly large
+STAC API by default returns every attribute in an item. However, Item objects can have hundreds of fields, or incredibly large
 geometries, and even smaller Item objects can get big when millions are requested but not all information is used. This
-fragment provides a mechanism for clients to request that servers to explicitly include or exclude certain fields. 
+fragment provides a mechanism for clients to request that servers to explicitly include or exclude certain fields.
+
+This fragment may be bound to either or both of 
+[Item Search](../../item-search) (`/search` endpoint) or
+[STAC Features](../../ogcapi-features) (`/collections/{collection_id}/items` endpoint) by
+advertising the relevant conformance class. 
 
 When used in a POST request with `Content-Type: application/json`, this adds an attribute `fields` with 
 an object value to the core JSON search request body. The `fields` object contains two attributes with string array 

@@ -9,6 +9,9 @@
   - [Extensions](#extensions)
     - [Transaction](#transaction)
     - [Items and Collections API Version Extension](#items-and-collections-api-version-extension)
+    - [Fields](#fields)
+    - [Sort](#sort)
+    - [Context](#context)
 
 *based on [**OGC API - Features - Part 1: Core**](https://www.ogc.org/standards/ogcapi-features)*
 
@@ -35,7 +38,7 @@ with OAFeat clients. But specialized STAC clients will likely display results be
 
 ## Link Relations
 
-The following Link relations should exist in the Landing Page (root).
+The following Link relations shall exist in the Landing Page (root).
 
 | **rel**        | **href**             | **From**       | **Description**                                                                                                                                                         |
 | -------------- | -------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -45,7 +48,7 @@ The following Link relations should exist in the Landing Page (root).
 | `service-desc` | `/api` (recommended) | OAFeat OpenAPI | The OpenAPI service description. Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API |
 | `data`         | `/collections`       | OAFeat         | List of Collections                                                                                                                                                     |
 
-Additionally, a `service-doc` endpoint is recommended.
+Additionally, a `service-doc` endpoint is recommended, but not required.
 
 | **rel**       | **href**                  | **From**       | **Description**                                                                                                         |
 | ------------- | ------------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------- |
@@ -261,3 +264,39 @@ POST, PUT, PATCH, and DELETE methods. The full description of how this extension
 The core API only supports semantics for creating and accessing a single version of an Item or Collection.
 The Version Extension defines the API resources and semantics for creating and accessing versioned records.
 It is the STAC API equivalent of [OGC API - Features - Part 4: Create, Replace, Update and Delete](https://docs.ogc.org/DRAFTS/20-002.html).
+
+### Fields
+
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features#fields>
+- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
+- **Definition**: [STAC API - Fields Fragment](../fragments/fields/)
+
+By default, the Items resource `/collections/{collection_id}/items` returns all attributes 
+of each Item, as there is no way to specify 
+exactly those attributes that should be returned. The Fields extension to STAC Features adds new functionality that 
+allows the client to suggest to the server which Item attributes should be included or excluded in the response, 
+through the use of a `fields` parameter. The full description of how this extension works can be found in the 
+[fields fragment](../fragments/fields/). 
+
+### Sort
+
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features#sort>
+- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
+- **Definition**: [STAC API - Sort Fragment](../fragments/sort/)
+
+By default, the Items resource `/collections/{collection_id}/items` returns results in no specified order. Whatever order the results are in 
+is up to the implementor, and will typically default to an arbitrary order that is fastest for the underlying data store 
+to retrieve results. This extension adds a new parameter, `sortby`, that lets a user specify a comma separated list of
+field names to sort by, with an indication of direction. It uses '+' and
+'-' to indicate sort order of the list of fields. The full description of the semantics
+of this extension can be found in the [sort fragment](../fragments/sort).
+
+### Context
+
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features#context>
+- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
+- **Definition**: [STAC API - Context Fragment](../fragments/context/)
+
+This extension is intended to augment the core ItemCollection responses from the Items resource `/collections/{collection_id}/items`  with a
+JSON object called `context` that includes the number of items `matched`, `returned` and the `limit` requested.
+The full description and examples of this are found in the [context fragment](../fragments/context).
