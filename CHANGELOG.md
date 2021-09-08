@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- The required Link Relations and endpoints for each conformance class now use the wording of 'shall' 
+  instead of 'should'. While this technically changes the semantics, it was generally understood 
+  previously the semantics were those of 'shall' (must).
+
 ### Deprecated
 
 ### Removed

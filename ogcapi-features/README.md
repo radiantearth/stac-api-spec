@@ -35,7 +35,7 @@ with OAFeat clients. But specialized STAC clients will likely display results be
 
 ## Link Relations
 
-The following Link relations should exist in the Landing Page (root).
+The following Link relations shall exist in the Landing Page (root).
 
 | **rel**        | **href**             | **From**       | **Description**                                                                                                                                                         |
 | -------------- | -------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -45,7 +45,7 @@ The following Link relations should exist in the Landing Page (root).
 | `service-desc` | `/api` (recommended) | OAFeat OpenAPI | The OpenAPI service description. Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API |
 | `data`         | `/collections`       | OAFeat         | List of Collections                                                                                                                                                     |
 
-Additionally, a `service-doc` endpoint is recommended.
+Additionally, a `service-doc` endpoint is recommended, but not required.
 
 | **rel**       | **href**                  | **From**       | **Description**                                                                                                         |
 | ------------- | ------------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------- |
