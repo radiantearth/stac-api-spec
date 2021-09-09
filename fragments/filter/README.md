@@ -233,7 +233,7 @@ not compliant with this extension.
 The Queryables mechanism allows a client to discover what variable terms are available for use when writing filter
 expressions.  These variables can be defined per-collection, and the intersection of these variables over all collections is what 
 is available for filtering when there are no collection restrictions. These queryables are the only variables that may be used 
-in filter expressions, and if any variable is used in expression that is not defined as a queryable and error should be 
+in filter expressions, and if any variable is used in expression that is not defined as a queryable and error must be 
 returned according to OAFeat Part 3. It is recognized that this is a severe restriction in STAC APIs that have highly variable 
 and dynamic content. It is possible that this will change in the OAFeat Part 3 spec, see 
 this [issue](https://github.com/opengeospatial/ogcapi-features/issues/582). For now, implementers may choose to allow 
@@ -341,7 +341,7 @@ supported, the server must return a 400 error if `filter-lang=cql-text`.
 
 ## Interaction with Endpoints
 
-In an implementation that supports several operator classes, the Landing Page (`/`) should return a document including 
+In an implementation that supports several operator classes, the Landing Page (`/`) must return a document including 
 at least these values:
 
 ```json

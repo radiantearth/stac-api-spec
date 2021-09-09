@@ -30,7 +30,7 @@ for the latest discussion.*
 ## HTTP GET (or POST Form)
 
 When calling a relevant endpoint using GET (or POST with `Content-Type: application/x-www-form-urlencoded` or 
-`Content-Type: multipart/form-data)`, a single parameter `sortby` with a comma-separated list of item field names should 
+`Content-Type: multipart/form-data)`, a single parameter `sortby` with a comma-separated list of item field names must 
 be provided. The field names may be prefixed with either "+" for ascending, or "-" for descending.  If no sign is 
 provided before the field name, it will be assumed to be "+". 
 

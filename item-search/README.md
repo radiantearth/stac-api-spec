@@ -2,6 +2,7 @@
 
 - [STAC API - Item Search](#stac-api---item-search)
   - [Link Relations](#link-relations)
+  - [Endpoints](#endpoints)
   - [Query Parameters and Fields](#query-parameters-and-fields)
     - [Query Examples](#query-examples)
     - [Query Parameter Table](#query-parameter-table)
@@ -62,7 +63,7 @@ A `service-doc` endpoint is recommended, but not required.
 It is **required** to add a Link to the root endpoint (`/`) with the `rel` type set to `search`
 that refers to the search endpoint in the `href` property,
 with a `type` of `application/geo+json` and a `method` of `GET`.
-This link should look like:
+This link will look like:
 
 ```json
 {
@@ -74,14 +75,22 @@ This link should look like:
 }
 ```
 
-Implementations that support `POST` should add a second link with the same structure but with a `method` of `POST`. 
+Implementations that support `POST` should add a second link with the same structure but with a `method` of `POST`.
 
+## Endpoints
+
+| Endpoint | Returns | Description |
+| -------- | ------- | ----------- |
+| `/`                  | Catalog         | Landing Page and root Catalog |
+| `/api` (recommended) | OAFeat OpenAPI  | The OpenAPI service description |
+| `/search`            | Item Collection | Search endpoint      |
+ 
 ## Query Parameters and Fields
 
 The following list of parameters is used to narrow search queries. They can all be represented as query 
 string parameters in a GET request, or as JSON entity fields in a POST request. For filters that represent 
-a set of values, query parameters should use comma-separated string values with no enclosing brackets 
-(\[ or \]) and no whitespace between values, and JSON entity attributes should use JSON Arrays. 
+a set of values, query parameters must use comma-separated string values with no enclosing brackets 
+(\[ or \]) and no whitespace between values, and JSON entity attributes must use JSON Arrays. 
 
 ### Query Examples
 
@@ -115,8 +124,8 @@ The core parameters for STAC search are defined by OAFeat, and STAC adds a few p
 
 See [examples](examples.md) for some example requests.
 
-Only one of either **intersects** or **bbox** should be specified.  If both are specified, a 400 Bad Request response 
-should be returned. 
+Only one of either **intersects** or **bbox** may be specified.  If both are specified, a 400 Bad Request response 
+must be returned. 
 
 **datetime** The datetime parameter use the same allowed values as the 
 [OAF datetime](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_parameter_datetime) parameter. 
@@ -135,7 +144,7 @@ elevation 0.
 
 ## Response
 
-The response to a request (GET or POST) to the search endpoint should always be an 
+The response to a request (GET or POST) to the search endpoint must always be an 
 [ItemCollection](../fragments/itemcollection/README.md) object - a valid [GeoJSON 
 FeatureCollection](https://tools.ietf.org/html/rfc7946#section-3.3) that consists entirely of STAC 
 [Item](../stac-spec/item-spec/item-spec.md) objects. 
@@ -168,7 +177,7 @@ The href may contain any arbitrary URL parameter:
 
 OAFeat does not support POST requests for searches, however the STAC API spec does. Hypermedia links are not designed 
 for anything other than GET requests, so providing a next link for a POST search request becomes problematic. STAC has 
-decided to extend the `link` object to support additional fields that provide hints to the client as to how it should 
+decided to extend the `link` object to support additional fields that provide hints to the client as to how it must 
 execute a subsequent request for the next page of results.
 
 The following fields have been added to the `link` object specification for the API spec:
@@ -176,9 +185,9 @@ The following fields have been added to the `link` object specification for the 
 | Parameter | Type    | Description                                                                                                                                                    |
 | --------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | method    | string  | The HTTP method of the request, usually `GET` or `POST`. Defaults to `GET`                                                                                     |
-| headers   | object  | A dictionary of header values that should be included in the next request                                                                                      |
-| body      | object  | A JSON object containing fields/values that should be included in the body of the next request                                                                 |
-| merge     | boolean | If `true`, the headers/body fields in the `next` link should be merged into the original request and be sent combined in the next request. Defaults to `false` |
+| headers   | object  | A dictionary of header values that must be included in the next request                                                                                      |
+| body      | object  | A JSON object containing fields/values that must be included in the body of the next request                                                                 |
+| merge     | boolean | If `true`, the headers/body fields in the `next` link must be merged into the original request and be sent combined in the next request. Defaults to `false` |
 
 The implementor has the freedom to decide exactly how to apply these extended fields for their particular pagination 
 mechanism.  The same freedom that exists for GET requests, where the actual URL parameter used to defined the next page 
@@ -188,7 +197,7 @@ of their choosing. Pagination can be provided solely through header values, sole
 combination.  
 
 To avoid returning the entire original request body in a POST response which may be arbitrarily large, the  `merge` 
-property can be specified. This indicates that the client should send the same post body that it sent in the original 
+property can be specified. This indicates that the client must send the same post body that it sent in the original 
 request, but with the specified headers/body values merged in. This allows servers to indicate what needs to change 
 to get to the next page without mirroring the entire query structure back to the client.
 
