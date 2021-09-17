@@ -10,10 +10,8 @@ for fin in $FNAMES; do
     fout=./build/$fin
     mkdir -p ${fout%/*}
     openapi bundle --ext yaml --output $fout $fin
-    cp build/index.html ${fout%/*}/
+    cp build/redoc_index.html ${fout%/*}/index.html
 done
-
-cp build/core/openapi.yaml build/openapi.yaml
 
 # use swagger-combine
 #swagger-combine build/swagger-config.yaml --continueOnConflictingPaths -o build/openapi.yaml 
