@@ -69,11 +69,19 @@ the service supports. This are listed at the top of each extension description, 
   - <https://api.stacspec.org/v1.0.0-beta.4/item-search#fields>
   - <https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features#fields>
 - [Filter](item-search/README.md#filter)
-  - <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:filter>
-  - <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:simple-cql>
+  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/filter>
+  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-cql>
   - <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:item-search-filter>
-  - <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:cql-text>
-  - <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:cql-json>
+  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql-text>
+  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql-json>
+  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/advanced-comparison-operators>
+  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-spatial-operators>
+  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/spatial-operators>
+  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/temporal-operators>
+  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/functions>
+  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/arithmetic>
+  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/array-operators>
+  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/property-property>
 - [Context](item-search/README.md#context)
   - <https://api.stacspec.org/v1.0.0-beta.4/item-search#context>
   - <https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features#context>

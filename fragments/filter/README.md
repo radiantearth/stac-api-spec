@@ -2,20 +2,19 @@
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
 - **Conformance Classes:** 
-  - Filter: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:filter>
+  - Filter: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/filter>
   - Item Search Filter: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:item-search-filter>
-  - CQL Text: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:cql-text>
-  - CQL JSON: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:cql-json>
-  - Basic CQL: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:basic-cql>
-  - Basic Spatial Operators: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:basic-spatial-operators>
-  - Basic Temporal Operators: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:basic-temporal-operators>
-  - Enhanced Comparison Operators: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:enhanced-comparison-operators>
-  - Enhanced Spatial Operators: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:enhanced-spatial-operators>
-  - Enhanced Temporal Operators: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:enhanced-temporal-operators>
-  - Functions: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:functions>
-  - Arithmetic: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:arithmetic>
-  - Arrays: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:arrays>
-  - Queryable Second Operand: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:queryable-second-operand>
+  - CQL Text: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql-text>
+  - CQL JSON: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql-json>
+  - Basic CQL: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-cql>
+  - Advanced Comparison Operators: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/advanced-comparison-operators>
+  - Basic Spatial Operators: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-spatial-operators>
+  - Spatial Operators: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/spatial-operators>
+  - Temporal Operators: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/temporal-operators>
+  - Custom Functions: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/functions>
+  - Arithmetic Expressions: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/arithmetic>
+  - Array Operators: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/array-operators>
+  - Property-Property Comparisons: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/property-property>
 - **Extension [Maturity Classification](../../extensions.md#extension-maturity):** Pilot
 - **Dependents:**
   - [Item Search](../../item-search)
@@ -48,23 +47,29 @@
     - [Example 6: Temporal](#example-6-temporal)
       - [Example 6: ANYINTERACTS cql-text (GET)](#example-6-anyinteracts-cql-text-get)
       - [Example 6: ANYINTERACTS cql-json (POST)](#example-6-anyinteracts-cql-json-post)
-    - [Example 6: Spatial](#example-6-spatial)
-      - [Example 6: INTERSECTS cql-text (GET)](#example-6-intersects-cql-text-get)
-      - [Example 6: INTERSECTS cql-json (POST)](#example-6-intersects-cql-json-post)
+    - [Example 7: Spatial](#example-7-spatial)
+      - [Example 7: INTERSECTS cql-text (GET)](#example-7-intersects-cql-text-get)
+      - [Example 7: INTERSECTS cql-json (POST)](#example-7-intersects-cql-json-post)
+    - [Example 8: Spatial Disjunction](#example-8-spatial-disjunction)
+      - [Example 8: INTERSECTS cql-text (GET)](#example-8-intersects-cql-text-get)
+      - [Example 8: INTERSECTS cql-json (POST)](#example-8-intersects-cql-json-post)
+    - [Example 9: Using IS NULL](#example-9-using-is-null)
+      - [Example 9: cql-text (GET)](#example-9-cql-text-get)
+      - [Example 9: cql-json (POST)](#example-9-cql-json-post)
 
 ## Overview
 
 The Filter extension provides an expressive mechanism for searching based on Item attributes.
 
 This extension references behavior defined in the 
-[OGC API - Features - Part 3: Filtering and the Common Query Language (CQL)](https://portal.ogc.org/files/96288)
-specification. As of July 2021, this specification is in draft status. The only major anticipated change before final 
-is to the division of behavior among conformance classes, as described
-in the [Conformance Classes](#conformance-classes) section. While this makes implementing this spec somewhat of a moving
-target, implementers are encouraged to move ahead with support with the expectation that they will be able to precisely
-advertise behavior through conformance classes prior to STAC API 1.0.0 final. 
+[OGC API - Features - Part 3: Filtering and the Common Query Language (CQL2)](https://github.com/opengeospatial/ogcapi-features/tree/master/extensions/cql)
+specification. As of August 2021, this specification is in draft status. Several behaviors have changed since the 
+last published [draft](https://portal.ogc.org/files/96288), so this spec references the latest revision in the 
+[spec's GitHub repo](https://github.com/opengeospatial/ogcapi-features/tree/master/extensions/cql). There are no
+major anticipated changes, so implementers are encouraged to move ahead with implementation, and to simply be 
+aware that minor changes may need to be made in the future.
 
-OAFeat Part 3 CQL formally defines the syntax of "CQL2" as both a text format (cql-text) as an ABNF grammar 
+OAFeat Part 3 CQL2 formally defines the syntax of "CQL2" as both a text format (cql-text) as an ABNF grammar 
 (largely similar to the BNF grammar in the General Model for CQL) and a JSON format (cql-json) as a JSON Schema and 
 OpenAPI schema, and provides a precise natural 
 language description of the declarative semantics.  The CQL Text format has long-standing use within 
@@ -74,7 +79,7 @@ OGC CQL Text has been previously described in [OGC Filter Encoding](https://www.
 (including a BNF grammar in Annex B). The CQL JSON format is newly-defined, but also not
 expected to change before final.
 
-It should be noted that the "CQL" referred to here is "CQL2" defined in OGC API Features Part 3 CQL. This is a related, but 
+It should be noted that the "CQL" referred to here is "CQL2" defined in OGC API - Features - Part 3. This is a related, but 
 different language to the "classic" OGC CQL defined in the General Model.  CQL is also **not** referencing or related two 
 other "CQL" languages, 
 the [SRU (Search/Retrieve via URL) Contextual Query Language](https://www.loc.gov/standards/sru/cql/index.html) (formerly 
@@ -96,92 +101,80 @@ However, it does not contain a formalized way to filter based on arbitrary field
 no way to express the filter "item.properties.eo:cloud_cover is less than 10". It also does not have a way to logically combine
 multiple spatial or temporal filters.
 
-## Filter expressiveness 
+## Filter expressiveness
 
 This extension expands the capabilities of Item Search and the OAFeat Items resource with 
-[OAFeat Part 3 CQL](https://portal.ogc.org/files/96288) 
-by providing an expressive query language to construct more complex filter predicates. The operators are similar to 
-those provided by SQL. The Basic CQL conformance class requires the logical operators `AND`, `OR`, and `NOT`; 
-the comparison operators `=`, `<`, `<=`, `>`, `>=`; and the `IS NULL` operator. Other conformance classes add additional
-filtering capabilities.
+[OAFeat Part 3 CQL2](https://portal.ogc.org/files/96288) 
+by providing an expressive query language to construct more complex filter predicates using operators that are similar to 
+those provided by SQL. This extension also supports the Queryables mechanism that allows discovery of what Item fields can be used in 
+predicates.
 
-The `ANYINTERACTS` operator has effectively the same semantics as the `datetime` parameter
-in Item Search.
-
-CQL enables these types of queries:
+CQL enables more expressive queries than supported by STAC API Item Search. These include:
 - Use of Item Property values in predicates (e.g., `item.properties.eo:cloud_cover`), using comparison operators
-- Items whose `datetime` values are in the month of August of the years 2017-2021, using OR and ANYINTERACTS
+- Items whose `datetime` values are in the month of August of the years 2017-2021, using OR and datetime comparisons
 - Items whose `geometry` values intersect any one of several Polygons, using OR and INTERSECTS
 - Items whose `geometry` values intersect one Polygon, but do not intersect another one, using AND, NOT, and
   INTERSECTS
 
-This extension also supports the Queryables mechanism that allows discovery of what Item fields can be used in 
-predicates.
-
 ## Conformance Classes
 
-OAFeat CQL defines several conformance classes that allow implementers to create compositions of 
+OAFeat Part 3 CQL defines several conformance classes that allow implementers to create compositions of 
 functionality that support whatever expressiveness they need. This allows implementers to incrementally support CQL
 syntax, without needing to implement a huge spec all at once.  Some implementers choose not to incur the cost of 
 implementing functionality they do not need or may not be able to implement functionality that is not supported by 
 their underlying datastore, e.g., Elasticsearch does not support the spatial predicates required by the 
-Enhanced Spatial Operators conformance class.
+Spatial Operators conformance class, only the `intersects` operator in the Basic Spatial Operators class.
 
-The precise decomposition of the OAFeat conformance classes is still a work in progress 
-(see [ogcapi-features/issues/579](https://github.com/opengeospatial/ogcapi-features/issues/579)). 
-The STAC API Filter Extension reuses the definitions in OAFeat CQL, but divides them into different conformance classes
-that better fit the use cases of STAC API.  This extension uses conformance classes with a prefix of 
-`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:`.  We hope the conformance
-classes defined here and in OGC API Features Part 3 will re-align at some point but, for now, they do not.
+The precise decomposition of the OAFeat conformance classes is still a work in progress, but is being finalized
+rapidly (see [ogcapi-features/issues/579](https://github.com/opengeospatial/ogcapi-features/issues/579)). 
+The STAC API Filter Extension reuses the definitions and conformance classes in OAFeat CQL,
+adding only the Item Search Filter conformance class
+(`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:item-search-filter`) to bind 
+the CQL filter behavior to the Item Search resource.
 
 The implementation **must** support these conformance classes:
 
-- Filter (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:filter`) defines the Queryables mechanism and 
+- Filter (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/filter`) defines the Queryables mechanism and 
   parameters `filter-lang`, `filter-crs`, and `filter`.
-- Basic CQL (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:basic-cql`) defines the basic operations allowed in 
+- Basic CQL (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-cql`) defines the basic operations allowed in 
   the query language used for the `filter` parameter defined by Filter. This includes logical operators (`AND`, `OR`, `NOT`), 
-  comparison operators (`=`, `<`, `<=`, `>`, `>=`), and `IS NULL`.
+  comparison operators (`=`, `<>`, `<`, `<=`, `>`, `>=`), and `IS NULL`. The comparison operators are allowed against string, numeric, boolean,
+  and datetime types.
 - Item Search Filter (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:item-search-filter`) binds the Filter and 
   Basic CQL conformance classes to apply to the Item Search endpoint (`/search`).  This class is the correlate of the OAFeat CQL Features 
   Filter class that binds Filter and Basic CQL to the Features resource (`/collections/{cid}/items`).
 
-It is **recommended** that the implementation also support the Basic Spatial Operators and Basic Temporal Operators classes:
-
-- Basic Spatial Operators (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:basic-spatial-operators`)
-  defines the `INTERSECTS` predicate
-- Basic Temporal Operators: (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:basic-temporal-operators`)
-  defines the `ANYINTERACTS` predicate
-  
-Additionally, the implementation **must** support at least one of the "CQL Text" or "CQL JSON" conformance classes that define 
+The implementation **must** support at least one of the "CQL Text" or "CQL JSON" conformance classes that define 
 the CQL format used in the filter parameter:
 
-- CQL Text (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:cql-text`) defines that the CQL Text format is supported by Item Search.
-- CQL JSON (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:cql-json`) defines that the CQL JSON format is supported by Item Search
+- CQL Text (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql-text`) defines that the CQL Text format is supported by Item Search
+- CQL JSON (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql-json`) defines that the CQL JSON format is supported by Item Search
 
 If both are advertised as being supported, it is only required that both be supported for GET query parameters, and that 
 only that CQL JSON be supported for POST JSON requests.  It is recommended that clients use CQL Text in GET requests and 
 CQL JSON in POST requests. 
 
-The Filter Extension defines support for implementing the following conformance 
-classes. Implementation of these is often limited by the 
-operations supported by the implementation's datastore, for example, Elasticsearch does not support the spatial 
-operations required by the Enhanced Spatial Operators. If implemented for Item Search, the conformance class 
-URI should follow the same pattern relative to OAFeat CQL.
-
-- Enhanced Comparison Operators 
-  (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:enhanced-comparison-operators`) defines the `LIKE`, 
-  `BETWEEN`, and `IN` operators. It is **recommended** to implement this class.
-- Enhanced Spatial Operators 
-  (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:enhanced-spatial-operators`) defines the 
-  same operators as OAF Part 3 CQL Enhanced Spatial Operators.
-- Enhanced Temporal Operators 
-  (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:enhanced-temporal-operators`) defines the 
+For additional capabilities, the following classes can be implemented:
+- Advanced Comparison Operators 
+  (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/advanced-comparison-operators`) defines the `LIKE`, 
+  `BETWEEN`, and `IN` operators. Note: this conformance class does **not** require implementing the
+  `lower` and `upper` functions as defined in the latest OAFeat CQL spec, as these will soon be
+  removed from the corresponding OAFeat CQL conformance class.
+- Basic Spatial Operators (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-spatial-operators`) defines the `INTERSECTS` predicate.
+- Spatial Operators 
+  (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/spatial-operators`) defines the 
+  same operators as OAF Part 3 CQL Advanced Spatial Operators.
+- Temporal Operators 
+  (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/temporal-operators`) defines the 
   same operators as OAF Part 3 CQL Enhanced Temporal Operators.
-- Functions (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:functions`) defines the same operators as OAF Part 3 CQL Functions.
-- Arithmetic: (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:arithmetic`) defines the same operators as OAF Part 3 CQL Arithmetic.
-- Arrays: (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:arrays`) defines the same operators as OAF Part 3 CQL Arrays.
-- Queryable Second Operand: (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:queryable-second-operand`) allows the 
-  use of queryables (e.g., properties) in any position of a clause, not just in the first position. This allows 
+- Custom Functions (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/functions`) defines the
+  same operators as OAF Part 3 CQL Custom Functions.
+- Arithmetic Expressions: (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/arithmetic`) defines 
+  the same operators as OAF Part 3 CQL Arithmetic Expressions.
+- Array Operators: (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/array-operators`) 
+  defines the same operators as OAF Part 3 CQL Array Operators.
+- Property-Property Comparisons: (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/property-property`) allows the 
+  use of queryables (e.g., properties) in both positions of a clause, not just in the first position. This allows 
   predicates like `property1 == property2` be expressed, whereas the Basic CQL conformance class only requires
   comparisons against literal values.
 
@@ -195,10 +188,11 @@ to the Features resource is not supported, as POST is used by the
 
 It recommended that implementers start with fully implementing only a subset of functionality. A good place to start is 
 implementing only the Basic CQL conformance class of logical and comparison operators, defining a static Queryables 
-schema with no queryables advertised, and only implementing CQL Text. Following from that can be support for 
-INTERSECTS and ANYINTERACTS, defining a static Queryables schema with only the basic Item properties, and also 
+schema with no queryables advertised and the `additionalProperties` field set to `true`, and 
+only implementing CQL Text. Following from that can be support for 
+INTERSECTS, defining a static Queryables schema with only the basic Item properties, and 
 implementing CQL JSON. From there, other comparison operators can be implemented and a more 
-dynamic Queryables schema (if desired).
+dynamic Queryables schema.
 
 Formal definitions and grammars for CQL can be found here: 
 
@@ -230,16 +224,15 @@ not compliant with this extension.
 
 ## Queryables
 
-The Queryables mechanism allows a client to discover what variable terms are available for use when writing filter
-expressions.  These variables can be defined per-collection, and the intersection of these variables over all collections is what 
-is available for filtering when there are no collection restrictions. These queryables are the only variables that may be used 
-in filter expressions, and if any variable is used in expression that is not defined as a queryable and error must be 
+The Queryables mechanism allows a client to discover what terms are available for use when writing filter
+expressions.  These terms can be defined per-collection, and the intersection of these terms over all collections is what 
+is available for filtering when there are no collection restrictions. By default, these queryables are the only terms that may be used 
+in filter expressions, and if any term is used in expression that is not defined as a queryable and error must be 
 returned according to OAFeat Part 3. It is recognized that this is a severe restriction in STAC APIs that have highly variable 
-and dynamic content. It is possible that this will change in the OAFeat Part 3 spec, see 
-this [issue](https://github.com/opengeospatial/ogcapi-features/issues/582). For now, implementers may choose to allow 
-fully-qualified property 
-names not advertised in queryables (e.g., `properties.eo:cloud_cover`, in anticipation that there be some
-mechanism to explicitly allow or advertise this in the future.
+and dynamic content, so this behavior may be modified by setting the `additionalProperties` attribute in the
+queryables definition to `true`.  As such, any syntactically-valid term for a property will be accepted, and the
+matching semantics are such that, if an Item does not have an attribute by that name, the value is assumed to be
+`null`.  It is recommended to use fully-qualified property names (e.g., `properties.eo:cloud_cover`).
 
 Queryables are advertised via a JSON Schema document retrieved from the `/queryables` endpoint. This endpoint at the root 
 retrieves queryables that apply to all collections. When used as a subresource of the collection resource 
@@ -273,7 +266,8 @@ definitions for STAC Items should include at least the fields id, collection, ge
       "description" : "Datetime",
       "$ref": "https://schemas.stacspec.org/v1.0.0/item-spec/json-schema/datetime.json#/properties/datetime"
     }
-  }
+  },
+  "additionalProperties": true
 }
 ```
 
@@ -287,21 +281,21 @@ The Landing Page endpoint (`/`) will have a Link with rel `http://www.opengis.ne
 the endpoint `/queryables`. Additionally, each Collection resource will have a Link to the queryables resource for that 
 collection, e.g., `/collections/collection1/queryables`. 
 
-The queryables endpoint returns a JSON Schema describing the names and types variables that may be used in filter expressions. 
+The queryables endpoint returns a JSON Schema describing the names and types of terms that may be used in filter expressions. 
 This response is defined in JSON Schema because it is a well-specified typed schema, but it is not used for validating a JSON 
-document derived from it. This schema defines the variables that may be used in a CQL filter.
+document derived from it. This schema defines the terms that may be used in a CQL filter.
 
-These queryable variables are mapped by the service to filter Items. For example, the service may define a queryable with the 
+These queryable terms are mapped by the service to filter Items. For example, the service may define a queryable with the 
 name "eo:cloud_cover" that can be used in a CQL expression like `eo:cloud_cover <= 10`, with the semantics that only Items where the 
 `properties.eo:cloud_cover` value was <= 10 would match the filter. The server would then translate this into an appropriate 
 query for the data within its datastore.
 
 Queryables can be static or dynamically derived. For example, `cloud_cover` might be specified to have a value 0 to 100 or a field 
-may have a set of enumerated values dynamically determined by an aggreation at runtime.  This schema can be used by a UI or 
+may have a set of enumerated values dynamically determined by an aggregation at runtime.  This schema can be used by a UI or 
 interactive client to dynamically expose to the user the fields that are available for filtering, and provide a precise group 
-of options for the values of these variables.
+of options for the values of these terms.
 
-Queryables can also be used to advertise synthesized property values. The only requirement in CQL is that the property have a type 
+Queryables can also be used to advertise "synthesized" property values. The only requirement in CQL is that the property have a type 
 and evaluate to literal value of that type or NULL. For example, a filter like "Items must have an Asset with an eo:band with 
 the common_name of 'nir'" can be expressed. A Queryable `assets_bands` could be defined to have a type of array of string and 
 have the semantics that it contains all of `common_name` values across all assets and bands for an Item. This could then be 
@@ -321,7 +315,8 @@ in STAC API by the Filter Extension. In this case, the queryables endpoint (`/qu
   "title" : "Queryables for Example STAC API",
   "description" : "Queryable names for the example STAC API Item Search filter.",
   "properties" : {
-  }
+  },
+  "additionalProperties": true
 }
 ```
 
@@ -352,20 +347,19 @@ at least these values:
     "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30",
     "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson",
     
-    "http://www.opengis.net/spec/ogcapi_common-2/1.0/req/collections",
+    "http://www.opengis.net/spec/ogcapi_common-2/1.0/conf/collections",
 
     "http://api.stacspec.org/v1.0.0-beta.4/core",
     "http://api.stacspec.org/v1.0.0-beta.4/stac-search",
     "http://api.stacspec.org/v1.0.0-beta.4/stac-response",
 
-    "https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:filter",
-    "https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:features-filter",
-    "https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:basic-cql",
-    "https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:cql-text",
-    "https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:cql-json",
-    "https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:basic-spatial-operators",
-    "https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:basic-temporal-operators",
-    "https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:enhanced-comparison-operators"
+    "http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/filter",
+    "http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/features-filter",
+    "http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-cql",
+    "http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql-text",
+    "http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql-json",
+    "http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-spatial-operators",
+    "http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/advanced-comparison-operators"
 
   ],
   "links": [
@@ -428,7 +422,8 @@ The Queryables endpoint (`/queryables`) returns something like the following:
       "description" : "Asset eo:bands common names",
       "$ref": "https://stac-extensions.github.io/eo/v1.0.0/schema.json#/properties/eo:bands/common_name"    
     }
-  }
+  },
+  "additionalProperties": true
 }
 ```
 
@@ -451,10 +446,13 @@ These parameters/fields must be supported by the STAC Item Search endpoint and O
 
 ## Examples
 
-Note: the GET examples with query parameters are unescaped to make them easier to read. 
+Note: the GET examples with query parameters are unescaped to make them easier to read.
+
+The GET examples are assuming a call to `GET /search` and the POST examples are assuming a 
+call to `POST /search`.
 
 The parameter `filter-crs` always defaults to `http://www.opengis.net/def/crs/OGC/1.3/CRS84` for a STAC API, so is not shown 
-in any of these examples.
+in any of these examples.  
 
 ### Example 1
 
@@ -465,8 +463,8 @@ This example uses the queryables definition in (Interaction with Endpoints)(#int
 Note that `filter-lang` defaults to `cql-text` in this case. The parameter `filter-crs` defaults 
 to `http://www.opengis.net/def/crs/OGC/1.3/CRS84` for a STAC API.
 
-```javascript
-GET /search?filter=id='LC08_L1TP_060247_20180905_20180912_01_T1_L1TP' AND collection='landsat8_l1tp'
+```http
+filter=id='LC08_L1TP_060247_20180905_20180912_01_T1_L1TP' AND collection='landsat8_l1tp'
 ```
 
 #### Example 1: POST with cql-json
@@ -474,24 +472,12 @@ GET /search?filter=id='LC08_L1TP_060247_20180905_20180912_01_T1_L1TP' AND collec
 Note that `filter-lang` defaults to `cql-json` in this case. The parameter `filter-crs` defaults 
 to `http://www.opengis.net/def/crs/OGC/1.3/CRS84` for a STAC API.
 
-```javascript
-POST /search
+```json
 {
   "filter": {
-    "and": [{
-        "eq": [{
-            "property": "id"
-          },
-          "LC08_L1TP_060247_20180905_20180912_01_T1_L1TP"
-        ]
-      },
-      {
-        "eq": [{
-            "property": "collection"
-          },
-          "landsat8_l1tp"
-        ]
-      }
+    "and": [
+      { "eq": [ { "property": "id" }, "LC08_L1TP_060247_20180905_20180912_01_T1_L1TP" ] },
+      { "eq": [ { "property": "collection" }, "landsat8_l1tp" ] }
     ]
   }
 }
@@ -506,44 +492,28 @@ OGC API Features filters only operate against a single collection already.
 
 #### Example 2: GET with cql-text
 
-```javascript
-GET /search?filter=collection = 'landsat8_l1tp' 
+```http
+filter=collection = 'landsat8_l1tp'
   AND gsd <= 30
-  AND eo:cloud_cover <= 10 
-  AND datetime ANYINTERACTS 2021-04-08T04:39:23Z/2021-05-07T12:27:57Z 
-  AND INTERSECTS(geometry, POLYGON((43.5845 -79.5442, 43.6079 -79.4893, 43.5677 -79.4632, 43.6129 -79.3925, 43.6223 -79.3238, 43.6576 -79.3163, 43.7945 -79.1178, 43.8144 -79.1542, 43.8555 -79.1714, 43.7509 -79.6390, 43.5845 -79.5442)) 
+  AND eo:cloud_cover <= 10
+  AND datetime >= "2021-04-08T04:39:23Z"
+  AND datetime <= "2021-05-07T12:27:57Z"
+  AND INTERSECTS(geometry, POLYGON((43.5845 -79.5442, 43.6079 -79.4893, 43.5677 -79.4632, 43.6129 -79.3925, 43.6223 -79.3238, 43.6576 -79.3163, 43.7945 -79.1178, 43.8144 -79.1542, 43.8555 -79.1714, 43.7509 -79.6390, 43.5845 -79.5442))
 ```
 
 #### Example 2: POST with cql-json
 
-```javascript
-POST /search
+```json
 {
   "filter-lang": "cql-json",
   "filter": {
-    "and": [{
-        "eq": [{
-            "property": "collection"
-          },
-          "landsat8_l1tp"
-        ]
-      },
+    "and": [
+      { "eq": [ { "property": "collection" }, "landsat8_l1tp" ] },
+      { "lte": [ { "property": "eo:cloud_cover" }, "10" ] },
+      { "gte": [ { "property": "datetime" }, "2021-04-08T04:39:23Z" ] },
       {
-        "lte": [{
-            "property": "eo:cloud_cover"
-          },
-          "10"
-        ]
-      },
-      {
-        "anyinteracts": [{
-            "property": "datetime"
-          },
-          ["2021-04-08T04:39:23Z", "2021-05-07T12:27:57Z"]
-        ]
-      },
-      {
-        "intersects": [{
+        "intersects": [
+          {
             "property": "geometry"
           },
           {
@@ -601,14 +571,13 @@ This queryables JSON Schema is used in these examples:
 
 #### Example 3: GET with cql-text
 
-```javascript
-GET /search?filter=prop1 = prop2
+```http
+filter=prop1 = prop2
 ```
 
 #### Example 3: POST with cql-json
 
-```javascript
-POST /search
+```json
 { 
   "filter-lang": "cql-json",
   "filter": {
@@ -714,34 +683,21 @@ a tiny sliver of data.
 
 #### Example 4: AND cql-text (GET)
 
-```javascript
-/search?filter=sentinel:data_coverage > 50 AND eo:cloud_cover < 10 
+```http
+filter=sentinel:data_coverage > 50 AND eo:cloud_cover < 10 
 ```
 
 #### Example 4: AND cql-json (POST)
 
 ```json
 {
-    "filter": {
-        "and": [
-            {
-                "gt": [
-                    {
-                        "property": "sentinel:data_coverage"
-                    },
-                    50
-                ]
-            },
-            {
-                "lt": [
-                    {
-                        "property": "eo:cloud_cover"
-                    },
-                    10
-                ]
-            }
-        ]
-    }
+  "filter-lang": "cql-json",
+  "filter": {
+    "and": [
+      { "gt": [ { "property": "sentinel:data_coverage" }, 50 ] },
+      { "lt": [ { "property": "eo:cloud_cover" }, 10 ] }
+    ]
+  }
 }
 ```
 
@@ -754,30 +710,21 @@ This uses the same queryables as Example 4.
 
 #### Example 5: OR cql-text (GET)
 
-```javascript
-/search?filter=sentinel:data_coverage > 50 OR eo:cloud_cover < 10 
+```http
+filter=sentinel:data_coverage > 50 OR eo:cloud_cover < 10 
 ```
 
 #### Example 5: OR cql-json (POST)
 
 ```json
 {
+  "filter-lang": "cql-json",
   "filter": {
     "or": [
-            {
-               "gt": [
-                  { "property": "sentinel:data_coverage" },
-                  50
-               ]
-            },
-            {
-               "lt": [
-                  { "property": "eo:cloud_cover" },
-                  10
-               ]
-            }
-      ]
-    }
+      { "gt": [ { "property": "sentinel:data_coverage" }, 50 ] },
+      { "lt": [ { "property": "eo:cloud_cover" }, 10 ] }
+    ]
+  }
 }
 ```
 
@@ -785,56 +732,139 @@ This uses the same queryables as Example 4.
 
 This uses the same queryables as Example 4.
 
-The only temporal operator required is `ANYINTERACTS`, which follows the same semantics as the existing 
-`datetime` parameter. This is effectively that the datetime or interval operands have any overlap between them.
+The only temporal operator required is `ANYINTERACTS`. This is effectively that the datetime or interval operands 
+have any overlap between them.
 
 #### Example 6: ANYINTERACTS cql-text (GET)
 
-```javascript
-/search?filter=datetime ANYINTERACTS 2020-11-11
+```http
+filter=datetime ANYINTERACTS 2020-11-11T00:00:00Z/2020-11-12T00:00:00Z
 ```
 
 #### Example 6: ANYINTERACTS cql-json (POST)
 
 ```json
 {
+  "filter-lang": "cql-json",
   "filter": {
-      "anyinteracts": [
-        { "property": "datetime" },
-        "2020-11-11"
-      ]
+    "anyinteracts": [
+      { "property": "datetime" },
+      [ "2020-11-11T00:00:00Z", "2020-11-12T00:00:00Z"]
+    ]
   }
 }
 ```
 
-### Example 6: Spatial
+### Example 7: Spatial
 
-The only spatial operator that must be implemented is `INTERSECTS`. This has the same semantics as the one provided
-in the Item Search `intersects` parameter.  The `cql-text` format uses WKT geometries and the `cql-json` format uses 
-GeoJSON geometries.
+The only spatial operator that must be implemented for Basic Spatial Operators 
+is `INTERSECTS`. This has the same semantics as the one provided
+in the Item Search `intersects` parameter.  The `cql-text` format uses WKT geometries and the `cql-json`
+format uses GeoJSON geometries.
 
-#### Example 6: INTERSECTS cql-text (GET)
+#### Example 7: INTERSECTS cql-text (GET)
 
-```javascript
-/search?filter=INTERSECTS(geometry,POLYGON((-77.0824 38.7886,-77.0189 38.7886,-77.0189 38.8351,-77.0824 38.8351,-77.0824 38.7886)))
+```http
+filter=INTERSECTS(geometry,POLYGON((-77.0824 38.7886,-77.0189 38.7886,-77.0189 38.8351,-77.0824 38.8351,-77.0824 38.7886)))
 ```
 
-#### Example 6: INTERSECTS cql-json (POST)
+#### Example 7: INTERSECTS cql-json (POST)
 
 ```json
 {
-    "filter": {
-        "intersects": [
-                { "property": "geometry" } ,
-                {
-                   "type": "Polygon",
-                   "coordinates": [[
-                        [-77.0824, 38.7886], [-77.0189, 38.7886],
-                        [-77.0189, 38.8351], [-77.0824, 38.8351],
-                        [-77.0824, 38.7886]
-                    ]]
-                }
+  "filter-lang": "cql-json",
+  "filter": {
+    "intersects": [
+      { "property": "geometry" } ,
+      {
+        "type": "Polygon",
+        "coordinates": [[
+            [-77.0824, 38.7886], [-77.0189, 38.7886],
+            [-77.0189, 38.8351], [-77.0824, 38.8351],
+            [-77.0824, 38.7886]
+        ]]
+      }
+    ]
+  }
+}
+```
+
+### Example 8: Spatial Disjunction
+
+One limitation of the `intersects` parameter is that only a single geometry may be provided. While most
+GeoJSON geometries can be combined to form a composite (e.g., multiple Polygons can be combined to form a
+MultiPolygon), this is much easier to do in the query by combining `INTERSECTS` predicates with the `OR`
+logical operator.
+
+#### Example 8: INTERSECTS cql-text (GET)
+
+```http
+filter=INTERSECTS(geometry,POLYGON((-77.0824 38.7886,-77.0189 38.7886,-77.0189 38.8351,-77.0824 38.8351,-77.0824 38.7886))) OR INTERSECTS(geometry,POLYGON((-79.0935 38.7886,-79.0290 38.7886,-79.0290 38.8351,-79.0935 38.8351,-79.0935 38.7886)))
+```
+
+#### Example 8: INTERSECTS cql-json (POST)
+
+```json
+{
+  "filter": { 
+    "or" : [
+      "intersects": [
+        { "property": "geometry" } ,
+        {
+          "type": "Polygon",
+          "coordinates": [[
+            [-77.0824, 38.7886], [-77.0189, 38.7886],
+            [-77.0189, 38.8351], [-77.0824, 38.8351],
+            [-77.0824, 38.7886]
+          ]]
+        }
+      ],
+      "intersects": [
+        { "property": "geometry" } ,
+        {
+          "type": "Polygon",
+          "coordinates": [[
+            [-79.0935, 38.7886], [-79.0290, 38.7886],
+            [-79.0290, 38.8351], [-79.0935, 38.8351],
+            [-79.0935, 38.7886]
+          ]]
+        }
+      ]
+    ]
+  }        
+}
+```
+
+### Example 9: Using IS NULL
+
+One of the main use cases for STAC API is doing cross-collection query. Commonly, this means that items have
+different sets of properties. For example, a collection of Sentinel 2 data may have a property
+`sentinel:data_coverage` and a collection of Landsat 8 data may have a corresponding property
+`landsat:coverage_percent`, both representing what percentage of a given gridded scene actually contains
+data.  However, we many also want to also include in our result items that do not have a value defined for
+either of those properties. 
+
+#### Example 9: cql-text (GET)
+
+```http
+filter=sentinel:data_coverage > 50 OR landsat:coverage_percent < 10 OR (sentinel:data_coverage IS NULL AND landsat:coverage_percent IS NULL)
+```
+
+#### Example 9: cql-json (POST)
+
+```json
+{
+  "filter": {
+    "or": [
+      { "gte": [ { "property": "sentinel:data_coverage" }, 50 ] },
+      { "gte": [ { "property": "landsat:coverage_percent" }, 50 ] },
+      {
+        "and": [
+          { "isNull": { "property": "sentinel:data_coverage" } },
+          { "isNull": { "property": "landsat:coverage_percent" } }
         ]
-    },        
+      }
+    ]
+  }
 }
 ```

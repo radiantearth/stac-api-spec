@@ -70,11 +70,11 @@ RFC 3339 datetime or an interval) is:
    language standard libraries do not parse ISO8601 datetimes correctly, for example, the built-in
    Python datetime library does not handle `Z` as a timezone.
 
-Below are a few examples of valid RFC 3339 datetimes. Note the uses of fractional seconds,
-the use of `.` as the fractional seconds separator, Z or z as a timezone,
-positive and negative arbitrary offset timezones, and T or t as a separator between date and
-time. While the RFC 3339 spec does not define the required number of fractional seconds, 
-STAC API only requires up to 9 digits be supported.
+Below are a few examples of valid RFC 3339 datetimes. Note the uses of fractional seconds, the use of `.` 
+as the fractional seconds separator, Z (recommended) or z as a timezone, 
+positive and negative arbitrary offset timezones, and T (recommended) or t as a separator between date and time. While 
+the RFC 3339 spec does not define the required number of fractional seconds, STAC API only requires up to 
+9 digits be supported.
 
 - 1990-12-31T23:59:59Z (no fractional seconds, Z timezone)
 - 1990-12-31T23:59:23.123Z (fractional seconds, Z timezone)

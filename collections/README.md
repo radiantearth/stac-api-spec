@@ -1,6 +1,7 @@
 # STAC API - Collections
 
 - [STAC API - Collections](#stac-api---collections)
+  - [Link Relations](#link-relations)
   - [Endpoints](#endpoints)
   - [Example](#example)
 
@@ -19,6 +20,8 @@ Data](http://docs.opengeospatial.org/DRAFTS/20-024.html) as the [Collections req
 class](http://docs.opengeospatial.org/DRAFTS/20-024.html#rc_collections-section). Once the Common version is released we will 
 aim to align with it. But it still seems to be in flux.*
 
+## Link Relations
+
 The following Link relations shall exist in the Landing Page (root).
 
 | **rel**        | **href**             | **From**       | **Description**                                                                                                                                                         |
@@ -26,15 +29,15 @@ The following Link relations shall exist in the Landing Page (root).
 | `root`         | `/`                  | STAC Core      | The root URI                                                                                                                                                            |
 | `self`         | `/`                  | OAFeat         | Self reference, same as root URI                                                                                                                                        |
 | `service-desc` | `/api` | OAFeat OpenAPI | The OpenAPI service description. Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API. The path for this endpoint is only recommended to be `/api`, but may be another path. |
-| `data`         | `/collections`       | OAFeat         | List of Collections                                                                                                                                                     |
-A `service-doc` endpoint is recommended, but not required.
+| `data`         | `/collections`       | OAFeat         | List of Collections   |
 
+A `service-doc` endpoint is recommended, but not required.
 
 | **rel**       | **href**                  | **From**       | **Description**  |
 | ------------- | ------------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------- |
 | `service-doc` | `/api.html` | OAFeat OpenAPI | An HTML service description.  Uses the `text/html` media type to refer to a human-consumable description of the service. The path for this endpoint is only recommended to be `/api.html`, but may be another path. |
 
-Additionally, these relations may exist:
+Additionally, `child` relations may exist to individual catalogs and collections.
 
 | **rel**        | **href**             | **From**       | **Description**                                                                                                                                                         |
 | -------------- | -------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
