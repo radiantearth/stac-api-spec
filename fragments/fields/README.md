@@ -38,9 +38,9 @@ polygons can be very large when reprojected to EPSG:4326, as in the case of a hi
 Implementations are also not required to implement semantics for nested values whereby one can include an object, but
 exclude attributes of that object, e.g., include `properties` but exclude `properties.datetime`.
 
-No error should be returned if a specified field has no value for it in the catalog. For example, if the attribute 
+No error must be returned if a specified field has no value for it in the catalog. For example, if the attribute 
 "properties.eo:cloud_cover" is specified but there is no cloud cover value for an Item or the API does not even 
-support the EO Extension, a successful HTTP response should be returned and the Item entities will not contain that 
+support the EO Extension, a successful HTTP response must be returned and the Item entities will not contain that 
 attribute. 
 
 If no `fields` are specified, the response is **must** be a valid [ItemCollection](../itemcollection/README.md). If a client excludes
@@ -48,7 +48,7 @@ attributes that are required in a STAC Item, the server may return an invalid ST
 and `geometry` are excluded, the entity will not even be a valid GeoJSON Feature, or if `bbox` is excluded then the entity 
 will not be a valid STAC Item.
 
-Implementations may return attributes not specified, e.g., id, but should avoid anything other than a minimal entity 
+Implementations may return attributes not specified, e.g., id, but must avoid anything other than a minimal entity 
 representation. 
 
 ## Include/Exclude Semantics 
@@ -63,7 +63,7 @@ of default properties attributes should be kept to a minimum.
 the `include` attributes (set difference operation).  This will result in an entity that is not a valid Item if any 
 of the excluded attributes are in the default set of attributes.
 4. If both `include` and `exclude` attributes are specified, semantics are that a field must be included and **not** 
-excluded.  E.g., if `properties` is included and `properties.datetime` is excluded, then `datetime` should not appear 
+excluded.  E.g., if `properties` is included and `properties.datetime` is excluded, then `datetime` must not appear 
 in the attributes of `properties`.
 
 ## Examples
