@@ -72,7 +72,7 @@ RFC 3339 datetime or an interval) is:
 
 Below are a few examples of valid RFC 3339 datetimes. Note the uses of fractional seconds, the use of `.` 
 as the fractional seconds separator, Z (recommended) or z as a timezone, 
-positive and negative arbitrary offset timezones, and T or t as a separator between date and time. While 
+positive and negative arbitrary offset timezones, and T (recommended) or t as a separator between date and time. While 
 the RFC 3339 spec does not define the required number of fractional seconds, STAC API only requires up to 
 9 digits be supported.
 
