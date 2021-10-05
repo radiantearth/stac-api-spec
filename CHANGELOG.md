@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support binding Sort, Fields, and Context Extensions to STAC Features items resource
   endpoint (`/collections/{collection_id}/items`)
 - In Collections, added `canonical` rel type, added `/` and `/api` to list of endpoints
-- In Item Search, added Endpoint table
+- In Item Search, added endpoint table
 
 ### Changed
 
