@@ -45,14 +45,14 @@ The following Link relations shall exist in the Landing Page (root).
 | `root`         | `/`                  | STAC Core      | The root URI                                                                                                                                                            |
 | `self`         | `/`                  | OAFeat         | Self reference, same as root URI                                                                                                                                        |
 | `conformance`  | `/conformance`       | OAFeat         | Conformance URI                                                                                                                                                         |
-| `service-desc` | `/api` (recommended) | OAFeat OpenAPI | The OpenAPI service description. Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API |
+| `service-desc` | `/api` | OAFeat OpenAPI | The OpenAPI service description. Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API. The path for this endpoint is only recommended to be `/api`, but may be another path. |
 | `data`         | `/collections`       | OAFeat         | List of Collections                                                                                                                                                     |
 
 Additionally, a `service-doc` endpoint is recommended, but not required.
 
 | **rel**       | **href**                  | **From**       | **Description**                                                                                                         |
 | ------------- | ------------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `service-doc` | `/api.html` (recommended) | OAFeat OpenAPI | An HTML service description.  Uses the `text/html` media type to refer to a human-consumable description of the service |
+| `service-doc` | `/api.html` | OAFeat OpenAPI | An HTML service description.  Uses the `text/html` media type to refer to a human-consumable description of the service. The path for this endpoint is only recommended to be `/api`, but may be another path. |
 
 ## Endpoints
 
@@ -62,12 +62,12 @@ The core OGC API - Features endpoints are shown below, with details provided in 
 | Endpoint                                        | Returns                                                 | Description                                                                                                                                |
 | ----------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | `/`                                             | [Catalog](../stac-spec/catalog-spec/README.md)          | Landing page, links to API capabilities                                                                                                    |
+| `/api`                                          | OpenAPI 3.0 JSON                                        | Returns an OpenAPI description of the service from the `service-desc` link `rel`. The path for this endpoint is only recommended to be `/api`, but may be another path. |
 | `/conformance`                                  | JSON                                                    | Info about standards to which the API conforms                                                                                             |
 | `/collections`                                  | JSON                                                    | Object containing an array of Collection objects in the Catalog, and Link relations                                                        |
 | `/collections/{collectionId}`                   | [Collection](../stac-spec/collection-spec/README.md)    | Returns single Collection JSON                                                                                                             |
 | `/collections/{collectionId}/items`             | [ItemCollection](../fragments/itemcollection/README.md) | GeoJSON FeatureCollection-conformant entity of Item objects in collection                                                                  |
 | `/collections/{collectionId}/items/{featureId}` | [Item](../stac-spec/item-spec/README.md)                | Returns single Item (GeoJSON Feature)                                                                                                      |
-| `/api`                                          | OpenAPI 3.0 JSON                                        | Returns an OpenAPI description of the service from the `service-desc` link `rel` - not required to be `/api`, but the document is required |
 
 The OGC API - Features is a standard API that represents collections of geospatial data. It defines a RESTful interface 
 to query geospatial data, with GeoJSON as a main return type. With OAFeat you can return any `Feature`, which is a geometry 
@@ -92,7 +92,7 @@ is outside the scope of STAC API, as the [STAC Item](../stac-spec/item-spec/item
 specified in GeoJSON.
 
 A typical OAFeat will have multiple collections. Simple search for items within a collection can be done
-with the resource endpoint `GET /collections/{collectionId}/items`. This endpoint should be exposed via a 
+with the resource endpoint `GET /collections/{collectionId}/items`. This endpoint must be exposed via a 
 link in the individual collection's endpoint with `rel=items`, as shown in the 
 [Example Landing Page diagram](../overview.md#example-landing-page). Note that this relation is `items`, which is
 distinct from the `item` relation defined in STAC for linking to a single Item. The part of the API implementing OAFeat will usually not use 

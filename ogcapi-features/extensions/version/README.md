@@ -37,8 +37,8 @@ list of links to all versions available for an item.
 
 ## Version ID
 
-Version ID is a unique identifier for a version of an item or collection.
-This extension remains agnostic about what the identifier should like.
+Version ID is a unique identifier for a version of an Item or Collection.
+This extension remains agnostic about what the identifier should be.
 There are many options for a versioning schema including:
 - md5 hash of the record
 - datetime epoch

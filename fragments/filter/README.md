@@ -227,7 +227,7 @@ not compliant with this extension.
 The Queryables mechanism allows a client to discover what terms are available for use when writing filter
 expressions.  These terms can be defined per-collection, and the intersection of these terms over all collections is what 
 is available for filtering when there are no collection restrictions. By default, these queryables are the only terms that may be used 
-in filter expressions, and if any term is used in expression that is not defined as a queryable and error should be 
+in filter expressions, and if any term is used in expression that is not defined as a queryable and error must be 
 returned according to OAFeat Part 3. It is recognized that this is a severe restriction in STAC APIs that have highly variable 
 and dynamic content, so this behavior may be modified by setting the `additionalProperties` attribute in the
 queryables definition to `true`.  As such, any syntactically-valid term for a property will be accepted, and the
@@ -336,7 +336,7 @@ supported, the server must return a 400 error if `filter-lang=cql-text`.
 
 ## Interaction with Endpoints
 
-In an implementation that supports several operator classes, the Landing Page (`/`) should return a document including 
+In an implementation that supports several operator classes, the Landing Page (`/`) must return a document including 
 at least these values:
 
 ```json
