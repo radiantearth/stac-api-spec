@@ -291,11 +291,11 @@ name "eo:cloud_cover" that can be used in a CQL expression like `eo:cloud_cover 
 query for the data within its datastore.
 
 Queryables can be static or dynamically derived. For example, `cloud_cover` might be specified to have a value 0 to 100 or a field 
-may have a set of enumerated values dynamically determined by an aggreation at runtime.  This schema can be used by a UI or 
+may have a set of enumerated values dynamically determined by an aggregation at runtime.  This schema can be used by a UI or 
 interactive client to dynamically expose to the user the fields that are available for filtering, and provide a precise group 
 of options for the values of these terms.
 
-Queryables can also be used to advertise synthesized property values. The only requirement in CQL is that the property have a type 
+Queryables can also be used to advertise "synthesized" property values. The only requirement in CQL is that the property have a type 
 and evaluate to literal value of that type or NULL. For example, a filter like "Items must have an Asset with an eo:band with 
 the common_name of 'nir'" can be expressed. A Queryable `assets_bands` could be defined to have a type of array of string and 
 have the semantics that it contains all of `common_name` values across all assets and bands for an Item. This could then be 
@@ -446,10 +446,13 @@ These parameters/fields must be supported by the STAC Item Search endpoint and O
 
 ## Examples
 
-Note: the GET examples with query parameters are unescaped to make them easier to read. 
+Note: the GET examples with query parameters are unescaped to make them easier to read.
+
+The GET examples are assuming a call to `GET /search` and the POST examples are assuming a 
+call to `POST /search`.
 
 The parameter `filter-crs` always defaults to `http://www.opengis.net/def/crs/OGC/1.3/CRS84` for a STAC API, so is not shown 
-in any of these examples.
+in any of these examples.  
 
 ### Example 1
 
@@ -460,8 +463,8 @@ This example uses the queryables definition in (Interaction with Endpoints)(#int
 Note that `filter-lang` defaults to `cql-text` in this case. The parameter `filter-crs` defaults 
 to `http://www.opengis.net/def/crs/OGC/1.3/CRS84` for a STAC API.
 
-```javascript
-GET /search?filter=id='LC08_L1TP_060247_20180905_20180912_01_T1_L1TP' AND collection='landsat8_l1tp'
+```
+filter=id='LC08_L1TP_060247_20180905_20180912_01_T1_L1TP' AND collection='landsat8_l1tp'
 ```
 
 #### Example 1: POST with cql-json
@@ -469,8 +472,7 @@ GET /search?filter=id='LC08_L1TP_060247_20180905_20180912_01_T1_L1TP' AND collec
 Note that `filter-lang` defaults to `cql-json` in this case. The parameter `filter-crs` defaults 
 to `http://www.opengis.net/def/crs/OGC/1.3/CRS84` for a STAC API.
 
-```javascript
-POST /search
+```json
 {
   "filter": {
     "and": [
@@ -490,8 +492,8 @@ OGC API Features filters only operate against a single collection already.
 
 #### Example 2: GET with cql-text
 
-```javascript
-GET /search?filter=collection = 'landsat8_l1tp'
+```
+filter=collection = 'landsat8_l1tp'
   AND gsd <= 30
   AND eo:cloud_cover <= 10
   AND datetime >= "2021-04-08T04:39:23Z"
@@ -501,8 +503,7 @@ GET /search?filter=collection = 'landsat8_l1tp'
 
 #### Example 2: POST with cql-json
 
-```javascript
-POST /search
+```json
 {
   "filter-lang": "cql-json",
   "filter": {
@@ -570,14 +571,13 @@ This queryables JSON Schema is used in these examples:
 
 #### Example 3: GET with cql-text
 
-```javascript
-GET /search?filter=prop1 = prop2
+```
+filter=prop1 = prop2
 ```
 
 #### Example 3: POST with cql-json
 
-```javascript
-POST /search
+```json
 { 
   "filter-lang": "cql-json",
   "filter": {
@@ -683,8 +683,8 @@ a tiny sliver of data.
 
 #### Example 4: AND cql-text (GET)
 
-```javascript
-/search?filter=sentinel:data_coverage > 50 AND eo:cloud_cover < 10 
+```
+filter=sentinel:data_coverage > 50 AND eo:cloud_cover < 10 
 ```
 
 #### Example 4: AND cql-json (POST)
@@ -710,8 +710,8 @@ This uses the same queryables as Example 4.
 
 #### Example 5: OR cql-text (GET)
 
-```javascript
-/search?filter=sentinel:data_coverage > 50 OR eo:cloud_cover < 10 
+```
+filter=sentinel:data_coverage > 50 OR eo:cloud_cover < 10 
 ```
 
 #### Example 5: OR cql-json (POST)
@@ -737,8 +737,8 @@ have any overlap between them.
 
 #### Example 6: ANYINTERACTS cql-text (GET)
 
-```javascript
-/search?filter=datetime ANYINTERACTS 2020-11-11T00:00:00Z/2020-11-12T00:00:00Z
+```
+filter=datetime ANYINTERACTS 2020-11-11T00:00:00Z/2020-11-12T00:00:00Z
 ```
 
 #### Example 6: ANYINTERACTS cql-json (POST)
@@ -764,8 +764,8 @@ format uses GeoJSON geometries.
 
 #### Example 7: INTERSECTS cql-text (GET)
 
-```javascript
-/search?filter=INTERSECTS(geometry,POLYGON((-77.0824 38.7886,-77.0189 38.7886,-77.0189 38.8351,-77.0824 38.8351,-77.0824 38.7886)))
+```
+filter=INTERSECTS(geometry,POLYGON((-77.0824 38.7886,-77.0189 38.7886,-77.0189 38.8351,-77.0824 38.8351,-77.0824 38.7886)))
 ```
 
 #### Example 7: INTERSECTS cql-json (POST)
@@ -798,8 +798,8 @@ logical operator.
 
 #### Example 8: INTERSECTS cql-text (GET)
 
-```javascript
-/search?filter=INTERSECTS(geometry,POLYGON((-77.0824 38.7886,-77.0189 38.7886,-77.0189 38.8351,-77.0824 38.8351,-77.0824 38.7886))) OR INTERSECTS(geometry,POLYGON((-79.0935 38.7886,-79.0290 38.7886,-79.0290 38.8351,-79.0935 38.8351,-79.0935 38.7886)))
+```
+filter=INTERSECTS(geometry,POLYGON((-77.0824 38.7886,-77.0189 38.7886,-77.0189 38.8351,-77.0824 38.8351,-77.0824 38.7886))) OR INTERSECTS(geometry,POLYGON((-79.0935 38.7886,-79.0290 38.7886,-79.0290 38.8351,-79.0935 38.8351,-79.0935 38.7886)))
 ```
 
 #### Example 8: INTERSECTS cql-json (POST)
@@ -846,8 +846,8 @@ either of those properties.
 
 #### Example 9: cql-text (GET)
 
-```javascript
-/search?filter=sentinel:data_coverage > 50 OR landsat:coverage_percent < 10 OR (sentinel:data_coverage IS NULL AND landsat:coverage_percent IS NULL)
+```
+filter=sentinel:data_coverage > 50 OR landsat:coverage_percent < 10 OR (sentinel:data_coverage IS NULL AND landsat:coverage_percent IS NULL)
 ```
 
 #### Example 9: cql-json (POST)
