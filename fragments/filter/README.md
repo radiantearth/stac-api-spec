@@ -463,7 +463,7 @@ This example uses the queryables definition in (Interaction with Endpoints)(#int
 Note that `filter-lang` defaults to `cql-text` in this case. The parameter `filter-crs` defaults 
 to `http://www.opengis.net/def/crs/OGC/1.3/CRS84` for a STAC API.
 
-```
+```http
 filter=id='LC08_L1TP_060247_20180905_20180912_01_T1_L1TP' AND collection='landsat8_l1tp'
 ```
 
@@ -492,7 +492,7 @@ OGC API Features filters only operate against a single collection already.
 
 #### Example 2: GET with cql-text
 
-```
+```http
 filter=collection = 'landsat8_l1tp'
   AND gsd <= 30
   AND eo:cloud_cover <= 10
@@ -571,7 +571,7 @@ This queryables JSON Schema is used in these examples:
 
 #### Example 3: GET with cql-text
 
-```
+```http
 filter=prop1 = prop2
 ```
 
@@ -683,7 +683,7 @@ a tiny sliver of data.
 
 #### Example 4: AND cql-text (GET)
 
-```
+```http
 filter=sentinel:data_coverage > 50 AND eo:cloud_cover < 10 
 ```
 
@@ -710,7 +710,7 @@ This uses the same queryables as Example 4.
 
 #### Example 5: OR cql-text (GET)
 
-```
+```http
 filter=sentinel:data_coverage > 50 OR eo:cloud_cover < 10 
 ```
 
@@ -737,7 +737,7 @@ have any overlap between them.
 
 #### Example 6: ANYINTERACTS cql-text (GET)
 
-```
+```http
 filter=datetime ANYINTERACTS 2020-11-11T00:00:00Z/2020-11-12T00:00:00Z
 ```
 
@@ -764,7 +764,7 @@ format uses GeoJSON geometries.
 
 #### Example 7: INTERSECTS cql-text (GET)
 
-```
+```http
 filter=INTERSECTS(geometry,POLYGON((-77.0824 38.7886,-77.0189 38.7886,-77.0189 38.8351,-77.0824 38.8351,-77.0824 38.7886)))
 ```
 
@@ -798,7 +798,7 @@ logical operator.
 
 #### Example 8: INTERSECTS cql-text (GET)
 
-```
+```http
 filter=INTERSECTS(geometry,POLYGON((-77.0824 38.7886,-77.0189 38.7886,-77.0189 38.8351,-77.0824 38.8351,-77.0824 38.7886))) OR INTERSECTS(geometry,POLYGON((-79.0935 38.7886,-79.0290 38.7886,-79.0290 38.8351,-79.0935 38.8351,-79.0935 38.7886)))
 ```
 
@@ -846,7 +846,7 @@ either of those properties.
 
 #### Example 9: cql-text (GET)
 
-```
+```http
 filter=sentinel:data_coverage > 50 OR landsat:coverage_percent < 10 OR (sentinel:data_coverage IS NULL AND landsat:coverage_percent IS NULL)
 ```
 
