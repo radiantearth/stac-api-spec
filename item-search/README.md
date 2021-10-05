@@ -51,14 +51,14 @@ The following Link relations shall exist in the Landing Page (root).
 | -------------- | -------------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `root`         | `/`                  | STAC Core        | The root URI                                                                                                                                                            |
 | `self`         | `/`                  | OAFeat           | Self reference, same as root URI                                                                                                                                        |
-| `service-desc` | `/api` (recommended) | OAFeat OpenAPI   | The OpenAPI service description. Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API |
+| `service-desc` | `/api` | OAFeat OpenAPI   | The OpenAPI service description. Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API. The path for this endpoint is only recommended to be `/api`, but may be another path. |
 | search         | `/search`            | STAC Item Search | URI for the Search endpoint                                                                                                                                             |
 
 A `service-doc` endpoint is recommended, but not required.
 
 | **rel**       | **href**                  | **From**       | **Description**                                                                                                         |
 | ------------- | ------------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `service-doc` | `/api.html` (recommended) | OAFeat OpenAPI | An HTML service description.  Uses the `text/html` media type to refer to a human-consumable description of the service |
+| `service-doc` | `/api.html` | OAFeat OpenAPI | An HTML service description.  Uses the `text/html` media type to refer to a human-consumable description of the service. The path for this endpoint is only recommended to be `/api.html`, but may be another path.  |
 
 It is **required** to add a Link to the root endpoint (`/`) with the `rel` type set to `search`
 that refers to the search endpoint in the `href` property,
@@ -82,7 +82,7 @@ Implementations that support `POST` should add a second link with the same struc
 | Endpoint | Returns | Description |
 | -------- | ------- | ----------- |
 | `/`                  | Catalog         | Landing Page and root Catalog |
-| `/api` (recommended) | OAFeat OpenAPI  | The OpenAPI service description |
+| `/api` | OAFeat OpenAPI  | The OpenAPI service description. The path for this endpoint is only recommended to be `/api`, but may be another path.  |
 | `/search`            | Item Collection | Search endpoint      |
  
 ## Query Parameters and Fields

@@ -61,7 +61,7 @@ Additionally, these relations may exist for the `/collections/{collectionId}` en
 
 | **rel**  | **href**                            | **From**  | **Description**                            |
 | -------- | ----------------------------------- | --------- | ------------------------------------------ |
-| `canonical`        | various              | STAC Core      | The child STAC Catalogs & Collections. Provides curated paths to get to STAC Collection and Item objects |
+| `canonical`        | various              | STAC Core      | The child STAC Catalogs & Collections. Provides canonical paths to get to STAC Collection and Item objects if they differ from the URL that was used to retrieve the STAC object. This can be useful in federated catalogs that present data that had a different canonical location. |
 
 Usually, the `self` link in a Collection must link to the same URL that was used to request
 it. However, implementations may choose to have the canonical location of the Collection be
