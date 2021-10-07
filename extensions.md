@@ -66,23 +66,34 @@ Each extension has its own conformance URI, which is used in the `conformsTo` re
 the service supports. This are listed at the top of each extension description, but the full table is given here for ease of reference.
 
 - [Fields](item-search/README.md#fields)
-  - <https://api.stacspec.org/v1.0.0-beta.3/item-search#fields>
+  - <https://api.stacspec.org/v1.0.0-beta.4/item-search#fields>
+  - <https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features#fields>
 - [Filter](item-search/README.md#filter)
-  - <https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:filter>
-  - <https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:simple-cql>
-  - <https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:item-search-filter>
-  - <https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:cql-text>
-  - <https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:cql-json>
+  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/filter>
+  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-cql>
+  - <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:item-search-filter>
+  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql-text>
+  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql-json>
+  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/advanced-comparison-operators>
+  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-spatial-operators>
+  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/spatial-operators>
+  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/temporal-operators>
+  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/functions>
+  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/arithmetic>
+  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/array-operators>
+  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/property-property>
 - [Context](item-search/README.md#context)
-  - <https://api.stacspec.org/v1.0.0-beta.3/item-search#context>
+  - <https://api.stacspec.org/v1.0.0-beta.4/item-search#context>
+  - <https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features#context>
 - [Sort](item-search/README.md#sort)
-  - <https://api.stacspec.org/v1.0.0-beta.3/item-search#sort>
+  - <https://api.stacspec.org/v1.0.0-beta.4/item-search#sort>
+  - <https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features#sort>
 - [Transaction](ogcapi-features/extensions/transaction/README.md)
-  - <https://api.stacspec.org/v1.0.0-beta.3/ogcapi-features/extensions/transaction>
+  - <https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features/extensions/transaction>
 - [Items and Collections API Version](ogcapi-features/extensions/version/README.md)
-  - <https://api.stacspec.org/v1.0.0-beta.3/ogcapi-features/extensions/version>
+  - <https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features/extensions/version>
 - [Query](item-search/README.md#query)
-  - <https://api.stacspec.org/v1.0.0-beta.3/item-search#query>
+  - <https://api.stacspec.org/v1.0.0-beta.4/item-search#query>
 
 ## Third-party / vendor extensions
 
@@ -95,11 +106,12 @@ Please contact a STAC maintainer or open a Pull Request to add your extension to
 | Name                                                                | Scope                               | Description                                                     | Vendor                                         |
 | ------------------------------------------------------------------- | ----------------------------------- | --------------------------------------------------------------- | ---------------------------------------------- |
 | [Free-text Search](https://github.com/cedadev/stac-freetext-search) | [Item Search](item-search/) request | Adds `q` parameter and free-text search against item properties | [CEDA, STFC, UKRI](https://github.com/cedadev) |
+| [Context Collections](https://github.com/cedadev/stac-context-collections) | [Item Search](item-search/) request | Adds a `collections` keyword to the [context](https://github.com/radiantearth/stac-api-spec/tree/master/fragments/context) extension response. | [CEDA, STFC, UKRI](https://github.com/cedadev) |
 
 ## Creating new extensions
 
 Creating new extensions requires creating an OpenAPI fragment to define it, along with a README markdown file that gives 
-an overview of the functionality. In the README a conformance URI should be provided, so clients can use it to tell if
+an overview of the functionality. In the README, a conformance URI should be provided, so clients can use it to tell if
 a service has the indicated functionality. It is also recommended to note the 'extension maturity', as defined above,
 so others can know how widely it is used.
 

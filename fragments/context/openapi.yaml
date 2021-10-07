@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: The SpatioTemporal Asset Catalog API - Context
   description: Adds search related metadata (context) to GeoJSON Responses.
-  version: 1.0.0-beta.3
+  version: 1.0.0-beta.4
 paths: {}
 components:
   schemas:

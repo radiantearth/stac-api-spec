@@ -5,9 +5,9 @@
   - [Example Landing Page for STAC API - Core](#example-landing-page-for-stac-api---core)
   - [Extensions](#extensions)
 
-- **OpenAPI specification:** [openapi.yaml](openapi.yaml) describes the core endpoints ([rendered version](https://api.stacspec.org/v1.0.0-beta.3/core)),
+- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.4/core)),
   and [commons.yaml](commons.yaml) is the OpenAPI version of the core [STAC spec](../stac-spec) JSON Schemas.
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.3/core>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.4/core>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Dependencies**: None
 
@@ -48,20 +48,25 @@ API endpoints from OAFeat or STAC API to be implemented, so the following links 
 
 ## Link Relations
 
-The following Link relations should exist in the Landing Page (root).
+The following Link relations shall exist in the Landing Page (root).
 
 | **rel**        | **href**             | **From**       | **Description**                                                                                                                                                         |
 | -------------- | -------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `root`         | `/`                  | STAC Core      | The root URI                                                                                                                                                            |
 | `self`         | `/`                  | OAFeat         | Self reference, same as root URI                                                                                                                                        |
-| `service-desc` | `/api` (recommended) | OAFeat OpenAPI | The OpenAPI service description. Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API |
-| `child`        | various              | STAC Core      | The child STAC Catalogs & Collections. Provides curated paths to get to STAC Collection and Item objects                                                                |
+| `service-desc` | `/api` | OAFeat OpenAPI | The OpenAPI service description. Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API. The path for this endpoint is only recommended to be `/api`, but may be another path. |
 
-Additionally, a `service-doc` endpoint is recommended.
+A `service-doc` endpoint is recommended, but not required.
 
 | **rel**       | **href**                  | **From**       | **Description**                                                                                                         |
 | ------------- | ------------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `service-doc` | `/api.html` (recommended) | OAFeat OpenAPI | An HTML service description.  Uses the `text/html` media type to refer to a human-consumable description of the service |
+| `service-doc` | `/api.html` | OAFeat OpenAPI | An HTML service description.  Uses the `text/html` media type to refer to a human-consumable description of the service. The path for this endpoint is only recommended to be `/api.html`, but may be another path. |
+
+Additionally, `child` relations may exist to individual catalogs and collections.
+
+| **rel**        | **href**             | **From**       | **Description**                                                                                                                                                         |
+| -------------- | -------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `child`        | various              | STAC Core      | The child STAC Catalogs & Collections. Provides curated paths to get to STAC Collection and Item objects |
 
 It is also valid to have `item` links from the landing page, but most STAC API services are used to 
 serve up a large number of features, so they typically
@@ -81,8 +86,9 @@ the [overview](../overview.md#example-landing-page) document.
     "id": "example-stac",
     "title": "A simple STAC API Example",
     "description": "This Catalog aims to demonstrate the a simple landing page",
+    "type": "Catalog",
     "conformsTo" : [
-        "https://api.stacspec.org/v1.0.0-beta.3/core"
+        "https://api.stacspec.org/v1.0.0-beta.4/core"
     ],
     "links": [
         {

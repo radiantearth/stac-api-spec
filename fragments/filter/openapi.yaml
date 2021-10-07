@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: The SpatioTemporal Asset Catalog API - Filter
   description: Adds parameters to compare properties and only return the items that match
-  version: 1.0.0-beta.3
+  version: 1.0.0-beta.4
 
 tags:
   - name: STAC API - Core

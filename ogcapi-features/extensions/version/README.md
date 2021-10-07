@@ -1,7 +1,7 @@
 # Items and Collections API Version Extension
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.3/ogcapi-features/extensions/version>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features/extensions/version>
 - **Extension [Maturity Classification](../../../extensions.md#extension-maturity):** Proposal
 - **Dependencies**: [STAC API - Features](../../README.md)
 
@@ -37,8 +37,8 @@ list of links to all versions available for an item.
 
 ## Version ID
 
-Version ID is a unique identifier for a version of an item or collection.
-This extension remains agnostic about what the identifier should like.
+Version ID is a unique identifier for a version of an Item or Collection.
+This extension remains agnostic about what the identifier should be.
 There are many options for a versioning schema including:
 - md5 hash of the record
 - datetime epoch
@@ -65,6 +65,7 @@ Request to `GET /collections/my_collection/items/this_is_my_id`:
 ```json
 {
     "id": "this_is_my_id",
+    "type": "Feature",
     "bbox": [],
     "geometry": {},
     "properties": {},
@@ -97,6 +98,7 @@ Request to `GET /collections/my_collection/items/this_is_my_id/versions/02`:
 ```json
 {
     "id": "this_is_my_id",
+    "type": "Feature",
     "bbox": [],
     "geometry": {},
     "properties": {},
@@ -129,6 +131,7 @@ Request to `GET /collections/my_collection/items/this_is_my_id/versions/01`:
 ```json
 {
     "id": "this_is_my_id",
+    "type": "Feature",
     "bbox": [],
     "geometry": {},
     "properties": {},

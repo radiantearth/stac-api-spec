@@ -1,7 +1,9 @@
 # STAC API - Context Fragment
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
-- **Conformance Class:** <https://api.stacspec.org/v1.0.0-beta.3/item-search#context>
+- **Conformance Classes:** 
+  - Item Search binding: <https://api.stacspec.org/v1.0.0-beta.4/item-search#context>
+  - STAC Features binding: <https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features#context>
 - **Fragment [Maturity Classification](../../extensions.md#extension-maturity):** Pilot
 - **Dependents:**
   - [Item Search](../../item-search)
@@ -9,11 +11,14 @@
 This extension is intended to augment the core [ItemCollection](../itemcollection/README.md)
 object when the ItemCollection is the result of a search, for example, from calling the `/search` API endpoint.
 
-**Note**: *This fragment is currently scoped to just the STAC-specific functionality such as [STAC Item Search](../../item-search).
-OGC API has their own way returning `numberMatched` and `numberReturned` at the top level, instead of in a context
-object. We are hoping to [align](https://github.com/opengeospatial/ogcapi-common/issues/82), but until then it
-is recommended to use STAC Context in the cross-collection `search` endpoint, and follow the OGC API way when
-implementing OGC API - Features.*
+This fragment may be bound to either or both of 
+[Item Search](../../item-search) (`/search` endpoint) or
+[STAC Features](../../ogcapi-features) (`/collections/{collection_id}/items` endpoint) by
+advertising the relevant conformance class. 
+
+**Note**: OGC API Features - Part 1 has its own way returning `numberMatched` and `numberReturned` at the top level, instead of in a context
+object. We are hoping to [align](https://github.com/opengeospatial/ogcapi-common/issues/82), but until then, it
+is required to implement both when implementing STAC Features.
 
 - [Example](examples/example.json)
 - [JSON Schema](json-schema/schema.json)

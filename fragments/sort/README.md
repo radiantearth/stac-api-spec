@@ -1,15 +1,23 @@
 # STAC API - Sort Fragment
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
-- **Conformance Class:** <https://api.stacspec.org/v1.0.0-beta.3/item-search#sort>
+- **Conformance Class:** 
+  - Item Search binding: <https://api.stacspec.org/v1.0.0-beta.4/item-search#sort>
+  - STAC Features binding: <https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features#sort>
 - **Fragment [Maturity Classification](../../extensions.md#extension-maturity):** Pilot
 - **Dependents:**
   - [Item Search](../../item-search)
+  - [STAC Features](../../ogcapi-features)
  
 This defines a new parameter, `sortby`, that allows the user to define fields by which to sort results. 
 Only string, numeric, and datetime attributes of Item (`id` and `collection` only) or Item Properties (any attributes) 
 may be used to sort results.  It is not required that implementations support sorting over all attributes, but 
 implementations should return an error when attempting to sort over a field that does not support sorting. 
+
+This fragment may be bound to either or both of 
+[Item Search](../../item-search) (`/search` endpoint) or
+[STAC Features](../../ogcapi-features) (`/collections/{collection_id}/items` endpoint) by
+advertising the relevant conformance class. 
 
 Fields may be sorted in ascending or descending order.  The syntax between GET requests and POST requests with a JSON 
 body vary.  The `sortby` value is an array, so multiple sort fields can be defined which will be used to sort 
@@ -22,7 +30,7 @@ for the latest discussion.*
 ## HTTP GET (or POST Form)
 
 When calling a relevant endpoint using GET (or POST with `Content-Type: application/x-www-form-urlencoded` or 
-`Content-Type: multipart/form-data)`, a single parameter `sortby` with a comma-separated list of item field names should 
+`Content-Type: multipart/form-data)`, a single parameter `sortby` with a comma-separated list of item field names must 
 be provided. The field names may be prefixed with either "+" for ascending, or "-" for descending.  If no sign is 
 provided before the field name, it will be assumed to be "+". 
 

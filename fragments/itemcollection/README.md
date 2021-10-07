@@ -4,7 +4,7 @@ This document explains the structure and content of a SpatioTemporal Asset Catal
 An **ItemCollection** is a [GeoJSON](http://geojson.org/) [FeatureCollection](https://tools.ietf.org/html/rfc7946#section-3.3) 
 that is augmented with [foreign members](https://tools.ietf.org/html/rfc7946#section-6) relevant to a STAC entity.
 
-Similarly to the relationship between a GeoJSON Feature and a STAC Item, a STAC ItemCollection should be a valid GeoJSON 
+Similarly to the relationship between a GeoJSON Feature and a STAC Item, a STAC ItemCollection must be a valid GeoJSON 
 FeatureCollection to allow interoperability with existing tools that support GeoJSON. 
 
 Item objects are represented in JSON format and are very flexible. Any JSON object that contains all the
