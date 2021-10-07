@@ -261,7 +261,7 @@ components:
       x-stac-api-fragment: fields
       in: query
       description: |-
-        **Optional Extension:** Fields
+        **Extension:** Fields
 
         Determines the shape of the features in the response
       required: false
@@ -288,7 +288,7 @@ components:
       x-stac-api-fragment: sort
       in: query
       description: |-
-        **Optional Extension:** Sort
+        **Extension:** Sort
 
         An array of property names, prefixed by either "+" for ascending or
         "-" for descending. If no prefix is provided, "+" is assumed.
@@ -1255,7 +1255,7 @@ components:
     schemas-itemCollection:
       type: object
       description: >-
-        **Optional Extension:** Context
+        **Extension:** Context
 
 
         Augments lists of resources with the number of returned and matches
@@ -1308,7 +1308,7 @@ components:
       type: object
       x-stac-api-fragment: fields
       description: |-
-        **Optional Extension:** Fields
+        **Extension:** Fields
 
         Determines the shape of the features in the response
       properties:
@@ -1333,7 +1333,7 @@ components:
       type: object
       x-stac-api-fragment: filter
       description: |-
-        **Optional Extension:** Filter
+        **Extension:** Filter
 
         A filter for properties in Items.
       properties:
@@ -1371,7 +1371,7 @@ components:
       type: object
       x-stac-api-fragment: sort
       description: |-
-        **Optional Extension:** Sort
+        **Extension:** Sort
 
         Sort the results.
       properties:
