@@ -9,7 +9,7 @@ components:
     itemCollection:
       type: object
       description: |-
-        **Optional Extension:** Context
+        **Extension:** Context
 
         Augments lists of resources with the number of returned and matches resource and the given limit for the request.
       x-stac-api-fragment: context
