@@ -66,12 +66,12 @@ Each extension has its own conformance URI, which is used in the `conformsTo` re
 the service supports. This are listed at the top of each extension description, but the full table is given here for ease of reference.
 
 - [Fields](item-search/README.md#fields)
-  - <https://api.stacspec.org/v1.0.0-beta.4/item-search#fields>
-  - <https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features#fields>
+  - <https://api.stacspec.org/v1.0.0-beta.5/item-search#fields>
+  - <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features#fields>
 - [Filter](item-search/README.md#filter)
   - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/filter>
   - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-cql>
-  - <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:item-search-filter>
+  - <https://api.stacspec.org/v1.0.0-beta.5/item-search#filter:item-search-filter>
   - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql-text>
   - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql-json>
   - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/advanced-comparison-operators>
@@ -83,17 +83,17 @@ the service supports. This are listed at the top of each extension description, 
   - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/array-operators>
   - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/property-property>
 - [Context](item-search/README.md#context)
-  - <https://api.stacspec.org/v1.0.0-beta.4/item-search#context>
-  - <https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features#context>
+  - <https://api.stacspec.org/v1.0.0-beta.5/item-search#context>
+  - <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features#context>
 - [Sort](item-search/README.md#sort)
-  - <https://api.stacspec.org/v1.0.0-beta.4/item-search#sort>
-  - <https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features#sort>
+  - <https://api.stacspec.org/v1.0.0-beta.5/item-search#sort>
+  - <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features#sort>
 - [Transaction](ogcapi-features/extensions/transaction/README.md)
-  - <https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features/extensions/transaction>
+  - <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features/extensions/transaction>
 - [Items and Collections API Version](ogcapi-features/extensions/version/README.md)
-  - <https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features/extensions/version>
+  - <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features/extensions/version>
 - [Query](item-search/README.md#query)
-  - <https://api.stacspec.org/v1.0.0-beta.4/item-search#query>
+  - <https://api.stacspec.org/v1.0.0-beta.5/item-search#query>
 
 ## Third-party / vendor extensions
 
@@ -103,9 +103,9 @@ parties, extensions may be made official and incorporated in the STAC repository
 
 Please contact a STAC maintainer or open a Pull Request to add your extension to this table.
 
-| Name                                                                | Scope                               | Description                                                     | Vendor                                         |
-| ------------------------------------------------------------------- | ----------------------------------- | --------------------------------------------------------------- | ---------------------------------------------- |
-| [Free-text Search](https://github.com/cedadev/stac-freetext-search) | [Item Search](item-search/) request | Adds `q` parameter and free-text search against item properties | [CEDA, STFC, UKRI](https://github.com/cedadev) |
+| Name                                                                       | Scope                               | Description                                                                                                                                    | Vendor                                         |
+| -------------------------------------------------------------------------- | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
+| [Free-text Search](https://github.com/cedadev/stac-freetext-search)        | [Item Search](item-search/) request | Adds `q` parameter and free-text search against item properties                                                                                | [CEDA, STFC, UKRI](https://github.com/cedadev) |
 | [Context Collections](https://github.com/cedadev/stac-context-collections) | [Item Search](item-search/) request | Adds a `collections` keyword to the [context](https://github.com/radiantearth/stac-api-spec/tree/master/fragments/context) extension response. | [CEDA, STFC, UKRI](https://github.com/cedadev) |
 
 ## Creating new extensions
