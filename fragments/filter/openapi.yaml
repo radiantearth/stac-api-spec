@@ -133,7 +133,7 @@ components:
       type: object
       x-stac-api-fragment: filter
       description: |-
-        **Optional Extension:** Filter
+        **Extension:** Filter
 
         A filter for properties in Items.
       properties:
