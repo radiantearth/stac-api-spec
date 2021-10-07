@@ -177,10 +177,10 @@ The href may contain any arbitrary URL parameter:
 
 OAFeat does not support POST requests for searches, however the STAC API spec does. Hypermedia links are not designed 
 for anything other than GET requests, so providing a next link for a POST search request becomes problematic. STAC has 
-decided to extend the `link` object to support additional fields that provide hints to the client as to how it must 
+decided to extend the Link object to support additional fields that provide hints to the client as to how it must 
 execute a subsequent request for the next page of results.
 
-The following fields have been added to the `link` object specification for the API spec:
+The following fields have been added to the Link object specification for the API spec:
 
 | Parameter | Type    | Description                                                                                                                                                    |
 | --------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
