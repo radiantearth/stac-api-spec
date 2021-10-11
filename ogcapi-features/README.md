@@ -149,7 +149,8 @@ See the [paging examples](../item-search/examples.md#paging-examples) for additi
 
 ## Collection Pagination
 
-OAFeat does not specify a mechanism for how clients may access all collections from servers with many
+OAFeat does not define a specific mechanism for how clients may access all collections from servers
+with many
 collections. STAC - Features adds support for this with pagination (similar to the Item pagination
 mechanism) through hypermedia links for the Collections resource 
 (`/collections`). This mechanism aligns with pagination of collections in the 
