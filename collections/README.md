@@ -3,6 +3,7 @@
 - [STAC API - Collections](#stac-api---collections)
   - [Link Relations](#link-relations)
   - [Endpoints](#endpoints)
+  - [Pagination](#pagination)
   - [Example](#example)
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.4/collections))
@@ -81,6 +82,10 @@ elsewhere. If this is done, it is recommended to include a `rel` of `canonical` 
 
 STAC API's implementing the Collections class must support HTTP GET operation at `/collections`, with the return JSON document consisting
 of an array of all STAC Collections and an array of Links.
+
+## Pagination
+
+The `/collections` endpoint supports a pagination mechanism that aligns with pagination as described in the OGC API - Common - Part 2: Geospatial Data specification. This is described in detail in the [STAC - Features Collection Pagination section](../ogcapi-features/README.md#collection-pagination).
 
 ## Example
 

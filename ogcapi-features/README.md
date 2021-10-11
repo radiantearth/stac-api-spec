@@ -3,7 +3,8 @@
 - [STAC API - Features](#stac-api---features)
   - [Link Relations](#link-relations)
   - [Endpoints](#endpoints)
-  - [Paging](#paging)
+  - [Item Pagination](#item-pagination)
+  - [Collection Pagination](#collection-pagination)
   - [Examples](#examples)
   - [Example Landing Page for STAC API - Features](#example-landing-page-for-stac-api---features)
   - [Example Collection for STAC API - Features](#example-collection-for-stac-api---features)
@@ -111,7 +112,7 @@ STAC API.
 Implementing OAFeat enables a wider range of clients to access the API's STAC Item objects, as it is a more widely implemented
 protocol than STAC. 
 
-## Paging
+## Item Pagination
 
 OAFeat supports paging through hypermedia links for the Items resource 
 (`/collections/{collectionId}/items`). Since only GET requests are allowed for this endpoint, 
@@ -145,6 +146,43 @@ request, but with the specified headers values merged in. This allows servers to
 to get to the next page without mirroring the entire request back to the client. 
 
 See the [paging examples](../item-search/examples.md#paging-examples) for additional insight.
+
+## Collection Pagination
+
+OAFeat does not specify a mechanism for how clients may access all collections from servers with many
+collections. STAC - Features adds support for this with pagination (similar to the Item pagination
+mechanism) through hypermedia links for the Collections resource 
+(`/collections`). This mechanism aligns with pagination of collections in the 
+OGC API - Common - Part 2: Geospatial Data specification. With this, Links with 
+relations `next` and `prev` are included in the `links` array,
+and these are used to navigate to the next and previous pages of Collection objects. The specific query
+parameter used for paging is implementation specific and not defined by STAC API. For example, 
+an implementation may take a parameter (e.g., `page`) indicating the numeric page of results, a
+base64-encoded value indicating the last result returned for the current page (e.g., `search_after` as
+in Elasticsearch), or a cursor token representing backend state.  
+
+In our simple example of numerical pages, the response for `page=3` would have a
+`links` array containing these two Links indicating the URLs for the next (page=4) and 
+previous (page=2) pages:
+
+```none
+"links": [
+  ...
+  {
+    "rel": "prev",
+    "href": "http://api.cool-sat.com/collections/my_collection/items?page=2"
+  },
+  {
+    "rel": "next",
+    "href": "http://api.cool-sat.com/collections/my_collection/items?page=4"
+  }
+]
+```
+
+Additionally, STAC has extended the Link object to support additional fields that provide header values
+to the client should they be needed for a subsequent request for the next page of results. The use
+of header values for pagination with GET requests is uncommon, so if your implementation does not use them you can omit this attribute in the Link. These
+fields are described in detail in the [Item Search](../item-search/README.md#paging) spec. 
 
 ## Examples
 
