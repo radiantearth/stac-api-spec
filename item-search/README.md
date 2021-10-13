@@ -115,7 +115,7 @@ The core parameters for STAC search are defined by OAFeat, and STAC adds a few p
 
 | Parameter   | Type             | Source API | Description                                                                                                                                                                     |
 | ----------- | ---------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| limit       | integer          | OAFeat     | The maximum number of results to return (page size). Defaults to 10                                                                                                             |
+| limit       | integer          | OAFeat     | The maximum number of results to return (page size).                                                                                                            |
 | bbox        | \[number]        | OAFeat     | Requested bounding box.                                                                                                                                                         |
 | datetime    | string           | OAFeat     | Single date+time, or a range ('/' separator), formatted to [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). Use double dots `..` for open date ranges. |
 | intersects  | GeoJSON Geometry | STAC       | Searches items by performing intersection between their geometry and provided GeoJSON geometry.  All GeoJSON geometry types must be supported.                                  |
@@ -123,6 +123,14 @@ The core parameters for STAC search are defined by OAFeat, and STAC adds a few p
 | collections | \[string]        | STAC       | Array of one or more Collection IDs that each matching Item must be in.                                                                                                         |
 
 See [examples](examples.md) for some example requests.
+
+**limit** The limit parameter follows the same semantics of the OAFeat Item resource limit parameter. The value is 
+a suggestion to the server as to the maximum number of Item objects the
+client would prefer in the response. The OpenAPI specification defines the default and maximum values
+for this parameter. The base specifications define these with a default of 10 and a maximum of 10000, but implementers
+may choose other values to advertise through their `service-desc` endpoint.  If the limit parameter value is greater
+than the advertised maximum limit, the server shall return the maximum possible number of items (ideally, the number 
+as the advertised maximum limit), rather than responding with an error.
 
 Only one of either **intersects** or **bbox** may be specified.  If both are specified, a 400 Bad Request response 
 must be returned. 
