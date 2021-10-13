@@ -294,8 +294,14 @@ components:
       name: limit
       in: query
       description: >-
-        The optional limit parameter limits the number of items that are
-        presented in the response document.
+        The optional limit parameter recommends the number of items that should
+        be present in the response document.
+
+
+        If the limit parameter value is greater than advertised limit maximum,
+        the server shall return the
+
+        maximum possible number of items, rather than responding with an error.
 
 
         Only items are counted that are on the first level of the collection in
