@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: The SpatioTemporal Asset Catalog API - Commons
   description: This is the OpenAPI version of the core STAC spec JSON Schemas.
-  version: 1.0.0-beta.4
+  version: 1.0.0-beta.5
 paths: {}
 components:
   responses:
