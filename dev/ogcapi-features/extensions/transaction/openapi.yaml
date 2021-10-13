@@ -7,17 +7,17 @@ info:
     Transaction specification.
   contact:
     name: STAC Specification
-    url: 'http://stacspec.org'
+    url: http://stacspec.org
   license:
     name: Apache License 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0'
+    url: http://www.apache.org/licenses/LICENSE-2.0
 tags:
   - name: Transaction
     description: >-
       STAC-specific operations to add, remove, and edit items within OGC API -
       Features collections.
 paths:
-  '/collections/{collectionId}/items':
+  /collections/{collectionId}/items:
     parameters:
       - $ref: '#/components/parameters/collectionId'
     post:
@@ -64,7 +64,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/exception'
-  '/collections/{collectionId}/items/{featureId}':
+  /collections/{collectionId}/items/{featureId}:
     parameters:
       - $ref: '#/components/parameters/collectionId'
       - $ref: '#/components/parameters/featureId'
@@ -265,7 +265,7 @@ components:
             type: string
     itemId:
       type: string
-      description: 'Provider identifier, a unique ID.'
+      description: Provider identifier, a unique ID.
     bbox:
       description: |-
         Only features that have a geometry that intersects the bounding box are
@@ -576,9 +576,9 @@ components:
       example:
         stac_version: 1.0.0
         stac_extensions:
-          - 'https://stac-extensions.github.io/eo/v1.0.0/schema.json'
-          - 'https://stac-extensions.github.io/view/v1.0.0/schema.json'
-          - 'https://example.com/cs-extension/1.0/schema.json'
+          - https://stac-extensions.github.io/eo/v1.0.0/schema.json
+          - https://stac-extensions.github.io/view/v1.0.0/schema.json
+          - https://example.com/cs-extension/1.0/schema.json
         type: Feature
         id: CS3-20160503_132131_05
         bbox:
@@ -600,7 +600,7 @@ components:
               - - -122.308150179
                 - 37.488035566
         properties:
-          datetime: '2016-05-03T13:22:30.040Z'
+          datetime: 2016-05-03T13:22:30.040Z
           title: A CS3 item
           license: PDDL-1.0
           providers:
@@ -608,26 +608,26 @@ components:
               roles:
                 - producer
                 - licensor
-              url: 'https://cool-sat.com/'
-          'view:sun_azimuth': 168.7
-          'eo:cloud_cover': 0.12
-          'view:off_nadir': 1.4
+              url: https://cool-sat.com/
+          view:sun_azimuth: 168.7
+          eo:cloud_cover: 0.12
+          view:off_nadir: 1.4
           platform: coolsat2
           instruments:
             - cool_sensor_v1
-          'eo:bands': []
-          'view:sun_elevation': 33.4
-          'eo:gsd': 0.512
+          eo:bands: []
+          view:sun_elevation: 33.4
+          eo:gsd: 0.512
         collection: CS3
         links:
           - rel: self
-            href: 'http://cool-sat.com/collections/CS3/items/20160503_132130_04'
+            href: http://cool-sat.com/collections/CS3/items/20160503_132130_04
           - rel: root
-            href: 'http://cool-sat.com/collections'
+            href: http://cool-sat.com/collections
           - rel: parent
-            href: 'http://cool-sat.com/collections/CS3'
+            href: http://cool-sat.com/collections/CS3
           - rel: collection
-            href: 'http://cool-sat.com/collections/CS3'
+            href: http://cool-sat.com/collections/CS3
         assets:
           analytic:
             href: >-
@@ -689,7 +689,7 @@ components:
 
         `null` is allowed, but requires `start_datetime` and `end_datetime` from
         common metadata to be set.
-      example: '2018-02-12T00:00:00Z'
+      example: 2018-02-12T00:00:00Z
   responses:
     BadRequest:
       description: The request was malformed or semantically invalid

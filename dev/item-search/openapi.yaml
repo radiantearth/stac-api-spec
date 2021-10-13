@@ -7,10 +7,10 @@ info:
     Search specification.
   contact:
     name: STAC Specification
-    url: 'http://stacspec.org'
+    url: http://stacspec.org
   license:
     name: Apache License 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0'
+    url: http://www.apache.org/licenses/LICENSE-2.0
 tags:
   - name: Item Search
     description: essential characteristics of a STAC API
@@ -267,7 +267,7 @@ components:
       required: false
       schema:
         type: string
-        example: 'id,type,-geometry,bbox,properties,-links,-assets'
+        example: id,type,-geometry,bbox,properties,-links,-assets
       style: form
       explode: false
     filter:
@@ -295,7 +295,7 @@ components:
       required: false
       schema:
         type: string
-        example: '+id,-properties.eo:cloud_cover'
+        example: +id,-properties.eo:cloud_cover
       style: form
       explode: false
   schemas:
@@ -393,7 +393,7 @@ components:
         server whether only a single temporal property is used to determine
 
         the extent or all relevant temporal properties.
-      example: '2018-02-12T00:00:00Z/2018-03-18T12:31:12Z'
+      example: 2018-02-12T00:00:00Z/2018-03-18T12:31:12Z
     pointGeoJSON:
       type: object
       required:
@@ -987,7 +987,7 @@ components:
             type: string
     itemId:
       type: string
-      description: 'Provider identifier, a unique ID.'
+      description: Provider identifier, a unique ID.
     schemas-bbox:
       description: |-
         Only features that have a geometry that intersects the bounding box are
@@ -1163,9 +1163,9 @@ components:
       example:
         stac_version: 1.0.0
         stac_extensions:
-          - 'https://stac-extensions.github.io/eo/v1.0.0/schema.json'
-          - 'https://stac-extensions.github.io/view/v1.0.0/schema.json'
-          - 'https://example.com/cs-extension/1.0/schema.json'
+          - https://stac-extensions.github.io/eo/v1.0.0/schema.json
+          - https://stac-extensions.github.io/view/v1.0.0/schema.json
+          - https://example.com/cs-extension/1.0/schema.json
         type: Feature
         id: CS3-20160503_132131_05
         bbox:
@@ -1187,7 +1187,7 @@ components:
               - - -122.308150179
                 - 37.488035566
         properties:
-          datetime: '2016-05-03T13:22:30.040Z'
+          datetime: 2016-05-03T13:22:30.040Z
           title: A CS3 item
           license: PDDL-1.0
           providers:
@@ -1195,26 +1195,26 @@ components:
               roles:
                 - producer
                 - licensor
-              url: 'https://cool-sat.com/'
-          'view:sun_azimuth': 168.7
-          'eo:cloud_cover': 0.12
-          'view:off_nadir': 1.4
+              url: https://cool-sat.com/
+          view:sun_azimuth: 168.7
+          eo:cloud_cover: 0.12
+          view:off_nadir: 1.4
           platform: coolsat2
           instruments:
             - cool_sensor_v1
-          'eo:bands': []
-          'view:sun_elevation': 33.4
-          'eo:gsd': 0.512
+          eo:bands: []
+          view:sun_elevation: 33.4
+          eo:gsd: 0.512
         collection: CS3
         links:
           - rel: self
-            href: 'http://cool-sat.com/collections/CS3/items/20160503_132130_04'
+            href: http://cool-sat.com/collections/CS3/items/20160503_132130_04
           - rel: root
-            href: 'http://cool-sat.com/collections'
+            href: http://cool-sat.com/collections
           - rel: parent
-            href: 'http://cool-sat.com/collections/CS3'
+            href: http://cool-sat.com/collections/CS3
           - rel: collection
-            href: 'http://cool-sat.com/collections/CS3'
+            href: http://cool-sat.com/collections/CS3
         assets:
           analytic:
             href: >-
@@ -1300,7 +1300,7 @@ components:
       example:
         include:
           - id
-          - 'properties.eo:cloud_cover'
+          - properties.eo:cloud_cover
         exclude:
           - geometry
           - properties.datetime
@@ -1363,7 +1363,7 @@ components:
               - asc
               - desc
       example:
-        - field: 'properties.eo:cloud_cover'
+        - field: properties.eo:cloud_cover
           direction: asc
         - field: id
           direction: desc

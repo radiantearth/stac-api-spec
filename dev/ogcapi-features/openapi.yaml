@@ -7,10 +7,10 @@ info:
     Features specification. This extends OGC API - Features - Part 1: Core.
   contact:
     name: STAC Specification
-    url: 'http://stacspec.org'
+    url: http://stacspec.org
   license:
     name: Apache License 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0'
+    url: http://www.apache.org/licenses/LICENSE-2.0
 tags:
   - name: Features
     description: 'All endpoints related to OGC API - Features - Part 1: Core'
@@ -42,37 +42,37 @@ paths:
                 title: Copernicus Sentinel Imagery
                 description: Catalog of Copernicus Sentinel 1 and 2 imagery.
                 conformsTo:
-                  - 'https://api.stacspec.org/v1.0.0-beta.4/core'
-                  - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core'
-                  - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30'
+                  - https://api.stacspec.org/v1.0.0-beta.4/core
+                  - http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core
+                  - http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30
                   - >-
                     http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson
                 links:
-                  - href: 'http://data.example.org/'
+                  - href: http://data.example.org/
                     rel: self
                     type: application/json
                     title: this document
-                  - href: 'http://data.example.org/api'
+                  - href: http://data.example.org/api
                     rel: service-desc
                     type: application/vnd.oai.openapi+json;version=3.0
                     title: the API definition
-                  - href: 'http://data.example.org/api.html'
+                  - href: http://data.example.org/api.html
                     rel: service-doc
                     type: text/html
                     title: the API documentation
-                  - href: 'http://data.example.org/sentinel-1'
+                  - href: http://data.example.org/sentinel-1
                     rel: child
                     type: application/json
                     title: Sentinel 1 Catalog
-                  - href: 'http://data.example.org/sentinel-2'
+                  - href: http://data.example.org/sentinel-2
                     rel: child
                     type: application/json
                     title: Sentinel 2 Catalog
-                  - href: 'http://data.example.org/conformance'
+                  - href: http://data.example.org/conformance
                     rel: conformance
                     type: application/json
                     title: OGC API conformance classes implemented by this server
-                  - href: 'http://data.example.org/collections'
+                  - href: http://data.example.org/collections
                     rel: data
                     type: application/json
                     title: Information about the feature collections
@@ -106,7 +106,7 @@ paths:
           $ref: '#/components/responses/Collections'
         '500':
           $ref: '#/components/responses/ServerError'
-  '/collections/{collectionId}':
+  /collections/{collectionId}:
     get:
       tags:
         - Features
@@ -126,7 +126,7 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/ServerError'
-  '/collections/{collectionId}/items':
+  /collections/{collectionId}/items:
     get:
       tags:
         - Features
@@ -152,7 +152,7 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/ServerError'
-  '/collections/{collectionId}/items/{featureId}':
+  /collections/{collectionId}/items/{featureId}:
     get:
       tags:
         - Features
@@ -371,7 +371,7 @@ components:
         generated.
       type: string
       format: date-time
-      example: '2017-08-17T08:05:32Z'
+      example: 2017-08-17T08:05:32Z
     stac_version:
       title: STAC version
       type: string
@@ -646,8 +646,8 @@ components:
                 additional enum values.
               type: string
               enum:
-                - 'http://www.opengis.net/def/crs/OGC/1.3/CRS84'
-              default: 'http://www.opengis.net/def/crs/OGC/1.3/CRS84'
+                - http://www.opengis.net/def/crs/OGC/1.3/CRS84
+              default: http://www.opengis.net/def/crs/OGC/1.3/CRS84
         temporal:
           description: The temporal extent of the features in the collection.
           type: object
@@ -692,7 +692,7 @@ components:
                   format: date-time
                   nullable: true
                 example:
-                  - '2011-11-11T12:22:11Z'
+                  - 2011-11-11T12:22:11Z
                   - null
             trs:
               description: >-
@@ -711,8 +711,8 @@ components:
                 additional enum values.
               type: string
               enum:
-                - 'http://www.opengis.net/def/uom/ISO-8601/0/Gregorian'
-              default: 'http://www.opengis.net/def/uom/ISO-8601/0/Gregorian'
+                - http://www.opengis.net/def/uom/ISO-8601/0/Gregorian
+              default: http://www.opengis.net/def/uom/ISO-8601/0/Gregorian
     providers:
       type: array
       description: >-
@@ -788,7 +788,7 @@ components:
         type:
           type: string
         id:
-          description: 'identifier of the collection used, for example, in URIs'
+          description: identifier of the collection used, for example, in URIs
           type: string
         title:
           description: human readable title of the collection
@@ -878,7 +878,7 @@ components:
             roles:
               - producer
               - licensor
-            url: 'https://sentinel.esa.int/web/sentinel/user-guides/sentinel-2-msi'
+            url: https://sentinel.esa.int/web/sentinel/user-guides/sentinel-2-msi
         extent:
           spatial:
             bbox:
@@ -888,15 +888,15 @@ components:
                 - 83
           temporal:
             interval:
-              - - '2015-06-23T00:00:00Z'
-                - '2019-07-10T13:44:56Z'
+              - - 2015-06-23T00:00:00Z
+                - 2019-07-10T13:44:56Z
         summaries:
           datetime:
-            min: '2015-06-23T00:00:00Z'
-            max: '2019-07-10T13:44:56Z'
-          'sci:citation':
-            - 'Copernicus Sentinel data [Year]'
-          'eo:gsd':
+            min: 2015-06-23T00:00:00Z
+            max: 2019-07-10T13:44:56Z
+          sci:citation:
+            - Copernicus Sentinel data [Year]
+          eo:gsd:
             - 10
             - 30
             - 60
@@ -907,13 +907,13 @@ components:
             - sentinel-2
           instruments:
             - msi
-          'view:off_nadir':
+          view:off_nadir:
             min: 0
             max: 100
-          'view:sun_elevation':
+          view:sun_elevation:
             min: 6.78
             max: 89.9
-          'eo:bands':
+          eo:bands:
             - - name: B1
                 common_name: coastal
                 center_wavelength: 4.439
@@ -949,9 +949,9 @@ components:
                 center_wavelength: 2.2024
         links:
           - rel: self
-            href: 'http://cool-sat.com/collections/Sentinel-2'
+            href: http://cool-sat.com/collections/Sentinel-2
           - rel: root
-            href: 'http://cool-sat.com/collections'
+            href: http://cool-sat.com/collections
           - rel: license
             href: >-
               https://scihub.copernicus.eu/twiki/pub/SciHubWebPortal/TermsConditions/Sentinel_Data_Terms_and_Conditions.pdf
@@ -1125,7 +1125,7 @@ components:
             $ref: '#/components/schemas/featureGeoJSON'
     itemId:
       type: string
-      description: 'Provider identifier, a unique ID.'
+      description: Provider identifier, a unique ID.
     bbox:
       description: |-
         Only features that have a geometry that intersects the bounding box are
@@ -1245,9 +1245,9 @@ components:
       example:
         stac_version: 1.0.0
         stac_extensions:
-          - 'https://stac-extensions.github.io/eo/v1.0.0/schema.json'
-          - 'https://stac-extensions.github.io/view/v1.0.0/schema.json'
-          - 'https://example.com/cs-extension/1.0/schema.json'
+          - https://stac-extensions.github.io/eo/v1.0.0/schema.json
+          - https://stac-extensions.github.io/view/v1.0.0/schema.json
+          - https://example.com/cs-extension/1.0/schema.json
         type: Feature
         id: CS3-20160503_132131_05
         bbox:
@@ -1269,7 +1269,7 @@ components:
               - - -122.308150179
                 - 37.488035566
         properties:
-          datetime: '2016-05-03T13:22:30.040Z'
+          datetime: 2016-05-03T13:22:30.040Z
           title: A CS3 item
           license: PDDL-1.0
           providers:
@@ -1277,26 +1277,26 @@ components:
               roles:
                 - producer
                 - licensor
-              url: 'https://cool-sat.com/'
-          'view:sun_azimuth': 168.7
-          'eo:cloud_cover': 0.12
-          'view:off_nadir': 1.4
+              url: https://cool-sat.com/
+          view:sun_azimuth: 168.7
+          eo:cloud_cover: 0.12
+          view:off_nadir: 1.4
           platform: coolsat2
           instruments:
             - cool_sensor_v1
-          'eo:bands': []
-          'view:sun_elevation': 33.4
-          'eo:gsd': 0.512
+          eo:bands: []
+          view:sun_elevation: 33.4
+          eo:gsd: 0.512
         collection: CS3
         links:
           - rel: self
-            href: 'http://cool-sat.com/collections/CS3/items/20160503_132130_04'
+            href: http://cool-sat.com/collections/CS3/items/20160503_132130_04
           - rel: root
-            href: 'http://cool-sat.com/collections'
+            href: http://cool-sat.com/collections
           - rel: parent
-            href: 'http://cool-sat.com/collections/CS3'
+            href: http://cool-sat.com/collections/CS3
           - rel: collection
-            href: 'http://cool-sat.com/collections/CS3'
+            href: http://cool-sat.com/collections/CS3
         assets:
           analytic:
             href: >-
@@ -1321,9 +1321,9 @@ components:
             $ref: '#/components/schemas/conformanceClasses'
           example:
             conformsTo:
-              - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core'
-              - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30'
-              - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson'
+              - http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core
+              - http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30
+              - http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson
     Collections:
       description: >-
         The feature collections shared by this API.
