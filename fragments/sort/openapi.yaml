@@ -11,7 +11,7 @@ components:
       x-stac-api-fragment: sort
       in: query
       description: |-
-        **Optional Extension:** Sort
+        **Extension:** Sort
 
         An array of property names, prefixed by either "+" for ascending or
         "-" for descending. If no prefix is provided, "+" is assumed.
@@ -26,7 +26,7 @@ components:
       type: object
       x-stac-api-fragment: sort
       description: |-
-        **Optional Extension:** Sort
+        **Extension:** Sort
 
         Sort the results.
       properties:

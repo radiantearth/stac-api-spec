@@ -11,7 +11,7 @@ components:
       x-stac-api-fragment: query
       in: query
       description: |-
-        **Optional Extension:** Query
+        **Extension:** Query
 
         Query for properties in items.
         Use the JSON form of the query used in POST.
@@ -23,7 +23,7 @@ components:
       type: object
       x-stac-api-fragment: query
       description: |-
-        **Optional Extension:** Query
+        **Extension:** Query
 
         Allows users to query properties for specific values
       properties:
