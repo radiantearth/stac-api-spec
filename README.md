@@ -29,7 +29,7 @@ to search STAC catalogs, where the features returned are STAC [Item](stac-spec/i
 that have common properties, links to their assets and geometries that represent the footprints of the geospatial assets.
 
 The specification for STAC API is provided as files that follow the [OpenAPI](http://openapis.org/) 3.0 specification, 
-rendered online into HTML at <https://api.stacspec.org/v1.0.0-beta.4>, in addition to human-readable documentation.  
+rendered online into HTML at <https://api.stacspec.org/v1.0.0-beta.5>, in addition to human-readable documentation.  
 
 ## Stability Note
 

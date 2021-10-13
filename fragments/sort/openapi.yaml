@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: The SpatioTemporal Asset Catalog API - Sort
   description: Adds Parameter to control sorting of returns results.
-  version: 1.0.0-beta.4
+  version: 1.0.0-beta.5
 paths: {}
 components:
   parameters:
@@ -11,7 +11,7 @@ components:
       x-stac-api-fragment: sort
       in: query
       description: |-
-        **Optional Extension:** Sort
+        **Extension:** Sort
 
         An array of property names, prefixed by either "+" for ascending or
         "-" for descending. If no prefix is provided, "+" is assumed.
@@ -26,7 +26,7 @@ components:
       type: object
       x-stac-api-fragment: sort
       description: |-
-        **Optional Extension:** Sort
+        **Extension:** Sort
 
         Sort the results.
       properties:

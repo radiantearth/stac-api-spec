@@ -3,7 +3,7 @@
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
 - **Conformance Classes:** 
   - Filter: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/filter>
-  - Item Search Filter: <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:item-search-filter>
+  - Item Search Filter: <https://api.stacspec.org/v1.0.0-beta.5/item-search#filter:item-search-filter>
   - CQL Text: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql-text>
   - CQL JSON: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql-json>
   - Basic CQL: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-cql>
@@ -129,7 +129,7 @@ The precise decomposition of the OAFeat conformance classes is still a work in p
 rapidly (see [ogcapi-features/issues/579](https://github.com/opengeospatial/ogcapi-features/issues/579)). 
 The STAC API Filter Extension reuses the definitions and conformance classes in OAFeat CQL,
 adding only the Item Search Filter conformance class
-(`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:item-search-filter`) to bind 
+(`https://api.stacspec.org/v1.0.0-beta.5/item-search#filter:item-search-filter`) to bind 
 the CQL filter behavior to the Item Search resource.
 
 The implementation **must** support these conformance classes:
@@ -140,7 +140,7 @@ The implementation **must** support these conformance classes:
   the query language used for the `filter` parameter defined by Filter. This includes logical operators (`AND`, `OR`, `NOT`), 
   comparison operators (`=`, `<>`, `<`, `<=`, `>`, `>=`), and `IS NULL`. The comparison operators are allowed against string, numeric, boolean,
   and datetime types.
-- Item Search Filter (`https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:item-search-filter`) binds the Filter and 
+- Item Search Filter (`https://api.stacspec.org/v1.0.0-beta.5/item-search#filter:item-search-filter`) binds the Filter and 
   Basic CQL conformance classes to apply to the Item Search endpoint (`/search`).  This class is the correlate of the OAFeat CQL Features 
   Filter class that binds Filter and Basic CQL to the Features resource (`/collections/{cid}/items`).
 
@@ -349,9 +349,9 @@ at least these values:
     
     "http://www.opengis.net/spec/ogcapi_common-2/1.0/conf/collections",
 
-    "http://api.stacspec.org/v1.0.0-beta.4/core",
-    "http://api.stacspec.org/v1.0.0-beta.4/stac-search",
-    "http://api.stacspec.org/v1.0.0-beta.4/stac-response",
+    "http://api.stacspec.org/v1.0.0-beta.5/core",
+    "http://api.stacspec.org/v1.0.0-beta.5/stac-search",
+    "http://api.stacspec.org/v1.0.0-beta.5/stac-response",
 
     "http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/filter",
     "http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/features-filter",

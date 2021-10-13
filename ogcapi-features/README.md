@@ -17,10 +17,10 @@
 
 *based on [**OGC API - Features - Part 1: Core**](https://www.ogc.org/standards/ogcapi-features)*
 
-- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features)) 
+- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features)) 
   uses all the OGC API - Features openapi fragments to describe returning STAC Item objects.
 - **Conformance URIs:**
-  - <https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features> 
+  - <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features> 
   - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core> - [Requirements Class Core](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_core))
   - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30> - [Requirements Class OpenAPI 3.0](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_oas30))
   - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson> - [Requirements Class GeoJSON](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_geojson))
@@ -42,18 +42,18 @@ with OAFeat clients. But specialized STAC clients will likely display results be
 
 The following Link relations shall exist in the Landing Page (root).
 
-| **rel**        | **href**             | **From**       | **Description**                                                                                                                                                         |
-| -------------- | -------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `root`         | `/`                  | STAC Core      | The root URI                                                                                                                                                            |
-| `self`         | `/`                  | OAFeat         | Self reference, same as root URI                                                                                                                                        |
-| `conformance`  | `/conformance`       | OAFeat         | Conformance URI                                                                                                                                                         |
-| `service-desc` | `/api` | OAFeat OpenAPI | The OpenAPI service description. Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API. The path for this endpoint is only recommended to be `/api`, but may be another path. |
-| `data`         | `/collections`       | OAFeat         | List of Collections                                                                                                                                                     |
+| **rel**        | **href**       | **From**       | **Description**                                                                                                                                                                                                                                                |
+| -------------- | -------------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `root`         | `/`            | STAC Core      | The root URI                                                                                                                                                                                                                                                   |
+| `self`         | `/`            | OAFeat         | Self reference, same as root URI                                                                                                                                                                                                                               |
+| `conformance`  | `/conformance` | OAFeat         | Conformance URI                                                                                                                                                                                                                                                |
+| `service-desc` | `/api`         | OAFeat OpenAPI | The OpenAPI service description. Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API. The path for this endpoint is only recommended to be `/api`, but may be another path. |
+| `data`         | `/collections` | OAFeat         | List of Collections                                                                                                                                                                                                                                            |
 
 Additionally, a `service-doc` endpoint is recommended, but not required.
 
-| **rel**       | **href**                  | **From**       | **Description**                                                                                                         |
-| ------------- | ------------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| **rel**       | **href**    | **From**       | **Description**                                                                                                                                                                                                |
+| ------------- | ----------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `service-doc` | `/api.html` | OAFeat OpenAPI | An HTML service description.  Uses the `text/html` media type to refer to a human-consumable description of the service. The path for this endpoint is only recommended to be `/api`, but may be another path. |
 
 ## Endpoints
@@ -61,15 +61,15 @@ Additionally, a `service-doc` endpoint is recommended, but not required.
 The core OGC API - Features endpoints are shown below, with details provided in an 
 [OpenAPI specification document](openapi.yaml).
 
-| Endpoint                                        | Returns                                                 | Description                                                                                                                                |
-| ----------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `/`                                             | [Catalog](../stac-spec/catalog-spec/README.md)          | Landing page, links to API capabilities                                                                                                    |
+| Endpoint                                        | Returns                                                 | Description                                                                                                                                                             |
+| ----------------------------------------------- | ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/`                                             | [Catalog](../stac-spec/catalog-spec/README.md)          | Landing page, links to API capabilities                                                                                                                                 |
 | `/api`                                          | OpenAPI 3.0 JSON                                        | Returns an OpenAPI description of the service from the `service-desc` link `rel`. The path for this endpoint is only recommended to be `/api`, but may be another path. |
-| `/conformance`                                  | JSON                                                    | Info about standards to which the API conforms                                                                                             |
-| `/collections`                                  | JSON                                                    | Object containing an array of Collection objects in the Catalog, and Link relations                                                        |
-| `/collections/{collectionId}`                   | [Collection](../stac-spec/collection-spec/README.md)    | Returns single Collection JSON                                                                                                             |
-| `/collections/{collectionId}/items`             | [ItemCollection](../fragments/itemcollection/README.md) | GeoJSON FeatureCollection-conformant entity of Item objects in collection                                                                  |
-| `/collections/{collectionId}/items/{featureId}` | [Item](../stac-spec/item-spec/README.md)                | Returns single Item (GeoJSON Feature)                                                                                                      |
+| `/conformance`                                  | JSON                                                    | Info about standards to which the API conforms                                                                                                                          |
+| `/collections`                                  | JSON                                                    | Object containing an array of Collection objects in the Catalog, and Link relations                                                                                     |
+| `/collections/{collectionId}`                   | [Collection](../stac-spec/collection-spec/README.md)    | Returns single Collection JSON                                                                                                                                          |
+| `/collections/{collectionId}/items`             | [ItemCollection](../fragments/itemcollection/README.md) | GeoJSON FeatureCollection-conformant entity of Item objects in collection                                                                                               |
+| `/collections/{collectionId}/items/{featureId}` | [Item](../stac-spec/item-spec/README.md)                | Returns single Item (GeoJSON Feature)                                                                                                                                   |
 
 The OGC API - Features is a standard API that represents collections of geospatial data. It defines a RESTful interface 
 to query geospatial data, with GeoJSON as a main return type. With OAFeat you can return any `Feature`, which is a geometry 
@@ -230,8 +230,8 @@ the [overview](../overview.md#example-landing-page) document.
     "description": "This Catalog aims to demonstrate the a simple landing page",
     "type": "Catalog",
     "conformsTo" : [
-        "https://api.stacspec.org/v1.0.0-beta.4/core",
-        "https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features",
+        "https://api.stacspec.org/v1.0.0-beta.5/core",
+        "https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features",
         "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core",
         "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30",
         "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson"
@@ -320,7 +320,7 @@ to requests from clients.
 ### Transaction
 
 - **Conformance URIs:**
-  - <https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features/extensions/transaction>
+  - <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features/extensions/transaction>
   - <http://www.opengis.net/spec/ogcapi-features-4/1.0/conf/simpletx>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Definition**: [STAC API - Transaction Fragment](extensions/transaction/)
@@ -332,7 +332,7 @@ POST, PUT, PATCH, and DELETE methods. The full description of how this extension
 
 ### Items and Collections API Version Extension
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features/extensions/version>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features/extensions/version>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Definition**: [STAC API - Version](extensions/version/)
 
@@ -342,7 +342,7 @@ It is the STAC API equivalent of [OGC API - Features - Part 4: Create, Replace, 
 
 ### Fields
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features#fields>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features#fields>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Definition**: [STAC API - Fields Fragment](../fragments/fields/)
 
@@ -355,7 +355,7 @@ through the use of a `fields` parameter. The full description of how this extens
 
 ### Sort
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features#sort>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features#sort>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Definition**: [STAC API - Sort Fragment](../fragments/sort/)
 
@@ -368,7 +368,7 @@ of this extension can be found in the [sort fragment](../fragments/sort).
 
 ### Context
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features#context>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features#context>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Definition**: [STAC API - Context Fragment](../fragments/context/)
 

@@ -6,8 +6,8 @@
   - [Pagination](#pagination)
   - [Example](#example)
 
-- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.4/collections))
-- **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.4/extensions/collections>
+- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.5/collections))
+- **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.5/extensions/collections>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Dependencies**: [STAC API - Core](../core)
 
@@ -25,24 +25,24 @@ aim to align with it. But it still seems to be in flux.*
 
 The following Link relations shall exist in the Landing Page (root).
 
-| **rel**        | **href**             | **From**       | **Description**                                                                                                                                                         |
-| -------------- | -------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `root`         | `/`                  | STAC Core      | The root URI                                                                                                                                                            |
-| `self`         | `/`                  | OAFeat         | Self reference, same as root URI                                                                                                                                        |
-| `service-desc` | `/api` | OAFeat OpenAPI | The OpenAPI service description. Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API. The path for this endpoint is only recommended to be `/api`, but may be another path. |
-| `data`         | `/collections`       | OAFeat         | List of Collections   |
+| **rel**        | **href**       | **From**       | **Description**                                                                                                                                                                                                                                                |
+| -------------- | -------------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `root`         | `/`            | STAC Core      | The root URI                                                                                                                                                                                                                                                   |
+| `self`         | `/`            | OAFeat         | Self reference, same as root URI                                                                                                                                                                                                                               |
+| `service-desc` | `/api`         | OAFeat OpenAPI | The OpenAPI service description. Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API. The path for this endpoint is only recommended to be `/api`, but may be another path. |
+| `data`         | `/collections` | OAFeat         | List of Collections                                                                                                                                                                                                                                            |
 
 A `service-doc` endpoint is recommended, but not required.
 
-| **rel**       | **href**                  | **From**       | **Description**  |
-| ------------- | ------------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| **rel**       | **href**    | **From**       | **Description**                                                                                                                                                                                                     |
+| ------------- | ----------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `service-doc` | `/api.html` | OAFeat OpenAPI | An HTML service description.  Uses the `text/html` media type to refer to a human-consumable description of the service. The path for this endpoint is only recommended to be `/api.html`, but may be another path. |
 
 Additionally, `child` relations may exist to individual catalogs and collections.
 
-| **rel**        | **href**             | **From**       | **Description**                                                                                                                                                         |
-| -------------- | -------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `child`        | various              | STAC Core      | The child STAC Catalogs & Collections. Provides curated paths to get to STAC Collection and Item objects |
+| **rel** | **href** | **From**  | **Description**                                                                                          |
+| ------- | -------- | --------- | -------------------------------------------------------------------------------------------------------- |
+| `child` | various  | STAC Core | The child STAC Catalogs & Collections. Provides curated paths to get to STAC Collection and Item objects |
 
 `child` relations are useful for supporting browsing a STAC API as if it were a static catalog.
 
@@ -55,17 +55,17 @@ The following Link relations shall exist in the `/collections` endpoint response
 
 The following Link relations shall exist in the Collection object returned from the `/collections/{collectionId}` endpoint.
 
-| **rel**  | **href**                            | **From**  | **Description**                            |
-| -------- | ----------------------------------- | --------- | ------------------------------------------ |
-| `root`   | `/`                                 | STAC Core | The root URI                               |
-| `parent` | `/`                                 | OAFeat    | Parent reference, usually the root Catalog |
-| `self`   | `/collections/{collectionId}`       | OAFeat    | Self reference                             |
+| **rel**  | **href**                      | **From**  | **Description**                            |
+| -------- | ----------------------------- | --------- | ------------------------------------------ |
+| `root`   | `/`                           | STAC Core | The root URI                               |
+| `parent` | `/`                           | OAFeat    | Parent reference, usually the root Catalog |
+| `self`   | `/collections/{collectionId}` | OAFeat    | Self reference                             |
 
 Additionally, these relations may exist for the `/collections/{collectionId}` endpoint:
 
-| **rel**  | **href**                            | **From**  | **Description**                            |
-| -------- | ----------------------------------- | --------- | ------------------------------------------ |
-| `canonical`        | various              | STAC Core      | Provides the preferred paths to get to STAC Collection and Item objects, if they differ from the URL that was used to retrieve the STAC object and thus duplicate other content. This can be useful in federated catalogs that present metadata that has a different location than the source metadata. |
+| **rel**     | **href** | **From**  | **Description**                                                                                                                                                                                                                                                                                         |
+| ----------- | -------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `canonical` | various  | STAC Core | Provides the preferred paths to get to STAC Collection and Item objects, if they differ from the URL that was used to retrieve the STAC object and thus duplicate other content. This can be useful in federated catalogs that present metadata that has a different location than the source metadata. |
 
 Usually, the `self` link in a Collection must link to the same URL that was used to request
 it. However, implementations may choose to have the canonical location of the Collection be
@@ -73,12 +73,12 @@ elsewhere. If this is done, it is recommended to include a `rel` of `canonical` 
 
 ## Endpoints
 
-| Endpoint | Returns | Description |
-| -------- | ------- | ----------- |
-| `/`                           | Catalog        | Landing Page and root Catalog |
+| Endpoint                      | Returns        | Description                                                                                                            |
+| ----------------------------- | -------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `/`                           | Catalog        | Landing Page and root Catalog                                                                                          |
 | `/api`                        | OAFeat OpenAPI | The OpenAPI service description. The path for this endpoint is only recommended to be `/api`, but may be another path. |
-| `/collections`                | JSON           | Object with a list of Collections contained in the catalog and links |
-| `/collections/{collectionId}` | Collection     | Returns single Collection JSON |
+| `/collections`                | JSON           | Object with a list of Collections contained in the catalog and links                                                   |
+| `/collections/{collectionId}` | Collection     | Returns single Collection JSON                                                                                         |
 
 STAC API's implementing the Collections class must support HTTP GET operation at `/collections`, with the return JSON document consisting
 of an array of all STAC Collections and an array of Links.
