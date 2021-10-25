@@ -1,10 +1,10 @@
 openapi: 3.0.3
 info:
-  title: STAC API - Collections
+  title: STAC API - Catalogs
   version: '1.0.0-beta.5'
   description: >-
-    This is an OpenAPI definition of the SpatioTemporal Asset Catalog API - Collections
-    specification.  This is a subset of the STAC API - Features specification.
+    This is an OpenAPI definition of the SpatioTemporal Asset Catalog API - Catalogs
+    specification.
   contact:
     name: STAC Specification
     url: 'http://stacspec.org'
@@ -12,14 +12,14 @@ info:
     name: Apache License 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0'
 tags:
-  - name: Collections
+  - name: Catalogs
     description: |-
-      All endpoints related to STAC API - Collections
+      All endpoints related to STAC API - Catalogs
 paths:
   '/':
     get:
       tags:
-        - Features
+        - Catalogs
       summary: landing page
       description: |-
         The landing page provides links to the sub-resources.
@@ -28,11 +28,8 @@ paths:
         '200':
           description: |-
             The landing page provides links to the API definition
-            (link relations `service-desc` and `service-doc`),
-            the Conformance declaration (path `/conformance`,
-            link relation `conformance`), and the Feature
-            Collections (path `/collections`, link relation
-            `data`).
+            (link relations `service-desc` and `service-doc`) and sub-Catalogs and sub-Collections
+            (link relation `child`).
           content:
             application/json:
               schema:
@@ -65,10 +62,14 @@ paths:
                     rel: conformance
                     type: application/json
                     title: OGC API conformance classes implemented by this server
-                  - href: 'http://data.example.org/collections'
-                    rel: data
+                  - href: 'http://data.example.org/catalog/sentinel-1'
+                    rel: child
                     type: application/json
-                    title: Information about the feature collections
+                    title: Sentinel 1 Catalog
+                  - href: 'http://data.example.org/catalog/sentinel-2'
+                    rel: child
+                    type: application/json
+                    title: Sentinel 2 Catalog
   '/conformance':
     get:
       tags:

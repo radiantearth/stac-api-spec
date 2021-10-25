@@ -77,11 +77,11 @@ components:
                 rel: service-doc
                 type: text/html
                 title: the API documentation
-              - href: 'http://data.example.org/sentinel-1'
+              - href: 'http://data.example.org/catalogs/sentinel-1'
                 rel: child
                 type: application/json
                 title: Sentinel 1 Catalog
-              - href: 'http://data.example.org/sentinel-2'
+              - href: 'http://data.example.org/catalogs/sentinel-2'
                 rel: child
                 type: application/json
                 title: Sentinel 2 Catalog

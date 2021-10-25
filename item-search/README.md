@@ -38,8 +38,8 @@ The Item Search endpoint intentionally defines only a limited group of operation
 most behavior will be defined in [Extensions](#extensions). These extensions can be composed by an implementer to 
 cover only the set of functionality the implementer requires. For example, the query capability defined by 
 Item Search is limited, and only adds cross-collection and spatial intersects query operators to the capabilities 
-already defined by OAFeat. For example, the Query Extension (soon to be superseded by the Filter Extension) 
-provides a more expressive set of operators. 
+already defined by OAFeat. For example, the Query Extension and Filter Extension
+provide a more expressive set of operators.
 
 Implementing `GET /search` is **required**, `POST /search` is optional, but recommended.
 
@@ -213,8 +213,9 @@ See the [paging examples](examples.md#paging-examples) for additional insight.
 
 ## HTTP Request Methods and Content Types
 
-The STAC API follow a RESTful model. A core principal of this is the use of HTTP Request Methods ("verbs") and
-the `Content-Type` header to drive behavior on resources ("nouns"). This section describes how these are used with the `/search` endpoint 
+STAC APIs follow the modern web API practices of using HTTP Request Methods ("verbs") and
+the `Content-Type` header to drive behavior on resources ("nouns").
+This section describes how these are used with the `/search` endpoint.
 
 ### GET
 

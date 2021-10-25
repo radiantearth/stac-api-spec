@@ -3,6 +3,8 @@
 - [STAC API - Features](#stac-api---features)
   - [Link Relations](#link-relations)
   - [Endpoints](#endpoints)
+  - [Item Pagination](#item-pagination)
+  - [Collection Pagination](#collection-pagination)
   - [Examples](#examples)
   - [Example Landing Page for STAC API - Features](#example-landing-page-for-stac-api---features)
   - [Example Collection for STAC API - Features](#example-collection-for-stac-api---features)
@@ -80,13 +82,13 @@ be queried ([7.11](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_col
 information about the geospatial dataset, like its name and description, as well as the spatial and temporal extents of all 
 the data contained. A [STAC Collection](../stac-spec/collection-spec/README.md) contains this same 
 information, along with other STAC-specific fields to provide additional metadata for searching spatiotemporal assets, and 
-thus are compliant with both OAFeat Collection and STAC Collection, and are returned from the `/collections/{collection_id}` 
+thus are compliant with both OAFeat Collection and STAC Collection, and are returned from the `/collections/{collectionId}` 
 endpoint.
 
 In OAFeat, Features are the individual records within a Collection and are usually provided in GeoJSON format. 
 [STAC Item](../stac-spec/item-spec/README.md) objects are compliant with the OAFeat Features 
 [GeoJSON requirements class](http://docs.ogc.org/is/17-069r3/17-069r3.html#_requirements_class_geojson), and are returned from the 
-`/collections/{collection_id}/items/{item_id}` endpoint. The return of other encodings 
+`/collections/{collectionId}/items/{itemId}` endpoint. The return of other encodings 
 ([html](http://docs.ogc.org/is/17-069r3/17-069r3.html#rc_html), [gml](http://docs.ogc.org/is/17-069r3/17-069r3.html#rc_gmlsf0))
 is outside the scope of STAC API, as the [STAC Item](../stac-spec/item-spec/item-spec.md) is
 specified in GeoJSON.
@@ -109,6 +111,81 @@ STAC API.
 
 Implementing OAFeat enables a wider range of clients to access the API's STAC Item objects, as it is a more widely implemented
 protocol than STAC. 
+
+***Todo*** -- allowing urls like `/collections/landsat-8-l1/151/018` where `landsat-8-l1/151/018` is the collectionId. 
+
+## Item Pagination
+
+OAFeat supports paging through hypermedia links for the Items resource 
+(`/collections/{collectionId}/items`). Since only GET requests are allowed for this endpoint, 
+it is possible
+to provide a Link with `rel` type `next` and the href of the full URL of the next page of results.
+This link href must contain any URL parameters that are necessary 
+for the implementation to understand how to provide the next page of results, eg: `page`, `next`,
+`token`, etc. For example, the links array will have an object like:
+
+```json
+    "links": [
+        {
+            "rel": "next",
+            "href": "http://api.cool-sat.com/collections/my_collection/items?page=2"
+        }
+    ]
+```
+
+The href may contain any arbitrary URL parameter, which is implementation-specific:
+
+- `http://api.cool-sat.com/collections/my_collection/items?page=2`
+- `http://api.cool-sat.com/collections/my_collection/items?next=8a35eba9c`
+- `http://api.cool-sat.com/collections/my_collection/items?token=f32890a0bdb09ac3`
+
+Additionally, STAC has extended the Link object to support additional fields that provide header values
+to the client should they be needed for a subsequent request for the next page of results. The use
+of header values for pagination with GET requests is uncommon, so if your implementation does not use them you can omit this attribute in the Link. These
+fields are described in detail in the [Item Search](../item-search/README.md#paging) spec.  To avoid returning the entire original request in the response, the  `merge` 
+property can be specified. This indicates that the client must send the same request headers that were sent in the original 
+request, but with the specified headers values merged in. This allows servers to indicate what needs to change 
+to get to the next page without mirroring the entire request back to the client. 
+
+See the [paging examples](../item-search/examples.md#paging-examples) for additional insight.
+
+## Collection Pagination
+
+OAFeat does not define a specific mechanism for how clients may access all collections from servers
+with many
+collections. STAC - Features adds support for this with pagination (similar to the Item pagination
+mechanism) through hypermedia links for the Collections resource 
+(`/collections`). This mechanism aligns with pagination of collections in the 
+OGC API - Common - Part 2: Geospatial Data specification. With this, Links with 
+relations `next` and `prev` are included in the `links` array,
+and these are used to navigate to the next and previous pages of Collection objects. The specific query
+parameter used for paging is implementation specific and not defined by STAC API. For example, 
+an implementation may take a parameter (e.g., `page`) indicating the numeric page of results, a
+base64-encoded value indicating the last result returned for the current page (e.g., `search_after` as
+in Elasticsearch), or a cursor token representing backend state.  
+
+In our simple example of numerical pages, the response for `page=3` would have a
+`links` array containing these two Links indicating the URLs for the next (page=4) and 
+previous (page=2) pages:
+
+```none
+"links": [
+  ...
+  {
+    "rel": "prev",
+    "href": "http://api.cool-sat.com/collections?page=2"
+  },
+  {
+    "rel": "next",
+    "href": "http://api.cool-sat.com/collections?page=4"
+  }
+]
+```
+
+Additionally, STAC has extended the Link object to support additional fields that provide header values
+to the client should they be needed for a subsequent request for the next page of results. The use
+of header values for pagination with GET requests is uncommon, so if your implementation does not use them you can omit this attribute in the Link. These
+fields are described in detail in the [Item Search](../item-search/README.md#paging) spec. 
 
 ## Examples
 
@@ -271,7 +348,7 @@ It is the STAC API equivalent of [OGC API - Features - Part 4: Create, Replace, 
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Definition**: [STAC API - Fields Fragment](../fragments/fields/)
 
-By default, the Items resource `/collections/{collection_id}/items` returns all attributes 
+By default, the Items resource `/collections/{collectionId}/items` returns all attributes 
 of each Item, as there is no way to specify 
 exactly those attributes that should be returned. The Fields extension to STAC Features adds new functionality that 
 allows the client to suggest to the server which Item attributes should be included or excluded in the response, 
@@ -284,7 +361,7 @@ through the use of a `fields` parameter. The full description of how this extens
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Definition**: [STAC API - Sort Fragment](../fragments/sort/)
 
-By default, the Items resource `/collections/{collection_id}/items` returns results in no specified order. Whatever order the results are in 
+By default, the Items resource `/collections/{collectionId}/items` returns results in no specified order. Whatever order the results are in 
 is up to the implementor, and will typically default to an arbitrary order that is fastest for the underlying data store 
 to retrieve results. This extension adds a new parameter, `sortby`, that lets a user specify a comma separated list of
 field names to sort by, with an indication of direction. It uses '+' and
@@ -297,6 +374,6 @@ of this extension can be found in the [sort fragment](../fragments/sort).
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Definition**: [STAC API - Context Fragment](../fragments/context/)
 
-This extension is intended to augment the core ItemCollection responses from the Items resource `/collections/{collection_id}/items`  with a
+This extension is intended to augment the core ItemCollection responses from the Items resource `/collections/{collectionId}/items`  with a
 JSON object called `context` that includes the number of items `matched`, `returned` and the `limit` requested.
 The full description and examples of this are found in the [context fragment](../fragments/context).

@@ -9,8 +9,6 @@ tags:
     description: Part of STAC API - Core definition
   - name: STAC API - Features
     description: Part of STAC API - Features definition
-  - name: STAC API - Collections
-    description: Part of STAC API - Collections definition
   - name: STAC API - Filter Extension
     description: Part of STAC API - Filter extension definition
 

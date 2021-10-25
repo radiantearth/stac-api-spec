@@ -1,6 +1,6 @@
 # About
 
-The STAC API defines a RESTful JSON-based web API to browse and query [SpatioTemporal Asset Catalog](stac-spec/) 
+The STAC API defines a JSON-based web API to browse and query [SpatioTemporal Asset Catalog](stac-spec/) 
 (STAC) objects. While the core STAC specification provides a structure and language to describe assets, users 
 usually want to access
 a subset of the entire catalog, such as for a certain date range, in a particular area of interest, or matching properties
@@ -20,7 +20,7 @@ off point for the more powerful capabilities - it contains a list of URL's, each
 'relationships' (`rel`) to indicate their functionality. Note that the [STAC Core specification](stac-spec) provides 
 most all the content of API responses - the STAC API is primarily concerned with the return of STAC 
 [Item](stac-spec/item-spec/README.md) and [Collection](stac-spec/collection-spec/README.md) objects via a 
-RESTful web API.  See the [rendered OpenAPI document](https://api.stacspec.org/v1.0.0-beta.5/core) for more details.
+web API.  See the [rendered OpenAPI document](https://api.stacspec.org/v1.0.0-beta.5/core) for more details.
 
 There are then two major sets of functionality that build on the core, which are designed to be complementary, letting
 implementations choose which parts they want to utilize. Most every STAC API implements at least one, and many follow
@@ -100,8 +100,8 @@ directory as a [submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
 
 ## Capabilities List
 
-As STAC APIs follow a RESTful model, a core principal of this is the use of HTTP Request Methods ("verbs") and
-the `Content-Type` header to drive behavior on resources ("nouns") - the endpoints listed below.
+STAC APIs follow the modern web API practices of using HTTP Request Methods ("verbs") and
+the `Content-Type` header to drive behavior on resources ("nouns") in the endpoints listed below.
 
 The following table describes the service resources available in a full STAC API implementation. Note that the 'Endpoint'
 column is more of an example in some cases. OGC API makes some endpoint locations required, those will be bolded below.

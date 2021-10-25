@@ -13,7 +13,7 @@
 
 The base of a STAC API is its landing page. This resource is the starting point to discover what behaviors 
 the API supports via the `conformsTo` values and link relations. 
-This behavior in a RESTful API is known as 
+This behavior in a web API is known as 
 [Hypermedia as the Engine of Application State (HATEOAS)](https://en.wikipedia.org/wiki/HATEOAS). 
 STAC API relies heavily on hypermedia for API resource navigation. 
 

@@ -8,6 +8,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- The Paging mechanism via a Link with rel `next` or `prev` as defined for Item Search can also be used
+  for the STAC - Features endpoint `/collections/{collectionId}/items`.
+
+### Fixed
+
+- Collection conformance class URI should be `https://api.stacspec.org/v1.0.0-beta.4/collections` instead 
+  of `http://stacspec.org/spec/api/1.0.0-beta.4/extensions/collections`
+
 ### Changed
 
 - Limit parameter semantics now match OAFeat. Previously, the behavior was not precisely defined.
@@ -23,7 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Support binding Sort, Fields, and Context Extensions to STAC Features items resource
-  endpoint (`/collections/{collection_id}/items`)
+  endpoint (`/collections/{collectionId}/items`)
 - In Collections, added `canonical` rel type, added `/` and `/api` to list of endpoints
 - In Item Search, added endpoint table
 

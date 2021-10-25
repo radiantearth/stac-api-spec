@@ -9,12 +9,17 @@ core geospatial standards.
 The collaboration facilities of Github should be used to their full extent. All proposed improvements and
 changes should come in the form of pull requests, using code review functionality to discuss changes.
 
+- **Alignment with OGC standards** - The Open Geospatial Consortium publishes a large set of geospatial standards.
+  To the greatest extent possible, the STAC API should align with existing and in-progress OGC API standards. The
+  STAC API has a symbiotic relationship with these standards, as it seeks both to reuse their building blocks and
+  push them forward in a practical direction. 
+
 - **JSON + REST + HTTP at the core.** JSON has won over XML, and REST over SOAP. We embrace them and
 are not considering legacy options. Forward looking protocols can be considered as extensions,
 but the default specifications should be in JSON, following best REST practices. HTTP caching and
 error codes should be leveraged at the core. GeoJSON has already defined the core geospatial JSON response,
-so it should also be core. As STAC APIs follow a RESTful model, a core principal is the use of HTTP Request Methods ("verbs") and
-the `Content-Type` header to drive behavior on resources ("nouns"). 
+so it should also be core. STAC APIs follow the modern web API practices of using HTTP Request Methods 
+("verbs") and the `Content-Type` header to drive behavior on resources ("nouns").
 
 - **Small Reusable Pieces Loosely Coupled** - Each specification should be as focused as possible,
 defining one core concept and refraining from describing lots of options. Additional options can be made
