@@ -70,10 +70,10 @@ the service supports. This are listed at the top of each extension description, 
   - <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features#fields>
 - [Filter](item-search/README.md#filter)
   - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/filter>
-  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-cql>
+  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-cql2>
   - <https://api.stacspec.org/v1.0.0-beta.5/item-search#filter:item-search-filter>
-  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql-text>
-  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql-json>
+  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql2-text>
+  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql2-json>
   - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/advanced-comparison-operators>
   - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-spatial-operators>
   - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/spatial-operators>
@@ -82,6 +82,7 @@ the service supports. This are listed at the top of each extension description, 
   - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/arithmetic>
   - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/array-operators>
   - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/property-property>
+  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/case-insensitive-comparison>
 - [Context](item-search/README.md#context)
   - <https://api.stacspec.org/v1.0.0-beta.5/item-search#context>
   - <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features#context>

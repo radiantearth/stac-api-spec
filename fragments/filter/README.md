@@ -6,7 +6,7 @@
   - Item Search Filter: <https://api.stacspec.org/v1.0.0-beta.5/item-search#filter:item-search-filter>
   - CQL2 Text: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql2-text>
   - CQL2 JSON: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql2-json>
-  - Basic CQL2: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-cql>
+  - Basic CQL2: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-cql2>
   - Advanced Comparison Operators: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/advanced-comparison-operators>
   - Basic Spatial Operators: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-spatial-operators>
   - Spatial Operators: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/spatial-operators>
@@ -140,7 +140,7 @@ The implementation **must** support these conformance classes:
 
 - Filter (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/filter`) defines the Queryables mechanism and 
   parameters `filter-lang`, `filter-crs`, and `filter`.
-- Basic CQL2 (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-cql`) defines the basic operations allowed in 
+- Basic CQL2 (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-cql2`) defines the basic operations allowed in 
   the query language used for the `filter` parameter defined by Filter. This includes logical operators (`AND`, `OR`, `NOT`), 
   comparison operators (`=`, `<>`, `<`, `<=`, `>`, `>=`), and `IS NULL`. The comparison operators are allowed against string, numeric, boolean,
   and datetime types.
