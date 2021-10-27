@@ -13,19 +13,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Limit parameter semantics now match OAFeat. Previously, the behavior was not precisely defined.
 - Filter Extension updates to align with changes to OAFeat CQL2 spec
   - Updated all "CQL" usages to "CQL2"
+  - Most conformance class URIs are now prefixed with `http://www.opengis.net/spec/cql2/` instead
+    of `http://www.opengis.net/spec/ogcapi-features-3/`
   - Conformance classes `http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-cql`, 
     `http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql-text`, and
-    `http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql-json` have had `cql` replaced with `cql2` to
-    become `http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-cql2`,
-    `http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql2-text`, and
-    `http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql2-json`
+    `http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql-json` have had `cql` replaced
+    with `cql2` (in addition to the prefix change) to
+    become `http://www.opengis.net/spec/cql2/1.0/conf/basic-cql2`,
+    `http://www.opengis.net/spec/cql2/1.0/conf/cql2-text`, and
+    `http://www.opengis.net/spec/cql2/1.0/conf/cql2-json`
   - Significant changes to CQL2 JSON format, now using `op` and `args` structure
   - Spatial operator `INTERSECTS` is now `S_INTERSECTS`
   - Temporal operator `ANYINTERACTS` is now `T_INTERSECTS`
   - Updated Example 3 (now Example 5) to make it clear that property to property comparisons require the
     Property-Property Comparisons conformance class
   - Added CQL2 Case Insensitive Comparison 
-    (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/case-insensitive-comparison`) conformance class
+    (`http://www.opengis.net/spec/cql2/1.0/conf/case-insensitive-comparison`) conformance class
     that adds functions LOWER and UPPER for case-insensitive comparison
 
 ### Deprecated

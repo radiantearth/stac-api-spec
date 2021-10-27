@@ -4,18 +4,18 @@
 - **Conformance Classes:** 
   - Filter: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/filter>
   - Item Search Filter: <https://api.stacspec.org/v1.0.0-beta.5/item-search#filter:item-search-filter>
-  - CQL2 Text: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql2-text>
-  - CQL2 JSON: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql2-json>
-  - Basic CQL2: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-cql2>
-  - Advanced Comparison Operators: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/advanced-comparison-operators>
-  - Basic Spatial Operators: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-spatial-operators>
-  - Spatial Operators: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/spatial-operators>
-  - Temporal Operators: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/temporal-operators>
-  - Custom Functions: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/functions>
-  - Arithmetic Expressions: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/arithmetic>
-  - Array Operators: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/array-operators>
-  - Property-Property Comparisons: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/property-property>
-  - Case-insensitive Comparison: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/case-insensitive-comparison>
+  - CQL2 Text: <http://www.opengis.net/spec/cql2/1.0/conf/cql2-text>
+  - CQL2 JSON: <http://www.opengis.net/spec/cql2/1.0/conf/cql2-json>
+  - Basic CQL2: <http://www.opengis.net/spec/cql2/1.0/conf/basic-cql2>
+  - Advanced Comparison Operators: <http://www.opengis.net/spec/cql2/1.0/conf/advanced-comparison-operators>
+  - Basic Spatial Operators: <http://www.opengis.net/spec/cql2/1.0/conf/basic-spatial-operators>
+  - Spatial Operators: <http://www.opengis.net/spec/cql2/1.0/conf/spatial-operators>
+  - Temporal Operators: <http://www.opengis.net/spec/cql2/1.0/conf/temporal-operators>
+  - Custom Functions: <http://www.opengis.net/spec/cql2/1.0/conf/functions>
+  - Arithmetic Expressions: <http://www.opengis.net/spec/cql2/1.0/conf/arithmetic>
+  - Array Operators: <http://www.opengis.net/spec/cql2/1.0/conf/array-operators>
+  - Property-Property Comparisons: <http://www.opengis.net/spec/cql2/1.0/conf/property-property>
+  - Case-insensitive Comparison: <http://www.opengis.net/spec/cql2/1.0/conf/case-insensitive-comparison>
 - **Extension [Maturity Classification](../../extensions.md#extension-maturity):** Pilot
 - **Dependents:**
   - [Item Search](../../item-search)
@@ -140,7 +140,7 @@ The implementation **must** support these conformance classes:
 
 - Filter (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/filter`) defines the Queryables mechanism and 
   parameters `filter-lang`, `filter-crs`, and `filter`.
-- Basic CQL2 (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-cql2`) defines the basic operations allowed in 
+- Basic CQL2 (`http://www.opengis.net/spec/cql2/1.0/conf/basic-cql2`) defines the basic operations allowed in 
   the query language used for the `filter` parameter defined by Filter. This includes logical operators (`AND`, `OR`, `NOT`), 
   comparison operators (`=`, `<>`, `<`, `<=`, `>`, `>=`), and `IS NULL`. The comparison operators are allowed against string, numeric, boolean,
   and datetime types.
@@ -151,8 +151,8 @@ The implementation **must** support these conformance classes:
 The implementation **must** support at least one of the "CQL2 Text" or "CQL2 JSON" conformance classes that
 define the CQL2 format used in the filter parameter:
 
-- CQL2 Text (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql2-text`) defines that the CQL2 Text format is supported by Item Search
-- CQL2 JSON (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql2-json`) defines that the CQL2 JSON format is supported by Item Search
+- CQL2 Text (`http://www.opengis.net/spec/cql2/1.0/conf/cql2-text`) defines that the CQL2 Text format is supported by Item Search
+- CQL2 JSON (`http://www.opengis.net/spec/cql2/1.0/conf/cql2-json`) defines that the CQL2 JSON format is supported by Item Search
 
 If both are advertised as being supported, it is only required that both be supported for GET query parameters, and that 
 only that CQL2 JSON be supported for POST JSON requests.  It is recommended that clients use CQL2 Text in GET requests and 
@@ -160,29 +160,29 @@ CQL2 JSON in POST requests.
 
 For additional capabilities, the following classes can be implemented:
 - Advanced Comparison Operators 
-  (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/advanced-comparison-operators`) defines the `LIKE`, 
+  (`http://www.opengis.net/spec/cql2/1.0/conf/advanced-comparison-operators`) defines the `LIKE`, 
   `BETWEEN`, and `IN` operators. **Note**: this conformance class does **not** require implementing the
   `lower` and `upper` functions as defined in the latest OAFeat CQL2 spec, as these have been moved to the
   Case-insensitive Comparison conformance class. 
-- Basic Spatial Operators (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-spatial-operators`) defines the intersects operator (`S_INTERSECTS`).
+- Basic Spatial Operators (`http://www.opengis.net/spec/cql2/1.0/conf/basic-spatial-operators`) defines the intersects operator (`S_INTERSECTS`).
 - Spatial Operators 
-  (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/spatial-operators`) defines a set of operators that
+  (`http://www.opengis.net/spec/cql2/1.0/conf/spatial-operators`) defines a set of operators that
   are part of the Dimensionally Extended Nine-intersection Model (DE-9IM) relation operators
   (`S_CONTAINS`, `S_CROSSES`, `S_DISJOINT`, `S_EQUALS`, `S_INTERSECTS`, `S_OVERLAPS`, `S_TOUCHES`, and `S_WITHIN`)
 - Temporal Operators 
-  (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/temporal-operators`) defines several temporal operators that provide more expressivity with datetime types than the relative comparison operators
+  (`http://www.opengis.net/spec/cql2/1.0/conf/temporal-operators`) defines several temporal operators that provide more expressivity with datetime types than the relative comparison operators
   in the Basic CQL2 class.
-- Custom Functions (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/functions`) defines support
+- Custom Functions (`http://www.opengis.net/spec/cql2/1.0/conf/functions`) defines support
   for function definition and usage.
-- Arithmetic Expressions: (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/arithmetic`) defines 
+- Arithmetic Expressions: (`http://www.opengis.net/spec/cql2/1.0/conf/arithmetic`) defines 
   support for arithmetic expressions.
-- Array Operators: (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/array-operators`) 
+- Array Operators: (`http://www.opengis.net/spec/cql2/1.0/conf/array-operators`) 
   defines array operators (`A_EQUALS`, `A_CONTAINS`, `A_CONTAINED_BY`, and `A_OVERLAPS`).
-- Property-Property Comparisons: (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/property-property`) allows the 
+- Property-Property Comparisons: (`http://www.opengis.net/spec/cql2/1.0/conf/property-property`) allows the 
   use of queryables (e.g., properties) in both positions of a clause, not just in the first position. This allows 
   predicates like `property1 == property2` be expressed, whereas the Basic CQL2 conformance class only requires
   comparisons against right-hand-side literals.
-- Case-insensitive Comparison: (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/case-insensitive-comparison`) defines the UPPER and LOWER functions that can be used for case-insensitive
+- Case-insensitive Comparison: (`http://www.opengis.net/spec/cql2/1.0/conf/case-insensitive-comparison`) defines the UPPER and LOWER functions that can be used for case-insensitive
   comparison.
 
 Additionally, if an API implements the OGC API Features endpoint, it is **recommended** that the OAFeat Part 3 Filter, 
@@ -359,11 +359,11 @@ at least these values:
 
     "http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/filter",
     "http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/features-filter",
-    "http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-cql2",
-    "http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql2-text",
-    "http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql2-json",
-    "http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-spatial-operators",
-    "http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/advanced-comparison-operators"
+    "http://www.opengis.net/spec/cql2/1.0/conf/basic-cql2",
+    "http://www.opengis.net/spec/cql2/1.0/conf/cql2-text",
+    "http://www.opengis.net/spec/cql2/1.0/conf/cql2-json",
+    "http://www.opengis.net/spec/cql2/1.0/conf/basic-spatial-operators",
+    "http://www.opengis.net/spec/cql2/1.0/conf/advanced-comparison-operators"
 
   ],
   "links": [
