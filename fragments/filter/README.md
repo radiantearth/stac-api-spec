@@ -127,7 +127,7 @@ functionality that support whatever expressiveness they need. This allows implem
 syntax, without needing to implement a huge spec all at once.  Some implementers choose not to incur the cost of 
 implementing functionality they do not need or may not be able to implement functionality that is not supported by 
 their underlying datastore, e.g., Elasticsearch does not support the spatial predicates required by the 
-Spatial Operators conformance class, only the `s_intersects` operator in the Basic Spatial Operators class.
+Spatial Operators conformance class, only the `S_INTERSECTS` operator in the Basic Spatial Operators class.
 
 The precise decomposition of the OAFeat conformance classes is still a work in progress, but is being finalized
 rapidly (see [ogcapi-features/issues/579](https://github.com/opengeospatial/ogcapi-features/issues/579)). 
