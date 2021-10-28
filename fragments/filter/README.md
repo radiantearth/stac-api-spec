@@ -69,8 +69,9 @@ specifications. As of November 2021, these specifications are still in draft sta
 finalized behavior. Several behaviors have changed since the 
 last published [draft](https://portal.ogc.org/files/96288), so this spec references the latest revision in the 
 [OAFeat Part 3 spec's GitHub repo](https://github.com/opengeospatial/ogcapi-features/tree/master/extensions/cql)
-and [Common Query Language (CQL2)](https://github.com/opengeospatial/ogcapi-features/blob/master/cql2/README.md)). Implementers should proceed with implementation, but must be aware that minor changes may be made before these
-specs are final.
+and [Common Query Language (CQL2)](https://github.com/opengeospatial/ogcapi-features/blob/master/cql2/README.md)). 
+Implementers should proceed with implementation, but must be aware that minor changes may be made
+before these specs are final.
 
 OAFeat Part 3 CQL2 formally defines the syntax of "CQL2" as both a text format (cql2-text) as an ABNF grammar 
 (largely similar to the BNF grammar in the General Model for CQL) and a JSON format (cql2-json) as a JSON Schema and 
@@ -170,7 +171,9 @@ For additional capabilities, the following classes can be implemented:
   are part of the Dimensionally Extended Nine-intersection Model (DE-9IM) relation operators
   (`S_CONTAINS`, `S_CROSSES`, `S_DISJOINT`, `S_EQUALS`, `S_INTERSECTS`, `S_OVERLAPS`, `S_TOUCHES`, and `S_WITHIN`)
 - Temporal Operators 
-  (`http://www.opengis.net/spec/cql2/1.0/conf/temporal-operators`) defines several temporal operators that provide more expressivity with datetime types than the relative comparison operators
+  (`http://www.opengis.net/spec/cql2/1.0/conf/temporal-operators`) defines several temporal
+  operators that provide more expressivity with datetime types than the relative comparison
+  operators
   in the Basic CQL2 class.
 - Custom Functions (`http://www.opengis.net/spec/cql2/1.0/conf/functions`) defines support
   for function definition and usage.
@@ -178,12 +181,12 @@ For additional capabilities, the following classes can be implemented:
   support for arithmetic expressions.
 - Array Operators: (`http://www.opengis.net/spec/cql2/1.0/conf/array-operators`) 
   defines array operators (`A_EQUALS`, `A_CONTAINS`, `A_CONTAINED_BY`, and `A_OVERLAPS`).
-- Property-Property Comparisons: (`http://www.opengis.net/spec/cql2/1.0/conf/property-property`) allows the 
-  use of queryables (e.g., properties) in both positions of a clause, not just in the first position. This allows 
-  predicates like `property1 == property2` be expressed, whereas the Basic CQL2 conformance class only requires
-  comparisons against right-hand-side literals.
-- Case-insensitive Comparison: (`http://www.opengis.net/spec/cql2/1.0/conf/case-insensitive-comparison`) defines the UPPER and LOWER functions that can be used for case-insensitive
-  comparison.
+- Property-Property Comparisons: (`http://www.opengis.net/spec/cql2/1.0/conf/property-property`)
+  allows the use of queryables (e.g., properties) in both positions of a clause, not just in the
+  first position. This allows predicates like `property1 == property2` be expressed, whereas the
+  Basic CQL2 conformance class only requires comparisons against right-hand-side literals.
+- Case-insensitive Comparison: (`http://www.opengis.net/spec/cql2/1.0/conf/case-insensitive-comparison`)
+  defines the UPPER and LOWER functions that can be used for case-insensitive comparison.
 
 Additionally, if an API implements the OGC API Features endpoint, it is **recommended** that the OAFeat Part 3 Filter, 
 Features Filter, and Basic CQL2 conformance classes be implemented, which allow use of CQL2 filters against the 
@@ -765,7 +768,6 @@ filter=prop1 = prop2
   }
 }
 ```
-
 
 ### Example 6: Temporal Intersection
 
