@@ -2,6 +2,7 @@
 
 - [STAC API - Core Specification](#stac-api---core-specification)
   - [Link Relations](#link-relations)
+  - [Endpoints](#endpoints)
   - [Example Landing Page for STAC API - Core](#example-landing-page-for-stac-api---core)
   - [Extensions](#extensions)
 
@@ -50,17 +51,17 @@ API endpoints from OAFeat or STAC API to be implemented, so the following links 
 
 The following Link relations shall exist in the Landing Page (root).
 
-| **rel**        | **href** | **From**       | **Description**                                                                                                                                                                                                                                                |
-| -------------- | -------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `root`         | `/`      | STAC Core      | The root URI                                                                                                                                                                                                                                                   |
-| `self`         | `/`      | OAFeat         | Self reference, same as root URI                                                                                                                                                                                                                               |
-| `service-desc` | `/api`   | OAFeat OpenAPI | The OpenAPI service description. Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API. The path for this endpoint is only recommended to be `/api`, but may be another path. |
+| **rel**        | **href** | **From**  | **Description**                                                                                                                                                                                                                                                                                                          |
+| -------------- | -------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `root`         | `/`      | STAC Core | The root URI                                                                                                                                                                                                                                                                                                             |
+| `self`         | `/`      | OAFeat    | Self reference, same as root URI                                                                                                                                                                                                                                                                                         |
+| `service-desc` | `/api`   | OAFeat    | The OpenAPI service description. Uses the media types `application/vnd.oai.openapi+json;version=3.0` or `application/vnd.oai.openapi+json;version=3.1` to refer to the OpenAPI 3.0 or 3.1 document that defines the service's API. The path for this endpoint is only recommended to be `/api`, but may be another path. |
 
 A `service-doc` endpoint is recommended, but not required.
 
-| **rel**       | **href**    | **From**       | **Description**                                                                                                                                                                                                     |
-| ------------- | ----------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `service-doc` | `/api.html` | OAFeat OpenAPI | An HTML service description.  Uses the `text/html` media type to refer to a human-consumable description of the service. The path for this endpoint is only recommended to be `/api.html`, but may be another path. |
+| **rel**       | **href**    | **From** | **Description**                                                                                                                                                                                                     |
+| ------------- | ----------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `service-doc` | `/api.html` | OAFeat   | An HTML service description.  Uses the `text/html` media type to refer to a human-consumable description of the service. The path for this endpoint is only recommended to be `/api.html`, but may be another path. |
 
 Additionally, `child` relations may exist to individual catalogs and collections.
 
@@ -72,6 +73,17 @@ It is also valid to have `item` links from the landing page, but most STAC API s
 serve up a large number of features, so they typically
 use several layers of intermediate `child` links before getting to Item objects.  Note that the `items` (plural)
 link will be used by APIs implementing STAC API - Features to link from a Collection to the items in that collection.
+
+## Endpoints
+
+These endpoints are required, with details provided in this [OpenAPI specification document](openapi.yaml).
+
+| Endpoint | Returns                                        | Description                                                                                                                                                       |
+| -------- | ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/`      | [Catalog](../stac-spec/catalog-spec/README.md) | Landing page, links to API capabilities                                                                                                                           |
+| `/api`   | JSON (OpenAPI 3.0 or 3.1)                      | The service description of the service from the `service-desc` link `rel`. The path is only recommended to be `/api`, and is at the discretion of the implementer |
+
+The service description endpoint may return JSON of either OpenAPI 3.0 or 3.1 format. Whichever format is used, the Link with relation `service-desc` must have a `type` field that matches the `Content-Type` header in the response from the endpoint. It is recommended to use OpenAPI 3.0 JSON as the specification format. This format should use media type `application/vnd.oai.openapi+json;version=3.0` and include `http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30` as a conformance class. All service descriptions provided as part of the STAC API spec use OpenAPI 3.0 YAML format, and can easily be used to return JSON from this endpoint. OpenAPI 3.1 should use media type `application/vnd.oai.openapi+json;version=3.1`, but there is no OAFeat conformance class currently defined for it.
 
 ## Example Landing Page for STAC API - Core
 
