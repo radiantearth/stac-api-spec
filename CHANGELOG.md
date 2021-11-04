@@ -8,8 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- The Paging mechanism via a Link with rel `next` or `prev` as defined for Item Search can also be used
-  for the STAC - Features endpoint `/collections/{collection_id}/items`.
+- The paging mechanism via a Link with rel `next` or `prev` as defined for Item Search can also be used
+  for the STAC API - Features endpoint `/collections/{collection_id}/items`, as described in OAFeat.
+- The paging mechanism via a Link with rel `next` or `prev` as defined for items can also be used
+  for the STAC API - Features and STAC API - Collections endpoint `/collections`.
 
 ### Changed
 
