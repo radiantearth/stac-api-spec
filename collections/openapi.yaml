@@ -69,20 +69,6 @@ paths:
                     rel: data
                     type: application/json
                     title: Information about the feature collections
-  '/conformance':
-    get:
-      tags:
-        - Features
-      summary: information about specifications that this API conforms to
-      description: |-
-        A list of all conformance classes specified in a standard that the
-        server conforms to.
-      operationId: getConformanceDeclaration
-      responses:
-        '200':
-          $ref: '#/components/responses/ConformanceDeclaration'
-        '500':
-          $ref: '#/components/responses/ServerError'
   '/collections':
     get:
       tags:
@@ -139,23 +125,6 @@ components:
           items:
             $ref: '../core/commons.yaml#/components/schemas/collection'
   responses:
-    ConformanceDeclaration:
-      description: |-
-        The URIs of all conformance classes supported by the server.
-
-        To support "generic" clients that want to access multiple
-        OGC API Features implementations - and not "just" a specific
-        API / server, the server declares the conformance
-        classes it implements and conforms to.
-      content:
-        application/json:
-          schema:
-            $ref: '../core/commons.yaml#/components/schemas/conformanceClasses'
-          example:
-            conformsTo:
-              - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core'
-              - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30'
-              - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson'
     Collections:
       description: |-
         The feature collections shared by this API.
