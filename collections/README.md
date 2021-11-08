@@ -80,7 +80,7 @@ elsewhere. If this is done, it is recommended to include a `rel` of `canonical` 
 | Endpoint                      | Returns                   | Description                                                                                                            |
 | ----------------------------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | `/`                           | Catalog                   | Landing Page and root Catalog                                                                                          |
-| `/api`                        | JSON (OpenAPI 3.0 or 3.1) | The OpenAPI service description. The path for this endpoint is only recommended to be `/api`, but may be another path. |
+| `/api`                        | any | The service description. The path for this endpoint is only recommended to be `/api`, but may be another path. |
 | `/collections`                | JSON                      | Object with a list of Collections contained in the catalog and links                                                   |
 | `/collections/{collectionId}` | Collection                | Returns single Collection JSON                                                                                         |
 

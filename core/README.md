@@ -86,9 +86,17 @@ These endpoints are required, with details provided in this [OpenAPI specificati
 | Endpoint | Returns                                        | Description                                                                                                                                                       |
 | -------- | ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `/`      | [Catalog](../stac-spec/catalog-spec/README.md) | Landing page, links to API capabilities                                                                                                                           |
-| `/api`   | JSON (OpenAPI 3.0 or 3.1)                      | The service description of the service from the `service-desc` link `rel`. The path is only recommended to be `/api`, and is at the discretion of the implementer |
+| `/api`   | any                    | The service description of the service from the `service-desc` link `rel`. The path is only recommended to be `/api`, and is at the discretion of the implementer. |
 
-The service description endpoint may return JSON of either OpenAPI 3.0 or 3.1 format. Whichever format is used, the Link with relation `service-desc` must have a `type` field that matches the `Content-Type` header in the response from the endpoint. It is recommended to use OpenAPI 3.0 JSON as the specification format. This format should use media type `application/vnd.oai.openapi+json;version=3.0` and include `http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30` as a conformance class. All service descriptions provided as part of the STAC API spec use OpenAPI 3.0 YAML format, and can easily be used to return JSON from this endpoint. OpenAPI 3.1 should use media type `application/vnd.oai.openapi+json;version=3.1`, but there is no OAFeat conformance class currently defined for it.
+The service description endpoint may return any specification format. It is recommended to use OpenAPI 3.0 or 3.1
+with media types `application/vnd.oai.openapi` (YAML), `application/vnd.oai.openapi+json;version=3.0` (3.0 JSON),
+or `application/vnd.oai.openapi+json;version=3.1` (3.1 JSON). Whichever format or formats are used, the link
+with relation `service-desc` must have a `type` field that matches an `Accept` header value to which the service
+responds, and the `Content-Type` header in the response should contain the same media type. If the OpenAPI 3.0
+format is used, the conformance class `http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30` should be
+advertised. All service descriptions provided as part of the STAC API spec use OpenAPI 3.0 YAML format, and can
+easily be used to return either YAML or JSON from this endpoint. OAFeat does not currently define a conformance
+class for OpenAPI 3.1, but may in the future. 
 
 ## Example Landing Page for STAC API - Core
 

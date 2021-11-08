@@ -27,8 +27,8 @@
   - [OGC API - Features](https://www.ogc.org/standards/ogcapi-features)
 
 Adding OGC API - Features (OAFeat) to a STAC API means fully implementing all their requirements, and then returning STAC 
-[Item](../stac-spec/item-spec/README.md) objects from their `/items` endpoints. In OAFeat, OpenAPI 3.0 and GeoJSON are optional 
-conformance classes, enabling flexibility. However, STAC requires the use of OpenAPI 3.0 or 3.1 for service specification and GeoJSON for OAFeat endpoints. The full conformance class list is in the following table.
+[Item](../stac-spec/item-spec/README.md) objects from their `/items` endpoints. In OAFeat, GeoJSON is an optional 
+conformance class, enabling flexibility. However, STAC requires the use of GeoJSON for OAFeat endpoints. The full conformance class list is in the following table.
 
 Note that implementing OGC API - Features does not actually depend on [STAC API - Core](../core), but we include it as a dependency since
 this extension discusses using it in the context of STAC. One could implement an OAFeat service, returning STAC 
@@ -66,7 +66,7 @@ The core OGC API - Features endpoints are shown below, with details provided in 
 | Endpoint                                        | Returns                                                 | Description                                                                                                                                                             |
 | ----------------------------------------------- | ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `/`                                             | [Catalog](../stac-spec/catalog-spec/README.md)          | Landing page, links to API capabilities                                                                                                                                 |
-| `/api`                                          | JSON (OpenAPI 3.0 or 3.1)                               | Returns an OpenAPI description of the service from the `service-desc` link `rel`. The path for this endpoint is only recommended to be `/api`, but may be another path. |
+| `/api`                                          | any                                                     | Returns an OpenAPI description of the service from the `service-desc` link `rel`. The path for this endpoint is only recommended to be `/api`, but may be another path. |
 | `/conformance`                                  | JSON                                                    | Info about standards to which the API conforms                                                                                                                          |
 | `/collections`                                  | JSON                                                    | Object containing an array of Collection objects in the Catalog, and Link relations                                                                                     |
 | `/collections/{collectionId}`                   | [Collection](../stac-spec/collection-spec/README.md)    | Returns single Collection JSON                                                                                                                                          |
