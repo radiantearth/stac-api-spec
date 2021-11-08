@@ -140,10 +140,13 @@ The href may contain any arbitrary URL parameter, which is implementation-specif
 Additionally, STAC has extended the Link object to support additional fields that provide header values
 to the client should they be needed for a subsequent request for the next page of results. The use
 of header values for pagination with GET requests is uncommon, so if your implementation does not use them you can omit this attribute in the Link. These
-fields are described in detail in the [Item Search](../item-search/README.md#paging) spec.  To avoid returning the entire original request in the response, the  `merge` 
+fields are described in detail in the [Item Search](../item-search/README.md#pagination) spec.  To avoid returning the entire original request in the response, the  `merge` 
 property can be specified. This indicates that the client must send the same request headers that were sent in the original 
 request, but with the specified headers values merged in. This allows servers to indicate what needs to change 
-to get to the next page without mirroring the entire request back to the client. 
+to get to the next page without mirroring the entire request back to the client.
+
+Implementations may also add link relations `first` and `last`, though these are not required and may
+be infeasible to implement in some data stores.
 
 See the [paging examples](../item-search/examples.md#paging-examples) for additional insight.
 
@@ -154,9 +157,9 @@ with many
 collections. STAC - Features adds support for this with pagination (similar to the Item pagination
 mechanism) through hypermedia links for the Collections resource 
 (`/collections`). This mechanism aligns with pagination of collections in the 
-OGC API - Common - Part 2: Geospatial Data specification. With this, Links with 
-relations `next` and `prev` are included in the `links` array,
-and these are used to navigate to the next and previous pages of Collection objects. The specific query
+OGC API - Common - Part 2: Geospatial Data specification. With this, a link with 
+relation `next` is included in the `links` array,
+and this is used to navigate to the next page of Collection objects. The specific query
 parameter used for paging is implementation specific and not defined by STAC API. For example, 
 an implementation may take a parameter (e.g., `page`) indicating the numeric page of results, a
 base64-encoded value indicating the last result returned for the current page (e.g., `search_after` as
@@ -183,7 +186,10 @@ previous (page=2) pages:
 Additionally, STAC has extended the Link object to support additional fields that provide header values
 to the client should they be needed for a subsequent request for the next page of results. The use
 of header values for pagination with GET requests is uncommon, so if your implementation does not use them you can omit this attribute in the Link. These
-fields are described in detail in the [Item Search](../item-search/README.md#paging) spec. 
+fields are described in detail in the [Item Search](../item-search/README.md#pagination) spec. 
+
+Implementations may also add link relations `prev`, `first`, and `last`, though these are not required and may
+be infeasible to implement in some data stores.
 
 ## Examples
 
