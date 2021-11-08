@@ -251,6 +251,9 @@ product for gridding).
         - /catalogs/landsat_8_c1/139_046_20170305
           - /collection/landsat_8_c1/items/LC08_L1TP_139046_20170305_20170317_01_T1
 
+If done in a consistent manner, these can also provide "templated" URIs, such that a user could directly request a
+specific path, row, and date simply by replacing the values in `/catalogs/landsat_8_c1/{path}_{row}_{date}`.
+
 Similarly, a MODIS product using sinusoidal gridding could use paths of the form
 `/{horizontal_grid}/{vertical_grid}/{date}`. Since only around 300 scenes produced every day for a MODIS product
 and there is a 20 year history of production, these could be fit in a graph with path length 3 from the root
