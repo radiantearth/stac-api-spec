@@ -12,9 +12,9 @@
 
 ## About
 
-The SpatioTemporal Asset Catalog (STAC) specification aims to standardize the way geospatial assets are exposed online and queried. 
+The SpatioTemporal Asset Catalog (STAC) family of specifications aim to standardize the way geospatial asset metadata is structured and queried.
 A 'spatiotemporal asset' is any file that represents information about the earth captured in a certain space and 
-time. The core STAC specification lives at [gitub.com/radiantearth/stac-spec](https://github.com/radiantearth/stac-spec).
+time. The core STAC specifications live at [gitub.com/radiantearth/stac-spec](https://github.com/radiantearth/stac-spec).
 
 A STAC API is the dynamic version of a SpatioTemporal Asset Catalog. It returns a STAC [Catalog](stac-spec/catalog-spec/catalog-spec.md), 
 [Collection](stac-spec/collection-spec/collection-spec.md), [Item](stac-spec/item-spec/item-spec.md), 
@@ -24,7 +24,7 @@ Typically, a Feature is used when returning a single Item object, and FeatureCol
 JSON array of Item entities).
 
 The API can be implemented in compliance with the *[OGC API - Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html)* standard 
-(we'll use OAFeat for shorthand). In this case STAC API can be thought of as a specialized Features API 
+(OAFeat for shorthand). In this case STAC API can be thought of as a specialized Features API 
 to search STAC catalogs, where the features returned are STAC [Item](stac-spec/item-spec/item-spec.md) objects, 
 that have common properties, links to their assets and geometries that represent the footprints of the geospatial assets.
 
@@ -63,6 +63,9 @@ cross-collection search of STAC Item objects at a `search` endpoint, as well as 
 The *[ogcapi-features](ogcapi-features)* folder describes how a STAC API can fully implement [OGC API - 
 Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to expose individual `items` endpoints for search of
 each STAC collection. It also includes extensions that can be used to further enhance OAFeat.
+
+**STAC API - Collections:**
+The *[collections](collections)* folder describes how a STAC API can advertise the Collections it contains.
 
 **Extensions:**
 The *[extensions](extensions.md) document* describes how STAC incubates new functionality, and it links to the existing 

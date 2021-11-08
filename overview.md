@@ -128,11 +128,11 @@ STAC Collection and Feature objects.
 The core STAC conformance classes communicate the conformance JSON only in the root (`/`) document, while OGC API 
 requires they also live at the `/conformance` endpoint. STAC's conformance structure is detailed in the 
 [core](core/). Note all 
-conformance URI's serve up a rendered HTML version of the corresponding OpenAPI document at the given location.
+conformance URIs serve up a rendered HTML version of the corresponding OpenAPI document at the given location.
 
 **NOTE:** *By 1.0.0 we aim to have requirements classes specified in detail, as testable assertions, 
 like OGC does, but for now the core reference is just this spec document and the OpenAPI yaml. We also desire to 
-have the URI's for conformance to actually resolve to machine-readable information clients can use.*	
+have the URIs for conformance to actually resolve to machine-readable information clients can use.*	
 
 ### Conformance Class Table
 

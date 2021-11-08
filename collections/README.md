@@ -11,7 +11,8 @@
 - **Dependencies**: [STAC API - Core](../core)
 
 A STAC API can return information about all STAC [Collections](../stac-spec/collection-spec/collection-spec.md) available using a link
-from the landing page that uses the link relation `data`, which links to an endpoint called `/collections`. Individual STAC collections can be accessed
+from the landing page that uses the link relation `data`, which links to an endpoint called `/collections`.
+Individual STAC collections can be accessed
 by providing the Collection `id` as a path past that endpoint: `/collections/{collectionId}`.
 
 **NOTE**: *This conformance class is directly based on the [Features Collection](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_collections_)
