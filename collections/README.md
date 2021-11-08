@@ -24,12 +24,17 @@ aim to align with it. But it still seems to be in flux.*
 
 The following Link relations shall exist in the Landing Page (root).
 
-| **rel**        | **href**       | **From**  | **Description**                                                                                                                                                                                                                                                |
-| -------------- | -------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `root`         | `/`            | STAC Core | The root URI                                                                                                                                                                                                                                                   |
-| `self`         | `/`            | OAFeat    | Self reference, same as root URI                                                                                                                                                                                                                               |
-| `service-desc` | `/api`         | OAFeat    | The OpenAPI service description. Uses the media types `application/vnd.oai.openapi+json;version=3.0` or `application/vnd.oai.openapi+json;version=3.1` to refer to the OpenAPI 3.0 or 3.1 document that defines the service's API. The path for this endpoint is only recommended to be `/api`, but may be another path.  |
-| `data`         | `/collections` | OAFeat    | List of Collections                                                                                                                                                                                                                                            |
+| **rel**        | **href**       | **From**  | **Description**                  |
+| -------------- | -------------- | --------- | -------------------------------- |
+| `root`         | `/`            | STAC Core | The root URI                     |
+| `self`         | `/`            | OAFeat    | Self reference, same as root URI |
+| `service-desc` | `/api`         | OAFeat    | The service description          |
+| `data`         | `/collections` | OAFeat    | List of Collections              |
+
+The path for the `service-desc` endpoint is recommended to be `/api`, but may be another path. Recommended to be
+OpenAPI 3.0 or 3.1 with media types `application/vnd.oai.openapi` (YAML),
+`application/vnd.oai.openapi+json;version=3.0` (3.0 JSON), or `application/vnd.oai.openapi+json;version=3.1`
+(3.1 JSON).
 
 A `service-doc` endpoint is recommended, but not required.
 

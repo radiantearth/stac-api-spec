@@ -12,7 +12,6 @@
     - [GET](#get)
     - [POST](#post)
       - [PUT / PATCH / DELETE](#put--patch--delete)
-  - [Recommended Link Relations at `/`](#recommended-link-relations-at-)
   - [Example Landing Page for STAC API - Item Search](#example-landing-page-for-stac-api---item-search)
   - [Extensions](#extensions)
     - [Fields](#fields)
@@ -47,12 +46,17 @@ Implementing `GET /search` is **required**, `POST /search` is optional, but reco
 
 The following Link relations shall exist in the Landing Page (root).
 
-| **rel**        | **href**  | **From**         | **Description**                                                                                                                                                                                                                                                |
-| -------------- | --------- | ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `root`         | `/`       | STAC Core        | The root URI                                                                                                                                                                                                                                                   |
-| `self`         | `/`       | OAFeat           | Self reference, same as root URI                                                                                                                                                                                                                               |
-| `service-desc` | `/api`    | OAFeat           | The OpenAPI service description. Uses the media types `application/vnd.oai.openapi+json;version=3.0` or `application/vnd.oai.openapi+json;version=3.1` to refer to the OpenAPI 3.0 or 3.1 document that defines the service's API. The path for this endpoint is only recommended to be `/api`, but may be another path. |
-| search         | `/search` | STAC Item Search | URI for the Search endpoint                                                                                                                                                                                                                                    |
+| **rel**        | **href**  | **From**         | **Description**                  |
+| -------------- | --------- | ---------------- | -------------------------------- |
+| `root`         | `/`       | STAC Core        | The root URI                     |
+| `self`         | `/`       | OAFeat           | Self reference, same as root URI |
+| `service-desc` | `/api`    | OAFeat           | The service description          |
+| search         | `/search` | STAC Item Search | URI for the Search endpoint      |
+
+The path for the `service-desc` endpoint is recommended to be `/api`, but may be another path. Recommended to be
+OpenAPI 3.0 or 3.1 with media types `application/vnd.oai.openapi` (YAML),
+`application/vnd.oai.openapi+json;version=3.0` (3.0 JSON), or `application/vnd.oai.openapi+json;version=3.1`
+(3.1 JSON).
 
 A `service-doc` endpoint is recommended, but not required.
 
@@ -241,23 +245,6 @@ searching on specific Item properties.
 
 The other HTTP verbs are not supported in STAC Item Search. The [Transaction Extension](../ogcapi-features/extensions/transaction/README.md)
 does implement them, for STAC and OAFeat implementations that want to enable writing and deleting items.
-
-## Recommended Link Relations at `/`
-
-When implementing the STAC API - Item Search conformance class, it it recommended to implement these Link relations.
-
-| **`rel`**      | **href to**                                | **From**    | **Description**                                                                                                                        |
-| -------------- | ------------------------------------------ | ----------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| `root`         | The root URI                               | STAC Core   | Reference to self URI                                                                                                                  |
-| `self`         | The root URI                               | OAFeat      | Reference to self URI                                                                                                                  |
-| `service-desc` | The OpenAPI service description            | OAFeat      | Uses the `application/vnd.oai.openapi+json;version=3.0` or `application/vnd.oai.openapi+json;version=3.1` media type to refer to the OpenAPI 3.0 or 3.1 document that defines the service's API |
-| `service-doc`  | An HTML service description                | OAFeat      | Uses the `text/html` media type to refer to a human-consumable description of the service                                              |
-| `child`        | The child STAC Catalogs & Collections      | STAC Core   | Provides curated paths to get to STAC Collection and Item objects                                                                      |
-| `search`       | The STAC search endpoint (often `/search`) | STAC Search | Cross-collection query endpoint to select sub-sets of STAC Item objects                                                                |
-
-It is also valid to have `item` links from the landing page, but most STAC API services are used to 
-serve up a large number of features, so they typically
-use several layers of intermediate `child` links before getting to Item objects.
 
 ## Example Landing Page for STAC API - Item Search
 
