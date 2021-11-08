@@ -139,8 +139,10 @@ The href may contain any arbitrary URL parameter, which is implementation-specif
 
 Additionally, STAC has extended the Link object to support additional fields that provide header values
 to the client should they be needed for a subsequent request for the next page of results. The use
-of header values for pagination with GET requests is uncommon, so if your implementation does not use them you can omit this attribute in the Link. These
-fields are described in detail in the [Item Search](../item-search/README.md#pagination) spec.  To avoid returning the entire original request in the response, the  `merge` 
+of header values for pagination with GET requests is uncommon, so if your implementation does not use them you can
+omit this attribute in the Link. These
+fields are described in detail in the [Item Search](../item-search/README.md#pagination) spec.  To avoid returning
+the entire original request in the response, the  `merge` 
 property can be specified. This indicates that the client must send the same request headers that were sent in the original 
 request, but with the specified headers values merged in. This allows servers to indicate what needs to change 
 to get to the next page without mirroring the entire request back to the client.
@@ -185,7 +187,8 @@ previous (page=2) pages:
 
 Additionally, STAC has extended the Link object to support additional fields that provide header values
 to the client should they be needed for a subsequent request for the next page of results. The use
-of header values for pagination with GET requests is uncommon, so if your implementation does not use them you can omit this attribute in the Link. These
+of header values for pagination with GET requests is uncommon, so if your implementation does not use them
+you can omit this attribute in the Link. These
 fields are described in detail in the [Item Search](../item-search/README.md#pagination) spec. 
 
 Implementations may also add link relations `prev`, `first`, and `last`, though these are not required and may

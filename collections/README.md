@@ -85,7 +85,9 @@ of an array of all STAC Collections and an array of Links.
 
 ## Pagination
 
-The `/collections` endpoint supports a pagination mechanism that aligns with pagination as described in the OGC API - Common - Part 2: Geospatial Data specification. This is described in detail in the [STAC - Features Collection Pagination section](../ogcapi-features/README.md#collection-pagination).
+The `/collections` endpoint supports a pagination mechanism that aligns with pagination as described in the 
+OGC API - Common - Part 2: Geospatial Data specification. This is described in detail in
+the [STAC - Features Collection Pagination section](../ogcapi-features/README.md#collection-pagination).
 
 ## Example
 
