@@ -120,7 +120,7 @@ it is possible
 to provide a Link with `rel` type `next` and the href of the full URL of the next page of results.
 This link href must contain any URL parameters that are necessary 
 for the implementation to understand how to provide the next page of results, e.g., the query parameters `page`, `next`,
-`token`, etc. For example, the links array will have an object like:
+or `token` and any additional filter parameters if given and required. For example, the links array will have an object like:
 
 ```json
     "links": [
