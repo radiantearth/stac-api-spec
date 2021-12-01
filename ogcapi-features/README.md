@@ -141,7 +141,7 @@ Additionally, STAC has extended the Link object to support additional fields tha
 to the client should they be needed for a subsequent request for the next page of results. The use
 of header values for pagination with GET requests is uncommon, so if your implementation does not use them you can
 omit this attribute in the Link. These
-fields are described in detail in the [Item Search](../item-search/README.md#pagination) spec.  To avoid returning
+fields are described in detail in the [Item Search](../item-search/README.md#pagination) spec. To avoid returning
 the entire original request in the response, the  `merge` 
 property can be specified. This indicates that the client must send the same request headers that were sent in the original 
 request, but with the specified headers values merged in. This allows servers to indicate what needs to change 
