@@ -593,6 +593,8 @@ components:
           $ref: '#/components/schemas/itemType'
         links:
           $ref: '#/components/schemas/links'
+        properties:
+          $ref: '#/components/schemas/properties'
         assets:
           $ref: '#/components/schemas/assets'
       example:
@@ -669,7 +671,7 @@ components:
       type: object
       required:
         - datetime
-      description: provides the core metatdata fields plus extensions
+      description: provides the core metadata fields plus extensions
       properties:
         datetime:
           $ref: '#/components/schemas/datetime'
