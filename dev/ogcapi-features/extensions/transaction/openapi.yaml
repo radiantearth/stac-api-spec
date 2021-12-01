@@ -503,6 +503,31 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/link'
+    datetime:
+      type: string
+      format: date-time
+      nullable: true
+      description: >-
+        The searchable date and time of the assets, in UTC.
+
+        It is formatted according to [RFC 3339, section
+        5.6](https://tools.ietf.org/html/rfc3339#section-5.6).
+
+        `null` is allowed, but requires `start_datetime` and `end_datetime` from
+        common metadata to be set.
+      example: 2018-02-12T00:00:00Z
+    properties:
+      type: object
+      required:
+        - datetime
+      description: provides the core metadata fields plus extensions
+      properties:
+        datetime:
+          $ref: '#/components/schemas/datetime'
+      additionalProperties:
+        description: >-
+          Any additional properties added in via Item specification or
+          extensions.
     assets:
       type: object
       additionalProperties:
@@ -569,6 +594,8 @@ components:
           $ref: '#/components/schemas/itemType'
         links:
           $ref: '#/components/schemas/links'
+        properties:
+          $ref: '#/components/schemas/properties'
         assets:
           $ref: '#/components/schemas/assets'
       example:
@@ -675,19 +702,6 @@ components:
           type: string
         description:
           type: string
-    datetime:
-      type: string
-      format: date-time
-      nullable: true
-      description: >-
-        The searchable date and time of the assets, in UTC.
-
-        It is formatted according to [RFC 3339, section
-        5.6](https://tools.ietf.org/html/rfc3339#section-5.6).
-
-        `null` is allowed, but requires `start_datetime` and `end_datetime` from
-        common metadata to be set.
-      example: 2018-02-12T00:00:00Z
   responses:
     BadRequest:
       description: The request was malformed or semantically invalid
