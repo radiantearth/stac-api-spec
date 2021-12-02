@@ -28,7 +28,7 @@ The following Link relations shall exist in the Landing Page (root).
 | -------------- | -------------- | --------- | -------------------------------- |
 | `root`         | `/`            | STAC Core | The root URI                     |
 | `self`         | `/`            | OAFeat    | Self reference, same as root URI |
-| `service-desc` | `/api`         | OAFeat    | The service description          |
+| `service-desc` | `/api`         | OAFeat    | The service description in a machine-readable format |
 | `data`         | `/collections` | OAFeat    | List of Collections              |
 
 The path for the `service-desc` endpoint is recommended to be `/api`, but may be another path. Recommended to be
