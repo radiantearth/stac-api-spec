@@ -858,6 +858,7 @@ filter=S_INTERSECTS(geometry,POLYGON((-77.0824 38.7886,-77.0189 38.7886,-77.0189
 
 ```json
 {
+  "filter-lang": "cql2-json",
   "filter": { 
     "op": "or" , 
     "args": [
@@ -913,6 +914,7 @@ filter=sentinel:data_coverage > 50 OR landsat:coverage_percent < 10 OR (sentinel
 
 ```json
 {
+  "filter-lang": "cql2-json",
   "filter": {
     "op": "or", 
     "args": [
@@ -956,6 +958,7 @@ filter=eo:cloud_cover BETWEEN 0 AND 50
 
 ```json
 {
+  "filter-lang": "cql2-json",
   "filter": {
     "op": "between", 
     "args": [ 
@@ -980,6 +983,7 @@ filter=mission LIKE 'sentinel%'
 
 ```json
 {
+  "filter-lang": "cql2-json",
   "filter": {
     "op": "like", 
     "args": [ 
@@ -1009,6 +1013,7 @@ filter=UPPER(provider) == 'NASA'
 
 ```json
 {
+  "filter-lang": "cql2-json",
   "filter": {
     "op": "eq", 
     "args": [
@@ -1024,6 +1029,7 @@ filter=UPPER(provider) == 'NASA'
 
 ```json
 {
+  "filter-lang": "cql2-json",
   "filter": {
     "op": "eq", 
     "args": [
