@@ -58,9 +58,9 @@ OpenAPI 3.0 or 3.1 with media types `application/vnd.oai.openapi` (YAML),
 `application/vnd.oai.openapi+json;version=3.0` (3.0 JSON), or `application/vnd.oai.openapi+json;version=3.1`
 (3.1 JSON).
 
-A `service-doc` endpoint is recommended, but not required. This most commonly returns an HTML
+A `service-doc` endpoint is recommended, but not required. This commonly returns an HTML
 page, for example, in the form of [Redoc](https://github.com/Redocly/redoc) interactive API
-documentation. The Link `type` field should correspond to whatever format or formats are
+, but any format is allowed. The Link `type` field should correspond to whatever format or formats are
 supported by this endpoint, e.g., `text/html`.
 
 | **rel**       | **href**    | **From** | **Description**                                                                                                                    |
