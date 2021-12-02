@@ -1018,8 +1018,7 @@ filter=UPPER(provider) == 'NASA'
     "op": "eq", 
     "args": [
       { 
-        "function" : "lower",
-        "args": [ { "property": "provider" } ]
+        "lower" : { "property": "provider" }
       },
       "coolsat"
     ]
@@ -1034,8 +1033,7 @@ filter=UPPER(provider) == 'NASA'
     "op": "eq", 
     "args": [
       { 
-        "function": "upper", 
-        "args": [ { "property": "provider" } ]
+        "upper": { "property": "provider" }
       },
       "NASA"
     ]
