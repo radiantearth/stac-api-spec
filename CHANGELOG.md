@@ -37,6 +37,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- definition of Item object was missing `properties` as an attribute
+
 ## [v1.0.0-beta.4] - 2020-10-05
 
 ### Added
