@@ -137,18 +137,16 @@ The href may contain any arbitrary URL parameter, which is implementation-specif
 - `http://api.cool-sat.com/collections/my_collection/items?next=8a35eba9c`
 - `http://api.cool-sat.com/collections/my_collection/items?token=f32890a0bdb09ac3`
 
-Additionally, STAC has extended the Link object to support additional fields that provide header values
-to the client should they be needed for a subsequent request for the next page of results. The use
-of header values for pagination with GET requests is uncommon, so if your implementation does not use them you can
-omit this attribute in the Link. These
-fields are described in detail in the [Item Search](../item-search/README.md#pagination) spec. To avoid returning
-the entire original request in the response, the `merge` 
-property can be specified. This indicates that the client must send the same request headers that were sent in the original 
-request, but with the specified headers values merged in. This allows servers to indicate what needs to change 
-to get to the next page without mirroring the entire request back to the client.
+In addition to supporting query parameters to the `ref` URL, STAC has extended the Link object
+with additional fields to support more complex HTTP requests. These include `method` to specify
+an HTTP method GET or POST, `headers` to add HTTP headers in the request, and `body` with either
+the entire body for the request or only the body fields that must be changed from the previous
+request, as determined by the `merge` field. These fields are described in detail in the
+[Item Search](../item-search/README.md#pagination) spec.
 
-Implementations may also add link relations `first` and `last`, though these are not required and may
-be infeasible to implement in some data stores.
+Implementations may also add link relations `prev`, `first`, and `last`. Most API implementations
+should be able to support `first`, though `last` may be infeasible to implement in some data 
+stores.
 
 See the [paging examples](../item-search/examples.md#paging-examples) for additional insight.
 
@@ -185,14 +183,16 @@ previous (page=2) pages:
 ]
 ```
 
-Additionally, STAC has extended the Link object to support additional fields that provide header values
-to the client should they be needed for a subsequent request for the next page of results. The use
-of header values for pagination with GET requests is uncommon, so if your implementation does not use them
-you can omit this attribute in the Link. These
-fields are described in detail in the [Item Search](../item-search/README.md#pagination) spec. 
+In addition to supporting query parameters to the `ref` URL, STAC has extended the Link object
+with additional fields to support more complex HTTP requests. These include `method` to specify
+an HTTP method GET or POST, `headers` to add HTTP headers in the request, and `body` with either
+the entire body for the request or only the body fields that must be changed from the previous
+request, as determined by the `merge` field. These fields are described in detail in the
+[Item Search](../item-search/README.md#pagination) spec.
 
-Implementations may also add link relations `prev`, `first`, and `last`, though these are not required and may
-be infeasible to implement in some data stores.
+Implementations may also add link relations `prev`, `first`, and `last`. Most API implementations
+should be able to support `first`, though `last` may be infeasible to implement in some data
+stores.
 
 ## Examples
 
