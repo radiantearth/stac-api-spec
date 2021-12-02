@@ -24,23 +24,26 @@ aim to align with it. But it still seems to be in flux.*
 
 The following Link relations shall exist in the Landing Page (root).
 
-| **rel**        | **href**       | **From**  | **Description**                  |
-| -------------- | -------------- | --------- | -------------------------------- |
-| `root`         | `/`            | STAC Core | The root URI                     |
-| `self`         | `/`            | OAFeat    | Self reference, same as root URI |
+| **rel**        | **href**       | **From**  | **Description**                                      |
+| -------------- | -------------- | --------- | ---------------------------------------------------- |
+| `root`         | `/`            | STAC Core | The root URI                                         |
+| `self`         | `/`            | OAFeat    | Self reference, same as root URI                     |
 | `service-desc` | `/api`         | OAFeat    | The service description in a machine-readable format |
-| `data`         | `/collections` | OAFeat    | List of Collections              |
+| `data`         | `/collections` | OAFeat    | List of Collections                                  |
 
 The path for the `service-desc` endpoint is recommended to be `/api`, but may be another path. Recommended to be
 OpenAPI 3.0 or 3.1 with media types `application/vnd.oai.openapi` (YAML),
 `application/vnd.oai.openapi+json;version=3.0` (3.0 JSON), or `application/vnd.oai.openapi+json;version=3.1`
 (3.1 JSON).
 
-A `service-doc` endpoint is recommended, but not required.
+A `service-doc` endpoint is recommended, but not required. This most commonly returns an HTML
+page, for example, in the form of [Redoc](https://github.com/Redocly/redoc) interactive API
+documentation. The Link `type` field should correspond to whatever format or formats are
+supported by this endpoint, e.g., `text/html`.
 
-| **rel**       | **href**    | **From** | **Description**                                                                                                                                                                                                     |
-| ------------- | ----------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `service-doc` | `/api.html` | OAFeat   | An HTML service description.  Uses the `text/html` media type to refer to a human-consumable description of the service. The path for this endpoint is only recommended to be `/api.html`, but may be another path. |
+| **rel**       | **href**    | **From** | **Description**                                                                                                                    |
+| ------------- | ----------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `service-doc` | `/api.html` | OAFeat   | A human-consumable service description. The path for this endpoint is only recommended to be `/api.html`, but may be another path. |
 
 Additionally, `child` relations may exist to individual catalogs and collections.
 

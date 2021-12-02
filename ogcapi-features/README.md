@@ -28,7 +28,8 @@
 
 Adding OGC API - Features (OAFeat) to a STAC API means fully implementing all their requirements, and then returning STAC 
 [Item](../stac-spec/item-spec/README.md) objects from their `/items` endpoints. In OAFeat, GeoJSON is an optional 
-conformance class, enabling flexibility. However, STAC requires the use of GeoJSON for OAFeat endpoints. The full conformance class list is in the following table.
+conformance class, enabling flexibility. However, STAC requires the use of GeoJSON for OAFeat
+endpoints. The full conformance class list is in the following table.
 
 Note that implementing OGC API - Features does not actually depend on [STAC API - Core](../core), but we include it as a dependency since
 this extension discusses using it in the context of STAC. One could implement an OAFeat service, returning STAC 
@@ -52,11 +53,14 @@ OpenAPI 3.0 or 3.1 with media types `application/vnd.oai.openapi` (YAML),
 `application/vnd.oai.openapi+json;version=3.0` (3.0 JSON), or `application/vnd.oai.openapi+json;version=3.1`
 (3.1 JSON).
 
-Additionally, a `service-doc` endpoint is recommended, but not required.
+A `service-doc` endpoint is recommended, but not required. This most commonly returns an HTML
+page, for example, in the form of [Redoc](https://github.com/Redocly/redoc) interactive API
+documentation. The Link `type` field should correspond to whatever format or formats are
+supported by this endpoint, e.g., `text/html`.
 
-| **rel**       | **href**    | **From** | **Description**                                                                                                                                                                                                |
-| ------------- | ----------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `service-doc` | `/api.html` | OAFeat   | An HTML service description.  Uses the `text/html` media type to refer to a human-consumable description of the service. The path for this endpoint is only recommended to be `/api`, but may be another path. |
+| **rel**       | **href**    | **From** | **Description**                                                                                                                                                                                                     |
+| ------------- | ----------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `service-doc` | `/api.html` | OAFeat   | A human-consumable service description. The path for this endpoint is only recommended to be `/api.html`, but may be another path. |
 
 ## Endpoints
 
