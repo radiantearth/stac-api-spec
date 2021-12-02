@@ -57,6 +57,15 @@
     - [Example 9: Using IS NULL](#example-9-using-is-null)
       - [Example 9: cql2-text (GET)](#example-9-cql2-text-get)
       - [Example 9: cql2-json (POST)](#example-9-cql2-json-post)
+    - [Example 10: Using BETWEEN](#example-10-using-between)
+      - [Example 10: cql2-text (GET)](#example-10-cql2-text-get)
+      - [Example 10: cql2-json (POST)](#example-10-cql2-json-post)
+    - [Example 11: Using LIKE](#example-11-using-like)
+      - [Example 11: cql2-text (GET)](#example-11-cql2-text-get)
+      - [Example 11: cql2-json (POST)](#example-11-cql2-json-post)
+    - [Example 12: Using Case-insensitive Comparison Functions](#example-12-using-case-insensitive-comparison-functions)
+      - [Example 12: cql2-text (GET)](#example-12-cql2-text-get)
+      - [Example 12: cql2-json (POST)](#example-12-cql2-json-post)
 
 ## Overview
 
@@ -928,6 +937,106 @@ filter=sentinel:data_coverage > 50 OR landsat:coverage_percent < 10 OR (sentinel
           }
         ]
       }
+    ]
+  }
+}
+```
+
+### Example 10: Using BETWEEN
+
+The BETWEEN operator allows for checking if a numeric value is within a specified inclusive range.
+
+#### Example 10: cql2-text (GET)
+
+```http
+filter=eo:cloud_cover BETWEEN 0 AND 50
+```
+
+#### Example 10: cql2-json (POST)
+
+```json
+{
+  "filter": {
+    "op": "between", 
+    "args": [ 
+      { "property": "eo:cloud_cover" }, 
+      [ 0, 50 ] 
+    ]
+  }
+}
+```
+
+### Example 11: Using LIKE 
+
+The LIKE operator allows for pattern-based string matching.
+
+
+    { "op" : "in", "args" : [ { "property" : "prop-name" }, [ 123, 456 ] ] }
+    { "function" : "my-func", "args" : [ "myarg1", 123 ] }
+
+
+#### Example 11: cql2-text (GET)
+
+```http
+filter=mission LIKE "sentinel%"
+```
+
+#### Example 11: cql2-json (POST)
+
+```json
+{
+  "filter": {
+    "op": "like", 
+    "args": [ 
+      { "property": "mission" }, 
+      "sentinel%"
+    ]
+  }
+}
+```
+
+### Example 12: Using Case-insensitive Comparison Functions
+
+The predefined functions `UPPER` and `LOWER` allow for case-insensitive comparisons, and are used in the same way
+user-defined functions are.
+
+#### Example 12: cql2-text (GET)
+
+```http
+filter=LOWER(provider) == "coolsat"
+```
+
+```http
+filter=UPPER(provider) == "NASA"
+```
+
+#### Example 12: cql2-json (POST)
+
+```json
+{
+  "filter": {
+    "op": "eq", 
+    "args": [
+      { 
+        "function" : "lower",
+        "args": [ { "property": "provider" } ]
+      },
+      "coolsat"
+    ]
+  }
+}
+```
+
+```json
+{
+  "filter": {
+    "op": "eq", 
+    "args": [
+      { 
+        "function": "upper", 
+        "args": [ { "property": "provider" } ]
+      },
+      "NASA"
     ]
   }
 }
