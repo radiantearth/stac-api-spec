@@ -91,7 +91,7 @@ geospatial software (e.g., GeoServer), is not expected to change before final.
 OGC CQL2 Text has been previously described in [OGC Filter Encoding](https://www.ogc.org/standards/filter) and 
 [OGC Catalogue Services 3.0 - General Model](http://docs.opengeospatial.org/is/12-168r6/12-168r6.html#62) 
 (including a BNF grammar in Annex B). The CQL2 JSON format is newly-defined and has changed significantly during
-the draft process, but is believed to now be stable.
+the draft process, but is believed to be stable now.
 
 It should be noted that the "CQL" referred to here is "CQL2" defined in OGC API - Features - Part 3. This is a related, but 
 different language to the "classic" OGC CQL defined in the General Model. Relatedly, CQL is **not**
@@ -970,15 +970,10 @@ filter=eo:cloud_cover BETWEEN 0 AND 50
 
 The LIKE operator allows for pattern-based string matching.
 
-
-    { "op" : "in", "args" : [ { "property" : "prop-name" }, [ 123, 456 ] ] }
-    { "function" : "my-func", "args" : [ "myarg1", 123 ] }
-
-
 #### Example 11: cql2-text (GET)
 
 ```http
-filter=mission LIKE "sentinel%"
+filter=mission LIKE 'sentinel%'
 ```
 
 #### Example 11: cql2-json (POST)
@@ -1003,11 +998,11 @@ user-defined functions are.
 #### Example 12: cql2-text (GET)
 
 ```http
-filter=LOWER(provider) == "coolsat"
+filter=LOWER(provider) == 'coolsat'
 ```
 
 ```http
-filter=UPPER(provider) == "NASA"
+filter=UPPER(provider) == 'NASA'
 ```
 
 #### Example 12: cql2-json (POST)
