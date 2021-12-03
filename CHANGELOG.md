@@ -16,7 +16,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Limit parameter semantics now match OAFeat. Previously, the behavior was not precisely defined.
-- `service-desc` endpoint may return any service description (previous restricted to only OpenAPI 3.0 JSON)
+- `service-desc` endpoint may return any service description format, typically a 
+  machine-consumable one (previous restricted required to be OpenAPI 3.0 JSON)
+- `service-doc` endpoint may return any service description format, typically a
+  human-consumable one (previous restricted required to be HTML)
 
 ### Deprecated
 
