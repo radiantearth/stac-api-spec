@@ -27,9 +27,9 @@
   - [OGC API - Features](https://www.ogc.org/standards/ogcapi-features)
 
 Adding OGC API - Features (OAFeat) to a STAC API means fully implementing all their requirements, and then returning STAC 
-[Item](../stac-spec/item-spec/README.md) objects from their `/items` endpoints. In OAFeat OpenAPI 3.0 and GeoJSON are optional 
-conformance classes, enabling flexibility, but for STAC they are required, since STAC uses OpenAPI 3.0 and GeoJSON at its
-core.  So the full conformance class list is in the following table.
+[Item](../stac-spec/item-spec/README.md) objects from their `/items` endpoints. In OAFeat, GeoJSON is an optional 
+conformance class, enabling flexibility. However, STAC requires the use of GeoJSON for OAFeat
+endpoints. The full conformance class list is in the following table.
 
 Note that implementing OGC API - Features does not actually depend on [STAC API - Core](../core), but we include it as a dependency since
 this extension discusses using it in the context of STAC. One could implement an OAFeat service, returning STAC 
@@ -40,19 +40,27 @@ with OAFeat clients. But specialized STAC clients will likely display results be
 
 The following Link relations shall exist in the Landing Page (root).
 
-| **rel**        | **href**       | **From**       | **Description**                                                                                                                                                                                                                                                |
-| -------------- | -------------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `root`         | `/`            | STAC Core      | The root URI                                                                                                                                                                                                                                                   |
-| `self`         | `/`            | OAFeat         | Self reference, same as root URI                                                                                                                                                                                                                               |
-| `conformance`  | `/conformance` | OAFeat         | Conformance URI                                                                                                                                                                                                                                                |
-| `service-desc` | `/api`         | OAFeat OpenAPI | The OpenAPI service description. Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API. The path for this endpoint is only recommended to be `/api`, but may be another path. |
-| `data`         | `/collections` | OAFeat         | List of Collections                                                                                                                                                                                                                                            |
+| **rel**        | **href**       | **From**  | **Description**                                      |
+| -------------- | -------------- | --------- | ---------------------------------------------------- |
+| `root`         | `/`            | STAC Core | The root URI                                         |
+| `self`         | `/`            | OAFeat    | Self reference, same as root URI                     |
+| `conformance`  | `/conformance` | OAFeat    | Conformance URI                                      |
+| `service-desc` | `/api`         | OAFeat    | The service description in a machine-readable format |
+| `data`         | `/collections` | OAFeat    | List of Collections                                  |
 
-Additionally, a `service-doc` endpoint is recommended, but not required.
+The path for the `service-desc` endpoint is recommended to be `/api`, but may be another path. Recommended to be
+OpenAPI 3.0 or 3.1 with media types `application/vnd.oai.openapi` (YAML),
+`application/vnd.oai.openapi+json;version=3.0` (3.0 JSON), or `application/vnd.oai.openapi+json;version=3.1`
+(3.1 JSON).
 
-| **rel**       | **href**    | **From**       | **Description**                                                                                                                                                                                                |
-| ------------- | ----------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `service-doc` | `/api.html` | OAFeat OpenAPI | An HTML service description.  Uses the `text/html` media type to refer to a human-consumable description of the service. The path for this endpoint is only recommended to be `/api`, but may be another path. |
+A `service-doc` endpoint is recommended, but not required. This commonly returns an HTML
+page, for example, in the form of [Redoc](https://github.com/Redocly/redoc) interactive API
+, but any format is allowed. The Link `type` field should correspond to whatever format or formats are
+supported by this endpoint, e.g., `text/html`.
+
+| **rel**       | **href**    | **From** | **Description**                                                                                                                    |
+| ------------- | ----------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `service-doc` | `/api.html` | OAFeat   | A human-consumable service description. The path for this endpoint is only recommended to be `/api.html`, but may be another path. |
 
 ## Endpoints
 
@@ -62,7 +70,7 @@ The core OGC API - Features endpoints are shown below, with details provided in 
 | Endpoint                                        | Returns                                                 | Description                                                                                                                                                             |
 | ----------------------------------------------- | ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `/`                                             | [Catalog](../stac-spec/catalog-spec/README.md)          | Landing page, links to API capabilities                                                                                                                                 |
-| `/api`                                          | OpenAPI 3.0 JSON                                        | Returns an OpenAPI description of the service from the `service-desc` link `rel`. The path for this endpoint is only recommended to be `/api`, but may be another path. |
+| `/api`                                          | any                                                     | Returns a machine-readable API description of the service from the `service-desc` link `rel`. The path for this endpoint is only recommended to be `/api`, but may be another path. |
 | `/conformance`                                  | JSON                                                    | Info about standards to which the API conforms                                                                                                                          |
 | `/collections`                                  | JSON                                                    | Object containing an array of Collection objects in the Catalog, and Link relations                                                                                     |
 | `/collections/{collectionId}`                   | [Collection](../stac-spec/collection-spec/README.md)    | Returns single Collection JSON                                                                                                                                          |
