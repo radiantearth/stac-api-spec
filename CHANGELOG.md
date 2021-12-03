@@ -4,9 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [v1.0.0-beta5 - Unreleased] - TBD
+## [v1.0.0-beta.5 - Unreleased] - TBD
 
 ### Added
+
+- The paging mechanism via a Link with rel `next` or `prev` as defined for Item Search can also be used
+  for the STAC API - Features endpoint `/collections/{collection_id}/items`, as described in OAFeat.
+- The paging mechanism via a Link with rel `next` or `prev` as defined for items can also be used
+  for the STAC API - Features and STAC API - Collections endpoint `/collections`.
 
 ### Changed
 
@@ -27,9 +32,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Temporal operator `ANYINTERACTS` is now `T_INTERSECTS`
   - Updated Example 3 (now Example 5) to make it clear that property to property comparisons require the
     Property-Property Comparisons conformance class
-  - Added CQL2 Case Insensitive Comparison 
+  - Added CQL2 Case-insensitive Comparison 
     (`http://www.opengis.net/spec/cql2/1.0/conf/case-insensitive-comparison`) conformance class
-    that adds functions LOWER and UPPER for case-insensitive comparison
+    that adds function CASEI for case-insensitive comparison
+- `service-desc` endpoint may return any service description format, typically a 
+  machine-consumable one (previous restricted required to be OpenAPI 3.0 JSON)
+- `service-doc` endpoint may return any service description format, typically a
+  human-consumable one (previous restricted required to be HTML)
 
 ### Deprecated
 
