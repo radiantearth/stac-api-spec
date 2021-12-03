@@ -60,17 +60,25 @@ to understand conformance from a single request to the landing page. Implementer
 
 The following Link relations shall exist in the Landing Page (root).
 
-| **rel**        | **href** | **From**       | **Description**                                                                                                                                                                                                                                                |
-| -------------- | -------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `root`         | `/`      | STAC Core      | The root URI                                                                                                                                                                                                                                                   |
-| `self`         | `/`      | OAFeat         | Self reference, same as root URI                                                                                                                                                                                                                               |
-| `service-desc` | `/api`   | OAFeat OpenAPI | The OpenAPI service description. Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API. The path for this endpoint is only recommended to be `/api`, but may be another path. |
+| **rel**        | **href** | **From**  | **Description**                                      |
+| -------------- | -------- | --------- | ---------------------------------------------------- |
+| `root`         | `/`      | STAC Core | The root URI                                         |
+| `self`         | `/`      | OAFeat    | Self reference, same as root URI                     |
+| `service-desc` | `/api`   | OAFeat    | The service description in a machine-readable format |
 
-A `service-doc` endpoint is recommended, but not required.
+The path for the `service-desc` endpoint is recommended to be `/api`, but may be another path. Recommended to be
+OpenAPI 3.0 or 3.1 with media types `application/vnd.oai.openapi` (YAML),
+`application/vnd.oai.openapi+json;version=3.0` (3.0 JSON), or `application/vnd.oai.openapi+json;version=3.1`
+(3.1 JSON).
 
-| **rel**       | **href**    | **From**       | **Description**                                                                                                                                                                                                     |
-| ------------- | ----------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `service-doc` | `/api.html` | OAFeat OpenAPI | An HTML service description.  Uses the `text/html` media type to refer to a human-consumable description of the service. The path for this endpoint is only recommended to be `/api.html`, but may be another path. |
+A `service-doc` endpoint is recommended, but not required. This commonly returns an HTML
+page, for example, in the form of [Redoc](https://github.com/Redocly/redoc) interactive API
+, but any format is allowed. The Link `type` field should correspond to whatever format or formats are
+supported by this endpoint, e.g., `text/html`.
+
+| **rel**       | **href**    | **From** | **Description**                                                                                                                    |
+| ------------- | ----------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `service-doc` | `/api.html` | OAFeat   | A human-consumable service description. The path for this endpoint is only recommended to be `/api.html`, but may be another path. |
 
 Additionally, `child` relations may exist to child Catalogs and Collections and `item` relations to Items. These
 relations form a directed acyclic graph that supports browseable traversal.
@@ -118,6 +126,25 @@ with other endpoints from the root.
 | Endpoint              | Returns                                        | Description          |
 | --------------------- | ---------------------------------------------- | -------------------- |
 | `/catalogs/catalogId` | [Catalog](../stac-spec/catalog-spec/README.md) | child Catalog object |
+
+## Endpoints
+
+These endpoints are required, with details provided in this [OpenAPI specification document](openapi.yaml).
+
+| Endpoint | Returns                                        | Description                                                                                                                                                        |
+| -------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `/`      | [Catalog](../stac-spec/catalog-spec/README.md) | Landing page, links to API capabilities                                                                                                                            |
+| `/api`   | any                                            | The service description of the service from the `service-desc` link `rel`. The path is only recommended to be `/api`, and is at the discretion of the implementer. |
+
+The service description endpoint may return any specification format. It is recommended to use OpenAPI 3.0 or 3.1
+with media types `application/vnd.oai.openapi` (YAML), `application/vnd.oai.openapi+json;version=3.0` (3.0 JSON),
+or `application/vnd.oai.openapi+json;version=3.1` (3.1 JSON). Whichever format or formats are used, the link
+with relation `service-desc` must have a `type` field that matches an `Accept` header value to which the service
+responds, and the `Content-Type` header in the response should contain the same media type. If the OpenAPI 3.0
+format is used, the conformance class `http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30` should be
+advertised. All service descriptions provided as part of the STAC API spec use OpenAPI 3.0 YAML format, and can
+easily be used to return either YAML or JSON from this endpoint. OAFeat does not currently define a conformance
+class for OpenAPI 3.1, but may in the future. 
 
 ## Example Landing Page for STAC API - Core
 
