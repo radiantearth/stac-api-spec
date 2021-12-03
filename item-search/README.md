@@ -7,7 +7,7 @@
     - [Query Examples](#query-examples)
     - [Query Parameter Table](#query-parameter-table)
   - [Response](#response)
-    - [Paging](#paging)
+    - [Pagination](#pagination)
   - [HTTP Request Methods and Content Types](#http-request-methods-and-content-types)
     - [GET](#get)
     - [POST](#post)
@@ -164,7 +164,7 @@ The response to a request (GET or POST) to the search endpoint must always be an
 FeatureCollection](https://tools.ietf.org/html/rfc7946#section-3.3) that consists entirely of STAC 
 [Item](../stac-spec/item-spec/item-spec.md) objects. 
 
-### Paging
+### Pagination
 
 OGC API supports paging through hypermedia links and STAC follows the same pattern for the cross collection search. For 
 GET requests, a link with `rel` type `next` is supplied.  This link may contain any URL parameter that is necessary 
@@ -178,7 +178,11 @@ parameter name is defined by the implementor and is not necessarily part of the 
     "links": [
         {
             "rel": "next",
-            "href": "http://api.cool-sat.com/search?page=2"
+            "href": "http://api.cool-sat.com/search?page=3"
+        },
+        {
+            "rel": "prev",
+            "href": "http://api.cool-sat.com/search?page=1"
         }
     ]
 }
@@ -190,12 +194,15 @@ The href may contain any arbitrary URL parameter:
 - `http://api.cool-sat.com/search?next=8a35eba9c`
 - `http://api.cool-sat.com/search?token=f32890a0bdb09ac3`
 
+Implementations may also add link relations `prev`, `first`, and `last`, though these are not required and may
+be infeasible to implement in some data stores.
+
 OAFeat does not support POST requests for searches, however the STAC API spec does. Hypermedia links are not designed 
 for anything other than GET requests, so providing a next link for a POST search request becomes problematic. STAC has 
-decided to extend the `link` object to support additional fields that provide hints to the client as to how it must 
+decided to extend the Link object to support additional fields that provide hints to the client as to how it must 
 execute a subsequent request for the next page of results.
 
-The following fields have been added to the `link` object specification for the API spec:
+The following fields have been added to the Link object specification for the API spec:
 
 | Parameter | Type    | Description                                                                                                                                                  |
 | --------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |

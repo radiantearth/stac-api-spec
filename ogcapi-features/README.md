@@ -3,6 +3,8 @@
 - [STAC API - Features](#stac-api---features)
   - [Link Relations](#link-relations)
   - [Endpoints](#endpoints)
+  - [Item Pagination](#item-pagination)
+  - [Collection Pagination](#collection-pagination)
   - [Examples](#examples)
   - [Example Landing Page for STAC API - Features](#example-landing-page-for-stac-api---features)
   - [Example Collection for STAC API - Features](#example-collection-for-stac-api---features)
@@ -117,6 +119,90 @@ STAC API.
 
 Implementing OAFeat enables a wider range of clients to access the API's STAC Item objects, as it is a more widely implemented
 protocol than STAC. 
+
+## Item Pagination
+
+OAFeat supports paging through hypermedia links for the Items resource 
+(`/collections/{collectionId}/items`). Since only GET requests are allowed for this endpoint, 
+it is possible
+to provide a Link with `rel` type `next` and the href of the full URL of the next page of results.
+This link href must contain any URL parameters that are necessary 
+for the implementation to understand how to provide the next page of results, e.g., the query parameters `page`, `next`,
+or `token` and any additional filter parameters if given and required. For example, the links array will have an object like:
+
+```json
+    "links": [
+        {
+            "rel": "next",
+            "href": "http://api.cool-sat.com/collections/my_collection/items?page=2"
+        }
+    ]
+```
+
+The href may contain any arbitrary URL parameter, which is implementation-specific:
+
+- `http://api.cool-sat.com/collections/my_collection/items?page=2`
+- `http://api.cool-sat.com/collections/my_collection/items?next=8a35eba9c`
+- `http://api.cool-sat.com/collections/my_collection/items?token=f32890a0bdb09ac3`
+
+In addition to supporting query parameters in the URL value of the `href` field,
+STAC has extended the Link object
+with additional fields to support more complex HTTP requests. These include `method` to specify
+an HTTP method GET or POST, `headers` to add HTTP headers in the request, and `body` with either
+the entire body for the request or only the body fields that must be changed from the previous
+request, as determined by the `merge` field. These fields are described in detail in the
+[Item Search](../item-search/README.md#pagination) spec.
+
+Implementations may also add link relations `prev`, `first`, and `last`. Most API implementations
+should be able to support `first`, though `last` may be infeasible to implement in some data 
+stores.
+
+See the [paging examples](../item-search/examples.md#paging-examples) for additional insight.
+
+## Collection Pagination
+
+OAFeat does not define a specific mechanism for how clients may access all collections from servers
+with many
+collections. STAC - Features adds support for this with pagination (similar to the Item pagination
+mechanism) through hypermedia links for the Collections resource 
+(`/collections`). This mechanism aligns with pagination of collections in the 
+OGC API - Common - Part 2: Geospatial Data specification. With this, a link with 
+relation `next` is included in the `links` array,
+and this is used to navigate to the next page of Collection objects. The specific query
+parameter used for paging is implementation specific and not defined by STAC API. For example, 
+an implementation may take a parameter (e.g., `page`) indicating the numeric page of results, a
+base64-encoded value indicating the last result returned for the current page (e.g., `search_after` as
+in Elasticsearch), or a cursor token representing backend state.  
+
+In our simple example of numerical pages, the response for `page=3` would have a
+`links` array containing these two Links indicating the URLs for the next (page=4) and 
+previous (page=2) pages:
+
+```none
+"links": [
+  ...
+  {
+    "rel": "prev",
+    "href": "http://api.cool-sat.com/collections/my_collection/items?page=2"
+  },
+  {
+    "rel": "next",
+    "href": "http://api.cool-sat.com/collections/my_collection/items?page=4"
+  }
+]
+```
+
+In addition to supporting query parameters in the URL value of the `href` field,
+STAC has extended the Link object
+with additional fields to support more complex HTTP requests. These include `method` to specify
+an HTTP method GET or POST, `headers` to add HTTP headers in the request, and `body` with either
+the entire body for the request or only the body fields that must be changed from the previous
+request, as determined by the `merge` field. These fields are described in detail in the
+[Item Search](../item-search/README.md#pagination) spec.
+
+Implementations may also add link relations `prev`, `first`, and `last`. Most API implementations
+should be able to support `first`, though `last` may be infeasible to implement in some data
+stores.
 
 ## Examples
 
