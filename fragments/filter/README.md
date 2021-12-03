@@ -15,7 +15,7 @@
   - Arithmetic Expressions: <http://www.opengis.net/spec/cql2/1.0/conf/arithmetic>
   - Array Operators: <http://www.opengis.net/spec/cql2/1.0/conf/array-operators>
   - Property-Property Comparisons: <http://www.opengis.net/spec/cql2/1.0/conf/property-property>
-  - Case-insensitive Comparison: <http://www.opengis.net/spec/cql2/1.0/conf/case-insensitive-comparison>
+  <!-- - Case-insensitive Comparison: <http://www.opengis.net/spec/cql2/1.0/conf/case-insensitive-comparison> -->
 - **Extension [Maturity Classification](../../extensions.md#extension-maturity):** Pilot
 - **Dependents:**
   - [Item Search](../../item-search)
@@ -63,9 +63,6 @@
     - [Example 11: Using LIKE](#example-11-using-like)
       - [Example 11: cql2-text (GET)](#example-11-cql2-text-get)
       - [Example 11: cql2-json (POST)](#example-11-cql2-json-post)
-    - [Example 12: Using Case-insensitive Comparison Functions](#example-12-using-case-insensitive-comparison-functions)
-      - [Example 12: cql2-text (GET)](#example-12-cql2-text-get)
-      - [Example 12: cql2-json (POST)](#example-12-cql2-json-post)
 
 ## Overview
 
@@ -171,9 +168,8 @@ CQL2 JSON in POST requests.
 For additional capabilities, the following classes can be implemented:
 - Advanced Comparison Operators 
   (`http://www.opengis.net/spec/cql2/1.0/conf/advanced-comparison-operators`) defines the `LIKE`, 
-  `BETWEEN`, and `IN` operators. **Note**: this conformance class does **not** require implementing the
-  `lower` and `upper` functions as defined in the latest OAFeat CQL2 spec, as these have been moved to the
-  Case-insensitive Comparison conformance class. 
+  `BETWEEN`, and `IN` operators. **Note**: this conformance class no longer requires implementing the
+  `lower` and `upper` functions.
 - Basic Spatial Operators (`http://www.opengis.net/spec/cql2/1.0/conf/basic-spatial-operators`) defines the intersects operator (`S_INTERSECTS`).
 - Spatial Operators 
   (`http://www.opengis.net/spec/cql2/1.0/conf/spatial-operators`) defines a set of operators that
@@ -194,8 +190,8 @@ For additional capabilities, the following classes can be implemented:
   allows the use of queryables (e.g., properties) in both positions of a clause, not just in the
   first position. This allows predicates like `property1 == property2` be expressed, whereas the
   Basic CQL2 conformance class only requires comparisons against right-hand-side literals.
-- Case-insensitive Comparison: (`http://www.opengis.net/spec/cql2/1.0/conf/case-insensitive-comparison`)
-  defines the UPPER and LOWER functions that can be used for case-insensitive comparison.
+<!-- - Case-insensitive Comparison: (`http://www.opengis.net/spec/cql2/1.0/conf/case-insensitive-comparison`) -->
+  <!-- defines the UPPER and LOWER functions that can be used for case-insensitive comparison. -->
 
 Additionally, if an API implements the OGC API Features endpoint, it is **recommended** that the OAFeat Part 3 Filter, 
 Features Filter, and Basic CQL2 conformance classes be implemented, which allow use of CQL2 filters against the 
@@ -994,19 +990,18 @@ filter=mission LIKE 'sentinel%'
 }
 ```
 
-### Example 12: Using Case-insensitive Comparison Functions
+<!-- ### Example 12: Using Case-insensitive Comparison Functions
 
-The predefined functions `UPPER` and `LOWER` allow for case-insensitive comparisons, and are used in the same way
-user-defined functions are.
+The predefined function `CASEI` allows for case-insensitive comparisons.
 
 #### Example 12: cql2-text (GET)
 
 ```http
-filter=LOWER(provider) == 'coolsat'
+filter=CASEI(provider) == 'coolsat'
 ```
 
 ```http
-filter=UPPER(provider) == 'NASA'
+filter=CASEI(provider) == 'NASA'
 ```
 
 #### Example 12: cql2-json (POST)
@@ -1039,4 +1034,4 @@ filter=UPPER(provider) == 'NASA'
     ]
   }
 }
-```
+``` -->
