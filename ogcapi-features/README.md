@@ -137,7 +137,8 @@ The href may contain any arbitrary URL parameter, which is implementation-specif
 - `http://api.cool-sat.com/collections/my_collection/items?next=8a35eba9c`
 - `http://api.cool-sat.com/collections/my_collection/items?token=f32890a0bdb09ac3`
 
-In addition to supporting query parameters to the `ref` URL, STAC has extended the Link object
+In addition to supporting query parameters in the URL value of the `href` field,
+STAC has extended the Link object
 with additional fields to support more complex HTTP requests. These include `method` to specify
 an HTTP method GET or POST, `headers` to add HTTP headers in the request, and `body` with either
 the entire body for the request or only the body fields that must be changed from the previous
@@ -183,7 +184,8 @@ previous (page=2) pages:
 ]
 ```
 
-In addition to supporting query parameters to the `ref` URL, STAC has extended the Link object
+In addition to supporting query parameters in the URL value of the `href` field,
+STAC has extended the Link object
 with additional fields to support more complex HTTP requests. These include `method` to specify
 an HTTP method GET or POST, `headers` to add HTTP headers in the request, and `body` with either
 the entire body for the request or only the body fields that must be changed from the previous
