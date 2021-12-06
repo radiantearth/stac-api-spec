@@ -32,10 +32,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Temporal operator `ANYINTERACTS` is now `T_INTERSECTS`
   - Updated Example 3 (now Example 5) to make it clear that property to property comparisons require the
     Property-Property Comparisons conformance class
-  - The CQL2 Case-insensitive Comparison 
+  - The CQL2 Accent and Case-insensitive Comparison 
     (`http://www.opengis.net/spec/cql2/1.0/conf/case-insensitive-comparison`) conformance class
-    that adds UPPER/LOWER terms or function CASEI for case-insensitive comparison has not been added
-    to this spec yet, since the definition in CQL2 is in flux.
+    adds the ACCENTI and CASEI functions for case-insensitive comparison. These replace the UPPER and
+    LOWER psuedo-functions that were previously part of the Advanced Comparison Operators class.
 - `service-desc` endpoint may return any service description format, typically a 
   machine-consumable one (previous restricted required to be OpenAPI 3.0 JSON)
 - `service-doc` endpoint may return any service description format, typically a

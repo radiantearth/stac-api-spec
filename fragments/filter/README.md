@@ -15,7 +15,7 @@
   - Arithmetic Expressions: <http://www.opengis.net/spec/cql2/1.0/conf/arithmetic>
   - Array Operators: <http://www.opengis.net/spec/cql2/1.0/conf/array-operators>
   - Property-Property Comparisons: <http://www.opengis.net/spec/cql2/1.0/conf/property-property>
-  <!-- - Case-insensitive Comparison: <http://www.opengis.net/spec/cql2/1.0/conf/case-insensitive-comparison> -->
+  - Accent and Case-insensitive Comparison: <http://www.opengis.net/spec/cql2/1.0/conf/accent-case-insensitive-comparison>
 - **Extension [Maturity Classification](../../extensions.md#extension-maturity):** Pilot
 - **Dependents:**
   - [Item Search](../../item-search)
@@ -63,6 +63,12 @@
     - [Example 11: Using LIKE](#example-11-using-like)
       - [Example 11: cql2-text (GET)](#example-11-cql2-text-get)
       - [Example 11: cql2-json (POST)](#example-11-cql2-json-post)
+    - [Example 12: Using the CASEI Case-insensitive Comparison Function](#example-12-using-the-casei-case-insensitive-comparison-function)
+      - [Example 12: cql2-text (GET)](#example-12-cql2-text-get)
+      - [Example 12: cql2-json (POST)](#example-12-cql2-json-post)
+    - [Example 13: Using the ACCENTI Accent-insensitive Comparison Function](#example-13-using-the-accenti-accent-insensitive-comparison-function)
+      - [Example 13: cql2-text (GET)](#example-13-cql2-text-get)
+      - [Example 13: cql2-json (POST)](#example-13-cql2-json-post)
 
 ## Overview
 
@@ -165,7 +171,7 @@ If both are advertised as being supported, it is only required that both be supp
 only that CQL2 JSON be supported for POST JSON requests.  It is recommended that clients use CQL2 Text in GET requests and 
 CQL2 JSON in POST requests. 
 
-For additional capabilities, the following classes can be implemented:
+For additional capabilities, the following classes may be implemented:
 - Advanced Comparison Operators 
   (`http://www.opengis.net/spec/cql2/1.0/conf/advanced-comparison-operators`) defines the `LIKE`, 
   `BETWEEN`, and `IN` operators. **Note**: this conformance class no longer requires implementing the
@@ -188,10 +194,10 @@ For additional capabilities, the following classes can be implemented:
   defines array operators (`A_EQUALS`, `A_CONTAINS`, `A_CONTAINED_BY`, and `A_OVERLAPS`).
 - Property-Property Comparisons: (`http://www.opengis.net/spec/cql2/1.0/conf/property-property`)
   allows the use of queryables (e.g., properties) in both positions of a clause, not just in the
-  first position. This allows predicates like `property1 == property2` be expressed, whereas the
+  first position. This allows predicates like `property1 = property2` be expressed, whereas the
   Basic CQL2 conformance class only requires comparisons against right-hand-side literals.
-<!-- - Case-insensitive Comparison: (`http://www.opengis.net/spec/cql2/1.0/conf/case-insensitive-comparison`) -->
-  <!-- defines the UPPER and LOWER functions that can be used for case-insensitive comparison. -->
+- Accent and Case-insensitive Comparison: (`http://www.opengis.net/spec/cql2/1.0/conf/accent-case-insensitive-comparison`)
+  defines the UPPER and LOWER functions that can be used for case-insensitive comparison.
 
 Additionally, if an API implements the OGC API Features endpoint, it is **recommended** that the OAFeat Part 3 Filter, 
 Features Filter, and Basic CQL2 conformance classes be implemented, which allow use of CQL2 filters against the 
@@ -765,7 +771,7 @@ filter=prop1 = prop2
 { 
   "filter-lang": "cql2-json",
   "filter": {
-    "op": "eq", 
+    "op": "=", 
     "args": [
       { "property": "prop1" },
       { "property": "prop2" }
@@ -990,18 +996,23 @@ filter=mission LIKE 'sentinel%'
 }
 ```
 
-<!-- ### Example 12: Using Case-insensitive Comparison Functions
+### Example 12: Using the CASEI Case-insensitive Comparison Function
 
-The predefined function `CASEI` allows for case-insensitive comparisons.
+The predefined function `CASEI` allows for case-insensitive comparisons. This function is
+defined in the Accent and Case-insensitive Comparison conformance class.
+
+In the example using 'Straße', both the capitalized 'S' and Eszett ('ß') are converted to an
+insensitive representation whereby the expressions `CASEI('Straße')`, `CASEI('straße')`,
+`CASEI('Strasse')`, and `CASEI('strasse')` are all equal.
 
 #### Example 12: cql2-text (GET)
 
 ```http
-filter=CASEI(provider) == 'coolsat'
+filter=CASEI(provider) = CASEI('coolsat')
 ```
 
 ```http
-filter=CASEI(provider) == 'NASA'
+filter=CASEI(provider) = CASEI('Straße')
 ```
 
 #### Example 12: cql2-json (POST)
@@ -1010,12 +1021,16 @@ filter=CASEI(provider) == 'NASA'
 {
   "filter-lang": "cql2-json",
   "filter": {
-    "op": "eq", 
+    "op": "=", 
     "args": [
       { 
-        "lower" : { "property": "provider" }
+        "function" : "casei", 
+        "args" : [ { "property": "provider" } ]
       },
-      "coolsat"
+      { 
+        "function" : "casei", 
+        "args" : [ "coolsat" ]
+      }
     ]
   }
 }
@@ -1025,13 +1040,50 @@ filter=CASEI(provider) == 'NASA'
 {
   "filter-lang": "cql2-json",
   "filter": {
-    "op": "eq", 
+    "op": "=", 
     "args": [
       { 
-        "upper": { "property": "provider" }
+        "function" : "casei", 
+        "args" : [ { "property": "provider" } ]
       },
-      "NASA"
+      { 
+        "function" : "casei", 
+        "args" : [ "Straße" ]
+      }
     ]
   }
 }
-``` -->
+```
+
+### Example 13: Using the ACCENTI Accent-insensitive Comparison Function
+
+The predefined function `ACCENTI` allows for accent-insensitive comparisons. This function is
+defined in the Accent and Case-insensitive Comparison conformance class. In the example below,
+`ACCENTI('tiburon')` and `ACCENTI('tiburón')` evaluate to be equal.
+
+#### Example 13: cql2-text (GET)
+
+```http
+filter=ACCENTI(provider) = ACCENTI('tiburón')
+```
+
+#### Example 13: cql2-json (POST)
+
+```json
+{
+  "filter-lang": "cql2-json",
+  "filter": {
+    "op": "=", 
+    "args": [
+      { 
+        "function" : "accenti", 
+        "args" : [ { "property": "provider" } ]
+      },
+      { 
+        "function" : "accenti", 
+        "args" : [ "tiburón" ]
+      }
+    ]
+  }
+}
+```
