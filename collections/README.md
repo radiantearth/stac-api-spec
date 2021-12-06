@@ -7,7 +7,7 @@
   - [Example](#example)
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.5/collections))
-- **Conformance URI:** <http://stacspec.org/spec/api/1.0.0-beta.5/extensions/collections>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/collections>
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Dependencies**: [STAC API - Core](../core)
 
