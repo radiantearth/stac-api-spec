@@ -10,17 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Added `STAC API - Children` conformance class
 - Added description of how to support both search and browse in an API.
-- The Paging mechanism via a Link with rel `next` or `prev` as defined for Item Search can also be used
-  for the STAC - Features endpoint `/collections/{collectionId}/items`.
 - The paging mechanism via a Link with rel `next` or `prev` as defined for Item Search can also be used
   for the STAC API - Features endpoint `/collections/{collection_id}/items`, as described in OAFeat.
 - The paging mechanism via a Link with rel `next` or `prev` as defined for items can also be used
   for the STAC API - Features and STAC API - Collections endpoint `/collections`.
-
-### Fixed
-
-- Collection conformance class URI should be `https://api.stacspec.org/v1.0.0-beta.4/collections` instead 
-  of `http://stacspec.org/spec/api/1.0.0-beta.4/extensions/collections`
 
 ### Changed
 
