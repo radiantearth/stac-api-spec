@@ -3,6 +3,7 @@
 - [STAC API - Core Specification](#stac-api---core-specification)
   - [Link Relations](#link-relations)
   - [Endpoints](#endpoints)
+  - [Endpoints](#endpoints-1)
   - [Example Landing Page for STAC API - Core](#example-landing-page-for-stac-api---core)
   - [Extensions](#extensions)
   - [Browseable Catalogs](#browseable-catalogs)
@@ -81,7 +82,7 @@ supported by this endpoint, e.g., `text/html`.
 | `service-doc` | `/api.html` | OAFeat   | A human-consumable service description. The path for this endpoint is only recommended to be `/api.html`, but may be another path. |
 
 Additionally, `child` relations may exist to child Catalogs and Collections and `item` relations to Items. These
-relations form a directed acyclic graph that supports browseable traversal.
+relations form a directed graph that supports browseable traversal.
 
 | **rel** | **href** | **From**  | **Description**                        |
 | ------- | -------- | --------- | -------------------------------------- |
@@ -90,7 +91,7 @@ relations form a directed acyclic graph that supports browseable traversal.
 
 While it is valid to have `item` links from the landing page, most STAC API implementations 
 serve large numbers of features, so they will typically use several layers of intermediate `child` links before
-getting to Item objects.  These relations form a directed acyclic graph
+getting to Item objects.  These relations form a directed graph
 of Catalogs and Collections, where interior nodes contain `child` relations, and the penultimate nodes will be
 Catalogs with `item` relations to individual Items as leaf nodes. 
 
@@ -214,9 +215,9 @@ A STAC API is more useful when it presents a complete `Catalog` representation o
 API, such that all `Item` objects can be reached by transitively traversing `child` and `item` link relations from
 the root.  While the `STAC API - Item Search` behavior is a formally-defined conformance class, browseability is
 only a set of conventions. Implementers who have search as their primary use case should consider also implementing this
-alternate view over the data by presenting it a directed acyclic graph of catalogs (typically a tree), where
-each catalog can be retrieved with a
-single request (e.g., each Catalog JSON is small enough that it does not require pagination).
+alternate view over the data by presenting it as a directed graph of catalogs, where the `child` link relations typically
+form a tree, and where each catalog can be retrieved with a single request (e.g., each Catalog JSON is small enough that
+it does not require pagination).
 
 While OAFeat requires that all Items must be part of a Collection, this does not mean that the Collection needs to be
 part of the browseable tree. If they are part of the tree, it is recommended that there only be one Collection in a
@@ -303,8 +304,8 @@ Catalogs can also group related products. For example, here we group together sy
     - child -> /catalogs/landsat_8_sr
     - child -> /catalogs/sentinel_2_l2a
 
-Since the catalogs structure is a directed acyclic graph which allows 
-you to provide numerous different Catalog and Collection graphs reach leaf Items. For example, for a Landsat 8 data
+The catalogs structure is a directed graph that allows 
+you to provide numerous different Catalog and Collection graphs to reach leaf Items. For example, for a Landsat 8 data
 product, you may want to allow browsing both by date then path then row, or by path then row then date:
 
 1. Catalog -> Catalog (product) -> Catalog (date) -> Catalog (path) -> Catalog (row)
