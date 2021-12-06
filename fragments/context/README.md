@@ -13,7 +13,7 @@ object when the ItemCollection is the result of a search, for example, from call
 
 This fragment may be bound to either or both of 
 [Item Search](../../item-search) (`/search` endpoint) or
-[STAC Features](../../ogcapi-features) (`/collections/{collection_id}/items` endpoint) by
+[STAC Features](../../ogcapi-features) (`/collections/{collectionId}/items` endpoint) by
 advertising the relevant conformance class. 
 
 **Note**: OGC API Features - Part 1 has its own way returning `numberMatched` and `numberReturned` at the top level, instead of in a context

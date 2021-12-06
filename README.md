@@ -64,6 +64,9 @@ The *[ogcapi-features](ogcapi-features)* folder describes how a STAC API can ful
 Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to expose individual `items` endpoints for search of
 each STAC collection. It also includes extensions that can be used to further enhance OAFeat.
 
+**STAC API - Collections:**
+The *[collections](collections)* folder describes how a STAC API can advertise the Collections it contains.
+
 **Extensions:**
 The *[extensions](extensions.md) document* describes how STAC incubates new functionality, and it links to the existing 
 extensions that can be added to enrich the functionality of a STAC API. Each has an OpenAPI yaml, but some of the yaml
