@@ -6,7 +6,8 @@
 - **Dependents:**
   - [Item Search](../../item-search)
 
-The `query` parameter adds additional filters for searching on the properties of Item objects.
+The `query` parameter adds additional filters for searching on the properties of Item objects. The JSON syntax for
+these filters is known as "STACQL" (pronounced `stack-cue-el`).
 
 The syntax for the `query` filter is:
 

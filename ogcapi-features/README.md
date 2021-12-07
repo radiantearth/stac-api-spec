@@ -69,15 +69,15 @@ supported by this endpoint, e.g., `text/html`.
 The core OGC API - Features endpoints are shown below, with details provided in an 
 [OpenAPI specification document](openapi.yaml).
 
-| Endpoint                                        | Returns                                                 | Description                                                                                                                                                             |
-| ----------------------------------------------- | ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `/`                                             | [Catalog](../stac-spec/catalog-spec/README.md)          | Landing page, links to API capabilities                                                                                                                                 |
+| Endpoint                                        | Returns                                                 | Description                                                                                                                                                                         |
+| ----------------------------------------------- | ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/`                                             | [Catalog](../stac-spec/catalog-spec/README.md)          | Landing page, links to API capabilities                                                                                                                                             |
 | `/api`                                          | any                                                     | Returns a machine-readable API description of the service from the `service-desc` link `rel`. The path for this endpoint is only recommended to be `/api`, but may be another path. |
-| `/conformance`                                  | JSON                                                    | Info about standards to which the API conforms                                                                                                                          |
-| `/collections`                                  | JSON                                                    | Object containing an array of Collection objects in the Catalog, and Link relations                                                                                     |
-| `/collections/{collectionId}`                   | [Collection](../stac-spec/collection-spec/README.md)    | Returns single Collection JSON                                                                                                                                          |
-| `/collections/{collectionId}/items`             | [ItemCollection](../fragments/itemcollection/README.md) | GeoJSON FeatureCollection-conformant entity of Item objects in collection                                                                                               |
-| `/collections/{collectionId}/items/{featureId}` | [Item](../stac-spec/item-spec/README.md)                | Returns single Item (GeoJSON Feature)                                                                                                                                   |
+| `/conformance`                                  | JSON                                                    | Info about standards to which the API conforms                                                                                                                                      |
+| `/collections`                                  | JSON                                                    | Object containing an array of Collection objects in the Catalog, and Link relations                                                                                                 |
+| `/collections/{collectionId}`                   | [Collection](../stac-spec/collection-spec/README.md)    | Returns single Collection JSON                                                                                                                                                      |
+| `/collections/{collectionId}/items`             | [ItemCollection](../fragments/itemcollection/README.md) | GeoJSON FeatureCollection-conformant entity of Item objects in collection                                                                                                           |
+| `/collections/{collectionId}/items/{featureId}` | [Item](../stac-spec/item-spec/README.md)                | Returns single Item (GeoJSON Feature)                                                                                                                                               |
 
 The OGC API - Features is a standard API that represents collections of geospatial data. It defines a RESTful interface 
 to query geospatial data, with GeoJSON as a main return type. With OAFeat you can return any `Feature`, which is a geometry 
@@ -90,13 +90,13 @@ be queried ([7.11](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_col
 information about the geospatial dataset, like its name and description, as well as the spatial and temporal extents of all 
 the data contained. A [STAC Collection](../stac-spec/collection-spec/README.md) contains this same 
 information, along with other STAC-specific fields to provide additional metadata for searching spatiotemporal assets, and 
-thus are compliant with both OAFeat Collection and STAC Collection, and are returned from the `/collections/{collection_id}` 
+thus are compliant with both OAFeat Collection and STAC Collection, and are returned from the `/collections/{collectionId}` 
 endpoint.
 
 In OAFeat, Features are the individual records within a Collection and are usually provided in GeoJSON format. 
 [STAC Item](../stac-spec/item-spec/README.md) objects are compliant with the OAFeat Features 
 [GeoJSON requirements class](http://docs.ogc.org/is/17-069r3/17-069r3.html#_requirements_class_geojson), and are returned from the 
-`/collections/{collection_id}/items/{item_id}` endpoint. The return of other encodings 
+`/collections/{collectionId}/items/{itemId}` endpoint. The return of other encodings 
 ([html](http://docs.ogc.org/is/17-069r3/17-069r3.html#rc_html), [gml](http://docs.ogc.org/is/17-069r3/17-069r3.html#rc_gmlsf0))
 is outside the scope of STAC API, as the [STAC Item](../stac-spec/item-spec/item-spec.md) is
 specified in GeoJSON.
@@ -183,11 +183,11 @@ previous (page=2) pages:
   ...
   {
     "rel": "prev",
-    "href": "http://api.cool-sat.com/collections/my_collection/items?page=2"
+    "href": "http://api.cool-sat.com/collections?page=2"
   },
   {
     "rel": "next",
-    "href": "http://api.cool-sat.com/collections/my_collection/items?page=4"
+    "href": "http://api.cool-sat.com/collections?page=4"
   }
 ]
 ```
@@ -365,7 +365,7 @@ It is the STAC API equivalent of [OGC API - Features - Part 4: Create, Replace, 
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Definition**: [STAC API - Fields Fragment](../fragments/fields/)
 
-By default, the Items resource `/collections/{collection_id}/items` returns all attributes 
+By default, the Items resource `/collections/{collectionId}/items` returns all attributes 
 of each Item, as there is no way to specify 
 exactly those attributes that should be returned. The Fields extension to STAC Features adds new functionality that 
 allows the client to suggest to the server which Item attributes should be included or excluded in the response, 
@@ -378,7 +378,7 @@ through the use of a `fields` parameter. The full description of how this extens
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Definition**: [STAC API - Sort Fragment](../fragments/sort/)
 
-By default, the Items resource `/collections/{collection_id}/items` returns results in no specified order. Whatever order the results are in 
+By default, the Items resource `/collections/{collectionId}/items` returns results in no specified order. Whatever order the results are in 
 is up to the implementor, and will typically default to an arbitrary order that is fastest for the underlying data store 
 to retrieve results. This extension adds a new parameter, `sortby`, that lets a user specify a comma separated list of
 field names to sort by, with an indication of direction. It uses '+' and
@@ -391,6 +391,6 @@ of this extension can be found in the [sort fragment](../fragments/sort).
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Definition**: [STAC API - Context Fragment](../fragments/context/)
 
-This extension is intended to augment the core ItemCollection responses from the Items resource `/collections/{collection_id}/items`  with a
+This extension is intended to augment the core ItemCollection responses from the Items resource `/collections/{collectionId}/items`  with a
 JSON object called `context` that includes the number of items `matched`, `returned` and the `limit` requested.
 The full description and examples of this are found in the [context fragment](../fragments/context).

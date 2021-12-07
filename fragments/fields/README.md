@@ -15,7 +15,7 @@ fragment provides a mechanism for clients to request that servers to explicitly 
 
 This fragment may be bound to either or both of 
 [Item Search](../../item-search) (`/search` endpoint) or
-[STAC Features](../../ogcapi-features) (`/collections/{collection_id}/items` endpoint) by
+[STAC Features](../../ogcapi-features) (`/collections/{collectionId}/items` endpoint) by
 advertising the relevant conformance class. 
 
 When used in a POST request with `Content-Type: application/json`, this adds an attribute `fields` with 
