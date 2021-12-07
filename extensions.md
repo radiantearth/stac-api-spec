@@ -82,7 +82,6 @@ the service supports. This are listed at the top of each extension description, 
   - <http://www.opengis.net/spec/cql2/1.0/conf/arithmetic>
   - <http://www.opengis.net/spec/cql2/1.0/conf/array-operators>
   - <http://www.opengis.net/spec/cql2/1.0/conf/property-property>
-  <!-- - <http://www.opengis.net/spec/cql2/1.0/conf/case-insensitive-comparison> -->
 - [Context](item-search/README.md#context)
   - <https://api.stacspec.org/v1.0.0-beta.5/item-search#context>
   - <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features#context>

@@ -13,9 +13,11 @@ changes should come in the form of pull requests, using code review functionalit
   To the greatest extent possible, the STAC API should align with existing and in-progress OGC API standards. The
   STAC API has a symbiotic relationship with these standards, as it seeks both to reuse their building blocks and
   push them forward in a practical direction. Among the most important of these are:
+  - [OGC API - Common](https://ogcapi.ogc.org/common/)
   - [OGC API - Features](https://ogcapi.ogc.org/features/), particularly [OGC API - Features - Part 1: Core](http://docs.ogc.org/is/17-069r3/17-069r3.html)
   - [OGC API - Records](https://ogcapi.ogc.org/records/)
-  - [Common Query Language (CQL2)](https://docs.ogc.org/DRAFTS/21-065.html), formerly part of OGC API - Features - Part 3: Filtering and the Common Query Language (CQL)
+  - [Common Query Language (CQL2)](https://docs.ogc.org/DRAFTS/21-065.html), formerly part of OGC 
+    API - Features - Part 3: Filtering and the Common Query Language (CQL)
 
 - **Web API using JSON + HTTP at the core.** JSON has won over XML, and resource-centric over SOAP. We embrace them and
 are not considering legacy options. Forward looking protocols can be considered as extensions,
