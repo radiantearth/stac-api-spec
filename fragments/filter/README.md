@@ -15,7 +15,6 @@
   - Arithmetic Expressions: <http://www.opengis.net/spec/cql2/1.0/conf/arithmetic>
   - Array Operators: <http://www.opengis.net/spec/cql2/1.0/conf/array-operators>
   - Property-Property Comparisons: <http://www.opengis.net/spec/cql2/1.0/conf/property-property>
-  <!-- - Case-insensitive Comparison: <http://www.opengis.net/spec/cql2/1.0/conf/case-insensitive-comparison> -->
 - **Extension [Maturity Classification](../../extensions.md#extension-maturity):** Pilot
 - **Dependents:**
   - [Item Search](../../item-search)
@@ -190,8 +189,6 @@ For additional capabilities, the following classes can be implemented:
   allows the use of queryables (e.g., properties) in both positions of a clause, not just in the
   first position. This allows predicates like `property1 == property2` be expressed, whereas the
   Basic CQL2 conformance class only requires comparisons against right-hand-side literals.
-<!-- - Case-insensitive Comparison: (`http://www.opengis.net/spec/cql2/1.0/conf/case-insensitive-comparison`) -->
-  <!-- defines the UPPER and LOWER functions that can be used for case-insensitive comparison. -->
 
 Additionally, if an API implements the OGC API Features endpoint, it is **recommended** that the OAFeat Part 3 Filter, 
 Features Filter, and Basic CQL2 conformance classes be implemented, which allow use of CQL2 filters against the 
