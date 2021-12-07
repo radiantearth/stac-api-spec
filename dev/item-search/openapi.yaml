@@ -277,7 +277,7 @@ components:
       description: |-
         **Extension:** Filter
 
-        A CQL filter expression for filtering items.
+        A CQL2 filter expression for filtering items.
       required: true
       schema:
         oneOf:
@@ -974,7 +974,7 @@ components:
         - $ref: '#/components/schemas/anyinteractsExpression'
     filter-cql-text:
       description: |
-        A CQL filter expression in the 'cql-text' encoding.
+        A CQL2 filter expression in the 'cql-text' encoding.
       type: string
     exception:
       type: object
@@ -1359,7 +1359,7 @@ components:
           $ref: '#/components/schemas/fields'
     filter-lang:
       description: |
-        The CQL filter encoding that the 'filter' value uses.
+        The CQL2 filter encoding that the 'filter' value uses.
       type: string
       enum:
         - cql-text
