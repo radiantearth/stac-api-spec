@@ -25,7 +25,8 @@ Typically, a Feature is used when returning a single Item object, and FeatureCol
 JSON array of Item entities).
 
 The API can be implemented in compliance with the *[OGC API - Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html)* standard 
-(OAFeat as a shorthand). In this case STAC API can be thought of as a specialized Features API 
+(OAFeat is a shorthand). In this case STAC API can be thought of as a specialized Features API 
+
 to search STAC catalogs, where the features returned are STAC [Item](stac-spec/item-spec/item-spec.md) objects, 
 that have common properties, links to their assets and geometries that represent the footprints of the geospatial assets.
 
