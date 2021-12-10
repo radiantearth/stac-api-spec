@@ -56,21 +56,25 @@ The **[Overview](overview.md)** document describes all the various parts of the 
 The *[core](core/)* folder describes the core STAC API specification that enables browsing catalogs and 
 retrieving the API capabilities. This includes the OpenAPI schemas for STAC Item, Catalog and Collection objects.
 
-**STAC API - Item Search Specification:**
-The *[item-search](item-search)* folder contains the Item Search specification, which enables 
-cross-collection search of STAC Item objects at a `search` endpoint, as well as a number of extensions. 
+**STAC API - Collections:**
+The *[collections](collections)* folder describes how a STAC API Catalog can advertise the Collections it contains.
 
 **STAC API - Features:**
 The *[ogcapi-features](ogcapi-features)* folder describes how a STAC API can fully implement [OGC API - 
 Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to expose individual `items` endpoints for search of
 each STAC collection. It also includes extensions that can be used to further enhance OAFeat.
 
-**STAC API - Collections:**
-The *[collections](collections)* folder describes how a STAC API Catalog can advertise the Collections it contains.
+**STAC API - Item Search Specification:**
+The *[item-search](item-search)* folder contains the Item Search specification, which enables 
+cross-collection search of STAC Item objects at a `search` endpoint, as well as a number of extensions. 
 
 **STAC API - Children:**
 The *[children](children)* folder describes how a STAC API Catalog can advertise the children (sub-catalogs or sub-collections)
 it contains.
+
+**STAC API - Browseable:**
+The *[browseable](browseable)* folder describes how a STAC API Catalog can advertise that all Items can be accessed
+by following through `child` and `item` link relations.
 
 **Extensions:**
 The *[extensions](extensions.md) document* describes how STAC incubates new functionality, and it links to the existing 

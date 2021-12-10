@@ -21,11 +21,16 @@
   uses all the OGC API - Features openapi fragments to describe returning STAC Item objects.
 - **Conformance URIs:**
   - <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features> 
-  - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core> - [Requirements Class Core](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_core))
-  - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30> - [Requirements Class OpenAPI 3.0](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_oas30))
-  - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson> - [Requirements Class GeoJSON](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_geojson))
+  - <https://api.stacspec.org/v1.0.0-beta.5/core>
+  - <https://api.stacspec.org/v1.0.0-beta.5/collections>
+  - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core> - [Requirements Class Core](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_core)
+  - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson> - [Requirements Class GeoJSON](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_geojson)
+  - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30> - [Requirements Class OpenAPI 3.0](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_oas30)
+    (optional, only if returning OpenAPI 3.0 from the `service-desc` endpoint)
+
 - **Dependencies**:
   - [STAC API - Core](../core)
+  - [STAC API - Collections](../collections)
   - [OGC API - Features](https://www.ogc.org/standards/ogcapi-features)
 
 Adding OGC API - Features (OAFeat) to a STAC API means fully implementing all their requirements, and then returning STAC 

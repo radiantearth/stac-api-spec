@@ -21,7 +21,7 @@
     "check-stac-spec-changes": "git diff --quiet HEAD ${npm_config_compare_to} -- stac-spec"
   },
   "dependencies": {
-    "@redocly/openapi-cli": "^1.0.0-beta.62",
+    "@redocly/openapi-cli": "^1.0.0-beta.69",
     "@stoplight/spectral": "^5.9.2",
     "gh-pages": "^3.2.3",
     "redoc-cli": "^0.12.3",

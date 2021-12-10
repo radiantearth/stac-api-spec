@@ -6,10 +6,12 @@
   - [Pagination](#pagination)
   - [Example](#example)
 
-- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.5/children))
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/children>
-- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
+- **Conformance URIs:** 
+  - <https://api.stacspec.org/v1.0.0-beta.5/children>
+  - <https://api.stacspec.org/v1.0.0-beta.5/core>
 - **Dependencies**: [STAC API - Core](../core)
+- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.5/children))
+- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 
 A STAC API can return information about all STAC [Catalogs](../stac-spec/catalog-spec/catalog-spec.md) available using a link
 from the landing page that uses the link relation `children`, which links to an endpoint called
@@ -19,27 +21,20 @@ retrieve each `child` link from the root to retrieve additional information (e.g
 
 ## Link Relations
 
+Implementation of this conformance class implies the [STAC API - Core](../core) relations are also implemented.
+
 The following Link relations shall exist in the Landing Page (root).
 
-| **rel**        | **href**    | **From**        | **Description**                                                                                                                                                                                                                                                |
-| -------------- | ----------- | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `root`         | `/`         | STAC - Core     | The root URI                                                                                                                                                                                                                                                   |
-| `self`         | `/`         | OAFeat          | Self reference, same as root URI                                                                                                                                                                                                                               |
-| `service-desc` | `/api`      | OAFeat          | The OpenAPI service description. Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API. The path for this endpoint is only recommended to be `/api`, but may be another path. |
-| `children`     | `/children` | STAC - Children | List of children of this catalog                                                                                                                                                                                                                               |
-
-A `service-doc` endpoint is recommended, but not required.
-
-| **rel**       | **href**    | **From**       | **Description**                                                                                                                                                                                                     |
-| ------------- | ----------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `service-doc` | `/api.html` | OAFeat OpenAPI | An HTML service description.  Uses the `text/html` media type to refer to a human-consumable description of the service. The path for this endpoint is only recommended to be `/api.html`, but may be another path. |
+| **rel**    | **href**    | **From**        | **Description**                  |
+| ---------- | ----------- | --------------- | -------------------------------- |
+| `children` | `/children` | STAC API - Children | List of children of this catalog |
 
 The following Link relations shall exist in the `/children` endpoint response.
 
-| **rel** | **href**    | **From**  | **Description** |
-| ------- | ----------- | --------- | --------------- |
-| `root`  | `/`         | STAC Core | The root URI    |
-| `self`  | `/children` | OAFeat    | Self reference  |
+| **rel** | **href**    | **From**            | **Description** |
+| ------- | ----------- | ------------------- | --------------- |
+| `root`  | `/`         | STAC Core           | The root URI    |
+| `self`  | `/children` | STAC API - Children | Self reference  |
 
 ## Endpoints
 

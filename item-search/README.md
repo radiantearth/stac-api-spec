@@ -20,9 +20,11 @@
     - [Context](#context)
     - [Query](#query)
 
-- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.5/item-search))
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/item-search>
+- **Conformance URIs:**
+  - <https://api.stacspec.org/v1.0.0-beta.5/core>
+  - <https://api.stacspec.org/v1.0.0-beta.5/item-search>
 - **Dependencies**: [STAC API - Core](../core)
+- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.5/item-search))
 - **Examples**: [examples.md](examples.md)
 
 A search endpoint provides the ability to query STAC [Item](../stac-spec/item-spec/README.md) 
@@ -46,12 +48,12 @@ Implementing `GET /search` is **required**, `POST /search` is optional, but reco
 
 The following Link relations shall exist in the Landing Page (root).
 
-| **rel**        | **href**  | **From**         | **Description**                                      |
-| -------------- | --------- | ---------------- | ---------------------------------------------------- |
-| `root`         | `/`       | STAC Core        | The root URI                                         |
-| `self`         | `/`       | OAFeat           | Self reference, same as root URI                     |
-| `service-desc` | `/api`    | OAFeat           | The service description in a machine-readable format |
-| `search`       | `/search` | STAC Item Search | URI for the Search endpoint                          |
+| **rel**        | **href**  | **From**               | **Description**                                      |
+| -------------- | --------- | ---------------------- | ---------------------------------------------------- |
+| `root`         | `/`       | STAC Core              | The root URI                                         |
+| `self`         | `/`       | OAFeat                 | Self reference, same as root URI                     |
+| `service-desc` | `/api`    | OAFeat                 | The service description in a machine-readable format |
+| `search`       | `/search` | STAC API - Item Search | URI for the Search endpoint                          |
 
 The path for the `service-desc` endpoint is recommended to be `/api`, but may be another path. Recommended to be
 OpenAPI 3.0 or 3.1 with media types `application/vnd.oai.openapi` (YAML),
