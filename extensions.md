@@ -9,11 +9,11 @@ The third-party / vendor extension section is for the sharing of extensions. As 
 it is expected that others will make use of it, and then evolve to make it a 'community extension', that several providers maintain together.
 For now anyone from the community is welcome to use the appropriate parts of the stac-api-spec repository to collaborate.
 
-## Extension Maturity
+## Maturity Classification
 
-Extensions are meant to evolve to maturity, and thus may be in different states
-in terms of stability and number of implementations. All extensions included must include a 
-maturity classification, so that STAC spec users can easily get a sense of how much they can count
+Conformance classes and extensions are meant to evolve to maturity, and thus may be in different states
+in terms of stability and number of implementations. All extensions must include a 
+maturity classification, so that STAC API spec users can easily get a sense of how much they can count
 on the extension. 
 
 | Maturity Classification | Min Impl # | Description                                                                                                                                                | Stability                                                                                                 |

@@ -4,7 +4,7 @@
 - **Conformance Classes:** 
   - Item Search binding: <https://api.stacspec.org/v1.0.0-beta.5/item-search#fields>
   - STAC Features binding: <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features#fields>
-- **Fragment [Maturity Classification](../../extensions.md#extension-maturity):** Pilot
+- **Fragment [Maturity Classification](../../extensions.md#maturity-classification):** Pilot
 - **Dependents:**
   - [Item Search](../../item-search)
   - [STAC Features](../../ogcapi-features)

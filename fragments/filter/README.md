@@ -15,7 +15,7 @@
   - Arithmetic Expressions: <http://www.opengis.net/spec/cql2/1.0/conf/arithmetic>
   - Array Operators: <http://www.opengis.net/spec/cql2/1.0/conf/array-operators>
   - Property-Property Comparisons: <http://www.opengis.net/spec/cql2/1.0/conf/property-property>
-- **Extension [Maturity Classification](../../extensions.md#extension-maturity):** Pilot
+- **Extension [Maturity Classification](../../extensions.md#maturity-classification):** Pilot
 - **Dependents:**
   - [Item Search](../../item-search)
 

@@ -14,24 +14,31 @@
     - [Fields](#fields)
     - [Sort](#sort)
     - [Context](#context)
+    - [Filter](#filter)
+    - [Query](#query)
 
 *based on [**OGC API - Features - Part 1: Core**](https://www.ogc.org/standards/ogcapi-features)*
 
-- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features)) 
-  uses all the OGC API - Features openapi fragments to describe returning STAC Item objects.
 - **Conformance URIs:**
   - <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features> 
-  - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core> - [Requirements Class Core](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_core))
-  - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30> - [Requirements Class OpenAPI 3.0](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_oas30))
-  - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson> - [Requirements Class GeoJSON](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_geojson))
+  - <https://api.stacspec.org/v1.0.0-beta.5/core> 
+  - <https://api.stacspec.org/v1.0.0-beta.5/collections> 
+  - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core> - [Requirements Class Core](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_core)
+  - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson> - [Requirements Class GeoJSON](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_geojson)
+  - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30> - [Requirements Class OpenAPI 3.0](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_oas30)
+    (if used for `service-desc` endpoint)
 - **Dependencies**:
   - [STAC API - Core](../core)
+  - [STAC API - Collections](../collections)
   - [OGC API - Features](https://www.ogc.org/standards/ogcapi-features)
+- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features)) 
+  uses all the OGC API - Features openapi fragments to describe returning STAC Item objects.
+- **[Maturity Classification](../extensions.md#maturity-classification):** Candidate
 
-Adding OGC API - Features (OAFeat) to a STAC API means fully implementing all their requirements, and then returning STAC 
-[Item](../stac-spec/item-spec/README.md) objects from their `/items` endpoints. In OAFeat, GeoJSON is an optional 
+Adding OGC API - Features (OAFeat) to a STAC API means fully implementing all its requirements, and then returning STAC 
+[Item](../stac-spec/item-spec/README.md) objects from its `/items` endpoints. In OAFeat, GeoJSON is an optional 
 conformance class, enabling flexibility. However, STAC requires the use of GeoJSON for OAFeat
-endpoints. The full conformance class list is in the following table.
+endpoints.
 
 Note that implementing OGC API - Features does not actually depend on [STAC API - Core](../core), but we include it as a dependency since
 this extension discusses using it in the context of STAC. One could implement an OAFeat service, returning STAC 
@@ -40,44 +47,29 @@ with OAFeat clients. But specialized STAC clients will likely display results be
 
 ## Link Relations
 
+This conformance class also requires for the link relations in the [STAC API - Core](../core) conformance class to be implemented.
+
 The following Link relations shall exist in the Landing Page (root).
 
-| **rel**        | **href**       | **From**  | **Description**                                      |
-| -------------- | -------------- | --------- | ---------------------------------------------------- |
-| `root`         | `/`            | STAC Core | The root URI                                         |
-| `self`         | `/`            | OAFeat    | Self reference, same as root URI                     |
-| `conformance`  | `/conformance` | OAFeat    | Conformance URI                                      |
-| `service-desc` | `/api`         | OAFeat    | The service description in a machine-readable format |
-| `data`         | `/collections` | OAFeat    | List of Collections                                  |
-
-The path for the `service-desc` endpoint is recommended to be `/api`, but may be another path. Recommended to be
-OpenAPI 3.0 or 3.1 with media types `application/vnd.oai.openapi` (YAML),
-`application/vnd.oai.openapi+json;version=3.0` (3.0 JSON), or `application/vnd.oai.openapi+json;version=3.1`
-(3.1 JSON).
-
-A `service-doc` endpoint is recommended, but not required. This commonly returns an HTML
-page, for example, in the form of [Redoc](https://github.com/Redocly/redoc) interactive API
-, but any format is allowed. The Link `type` field should correspond to whatever format or formats are
-supported by this endpoint, e.g., `text/html`.
-
-| **rel**       | **href**    | **From** | **Description**                                                                                                                    |
-| ------------- | ----------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `service-doc` | `/api.html` | OAFeat   | A human-consumable service description. The path for this endpoint is only recommended to be `/api.html`, but may be another path. |
+| **rel**       | **href**       | **From** | **Description**     |
+| ------------- | -------------- | -------- | ------------------- |
+| `conformance` | `/conformance` | OAFeat   | Conformance URI     |
+| `data`        | `/collections` | OAFeat   | List of Collections |
 
 ## Endpoints
 
-The core OGC API - Features endpoints are shown below, with details provided in an 
+This conformance class also requires for the endpoints in the [STAC API - Core](../core) conformance class to be implemented.
+
+The OGC API - Features endpoints are shown below, with details provided in an 
 [OpenAPI specification document](openapi.yaml).
 
-| Endpoint                                        | Returns                                                 | Description                                                                                                                                                                         |
-| ----------------------------------------------- | ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `/`                                             | [Catalog](../stac-spec/catalog-spec/README.md)          | Landing page, links to API capabilities                                                                                                                                             |
-| `/api`                                          | any                                                     | Returns a machine-readable API description of the service from the `service-desc` link `rel`. The path for this endpoint is only recommended to be `/api`, but may be another path. |
-| `/conformance`                                  | JSON                                                    | Info about standards to which the API conforms                                                                                                                                      |
-| `/collections`                                  | JSON                                                    | Object containing an array of Collection objects in the Catalog, and Link relations                                                                                                 |
-| `/collections/{collectionId}`                   | [Collection](../stac-spec/collection-spec/README.md)    | Returns single Collection JSON                                                                                                                                                      |
-| `/collections/{collectionId}/items`             | [ItemCollection](../fragments/itemcollection/README.md) | GeoJSON FeatureCollection-conformant entity of Item objects in collection                                                                                                           |
-| `/collections/{collectionId}/items/{featureId}` | [Item](../stac-spec/item-spec/README.md)                | Returns single Item (GeoJSON Feature)                                                                                                                                               |
+| Endpoint                                        | Returns                                                 | Description                                                                         |
+| ----------------------------------------------- | ------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `/conformance`                                  | JSON                                                    | Info about standards to which the API conforms                                      |
+| `/collections`                                  | JSON                                                    | Object containing an array of Collection objects in the Catalog, and Link relations |
+| `/collections/{collectionId}`                   | [Collection](../stac-spec/collection-spec/README.md)    | Returns single Collection JSON                                                      |
+| `/collections/{collectionId}/items`             | [ItemCollection](../fragments/itemcollection/README.md) | GeoJSON FeatureCollection-conformant entity of Item objects in collection           |
+| `/collections/{collectionId}/items/{featureId}` | [Item](../stac-spec/item-spec/README.md)                | Returns single Item (GeoJSON Feature)                                               |
 
 The OGC API - Features is a standard API that represents collections of geospatial data. It defines a RESTful interface 
 to query geospatial data, with GeoJSON as a main return type. With OAFeat you can return any `Feature`, which is a geometry 
@@ -251,6 +243,7 @@ the [overview](../overview.md#example-landing-page) document.
     "conformsTo" : [
         "https://api.stacspec.org/v1.0.0-beta.5/core",
         "https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features",
+        "https://api.stacspec.org/v1.0.0-beta.5/collections",
         "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core",
         "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30",
         "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson"
@@ -330,7 +323,7 @@ as is typical with a static STAC Collection, there are no links here with rel va
 
 ## Extensions
 
-These extensions provide additional functionality that enhances STAC API - Features. 
+These extensions provide additional functionality that enhances `STAC API - Features`. 
 All are specified as [fragments](../fragments), as they are re-used by extensions to other STAC APIs.
 STAC APIs that offer the following capabilities must include the relevant **conformance URI** in the 
 `conformsTo` response at the root (`/`) landing page, to indicate to clients that they will respond properly 
@@ -341,7 +334,7 @@ to requests from clients.
 - **Conformance URIs:**
   - <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features/extensions/transaction>
   - <http://www.opengis.net/spec/ogcapi-features-4/1.0/conf/simpletx>
-- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
+- **Extension [Maturity Classification](../extensions.md#maturity-classification):** Candidate
 - **Definition**: [STAC API - Transaction Fragment](extensions/transaction/)
 
 The core STAC API only supports retrieving existing Items.
@@ -352,7 +345,7 @@ POST, PUT, PATCH, and DELETE methods. The full description of how this extension
 ### Items and Collections API Version Extension
 
 - **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features/extensions/version>
-- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
+- **Extension [Maturity Classification](../extensions.md#maturity-classification):** Candidate
 - **Definition**: [STAC API - Version](extensions/version/)
 
 The core API only supports semantics for creating and accessing a single version of an Item or Collection.
@@ -362,7 +355,7 @@ It is the STAC API equivalent of [OGC API - Features - Part 4: Create, Replace, 
 ### Fields
 
 - **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features#fields>
-- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
+- **Extension [Maturity Classification](../extensions.md#maturity-classification):** Candidate
 - **Definition**: [STAC API - Fields Fragment](../fragments/fields/)
 
 By default, the Items resource `/collections/{collectionId}/items` returns all attributes 
@@ -375,7 +368,7 @@ through the use of a `fields` parameter. The full description of how this extens
 ### Sort
 
 - **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features#sort>
-- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
+- **Extension [Maturity Classification](../extensions.md#maturity-classification):** Candidate
 - **Definition**: [STAC API - Sort Fragment](../fragments/sort/)
 
 By default, the Items resource `/collections/{collectionId}/items` returns results in no specified order. Whatever order the results are in 
@@ -388,9 +381,36 @@ of this extension can be found in the [sort fragment](../fragments/sort).
 ### Context
 
 - **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features#context>
-- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
+- **Extension [Maturity Classification](../extensions.md#maturity-classification):** Candidate
 - **Definition**: [STAC API - Context Fragment](../fragments/context/)
 
 This extension is intended to augment the core ItemCollection responses from the Items resource `/collections/{collectionId}/items`  with a
 JSON object called `context` that includes the number of items `matched`, `returned` and the `limit` requested.
 The full description and examples of this are found in the [context fragment](../fragments/context).
+
+### Filter
+
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/item-search#filter>
+- **Extension [Maturity Classification](../extensions.md#maturity-classification):** Pilot
+- **Definition**: [STAC API - Filter Fragment](../fragments/filter/)
+
+The STAC search endpoint, `/search`, by default only accepts a limited set of parameters to limit the results
+by properties. The Filter extension adds a new parameter, `filter`, that can take a number of comparison operators to
+match predicates between the fields requested and the values of Item objects. It can be used with both GET and POST and supports two
+query formats, `cql-text` and `cql-json`. The full details on the JSON structure are specified in the [filter 
+fragment](../fragments/filter/).
+
+### Query
+
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/item-search#query>
+- **Extension [Maturity Classification](../extensions.md#maturity-classification):** Candidate
+- **Definition**: [STAC API - Query Fragment](../fragments/query/)
+
+**Note** - the Query Extension will be deprecated at some point in 1.x. Implementers
+are encouraged to use the Filter Extension instead.
+
+The STAC search endpoint, `/search`, by default only accepts a limited set of parameters to limit the results
+by properties. The Query extension adds a new parameter, `query`, that can take a number of comparison operators to
+match predicates between the fields requested and the values of Item objects. It can be used with both GET and POST, though
+GET includes the exact same JSON. The full details on the JSON structure are specified in the [query 
+fragment](../fragments/query/).
