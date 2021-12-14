@@ -27,7 +27,7 @@ This object describes a STAC ItemCollection. The fields `type` and `features` ar
 
 ## Extensions
 
-- The [Context Extension](../../item-search/README.md#context) adds additional fields to STAC ItemCollection relevant 
+- The [Context Extension](../../item-search/README.md#context-extension) adds additional fields to STAC ItemCollection relevant 
   to their use as search results.
 - The [Single File STAC Extension](https://github.com/stac-extensions/single-file-stac/blob/main/README.md) provides a set of Collection 
   and Item objects as a single file catalog.
