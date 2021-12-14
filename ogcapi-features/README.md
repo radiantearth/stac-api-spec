@@ -19,6 +19,7 @@
 
 *based on [**OGC API - Features - Part 1: Core**](https://www.ogc.org/standards/ogcapi-features)*
 
+- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features)) 
 - **Conformance URIs:**
   - <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features> 
   - <https://api.stacspec.org/v1.0.0-beta.5/core> 
@@ -27,13 +28,12 @@
   - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson> - [Requirements Class GeoJSON](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_geojson)
   - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30> - [Requirements Class OpenAPI 3.0](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_oas30)
     (if used for `service-desc` endpoint)
+- **[Maturity Classification](../extensions.md#maturity-classification):** Candidate
 - **Dependencies**:
   - [STAC API - Core](../core)
   - [STAC API - Collections](../collections)
   - [OGC API - Features](https://www.ogc.org/standards/ogcapi-features)
-- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features)) 
   uses all the OGC API - Features openapi fragments to describe returning STAC Item objects.
-- **[Maturity Classification](../extensions.md#maturity-classification):** Candidate
 
 Adding OGC API - Features (OAFeat) to a STAC API means fully implementing all its requirements, and then returning STAC 
 [Item](../stac-spec/item-spec/README.md) objects from its `/items` endpoints. In OAFeat, GeoJSON is an optional 

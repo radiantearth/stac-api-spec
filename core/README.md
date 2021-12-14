@@ -6,12 +6,12 @@
   - [Example Landing Page for STAC API - Core](#example-landing-page-for-stac-api---core)
   - [Extensions](#extensions)
 
+- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.5/core)),
 - **Conformance URIs:**
   - <https://api.stacspec.org/v1.0.0-beta.5/core>
-- **Dependencies**: None
-- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.5/core)),
-  and [commons.yaml](commons.yaml) is the OpenAPI version of the core [STAC spec](../stac-spec) JSON Schemas.
 - **[Maturity Classification](../extensions.md#maturity-classification):** Candidate
+- **Dependencies**: None
+  and [commons.yaml](commons.yaml) is the OpenAPI version of the core [STAC spec](../stac-spec) JSON Schemas.
 
 The base of a STAC API is its landing page. This resource is the starting point to discover what behaviors 
 the API supports via the `conformsTo` values and link relations. 
