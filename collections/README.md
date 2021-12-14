@@ -26,7 +26,7 @@ aim to align with it. But it still seems to be in flux.*
 
 ## Link Relations
 
-This conformance class also requires for the link relations in the [STAC API - Core](../core) conformance class to be implemented.
+This conformance class also requires implementation of the link relations in the [STAC API - Core](../core) conformance class.
 
 The following Link relations shall exist in the Landing Page (root).
 

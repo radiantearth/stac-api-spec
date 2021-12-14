@@ -14,11 +14,11 @@
       - [PUT / PATCH / DELETE](#put--patch--delete)
   - [Example Landing Page for STAC API - Item Search](#example-landing-page-for-stac-api---item-search)
   - [Extensions](#extensions)
-    - [Fields](#fields)
-    - [Sort](#sort)
-    - [Context](#context)
-    - [Filter](#filter)
-    - [Query](#query)
+    - [Fields Extension](#fields-extension)
+    - [Sort Extension](#sort-extension)
+    - [Context Extension](#context-extension)
+    - [Filter Extension](#filter-extension)
+    - [Query Extension](#query-extension)
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.5/item-search))
 - **Conformance URIs:** 
@@ -47,7 +47,7 @@ Implementing `GET /search` is **required**, `POST /search` is optional, but reco
 
 ## Link Relations
 
-This conformance class also requires for the link relations in the [STAC API - Core](../core) conformance class to be implemented.
+This conformance class also requires implementation of the link relations in the [STAC API - Core](../core) conformance class.
 
 The following Link relations shall exist in the Landing Page (root).
 
@@ -293,7 +293,7 @@ These extensions provide additional functionality that enhances Item Search. All
 the `search` endpoint must include the relevant **conformance URI** in the `conformsTo` response at
 the root (`/`) landing page, to indicate to clients that they will respond properly to requests from clients.
 
-### Fields
+### Fields Extension
 
 - **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/item-search#fields>
 - **Extension [Maturity Classification](../README.md#maturity-classification):** Candidate
@@ -305,7 +305,7 @@ allows the client to suggest to the server which Item attributes should be inclu
 through the use of a `fields` parameter. The full description of how this extension works can be found in the 
 [fields fragment](../fragments/fields/). 
 
-### Sort
+### Sort Extension
 
 - **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/item-search#sort>
 - **Extension [Maturity Classification](../README.md#maturity-classification):** Candidate
@@ -318,7 +318,7 @@ field names to sort by, with an indication of direction. It can be used with bot
 '-' to indicate sort order, and the latter including a 'direction' field in JSON. The full description of the semantics
 of this extension can be found in the [sort fragment](../fragments/sort).
 
-### Context
+### Context Extension
 
 - **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/item-search#context>
 - **Extension [Maturity Classification](../README.md#maturity-classification):** Candidate
@@ -328,7 +328,7 @@ This extension is intended to augment the core ItemCollection responses from the
 JSON object called `context` that includes the number of items `matched`, `returned` and the `limit` requested.
 The full description and examples of this are found in the [context fragment](../fragments/context).
 
-### Filter
+### Filter Extension
 
 - **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/item-search#filter>
 - **Extension [Maturity Classification](../README.md#maturity-classification):** Pilot
@@ -340,16 +340,16 @@ match predicates between the fields requested and the values of Item objects. It
 query formats, `cql-text` and `cql-json`. The full details on the JSON structure are specified in the [filter 
 fragment](../fragments/filter/).
 
-### Query
+### Query Extension
 
 - **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/item-search#query>
 - **Extension [Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Definition**: [STAC API - Query Fragment](../fragments/query/)
 
-**Note** - the Query Extension will be deprecated at some point in 1.x. Implementers
-are encouraged to use the Filter Extension instead.
+**Note**: It is recommended that implementers implement the [Filter Extension](#filter-extension) instead, as
+it offers a more robust set of operators and uses the CQL2 standard.
 
-The STAC search endpoint, `/search`, by default only accepts a limited set of parameters to limit the results
+The STAC API search endpoint, `/search`, by default only accepts a limited set of parameters to limit the results
 by properties. The Query extension adds a new parameter, `query`, that can take a number of comparison operators to
 match predicates between the fields requested and the values of Item objects. It can be used with both GET and POST, though
 GET includes the exact same JSON. The full details on the JSON structure are specified in the [query 
