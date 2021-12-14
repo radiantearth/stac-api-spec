@@ -2,7 +2,7 @@
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
 - **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features/extensions/version>
-- **Extension [Maturity Classification](../../../extensions.md#maturity-classification):** Proposal
+- **Extension [Maturity Classification](../../../README.md#maturity-classification):** Proposal
 - **Dependencies**: [STAC API - Features](../../README.md)
 
 The core API doesn't support semantics to creating and accessing different versions of an Item or Collection.

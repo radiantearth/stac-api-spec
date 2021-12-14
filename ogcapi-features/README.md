@@ -28,7 +28,7 @@
   - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson> - [Requirements Class GeoJSON](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_geojson)
   - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30> - [Requirements Class OpenAPI 3.0](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_oas30)
     (if used for `service-desc` endpoint)
-- **[Maturity Classification](../extensions.md#maturity-classification):** Candidate
+- **[Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Dependencies**:
   - [STAC API - Core](../core)
   - [STAC API - Collections](../collections)
@@ -334,7 +334,7 @@ to requests from clients.
 - **Conformance URIs:**
   - <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features/extensions/transaction>
   - <http://www.opengis.net/spec/ogcapi-features-4/1.0/conf/simpletx>
-- **Extension [Maturity Classification](../extensions.md#maturity-classification):** Candidate
+- **Extension [Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Definition**: [STAC API - Transaction Fragment](extensions/transaction/)
 
 The core STAC API only supports retrieving existing Items.
@@ -345,7 +345,7 @@ POST, PUT, PATCH, and DELETE methods. The full description of how this extension
 ### Items and Collections API Version Extension
 
 - **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features/extensions/version>
-- **Extension [Maturity Classification](../extensions.md#maturity-classification):** Candidate
+- **Extension [Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Definition**: [STAC API - Version](extensions/version/)
 
 The core API only supports semantics for creating and accessing a single version of an Item or Collection.
@@ -355,7 +355,7 @@ It is the STAC API equivalent of [OGC API - Features - Part 4: Create, Replace, 
 ### Fields
 
 - **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features#fields>
-- **Extension [Maturity Classification](../extensions.md#maturity-classification):** Candidate
+- **Extension [Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Definition**: [STAC API - Fields Fragment](../fragments/fields/)
 
 By default, the Items resource `/collections/{collectionId}/items` returns all attributes 
@@ -368,7 +368,7 @@ through the use of a `fields` parameter. The full description of how this extens
 ### Sort
 
 - **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features#sort>
-- **Extension [Maturity Classification](../extensions.md#maturity-classification):** Candidate
+- **Extension [Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Definition**: [STAC API - Sort Fragment](../fragments/sort/)
 
 By default, the Items resource `/collections/{collectionId}/items` returns results in no specified order. Whatever order the results are in 
@@ -381,7 +381,7 @@ of this extension can be found in the [sort fragment](../fragments/sort).
 ### Context
 
 - **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features#context>
-- **Extension [Maturity Classification](../extensions.md#maturity-classification):** Candidate
+- **Extension [Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Definition**: [STAC API - Context Fragment](../fragments/context/)
 
 This extension is intended to augment the core ItemCollection responses from the Items resource `/collections/{collectionId}/items`  with a
@@ -391,7 +391,7 @@ The full description and examples of this are found in the [context fragment](..
 ### Filter
 
 - **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/item-search#filter>
-- **Extension [Maturity Classification](../extensions.md#maturity-classification):** Pilot
+- **Extension [Maturity Classification](../README.md#maturity-classification):** Pilot
 - **Definition**: [STAC API - Filter Fragment](../fragments/filter/)
 
 The STAC search endpoint, `/search`, by default only accepts a limited set of parameters to limit the results
@@ -403,7 +403,7 @@ fragment](../fragments/filter/).
 ### Query
 
 - **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/item-search#query>
-- **Extension [Maturity Classification](../extensions.md#maturity-classification):** Candidate
+- **Extension [Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Definition**: [STAC API - Query Fragment](../fragments/query/)
 
 **Note** - the Query Extension will be deprecated at some point in 1.x. Implementers

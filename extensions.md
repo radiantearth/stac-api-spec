@@ -1,6 +1,6 @@
 # API Extensions
 
-STAC aims to define a small core of functionality, with richer capabilities enabled by extensions. This document
+STAC API aims to define a core of functionality, with richer capabilities enabled by extensions. This document
 lists the existing extensions, and explains the process of creating and maturing an extension. 
 
 Anyone is welcome to create an extension (see [info on this](#creating-new-extensions) below), and is encouraged to at least 
@@ -9,30 +9,10 @@ The third-party / vendor extension section is for the sharing of extensions. As 
 it is expected that others will make use of it, and then evolve to make it a 'community extension', that several providers maintain together.
 For now anyone from the community is welcome to use the appropriate parts of the stac-api-spec repository to collaborate.
 
-## Maturity Classification
+All extensions must include a [maturity classification](README.md#maturity-classification), so that STAC API
+specification users can easily get a sense of how much they can count on the extension. 
 
-Conformance classes and extensions are meant to evolve to maturity, and thus may be in different states
-in terms of stability and number of implementations. All extensions must include a 
-maturity classification, so that STAC API spec users can easily get a sense of how much they can count
-on the extension. 
-
-| Maturity Classification | Min Impl # | Description                                                                                                                                                | Stability                                                                                                 |
-| ----------------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| Proposal                | 0          | An idea put forward by a community member to gather feedback                                                                                               | Not stable - breaking changes almost guaranteed as implementers try out the idea.                         |
-| Pilot                   | 1          | Idea is fleshed out, with examples and a JSON schema, and implemented in one or more catalogs. Additional implementations encouraged to help give feedback | Approaching stability - breaking changes are not anticipated but can easily come from additional feedback |
-| Candidate               | 3          | A number of implementers are using it and are standing behind it as a solid extension. Can generally count on an extension at this maturity level          | Mostly stable, breaking changes require a new version and minor changes are unlikely.                     |
-| Stable                  | 6          | Highest current level of maturity. The community of extension maintainers commits to a STAC review process for any changes, which are not made lightly.    | Completely stable, all changes require a new version number and review process.                           |
-| Deprecated              | N/A        | A previous extension that has likely been superseded by a newer one or did not work out for some reason.                                                   | Will not be updated and may be removed in an upcoming major release.                                      |
-
-Maturity mostly comes through diverse implementations, so the minimum number of implementations
-column is the main gating function for an extension to mature. But extension authors can also
-choose to hold back the maturity advancement if they don't feel they are yet ready to commit to
-the less breaking changes of the next level.
-
-A 'mature' classification level will likely be added once there are extensions that have been 
-stable for over a year and are used in twenty or more implementations.
-
-## Extensions, Fragments and Conformance
+## Extensions, Fragments, and Conformance
 
 Each extension has its own conformance class, which is specified with a 'conformance URI' that is defined for the extension, and listed in 
 the table below. These must be listed in the `conformsTo` JSON of the landing page, as specified by [STAC API Core](core/), to let clients

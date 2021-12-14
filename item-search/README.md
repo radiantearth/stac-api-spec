@@ -24,7 +24,7 @@
 - **Conformance URIs:** 
   - <https://api.stacspec.org/v1.0.0-beta.5/item-search>
   - <https://api.stacspec.org/v1.0.0-beta.5/core>
-- **[Maturity Classification](../extensions.md#maturity-classification):** Candidate
+- **[Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Dependencies**: [STAC API - Core](../core)
 - **Examples**: [examples.md](examples.md)
 
@@ -296,7 +296,7 @@ the root (`/`) landing page, to indicate to clients that they will respond prope
 ### Fields
 
 - **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/item-search#fields>
-- **Extension [Maturity Classification](../extensions.md#maturity-classification):** Candidate
+- **Extension [Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Definition**: [STAC API - Fields Fragment](../fragments/fields/)
 
 By default, the STAC search endpoint `/search` returns all attributes of each Item, as there is no way to specify 
@@ -308,7 +308,7 @@ through the use of a `fields` parameter. The full description of how this extens
 ### Sort
 
 - **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/item-search#sort>
-- **Extension [Maturity Classification](../extensions.md#maturity-classification):** Candidate
+- **Extension [Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Definition**: [STAC API - Sort Fragment](../fragments/sort/)
 
 By default, the STAC search endpoint `/search` returns results in no specified order. Whatever order the results are in 
@@ -321,7 +321,7 @@ of this extension can be found in the [sort fragment](../fragments/sort).
 ### Context
 
 - **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/item-search#context>
-- **Extension [Maturity Classification](../extensions.md#maturity-classification):** Candidate
+- **Extension [Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Definition**: [STAC API - Context Fragment](../fragments/context/)
 
 This extension is intended to augment the core ItemCollection responses from the `search` API endpoint with a
@@ -331,7 +331,7 @@ The full description and examples of this are found in the [context fragment](..
 ### Filter
 
 - **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/item-search#filter>
-- **Extension [Maturity Classification](../extensions.md#maturity-classification):** Pilot
+- **Extension [Maturity Classification](../README.md#maturity-classification):** Pilot
 - **Definition**: [STAC API - Filter Fragment](../fragments/filter/)
 
 The STAC search endpoint, `/search`, by default only accepts a limited set of parameters to limit the results
@@ -343,7 +343,7 @@ fragment](../fragments/filter/).
 ### Query
 
 - **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/item-search#query>
-- **Extension [Maturity Classification](../extensions.md#maturity-classification):** Candidate
+- **Extension [Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Definition**: [STAC API - Query Fragment](../fragments/query/)
 
 **Note** - the Query Extension will be deprecated at some point in 1.x. Implementers
