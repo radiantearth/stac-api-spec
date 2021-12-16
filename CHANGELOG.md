@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Added `STAC API - Browseable` conformance class
 - Added `STAC API - Children` conformance class
 - Added description of how to support both search and browse in an API.
 - The paging mechanism via a Link with rel `next` or `prev` as defined for Item Search can also be used
