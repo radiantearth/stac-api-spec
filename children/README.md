@@ -6,12 +6,12 @@
   - [Pagination](#pagination)
   - [Example](#example)
 
+- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.5/children))
 - **Conformance URIs:** 
   - <https://api.stacspec.org/v1.0.0-beta.5/children>
   - <https://api.stacspec.org/v1.0.0-beta.5/core>
-- **Dependencies**: [STAC API - Core](../core)
-- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.5/children))
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
+- **Dependencies**: [STAC API - Core](../core)
 
 A STAC API can return information about all STAC [Catalogs](../stac-spec/catalog-spec/catalog-spec.md) available using a link
 from the landing page that uses the link relation `children`, which links to an endpoint called

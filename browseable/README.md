@@ -6,12 +6,12 @@
   - [Example Landing Page for STAC API - Browseable](#example-landing-page-for-stac-api---browseable)
   - [Extensions](#extensions)
 
+- **OpenAPI specification:** none
 - **Conformance URIs:** 
   - <https://api.stacspec.org/v1.0.0-beta.5/browseable>
   - <https://api.stacspec.org/v1.0.0-beta.5/core>
-- **Dependencies**: [STAC API - Core](../core)
-- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.5/browseable))
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
+- **Dependencies**: [STAC API - Core](../core)
 
 A Catalog conforming to the `STAC API - Browseable` conformance class must be structured such that all 
 all Items in the catalog may be accessed by following `child` and `item` link relations. This is a more significant
