@@ -23,7 +23,7 @@ Recommendations for structuring Catalogs hierarchically can be found in
 
 ## Link Relations
 
-Implementation of this conformance class implies the [STAC API - Core](../core) relations are also implemented.
+This conformance class also requires implementation of the link relations in the [STAC API - Core](../core) conformance class.
 
 Additionally, `child` relations must exist to child Catalogs and Collections and `item` relations to Items, such that
 every Item in the Catalog can be accessed by traversing these relations.
