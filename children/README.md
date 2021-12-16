@@ -43,6 +43,8 @@ The following Link relations shall exist in the `/children` endpoint response.
 
 ## Endpoints
 
+This conformance class also requires for the endpoints in the [STAC API - Core](../core) conformance class to be implemented.
+
 | Endpoint    | Returns        | Description                                                                                                            |
 | ----------- | -------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | `/children` | JSON           | Object with a list of child Catalogs and Collections                                                                   |

@@ -13,10 +13,10 @@
 - **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
 - **Dependencies**: [STAC API - Core](../core)
 
-A Catalog conforming to the `STAC API - Browseable` conformance class must be structured such that all 
-all Items in the catalog may be accessed by following `child` and `item` link relations. This is a more significant
-constraint than a STAC Catalog that is available over HTTP or a STAC API conforming to `STAC API - Core`, neither
-of which have any guarantee regarding the reachability of Items.
+A STAC API conforming to the `STAC API - Browseable` conformance class must be structured such that all 
+all Items in the catalog can be accessed by following `child` and `item` link relations. This is a more significant
+constraint than a STAC API without this conformance class or a STAC Catalog that is available over HTTP but does not
+implement STAC API, neither of which have any guarantee regarding the reachability of Items.
 
 Recommendations for structuring Catalogs hierarchically can be found in
 [Structuring Catalog Hierarchies](../core/README.md#structuring-catalog-hierarchies) from the `STAC API - Core` specification.
@@ -34,14 +34,14 @@ every Item in the Catalog can be accessed by traversing these relations.
 | `item`  | various  | STAC Core | The child STAC Items.                  |
 
 Note that there is a different link relation `items` (plural)
-used by APIs conforming to the `STAC API - Features` class that links from a Collection to the items in
+used by the `STAC API - Features` conformance class that links from a collection to the items in
 that collection.
 
 ## Endpoints
 
-This conformance class adds no additional endpoints.
+This conformance class also requires for the endpoints in the [STAC API - Core](../core) conformance class to be implemented.
 
-Implementation of this conformance class implies the existence of the [STAC API - Core](../core) endpoints.
+This conformance class adds no additional endpoints.
 
 ## Example Landing Page for STAC API - Browseable
 
