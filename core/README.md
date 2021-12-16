@@ -308,5 +308,9 @@ product, you may want to allow browsing both by date then path then row, or by p
 1. Catalog -> Catalog (product) -> Catalog (date) -> Catalog (path) -> Catalog (row)
 2. Catalog -> Catalog (product) -> Catalog (path) -> Catalog (row) -> Catalog (date)
 
+When more than path to an Item is allowed, it is recommended that the final `item` link relation reference a
+consistent, canonical URL for each item, instead of a URL that is specific to the path of Catalog that was followed
+to reach it.
+
 There are many options for how to structure these catalog graphs, so it will take some analysis work to figure out
 which one or ones best match the structure of your data and the needs of your consumers.
