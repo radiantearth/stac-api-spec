@@ -29,10 +29,12 @@ have the appropriate `child` and `item` link relations to traverse over the obje
 implementations may provide an even greater guarantee of Item reachability with the
 [STAC API - Browseable](../browseable/README.md) conformance class.
 
-Providing these two complementary ways of navigating the catalog allows users to interrogate the data in whichever
-way best meets their needs.  Supporting these also opens up a catalog to both
-clients that are oriented towards static catalogs
-(e.g., [STAC Browser](https://github.com/radiantearth/stac-browser)) and those that are oriented towards dynamic searchable catalogs
+Providing these two complementary ways of interacting with the catalog allow users to iteratively interrogate the data
+to discover what data is available through browse and filter the data to only what they are interested in
+through search.  Supporting both also opens up a catalog to
+clients that are oriented towards reading non-API STAC catalogs
+(e.g., [STAC Browser](https://github.com/radiantearth/stac-browser)) and those that are oriented towards
+searchable STAC API catalogs
 (e.g., [PySTAC Client](https://pystac-client.readthedocs.io/), [stac-nb](https://github.com/darrenwiens/stac-nb)).
 Recommendations for supporting both of these discussed in [Structuring Catalog Hierarchies](#structuring-catalog-hierarchies).
 
