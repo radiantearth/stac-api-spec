@@ -16,13 +16,14 @@
 A STAC API Landing Page (a Catalog) can return information about the Catalog and Collection child objects
 it contains using the link relation `children` to an endpoint `/children`. The purpose of this endpoint is
 to present a single resource from which clients can retrieve
-all the immediate child objects of a Catalog. The `child` link relations in a Catalog already allow for describing these
+all the immediate child objects of a Catalog, which may be Catalog or Collection objects.
+The `child` link relations in a Catalog already allow for describing these
 relationships, but require a client to retrieve each resource URL to find any information about the children
-(e.g., title, description), which can be too slow to render in user-facing applications.
+(e.g., title, description), which can cause significant performance issues in user-facing applications.
 
 It is recommended that the Catalog and Collection objects returned by the `/children` endpoint are the same
 as those referenced by `child` link relations in the STAC API Landing Page. Following these semantics, it should
-return the immediate children of the root Catalog, rather than any descendant catalog or collection of the Catalog.
+return the immediate children of the root Catalog, rather than all descendant catalogs or collections.
 
 ## Link Relations
 
@@ -50,8 +51,8 @@ This conformance class also requires for the endpoints in the [STAC API - Core](
 | `/children` | JSON           | Object with a list of child Catalogs and Collections                                                                   |
 
 STAC APIs implementing the `STAC API - Children` conformance class must support HTTP GET operation at
-`/children`, with the return JSON document consisting of an array of all child Catalogs and Collections and an 
-array of Links.
+`/children`, with the return JSON document consisting of an array of all child Catalogs and Collections in a field `children` and an 
+array of Links in a field `links`.
 
 ## Pagination
 
