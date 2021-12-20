@@ -20,11 +20,11 @@
     - [Context](#context)
     - [Query](#query)
 
+- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.5/item-search))
 - **Conformance URIs:**
   - <https://api.stacspec.org/v1.0.0-beta.5/core>
   - <https://api.stacspec.org/v1.0.0-beta.5/item-search>
 - **Dependencies**: [STAC API - Core](../core)
-- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.5/item-search))
 - **Examples**: [examples.md](examples.md)
 
 A search endpoint provides the ability to query STAC [Item](../stac-spec/item-spec/README.md) 
