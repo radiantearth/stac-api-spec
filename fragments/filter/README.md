@@ -148,8 +148,8 @@ The implementation **must** support these conformance classes:
   parameters `filter-lang`, `filter-crs`, and `filter`.
 - Basic CQL2 (`http://www.opengis.net/spec/cql2/1.0/conf/basic-cql2`) defines the basic operations allowed in 
   the query language used for the `filter` parameter defined by Filter. This includes logical operators (`AND`, `OR`, `NOT`), 
-  comparison operators (`=`, `<>`, `<`, `<=`, `>`, `>=`), and `IS NULL`. The comparison operators are allowed against string, numeric, boolean,
-  and datetime types.
+  comparison operators (`=`, `<>`, `<`, `<=`, `>`, `>=`), and `IS NULL`. The comparison operators are allowed against
+  string, numeric, boolean, date, and datetime types.
 - Item Search Filter (`https://api.stacspec.org/v1.0.0-beta.5/item-search#filter:item-search-filter`) binds the Filter and 
   Basic CQL2 conformance classes to apply to the Item Search endpoint (`/search`).  This class is the correlate of the OAFeat CQL2 Features 
   Filter class that binds Filter and Basic CQL2 to the Features resource (`/collections/{cid}/items`).
@@ -512,8 +512,8 @@ OGC API Features filters only operate against a single collection already.
 filter=collection = 'landsat8_l1tp'
   AND gsd <= 30
   AND eo:cloud_cover <= 10
-  AND datetime >= '2021-04-08T04:39:23Z'
-  AND datetime <= '2021-05-07T12:27:57Z'
+  AND datetime >= TIMESTAMP('2021-04-08T04:39:23Z')
+  AND datetime <= TIMESTAMP('2021-05-07T12:27:57Z')
   AND S_INTERSECTS(geometry, POLYGON((43.5845 -79.5442, 43.6079 -79.4893, 43.5677 -79.4632, 43.6129 -79.3925, 43.6223 -79.3238, 43.6576 -79.3163, 43.7945 -79.1178, 43.8144 -79.1542, 43.8555 -79.1714, 43.7509 -79.6390, 43.5845 -79.5442))
 ```
 
@@ -535,7 +535,7 @@ filter=collection = 'landsat8_l1tp'
       },
       { 
         "op": ">=", 
-        "args": [ { "property": "datetime" }, "2021-04-08T04:39:23Z" ] 
+        "args": [ { "property": "datetime" }, { "timestamp": "2021-04-08T04:39:23Z" } ] 
       },
       {
         "op": "s_intersects", 
@@ -781,7 +781,7 @@ have any overlap between them.
 #### Example 6: T_INTERSECTS cql2-text (GET)
 
 ```http
-filter=datetime T_INTERSECTS 2020-11-11T00:00:00Z/2020-11-12T00:00:00Z
+filter=datetime T_INTERSECTS INTERVAL('2020-11-11T00:00:00Z', '2020-11-12T00:00:00Z')
 ```
 
 #### Example 6: T_INTERSECTS cql2-json (POST)
@@ -793,7 +793,7 @@ filter=datetime T_INTERSECTS 2020-11-11T00:00:00Z/2020-11-12T00:00:00Z
     "op": "t_intersects", 
     "args": [
       { "property": "datetime" },
-      [ "2020-11-11T00:00:00Z", "2020-11-12T00:00:00Z"]
+      { "interval" : [ "2020-11-11T00:00:00Z", "2020-11-12T00:00:00Z"] }
     ]
   }
 }
