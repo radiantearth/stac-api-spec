@@ -48,9 +48,7 @@ This conformance class adds no additional endpoints.
 This JSON is what would be expected from an API that implements `STAC API - Browseable`. 
 
 This particular catalog provides both the ability to browse down to child Catalog objects through its
-`child` links, and also provides the search endpoint to be able to search across items in its collections. Note
-that some of those links are not required and other servers may provide
-different conformance classes and a different set of links. 
+`child` links, which then will eventually reach Items through `item` link relations.
 
 ```json
 {
