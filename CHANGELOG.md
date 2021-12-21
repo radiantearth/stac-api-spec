@@ -86,6 +86,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Filter Extension - examples of using intervals and timestamps in CQL2 were incorrect and have been fixed
+
 ## [v1.0.0-beta.3] - 2020-08-06
 
 ### Added
