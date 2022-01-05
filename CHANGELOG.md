@@ -53,6 +53,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Collection conformance class URI should be `https://api.stacspec.org/v1.0.0-beta.XXX/collections` instead 
   of `http://stacspec.org/spec/api/1.0.0-beta.XXX/extensions/collections`
 - definition of Item object was missing `properties` as an attribute
+- Filter Extension - examples of using intervals and timestamps in CQL2 were incorrect and have been fixed
 
 ## [v1.0.0-beta.4] - 2020-10-05
 
@@ -88,8 +89,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 ### Fixed
-
-- Filter Extension - examples of using intervals and timestamps in CQL2 were incorrect and have been fixed
 
 ## [v1.0.0-beta.3] - 2020-08-06
 
