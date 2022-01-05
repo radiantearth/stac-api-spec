@@ -48,10 +48,11 @@ This conformance class adds no additional endpoints.
 
 ## Example Landing Page for STAC API - Browseable
 
-This JSON is what would be expected from an API that implements `STAC API - Browseable`. 
-
-This particular catalog provides both the ability to browse down to child Catalog objects through its
-`child` links, which then will eventually reach Items through `item` link relations.
+This JSON is what would be expected from an API that implements `STAC API - Browseable`. Note that the
+`conformsTo` array contains `https://api.stacspec.org/v1.0.0-beta.5/browseable` and the `links` array 
+contains `child` link relations.  The semantics of this conformance class imply that the the catalogs
+linked to by these `child` link relations then have further `child` or `item` link relations that
+eventually reach all items in this catalog.
 
 ```json
 {
