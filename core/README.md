@@ -2,17 +2,18 @@
 
 - [STAC API - Core Specification](#stac-api---core-specification)
   - [Link Relations](#link-relations)
+- [that collection.](#that-collection)
   - [Endpoints](#endpoints)
   - [Example Landing Page for STAC API - Core](#example-landing-page-for-stac-api---core)
   - [Extensions](#extensions)
   - [Structuring Catalog Hierarchies](#structuring-catalog-hierarchies)
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.5/core)),
-- **Conformance URIs:** 
+- **Conformance URIs:**
   - <https://api.stacspec.org/v1.0.0-beta.5/core>
-  and [commons.yaml](commons.yaml) is the OpenAPI version of the core [STAC spec](../stac-spec) JSON Schemas.
-- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
+- **[Maturity Classification](../README.md#maturity-classification):** Pilot
 - **Dependencies**: None
+  and [commons.yaml](commons.yaml) is the OpenAPI version of the core [STAC spec](../stac-spec) JSON Schemas.
 
 All STAC API implementations must support the `STAC API - Core` conformance class. The only requirement of this class
 is to provide a valid [STAC Catalog](../stac-spec/catalog-spec/catalog-spec.md) that also includes a `conformsTo`
@@ -113,11 +114,20 @@ Catalogs with `item` relations to individual Items as leaf nodes.
 search over only a sub-catalog. This is useful for very large or federated catalogs that cannot support searching
 over the entire catalog, but can support searching over individual sub-catalogs within it.
 
+<<<<<<< HEAD
 Note that there is a different link relation `items` (plural)
 used by APIs conforming to the `STAC API - Features` class that links from a Collection to the items in
 that collection.
+=======
+It is also valid to have `item` links from the landing page, but most STAC API services are used to 
+serve up a large number of features, so they typically
+use several layers of intermediate `child` links before getting to Item objects.  Note that the `items` (plural)
+link relation is used by APIs implementing `STAC API - Features` to link from a Collection to the items in that collection.
+>>>>>>> dev
 
 ## Endpoints
+
+This conformance class also requires for the endpoints in the [STAC API - Core](../core) conformance class to be implemented.
 
 These endpoints are required, with details provided in this [OpenAPI specification document](openapi.yaml).
 

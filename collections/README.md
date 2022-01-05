@@ -10,7 +10,7 @@
 - **Conformance URIs:** 
   - <https://api.stacspec.org/v1.0.0-beta.5/collections>
   - <https://api.stacspec.org/v1.0.0-beta.5/core>
-- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
+- **[Maturity Classification](../README.md#maturity-classification):** Pilot
 - **Dependencies**: [STAC API - Core](../core)
 
 A STAC API can return information about all STAC [Collections](../stac-spec/collection-spec/collection-spec.md) available using a link
@@ -26,36 +26,19 @@ aim to align with it. But it still seems to be in flux.*
 
 ## Link Relations
 
+This conformance class also requires implementation of the link relations in the [STAC API - Core](../core) conformance class.
+
 The following Link relations shall exist in the Landing Page (root).
 
-| **rel**        | **href**       | **From**  | **Description**                                      |
-| -------------- | -------------- | --------- | ---------------------------------------------------- |
-| `root`         | `/`            | STAC Core | The root URI                                         |
-| `self`         | `/`            | OAFeat    | Self reference, same as root URI                     |
-| `service-desc` | `/api`         | OAFeat    | The service description in a machine-readable format |
-| `data`         | `/collections` | OAFeat    | List of Collections                                  |
+| **rel** | **href**       | **From** | **Description**     |
+| ------- | -------------- | -------- | ------------------- |
+| `data`  | `/collections` | OAFeat   | List of Collections |
 
-The path for the `service-desc` endpoint is recommended to be `/api`, but may be another path. Recommended to be
-OpenAPI 3.0 or 3.1 with media types `application/vnd.oai.openapi` (YAML),
-`application/vnd.oai.openapi+json;version=3.0` (3.0 JSON), or `application/vnd.oai.openapi+json;version=3.1`
-(3.1 JSON).
-
-A `service-doc` endpoint is recommended, but not required. This commonly returns an HTML
-page, for example, in the form of [Redoc](https://github.com/Redocly/redoc) interactive API
-documentation, but any format is allowed. The Link `type` field should correspond to whatever format or formats are
-supported by this endpoint, e.g., `text/html`.
-
-| **rel**       | **href**    | **From** | **Description**                                                                                                                    |
-| ------------- | ----------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `service-doc` | `/api.html` | OAFeat   | A human-consumable service description. The path for this endpoint is only recommended to be `/api.html`, but may be another path. |
-
-Additionally, `child` relations may exist to individual catalogs and collections.
+Additionally, `child` relations may exist to child Catalogs and Collections.
 
 | **rel** | **href** | **From**  | **Description**                                                                                          |
 | ------- | -------- | --------- | -------------------------------------------------------------------------------------------------------- |
 | `child` | various  | STAC Core | The child STAC Catalogs & Collections. Provides curated paths to get to STAC Collection and Item objects |
-
-`child` relations are useful for supporting browsing a STAC API as if it were a static catalog.
 
 The following Link relations shall exist in the `/collections` endpoint response.
 
@@ -84,12 +67,12 @@ elsewhere. If this is done, it is recommended to include a `rel` of `canonical` 
 
 ## Endpoints
 
-| Endpoint                      | Returns    | Description                                                                                                    |
-| ----------------------------- | ---------- | -------------------------------------------------------------------------------------------------------------- |
-| `/`                           | Catalog    | Landing Page and root Catalog                                                                                  |
-| `/api`                        | any        | The service description. The path for this endpoint is only recommended to be `/api`, but may be another path. |
-| `/collections`                | JSON       | Object with a list of Collections contained in the catalog and links                                           |
-| `/collections/{collectionId}` | Collection | Returns single Collection JSON                                                                                 |
+This conformance class also requires for the endpoints in the [STAC API - Core](../core) conformance class to be implemented.
+
+| Endpoint                      | Returns    | Description                                                          |
+| ----------------------------- | ---------- | -------------------------------------------------------------------- |
+| `/collections`                | JSON       | Object with a list of Collections contained in the catalog and links |
+| `/collections/{collectionId}` | Collection | Returns single Collection JSON                                       |
 
 STAC API's implementing the Collections class must support HTTP GET operation at `/collections`, with the return JSON document consisting
 of an array of all STAC Collections and an array of Links.
