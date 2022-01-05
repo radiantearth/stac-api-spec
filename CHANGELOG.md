@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Added `STAC API - Browseable` conformance class
+- Added `STAC API - Children` conformance class
+- Added description of how to support both search and browse in an API.
 - The paging mechanism via a Link with rel `next` or `prev` as defined for Item Search can also be used
   for the STAC API - Features endpoint `/collections/{collection_id}/items`, as described in OAFeat.
 - The paging mechanism via a Link with rel `next` or `prev` as defined for items can also be used
@@ -56,7 +59,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Support binding Sort, Fields, and Context Extensions to STAC Features items resource
-  endpoint (`/collections/{collection_id}/items`)
+  endpoint (`/collections/{collectionId}/items`)
 - In Collections, added `canonical` rel type, added `/` and `/api` to list of endpoints
 - In Item Search, added endpoint table
 
