@@ -116,7 +116,7 @@ over the entire catalog, but can support searching over individual sub-catalogs 
 
 <<<<<<< HEAD
 Note that there is a different link relation `items` (plural)
-used by APIs conforming to the `STAC API - Features` class that links from a Collection to the items in
+used by APIs conforming to the [`STAC API - Features`](../../ogcapi-features/README.md) class that links from a Collection to the items in
 that collection.
 =======
 It is also valid to have `item` links from the landing page, but most STAC API services are used to 
