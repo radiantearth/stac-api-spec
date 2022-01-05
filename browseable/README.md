@@ -37,7 +37,8 @@ every Item in the Catalog can be accessed by traversing these relations.
 
 Note that there is a different link relation `items` (plural)
 used by the `STAC API - Features` conformance class that links from a collection to the items in
-that collection.
+that collection at the `/collection/{collectionId}`
+[endpoint derived from OGC API - Features](https://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_items_).
 
 ## Endpoints
 
