@@ -277,14 +277,14 @@ product for gridding).
     - /catalogs/landsat_8_c1/139
       - /catalogs/landsat_8_c1/139_045
         - /catalogs/landsat_8_c1/139_045_20170304
-          - /collection/landsat_8_c1/items/LC08_L1TP_139045_20170304_20170316_01_T1
+          - /collections/landsat_8_c1/items/LC08_L1TP_139045_20170304_20170316_01_T1
         - /catalogs/landsat_8_c1/139_045_20170305
-          - /collection/landsat_8_c1/items/LC08_L1TP_139045_20170305_20170317_01_T1
+          - /collections/landsat_8_c1/items/LC08_L1TP_139045_20170305_20170317_01_T1
       - /catalogs/landsat_8_c1/139_046
         - /catalogs/landsat_8_c1/139_046_20170304
-          - /collection/landsat_8_c1/items/LC08_L1TP_139046_20170304_20170316_01_T1
+          - /collections/landsat_8_c1/items/LC08_L1TP_139046_20170304_20170316_01_T1
         - /catalogs/landsat_8_c1/139_046_20170305
-          - /collection/landsat_8_c1/items/LC08_L1TP_139046_20170305_20170317_01_T1
+          - /collections/landsat_8_c1/items/LC08_L1TP_139046_20170305_20170317_01_T1
 
 If done in a consistent manner, these can also provide "templated" URIs, such that a user could directly request a
 specific path, row, and date simply by replacing the values in `/catalogs/landsat_8_c1/{path}_{row}_{date}`.
