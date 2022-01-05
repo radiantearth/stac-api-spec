@@ -2,7 +2,6 @@
 
 - [STAC API - Core Specification](#stac-api---core-specification)
   - [Link Relations](#link-relations)
-- [that collection.](#that-collection)
   - [Endpoints](#endpoints)
   - [Example Landing Page for STAC API - Core](#example-landing-page-for-stac-api---core)
   - [Extensions](#extensions)
@@ -114,16 +113,10 @@ Catalogs with `item` relations to individual Items as leaf nodes.
 search over only a sub-catalog. This is useful for very large or federated catalogs that cannot support searching
 over the entire catalog, but can support searching over individual sub-catalogs within it.
 
-<<<<<<< HEAD
 Note that there is a different link relation `items` (plural)
-used by APIs conforming to the [`STAC API - Features`](../../ogcapi-features/README.md) class that links from a Collection to the items in
-that collection.
-=======
-It is also valid to have `item` links from the landing page, but most STAC API services are used to 
-serve up a large number of features, so they typically
-use several layers of intermediate `child` links before getting to Item objects.  Note that the `items` (plural)
-link relation is used by APIs implementing `STAC API - Features` to link from a Collection to the items in that collection.
->>>>>>> dev
+used by the `STAC API - Features` conformance class that links from a collection resource (at the `/collections/{collectionId}` endpoint) to the items in
+that collection (at the `/collections/{collectionId}/items` endpoint). Both of these endpoints are 
+[derived from OGC API - Features](https://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_items_).
 
 ## Endpoints
 
