@@ -36,9 +36,9 @@ every Item in the Catalog can be accessed by traversing these relations.
 | `item`  | various  | STAC Core | The child STAC Items.                  |
 
 Note that there is a different link relation `items` (plural)
-used by the `STAC API - Features` conformance class that links from a collection to the items in
-that collection at the `/collection/{collectionId}`
-[endpoint derived from OGC API - Features](https://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_items_).
+used by the `STAC API - Features` conformance class that links from a collection resource (at the `/collections/{collectionId}` endpoint) to the items in
+that collection (at the `/collections/{collectionId}/items` endpoint). Both of these endpoints are 
+[derived from OGC API - Features](https://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_items_).
 
 ## Endpoints
 
