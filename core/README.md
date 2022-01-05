@@ -228,7 +228,7 @@ it does not require pagination).
 
 While OAFeat requires that all Items must be part of a Collection, this does not mean that the Collection needs to be
 part of the browseable tree. If they are part of the tree, it is recommended that there only be one Collection in a
-path through the tree, and that sub-collections not be used.
+path through the tree, and that a collection never contain child collections.
 
 These are the two standard ways of structuring a browseable tree of catalogs, the only difference being
 whether the Collection is used as part of the tree or not:

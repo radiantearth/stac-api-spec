@@ -93,7 +93,7 @@ The *[item-search](item-search)* folder contains the Item Search specification, 
 cross-collection search of STAC Item objects at a `search` endpoint, as well as a number of extensions. 
 
 **STAC API - Children:**
-The *[children](children)* folder describes how a STAC API Catalog can advertise the children (sub-catalogs or sub-collections)
+The *[children](children)* folder describes how a STAC API Catalog can advertise the children (child catalogs or child collections)
 it contains.
 
 **STAC API - Browseable:**
