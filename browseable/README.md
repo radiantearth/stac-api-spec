@@ -16,7 +16,9 @@
 A STAC API conforming to the `STAC API - Browseable` conformance class must be structured such that all 
 all Items in the catalog can be accessed by following `child` and `item` link relations. This is a more significant
 constraint than a STAC API without this conformance class or a STAC Catalog that is available over HTTP but does not
-implement STAC API, neither of which have any guarantee regarding the reachability of Items.
+implement STAC API, neither of which have any guarantee regarding the reachability of Items. This conformance 
+class is used to signal to users that they can fully navigate to all available Items using a UI (like [STAC Browser](https://github.com/radiantearth/stac-browser), 
+and also makes it clear to crawlers that they can reach everything by following catalog links. 
 
 Recommendations for structuring Catalogs hierarchically can be found in
 [Structuring Catalog Hierarchies](../core/README.md#structuring-catalog-hierarchies) from the `STAC API - Core` specification.
