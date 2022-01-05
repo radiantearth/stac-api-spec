@@ -60,14 +60,6 @@ paths:
                     rel: service-doc
                     type: text/html
                     title: the API documentation
-                  - href: http://data.example.org/sentinel-1
-                    rel: child
-                    type: application/json
-                    title: Sentinel 1 Catalog
-                  - href: http://data.example.org/sentinel-2
-                    rel: child
-                    type: application/json
-                    title: Sentinel 2 Catalog
                   - href: http://data.example.org/conformance
                     rel: conformance
                     type: application/json
