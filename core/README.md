@@ -114,7 +114,8 @@ search over only a sub-catalog. This is useful for very large or federated catal
 over the entire catalog, but can support searching over individual sub-catalogs within it.
 
 Note that there is a different link relation `items` (plural)
-used by the `STAC API - Features` conformance class that links from a collection resource (at the `/collections/{collectionId}` endpoint) to the items in
+used by the `STAC API - Features` conformance class that links from a collection resource
+(at the `/collections/{collectionId}` endpoint) to the items in
 that collection (at the `/collections/{collectionId}/items` endpoint). Both of these endpoints are 
 [derived from OGC API - Features](https://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_items_).
 
@@ -213,7 +214,7 @@ None.
 A STAC API is more useful when it presents a complete `Catalog` representation of all the data contained in the
 API, such that all `Item` objects can be reached by transitively traversing `child` and `item` link relations from
 the root. This property of being able to reach all Items in this way is formalized in the
-[`STAC API - Browseable` conformance class](../browseable/README.md], but any Catalog can be structured for hierarchical traversal. 
+[`STAC API - Browseable` conformance class](../browseable/README.md), but any Catalog can be structured for hierarchical traversal. 
 Implementers who have search as their primary use case should consider also implementing this
 alternate view over the data by presenting it as a directed graph of catalogs, where the `child` link relations typically
 form a tree, and where each catalog can be retrieved with a single request (e.g., each Catalog JSON is small enough that

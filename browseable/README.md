@@ -10,7 +10,7 @@
 - **Conformance URIs:** 
   - <https://api.stacspec.org/v1.0.0-beta.5/browseable>
   - <https://api.stacspec.org/v1.0.0-beta.5/core>
-- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
+- **[Maturity Classification](../README.md#maturity-classification):** Pilot
 - **Dependencies**: [STAC API - Core](../core)
 
 A STAC API conforming to the `STAC API - Browseable` conformance class must be structured such that all 
@@ -36,7 +36,8 @@ every Item in the Catalog can be accessed by traversing these relations.
 | `item`  | various  | STAC Core | The child STAC Items.                  |
 
 Note that there is a different link relation `items` (plural)
-used by the `STAC API - Features` conformance class that links from a collection resource (at the `/collections/{collectionId}` endpoint) to the items in
+used by the `STAC API - Features` conformance class that links from a collection resource
+(at the `/collections/{collectionId}` endpoint) to the items in
 that collection (at the `/collections/{collectionId}/items` endpoint). Both of these endpoints are 
 [derived from OGC API - Features](https://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_items_).
 
