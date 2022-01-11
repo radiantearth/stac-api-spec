@@ -4,13 +4,63 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v1.0.0-beta.5 - Unreleased] - TBD
 
-## [v1.0.0-beta4] - 2020-10-05
+### Added
+
+- Added `STAC API - Browseable` conformance class
+- Added `STAC API - Children` conformance class
+- Added description of how to support both search and browse in an API.
+- The paging mechanism via a Link with rel `next` or `prev` as defined for Item Search can also be used
+  for the STAC API - Features endpoint `/collections/{collection_id}/items`, as described in OAFeat.
+- The paging mechanism via a Link with rel `next` or `prev` as defined for items can also be used
+  for the STAC API - Features and STAC API - Collections endpoint `/collections`.
+
+### Changed
+
+- Limit parameter semantics now match OAFeat. Previously, the behavior was not precisely defined.
+- Filter Extension updates to align with changes to OAFeat CQL2 spec
+  - Updated all "CQL" usages to "CQL2"
+  - Most conformance class URIs are now prefixed with `http://www.opengis.net/spec/cql2/` instead
+    of `http://www.opengis.net/spec/ogcapi-features-3/`
+  - Conformance classes `http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-cql`, 
+    `http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql-text`, and
+    `http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql-json` have had `cql` replaced
+    with `cql2` (in addition to the prefix change) to
+    become `http://www.opengis.net/spec/cql2/1.0/conf/basic-cql2`,
+    `http://www.opengis.net/spec/cql2/1.0/conf/cql2-text`, and
+    `http://www.opengis.net/spec/cql2/1.0/conf/cql2-json`
+  - Significant changes to CQL2 JSON format, now using `op` and `args` structure
+  - Spatial operator `INTERSECTS` is now `S_INTERSECTS`
+  - Temporal operator `ANYINTERACTS` is now `T_INTERSECTS`
+  - Updated Example 3 (now Example 5) to make it clear that property to property comparisons require the
+    Property-Property Comparisons conformance class
+  - The CQL2 Case-insensitive Comparison 
+    (`http://www.opengis.net/spec/cql2/1.0/conf/case-insensitive-comparison`) conformance class
+    that adds UPPER/LOWER terms or function CASEI for case-insensitive comparison has not been added
+    to this spec yet, since the definition in CQL2 is in flux.
+- `service-desc` endpoint may return any service description format, typically a 
+  machine-consumable one (previous restricted required to be OpenAPI 3.0 JSON)
+- `service-doc` endpoint may return any service description format, typically a
+  human-consumable one (previous restricted required to be HTML)
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+- Collection conformance class URI should be `https://api.stacspec.org/v1.0.0-beta.XXX/collections` instead 
+  of `http://stacspec.org/spec/api/1.0.0-beta.XXX/extensions/collections`
+- definition of Item object was missing `properties` as an attribute
+- Filter Extension - examples of using intervals and timestamps in CQL2 were incorrect and have been fixed
+
+## [v1.0.0-beta.4] - 2020-10-05
 
 ### Added
 
 - Support binding Sort, Fields, and Context Extensions to STAC Features items resource
-  endpoint (`/collections/{collection_id}/items`)
+  endpoint (`/collections/{collectionId}/items`)
 - In Collections, added `canonical` rel type, added `/` and `/api` to list of endpoints
 - In Item Search, added endpoint table
 

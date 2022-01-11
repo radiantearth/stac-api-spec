@@ -7,22 +7,24 @@
     - [Query Examples](#query-examples)
     - [Query Parameter Table](#query-parameter-table)
   - [Response](#response)
-    - [Paging](#paging)
+    - [Pagination](#pagination)
   - [HTTP Request Methods and Content Types](#http-request-methods-and-content-types)
     - [GET](#get)
     - [POST](#post)
       - [PUT / PATCH / DELETE](#put--patch--delete)
-  - [Recommended Link Relations at `/`](#recommended-link-relations-at-)
   - [Example Landing Page for STAC API - Item Search](#example-landing-page-for-stac-api---item-search)
   - [Extensions](#extensions)
-    - [Fields](#fields)
-    - [Filter](#filter)
-    - [Sort](#sort)
-    - [Context](#context)
-    - [Query](#query)
+    - [Fields Extension](#fields-extension)
+    - [Sort Extension](#sort-extension)
+    - [Context Extension](#context-extension)
+    - [Filter Extension](#filter-extension)
+    - [Query Extension](#query-extension)
 
-- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.4/item-search))
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.4/item-search>
+- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.5/item-search))
+- **Conformance URIs:** 
+  - <https://api.stacspec.org/v1.0.0-beta.5/item-search>
+  - <https://api.stacspec.org/v1.0.0-beta.5/core>
+- **[Maturity Classification](../README.md#maturity-classification):** Pilot
 - **Dependencies**: [STAC API - Core](../core)
 - **Examples**: [examples.md](examples.md)
 
@@ -38,52 +40,31 @@ The Item Search endpoint intentionally defines only a limited group of operation
 most behavior will be defined in [Extensions](#extensions). These extensions can be composed by an implementer to 
 cover only the set of functionality the implementer requires. For example, the query capability defined by 
 Item Search is limited, and only adds cross-collection and spatial intersects query operators to the capabilities 
-already defined by OAFeat. For example, the Query Extension (soon to be superseded by the Filter Extension) 
-provides a more expressive set of operators. 
+already defined by OAFeat. For example, the Query Extension and Filter Extension
+provide a more expressive set of operators.
 
 Implementing `GET /search` is **required**, `POST /search` is optional, but recommended.
 
 ## Link Relations
 
+This conformance class also requires implementation of the link relations in the [STAC API - Core](../core) conformance class.
+
 The following Link relations shall exist in the Landing Page (root).
 
-| **rel**        | **href**             | **From**         | **Description**                                                                                                                                                         |
-| -------------- | -------------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `root`         | `/`                  | STAC Core        | The root URI                                                                                                                                                            |
-| `self`         | `/`                  | OAFeat           | Self reference, same as root URI                                                                                                                                        |
-| `service-desc` | `/api` | OAFeat OpenAPI   | The OpenAPI service description. Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API. The path for this endpoint is only recommended to be `/api`, but may be another path. |
-| search         | `/search`            | STAC Item Search | URI for the Search endpoint                                                                                                                                             |
+| **rel**  | **href**  | **From**               | **Description**             |
+| -------- | --------- | ---------------------- | --------------------------- |
+| `search` | `/search` | STAC API - Item Search | URI for the Search endpoint |
 
-A `service-doc` endpoint is recommended, but not required.
-
-| **rel**       | **href**                  | **From**       | **Description**                                                                                                         |
-| ------------- | ------------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `service-doc` | `/api.html` | OAFeat OpenAPI | An HTML service description.  Uses the `text/html` media type to refer to a human-consumable description of the service. The path for this endpoint is only recommended to be `/api.html`, but may be another path.  |
-
-It is **required** to add a Link to the root endpoint (`/`) with the `rel` type set to `search`
-that refers to the search endpoint in the `href` property,
-with a `type` of `application/geo+json` and a `method` of `GET`.
-This link will look like:
-
-```json
-{
-    "href": "https://example.com/search",
-    "rel": "search",
-    "title": "Search",
-    "type": "application/geo+json",
-    "method": "GET"
-}
-```
-
-Implementations that support `POST` should add a second link with the same structure but with a `method` of `POST`.
+The `search` link relation shall have a `type` of `application/geo+json` and a `method` of `GET`, and may also
+a link with a `method` of `POST` if the server supports it.
 
 ## Endpoints
 
-| Endpoint | Returns | Description |
-| -------- | ------- | ----------- |
-| `/`                  | Catalog         | Landing Page and root Catalog |
-| `/api` | OAFeat OpenAPI  | The OpenAPI service description. The path for this endpoint is only recommended to be `/api`, but may be another path.  |
-| `/search`            | Item Collection | Search endpoint      |
+This conformance class also requires for the endpoints in the [STAC API - Core](../core) conformance class to be implemented.
+
+| Endpoint  | Returns         | Description     |
+| --------- | --------------- | --------------- |
+| `/search` | Item Collection | Search endpoint |
  
 ## Query Parameters and Fields
 
@@ -115,7 +96,7 @@ The core parameters for STAC search are defined by OAFeat, and STAC adds a few p
 
 | Parameter   | Type             | Source API | Description                                                                                                                                                                     |
 | ----------- | ---------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| limit       | integer          | OAFeat     | The maximum number of results to return (page size). Defaults to 10                                                                                                             |
+| limit       | integer          | OAFeat     | The maximum number of results to return (page size).                                                                                                                            |
 | bbox        | \[number]        | OAFeat     | Requested bounding box.                                                                                                                                                         |
 | datetime    | string           | OAFeat     | Single date+time, or a range ('/' separator), formatted to [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). Use double dots `..` for open date ranges. |
 | intersects  | GeoJSON Geometry | STAC       | Searches items by performing intersection between their geometry and provided GeoJSON geometry.  All GeoJSON geometry types must be supported.                                  |
@@ -123,6 +104,14 @@ The core parameters for STAC search are defined by OAFeat, and STAC adds a few p
 | collections | \[string]        | STAC       | Array of one or more Collection IDs that each matching Item must be in.                                                                                                         |
 
 See [examples](examples.md) for some example requests.
+
+**limit** The limit parameter follows the same semantics of the OAFeat Item resource limit parameter. The value is 
+a suggestion to the server as to the maximum number of Item objects the
+client would prefer in the response. The OpenAPI specification defines the default and maximum values
+for this parameter. The base specifications define these with a default of 10 and a maximum of 10000, but implementers
+may choose other values to advertise through their `service-desc` endpoint.  If the limit parameter value is greater
+than the advertised maximum limit, the server shall return the maximum possible number of items (ideally, the number 
+as the advertised maximum limit), rather than responding with an error.
 
 Only one of either **intersects** or **bbox** may be specified.  If both are specified, a 400 Bad Request response 
 must be returned. 
@@ -149,7 +138,7 @@ The response to a request (GET or POST) to the search endpoint must always be an
 FeatureCollection](https://tools.ietf.org/html/rfc7946#section-3.3) that consists entirely of STAC 
 [Item](../stac-spec/item-spec/item-spec.md) objects. 
 
-### Paging
+### Pagination
 
 OGC API supports paging through hypermedia links and STAC follows the same pattern for the cross collection search. For 
 GET requests, a link with `rel` type `next` is supplied.  This link may contain any URL parameter that is necessary 
@@ -163,7 +152,11 @@ parameter name is defined by the implementor and is not necessarily part of the 
     "links": [
         {
             "rel": "next",
-            "href": "http://api.cool-sat.com/search?page=2"
+            "href": "http://api.cool-sat.com/search?page=3"
+        },
+        {
+            "rel": "prev",
+            "href": "http://api.cool-sat.com/search?page=1"
         }
     ]
 }
@@ -175,16 +168,19 @@ The href may contain any arbitrary URL parameter:
 - `http://api.cool-sat.com/search?next=8a35eba9c`
 - `http://api.cool-sat.com/search?token=f32890a0bdb09ac3`
 
+Implementations may also add link relations `prev`, `first`, and `last`, though these are not required and may
+be infeasible to implement in some data stores.
+
 OAFeat does not support POST requests for searches, however the STAC API spec does. Hypermedia links are not designed 
 for anything other than GET requests, so providing a next link for a POST search request becomes problematic. STAC has 
-decided to extend the `link` object to support additional fields that provide hints to the client as to how it must 
+decided to extend the Link object to support additional fields that provide hints to the client as to how it must 
 execute a subsequent request for the next page of results.
 
-The following fields have been added to the `link` object specification for the API spec:
+The following fields have been added to the Link object specification for the API spec:
 
-| Parameter | Type    | Description                                                                                                                                                    |
-| --------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| method    | string  | The HTTP method of the request, usually `GET` or `POST`. Defaults to `GET`                                                                                     |
+| Parameter | Type    | Description                                                                                                                                                  |
+| --------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| method    | string  | The HTTP method of the request, usually `GET` or `POST`. Defaults to `GET`                                                                                   |
 | headers   | object  | A dictionary of header values that must be included in the next request                                                                                      |
 | body      | object  | A JSON object containing fields/values that must be included in the body of the next request                                                                 |
 | merge     | boolean | If `true`, the headers/body fields in the `next` link must be merged into the original request and be sent combined in the next request. Defaults to `false` |
@@ -205,8 +201,9 @@ See the [paging examples](examples.md#paging-examples) for additional insight.
 
 ## HTTP Request Methods and Content Types
 
-The STAC API follow a RESTful model. A core principal of this is the use of HTTP Request Methods ("verbs") and
-the `Content-Type` header to drive behavior on resources ("nouns"). This section describes how these are used with the `/search` endpoint 
+STAC APIs follow the modern web API practices of using HTTP Request Methods ("verbs") and
+the `Content-Type` header to drive behavior on resources ("nouns").
+This section describes how these are used with the `/search` endpoint.
 
 ### GET
 
@@ -234,23 +231,6 @@ searching on specific Item properties.
 The other HTTP verbs are not supported in STAC Item Search. The [Transaction Extension](../ogcapi-features/extensions/transaction/README.md)
 does implement them, for STAC and OAFeat implementations that want to enable writing and deleting items.
 
-## Recommended Link Relations at `/`
-
-When implementing the STAC API - Item Search conformance class, it it recommended to implement these Link relations.
-
-| **`rel`**      | **href to**                                | **From**       | **Description**                                                                                                                        |
-| -------------- | ------------------------------------------ | -------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| `root`         | The root URI                               | STAC Core      | Reference to self URI                                                                                                                  |
-| `self`         | The root URI                               | OAFeat         | Reference to self URI                                                                                                                  |
-| `service-desc` | The OpenAPI service description            | OAFeat OpenAPI | Uses the `application/vnd.oai.openapi+json;version=3.0` media type to refer to the OpenAPI 3.0 document that defines the service's API |
-| `service-doc`  | An HTML service description                | OAFeat OpenAPI | Uses the `text/html` media type to refer to a human-consumable description of the service                                              |
-| `child`        | The child STAC Catalogs & Collections      | STAC Core      | Provides curated paths to get to STAC Collection and Item objects                                                                      |
-| `search`       | The STAC search endpoint (often `/search`) | STAC Search    | Cross-collection query endpoint to select sub-sets of STAC Item objects                                                                |
-
-It is also valid to have `item` links from the landing page, but most STAC API services are used to 
-serve up a large number of features, so they typically
-use several layers of intermediate `child` links before getting to Item objects.
-
 ## Example Landing Page for STAC API - Item Search
 
 This JSON is what would be expected from an api that only implements STAC API - Item Search. In practice, 
@@ -266,8 +246,8 @@ the [overview](../overview.md#example-landing-page) document.
     "description": "This Catalog aims to demonstrate the a simple landing page",
     "type": "Catalog",
     "conformsTo" : [
-        "https://api.stacspec.org/v1.0.0-beta.4/core",
-        "https://api.stacspec.org/v1.0.0-beta.4/item-search"
+        "https://api.stacspec.org/v1.0.0-beta.5/core",
+        "https://api.stacspec.org/v1.0.0-beta.5/item-search"
     ],
     "links": [
         {
@@ -293,7 +273,14 @@ the [overview](../overview.md#example-landing-page) document.
         {
             "rel": "search",
             "type": "application/geo+json",
-            "href": "https://stacserver.org/search"
+            "href": "https://stacserver.org/search",
+            "method": "GET"
+        },
+        {
+            "rel": "search",
+            "type": "application/geo+json",
+            "href": "https://stacserver.org/search",
+            "method": "POST"
         }
     ]
 }
@@ -306,10 +293,10 @@ These extensions provide additional functionality that enhances Item Search. All
 the `search` endpoint must include the relevant **conformance URI** in the `conformsTo` response at
 the root (`/`) landing page, to indicate to clients that they will respond properly to requests from clients.
 
-### Fields
+### Fields Extension
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.4/item-search#fields>
-- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/item-search#fields>
+- **Extension [Maturity Classification](../README.md#maturity-classification):** Pilot
 - **Definition**: [STAC API - Fields Fragment](../fragments/fields/)
 
 By default, the STAC search endpoint `/search` returns all attributes of each Item, as there is no way to specify 
@@ -318,22 +305,10 @@ allows the client to suggest to the server which Item attributes should be inclu
 through the use of a `fields` parameter. The full description of how this extension works can be found in the 
 [fields fragment](../fragments/fields/). 
 
-### Filter
+### Sort Extension
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter>
-- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
-- **Definition**: [STAC API - Filter Fragment](../fragments/filter/)
-
-The STAC search endpoint, `/search`, by default only accepts a limited set of parameters to limit the results
-by properties. The Filter extension adds a new parameter, `filter`, that can take a number of comparison operators to
-match predicates between the fields requested and the values of Item objects. It can be used with both GET and POST and supports two
-query formats, `cql-text` and `cql-json`. The full details on the JSON structure are specified in the [filter 
-fragment](../fragments/filter/).
-
-### Sort
-
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.4/item-search#sort>
-- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/item-search#sort>
+- **Extension [Maturity Classification](../README.md#maturity-classification):** Pilot
 - **Definition**: [STAC API - Sort Fragment](../fragments/sort/)
 
 By default, the STAC search endpoint `/search` returns results in no specified order. Whatever order the results are in 
@@ -343,26 +318,38 @@ field names to sort by, with an indication of direction. It can be used with bot
 '-' to indicate sort order, and the latter including a 'direction' field in JSON. The full description of the semantics
 of this extension can be found in the [sort fragment](../fragments/sort).
 
-### Context
+### Context Extension
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.4/item-search#context>
-- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/item-search#context>
+- **Extension [Maturity Classification](../README.md#maturity-classification):** Pilot
 - **Definition**: [STAC API - Context Fragment](../fragments/context/)
 
 This extension is intended to augment the core ItemCollection responses from the `search` API endpoint with a
 JSON object called `context` that includes the number of items `matched`, `returned` and the `limit` requested.
 The full description and examples of this are found in the [context fragment](../fragments/context).
 
-### Query
+### Filter Extension
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.4/item-search#query>
-- **Extension [Maturity Classification](../extensions.md#extension-maturity):** Pilot, scheduled to be Deprecated
-- **Definition**: [STAC API - Query Fragment](../fragments/query/)
-
-**Note** - the Query Extension will be deprecated at some point in 1.x. Implementers
-are encouraged to use the Filter Extension instead.
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/item-search#filter>
+- **Extension [Maturity Classification](../README.md#maturity-classification):** Pilot
+- **Definition**: [STAC API - Filter Fragment](../fragments/filter/)
 
 The STAC search endpoint, `/search`, by default only accepts a limited set of parameters to limit the results
+by properties. The Filter extension adds a new parameter, `filter`, that can take a number of comparison operators to
+match predicates between the fields requested and the values of Item objects. It can be used with both GET and POST and supports two
+query formats, `cql-text` and `cql-json`. The full details on the JSON structure are specified in the [filter 
+fragment](../fragments/filter/).
+
+### Query Extension
+
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/item-search#query>
+- **Extension [Maturity Classification](../README.md#maturity-classification):** Pilot
+- **Definition**: [STAC API - Query Fragment](../fragments/query/)
+
+**Note**: It is recommended that implementers implement the [Filter Extension](#filter-extension) instead, as
+it offers a more robust set of operators and uses the CQL2 standard.
+
+The STAC API search endpoint, `/search`, by default only accepts a limited set of parameters to limit the results
 by properties. The Query extension adds a new parameter, `query`, that can take a number of comparison operators to
 match predicates between the fields requested and the values of Item objects. It can be used with both GET and POST, though
 GET includes the exact same JSON. The full details on the JSON structure are specified in the [query 

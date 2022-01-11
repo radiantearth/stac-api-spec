@@ -2,9 +2,9 @@
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
 - **Conformance Class:** 
-  - Item Search binding: <https://api.stacspec.org/v1.0.0-beta.4/item-search#sort>
-  - STAC Features binding: <https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features#sort>
-- **Fragment [Maturity Classification](../../extensions.md#extension-maturity):** Pilot
+  - Item Search binding: <https://api.stacspec.org/v1.0.0-beta.5/item-search#sort>
+  - STAC Features binding: <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features#sort>
+- **Fragment [Maturity Classification](../../README.md#maturity-classification):** Pilot
 - **Dependents:**
   - [Item Search](../../item-search)
   - [STAC Features](../../ogcapi-features)
@@ -16,7 +16,7 @@ implementations should return an error when attempting to sort over a field that
 
 This fragment may be bound to either or both of 
 [Item Search](../../item-search) (`/search` endpoint) or
-[STAC Features](../../ogcapi-features) (`/collections/{collection_id}/items` endpoint) by
+[STAC Features](../../ogcapi-features) (`/collections/{collectionId}/items` endpoint) by
 advertising the relevant conformance class. 
 
 Fields may be sorted in ascending or descending order.  The syntax between GET requests and POST requests with a JSON 

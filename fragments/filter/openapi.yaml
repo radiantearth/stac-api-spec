@@ -2,15 +2,13 @@ openapi: 3.0.3
 info:
   title: The SpatioTemporal Asset Catalog API - Filter
   description: Adds parameters to compare properties and only return the items that match
-  version: 1.0.0-beta.4
+  version: 1.0.0-beta.5
 
 tags:
   - name: STAC API - Core
     description: Part of STAC API - Core definition
   - name: STAC API - Features
     description: Part of STAC API - Features definition
-  - name: STAC API - Collections
-    description: Part of STAC API - Collections definition
   - name: STAC API - Filter Extension
     description: Part of STAC API - Filter extension definition
 
@@ -31,10 +29,10 @@ paths:
 
   /queryables:
     get:
-      summary: Get the JSON Schema defining the list of variable terms that can be used in CQL expressions.
+      summary: Get the JSON Schema defining the list of variable terms that can be used in CQL2 expressions.
       operationId: getQueryables
       description: |-
-        This endpoint returns a list of variable terms that can be used in CQL expressions. The
+        This endpoint returns a list of variable terms that can be used in CQL2 expressions. The
         precise definition of this can be found in the OGC API - Features - Part 3: Filtering and the 
         Common Query Language (CQL) specification.
       tags:
@@ -70,10 +68,10 @@ paths:
                 A link with rel=queryables for queryables to only apply to this collection.
   /collections/{collectionId}/queryables:
     get:
-      summary: Get the JSON Schema defining the list of variable terms that can be used in CQL expressions.
+      summary: Get the JSON Schema defining the list of variable terms that can be used in CQL2 expressions.
       operationId: getQueryablesForCollection
       description: |-
-        This endpoint returns a list of variable terms that can be used in CQL expressions. The
+        This endpoint returns a list of variable terms that can be used in CQL2 expressions. The
         precise definition of this can be found in the OGC API - Features - Part 3: Filtering and the 
         Common Query Language (CQL) specification.
       parameters:
@@ -99,7 +97,7 @@ components:
       description: |-
         **Extension:** Filter
 
-        A CQL filter expression for filtering items.
+        A CQL2 filter expression for filtering items.
       required: true
       schema:
         oneOf:
@@ -112,7 +110,7 @@ components:
       description: |-
         **Extension:** Filter
 
-        The CQL filter encoding that the 'filter' value uses. Must be one of 'cql-text' or 'cql-json'.
+        The CQL2 filter encoding that the 'filter' value uses. Must be one of 'cql-text' or 'cql-json'.
       required: false
       schema:
         $ref: '#/components/schemas/filter-lang'
@@ -133,7 +131,7 @@ components:
       type: object
       x-stac-api-fragment: filter
       description: |-
-        **Optional Extension:** Filter
+        **Extension:** Filter
 
         A filter for properties in Items.
       properties:
@@ -145,13 +143,13 @@ components:
           $ref: '#/components/schemas/filter-crs'
     filter-cql-text:
       description: |
-        A CQL filter expression in the 'cql-text' encoding.
+        A CQL2 filter expression in the 'cql-text' encoding.
       type: string
     filter-cql-json:
       $ref: './cql.yml#/components/schemas/booleanValueExpression'
     filter-lang:
       description: |
-        The CQL filter encoding that the 'filter' value uses.
+        The CQL2 filter encoding that the 'filter' value uses.
       type: string
       enum:
         - 'cql-text'
@@ -164,7 +162,7 @@ components:
       format: uri
   responses:
     Queryables:
-      description: A JSON Schema defining the Queryables allowed in CQL expressions
+      description: A JSON Schema defining the Queryables allowed in CQL2 expressions
       content:
         application/schema+json:
           schema:

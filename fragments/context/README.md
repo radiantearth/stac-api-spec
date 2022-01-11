@@ -2,9 +2,9 @@
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
 - **Conformance Classes:** 
-  - Item Search binding: <https://api.stacspec.org/v1.0.0-beta.4/item-search#context>
-  - STAC Features binding: <https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features#context>
-- **Fragment [Maturity Classification](../../extensions.md#extension-maturity):** Pilot
+  - Item Search binding: <https://api.stacspec.org/v1.0.0-beta.5/item-search#context>
+  - STAC Features binding: <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features#context>
+- **Fragment [Maturity Classification](../../README.md#maturity-classification):** Pilot
 - **Dependents:**
   - [Item Search](../../item-search)
 
@@ -13,7 +13,7 @@ object when the ItemCollection is the result of a search, for example, from call
 
 This fragment may be bound to either or both of 
 [Item Search](../../item-search) (`/search` endpoint) or
-[STAC Features](../../ogcapi-features) (`/collections/{collection_id}/items` endpoint) by
+[STAC Features](../../ogcapi-features) (`/collections/{collectionId}/items` endpoint) by
 advertising the relevant conformance class. 
 
 **Note**: OGC API Features - Part 1 has its own way returning `numberMatched` and `numberReturned` at the top level, instead of in a context

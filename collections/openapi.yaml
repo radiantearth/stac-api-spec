@@ -1,10 +1,10 @@
 openapi: 3.0.3
 info:
   title: STAC API - Collections
-  version: '1.0.0-beta.4'
+  version: '1.0.0-beta.5'
   description: >-
-    This is an OpenAPI definition of the SpatioTemporal Asset Catalog API - Core
-    specification.  This is a subset of the STAC API - Collections specification.
+    This is an OpenAPI definition of the SpatioTemporal Asset Catalog API - Collections
+    specification.  This is a subset of the STAC API - Features specification.
   contact:
     name: STAC Specification
     url: 'http://stacspec.org'
@@ -12,9 +12,9 @@ info:
     name: Apache License 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0'
 tags:
-  - name: Features
+  - name: Collections
     description: |-
-      All endpoints related to OGC API - Features - Part 1: Core
+      All endpoints related to STAC API - Collections
 paths:
   '/':
     get:
@@ -38,13 +38,13 @@ paths:
               schema:
                 $ref: '../core/openapi.yaml#/components/schemas/landingPage'
               example:
-                stac_version: 1.0.0-beta.4
+                stac_version: 1.0.0-beta.5
                 type: Catalog
                 id: sentinel
                 title: Copernicus Sentinel Imagery
                 description: Catalog of Copernicus Sentinel 1 and 2 imagery.
                 conformsTo:
-                  - 'https://api.stacspec.org/v1.0.0-beta.4/core'
+                  - 'https://api.stacspec.org/v1.0.0-beta.5/core'
                   - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core'
                   - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30'
                   - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson'
@@ -61,14 +61,6 @@ paths:
                     rel: service-doc
                     type: text/html
                     title: the API documentation
-                  - href: 'http://data.example.org/sentinel-1'
-                    rel: child
-                    type: application/json
-                    title: Sentinel 1 Catalog
-                  - href: 'http://data.example.org/sentinel-2'
-                    rel: child
-                    type: application/json
-                    title: Sentinel 2 Catalog
                   - href: 'http://data.example.org/conformance'
                     rel: conformance
                     type: application/json
@@ -77,20 +69,6 @@ paths:
                     rel: data
                     type: application/json
                     title: Information about the feature collections
-  '/conformance':
-    get:
-      tags:
-        - Features
-      summary: information about specifications that this API conforms to
-      description: |-
-        A list of all conformance classes specified in a standard that the
-        server conforms to.
-      operationId: getConformanceDeclaration
-      responses:
-        '200':
-          $ref: '#/components/responses/ConformanceDeclaration'
-        '500':
-          $ref: '#/components/responses/ServerError'
   '/collections':
     get:
       tags:
@@ -147,23 +125,6 @@ components:
           items:
             $ref: '../core/commons.yaml#/components/schemas/collection'
   responses:
-    ConformanceDeclaration:
-      description: |-
-        The URIs of all conformance classes supported by the server.
-
-        To support "generic" clients that want to access multiple
-        OGC API Features implementations - and not "just" a specific
-        API / server, the server declares the conformance
-        classes it implements and conforms to.
-      content:
-        application/json:
-          schema:
-            $ref: '../core/commons.yaml#/components/schemas/conformanceClasses'
-          example:
-            conformsTo:
-              - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core'
-              - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30'
-              - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson'
     Collections:
       description: |-
         The feature collections shared by this API.

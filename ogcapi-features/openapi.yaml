@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: STAC API - Features
-  version: '1.0.0-beta.4'
+  version: '1.0.0-beta.5'
   description: >-
     This is an OpenAPI definition of the SpatioTemporal Asset Catalog API - Features
     specification. This extends OGC API - Features - Part 1: Core.
@@ -38,13 +38,13 @@ paths:
               schema:
                 $ref: '../core/openapi.yaml#/components/schemas/landingPage'
               example:
-                stac_version: 1.0.0-beta.4
+                stac_version: 1.0.0-beta.5
                 type: Catalog
                 id: sentinel
                 title: Copernicus Sentinel Imagery
                 description: Catalog of Copernicus Sentinel 1 and 2 imagery.
                 conformsTo:
-                  - 'https://api.stacspec.org/v1.0.0-beta.4/core'
+                  - 'https://api.stacspec.org/v1.0.0-beta.5/core'
                   - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core'
                   - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30'
                   - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson'
@@ -61,14 +61,6 @@ paths:
                     rel: service-doc
                     type: text/html
                     title: the API documentation
-                  - href: 'http://data.example.org/sentinel-1'
-                    rel: child
-                    type: application/json
-                    title: Sentinel 1 Catalog
-                  - href: 'http://data.example.org/sentinel-2'
-                    rel: child
-                    type: application/json
-                    title: Sentinel 2 Catalog
                   - href: 'http://data.example.org/conformance'
                     rel: conformance
                     type: application/json
@@ -254,7 +246,10 @@ components:
       name: limit
       in: query
       description: |-
-        The optional limit parameter limits the number of items that are presented in the response document.
+        The optional limit parameter recommends the number of items that should be present in the response document.
+
+        If the limit parameter value is greater than advertised limit maximum, the server shall return the
+        maximum possible number of items, rather than responding with an error.
 
         Only items are counted that are on the first level of the collection in the response document.
         Nested objects contained within the explicitly requested items shall not be counted.

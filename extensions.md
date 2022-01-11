@@ -1,6 +1,6 @@
 # API Extensions
 
-STAC aims to define a small core of functionality, with richer capabilities enabled by extensions. This document
+STAC API aims to define a core of functionality, with richer capabilities enabled by extensions. This document
 lists the existing extensions, and explains the process of creating and maturing an extension. 
 
 Anyone is welcome to create an extension (see [info on this](#creating-new-extensions) below), and is encouraged to at least 
@@ -9,30 +9,10 @@ The third-party / vendor extension section is for the sharing of extensions. As 
 it is expected that others will make use of it, and then evolve to make it a 'community extension', that several providers maintain together.
 For now anyone from the community is welcome to use the appropriate parts of the stac-api-spec repository to collaborate.
 
-## Extension Maturity
+All extensions must include a [maturity classification](README.md#maturity-classification), so that STAC API
+specification users can easily get a sense of how much they can count on the extension. 
 
-Extensions are meant to evolve to maturity, and thus may be in different states
-in terms of stability and number of implementations. All extensions included must include a 
-maturity classification, so that STAC spec users can easily get a sense of how much they can count
-on the extension. 
-
-| Maturity Classification | Min Impl # | Description                                                                                                                                                | Stability                                                                                                 |
-| ----------------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| Proposal                | 0          | An idea put forward by a community member to gather feedback                                                                                               | Not stable - breaking changes almost guaranteed as implementers try out the idea.                         |
-| Pilot                   | 1          | Idea is fleshed out, with examples and a JSON schema, and implemented in one or more catalogs. Additional implementations encouraged to help give feedback | Approaching stability - breaking changes are not anticipated but can easily come from additional feedback |
-| Candidate               | 3          | A number of implementers are using it and are standing behind it as a solid extension. Can generally count on an extension at this maturity level          | Mostly stable, breaking changes require a new version and minor changes are unlikely.                     |
-| Stable                  | 6          | Highest current level of maturity. The community of extension maintainers commits to a STAC review process for any changes, which are not made lightly.    | Completely stable, all changes require a new version number and review process.                           |
-| Deprecated              | N/A        | A previous extension that has likely been superseded by a newer one or did not work out for some reason.                                                   | Will not be updated and may be removed in an upcoming major release.                                      |
-
-Maturity mostly comes through diverse implementations, so the minimum number of implementations
-column is the main gating function for an extension to mature. But extension authors can also
-choose to hold back the maturity advancement if they don't feel they are yet ready to commit to
-the less breaking changes of the next level.
-
-A 'mature' classification level will likely be added once there are extensions that have been 
-stable for over a year and are used in twenty or more implementations.
-
-## Extensions, Fragments and Conformance
+## Extensions, Fragments, and Conformance
 
 Each extension has its own conformance class, which is specified with a 'conformance URI' that is defined for the extension, and listed in 
 the table below. These must be listed in the `conformsTo` JSON of the landing page, as specified by [STAC API Core](core/), to let clients
@@ -52,48 +32,48 @@ This is the list of all extensions that are contained in the stac-api-spec repos
 
 | Extension Name                                                                    | Scope*                                                                                                     | Description                                                                                                                                 | Maturity                              |
 | --------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
-| [Fields](item-search/README.md#fields)                                            | [Item Search](item-search/) request                                                                        | Adds parameter to control which fields are returned in the response.                                                                        | *Pilot*                               |
-| [Filter](item-search/README.md#filter)                                            | [Item Search](item-search/) and [STAC - Features API](ogcapi-features) `/items` requests                   | Adds parameter to search Item and Collection properties.                                                                                    | *Pilot*                               |
-| [Context](item-search/README.md#context)                                          | [Item Search](item-search/) response ([ItemCollection](fragments/itemcollection/README.md))                | Adds search related metadata (context) to ItemCollection.                                                                                   | *Proposal*                            |
-| [Sort](item-search/README.md#sort)                                                | [Item Search](item-search/) request                                                                        | Adds Parameter to control sorting of returns results.                                                                                       | *Pilot*                               |
-| [Transaction](ogcapi-features/extensions/transaction/README.md)                   | [STAC - Features API](ogcapi-features) POST on `/items` endpoint, DELETE/PUT on `/items/{itemId}` endpoint | Adds PUT and DELETE endpoints for the creation, editing, and deleting of Item objects.                                                      | *Pilot*                               |
-| [Items and Collections API Version](ogcapi-features/extensions/version/README.md) | [STAC - Features API](ogcapi-features) on `/items` endpoint                                                | Adds GET versions resource to Collection and Item endpoints and provides semantics for a versioning scheme for Collection and Item objects. | *Proposal*                            |
-| [Query](item-search/README.md#query)                                              | [Item Search](item-search/) request                                                                        | Adds parameter to search Item and Collection properties.                                                                                    | *Pilot*, scheduled to be *Deprecated* |
+| [Fields](item-search/README.md#fields-extension)                                            | [Item Search](item-search/) request                                                                        | Adds parameter to control which fields are returned in the response.                                                                        | *Pilot*                               |
+| [Filter](item-search/README.md#filter-extension)                                            | [Item Search](item-search/) and [STAC API - Features](ogcapi-features) `/items` requests                   | Adds parameter to search Item and Collection properties.                                                                                    | *Pilot*                               |
+| [Context](item-search/README.md#context-extension)                                          | [Item Search](item-search/) response ([ItemCollection](fragments/itemcollection/README.md))                | Adds search related metadata (context) to ItemCollection.                                                                                   | *Proposal*                            |
+| [Sort](item-search/README.md#sort-extension)                                                | [Item Search](item-search/) request                                                                        | Adds Parameter to control sorting of returns results.                                                                                       | *Pilot*                               |
+| [Transaction](ogcapi-features/extensions/transaction/README.md)                   | [STAC API - Features](ogcapi-features) POST on `/items` endpoint, DELETE/PUT on `/items/{itemId}` endpoint | Adds PUT and DELETE endpoints for the creation, editing, and deleting of Item objects.                                                      | *Pilot*                               |
+| [Items and Collections API Version](ogcapi-features/extensions/version/README.md) | [STAC API - Features](ogcapi-features) on `/items` endpoint                                                | Adds GET versions resource to Collection and Item endpoints and provides semantics for a versioning scheme for Collection and Item objects. | *Proposal*                            |
+| [Query](item-search/README.md#query-extension)                                              | [Item Search](item-search/) request                                                                        | Adds parameter to search Item and Collection properties.                                                                                    | *Pilot*, scheduled to be *Deprecated* |
 
 ### Conformance classes of extensions
 
 Each extension has its own conformance URI, which is used in the `conformsTo` response of the landing page to let clients know what capabilities 
 the service supports. This are listed at the top of each extension description, but the full table is given here for ease of reference.
 
-- [Fields](item-search/README.md#fields)
-  - <https://api.stacspec.org/v1.0.0-beta.4/item-search#fields>
-  - <https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features#fields>
-- [Filter](item-search/README.md#filter)
-  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/filter>
-  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-cql>
-  - <https://api.stacspec.org/v1.0.0-beta.4/item-search#filter:item-search-filter>
-  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql-text>
-  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql-json>
-  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/advanced-comparison-operators>
-  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-spatial-operators>
-  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/spatial-operators>
-  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/temporal-operators>
-  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/functions>
-  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/arithmetic>
-  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/array-operators>
-  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/property-property>
-- [Context](item-search/README.md#context)
-  - <https://api.stacspec.org/v1.0.0-beta.4/item-search#context>
-  - <https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features#context>
-- [Sort](item-search/README.md#sort)
-  - <https://api.stacspec.org/v1.0.0-beta.4/item-search#sort>
-  - <https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features#sort>
+- [Fields](item-search/README.md#fields-extension)
+  - <https://api.stacspec.org/v1.0.0-beta.5/item-search#fields-extension>
+  - <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features#fields-extension>
+- [Filter](item-search/README.md#filter-extension)
+  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/filter-extension>
+  - <http://www.opengis.net/spec/cql2/1.0/conf/basic-cql2>
+  - <https://api.stacspec.org/v1.0.0-beta.5/item-search#filter:item-search-filter>
+  - <http://www.opengis.net/spec/cql2/1.0/conf/cql2-text>
+  - <http://www.opengis.net/spec/cql2/1.0/conf/cql2-json>
+  - <http://www.opengis.net/spec/cql2/1.0/conf/advanced-comparison-operators>
+  - <http://www.opengis.net/spec/cql2/1.0/conf/basic-spatial-operators>
+  - <http://www.opengis.net/spec/cql2/1.0/conf/spatial-operators>
+  - <http://www.opengis.net/spec/cql2/1.0/conf/temporal-operators>
+  - <http://www.opengis.net/spec/cql2/1.0/conf/functions>
+  - <http://www.opengis.net/spec/cql2/1.0/conf/arithmetic>
+  - <http://www.opengis.net/spec/cql2/1.0/conf/array-operators>
+  - <http://www.opengis.net/spec/cql2/1.0/conf/property-property>
+- [Context](item-search/README.md#context-extension)
+  - <https://api.stacspec.org/v1.0.0-beta.5/item-search#context>
+  - <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features#context>
+- [Sort](item-search/README.md#sort-extension)
+  - <https://api.stacspec.org/v1.0.0-beta.5/item-search#sort>
+  - <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features#sort>
 - [Transaction](ogcapi-features/extensions/transaction/README.md)
-  - <https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features/extensions/transaction>
+  - <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features/extensions/transaction>
 - [Items and Collections API Version](ogcapi-features/extensions/version/README.md)
-  - <https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features/extensions/version>
-- [Query](item-search/README.md#query)
-  - <https://api.stacspec.org/v1.0.0-beta.4/item-search#query>
+  - <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features/extensions/version>
+- [Query](item-search/README.md#query-extension)
+  - <https://api.stacspec.org/v1.0.0-beta.5/item-search#query>
 
 ## Third-party / vendor extensions
 
@@ -103,9 +83,9 @@ parties, extensions may be made official and incorporated in the STAC repository
 
 Please contact a STAC maintainer or open a Pull Request to add your extension to this table.
 
-| Name                                                                | Scope                               | Description                                                     | Vendor                                         |
-| ------------------------------------------------------------------- | ----------------------------------- | --------------------------------------------------------------- | ---------------------------------------------- |
-| [Free-text Search](https://github.com/cedadev/stac-freetext-search) | [Item Search](item-search/) request | Adds `q` parameter and free-text search against item properties | [CEDA, STFC, UKRI](https://github.com/cedadev) |
+| Name                                                                       | Scope                               | Description                                                                                                                                    | Vendor                                         |
+| -------------------------------------------------------------------------- | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
+| [Free-text Search](https://github.com/cedadev/stac-freetext-search)        | [Item Search](item-search/) request | Adds `q` parameter and free-text search against item properties                                                                                | [CEDA, STFC, UKRI](https://github.com/cedadev) |
 | [Context Collections](https://github.com/cedadev/stac-context-collections) | [Item Search](item-search/) request | Adds a `collections` keyword to the [context](https://github.com/radiantearth/stac-api-spec/tree/master/fragments/context) extension response. | [CEDA, STFC, UKRI](https://github.com/cedadev) |
 
 ## Creating new extensions

@@ -1,12 +1,13 @@
 # STAC API - Query Fragment
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
-- **Conformance Class:** <https://api.stacspec.org/v1.0.0-beta.4/item-search#query>
-- **Extension [Maturity Classification](../../extensions.md#extension-maturity):** Pilot, scheduled to be Deprecated in favor of the [Filter Extension](../filter/README.md) using [CQL](http://docs.opengeospatial.org/DRAFTS/19-079.html).
+- **Conformance Class:** <https://api.stacspec.org/v1.0.0-beta.5/item-search#query>
+- **Extension [Maturity Classification](../../README.md#maturity-classification):** Pilot, scheduled to be Deprecated in favor of the [Filter Extension](../filter/README.md) using [CQL](http://docs.opengeospatial.org/DRAFTS/19-079.html).
 - **Dependents:**
   - [Item Search](../../item-search)
 
-The `query` parameter adds additional filters for searching on the properties of Item objects.
+The `query` parameter adds additional filters for searching on the properties of Item objects. The JSON syntax for
+these filters is known as "STACQL" (pronounced `stack-cue-el`).
 
 The syntax for the `query` filter is:
 
