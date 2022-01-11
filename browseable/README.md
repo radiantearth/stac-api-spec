@@ -10,7 +10,7 @@
 - **Conformance URIs:** 
   - <https://api.stacspec.org/v1.0.0-beta.5/browseable>
   - <https://api.stacspec.org/v1.0.0-beta.5/core>
-- **[Maturity Classification](../README.md#maturity-classification):** Pilot
+- **[Maturity Classification](../README.md#maturity-classification):** Proposal
 - **Dependencies**: [STAC API - Core](../core)
 
 A STAC API conforming to the `STAC API - Browseable` conformance class must be structured such that all 

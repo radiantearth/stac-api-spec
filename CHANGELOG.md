@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [v1.0.0-beta.5 - Unreleased] - TBD
+## [v1.0.0-beta.5] - 2022-01-11
 
 ### Added
 
@@ -55,7 +55,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - definition of Item object was missing `properties` as an attribute
 - Filter Extension - examples of using intervals and timestamps in CQL2 were incorrect and have been fixed
 
-## [v1.0.0-beta.4] - 2020-10-05
+## [v1.0.0-beta.4] - 2021-10-05
 
 ### Added
 
@@ -90,7 +90,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-## [v1.0.0-beta.3] - 2020-08-06
+## [v1.0.0-beta.3] - 2021-08-06
 
 ### Added
 - Added STAC API - Collections definition (subset of STAC API - Features)
@@ -111,7 +111,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
   
-## [v1.0.0-beta.2] - 2020-06-01
+## [v1.0.0-beta.2] - 2021-06-01
 
 ### Added
 - Added Filter extension to integrate OAFeat Part 3 CQL
