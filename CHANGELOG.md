@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - The CQL2 Accent and Case-insensitive Comparison 
-    (`http://www.opengis.net/spec/cql2/1.0/conf/case-insensitive-comparison`) conformance class
+    (`http://www.opengis.net/spec/cql2/1.0/conf/accent-case-insensitive-comparison`) conformance class
     adds the ACCENTI and CASEI functions for case-insensitive comparison. These replace the UPPER and
     LOWER psuedo-functions that were previously part of the Advanced Comparison Operators class.
 

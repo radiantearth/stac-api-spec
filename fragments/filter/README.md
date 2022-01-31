@@ -1019,7 +1019,7 @@ filter=CASEI(provider) = CASEI('Straße')
 {
   "filter-lang": "cql2-json",
   "filter": {
-    "op": "=", 
+    "op": "=",
     "args": [
       { 
         "function" : "casei", 
@@ -1038,7 +1038,7 @@ filter=CASEI(provider) = CASEI('Straße')
 {
   "filter-lang": "cql2-json",
   "filter": {
-    "op": "=", 
+    "op": "=",
     "args": [
       { 
         "function" : "casei", 
@@ -1071,7 +1071,7 @@ filter=ACCENTI(provider) = ACCENTI('tiburón')
 {
   "filter-lang": "cql2-json",
   "filter": {
-    "op": "=", 
+    "op": "=",
     "args": [
       { 
         "function" : "accenti", 
