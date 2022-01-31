@@ -6,6 +6,7 @@
 - [STAC API](#stac-api)
   - [About](#about)
   - [Stability Note](#stability-note)
+  - [Maturity Classification](#maturity-classification)
   - [Communication](#communication)
   - [In this repository](#in-this-repository)
   - [Contributing](#contributing)
@@ -15,7 +16,6 @@
 The SpatioTemporal Asset Catalog (STAC) family of specifications aim to standardize the way geospatial asset metadata is structured and queried.
 A 'spatiotemporal asset' is any file that represents information about the earth captured in a certain space and 
 time. The core STAC specifications live in the GitHub repository [radiantearth/stac-spec](https://github.com/radiantearth/stac-spec).
-
 
 A STAC API is the dynamic version of a SpatioTemporal Asset Catalog. It returns a STAC [Catalog](stac-spec/catalog-spec/catalog-spec.md), 
 [Collection](stac-spec/collection-spec/collection-spec.md), [Item](stac-spec/item-spec/item-spec.md), 
@@ -36,11 +36,34 @@ rendered online into HTML at <https://api.stacspec.org/v1.0.0-beta.5>, in additi
 ## Stability Note
 
 This specification has evolved over the past couple years, and is used in production in a variety of deployments. It is 
-currently in a 'beta' state, with no major changes anticipated. For 1.0-beta we remain fully aligned with [OGC API - 
+currently in a 'beta' state, with no major changes anticipated. For 1.0.0-beta.5, we remain fully aligned with [OGC API - 
 Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) Version 1.0, and we are working to stay aligned
 as the additional OGC API components mature. This may result in minor changes as things evolve. The STAC API 
 specification follows [Semantic Versioning](https://semver.org/), so once 1.0.0 is reached any breaking change 
-will require the spec to go to 2.0.0. 
+will require the spec to go to 2.0.0.
+
+## Maturity Classification
+
+Conformance classes and extensions are meant to evolve to maturity, and thus may be in different states
+in terms of stability and number of implementations. All extensions must include a 
+maturity classification, so that STAC API spec users can easily get a sense of how much they can count
+on the extension. 
+
+| Maturity Classification | Min Impl # | Description                                                                                                                                                | Stability                                                                                                 |
+| ----------------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| Proposal                | 0          | An idea put forward by a community member to gather feedback                                                                                               | Not stable - breaking changes almost guaranteed as implementers try out the idea.                         |
+| Pilot                   | 1          | Idea is fleshed out, with examples and a JSON schema, and implemented in one or more catalogs. Additional implementations encouraged to help give feedback | Approaching stability - breaking changes are not anticipated but can easily come from additional feedback |
+| Candidate               | 3          | A number of implementers are using it and are standing behind it as a solid extension. Can generally count on an extension at this maturity level          | Mostly stable, breaking changes require a new version and minor changes are unlikely.                     |
+| Stable                  | 6          | Highest current level of maturity. The community of extension maintainers commits to a STAC review process for any changes, which are not made lightly.    | Completely stable, all changes require a new version number and review process.                           |
+| Deprecated              | N/A        | A previous extension that has likely been superseded by a newer one or did not work out for some reason.                                                   | Will not be updated and may be removed in an upcoming major release.                                      |
+
+Maturity mostly comes through diverse implementations, so the minimum number of implementations
+column is the main gating function for an extension to mature. But extension authors can also
+choose to hold back the maturity advancement if they don't feel they are yet ready to commit to
+the less breaking changes of the next level.
+
+A 'mature' classification level will likely be added once there are extensions that have been 
+stable for over a year and are used in twenty or more implementations.
 
 ## Communication
 
@@ -57,17 +80,25 @@ The **[Overview](overview.md)** document describes all the various parts of the 
 The *[core](core/)* folder describes the core STAC API specification that enables browsing catalogs and 
 retrieving the API capabilities. This includes the OpenAPI schemas for STAC Item, Catalog and Collection objects.
 
-**STAC API - Item Search Specification:**
-The *[item-search](item-search)* folder contains the Item Search specification, which enables 
-cross-collection search of STAC Item objects at a `search` endpoint, as well as a number of extensions. 
+**STAC API - Collections:**
+The *[collections](collections)* folder describes how a STAC API Catalog can advertise the Collections it contains.
 
 **STAC API - Features:**
 The *[ogcapi-features](ogcapi-features)* folder describes how a STAC API can fully implement [OGC API - 
 Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to expose individual `items` endpoints for search of
 each STAC collection. It also includes extensions that can be used to further enhance OAFeat.
 
-**STAC API - Collections:**
-The *[collections](collections)* folder describes how a STAC API can advertise the Collections it contains.
+**STAC API - Item Search Specification:**
+The *[item-search](item-search)* folder contains the Item Search specification, which enables 
+cross-collection search of STAC Item objects at a `search` endpoint, as well as a number of extensions. 
+
+**STAC API - Children:**
+The *[children](children)* folder describes how a STAC API Catalog can advertise the children (child catalogs or child collections)
+it contains.
+
+**STAC API - Browseable:**
+The *[browseable](browseable)* folder describes how a STAC API Catalog can advertise that all Items can be accessed
+by following through `child` and `item` link relations.
 
 **Extensions:**
 The *[extensions](extensions.md) document* describes how STAC incubates new functionality, and it links to the existing 

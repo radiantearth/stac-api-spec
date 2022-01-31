@@ -4,10 +4,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [v1.0.0-beta.5 - Unreleased] - TBD
+## [v1.0.0-rc.1] - TBD
 
 ### Added
 
+- The CQL2 Accent and Case-insensitive Comparison 
+    (`http://www.opengis.net/spec/cql2/1.0/conf/case-insensitive-comparison`) conformance class
+    adds the ACCENTI and CASEI functions for case-insensitive comparison. These replace the UPPER and
+    LOWER psuedo-functions that were previously part of the Advanced Comparison Operators class.
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+## [v1.0.0-beta.5] - 2022-01-14
+
+### Added
+
+- Added `STAC API - Browseable` conformance class
+- Added `STAC API - Children` conformance class
+- Added description of how to support both search and browse in an API.
 - The paging mechanism via a Link with rel `next` or `prev` as defined for Item Search can also be used
   for the STAC API - Features endpoint `/collections/{collection_id}/items`, as described in OAFeat.
 - The paging mechanism via a Link with rel `next` or `prev` as defined for items can also be used
@@ -20,7 +40,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Updated all "CQL" usages to "CQL2"
   - Most conformance class URIs are now prefixed with `http://www.opengis.net/spec/cql2/` instead
     of `http://www.opengis.net/spec/ogcapi-features-3/`
-  - Conformance classes `http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-cql`, 
+  - Conformance classes `http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/basic-cql`,
     `http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql-text`, and
     `http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/cql-json` have had `cql` replaced
     with `cql2` (in addition to the prefix change) to
@@ -32,11 +52,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Temporal operator `ANYINTERACTS` is now `T_INTERSECTS`
   - Updated Example 3 (now Example 5) to make it clear that property to property comparisons require the
     Property-Property Comparisons conformance class
-  - The CQL2 Accent and Case-insensitive Comparison 
+  - The CQL2 Case-insensitive Comparison
     (`http://www.opengis.net/spec/cql2/1.0/conf/case-insensitive-comparison`) conformance class
-    adds the ACCENTI and CASEI functions for case-insensitive comparison. These replace the UPPER and
-    LOWER psuedo-functions that were previously part of the Advanced Comparison Operators class.
-- `service-desc` endpoint may return any service description format, typically a 
+    that adds UPPER/LOWER terms or function CASEI for case-insensitive comparison has not been added
+    to this spec yet, since the definition in CQL2 is in flux.
+- `service-desc` endpoint may return any service description format, typically a
   machine-consumable one (previous restricted required to be OpenAPI 3.0 JSON)
 - `service-doc` endpoint may return any service description format, typically a
   human-consumable one (previous restricted required to be HTML)
@@ -47,16 +67,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Collection conformance class URI should be `https://api.stacspec.org/v1.0.0-beta.XXX/collections` instead 
+- Collection conformance class URI should be `https://api.stacspec.org/v1.0.0-beta.XXX/collections` instead
   of `http://stacspec.org/spec/api/1.0.0-beta.XXX/extensions/collections`
 - definition of Item object was missing `properties` as an attribute
+- Filter Extension - examples of using intervals and timestamps in CQL2 were incorrect and have been fixed
+- Filter Extension - examples are updated so that text and json examples are equivalent
 
-## [v1.0.0-beta.4] - 2020-10-05
+## [v1.0.0-beta.4] - 2021-10-05
 
 ### Added
 
 - Support binding Sort, Fields, and Context Extensions to STAC Features items resource
-  endpoint (`/collections/{collection_id}/items`)
+  endpoint (`/collections/{collectionId}/items`)
 - In Collections, added `canonical` rel type, added `/` and `/api` to list of endpoints
 - In Item Search, added endpoint table
 
@@ -76,8 +98,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - "Arithmetic" has been renamed "Arithmetic Expressions"
   - "Arrays" has been renamed "Array Operators"
   - "Queryable Second Operand" has been renamed "Property-Property Comparisons"
-- The required Link Relations and endpoints for each conformance class now use the wording of 'shall' 
-  instead of 'should'. While this technically changes the semantics, it was generally understood 
+- The required Link Relations and endpoints for each conformance class now use the wording of 'shall'
+  instead of 'should'. While this technically changes the semantics, it was generally understood
   previously the semantics were those of 'shall' (must).
 
 ### Deprecated
@@ -86,7 +108,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-## [v1.0.0-beta.3] - 2020-08-06
+## [v1.0.0-beta.3] - 2021-08-06
 
 ### Added
 - Added STAC API - Collections definition (subset of STAC API - Features)
@@ -95,9 +117,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Query extension not deprecated; recommendation to use Filter (https://github.com/radiantearth/stac-api-spec/pull/157)
 - Filter Extension conformance classes refactored to better align with STAC API use cases.
-- Renamed conformance class "Queryable First Operand" 
-  (https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:queryable-first-operand) to 
-  "Queryable Second Operand" 
+- Renamed conformance class "Queryable First Operand"
+  (https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:queryable-first-operand) to
+  "Queryable Second Operand"
   (https://api.stacspec.org/v1.0.0-beta.3/item-search#filter:queryable-second-operand)
 
 ### Deprecated
@@ -106,8 +128,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove stac_version and stac_extensions fields in ItemCollection
 
 ### Fixed
-  
-## [v1.0.0-beta.2] - 2020-06-01
+
+## [v1.0.0-beta.2] - 2021-06-01
 
 ### Added
 - Added Filter extension to integrate OAFeat Part 3 CQL
