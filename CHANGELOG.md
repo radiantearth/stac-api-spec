@@ -4,6 +4,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v1.0.0-rc.1] - TBD
+
+### Added
+
+- The CQL2 Accent and Case-insensitive Comparison 
+    (`http://www.opengis.net/spec/cql2/1.0/conf/accent-case-insensitive-comparison`) conformance class
+    adds the ACCENTI and CASEI functions for case-insensitive comparison. These replace the UPPER and
+    LOWER psuedo-functions that were previously part of the Advanced Comparison Operators class.
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
 ## [v1.0.0-beta.5] - 2022-01-14
 
 ### Added
