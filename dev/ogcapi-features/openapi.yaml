@@ -369,7 +369,7 @@ components:
         generated.
       type: string
       format: date-time
-      example: 2017-08-17T08:05:32Z
+      example: '2017-08-17T08:05:32Z'
     stac_version:
       title: STAC version
       type: string
@@ -690,7 +690,7 @@ components:
                   format: date-time
                   nullable: true
                 example:
-                  - 2011-11-11T12:22:11Z
+                  - '2011-11-11T12:22:11Z'
                   - null
             trs:
               description: >-
@@ -886,12 +886,12 @@ components:
                 - 83
           temporal:
             interval:
-              - - 2015-06-23T00:00:00Z
-                - 2019-07-10T13:44:56Z
+              - - '2015-06-23T00:00:00Z'
+                - '2019-07-10T13:44:56Z'
         summaries:
           datetime:
-            min: 2015-06-23T00:00:00Z
-            max: 2019-07-10T13:44:56Z
+            min: '2015-06-23T00:00:00Z'
+            max: '2019-07-10T13:44:56Z'
           sci:citation:
             - Copernicus Sentinel data [Year]
           eo:gsd:
@@ -1182,7 +1182,7 @@ components:
 
         `null` is allowed, but requires `start_datetime` and `end_datetime` from
         common metadata to be set.
-      example: 2018-02-12T00:00:00Z
+      example: '2018-02-12T00:00:00Z'
     properties:
       type: object
       required:
@@ -1292,7 +1292,7 @@ components:
               - - -122.308150179
                 - 37.488035566
         properties:
-          datetime: 2016-05-03T13:22:30.040Z
+          datetime: '2016-05-03T13:22:30.040Z'
           title: A CS3 item
           license: PDDL-1.0
           providers:

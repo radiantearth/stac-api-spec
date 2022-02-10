@@ -435,7 +435,7 @@ components:
                   format: date-time
                   nullable: true
                 example:
-                  - 2011-11-11T12:22:11Z
+                  - '2011-11-11T12:22:11Z'
                   - null
             trs:
               description: >-
@@ -631,12 +631,12 @@ components:
                 - 83
           temporal:
             interval:
-              - - 2015-06-23T00:00:00Z
-                - 2019-07-10T13:44:56Z
+              - - '2015-06-23T00:00:00Z'
+                - '2019-07-10T13:44:56Z'
         summaries:
           datetime:
-            min: 2015-06-23T00:00:00Z
-            max: 2019-07-10T13:44:56Z
+            min: '2015-06-23T00:00:00Z'
+            max: '2019-07-10T13:44:56Z'
           sci:citation:
             - Copernicus Sentinel data [Year]
           eo:gsd:

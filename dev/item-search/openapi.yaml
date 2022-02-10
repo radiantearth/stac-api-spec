@@ -1120,7 +1120,7 @@ components:
 
         `null` is allowed, but requires `start_datetime` and `end_datetime` from
         common metadata to be set.
-      example: 2018-02-12T00:00:00Z
+      example: '2018-02-12T00:00:00Z'
     properties:
       type: object
       required:
@@ -1230,7 +1230,7 @@ components:
               - - -122.308150179
                 - 37.488035566
         properties:
-          datetime: 2016-05-03T13:22:30.040Z
+          datetime: '2016-05-03T13:22:30.040Z'
           title: A CS3 item
           license: PDDL-1.0
           providers:
