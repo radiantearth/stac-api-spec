@@ -218,9 +218,9 @@ dynamic Queryables schema.
 Formal definitions and grammars for CQL2 can be found in the
 [OAFeat CQL spec](https://github.com/opengeospatial/ogcapi-features/tree/master/cql2) includes a BNF grammar
   for CQL2 Text and both a JSON Schema and an OpenAPI specification for CQL2 JSON. The standalone files are:
-  - [cql.bnf](https://github.com/opengeospatial/ogcapi-features/blob/master/extensions/cql/standard/schema/cql.bnf)
-  - [cql.json](https://github.com/opengeospatial/ogcapi-features/blob/master/extensions/cql/standard/schema/cql.json)
-  - [cql.yml](https://github.com/opengeospatial/ogcapi-features/blob/master/extensions/cql/standard/schema/cql.yml)
+- [cql.bnf](https://github.com/opengeospatial/ogcapi-features/blob/master/extensions/cql/standard/schema/cql.bnf)
+- [cql.json](https://github.com/opengeospatial/ogcapi-features/blob/master/extensions/cql/standard/schema/cql.json)
+- [cql.yml](https://github.com/opengeospatial/ogcapi-features/blob/master/extensions/cql/standard/schema/cql.yml)
 
 These projects have or are developing CQL2 support:
 
