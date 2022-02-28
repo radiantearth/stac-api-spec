@@ -87,7 +87,7 @@ Please contact a STAC maintainer or open a Pull Request to add your extension to
 | Name                                                                       | Scope                               | Description                                                                                                                                    | Vendor                                         |
 | -------------------------------------------------------------------------- | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
 | [Free-text Search](https://github.com/cedadev/stac-freetext-search)        | [Item Search](item-search/) request | Adds `q` parameter and free-text search against item properties                                                                                | [CEDA, STFC, UKRI](https://github.com/cedadev) |
-| [Context Collections](https://github.com/cedadev/stac-context-collections) | [Item Search](item-search/) request | Adds a `collections` keyword to the [context](https://github.com/radiantearth/stac-api-spec/tree/master/fragments/context) extension response. | [CEDA, STFC, UKRI](https://github.com/cedadev) |
+| [Context Collections](https://github.com/cedadev/stac-context-collections) | [Item Search](item-search/) request | Adds a `collections` keyword to the [context](https://github.com/radiantearth/stac-api-spec/tree/main/fragments/context) extension response. | [CEDA, STFC, UKRI](https://github.com/cedadev) |
 
 ## Creating new extensions
 

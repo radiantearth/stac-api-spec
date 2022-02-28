@@ -16,9 +16,8 @@ for ideas on projects to advance STAC.
 
 The SpatioTemporal Asset Catalog API specification is under active development. 
 
-The `master` branch aims to always be stable, meaning that all the pieces of the specification are consistent and well
-explained, and all the examples are consistent with the specification. The `dev` branch is a place of active development, 
-where a new change in one part of the spec might not yet be fully updated everywhere else. The team uses the 
+The `main` branch is a place of active development, 
+where a new change in one part of the spec might not yet be fully updated everywhere else. Releases are tagged. The team uses the 
 [stac-api-spec issue tracker](https://github.com/radiantearth/stac-api-spec/issues) to identify and track all that will be done for 
 a release. Once all the major issues are resolved the core team makes sure everything is consistent across the spec and
 examples.
@@ -26,11 +25,10 @@ examples.
 ### Submitting Pull Requests
 
 Any proposed changes to the specification should be done as pull requests. Please make these
-requests against the [dev](https://github.com/radiantearth/stac-api-spec/tree/dev) branch (this will
-require you to switch from the default of 'master', which we keep so it displays first). 
+requests against the [main](https://github.com/radiantearth/stac-api-spec/tree/main) branch. 
 
 Creating a Pull Request will show our PR template, which includes checkbox reminders for a number
-of things, including adding an entry the [CHANGELOG](CHANGELOG.md) and making the PR against the `dev`
+of things, including adding an entry the [CHANGELOG](CHANGELOG.md) and making the PR against the `main`
 branch. 
 
 All pull requests should submit clean markdown, which is checked by the continuous integration
@@ -41,8 +39,8 @@ mistakes online, which are the same as running `npm run check` locally would sur
 All pull requests that modify or create JSON schema files or examples should use
 [JSON formatter](https://jsonformatter.org/) to keep files consistent across the repo. 
 
-All pull requests additionally require a review of two STAC core team members. Releases are cut
-from dev to master (and require 3 approvals).
+All pull requests additionally require a review of two STAC core team members.
+Releases are cut from main.
 
 ### Check files
 
@@ -109,9 +107,6 @@ with a coherent whole.
 and there are no typos, errors, etc.
 - **Update the Changelog**: The [changelog](CHANGELOG.md) should be reviewed to make sure it includes all major improvements
 in the release. And anything in 'unreleased' section should move to the version of the spec to be released.
-- **Merge dev to master**: As there is no 'build' process, since the specification *is* the markdown files in the github
-repository, the key step in a release is to merge the `dev` branch into `master`, as `master` is the current stable state 
-of the spec.
 - **Check Online API Docs**: Check to make sure the online API docs reflect the release at <https://api.stacspec.org/> 
 (this step may go away once we are confident this works well, as this publishing is in flux)
 - **Release on Github**: The final step to create the release is to add a new 'release' on 
@@ -131,7 +126,7 @@ vX.Y.Z-RC.1. The core STAC community should be told and encouraged to update the
 should be updated to the new specification before there is a real release. And ideally an API client is also 
 updated. This provides the core sanity check. If there are changes or fixes to the spec or 
 schemas needed from their feedback then make fixes and do RC2. If it is just fixes to the examples or tooling then no 
-additional RC is needed. After there is no more changes to spec or schemas then the release process should be done on master,
+additional RC is needed. After there is no more changes to spec or schemas then the release process should be done on main,
 with no changes to the spec - just updating the version numbers.
 
 ## Governance 

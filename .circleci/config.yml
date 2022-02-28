@@ -107,5 +107,5 @@ workflows:
             tags:
               only: /^v.*/
             branches:
-              # Only dev branch, not PRs
-              only: dev
+              # Only main branch, not PRs
+              only: main
