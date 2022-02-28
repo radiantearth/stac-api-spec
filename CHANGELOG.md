@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Children conformance class now requires the /children endpoint includes all child catalogs or collections referenced via `child` link relations from the Landing Page
+
 ### Deprecated
 
 ### Removed
