@@ -34,7 +34,8 @@ Response with `200 OK`:
     "links": [
         {
             "rel": "next",
-            "href": "http://api.cool-sat.com/search?page=2"
+            "href": "http://api.cool-sat.com/search?page=2",
+            "type": "application/geo+json"
         }
     ]
 }
@@ -58,6 +59,7 @@ Response with `200 OK`:
         {
             "rel": "next",
             "href": "http://api.cool-sat.com/search",
+            "type": "application/geo+json",
             "method": "POST",
             "body": {
                 "page": 2,
@@ -89,6 +91,7 @@ Response with `200 OK`:
 {
     "rel": "next",
     "href": "http://api.cool-sat.com/search",
+    "type": "application/geo+json",
     "method": "POST",
     "body": {
         "next": "a9f3kfbc98e29a0da23"
@@ -123,6 +126,7 @@ Response with `200 OK`:
         {
             "rel": "next",
             "href": "http://api.cool-sat.com/search",
+            "type": "application/geo+json",
             "method": "POST",
             "headers": {
                 "Search-After": "LC81530752019135LGN00"

@@ -126,7 +126,8 @@ or `token` and any additional filter parameters if given and required. For examp
     "links": [
         {
             "rel": "next",
-            "href": "http://api.cool-sat.com/collections/my_collection/items?page=2"
+            "href": "http://api.cool-sat.com/collections/my_collection/items?page=2",
+            "type": "application/geo+json"
         }
     ]
 ```
@@ -175,11 +176,13 @@ previous (page=2) pages:
   ...
   {
     "rel": "prev",
-    "href": "http://api.cool-sat.com/collections?page=2"
+    "href": "http://api.cool-sat.com/collections?page=2",
+    "type": "application/geo+json"
   },
   {
     "rel": "next",
-    "href": "http://api.cool-sat.com/collections?page=4"
+    "href": "http://api.cool-sat.com/collections?page=4",
+    "type": "application/geo+json"
   }
 ]
 ```

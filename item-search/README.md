@@ -152,11 +152,13 @@ parameter name is defined by the implementor and is not necessarily part of the 
     "links": [
         {
             "rel": "next",
-            "href": "http://api.cool-sat.com/search?page=3"
+            "href": "http://api.cool-sat.com/search?page=3",
+            "type": "application/geo+json"
         },
         {
             "rel": "prev",
-            "href": "http://api.cool-sat.com/search?page=1"
+            "href": "http://api.cool-sat.com/search?page=1",
+            "type": "application/geo+json"
         }
     ]
 }
