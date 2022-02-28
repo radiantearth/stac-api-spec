@@ -210,30 +210,26 @@ to the Features resource is not supported, as POST is used by the
 It recommended that implementers start with fully implementing only a subset of functionality. A good place to start is
 implementing only the Basic CQL2 conformance class of logical and comparison operators, defining a static Queryables
 schema with no queryables advertised and the `additionalProperties` field set to `true`, and
-only implementing CQL2 Text. Following from that can be support for
+only implementing CQL2 JSON. Following from that can be support for
 S_INTERSECTS, defining a static Queryables schema with only the basic Item properties, and
-implementing CQL2 JSON. From there, other comparison operators can be implemented and a more
+implementing CQL2 Text. From there, other comparison operators can be implemented and a more
 dynamic Queryables schema.
 
-Formal definitions and grammars for CQL2 can be found here:
-
-- The [OAFeat (CQL) spec](https://portal.ogc.org/files/96288) includes an ABNF for cql2-text and both JSON Schema and
-  OpenAPI specifications for cql2-json. The standalone files are:
+Formal definitions and grammars for CQL2 can be found in the
+[OAFeat CQL spec](https://github.com/opengeospatial/ogcapi-features/tree/master/cql2) includes a BNF grammar
+  for CQL2 Text and both a JSON Schema and an OpenAPI specification for CQL2 JSON. The standalone files are:
   - [cql.bnf](https://github.com/opengeospatial/ogcapi-features/blob/master/extensions/cql/standard/schema/cql.bnf)
   - [cql.json](https://github.com/opengeospatial/ogcapi-features/blob/master/extensions/cql/standard/schema/cql.json)
   - [cql.yml](https://github.com/opengeospatial/ogcapi-features/blob/master/extensions/cql/standard/schema/cql.yml)
-- A JSON Schema for only the parts of the CQL2 JSON encoding required by this extension is [here](cql.json)
-- A OpenAPI specification for only the parts of the CQL2 JSON encoding required by this extension is [here](cql.yml)
-- xtraplatform-spatial has a CQL2 [ANTLR 4 grammer](https://github.com/interactive-instruments/xtraplatform-spatial/tree/master/xtraplatform-cql/src/main/antlr/de/ii/xtraplatform/cql/infra)
 
-These projects have or are developing CQL or CQL2 support:
+These projects have or are developing CQL2 support:
 
-- [pygeofilter](https://github.com/geopython/pygeofilter) has support for the older ECQL standard
-  (similar to CQL2 Text) and will soon have support for OGC API Part 3 CQL2
-- [GeoPython PyCQL](https://github.com/geopython/pycql/tree/master/pycql) (discontinued), and the
-  [Bitner fork](https://github.com/bitner/pycql) to be used in stac-fastapi
-- [Franklin](https://github.com/azavea/franklin) is working on it in [this PR](https://github.com/azavea/franklin/pull/750).
+- [pgstac](https://github.com/stac-utils/pgstac) supports CQL2 JSON
+- [pygeofilter](https://github.com/geopython/pygeofilter) has support for CQL2 JSON and for the older ECQL standard that
+- [xtraplatform-spatial](https://github.com/interactive-instruments/xtraplatform-spatial) has support for CQL2 Text and provides an [ANTLR 4 grammer](https://github.com/interactive-instruments/xtraplatform-spatial/tree/master/xtraplatform-cql/src/main/antlr/de/ii/xtraplatform/cql/infra)
+  is similar to CQL2 Text
 - [Geotools](https://github.com/geotools/geotools) has support for [CQL2 text](https://github.com/geotools/geotools/tree/main/modules/library/cql/src/main/java/org/geotools/filter/text/cql2)
+- [Franklin](https://github.com/azavea/franklin) is working on it in [this PR](https://github.com/azavea/franklin/pull/750).
 
 Note that the [xbib CQL library (JVM)](https://github.com/xbib/cql) is the OASIS Contextual Query Language, not
 OGC CQL, and should not be used to implement this extension, as they are significantly different query languages.
