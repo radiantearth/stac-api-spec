@@ -21,8 +21,8 @@ paths:
     parameters:
       - $ref: '../../openapi.yaml#/components/parameters/collectionId'
     post:
-      summary: add a new STAC Item to a collection
-      description: create a new STAC Item in a specific collection
+      summary: add a new STAC Item or Items in an ItemCollection to a collection
+      description: create a new STAC Item r Items in an ItemCollection in a specific collection
       operationId: postFeature
       tags:
         - Transaction
@@ -31,8 +31,8 @@ paths:
           application/json:
             schema:
               oneOf:
-                - $ref: '../../../core/commons.yaml#/components/schemas/item'
-                - $ref: '../../../fragments/itemcollection/openapi.yaml#/components/schemas/itemCollection'
+                - $ref: '#/components/schemas/partialItemCollection'
+                - $ref: '#/components/schemas/partialItem'
       responses:
         '201':
           description: Status of the create request.
@@ -50,6 +50,8 @@ paths:
             application/json:
               schema:
                 $ref: '../../../core/commons.yaml#/components/schemas/item'
+        '202':
+          description: The item was accepted for asynchronous action
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
@@ -98,6 +100,19 @@ paths:
             schema:
               $ref: '../../../core/commons.yaml#/components/schemas/item'
       responses:
+        '200':
+          description: The item was replaced
+          headers:
+            ETag:
+              schema:
+                type: string
+              description: An updated string to track changes
+          content:
+            application/json:
+              schema:
+                $ref: '../../../core/commons.yaml#/components/schemas/item'
+        '202':
+          description: The item was accepted for asynchronous action
         '204':
           description: The item was replaced
           headers:
@@ -135,6 +150,19 @@ paths:
             schema:
               $ref: '#/components/schemas/partialItem'
       responses:
+        '200':
+          description: The item was replaced
+          headers:
+            ETag:
+              schema:
+                type: string
+              description: An updated string to track changes
+          content:
+            application/json:
+              schema:
+                $ref: '../../../core/commons.yaml#/components/schemas/item'
+        '202':
+          description: The item was accepted for asynchronous action
         '204':
           description: Status of the update request.
           headers:
@@ -163,8 +191,12 @@ paths:
       parameters:
         - $ref: '#/components/parameters/IfMatch'
       responses:
-        '204':
+        '200':
           description: The resource was deleted.
+        '202':
+          description: The operation was accepted for asynchronous executiona.
+        '204':
+          description: The resource was deleted. 
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
@@ -196,6 +228,33 @@ components:
       schema:
         type: string
   schemas:
+    partialItemCollection:
+      description: >-
+        A GeoJSON FeatureCollection augmented with foreign members that contain values relevant to a STAC entity
+      type: object
+      required:
+        - features
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - FeatureCollection
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/partialItem'
+        links:
+          type: array
+          description: >-
+            An array of links. Can be used for pagination, e.g. by providing a link
+            with the `next` relation type.
+          items:
+            $ref: '../../../core/commons.yaml#/components/schemas/link'
+          example:
+            - rel: next
+              href: >-
+                http://api.cool-sat.com/search?next=ANsXtp9mrqN0yrKWhf-y2PUpHRLQb1GT-mtxNcXou8TwkXhi1Jbk
     partialItem:
       type: object
       properties:
@@ -219,11 +278,6 @@ components:
             $ref: '../../../core/commons.yaml#/components/schemas/link'
         assets:
           $ref: '../../../core/commons.yaml#/components/schemas/assets'
-      example:
-        assets:
-          analytic:
-            title: 1-Band Analytic
-            href: http://cool-sat.com/catalog/collections/cs/items/CS3-201605XX_132130_04/analytic-1.tif
     partialItemProperties:
       type: object
       description: allows for partial collections of metadata fields

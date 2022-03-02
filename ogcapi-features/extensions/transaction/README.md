@@ -24,14 +24,59 @@ OGC API [Simple Transactions](http://docs.opengeospatial.org/DRAFTS/20-002.html)
 once it is released STAC will align to a released one, but we anticipate few changes as it is a very simple document.
 
 STAC Transactions additionally support optimistic locking through use of the ETag header, as specified in the
-OpenAPI document. This is not currently specified in OGC API - Features, but it is compatible and we will 
+OpenAPI document. This is not currently specified in `OGC API - Features`, but it is compatible and we will 
 work to get it incorporated.
 
 ## Methods
 
-| Path                                                   | Content-Type Header | Description                                                                                                                      |
-| ------------------------------------------------------ | ------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| `POST /collections/{collectionID}/items`               | `application/json`  | Adds a new item to a collection.                                                                                                 |
-| `PUT /collections/{collectionId}/items/{featureId}`    | `application/json`  | Updates an existing item by ID using a complete item description.                                                                |
-| `PATCH /collections/{collectionId}/items/{featureId}`  | `application/json`  | Updates an existing item by ID using a partial item description, compliant with [RFC 7386](https://tools.ietf.org/html/rfc7386). |
-| `DELETE /collections/{collectionID}/items/{featureId}` | n/a                 | Deletes an existing item by ID.                                                                                                  |
+| Path                                                   | Content-Type Header | Body                                   | Success Status | Description                                                       |
+| ------------------------------------------------------ | ------------------- | -------------------------------------- | -------------- | ----------------------------------------------------------------- |
+| `POST /collections/{collectionID}/items`               | `application/json`  | partial Item or partial ItemCollection | 201, 202       | Adds a new item to a collection.                                  |
+| `PUT /collections/{collectionId}/items/{featureId}`    | `application/json`  | partial Item                           | 200, 202, 204  | Updates an existing item by ID using a complete item description. |
+| `PATCH /collections/{collectionId}/items/{featureId}`  | `application/json`  | partial Item                           | 200, 202, 204  | Updates an existing item by ID using a partial item description.  |
+| `DELETE /collections/{collectionID}/items/{featureId}` | n/a                 | n/a                                    | 200, 202, 204  | Deletes an existing item by ID.                                   |
+
+### POST
+
+When the body is a partial Item:
+
+- Shall only create a new resource
+- Shall return 201 and a Location header with the URI of the newly added resource for a successful operation.
+- May return the content of the newly added resource for a successful operation.
+- Shall return 409 if an Item exists for the same collection and id values.
+
+When the body is a partial ItemCollection:
+
+- Shall only create a new resource
+- Shall return 201 without a Location header.
+- Shall return 409 if an Item exists for any of the same collection and id values.
+- May create only some of the Items in the ItemCollection.
+
+All cases:
+
+- Shall return 202 if the operation is queued for asynchronous execution.
+
+### PUT
+
+- Shall return 200 or 204 for a successful operation.
+- If 200 status code is returned, the server shall return the content of the updated resource for a successful operation.
+- Shall return 202 if the operation is queued for asynchronous execution.
+- Shall return 404 if no Item exists for this resource URI.
+- If the `id` or `collection` fields are different from those in the URI, status code 400 shall be returned.
+ 
+### PATCH
+
+- Shall return 200 or 204 for a successful operation.
+- If status code 200 is returned, the server shall return the content of the updated resource for a successful operation.
+- May return the content of the updated resource for a successful operation.
+- Shall return 202 if the operation is queued for asynchronous execution.
+- Shall return 404 if no Item exists for this resource URI.
+- If the `id` or `collection` fields are different from those in the URI, status code 400 shall be returned.
+
+PATCH is compliant with [RFC 7386](https://tools.ietf.org/html/rfc7386).
+
+### DELETE
+
+- Shall return 200 or 204 for a successful operation.
+- Shall return a 202 if the operation is queued for asynchronous execution.
+- May return a 404 if no Item existed prior to the delete operation. Returning a 200 or 204 is also valid in this situation.
