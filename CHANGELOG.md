@@ -15,6 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Clarified behavior of Transaction Extension endpoints, notably that PUT or PATCH that changes the `collection`
+  or `id` is disallowed.
+
 ### Deprecated
 
 ### Removed
