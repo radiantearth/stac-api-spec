@@ -40,16 +40,18 @@ work to get it incorporated.
 
 When the body is a partial Item:
 
-- Shall only create a new resource
+- Shall only create a new resource.
+- Shall return 409 if an Item exists for the same collection and id values.
+- Shall populate the `collection` field in the Item from the URI.
 - Shall return 201 and a Location header with the URI of the newly added resource for a successful operation.
 - May return the content of the newly added resource for a successful operation.
-- Shall return 409 if an Item exists for the same collection and id values.
 
 When the body is a partial ItemCollection:
 
-- Shall only create a new resource
-- Shall return 201 without a Location header.
+- Shall only create a new resource.
 - Shall return 409 if an Item exists for any of the same collection and id values.
+- Shall populate the `collection` field in each Item from the URI.
+- Shall return 201 without a Location header.
 - May create only some of the Items in the ItemCollection.
 
 All cases:
@@ -58,6 +60,7 @@ All cases:
 
 ### PUT
 
+- Shall populate the `id` and `collection` fields in the Item from the URI.
 - Shall return 200 or 204 for a successful operation.
 - If 200 status code is returned, the server shall return the content of the updated resource for a successful operation.
 - Shall return 202 if the operation is queued for asynchronous execution.
@@ -66,6 +69,7 @@ All cases:
  
 ### PATCH
 
+- Shall populate the `id` and `collection` fields in the Item from the URI.
 - Shall return 200 or 204 for a successful operation.
 - If status code 200 is returned, the server shall return the content of the updated resource for a successful operation.
 - May return the content of the updated resource for a successful operation.
