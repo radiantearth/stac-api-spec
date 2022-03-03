@@ -70,32 +70,32 @@ eventually reach all items in this catalog.
         {
             "rel": "self",
             "type": "application/json",
-            "href": "https://stacserver.org"
+            "href": "https://stac-api.example.com"
         },
         {
             "rel": "root",
             "type": "application/json",
-            "href": "https://stacserver.org"
+            "href": "https://stac-api.example.com"
         },
         {
             "rel": "service-desc",
             "type": "application/vnd.oai.openapi+json;version=3.0",
-            "href": "https://stacserver.org/api"
+            "href": "https://stac-api.example.com/api"
         },
         {
             "rel": "service-doc",
             "type": "text/html",
-            "href": "https://stacserver.org/api.html"
+            "href": "https://stac-api.example.com/api.html"
         },
         {
             "rel": "child",
             "type": "application/json",
-            "href": "https://stacserver.org/catalogs/sentinel-2",
+            "href": "https://stac-api.example.com/catalogs/sentinel-2",
         },
         {
             "rel": "child",
             "type": "application/json",
-            "href": "https://stacserver.org/catalogs/landsat-8",
+            "href": "https://stac-api.example.com/catalogs/landsat-8",
         }
     ]
 }

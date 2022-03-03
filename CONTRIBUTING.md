@@ -47,11 +47,11 @@ from dev to master (and require 3 approvals).
 ### Check files
 
 The same check-markdown and check-openapi programs that runs as a check on PR's is part of the repo and can be run locally. 
-To install you'll need npm, which is a standard part of any [node.js installation](https://nodejs.org/en/download/).
-Alternatively, you can also use [yarn](https://yarnpkg.com/) instead of npm. In this case replace all occurrences of `npm` with `yarn` below.
+To install you'll need npm, which is a standard part of any [node.js installation](https://nodejs.org/en/download/). Any recent version of node/npm should work.
 
-First you'll need to install everything with npm once. Just navigate to the root of the stac-spec repo and on 
-your command line run:
+If using nvm, run `nvm install`.
+
+Install the dependencies with npm:
 
 ```bash
 npm install

@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Query Extension is no longer deprecated.
 - Clarified behavior of Transaction Extension endpoints:
   - PUT and PATCH of a body that changes the `collection` or `id` is disallowed.
   - POST, PUT, and PATCH do not need to include the `collection` attribute, as it should be derived from the URL.
