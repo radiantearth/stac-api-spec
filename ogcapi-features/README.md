@@ -127,6 +127,7 @@ or `token` and any additional filter parameters if given and required. For examp
         {
             "rel": "next",
             "href": "https://stac-api.example.com/collections/my_collection/items?page=2"
+            "type": "application/geo+json"
         }
     ]
 ```
@@ -176,10 +177,12 @@ previous (page=2) pages:
   {
     "rel": "prev",
     "href": "https://stac-api.example.com/collections?page=2"
+    "type": "application/geo+json"
   },
   {
     "rel": "next",
     "href": "https://stac-api.example.com/collections?page=4"
+    "type": "application/geo+json"
   }
 ]
 ```
