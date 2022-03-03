@@ -152,12 +152,13 @@ parameter name is defined by the implementor and is not necessarily part of the 
     "links": [
         {
             "rel": "next",
-            "href": "http://api.cool-sat.com/search?page=3",
+            "href": "https://stac-api.example.com/search?page=3"
             "type": "application/geo+json"
+
         },
         {
             "rel": "prev",
-            "href": "http://api.cool-sat.com/search?page=1",
+            "href": "https://stac-api.example.com/search?page=1"
             "type": "application/geo+json"
         }
     ]
@@ -166,9 +167,9 @@ parameter name is defined by the implementor and is not necessarily part of the 
 
 The href may contain any arbitrary URL parameter:
 
-- `http://api.cool-sat.com/search?page=2`
-- `http://api.cool-sat.com/search?next=8a35eba9c`
-- `http://api.cool-sat.com/search?token=f32890a0bdb09ac3`
+- `https://stac-api.example.com/search?page=2`
+- `https://stac-api.example.com/search?next=8a35eba9c`
+- `https://stac-api.example.com/search?token=f32890a0bdb09ac3`
 
 Implementations may also add link relations `prev`, `first`, and `last`, though these are not required and may
 be infeasible to implement in some data stores.
@@ -255,33 +256,33 @@ the [overview](../overview.md#example-landing-page) document.
         {
             "rel": "self",
             "type": "application/json",
-            "href": "https://stacserver.org"
+            "href": "https://stac-api.example.com"
         },
         {
             "rel": "root",
             "type": "application/json",
-            "href": "https://stacserver.org"
+            "href": "https://stac-api.example.com"
         },
         {
             "rel": "service-desc",
             "type": "application/vnd.oai.openapi+json;version=3.0",
-            "href": "https://stacserver.org/api"
+            "href": "https://stac-api.example.com/api"
         },
         {
             "rel": "service-doc",
             "type": "text/html",
-            "href": "https://stacserver.org/api.html"
+            "href": "https://stac-api.example.com/api.html"
         },
         {
             "rel": "search",
             "type": "application/geo+json",
-            "href": "https://stacserver.org/search",
+            "href": "https://stac-api.example.com/search",
             "method": "GET"
         },
         {
             "rel": "search",
             "type": "application/geo+json",
-            "href": "https://stacserver.org/search",
+            "href": "https://stac-api.example.com/search",
             "method": "POST"
         }
     ]
