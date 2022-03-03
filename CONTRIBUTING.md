@@ -47,7 +47,8 @@ from dev to master (and require 3 approvals).
 ### Check files
 
 The same check-markdown and check-openapi programs that runs as a check on PR's is part of the repo and can be run locally. 
-To install you'll need npm, which is a standard part of any [node.js installation](https://nodejs.org/en/download/). Any recent version of node/npm should work.
+To install you'll need npm, which is a standard part of any [node.js installation](https://nodejs.org/en/download/).
+Any recent version of node/npm should work.
 
 If using nvm, run `nvm install`.
 
