@@ -15,8 +15,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Clarified behavior of Transaction Extension endpoints, notably that PUT or PATCH that changes the `collection`
-  or `id` is disallowed.
+- Clarified behavior of Transaction Extension endpoints:
+  - PUT and PATCH of a body that changes the `collection` or `id` is disallowed.
+  - POST, PUT, and PATCH do not need to include the `collection` attribute, as it should be derived from the URL.
+  - POST and PUT can be used with a body that is at least a GeoJSON Feature, but does not have to be an Item, but for which 
+    the server can derive a valid Item, e.g., by populating the id and collection fields or adding links
+  - Likewise, POST can be used with a body of a FeatureCollection that contains features that meet the same constraints.
 
 ### Deprecated
 
