@@ -126,16 +126,16 @@ or `token` and any additional filter parameters if given and required. For examp
     "links": [
         {
             "rel": "next",
-            "href": "http://api.cool-sat.com/collections/my_collection/items?page=2"
+            "href": "https://stac-api.example.com/collections/my_collection/items?page=2"
         }
     ]
 ```
 
 The href may contain any arbitrary URL parameter, which is implementation-specific:
 
-- `http://api.cool-sat.com/collections/my_collection/items?page=2`
-- `http://api.cool-sat.com/collections/my_collection/items?next=8a35eba9c`
-- `http://api.cool-sat.com/collections/my_collection/items?token=f32890a0bdb09ac3`
+- `https://stac-api.example.com/collections/my_collection/items?page=2`
+- `https://stac-api.example.com/collections/my_collection/items?next=8a35eba9c`
+- `https://stac-api.example.com/collections/my_collection/items?token=f32890a0bdb09ac3`
 
 In addition to supporting query parameters in the URL value of the `href` field,
 STAC has extended the Link object
@@ -175,11 +175,11 @@ previous (page=2) pages:
   ...
   {
     "rel": "prev",
-    "href": "http://api.cool-sat.com/collections?page=2"
+    "href": "https://stac-api.example.com/collections?page=2"
   },
   {
     "rel": "next",
-    "href": "http://api.cool-sat.com/collections?page=4"
+    "href": "https://stac-api.example.com/collections?page=4"
   }
 ]
 ```
@@ -252,32 +252,32 @@ the [overview](../overview.md#example-landing-page) document.
         {
             "rel": "self",
             "type": "application/json",
-            "href": "https://stacserver.org"
+            "href": "https://stac-api.example.com"
         },
         {
             "rel": "root",
             "type": "application/json",
-            "href": "https://stacserver.org"
+            "href": "https://stac-api.example.com"
         },
         {
             "rel": "conformance",
             "type": "application/json",
-            "href": "https://stacserver.org/conformance"
+            "href": "https://stac-api.example.com/conformance"
         },
         {
             "rel": "service-desc",
             "type": "application/vnd.oai.openapi+json;version=3.0",
-            "href": "https://stacserver.org/api"
+            "href": "https://stac-api.example.com/api"
         },
         {
             "rel": "service-doc",
             "type": "text/html",
-            "href": "https://stacserver.org/api.html"
+            "href": "https://stac-api.example.com/api.html"
         },
         {
             "rel": "data",
             "type": "application/json",
-            "href": "https://stacserver.org/collections"
+            "href": "https://stac-api.example.com/collections"
         }
     ]
 }
@@ -289,7 +289,7 @@ The landing page `data` relation points to an endpoint to retrieve all collectio
 a link relation to its `items` resource through the link with a rel value `items`.  Note here that, unlike 
 as is typical with a static STAC Collection, there are no links here with rel value `item`. 
 
-`https://stacserver.org/collections/aster-l1t`
+`https://stac-api.example.com/collections/aster-l1t`
 
 ```json
 {
@@ -300,22 +300,22 @@ as is typical with a static STAC Collection, there are no links here with rel va
     {
       "rel": "items",
       "type": "application/geo+json",
-      "href": "https://stacserver.org/collections/aster-l1t/items"
+      "href": "https://stac-api.example.com/collections/aster-l1t/items"
     },
     {
       "rel": "parent",
       "type": "application/json",
-      "href": "https://stacserver.org"
+      "href": "https://stac-api.example.com"
     },
     {
       "rel": "root",
       "type": "application/json",
-      "href": "https://stacserver.org"
+      "href": "https://stac-api.example.com"
     },
     {
       "rel": "self",
       "type": "application/json",
-      "href": "https://stacserver.org/collections/aster-l1t"
+      "href": "https://stac-api.example.com/collections/aster-l1t"
     }
   ]
 }

@@ -112,22 +112,22 @@ the links section must include a `self` link, and it must also link to alternate
         {
           "rel": "root",
           "type": "application/json",
-          "href": "https://myservice.com"
+          "href": "https://stac-api.example.com"
         },
         {
           "rel": "parent",
           "type": "application/json",
-          "href": "https://myservice.com"
+          "href": "https://stac-api.example.com"
         },
         {
           "rel": "self",
           "type": "application/json",
-          "href": "https://myservice.com/collections/cool-data"
+          "href": "https://stac-api.example.com/collections/cool-data"
         },
         {
           "rel": "items",
           "type": "application/json",
-          "href": "https://myservice.com/collections/cool-data/items"
+          "href": "https://stac-api.example.com/collections/cool-data/items"
         }
       ],
     }
@@ -136,12 +136,12 @@ the links section must include a `self` link, and it must also link to alternate
     {
       "rel": "root",
       "type": "application/json",
-      "href": "https://myservice.com"
+      "href": "https://stac-api.example.com"
     },
     {
       "rel": "self",
       "type": "application/json",
-      "href": "https://myservice.com/collections"
+      "href": "https://stac-api.example.com/collections"
     }
   ]
 }

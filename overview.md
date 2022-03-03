@@ -112,7 +112,7 @@ column is more of an example in some cases. OGC API makes some endpoint location
 | `/search`                                           | [Item Search](item-search) | search            | [ItemCollection](fragments/itemcollection/README.md)                                                | Retrieves a group of Item objects matching the provided search predicates, probably containing search metadata from the `search` extension |
 | **`/collections`**                                  | [OAFeat](ogcapi-features)  | data              | JSON                                                                                                | Object with a list of Collection objects contained in the catalog and links                                                                |
 | **`/conformance`**                                  | [OAFeat](ogcapi-features)  | conformance       | JSON                                                                                                | Info about standards to which the API conforms                                                                                             |
-| `/api`                                              | [OAFeat](ogcapi-features)  | service-desc      | any                                                                           | The description of the endpoints in this service                                                                                    |
+| `/api`                                              | [OAFeat](ogcapi-features)  | service-desc      | any                                                                                                 | The description of the endpoints in this service                                                                                           |
 | **`/collections/{collectionId}`**                   | [OAFeat](ogcapi-features)  | collection        | Collection                                                                                          | Returns single Collection JSON                                                                                                             |
 | **`/collections/{collectionId}/items`**             | [OAFeat](ogcapi-features)  | items             | ItemCollection                                                                                      | GeoJSON FeatureCollection-conformant entity of Item objects in collection                                                                  |
 | **`/collections/{collectionId}/items/{featureId}`** | [OAFeat](ogcapi-features)  | item              | Returns single Item (GeoJSON Feature). This relation is usually not used in OAFeat implementations. |
@@ -176,47 +176,47 @@ The Landing Page will at least have the following `conformsTo` and `links`:
         {
             "rel": "self",
             "type": "application/json",
-            "href": "https://stacserver.org"
+            "href": "https://stac-api.example.com"
         },
         {
             "rel": "root",
             "type": "application/json",
-            "href": "https://stacserver.org"
+            "href": "https://stac-api.example.com"
         },
         {
             "rel": "conformance",
             "type": "application/json",
-            "href": "https://stacserver.org/conformance"
+            "href": "https://stac-api.example.com/conformance"
         },
         {
             "rel": "service-desc",
             "type": "application/vnd.oai.openapi+json;version=3.0",
-            "href": "https://stacserver.org/api"
+            "href": "https://stac-api.example.com/api"
         },
         {
             "rel": "service-doc",
             "type": "text/html",
-            "href": "https://stacserver.org/api.html"
+            "href": "https://stac-api.example.com/api.html"
         },
         {
             "rel": "data",
             "type": "application/json",
-            "href": "https://stacserver.org/collections"
+            "href": "https://stac-api.example.com/collections"
         },
         {
             "rel": "child",
             "type": "application/json",
-            "href": "https://stacserver.org/collections/sentinel-2",
+            "href": "https://stac-api.example.com/collections/sentinel-2",
         },
         {
             "rel": "child",
             "type": "application/json",
-            "href": "https://stacserver.org/collections/landsat-8",
+            "href": "https://stac-api.example.com/collections/landsat-8",
         },
         {
             "rel": "search",
             "type": "application/geo+json",
-            "href": "https://stacserver.org/search"
+            "href": "https://stac-api.example.com/search"
         }
     ]
 }

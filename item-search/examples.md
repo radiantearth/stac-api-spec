@@ -34,12 +34,12 @@ Response with `200 OK`:
     "links": [
         {
             "rel": "next",
-            "href": "http://api.cool-sat.com/search?page=2"
+            "https://stac-api.example.com/search?page=2"
         }
     ]
 }
 ```
-Following the link `http://api.cool-sat.com/search?page=2` will send the user to the next page of results.
+Following the link `https://stac-api.example.com/search?page=2` will send the user to the next page of results.
 
 #### POST search with body and merge fields
 Request to `HTTP POST /search`:
@@ -57,7 +57,7 @@ Response with `200 OK`:
     "links": [
         {
             "rel": "next",
-            "href": "http://api.cool-sat.com/search",
+            "href": "https://stac-api.example.com/search",
             "method": "POST",
             "body": {
                 "page": 2,
@@ -88,7 +88,7 @@ Response with `200 OK`:
 ```json
 {
     "rel": "next",
-    "href": "http://api.cool-sat.com/search",
+    "href": "https://stac-api.example.com/search",
     "method": "POST",
     "body": {
         "next": "a9f3kfbc98e29a0da23"
@@ -122,7 +122,7 @@ Response with `200 OK`:
     "links": [
         {
             "rel": "next",
-            "href": "http://api.cool-sat.com/search",
+            "href": "https://stac-api.example.com/search",
             "method": "POST",
             "headers": {
                 "Search-After": "LC81530752019135LGN00"
