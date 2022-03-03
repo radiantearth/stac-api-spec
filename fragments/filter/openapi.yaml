@@ -5,11 +5,13 @@ info:
   version: 1.0.0-beta.5
 
 tags:
-  - name: STAC API - Core
+  - name: Core
     description: Part of STAC API - Core definition
-  - name: STAC API - Features
+  - name: Collections
+    description: Part of STAC API - Collections definition
+  - name: Features
     description: Part of STAC API - Features definition
-  - name: STAC API - Filter Extension
+  - name: Filter Extension
     description: Part of STAC API - Filter extension definition
 
 paths:
@@ -49,8 +51,8 @@ paths:
       description: |-
         This endpoint returns a list of Collections.
       tags:
-        - STAC API - Features
-        - STAC API - Collections
+        - Features
+        - Collections
       parameters:
         - in: path
           name: collectionId
@@ -146,7 +148,7 @@ components:
         A CQL2 filter expression in the 'cql-text' encoding.
       type: string
     filter-cql-json:
-      $ref: './cql.yml#/components/schemas/booleanValueExpression'
+      $ref: 'https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/cql2/standard/schema/cql2.yml#/components/schemas/booleanValueExpression'
     filter-lang:
       description: |
         The CQL2 filter encoding that the 'filter' value uses.

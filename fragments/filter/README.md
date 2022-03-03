@@ -222,8 +222,6 @@ Formal definitions and grammars for CQL2 can be found here:
   - [cql.bnf](https://github.com/opengeospatial/ogcapi-features/blob/master/extensions/cql/standard/schema/cql.bnf)
   - [cql.json](https://github.com/opengeospatial/ogcapi-features/blob/master/extensions/cql/standard/schema/cql.json)
   - [cql.yml](https://github.com/opengeospatial/ogcapi-features/blob/master/extensions/cql/standard/schema/cql.yml)
-- A JSON Schema for only the parts of the CQL2 JSON encoding required by this extension is [here](cql.json)
-- A OpenAPI specification for only the parts of the CQL2 JSON encoding required by this extension is [here](cql.yml)
 - xtraplatform-spatial has a CQL2 [ANTLR 4 grammer](https://github.com/interactive-instruments/xtraplatform-spatial/tree/master/xtraplatform-cql/src/main/antlr/de/ii/xtraplatform/cql/infra)
 
 These projects have or are developing CQL or CQL2 support:
