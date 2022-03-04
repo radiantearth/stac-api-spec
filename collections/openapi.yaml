@@ -12,14 +12,15 @@ info:
     name: Apache License 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0'
 tags:
+  - name: Core
+    description: essential characteristics of a STAC API
   - name: Collections
-    description: |-
-      All endpoints related to STAC API - Collections
+    description: All endpoints related to STAC API - Collections
 paths:
   '/':
     get:
       tags:
-        - Features
+        - Core
       summary: landing page
       description: |-
         The landing page provides links to the sub-resources.
@@ -72,7 +73,7 @@ paths:
   '/collections':
     get:
       tags:
-        - Features
+        - Collections
       summary: the feature collections in the dataset
       description: |-
         A body of Feature Collections that belong or are used together with additional links.
@@ -86,7 +87,7 @@ paths:
   '/collections/{collectionId}':
     get:
       tags:
-        - Features
+        - Collections
       summary: |-
         describe the feature collection with id `collectionId`
       description: |-

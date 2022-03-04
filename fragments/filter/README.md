@@ -223,7 +223,6 @@ Formal definitions and grammars for CQL2 can be found in the
 - [cql.yml](https://github.com/opengeospatial/ogcapi-features/blob/master/extensions/cql/standard/schema/cql.yml)
 
 These projects have or are developing CQL2 support:
-
 - [pgstac](https://github.com/stac-utils/pgstac) supports CQL2 JSON
 - [pygeofilter](https://github.com/geopython/pygeofilter) has support for CQL2 JSON and for the older ECQL standard that
 - [xtraplatform-spatial](https://github.com/interactive-instruments/xtraplatform-spatial) has support for CQL2 Text and provides an [ANTLR 4 grammer](https://github.com/interactive-instruments/xtraplatform-spatial/tree/master/xtraplatform-cql/src/main/antlr/de/ii/xtraplatform/cql/infra)
@@ -259,7 +258,7 @@ definitions for STAC Items should include at least the fields id, collection, ge
 ```json
 {
   "$schema" : "https://json-schema.org/draft/2019-09/schema",
-  "$id" : "https://example.org/queryables",
+  "$id" : "https://stac-api.example.com/queryables",
   "type" : "object",
   "title" : "Queryables for Example STAC API",
   "description" : "Queryable names for the example STAC API Item Search filter.",
@@ -324,7 +323,7 @@ in STAC API by the Filter Extension. In this case, the queryables endpoint (`/qu
 ```json
 {
   "$schema" : "https://json-schema.org/draft/2019-09/schema",
-  "$id" : "https://example.org/queryables",
+  "$id" : "https://stac-api.example.com/queryables",
   "type" : "object",
   "title" : "Queryables for Example STAC API",
   "description" : "Queryable names for the example STAC API Item Search filter.",
@@ -379,13 +378,13 @@ at least these values:
   "links": [
     {
       "title": "Search",
-      "href": "https://example.org/search",
+      "href": "https://stac-api.example.com/search",
       "rel": "search",
       "type": "application/geo+json"
     },
     {
       "title": "Queryables",
-      "href": "https://example.org/queryables",
+      "href": "https://stac-api.example.com/queryables",
       "rel": "http://www.opengis.net/def/rel/ogc/1.0/queryables",
       "type": "application/schema+json"
     }
@@ -403,7 +402,7 @@ The Queryables endpoint (`/queryables`) returns something like the following:
 ```json
 {
   "$schema" : "https://json-schema.org/draft/2019-09/schema",
-  "$id" : "https://example.org/queryables",
+  "$id" : "https://stac-api.example.com/queryables",
   "type" : "object",
   "title" : "Queryables for Example STAC API",
   "description" : "Queryable names for the example STAC API Item Search filter.",
@@ -581,7 +580,7 @@ The queryables defined are as follows:
 ```json
 {
   "$schema" : "https://json-schema.org/draft/2019-09/schema",
-  "$id" : "https://example.org/queryables",
+  "$id" : "https://stac-api.example.com/queryables",
   "type" : "object",
   "title" : "Queryables for Example STAC API",
   "description" : "Queryable names for the example STAC API Item Search filter.",
@@ -736,7 +735,7 @@ This queryables JSON Schema is used in these examples:
 ```json
 {
   "$schema" : "https://json-schema.org/draft/2019-09/schema",
-  "$id" : "https://example.org/queryables",
+  "$id" : "https://stac-api.example.com/queryables",
   "type" : "object",
   "title" : "Queryables for Example STAC API",
   "description" : "Queryable names for the example STAC API Item Search filter.",

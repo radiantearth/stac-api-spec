@@ -143,8 +143,8 @@ class for OpenAPI 3.1, but may in the future.
 If sub-catalogs are used, it is **recommended** that these use the endpoint `/catalogs/{catalogId}` to avoid conflicting
 with other endpoints from the root.
 
-| Endpoint              | Returns                                        | Description          |
-| --------------------- | ---------------------------------------------- | -------------------- |
+| Endpoint                | Returns                                        | Description          |
+| ----------------------- | ---------------------------------------------- | -------------------- |
 | `/catalogs/{catalogId}` | [Catalog](../stac-spec/catalog-spec/README.md) | child Catalog object |
 
 ## Example Landing Page for STAC API - Core
@@ -174,32 +174,32 @@ different conformance classes and a different set of links.
         {
             "rel": "self",
             "type": "application/json",
-            "href": "https://stacserver.org"
+            "href": "https://stac-api.example.com"
         },
         {
             "rel": "root",
             "type": "application/json",
-            "href": "https://stacserver.org"
+            "href": "https://stac-api.example.com"
         },
         {
             "rel": "service-desc",
             "type": "application/vnd.oai.openapi+json;version=3.0",
-            "href": "https://stacserver.org/api"
+            "href": "https://stac-api.example.com/api"
         },
         {
             "rel": "service-doc",
             "type": "text/html",
-            "href": "https://stacserver.org/api.html"
+            "href": "https://stac-api.example.com/api.html"
         },
         {
             "rel": "child",
             "type": "application/json",
-            "href": "https://stacserver.org/catalogs/sentinel-2",
+            "href": "https://stac-api.example.com/catalogs/sentinel-2",
         },
         {
             "rel": "child",
             "type": "application/json",
-            "href": "https://stacserver.org/catalogs/landsat-8",
+            "href": "https://stac-api.example.com/catalogs/landsat-8",
         }
     ]
 }
