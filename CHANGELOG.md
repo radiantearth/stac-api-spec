@@ -16,6 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Query Extension is no longer deprecated.
+- Children conformance class now requires the /children endpoint includes all child catalogs or collections
+  referenced via `child` link relations from the Landing Page
 - Clarified behavior of Transaction Extension endpoints:
   - PUT and PATCH of a body that changes the `collection` or `id` is disallowed.
   - POST, PUT, and PATCH do not need to include the `collection` attribute, as it should be derived from the URL.
@@ -109,6 +111,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The required Link Relations and endpoints for each conformance class now use the wording of 'shall'
   instead of 'should'. While this technically changes the semantics, it was generally understood
   previously the semantics were those of 'shall' (must).
+- Explicitly state that the `/children` endpoint can return Catalog and Collection objects that have fewer
+  fields than are available through other endpoints.
 
 ### Deprecated
 
