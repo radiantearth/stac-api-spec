@@ -105,6 +105,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The required Link Relations and endpoints for each conformance class now use the wording of 'shall'
   instead of 'should'. While this technically changes the semantics, it was generally understood
   previously the semantics were those of 'shall' (must).
+- Explicitly state that the `/children` endpoint can return Catalog and Collection objects that have fewer
+  fields than are available through other endpoints.
 
 ### Deprecated
 
