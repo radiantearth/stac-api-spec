@@ -22,7 +22,8 @@ the immediate children of a Catalog, which may be Catalog or Collection objects.
 While the `child` link relations in a Catalog already allow for describing these
 relationships, this scheme requires a client to retrieve each resource URL to find any information about
 the children (e.g., title, description), which can cause significant performance issues in user-facing
-applications.
+applications. Implementers may choose to to return only a subset of fields for each Catalog or Collection,
+but the objects must still be valid Catalogs and Collections.
 
 ## Link Relations
 
