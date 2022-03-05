@@ -55,8 +55,11 @@ The following Link relations shall exist in the Landing Page (root).
 | -------- | --------- | ---------------------- | --------------------------- |
 | `search` | `/search` | STAC API - Item Search | URI for the Search endpoint |
 
-The `search` link relation shall have a `type` of `application/geo+json` and a `method` of `GET`, and may also
-a link with a `method` of `POST` if the server supports it.
+This `search` link relation shall have a `type` of `application/geo+json`. If no `method` attribute is
+specified, it is assumed to represent a GET request. If the server supports both GET and POST requests, two links should be included, one with a `method` of `GET` one with a `method` of `POST`.
+
+Other links with relation `search` may be included that advertise other content types the server may respond
+with, but these other types are not part of the STAC API requirements.
 
 ## Endpoints
 
