@@ -393,14 +393,20 @@ The full description and examples of this are found in the [context fragment](..
 
 ### Filter Extension
 
+<<<<<<< HEAD
 - **Conformance URI:** <https://api.stacspec.org/v1.0.0-rc.1/item-search#filter>
+=======
+- **Conformance URI:** <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/features-filter>
+>>>>>>> dev
 - **Extension [Maturity Classification](../README.md#maturity-classification):** Pilot
 - **Definition**: [STAC API - Filter Fragment](../fragments/filter/)
 
-The STAC search endpoint, `/search`, by default only accepts a limited set of parameters to limit the results
+The Features items endpoint, `/collections/{collectionId}/items`, by default only accepts a few parameters to filter the results
 by properties. The Filter extension adds a new parameter, `filter`, that can take a number of comparison operators to
-match predicates between the fields requested and the values of Item objects. It can be used with both GET and POST and supports two
-query formats, `cql-text` and `cql-json`. The full details on the JSON structure are specified in the [filter 
+match predicates between the fields requested and the values of Item objects. It can only be
+used with GET requests, as a POST to the items endpoint is a create operation in the
+Transaction Extension. It supports two
+query formats, `cql2-text` and `cql2-json`. The full details on the JSON structure are specified in the [filter 
 fragment](../fragments/filter/).
 
 ### Query Extension

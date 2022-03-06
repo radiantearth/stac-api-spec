@@ -49,11 +49,12 @@ the service supports. This are listed at the top of each extension description, 
   - <https://api.stacspec.org/v1.0.0-rc.1/item-search#fields-extension>
   - <https://api.stacspec.org/v1.0.0-rc.1/ogcapi-features#fields-extension>
 - [Filter](item-search/README.md#filter-extension)
-  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/filter-extension>
-  - <http://www.opengis.net/spec/cql2/1.0/conf/basic-cql2>
-  - <https://api.stacspec.org/v1.0.0-rc.1/item-search#filter:item-search-filter>
+  - <https://api.stacspec.org/v1.0.0-rc.1/item-search#filter>
+  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/filter>
+  - <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/features-filter>
   - <http://www.opengis.net/spec/cql2/1.0/conf/cql2-text>
   - <http://www.opengis.net/spec/cql2/1.0/conf/cql2-json>
+  - <http://www.opengis.net/spec/cql2/1.0/conf/basic-cql2>
   - <http://www.opengis.net/spec/cql2/1.0/conf/advanced-comparison-operators>
   - <http://www.opengis.net/spec/cql2/1.0/conf/basic-spatial-operators>
   - <http://www.opengis.net/spec/cql2/1.0/conf/spatial-operators>
