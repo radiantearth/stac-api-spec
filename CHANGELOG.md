@@ -18,7 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Query Extension is no longer deprecated.
 - Children conformance class now requires the /children endpoint includes all child catalogs or collections
   referenced via `child` link relations from the Landing Page
-
+- Specifications now use the term "must" instead of "shall". The semantics of these words are identical.
 ### Deprecated
 
 ### Removed

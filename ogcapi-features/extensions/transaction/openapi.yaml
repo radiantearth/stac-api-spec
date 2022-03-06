@@ -92,7 +92,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/IfMatch'
       requestBody:
-        description: The request body shall contain a representation of the replacement item.
+        description: The request body must contain a representation of the replacement item.
         content:
           application/json:
             schema:
