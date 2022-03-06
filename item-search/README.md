@@ -49,13 +49,13 @@ Implementing `GET /search` is **required**, `POST /search` is optional, but reco
 
 This conformance class also requires implementation of the link relations in the [STAC API - Core](../core) conformance class.
 
-The following Link relations shall exist in the Landing Page (root).
+The following Link relations must exist in the Landing Page (root).
 
 | **rel**  | **href**  | **From**               | **Description**             |
 | -------- | --------- | ---------------------- | --------------------------- |
 | `search` | `/search` | STAC API - Item Search | URI for the Search endpoint |
 
-This `search` link relation shall have a `type` of `application/geo+json`. If no `method` attribute is
+This `search` link relation must have a `type` of `application/geo+json`. If no `method` attribute is
 specified, it is assumed to represent a GET request. If the server supports both GET and POST requests, two links should be included, one with a `method` of `GET` one with a `method` of `POST`.
 
 Other links with relation `search` may be included that advertise other content types the server may respond
@@ -113,7 +113,7 @@ a suggestion to the server as to the maximum number of Item objects the
 client would prefer in the response. The OpenAPI specification defines the default and maximum values
 for this parameter. The base specifications define these with a default of 10 and a maximum of 10000, but implementers
 may choose other values to advertise through their `service-desc` endpoint.  If the limit parameter value is greater
-than the advertised maximum limit, the server shall return the maximum possible number of items (ideally, the number 
+than the advertised maximum limit, the server must return the maximum possible number of items (ideally, the number 
 as the advertised maximum limit), rather than responding with an error.
 
 Only one of either **intersects** or **bbox** may be specified.  If both are specified, a 400 Bad Request response 
@@ -239,7 +239,7 @@ does implement them, for STAC and OAFeat implementations that want to enable wri
 
 ## Example Landing Page for STAC API - Item Search
 
-This JSON is what would be expected from an api that only implements STAC API - Item Search. In practice, 
+This JSON is what would be expected from an api that only implements *STAC API - Item Search*. In practice, 
 most APIs will also implement other conformance classes, and those will be reflected in the `links` and 
 `conformsTo` fields.  A more typical Landing Page example is in 
 the [overview](../overview.md#example-landing-page) document.
