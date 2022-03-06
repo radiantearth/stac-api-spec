@@ -24,7 +24,7 @@ OGC API [Simple Transactions](http://docs.opengeospatial.org/DRAFTS/20-002.html)
 once it is released STAC will align to a released one, but we anticipate few changes as it is a very simple document.
 
 STAC Transactions additionally support optimistic locking through use of the ETag header, as specified in the
-OpenAPI document. This is not currently specified in `OGC API - Features`, but it is compatible and we will 
+OpenAPI document. This is not currently specified in *OGC API - Features*, but it is compatible and we will 
 work to get it incorporated.
 
 ## Methods
