@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - POST and PUT can be used with a body that is at least a GeoJSON Feature, but does not have to be an Item, but for which 
     the server can derive a valid Item, e.g., by populating the id and collection fields or adding links
   - Likewise, POST can be used with a body of a FeatureCollection that contains features that meet the same constraints.
+- Specifications now use the term "must" instead of "shall". The semantics of these words are identical.
 
 ### Deprecated
 

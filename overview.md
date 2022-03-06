@@ -40,7 +40,7 @@ document](https://api.stacspec.org/v1.0.0-beta.5/item-spec) for more details.
 The other most common set of functionality is [Collections](collections/). This is implemented with the `/collections`
 endpoint and linked to with the `data` relation. The response is a complete list of available STAC `Collection`
 entities. Each individual collection resource can be accessed with the endpoints like `/collection/{collectionId}` 
-by collection ID. This is a subset of the functionality defined by the STAC API - Features conformance class.
+by collection ID. This is a subset of the functionality defined by the *STAC API - Features* conformance class.
 
 This general pattern is  defined in OAFeat's 
 [Feature Collections](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_collections_) as part of
@@ -142,6 +142,8 @@ have the URIs for conformance to actually resolve to machine-readable informatio
 | Item Search   | [Item Search](item-search)             | <https://api.stacspec.org/v1.0.0-beta.5/item-search>     | Enables search of all STAC Item objects on the server, with the STAC `[/search](#stac-api-endpoints)` endpoint. |
 | STAC Features | [STAC API - Features](ogcapi-features) | <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features> | Specifies the use of OGC API - Features to serve STAC Item and Collection objects                               |
 | Collections   | [Collections](collections)             | <https://api.stacspec.org/v1.0.0-beta.5/collections>     | Specifies the use of a subset of OGC API - Features to serve Collection objects                                 |
+| Children      | [Children](children)                   | <https://api.stacspec.org/v1.0.0-beta.5/children>        | Returns child objects of a Catalog                                                                              |
+| Browseable    | [Browseable](browseable)               | <https://api.stacspec.org/v1.0.0-beta.5/browseable>      | Indicates that all Items in a Catalog can be accessed through following child and item link relations           |
 
 Additional conformance classes are specified in the [STAC Extensions](extensions.md#Conformance-classes-of-extensions).
 

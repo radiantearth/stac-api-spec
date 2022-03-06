@@ -13,7 +13,7 @@
 - **[Maturity Classification](../README.md#maturity-classification):** Proposal
 - **Dependencies**: [STAC API - Core](../core)
 
-A STAC API conforming to the `STAC API - Browseable` conformance class must be structured such that all 
+A STAC API conforming to the *STAC API - Browseable* conformance class must be structured such that all 
 all Items in the catalog can be accessed by following `child` and `item` link relations. This is a more significant
 constraint than a STAC API without this conformance class or a STAC Catalog that is available over HTTP but does not
 implement STAC API, neither of which have any guarantee regarding the reachability of Items. This conformance 
@@ -21,7 +21,7 @@ class is used to signal to users that they can fully navigate to all available I
 and also makes it clear to crawlers that they can reach everything by following catalog links. 
 
 Recommendations for structuring Catalogs hierarchically can be found in
-[Structuring Catalog Hierarchies](../core/README.md#structuring-catalog-hierarchies) from the `STAC API - Core` specification.
+[Structuring Catalog Hierarchies](../core/README.md#structuring-catalog-hierarchies) from the *STAC API - Core* specification.
 
 ## Link Relations
 
@@ -36,7 +36,7 @@ every Item in the Catalog can be accessed by traversing these relations.
 | `item`  | various  | STAC Core | The child STAC Items.                  |
 
 Note that there is a different link relation `items` (plural)
-used by the `STAC API - Features` conformance class that links from a collection resource
+used by the *STAC API - Features* conformance class that links from a collection resource
 (at the `/collections/{collectionId}` endpoint) to the items in
 that collection (at the `/collections/{collectionId}/items` endpoint). Both of these endpoints are 
 [derived from OGC API - Features](https://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_items_).
@@ -49,7 +49,7 @@ This conformance class adds no additional endpoints.
 
 ## Example Landing Page for STAC API - Browseable
 
-This JSON is what would be expected from an API that implements `STAC API - Browseable`. Note that the
+This JSON is what would be expected from an API that implements *STAC API - Browseable*. Note that the
 `conformsTo` array contains `https://api.stacspec.org/v1.0.0-beta.5/browseable` and the `links` array 
 contains `child` link relations.  The semantics of this conformance class imply that the the catalogs
 linked to by these `child` link relations then have further `child` or `item` link relations that

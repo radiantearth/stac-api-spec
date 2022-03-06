@@ -248,11 +248,11 @@ components:
       description: |-
         The optional limit parameter recommends the number of items that should be present in the response document.
 
-        If the limit parameter value is greater than advertised limit maximum, the server shall return the
+        If the limit parameter value is greater than advertised limit maximum, the server must return the
         maximum possible number of items, rather than responding with an error.
 
         Only items are counted that are on the first level of the collection in the response document.
-        Nested objects contained within the explicitly requested items shall not be counted.
+        Nested objects contained within the explicitly requested items must not be counted.
 
         Minimum = 1. Maximum = 10000. Default = 10.
       required: false
@@ -309,7 +309,7 @@ components:
         A server may omit this information in a response, if the information
         about the number of features is not known or difficult to compute.
 
-        If the value is provided, the value shall be identical to the number
+        If the value is provided, the value must be identical to the number
         of items in the "features" array.
       type: integer
       minimum: 0

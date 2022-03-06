@@ -28,7 +28,7 @@ aim to align with it. But it still seems to be in flux.*
 
 This conformance class also requires implementation of the link relations in the [STAC API - Core](../core) conformance class.
 
-The following Link relations shall exist in the Landing Page (root).
+The following Link relations must exist in the Landing Page (root).
 
 | **rel** | **href**       | **From** | **Description**     |
 | ------- | -------------- | -------- | ------------------- |
@@ -40,14 +40,14 @@ Additionally, `child` relations may exist to child Catalogs and Collections.
 | ------- | -------- | --------- | -------------------------------------------------------------------------------------------------------- |
 | `child` | various  | STAC Core | The child STAC Catalogs & Collections. Provides curated paths to get to STAC Collection and Item objects |
 
-The following Link relations shall exist in the `/collections` endpoint response.
+The following Link relations must exist in the `/collections` endpoint response.
 
 | **rel** | **href**       | **From**  | **Description** |
 | ------- | -------------- | --------- | --------------- |
 | `root`  | `/`            | STAC Core | The root URI    |
 | `self`  | `/collections` | OAFeat    | Self reference  |
 
-The following Link relations shall exist in the Collection object returned from the `/collections/{collectionId}` endpoint.
+The following Link relations must exist in the Collection object returned from the `/collections/{collectionId}` endpoint.
 
 | **rel**  | **href**                      | **From**  | **Description**                            |
 | -------- | ----------------------------- | --------- | ------------------------------------------ |
