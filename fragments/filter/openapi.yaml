@@ -19,7 +19,7 @@ paths:
     get:
       description: Landing Page
       tags:
-        - STAC API - Core
+        - Core
       responses:
         '200':
           description: Landing Page
@@ -38,7 +38,7 @@ paths:
         precise definition of this can be found in the OGC API - Features - Part 3: Filtering and the 
         Common Query Language (CQL) specification.
       tags:
-        - STAC API - Filter Extension
+        - Filter Extension
       # parameters:
       # todo: may have collections parameter in the future
       responses:
@@ -84,7 +84,7 @@ paths:
           required: true
           description: ID of Collection
       tags:
-        - STAC API - Filter Extension
+        - Filter Extension
       responses:
         '200':
           $ref: '#/components/responses/Queryables'

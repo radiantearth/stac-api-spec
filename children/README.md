@@ -14,7 +14,7 @@
 - **Dependencies**: [STAC API - Core](../core)
 
 A STAC API Landing Page (a Catalog) can return information about the Catalog and Collection child objects
-it contains using the link relation `children` to an endpoint `/children`. The `/children` endpoint shall
+it contains using the link relation `children` to an endpoint `/children`. The `/children` endpoint must
 return the all the Catalog and Collection objects referenced by these `child` link relations.
 
 The purpose of this endpoint is to present a single resource from which clients can retrieve
@@ -29,13 +29,13 @@ but the objects must still be valid Catalogs and Collections.
 
 This conformance class also requires implementation of the link relations in the [STAC API - Core](../core) conformance class.
 
-The following Link relations shall exist in the Landing Page (root).
+The following Link relations must exist in the Landing Page (root).
 
 | **rel**    | **href**    | **From**            | **Description**                  |
 | ---------- | ----------- | ------------------- | -------------------------------- |
 | `children` | `/children` | STAC API - Children | List of children of this catalog |
 
-The following Link relations shall exist in the `/children` endpoint response.
+The following Link relations must exist in the `/children` endpoint response.
 
 | **rel** | **href**    | **From**            | **Description** |
 | ------- | ----------- | ------------------- | --------------- |
@@ -50,7 +50,7 @@ This conformance class also requires for the endpoints in the [STAC API - Core](
 | ----------- | ------- | ---------------------------------------------------- |
 | `/children` | JSON    | Object with a list of child Catalogs and Collections |
 
-STAC APIs implementing the `STAC API - Children` conformance class must support HTTP GET operation at
+STAC APIs implementing the *STAC API - Children* conformance class must support HTTP GET operation at
 `/children`, with the return JSON document consisting of an array of all child Catalogs and Collections in a field `children` and an 
 array of Links in a field `links`.
 

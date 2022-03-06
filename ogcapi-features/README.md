@@ -49,7 +49,7 @@ with OAFeat clients. But specialized STAC clients will likely display results be
 
 This conformance class also requires implementation of the link relations in the [STAC API - Core](../core) conformance class.
 
-The following Link relations shall exist in the Landing Page (root).
+The following Link relations must exist in the Landing Page (root).
 
 | **rel**       | **href**       | **From** | **Description**     |
 | ------------- | -------------- | -------- | ------------------- |
@@ -231,7 +231,7 @@ GET /collections/mycollection/items?datetime=2019-01-01T00:00:00Z/2019-03-31T23:
 
 ## Example Landing Page for STAC API - Features
 
-This JSON is what would be expected from an api that only implements STAC API - Features. In practice, 
+This JSON is what would be expected from an api that only implements *STAC API - Features*. In practice, 
 most APIs will also implement other conformance classes, and those will be reflected in the `links` and 
 `conformsTo` fields.  A more typical Landing Page example is in 
 the [overview](../overview.md#example-landing-page) document.
@@ -326,7 +326,7 @@ as is typical with a static STAC Collection, there are no links here with rel va
 
 ## Extensions
 
-These extensions provide additional functionality that enhances `STAC API - Features`. 
+These extensions provide additional functionality that enhances *STAC API - Features*. 
 All are specified as [fragments](../fragments), as they are re-used by extensions to other STAC APIs.
 STAC APIs that offer the following capabilities must include the relevant **conformance URI** in the 
 `conformsTo` response at the root (`/`) landing page, to indicate to clients that they will respond properly 
