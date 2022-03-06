@@ -1,7 +1,7 @@
 # Items and Collections API Version Extension
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features/extensions/version>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-rc.1/ogcapi-features/extensions/version>
 - **Extension [Maturity Classification](../../../README.md#maturity-classification):** Proposal
 - **Dependencies**: [STAC API - Features](../../README.md)
 

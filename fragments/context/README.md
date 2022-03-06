@@ -2,8 +2,8 @@
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
 - **Conformance Classes:** 
-  - Item Search binding: <https://api.stacspec.org/v1.0.0-beta.5/item-search#context>
-  - STAC Features binding: <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features#context>
+  - Item Search binding: <https://api.stacspec.org/v1.0.0-rc.1/item-search#context>
+  - STAC Features binding: <https://api.stacspec.org/v1.0.0-rc.1/ogcapi-features#context>
 - **Fragment [Maturity Classification](../../README.md#maturity-classification):** Pilot
 - **Dependents:**
   - [Item Search](../../item-search)
