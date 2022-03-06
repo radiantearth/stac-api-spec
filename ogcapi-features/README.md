@@ -393,11 +393,7 @@ The full description and examples of this are found in the [context fragment](..
 
 ### Filter Extension
 
-<<<<<<< HEAD
 - **Conformance URI:** <https://api.stacspec.org/v1.0.0-rc.1/item-search#filter>
-=======
-- **Conformance URI:** <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/features-filter>
->>>>>>> dev
 - **Extension [Maturity Classification](../README.md#maturity-classification):** Pilot
 - **Definition**: [STAC API - Filter Fragment](../fragments/filter/)
 
