@@ -2,8 +2,9 @@
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
 - **Conformance Classes:**
+  - Item Search Filter: <https://api.stacspec.org/v1.0.0-beta.5/item-search#filter>
   - Filter: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/filter>
-  - Item Search Filter: <https://api.stacspec.org/v1.0.0-beta.5/item-search#filter:item-search-filter>
+  - Features Filter: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/features-filter>
   - CQL2 Text: <http://www.opengis.net/spec/cql2/1.0/conf/cql2-text>
   - CQL2 JSON: <http://www.opengis.net/spec/cql2/1.0/conf/cql2-json>
   - Basic CQL2: <http://www.opengis.net/spec/cql2/1.0/conf/basic-cql2>
@@ -142,12 +143,10 @@ implementing functionality they do not need or may not be able to implement func
 their underlying datastore, e.g., Elasticsearch does not support the spatial predicates required by the
 Spatial Operators conformance class, only the `S_INTERSECTS` operator in the Basic Spatial Operators class.
 
-The precise decomposition of the OAFeat conformance classes is still a work in progress, but is being finalized
-rapidly (see [ogcapi-features/issues/579](https://github.com/opengeospatial/ogcapi-features/issues/579)).
 The STAC API Filter Extension reuses the definitions and conformance classes in OAFeat CQL,
-adding only the Item Search Filter conformance class
-(`https://api.stacspec.org/v1.0.0-beta.5/item-search#filter:item-search-filter`) to bind
-the CQL2 Filter behavior to the Item Search resource.
+adding only the *Item Search Filter* conformance class
+(`https://api.stacspec.org/v1.0.0-beta.5/item-search#filter`) to bind
+the Filter behavior to the Item Search endpoint.
 
 The implementation **must** support these conformance classes:
 
@@ -157,7 +156,7 @@ The implementation **must** support these conformance classes:
   the query language used for the `filter` parameter defined by Filter. This includes logical operators (`AND`, `OR`, `NOT`),
   comparison operators (`=`, `<>`, `<`, `<=`, `>`, `>=`), and `IS NULL`. The comparison operators are allowed against
   string, numeric, boolean, date, and datetime types.
-- Item Search Filter (`https://api.stacspec.org/v1.0.0-beta.5/item-search#filter:item-search-filter`) binds the Filter and
+- Item Search Filter (`https://api.stacspec.org/v1.0.0-beta.5/item-search#filter`) binds the Filter and
   Basic CQL2 conformance classes to apply to the Item Search endpoint (`/search`).  This class is the correlate of the OAFeat CQL2 Features
   Filter class that binds Filter and Basic CQL2 to the Features resource (`/collections/{cid}/items`).
 
@@ -171,7 +170,12 @@ If both are advertised as being supported, it is only required that both be supp
 only that CQL2 JSON be supported for POST JSON requests.  It is recommended that clients use CQL2 Text in GET requests and
 CQL2 JSON in POST requests.
 
-For additional capabilities, the following classes can be implemented:
+The implementation **may** support the OAFeat Part 3 *Features Filter* conformance classes:
+
+- Features Filter (`http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/features-filter`) binds the Filter and
+  CQL2 conformance classes to the Features resource(`/collections/{cid}/items`).
+
+For additional capabilities, the following classes may be implemented:
 - Advanced Comparison Operators
   (`http://www.opengis.net/spec/cql2/1.0/conf/advanced-comparison-operators`) defines the `LIKE`,
   `BETWEEN`, and `IN` operators. **Note**: this conformance class no longer requires implementing the
@@ -366,11 +370,12 @@ at least these values:
     "http://api.stacspec.org/v1.0.0-beta.5/stac-search",
     "http://api.stacspec.org/v1.0.0-beta.5/stac-response",
 
+    "https://api.stacspec.org/v1.0.0-beta.5/item-search#filter"
     "http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/filter",
     "http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/features-filter",
-    "http://www.opengis.net/spec/cql2/1.0/conf/basic-cql2",
     "http://www.opengis.net/spec/cql2/1.0/conf/cql2-text",
     "http://www.opengis.net/spec/cql2/1.0/conf/cql2-json",
+    "http://www.opengis.net/spec/cql2/1.0/conf/basic-cql2",
     "http://www.opengis.net/spec/cql2/1.0/conf/basic-spatial-operators",
     "http://www.opengis.net/spec/cql2/1.0/conf/advanced-comparison-operators"
 
