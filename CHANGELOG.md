@@ -18,7 +18,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Query Extension is no longer deprecated.
 - Children conformance class now requires the /children endpoint includes all child catalogs or collections
   referenced via `child` link relations from the Landing Page
-
+- Conformance class for Item Search Filter is now
+  `https://api.stacspec.org/v1.0.0-beta.5/item-search#filter`, whereas before it was incorrectly stated as
+  `https://api.stacspec.org/v1.0.0-beta.5/item-search#filter:item-search-filter`
 ### Deprecated
 
 ### Removed
