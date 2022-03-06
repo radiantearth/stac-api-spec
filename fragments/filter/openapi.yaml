@@ -103,8 +103,8 @@ components:
       required: true
       schema:
         oneOf:
-          - $ref: '#/components/schemas/filter-cql-json'
-          - $ref: '#/components/schemas/filter-cql-text'
+          - $ref: '#/components/schemas/filter-cql2-json'
+          - $ref: '#/components/schemas/filter-cql2-text'
     filter-lang:
       name: filter-lang
       x-stac-api-fragment: filter
@@ -112,7 +112,7 @@ components:
       description: |-
         **Extension:** Filter
 
-        The CQL2 filter encoding that the 'filter' value uses. Must be one of 'cql-text' or 'cql-json'.
+        The CQL2 filter encoding that the 'filter' value uses. Must be one of 'cql2-text' or 'cql2-json'.
       required: false
       schema:
         $ref: '#/components/schemas/filter-lang'
@@ -138,24 +138,24 @@ components:
         A filter for properties in Items.
       properties:
         filter:
-          $ref: '#/components/schemas/filter-cql-json'
+          $ref: '#/components/schemas/filter-cql2-json'
         filter-lang:
           $ref: '#/components/schemas/filter-lang'
         filter-crs:
           $ref: '#/components/schemas/filter-crs'
-    filter-cql-text:
+    filter-cql2-text:
       description: |
-        A CQL2 filter expression in the 'cql-text' encoding.
+        A CQL2 filter expression in the 'cql2-text' encoding.
       type: string
-    filter-cql-json:
+    filter-cql2-json:
       $ref: 'https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/cql2/standard/schema/cql2.yml#/components/schemas/booleanValueExpression'
     filter-lang:
       description: |
         The CQL2 filter encoding that the 'filter' value uses.
       type: string
       enum:
-        - 'cql-text'
-        - 'cql-json'
+        - 'cql2-text'
+        - 'cql2-json'
     filter-crs:
       description: |
         The coordinate reference system (CRS) used by spatial literals in the 'filter' value.  The only value that STAC APIs must

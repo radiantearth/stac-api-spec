@@ -25,6 +25,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     the server can derive a valid Item, e.g., by populating the id and collection fields or adding links
   - Likewise, POST can be used with a body of a FeatureCollection that contains features that meet the same constraints.
 - Specifications now use the term "must" instead of "shall". The semantics of these words are identical.
+- Conformance class for Item Search Filter is now
+  `https://api.stacspec.org/v1.0.0-beta.5/item-search#filter`, whereas before it was incorrectly stated as
+  `https://api.stacspec.org/v1.0.0-beta.5/item-search#filter:item-search-filter`
 
 ### Deprecated
 
