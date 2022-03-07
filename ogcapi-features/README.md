@@ -19,11 +19,11 @@
 
 *based on [**OGC API - Features - Part 1: Core**](https://www.ogc.org/standards/ogcapi-features)*
 
-- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features)) 
+- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-rc.1/ogcapi-features)) 
 - **Conformance URIs:**
-  - <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features> 
-  - <https://api.stacspec.org/v1.0.0-beta.5/core> 
-  - <https://api.stacspec.org/v1.0.0-beta.5/collections> 
+  - <https://api.stacspec.org/v1.0.0-rc.1/ogcapi-features> 
+  - <https://api.stacspec.org/v1.0.0-rc.1/core> 
+  - <https://api.stacspec.org/v1.0.0-rc.1/collections> 
   - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core> - [Requirements Class Core](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_core)
   - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson> - [Requirements Class GeoJSON](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_geojson)
   - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30> - [Requirements Class OpenAPI 3.0](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_oas30)
@@ -244,9 +244,9 @@ the [overview](../overview.md#example-landing-page) document.
     "description": "This Catalog aims to demonstrate the a simple landing page",
     "type": "Catalog",
     "conformsTo" : [
-        "https://api.stacspec.org/v1.0.0-beta.5/core",
-        "https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features",
-        "https://api.stacspec.org/v1.0.0-beta.5/collections",
+        "https://api.stacspec.org/v1.0.0-rc.1/core",
+        "https://api.stacspec.org/v1.0.0-rc.1/ogcapi-features",
+        "https://api.stacspec.org/v1.0.0-rc.1/collections",
         "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core",
         "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30",
         "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson"
@@ -335,7 +335,7 @@ to requests from clients.
 ### Transaction Extension
 
 - **Conformance URIs:**
-  - <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features/extensions/transaction>
+  - <https://api.stacspec.org/v1.0.0-rc.1/ogcapi-features/extensions/transaction>
   - <http://www.opengis.net/spec/ogcapi-features-4/1.0/conf/simpletx>
 - **Extension [Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Definition**: [STAC API - Transaction Fragment](extensions/transaction/)
@@ -347,7 +347,7 @@ POST, PUT, PATCH, and DELETE methods. The full description of how this extension
 
 ### Items and Collections API Version Extension
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features/extensions/version>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-rc.1/ogcapi-features/extensions/version>
 - **Extension [Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Definition**: [STAC API - Version](extensions/version/)
 
@@ -357,7 +357,7 @@ It is the STAC API equivalent of [OGC API - Features - Part 4: Create, Replace, 
 
 ### Fields Extension
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features#fields>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-rc.1/ogcapi-features#fields>
 - **Extension [Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Definition**: [STAC API - Fields Fragment](../fragments/fields/)
 
@@ -370,7 +370,7 @@ through the use of a `fields` parameter. The full description of how this extens
 
 ### Sort Extension
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features#sort>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-rc.1/ogcapi-features#sort>
 - **Extension [Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Definition**: [STAC API - Sort Fragment](../fragments/sort/)
 
@@ -383,7 +383,7 @@ of this extension can be found in the [sort fragment](../fragments/sort).
 
 ### Context Extension
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features#context>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-rc.1/ogcapi-features#context>
 - **Extension [Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Definition**: [STAC API - Context Fragment](../fragments/context/)
 
@@ -393,7 +393,7 @@ The full description and examples of this are found in the [context fragment](..
 
 ### Filter Extension
 
-- **Conformance URI:** <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/features-filter>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-rc.1/item-search#filter>
 - **Extension [Maturity Classification](../README.md#maturity-classification):** Pilot
 - **Definition**: [STAC API - Filter Fragment](../fragments/filter/)
 
@@ -407,7 +407,7 @@ fragment](../fragments/filter/).
 
 ### Query Extension
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/item-search#query>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-rc.1/item-search#query>
 - **Extension [Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Definition**: [STAC API - Query Fragment](../fragments/query/)
 

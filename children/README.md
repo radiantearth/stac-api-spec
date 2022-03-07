@@ -6,10 +6,10 @@
   - [Pagination](#pagination)
   - [Example](#example)
 
-- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.5/children))
+- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-rc.1/children))
 - **Conformance URIs:** 
-  - <https://api.stacspec.org/v1.0.0-beta.5/children>
-  - <https://api.stacspec.org/v1.0.0-beta.5/core>
+  - <https://api.stacspec.org/v1.0.0-rc.1/children>
+  - <https://api.stacspec.org/v1.0.0-rc.1/core>
 - **[Maturity Classification](../README.md#maturity-classification):** Proposal
 - **Dependencies**: [STAC API - Core](../core)
 
@@ -80,9 +80,9 @@ The STAC API Landing Page should look like the following (note the `child` link 
     "description": "This Catalog aims to demonstrate the a simple landing page",
     "type": "Catalog",
     "conformsTo" : [
-        "https://api.stacspec.org/v1.0.0-beta.5/core",
-        "https://api.stacspec.org/v1.0.0-beta.5/children",
-        "https://api.stacspec.org/v1.0.0-beta.5/browseable"
+        "https://api.stacspec.org/v1.0.0-rc.1/core",
+        "https://api.stacspec.org/v1.0.0-rc.1/children",
+        "https://api.stacspec.org/v1.0.0-rc.1/browseable"
     ],
     "links": [
         {

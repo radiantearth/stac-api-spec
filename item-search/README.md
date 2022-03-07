@@ -20,10 +20,10 @@
     - [Filter Extension](#filter-extension)
     - [Query Extension](#query-extension)
 
-- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.5/item-search))
+- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-rc.1/item-search))
 - **Conformance URIs:** 
-  - <https://api.stacspec.org/v1.0.0-beta.5/item-search>
-  - <https://api.stacspec.org/v1.0.0-beta.5/core>
+  - <https://api.stacspec.org/v1.0.0-rc.1/item-search>
+  - <https://api.stacspec.org/v1.0.0-rc.1/core>
 - **[Maturity Classification](../README.md#maturity-classification):** Pilot
 - **Dependencies**: [STAC API - Core](../core)
 - **Examples**: [examples.md](examples.md)
@@ -252,8 +252,8 @@ the [overview](../overview.md#example-landing-page) document.
     "description": "This Catalog aims to demonstrate the a simple landing page",
     "type": "Catalog",
     "conformsTo" : [
-        "https://api.stacspec.org/v1.0.0-beta.5/core",
-        "https://api.stacspec.org/v1.0.0-beta.5/item-search"
+        "https://api.stacspec.org/v1.0.0-rc.1/core",
+        "https://api.stacspec.org/v1.0.0-rc.1/item-search"
     ],
     "links": [
         {
@@ -301,7 +301,7 @@ the root (`/`) landing page, to indicate to clients that they will respond prope
 
 ### Fields Extension
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/item-search#fields>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-rc.1/item-search#fields>
 - **Extension [Maturity Classification](../README.md#maturity-classification):** Pilot
 - **Definition**: [STAC API - Fields Fragment](../fragments/fields/)
 
@@ -313,7 +313,7 @@ through the use of a `fields` parameter. The full description of how this extens
 
 ### Sort Extension
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/item-search#sort>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-rc.1/item-search#sort>
 - **Extension [Maturity Classification](../README.md#maturity-classification):** Pilot
 - **Definition**: [STAC API - Sort Fragment](../fragments/sort/)
 
@@ -326,7 +326,7 @@ of this extension can be found in the [sort fragment](../fragments/sort).
 
 ### Context Extension
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/item-search#context>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-rc.1/item-search#context>
 - **Extension [Maturity Classification](../README.md#maturity-classification):** Pilot
 - **Definition**: [STAC API - Context Fragment](../fragments/context/)
 
@@ -336,7 +336,7 @@ The full description and examples of this are found in the [context fragment](..
 
 ### Filter Extension
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/item-search#filter>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-rc.1/item-search#filter>
 - **Extension [Maturity Classification](../README.md#maturity-classification):** Pilot
 - **Definition**: [STAC API - Filter Fragment](../fragments/filter/)
 
@@ -348,7 +348,7 @@ fragment](../fragments/filter/).
 
 ### Query Extension
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/item-search#query>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-rc.1/item-search#query>
 - **Extension [Maturity Classification](../README.md#maturity-classification):** Pilot
 - **Definition**: [STAC API - Query Fragment](../fragments/query/)
 
