@@ -38,7 +38,7 @@ paths:
               schema:
                 $ref: '../core/openapi.yaml#/components/schemas/landingPage'
               example:
-                stac_version: 1.0.0-rc.1
+                stac_version: '1.0.0'
                 type: Catalog
                 id: sentinel
                 title: Copernicus Sentinel Imagery
