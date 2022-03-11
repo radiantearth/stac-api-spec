@@ -58,7 +58,7 @@ components:
             $ref: '#/components/schemas/landingPage'
           example:
             type: Catalog
-            stac_version: 1.0.0
+            stac_version: '1.0.0'
             id: sentinel
             title: Copernicus Sentinel Imagery
             description: Catalog of Copernicus Sentinel 1 and 2 imagery.
