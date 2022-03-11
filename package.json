@@ -27,6 +27,7 @@
         "redoc-cli": "^0.13.8",
         "remark-cli": "^10.0.1",
         "remark-lint": "^9.1.1",
+        "remark-gfm": "^3.0.1",
         "remark-lint-no-html": "^3.1.1",
         "remark-preset-lint-consistent": "^5.1.1",
         "remark-preset-lint-markdown-style-guide": "^5.1.2",
@@ -35,6 +36,7 @@
     },
     "remarkConfig": {
         "plugins": [
+            "remark-gfm",
             "validate-links",
             "remark-preset-lint-consistent",
             "remark-preset-lint-markdown-style-guide",
@@ -49,7 +51,7 @@
             "remark-lint-no-consecutive-blank-lines",
             [
                 "remark-lint-maximum-line-length",
-                "150"
+                150
             ],
             "remark-lint-fenced-code-flag",
             "remark-lint-fenced-code-marker",
@@ -63,7 +65,7 @@
             "remark-lint-no-heading-punctuation",
             [
                 "remark-lint-maximum-heading-length",
-                "70"
+                70
             ],
             [
                 "remark-lint-heading-style",
@@ -71,7 +73,7 @@
             ],
             [
                 "remark-lint-no-shortcut-reference-link",
-                "false"
+                false
             ],
             "remark-lint-list-item-bullet-indent",
             "remark-lint-ordered-list-marker-style",
@@ -86,7 +88,9 @@
                 "space"
             ],
             "remark-lint-table-pipes",
-            "remark-lint-no-literal-urls"
+            "remark-lint-no-literal-urls",
+            ["remark-lint-no-file-name-irregular-characters", false],
+            ["remark-lint-list-item-spacing", false]
         ]
     }
 }
