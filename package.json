@@ -89,8 +89,14 @@
             ],
             "remark-lint-table-pipes",
             "remark-lint-no-literal-urls",
-            ["remark-lint-no-file-name-irregular-characters", false],
-            ["remark-lint-list-item-spacing", false]
+            [
+                "remark-lint-no-file-name-irregular-characters",
+                false
+            ],
+            [
+                "remark-lint-list-item-spacing",
+                false
+            ]
         ]
     }
 }
