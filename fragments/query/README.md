@@ -2,7 +2,7 @@
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
 - **Conformance Class:** <https://api.stacspec.org/v1.0.0-rc.1/item-search#query>
-- **Extension [Maturity Classification](../../README.md#maturity-classification):** Pilot
+- **Extension [Maturity Classification](../../README.md#maturity-classification):** Candidate
 - **Dependents:**
   - [Item Search](../../item-search)
 
