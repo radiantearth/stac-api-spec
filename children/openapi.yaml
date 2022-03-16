@@ -38,7 +38,7 @@ paths:
               schema:
                 $ref: '../core/openapi.yaml#/components/schemas/landingPage'
               example:
-                stac_version: 1.0.0-rc.1
+                stac_version: '1.0.0'
                 type: Catalog
                 id: sentinel
                 title: Copernicus Sentinel Imagery
@@ -107,16 +107,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/children'
-    InvalidParameter:
-      description: |-
-        A query parameter has an invalid value.
-      content:
-        application/json:
-          schema:
-            $ref: '../core/commons.yaml#/components/schemas/exception'
-    NotFound:
-      description: |-
-        The requested URI was not found.
     ServerError:
       description: |-
         A server error occurred.
