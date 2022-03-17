@@ -2,7 +2,7 @@
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
 - **Conformance Classes:**
-  - Item Search Filter: <https://api.stacspec.org/v1.0.0-beta.5/item-search#filter>
+  - Item Search Filter: <https://api.stacspec.org/v1.0.0-rc.1/item-search#filter>
   - Filter: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/filter>
   - Features Filter: <http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/features-filter>
   - CQL2 Text: <http://www.opengis.net/spec/cql2/1.0/conf/cql2-text>
@@ -145,7 +145,7 @@ Spatial Operators conformance class, only the `S_INTERSECTS` operator in the Bas
 
 The STAC API Filter Extension reuses the definitions and conformance classes in OAFeat CQL,
 adding only the *Item Search Filter* conformance class
-(`https://api.stacspec.org/v1.0.0-beta.5/item-search#filter`) to bind
+(`https://api.stacspec.org/v1.0.0-rc.1/item-search#filter`) to bind
 the Filter behavior to the Item Search endpoint.
 
 The implementation **must** support these conformance classes:
@@ -156,7 +156,7 @@ The implementation **must** support these conformance classes:
   the query language used for the `filter` parameter defined by Filter. This includes logical operators (`AND`, `OR`, `NOT`),
   comparison operators (`=`, `<>`, `<`, `<=`, `>`, `>=`), and `IS NULL`. The comparison operators are allowed against
   string, numeric, boolean, date, and datetime types.
-- Item Search Filter (`https://api.stacspec.org/v1.0.0-beta.5/item-search#filter`) binds the Filter and
+- Item Search Filter (`https://api.stacspec.org/v1.0.0-rc.1/item-search#filter`) binds the Filter and
   Basic CQL2 conformance classes to apply to the Item Search endpoint (`/search`).  This class is the correlate of the OAFeat CQL2 Features
   Filter class that binds Filter and Basic CQL2 to the Features resource (`/collections/{cid}/items`).
 
@@ -230,7 +230,6 @@ These projects have or are developing CQL2 support:
 - [pgstac](https://github.com/stac-utils/pgstac) supports CQL2 JSON
 - [pygeofilter](https://github.com/geopython/pygeofilter) has support for CQL2 JSON and for the older ECQL standard that
 - [xtraplatform-spatial](https://github.com/interactive-instruments/xtraplatform-spatial) has support for CQL2 Text and provides an [ANTLR 4 grammer](https://github.com/interactive-instruments/xtraplatform-spatial/tree/master/xtraplatform-cql/src/main/antlr/de/ii/xtraplatform/cql/infra)
-  is similar to CQL2 Text
 - [Geotools](https://github.com/geotools/geotools) has support for [CQL2 text](https://github.com/geotools/geotools/tree/main/modules/library/cql/src/main/java/org/geotools/filter/text/cql2)
 - [Franklin](https://github.com/azavea/franklin) is working on it in [this PR](https://github.com/azavea/franklin/pull/750).
 
@@ -366,11 +365,11 @@ at least these values:
 
     "http://www.opengis.net/spec/ogcapi_common-2/1.0/conf/collections",
 
-    "http://api.stacspec.org/v1.0.0-beta.5/core",
-    "http://api.stacspec.org/v1.0.0-beta.5/stac-search",
-    "http://api.stacspec.org/v1.0.0-beta.5/stac-response",
+    "http://api.stacspec.org/v1.0.0-rc.1/core",
+    "http://api.stacspec.org/v1.0.0-rc.1/stac-search",
+    "http://api.stacspec.org/v1.0.0-rc.1/stac-response",
 
-    "https://api.stacspec.org/v1.0.0-beta.5/item-search#filter"
+    "https://api.stacspec.org/v1.0.0-rc.1/item-search#filter"
     "http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/filter",
     "http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/features-filter",
     "http://www.opengis.net/spec/cql2/1.0/conf/cql2-text",

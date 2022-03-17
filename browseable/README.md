@@ -8,8 +8,8 @@
 
 - **OpenAPI specification:** none
 - **Conformance URIs:** 
-  - <https://api.stacspec.org/v1.0.0-beta.5/browseable>
-  - <https://api.stacspec.org/v1.0.0-beta.5/core>
+  - <https://api.stacspec.org/v1.0.0-rc.1/browseable>
+  - <https://api.stacspec.org/v1.0.0-rc.1/core>
 - **[Maturity Classification](../README.md#maturity-classification):** Proposal
 - **Dependencies**: [STAC API - Core](../core)
 
@@ -50,7 +50,7 @@ This conformance class adds no additional endpoints.
 ## Example Landing Page for STAC API - Browseable
 
 This JSON is what would be expected from an API that implements *STAC API - Browseable*. Note that the
-`conformsTo` array contains `https://api.stacspec.org/v1.0.0-beta.5/browseable` and the `links` array 
+`conformsTo` array contains `https://api.stacspec.org/v1.0.0-rc.1/browseable` and the `links` array 
 contains `child` link relations.  The semantics of this conformance class imply that the the catalogs
 linked to by these `child` link relations then have further `child` or `item` link relations that
 eventually reach all items in this catalog.
@@ -63,8 +63,8 @@ eventually reach all items in this catalog.
     "description": "This Catalog aims to demonstrate the a simple landing page",
     "type": "Catalog",
     "conformsTo" : [
-        "https://api.stacspec.org/v1.0.0-beta.5/core",
-        "https://api.stacspec.org/v1.0.0-beta.5/browseable"
+        "https://api.stacspec.org/v1.0.0-rc.1/core",
+        "https://api.stacspec.org/v1.0.0-rc.1/browseable"
     ],
     "links": [
         {

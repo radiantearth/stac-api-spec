@@ -4,9 +4,9 @@
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml)
 - **Conformance URIs:**
-  - <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features/extensions/transaction>
+  - <https://api.stacspec.org/v1.0.0-rc.1/ogcapi-features/extensions/transaction>
   - <http://www.opengis.net/spec/ogcapi-features-4/1.0/conf/simpletx>
-- **Extension [Maturity Classification](../../../README.md#maturity-classification):** Pilot
+- **Extension [Maturity Classification](../../../README.md#maturity-classification):** Candidate
 - **Dependencies**: [STAC API - Features](../../README.md)
 
 The core STAC API doesn't support adding, editing, or removing items.
