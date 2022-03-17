@@ -10,7 +10,7 @@
 - **Conformance URIs:** 
   - <https://api.stacspec.org/v1.0.0-rc.1/collections>
   - <https://api.stacspec.org/v1.0.0-rc.1/core>
-- **[Maturity Classification](../README.md#maturity-classification):** Proposal
+- **[Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Dependencies**: [STAC API - Core](../core)
 
 A STAC API can return information about all STAC [Collections](../stac-spec/collection-spec/collection-spec.md) available using a link
