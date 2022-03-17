@@ -21,8 +21,8 @@ paths:
     parameters:
       - $ref: '../../openapi.yaml#/components/parameters/collectionId'
     post:
-      summary: add a new STAC Item to a collection
-      description: create a new STAC Item in a specific collection
+      summary: add a new STAC Item or Items in an ItemCollection to a collection
+      description: create a new STAC Item r Items in an ItemCollection in a specific collection
       operationId: postFeature
       tags:
         - Transaction
@@ -31,8 +31,8 @@ paths:
           application/json:
             schema:
               oneOf:
-                - $ref: '../../../core/commons.yaml#/components/schemas/item'
-                - $ref: '../../../fragments/itemcollection/openapi.yaml#/components/schemas/itemCollection'
+                - $ref: '#/components/schemas/postOrPutItemCollection'
+                - $ref: '#/components/schemas/postOrPutItem'
       responses:
         '201':
           description: Status of the create request.
@@ -50,6 +50,8 @@ paths:
             application/json:
               schema:
                 $ref: '../../../core/commons.yaml#/components/schemas/item'
+        '202':
+          description: The item was accepted for asynchronous action
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
@@ -96,8 +98,21 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '../../../core/commons.yaml#/components/schemas/item'
+              $ref: '#/components/schemas/postOrPutItem'
       responses:
+        '200':
+          description: The item was replaced
+          headers:
+            ETag:
+              schema:
+                type: string
+              description: An updated string to track changes
+          content:
+            application/json:
+              schema:
+                $ref: '../../../core/commons.yaml#/components/schemas/item'
+        '202':
+          description: The item was accepted for asynchronous action
         '204':
           description: The item was replaced
           headers:
@@ -133,8 +148,21 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/partialItem'
+              $ref: '#/components/schemas/patchItem'
       responses:
+        '200':
+          description: The item was replaced
+          headers:
+            ETag:
+              schema:
+                type: string
+              description: An updated string to track changes
+          content:
+            application/json:
+              schema:
+                $ref: '../../../core/commons.yaml#/components/schemas/item'
+        '202':
+          description: The item was accepted for asynchronous action
         '204':
           description: Status of the update request.
           headers:
@@ -163,8 +191,12 @@ paths:
       parameters:
         - $ref: '#/components/parameters/IfMatch'
       responses:
-        '204':
+        '200':
           description: The resource was deleted.
+        '202':
+          description: The operation was accepted for asynchronous executiona.
+        '204':
+          description: The resource was deleted. 
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
@@ -196,7 +228,9 @@ components:
       schema:
         type: string
   schemas:
-    partialItem:
+    patchItem:
+      description: >-
+        An object that contains at least a subset of the fields for a STAC Item.
       type: object
       properties:
         stac_version:
@@ -212,25 +246,79 @@ components:
         type:
           $ref: '../../../core/commons.yaml#/components/schemas/itemType'
         properties:
-          $ref: '#/components/schemas/partialItemProperties'
+          $ref: '#/components/schemas/patchItemProperties'
         links:
           type: array
           items:
             $ref: '../../../core/commons.yaml#/components/schemas/link'
         assets:
           $ref: '../../../core/commons.yaml#/components/schemas/assets'
-      example:
-        assets:
-          analytic:
-            title: 1-Band Analytic
-            href: http://cool-sat.com/catalog/collections/cs/items/CS3-201605XX_132130_04/analytic-1.tif
-    partialItemProperties:
+    patchItemProperties:
+      description: >-
+        An object that contains at least a subset of a valid STAC Item Properties object.
       type: object
-      description: allows for partial collections of metadata fields
       additionalProperties: true
       properties:
         datetime:
           $ref: '../../../core/commons.yaml#/components/schemas/datetime'
+    postOrPutItemCollection:
+      description: >-
+        A GeoJSON FeatureCollection augmented with foreign members that contain values relevant to a STAC entity
+      type: object
+      required:
+        - features
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - FeatureCollection
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/postOrPutItem'
+        links:
+          description: >-
+            An array of links. Can be used for pagination, e.g. by providing a link
+            with the `next` relation type.
+          type: array
+          items:
+            $ref: '../../../core/commons.yaml#/components/schemas/link'
+          example:
+            - rel: next
+              href: >-
+                http://api.cool-sat.com/search?next=ANsXtp9mrqN0yrKWhf-y2PUpHRLQb1GT-mtxNcXou8TwkXhi1Jbk
+    postOrPutItem:
+      description: >-
+        An object that is a valid GeoJSON Feature, but not necessarily a valid STAC Item.
+      type: object
+      required:
+        - stac_version
+        - id
+        - type
+        - geometry
+        - properties
+      properties:
+        stac_version:
+          $ref: '../../../core/commons.yaml#/components/schemas/stac_version'
+        stac_extensions:
+          $ref: '../../../core/commons.yaml#/components/schemas/stac_extensions'
+        id:
+          $ref: '../../../core/commons.yaml#/components/schemas/itemId'
+        bbox:
+          $ref: '../../../core/commons.yaml#/components/schemas/bbox'
+        geometry:
+          $ref: '../../../core/commons.yaml#/components/schemas/geometryGeoJSON'
+        type:
+          $ref: '../../../core/commons.yaml#/components/schemas/itemType'
+        properties:
+          $ref: '../../../core/commons.yaml#/components/schemas/properties'
+        links:
+          type: array
+          items:
+            $ref: '../../../core/commons.yaml#/components/schemas/link'
+        assets:
+          $ref: '../../../core/commons.yaml#/components/schemas/assets'
   responses:
     BadRequest:
       description: The request was malformed or semantically invalid
