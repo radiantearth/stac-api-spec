@@ -3,6 +3,6 @@ rules:
   openapi-tags: off
   info-contact: off
   oas3-api-servers: off
-  oas3-unused-components-schema: off
+  oas3-unused-component: off
   operation-operationId: off
   oas3-parameter-description: true
