@@ -21,8 +21,10 @@ paths:
     parameters:
       - $ref: '#/components/parameters/collectionId'
     post:
-      summary: add a new STAC Item to a collection
-      description: create a new STAC Item in a specific collection
+      summary: add a new STAC Item or Items in an ItemCollection to a collection
+      description: >-
+        create a new STAC Item r Items in an ItemCollection in a specific
+        collection
       operationId: postFeature
       tags:
         - Transaction
@@ -31,8 +33,8 @@ paths:
           application/json:
             schema:
               oneOf:
-                - $ref: '#/components/schemas/item'
-                - $ref: '#/components/schemas/itemCollection'
+                - $ref: '#/components/schemas/postOrPutItemCollection'
+                - $ref: '#/components/schemas/postOrPutItem'
       responses:
         '201':
           description: Status of the create request.
@@ -52,6 +54,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/item'
+        '202':
+          description: The item was accepted for asynchronous action
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
@@ -100,8 +104,21 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/item'
+              $ref: '#/components/schemas/postOrPutItem'
       responses:
+        '200':
+          description: The item was replaced
+          headers:
+            ETag:
+              schema:
+                type: string
+              description: An updated string to track changes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/item'
+        '202':
+          description: The item was accepted for asynchronous action
         '204':
           description: The item was replaced
           headers:
@@ -137,8 +154,21 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/partialItem'
+              $ref: '#/components/schemas/patchItem'
       responses:
+        '200':
+          description: The item was replaced
+          headers:
+            ETag:
+              schema:
+                type: string
+              description: An updated string to track changes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/item'
+        '202':
+          description: The item was accepted for asynchronous action
         '204':
           description: Status of the update request.
           headers:
@@ -167,6 +197,10 @@ paths:
       parameters:
         - $ref: '#/components/parameters/IfMatch'
       responses:
+        '200':
+          description: The resource was deleted.
+        '202':
+          description: The operation was accepted for asynchronous executiona.
         '204':
           description: The resource was deleted.
         '400':
@@ -212,7 +246,8 @@ components:
       schema:
         type: string
   schemas:
-    partialItem:
+    patchItem:
+      description: An object that contains at least a subset of the fields for a STAC Item.
       type: object
       properties:
         stac_version:
@@ -228,26 +263,82 @@ components:
         type:
           $ref: '#/components/schemas/itemType'
         properties:
-          $ref: '#/components/schemas/partialItemProperties'
+          $ref: '#/components/schemas/patchItemProperties'
         links:
           type: array
           items:
             $ref: '#/components/schemas/link'
         assets:
           $ref: '#/components/schemas/assets'
-      example:
-        assets:
-          analytic:
-            title: 1-Band Analytic
-            href: >-
-              http://cool-sat.com/catalog/collections/cs/items/CS3-201605XX_132130_04/analytic-1.tif
-    partialItemProperties:
+    patchItemProperties:
+      description: >-
+        An object that contains at least a subset of a valid STAC Item
+        Properties object.
       type: object
-      description: allows for partial collections of metadata fields
       additionalProperties: true
       properties:
         datetime:
           $ref: '#/components/schemas/datetime'
+    postOrPutItemCollection:
+      description: >-
+        A GeoJSON FeatureCollection augmented with foreign members that contain
+        values relevant to a STAC entity
+      type: object
+      required:
+        - features
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - FeatureCollection
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/postOrPutItem'
+        links:
+          description: >-
+            An array of links. Can be used for pagination, e.g. by providing a
+            link with the `next` relation type.
+          type: array
+          items:
+            $ref: '#/components/schemas/link'
+          example:
+            - rel: next
+              href: >-
+                http://api.cool-sat.com/search?next=ANsXtp9mrqN0yrKWhf-y2PUpHRLQb1GT-mtxNcXou8TwkXhi1Jbk
+    postOrPutItem:
+      description: >-
+        An object that is a valid GeoJSON Feature, but not necessarily a valid
+        STAC Item.
+      type: object
+      required:
+        - stac_version
+        - id
+        - type
+        - geometry
+        - properties
+      properties:
+        stac_version:
+          $ref: '#/components/schemas/stac_version'
+        stac_extensions:
+          $ref: '#/components/schemas/stac_extensions'
+        id:
+          $ref: '#/components/schemas/itemId'
+        bbox:
+          $ref: '#/components/schemas/bbox'
+        geometry:
+          $ref: '#/components/schemas/geometryGeoJSON'
+        type:
+          $ref: '#/components/schemas/itemType'
+        properties:
+          $ref: '#/components/schemas/properties'
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/link'
+        assets:
+          $ref: '#/components/schemas/assets'
     stac_version:
       title: STAC version
       type: string
@@ -447,6 +538,31 @@ components:
       description: The GeoJSON type
       enum:
         - Feature
+    datetime:
+      type: string
+      format: date-time
+      nullable: true
+      description: >-
+        The searchable date and time of the assets, in UTC.
+
+        It is formatted according to [RFC 3339, section
+        5.6](https://tools.ietf.org/html/rfc3339#section-5.6).
+
+        `null` is allowed, but requires `start_datetime` and `end_datetime` from
+        common metadata to be set.
+      example: '2018-02-12T00:00:00Z'
+    properties:
+      type: object
+      required:
+        - datetime
+      description: provides the core metadata fields plus extensions
+      properties:
+        datetime:
+          $ref: '#/components/schemas/datetime'
+      additionalProperties:
+        description: >-
+          Any additional properties added in via Item specification or
+          extensions.
     link:
       title: Link
       type: object
@@ -499,35 +615,6 @@ components:
             NOTE: To support form encoding it is expected that a client be able
             to merge in the key value pairs specified as JSON
             `{"next": "token"}` will become `&next=token`.
-    links:
-      type: array
-      items:
-        $ref: '#/components/schemas/link'
-    datetime:
-      type: string
-      format: date-time
-      nullable: true
-      description: >-
-        The searchable date and time of the assets, in UTC.
-
-        It is formatted according to [RFC 3339, section
-        5.6](https://tools.ietf.org/html/rfc3339#section-5.6).
-
-        `null` is allowed, but requires `start_datetime` and `end_datetime` from
-        common metadata to be set.
-      example: '2018-02-12T00:00:00Z'
-    properties:
-      type: object
-      required:
-        - datetime
-      description: provides the core metadata fields plus extensions
-      properties:
-        datetime:
-          $ref: '#/components/schemas/datetime'
-      additionalProperties:
-        description: >-
-          Any additional properties added in via Item specification or
-          extensions.
     assets:
       type: object
       additionalProperties:
@@ -565,6 +652,22 @@ components:
             description: Purposes of the asset
             example:
               - thumbnail
+    exception:
+      type: object
+      description: >-
+        Information about the exception: an error code plus an optional
+        description.
+      required:
+        - code
+      properties:
+        code:
+          type: string
+        description:
+          type: string
+    links:
+      type: array
+      items:
+        $ref: '#/components/schemas/link'
     item:
       description: >-
         A GeoJSON Feature augmented with foreign members that contain values
@@ -662,46 +765,6 @@ components:
             href: >-
               http://cool-sat.com/static-catalog/CS3/20160503_132130_04/thumbnail.png
             title: Thumbnail
-    itemCollection:
-      description: >-
-        A GeoJSON FeatureCollection augmented with foreign members that contain
-        values relevant to a STAC entity
-      type: object
-      required:
-        - features
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - FeatureCollection
-        features:
-          type: array
-          items:
-            $ref: '#/components/schemas/item'
-        links:
-          type: array
-          description: >-
-            An array of links. Can be used for pagination, e.g. by providing a
-            link with the `next` relation type.
-          items:
-            $ref: '#/components/schemas/link'
-          example:
-            - rel: next
-              href: >-
-                http://api.cool-sat.com/search?next=ANsXtp9mrqN0yrKWhf-y2PUpHRLQb1GT-mtxNcXou8TwkXhi1Jbk
-    exception:
-      type: object
-      description: >-
-        Information about the exception: an error code plus an optional
-        description.
-      required:
-        - code
-      properties:
-        code:
-          type: string
-        description:
-          type: string
   responses:
     BadRequest:
       description: The request was malformed or semantically invalid
