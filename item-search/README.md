@@ -20,11 +20,11 @@
     - [Filter Extension](#filter-extension)
     - [Query Extension](#query-extension)
 
-- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.5/item-search))
+- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-rc.1/item-search))
 - **Conformance URIs:** 
-  - <https://api.stacspec.org/v1.0.0-beta.5/item-search>
-  - <https://api.stacspec.org/v1.0.0-beta.5/core>
-- **[Maturity Classification](../README.md#maturity-classification):** Pilot
+  - <https://api.stacspec.org/v1.0.0-rc.1/item-search>
+  - <https://api.stacspec.org/v1.0.0-rc.1/core>
+- **[Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Dependencies**: [STAC API - Core](../core)
 - **Examples**: [examples.md](examples.md)
 
@@ -49,14 +49,17 @@ Implementing `GET /search` is **required**, `POST /search` is optional, but reco
 
 This conformance class also requires implementation of the link relations in the [STAC API - Core](../core) conformance class.
 
-The following Link relations shall exist in the Landing Page (root).
+The following Link relations must exist in the Landing Page (root).
 
 | **rel**  | **href**  | **From**               | **Description**             |
 | -------- | --------- | ---------------------- | --------------------------- |
 | `search` | `/search` | STAC API - Item Search | URI for the Search endpoint |
 
-The `search` link relation shall have a `type` of `application/geo+json` and a `method` of `GET`, and may also
-a link with a `method` of `POST` if the server supports it.
+This `search` link relation must have a `type` of `application/geo+json`. If no `method` attribute is
+specified, it is assumed to represent a GET request. If the server supports both GET and POST requests, two links should be included, one with a `method` of `GET` one with a `method` of `POST`.
+
+Other links with relation `search` may be included that advertise other content types the server may respond
+with, but these other types are not part of the STAC API requirements.
 
 ## Endpoints
 
@@ -110,7 +113,7 @@ a suggestion to the server as to the maximum number of Item objects the
 client would prefer in the response. The OpenAPI specification defines the default and maximum values
 for this parameter. The base specifications define these with a default of 10 and a maximum of 10000, but implementers
 may choose other values to advertise through their `service-desc` endpoint.  If the limit parameter value is greater
-than the advertised maximum limit, the server shall return the maximum possible number of items (ideally, the number 
+than the advertised maximum limit, the server must return the maximum possible number of items (ideally, the number 
 as the advertised maximum limit), rather than responding with an error.
 
 Only one of either **intersects** or **bbox** may be specified.  If both are specified, a 400 Bad Request response 
@@ -152,11 +155,14 @@ parameter name is defined by the implementor and is not necessarily part of the 
     "links": [
         {
             "rel": "next",
-            "href": "http://api.cool-sat.com/search?page=3"
+            "href": "https://stac-api.example.com/search?page=3"
+            "type": "application/geo+json"
+
         },
         {
             "rel": "prev",
-            "href": "http://api.cool-sat.com/search?page=1"
+            "href": "https://stac-api.example.com/search?page=1"
+            "type": "application/geo+json"
         }
     ]
 }
@@ -164,9 +170,9 @@ parameter name is defined by the implementor and is not necessarily part of the 
 
 The href may contain any arbitrary URL parameter:
 
-- `http://api.cool-sat.com/search?page=2`
-- `http://api.cool-sat.com/search?next=8a35eba9c`
-- `http://api.cool-sat.com/search?token=f32890a0bdb09ac3`
+- `https://stac-api.example.com/search?page=2`
+- `https://stac-api.example.com/search?next=8a35eba9c`
+- `https://stac-api.example.com/search?token=f32890a0bdb09ac3`
 
 Implementations may also add link relations `prev`, `first`, and `last`, though these are not required and may
 be infeasible to implement in some data stores.
@@ -233,7 +239,7 @@ does implement them, for STAC and OAFeat implementations that want to enable wri
 
 ## Example Landing Page for STAC API - Item Search
 
-This JSON is what would be expected from an api that only implements STAC API - Item Search. In practice, 
+This JSON is what would be expected from an api that only implements *STAC API - Item Search*. In practice, 
 most APIs will also implement other conformance classes, and those will be reflected in the `links` and 
 `conformsTo` fields.  A more typical Landing Page example is in 
 the [overview](../overview.md#example-landing-page) document.
@@ -246,40 +252,40 @@ the [overview](../overview.md#example-landing-page) document.
     "description": "This Catalog aims to demonstrate the a simple landing page",
     "type": "Catalog",
     "conformsTo" : [
-        "https://api.stacspec.org/v1.0.0-beta.5/core",
-        "https://api.stacspec.org/v1.0.0-beta.5/item-search"
+        "https://api.stacspec.org/v1.0.0-rc.1/core",
+        "https://api.stacspec.org/v1.0.0-rc.1/item-search"
     ],
     "links": [
         {
             "rel": "self",
             "type": "application/json",
-            "href": "https://stacserver.org"
+            "href": "https://stac-api.example.com"
         },
         {
             "rel": "root",
             "type": "application/json",
-            "href": "https://stacserver.org"
+            "href": "https://stac-api.example.com"
         },
         {
             "rel": "service-desc",
             "type": "application/vnd.oai.openapi+json;version=3.0",
-            "href": "https://stacserver.org/api"
+            "href": "https://stac-api.example.com/api"
         },
         {
             "rel": "service-doc",
             "type": "text/html",
-            "href": "https://stacserver.org/api.html"
+            "href": "https://stac-api.example.com/api.html"
         },
         {
             "rel": "search",
             "type": "application/geo+json",
-            "href": "https://stacserver.org/search",
+            "href": "https://stac-api.example.com/search",
             "method": "GET"
         },
         {
             "rel": "search",
             "type": "application/geo+json",
-            "href": "https://stacserver.org/search",
+            "href": "https://stac-api.example.com/search",
             "method": "POST"
         }
     ]
@@ -295,8 +301,8 @@ the root (`/`) landing page, to indicate to clients that they will respond prope
 
 ### Fields Extension
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/item-search#fields>
-- **Extension [Maturity Classification](../README.md#maturity-classification):** Pilot
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-rc.1/item-search#fields>
+- **Extension [Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Definition**: [STAC API - Fields Fragment](../fragments/fields/)
 
 By default, the STAC search endpoint `/search` returns all attributes of each Item, as there is no way to specify 
@@ -307,8 +313,8 @@ through the use of a `fields` parameter. The full description of how this extens
 
 ### Sort Extension
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/item-search#sort>
-- **Extension [Maturity Classification](../README.md#maturity-classification):** Pilot
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-rc.1/item-search#sort>
+- **Extension [Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Definition**: [STAC API - Sort Fragment](../fragments/sort/)
 
 By default, the STAC search endpoint `/search` returns results in no specified order. Whatever order the results are in 
@@ -320,8 +326,8 @@ of this extension can be found in the [sort fragment](../fragments/sort).
 
 ### Context Extension
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/item-search#context>
-- **Extension [Maturity Classification](../README.md#maturity-classification):** Pilot
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-rc.1/item-search#context>
+- **Extension [Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Definition**: [STAC API - Context Fragment](../fragments/context/)
 
 This extension is intended to augment the core ItemCollection responses from the `search` API endpoint with a
@@ -330,20 +336,20 @@ The full description and examples of this are found in the [context fragment](..
 
 ### Filter Extension
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/item-search#filter>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-rc.1/item-search#filter>
 - **Extension [Maturity Classification](../README.md#maturity-classification):** Pilot
 - **Definition**: [STAC API - Filter Fragment](../fragments/filter/)
 
 The STAC search endpoint, `/search`, by default only accepts a limited set of parameters to limit the results
 by properties. The Filter extension adds a new parameter, `filter`, that can take a number of comparison operators to
 match predicates between the fields requested and the values of Item objects. It can be used with both GET and POST and supports two
-query formats, `cql-text` and `cql-json`. The full details on the JSON structure are specified in the [filter 
+query formats, `cql2-text` and `cql2-json`. The full details on the JSON structure are specified in the [filter 
 fragment](../fragments/filter/).
 
 ### Query Extension
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/item-search#query>
-- **Extension [Maturity Classification](../README.md#maturity-classification):** Pilot
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-rc.1/item-search#query>
+- **Extension [Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Definition**: [STAC API - Query Fragment](../fragments/query/)
 
 **Note**: It is recommended that implementers implement the [Filter Extension](#filter-extension) instead, as

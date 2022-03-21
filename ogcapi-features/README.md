@@ -19,11 +19,11 @@
 
 *based on [**OGC API - Features - Part 1: Core**](https://www.ogc.org/standards/ogcapi-features)*
 
-- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features)) 
+- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-rc.1/ogcapi-features)) 
 - **Conformance URIs:**
-  - <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features> 
-  - <https://api.stacspec.org/v1.0.0-beta.5/core> 
-  - <https://api.stacspec.org/v1.0.0-beta.5/collections> 
+  - <https://api.stacspec.org/v1.0.0-rc.1/ogcapi-features> 
+  - <https://api.stacspec.org/v1.0.0-rc.1/core> 
+  - <https://api.stacspec.org/v1.0.0-rc.1/collections> 
   - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core> - [Requirements Class Core](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_core)
   - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson> - [Requirements Class GeoJSON](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_geojson)
   - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30> - [Requirements Class OpenAPI 3.0](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_oas30)
@@ -49,7 +49,7 @@ with OAFeat clients. But specialized STAC clients will likely display results be
 
 This conformance class also requires implementation of the link relations in the [STAC API - Core](../core) conformance class.
 
-The following Link relations shall exist in the Landing Page (root).
+The following Link relations must exist in the Landing Page (root).
 
 | **rel**       | **href**       | **From** | **Description**     |
 | ------------- | -------------- | -------- | ------------------- |
@@ -126,16 +126,17 @@ or `token` and any additional filter parameters if given and required. For examp
     "links": [
         {
             "rel": "next",
-            "href": "http://api.cool-sat.com/collections/my_collection/items?page=2"
+            "href": "https://stac-api.example.com/collections/my_collection/items?page=2"
+            "type": "application/geo+json"
         }
     ]
 ```
 
 The href may contain any arbitrary URL parameter, which is implementation-specific:
 
-- `http://api.cool-sat.com/collections/my_collection/items?page=2`
-- `http://api.cool-sat.com/collections/my_collection/items?next=8a35eba9c`
-- `http://api.cool-sat.com/collections/my_collection/items?token=f32890a0bdb09ac3`
+- `https://stac-api.example.com/collections/my_collection/items?page=2`
+- `https://stac-api.example.com/collections/my_collection/items?next=8a35eba9c`
+- `https://stac-api.example.com/collections/my_collection/items?token=f32890a0bdb09ac3`
 
 In addition to supporting query parameters in the URL value of the `href` field,
 STAC has extended the Link object
@@ -175,11 +176,13 @@ previous (page=2) pages:
   ...
   {
     "rel": "prev",
-    "href": "http://api.cool-sat.com/collections?page=2"
+    "href": "https://stac-api.example.com/collections?page=2"
+    "type": "application/geo+json"
   },
   {
     "rel": "next",
-    "href": "http://api.cool-sat.com/collections?page=4"
+    "href": "https://stac-api.example.com/collections?page=4"
+    "type": "application/geo+json"
   }
 ]
 ```
@@ -228,7 +231,7 @@ GET /collections/mycollection/items?datetime=2019-01-01T00:00:00Z/2019-03-31T23:
 
 ## Example Landing Page for STAC API - Features
 
-This JSON is what would be expected from an api that only implements STAC API - Features. In practice, 
+This JSON is what would be expected from an api that only implements *STAC API - Features*. In practice, 
 most APIs will also implement other conformance classes, and those will be reflected in the `links` and 
 `conformsTo` fields.  A more typical Landing Page example is in 
 the [overview](../overview.md#example-landing-page) document.
@@ -241,9 +244,9 @@ the [overview](../overview.md#example-landing-page) document.
     "description": "This Catalog aims to demonstrate the a simple landing page",
     "type": "Catalog",
     "conformsTo" : [
-        "https://api.stacspec.org/v1.0.0-beta.5/core",
-        "https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features",
-        "https://api.stacspec.org/v1.0.0-beta.5/collections",
+        "https://api.stacspec.org/v1.0.0-rc.1/core",
+        "https://api.stacspec.org/v1.0.0-rc.1/ogcapi-features",
+        "https://api.stacspec.org/v1.0.0-rc.1/collections",
         "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core",
         "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30",
         "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson"
@@ -252,32 +255,32 @@ the [overview](../overview.md#example-landing-page) document.
         {
             "rel": "self",
             "type": "application/json",
-            "href": "https://stacserver.org"
+            "href": "https://stac-api.example.com"
         },
         {
             "rel": "root",
             "type": "application/json",
-            "href": "https://stacserver.org"
+            "href": "https://stac-api.example.com"
         },
         {
             "rel": "conformance",
             "type": "application/json",
-            "href": "https://stacserver.org/conformance"
+            "href": "https://stac-api.example.com/conformance"
         },
         {
             "rel": "service-desc",
             "type": "application/vnd.oai.openapi+json;version=3.0",
-            "href": "https://stacserver.org/api"
+            "href": "https://stac-api.example.com/api"
         },
         {
             "rel": "service-doc",
             "type": "text/html",
-            "href": "https://stacserver.org/api.html"
+            "href": "https://stac-api.example.com/api.html"
         },
         {
             "rel": "data",
             "type": "application/json",
-            "href": "https://stacserver.org/collections"
+            "href": "https://stac-api.example.com/collections"
         }
     ]
 }
@@ -289,7 +292,7 @@ The landing page `data` relation points to an endpoint to retrieve all collectio
 a link relation to its `items` resource through the link with a rel value `items`.  Note here that, unlike 
 as is typical with a static STAC Collection, there are no links here with rel value `item`. 
 
-`https://stacserver.org/collections/aster-l1t`
+`https://stac-api.example.com/collections/aster-l1t`
 
 ```json
 {
@@ -300,22 +303,22 @@ as is typical with a static STAC Collection, there are no links here with rel va
     {
       "rel": "items",
       "type": "application/geo+json",
-      "href": "https://stacserver.org/collections/aster-l1t/items"
+      "href": "https://stac-api.example.com/collections/aster-l1t/items"
     },
     {
       "rel": "parent",
       "type": "application/json",
-      "href": "https://stacserver.org"
+      "href": "https://stac-api.example.com"
     },
     {
       "rel": "root",
       "type": "application/json",
-      "href": "https://stacserver.org"
+      "href": "https://stac-api.example.com"
     },
     {
       "rel": "self",
       "type": "application/json",
-      "href": "https://stacserver.org/collections/aster-l1t"
+      "href": "https://stac-api.example.com/collections/aster-l1t"
     }
   ]
 }
@@ -323,7 +326,7 @@ as is typical with a static STAC Collection, there are no links here with rel va
 
 ## Extensions
 
-These extensions provide additional functionality that enhances `STAC API - Features`. 
+These extensions provide additional functionality that enhances *STAC API - Features*. 
 All are specified as [fragments](../fragments), as they are re-used by extensions to other STAC APIs.
 STAC APIs that offer the following capabilities must include the relevant **conformance URI** in the 
 `conformsTo` response at the root (`/`) landing page, to indicate to clients that they will respond properly 
@@ -332,7 +335,7 @@ to requests from clients.
 ### Transaction Extension
 
 - **Conformance URIs:**
-  - <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features/extensions/transaction>
+  - <https://api.stacspec.org/v1.0.0-rc.1/ogcapi-features/extensions/transaction>
   - <http://www.opengis.net/spec/ogcapi-features-4/1.0/conf/simpletx>
 - **Extension [Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Definition**: [STAC API - Transaction Fragment](extensions/transaction/)
@@ -344,7 +347,7 @@ POST, PUT, PATCH, and DELETE methods. The full description of how this extension
 
 ### Items and Collections API Version Extension
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features/extensions/version>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-rc.1/ogcapi-features/extensions/version>
 - **Extension [Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Definition**: [STAC API - Version](extensions/version/)
 
@@ -354,7 +357,7 @@ It is the STAC API equivalent of [OGC API - Features - Part 4: Create, Replace, 
 
 ### Fields Extension
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features#fields>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-rc.1/ogcapi-features#fields>
 - **Extension [Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Definition**: [STAC API - Fields Fragment](../fragments/fields/)
 
@@ -367,7 +370,7 @@ through the use of a `fields` parameter. The full description of how this extens
 
 ### Sort Extension
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features#sort>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-rc.1/ogcapi-features#sort>
 - **Extension [Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Definition**: [STAC API - Sort Fragment](../fragments/sort/)
 
@@ -380,7 +383,7 @@ of this extension can be found in the [sort fragment](../fragments/sort).
 
 ### Context Extension
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features#context>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-rc.1/ogcapi-features#context>
 - **Extension [Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Definition**: [STAC API - Context Fragment](../fragments/context/)
 
@@ -390,19 +393,21 @@ The full description and examples of this are found in the [context fragment](..
 
 ### Filter Extension
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/item-search#filter>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-rc.1/item-search#filter>
 - **Extension [Maturity Classification](../README.md#maturity-classification):** Pilot
 - **Definition**: [STAC API - Filter Fragment](../fragments/filter/)
 
-The STAC search endpoint, `/search`, by default only accepts a limited set of parameters to limit the results
+The Features items endpoint, `/collections/{collectionId}/items`, by default only accepts a few parameters to filter the results
 by properties. The Filter extension adds a new parameter, `filter`, that can take a number of comparison operators to
-match predicates between the fields requested and the values of Item objects. It can be used with both GET and POST and supports two
-query formats, `cql-text` and `cql-json`. The full details on the JSON structure are specified in the [filter 
+match predicates between the fields requested and the values of Item objects. It can only be
+used with GET requests, as a POST to the items endpoint is a create operation in the
+Transaction Extension. It supports two
+query formats, `cql2-text` and `cql2-json`. The full details on the JSON structure are specified in the [filter 
 fragment](../fragments/filter/).
 
 ### Query Extension
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-beta.5/item-search#query>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-rc.1/item-search#query>
 - **Extension [Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Definition**: [STAC API - Query Fragment](../fragments/query/)
 

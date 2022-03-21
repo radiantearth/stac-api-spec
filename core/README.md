@@ -7,14 +7,14 @@
   - [Extensions](#extensions)
   - [Structuring Catalog Hierarchies](#structuring-catalog-hierarchies)
 
-- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.5/core)),
+- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-rc.1/core)),
 - **Conformance URIs:**
-  - <https://api.stacspec.org/v1.0.0-beta.5/core>
-- **[Maturity Classification](../README.md#maturity-classification):** Pilot
+  - <https://api.stacspec.org/v1.0.0-rc.1/core>
+- **[Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Dependencies**: None
   and [commons.yaml](commons.yaml) is the OpenAPI version of the core [STAC spec](../stac-spec) JSON Schemas.
 
-All STAC API implementations must support the `STAC API - Core` conformance class. The only requirement of this class
+All STAC API implementations must support the *STAC API - Core* conformance class. The only requirement of this class
 is to provide a valid [STAC Catalog](../stac-spec/catalog-spec/catalog-spec.md) that also includes a `conformsTo`
 attribute with a string array value. Any API implementing this is considered a valid STAC API.
 
@@ -23,7 +23,7 @@ makes it into a defacto hypermedia-driven web API. Even if none of the
 STAC API conformance classes are implemented, the catalog can be traversed from the root via `child` and `item` link relations (though it is not
 required that all Items are reachable). Support for 
 this "browse" mode of interaction is complementary to the dynamic search capabilities defined in the
-`STAC API - Features` and `STAC API - Item Search` conformance classes.
+*STAC API - Features* and *STAC API - Item Search* conformance classes.
 Conversely, STAC API implementations may not support browse, even though the root is a Catalog object, if they do not
 have the appropriate `child` and `item` link relations to traverse over the objects in the catalog. STAC API
 implementations may provide an even greater guarantee of Item reachability with the
@@ -62,18 +62,18 @@ Note the `conformsTo` array follows the same structure of the OGC API - Features
 classes](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_declaration_of_conformance_classes), except it is part of the
 landing page instead of in the JSON response from the `/conformance` endpoint. This is different from how the OGC API advertises 
 conformance, as STAC feels it is important for clients
-to understand conformance from a single request to the landing page. Implementers who implement the `OGC API - Features` and/or 
-`STAC API - Features` conformance classes must also implement the `/conformance` endpoint.
+to understand conformance from a single request to the landing page. Implementers who implement the *OGC API - Features* and/or 
+*STAC API - Features* conformance classes must also implement the `/conformance` endpoint.
 
 The scope of the conformance classes declared in the `conformsTo` field and the `/conformance` endpoint are limited
 to the STAC API Catalog that declares them. A STAC API Catalog may link to sub-catalogs within it via `child` links
 that declare different conformance classes. This is useful when an entire catalog cannot be searched against to
-support the `STAC API - Item Search` conformance class, perhaps because it uses multiple databases to store items,
+support the *STAC API - Item Search* conformance class, perhaps because it uses multiple databases to store items,
 but sub-catalogs whose items are all in one database can support search. 
 
 ## Link Relations
 
-The following Link relations shall exist in the Landing Page (root).
+The following Link relations must exist in the Landing Page (root).
 
 | **rel**        | **href** | **From**  | **Description**                                      |
 | -------------- | -------- | --------- | ---------------------------------------------------- |
@@ -114,7 +114,7 @@ search over only a sub-catalog. This is useful for very large or federated catal
 over the entire catalog, but can support searching over individual sub-catalogs within it.
 
 Note that there is a different link relation `items` (plural)
-used by the `STAC API - Features` conformance class that links from a collection resource
+used by the *STAC API - Features* conformance class that links from a collection resource
 (at the `/collections/{collectionId}` endpoint) to the items in
 that collection (at the `/collections/{collectionId}/items` endpoint). Both of these endpoints are 
 [derived from OGC API - Features](https://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_items_).
@@ -143,13 +143,13 @@ class for OpenAPI 3.1, but may in the future.
 If sub-catalogs are used, it is **recommended** that these use the endpoint `/catalogs/{catalogId}` to avoid conflicting
 with other endpoints from the root.
 
-| Endpoint              | Returns                                        | Description          |
-| --------------------- | ---------------------------------------------- | -------------------- |
+| Endpoint                | Returns                                        | Description          |
+| ----------------------- | ---------------------------------------------- | -------------------- |
 | `/catalogs/{catalogId}` | [Catalog](../stac-spec/catalog-spec/README.md) | child Catalog object |
 
 ## Example Landing Page for STAC API - Core
 
-This JSON is what would be expected from an API that only implements `STAC API - Core`. It is a valid STAC Catalog
+This JSON is what would be expected from an API that only implements *STAC API - Core*. It is a valid STAC Catalog
 with additional Links and a `conformsTo` attribute. In practice, 
 most APIs will also implement other conformance classes, and those will be reflected in the `links` and 
 `conformsTo` attribute.  A more typical Landing Page example is in 
@@ -168,38 +168,38 @@ different conformance classes and a different set of links.
     "description": "This Catalog aims to demonstrate the a simple landing page",
     "type": "Catalog",
     "conformsTo" : [
-        "https://api.stacspec.org/v1.0.0-beta.5/core"
+        "https://api.stacspec.org/v1.0.0-rc.1/core"
     ],
     "links": [
         {
             "rel": "self",
             "type": "application/json",
-            "href": "https://stacserver.org"
+            "href": "https://stac-api.example.com"
         },
         {
             "rel": "root",
             "type": "application/json",
-            "href": "https://stacserver.org"
+            "href": "https://stac-api.example.com"
         },
         {
             "rel": "service-desc",
             "type": "application/vnd.oai.openapi+json;version=3.0",
-            "href": "https://stacserver.org/api"
+            "href": "https://stac-api.example.com/api"
         },
         {
             "rel": "service-doc",
             "type": "text/html",
-            "href": "https://stacserver.org/api.html"
+            "href": "https://stac-api.example.com/api.html"
         },
         {
             "rel": "child",
             "type": "application/json",
-            "href": "https://stacserver.org/catalogs/sentinel-2",
+            "href": "https://stac-api.example.com/catalogs/sentinel-2",
         },
         {
             "rel": "child",
             "type": "application/json",
-            "href": "https://stacserver.org/catalogs/landsat-8",
+            "href": "https://stac-api.example.com/catalogs/landsat-8",
         }
     ]
 }
@@ -214,7 +214,7 @@ None.
 A STAC API is more useful when it presents a complete `Catalog` representation of all the data contained in the
 API, such that all `Item` objects can be reached by transitively traversing `child` and `item` link relations from
 the root. This property of being able to reach all Items in this way is formalized in the
-[`STAC API - Browseable` conformance class](../browseable/README.md), but any Catalog can be structured for hierarchical traversal. 
+[*STAC API - Browseable* conformance class](../browseable/README.md), but any Catalog can be structured for hierarchical traversal. 
 Implementers who have search as their primary use case should consider also implementing this
 alternate view over the data by presenting it as a directed graph of catalogs, where the `child` link relations typically
 form a tree, and where each catalog can be retrieved with a single request (e.g., each Catalog JSON is small enough that

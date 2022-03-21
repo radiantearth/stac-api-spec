@@ -4,6 +4,37 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v1.0.0-rc.1] - 2022-03-17
+
+### Added
+
+- The CQL2 Accent and Case-insensitive Comparison 
+    (`http://www.opengis.net/spec/cql2/1.0/conf/accent-case-insensitive-comparison`) conformance class
+    adds the ACCENTI and CASEI functions for case-insensitive comparison. These replace the UPPER and
+    LOWER psuedo-functions that were previously part of the Advanced Comparison Operators class.
+
+### Changed
+
+- Query Extension is no longer deprecated.
+- Children conformance class now requires the /children endpoint includes all child catalogs or collections
+  referenced via `child` link relations from the Landing Page
+- Clarified behavior of Transaction Extension endpoints:
+  - PUT and PATCH of a body that changes the `collection` or `id` is disallowed.
+  - POST, PUT, and PATCH do not need to include the `collection` attribute, as it should be derived from the URL.
+  - POST and PUT can be used with a body that is at least a GeoJSON Feature, but does not have to be an Item, but for which 
+    the server can derive a valid Item, e.g., by populating the id and collection fields or adding links
+  - Likewise, POST can be used with a body of a FeatureCollection that contains features that meet the same constraints.
+- Specifications now use the term "must" instead of "shall". The semantics of these words are identical.
+- Conformance class for Item Search Filter is now
+  `https://api.stacspec.org/v1.0.0-beta.5/item-search#filter`, whereas before it was incorrectly stated as
+  `https://api.stacspec.org/v1.0.0-beta.5/item-search#filter:item-search-filter`
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
 ## [v1.0.0-beta.5] - 2022-01-14
 
 ### Added
@@ -84,6 +115,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The required Link Relations and endpoints for each conformance class now use the wording of 'shall'
   instead of 'should'. While this technically changes the semantics, it was generally understood
   previously the semantics were those of 'shall' (must).
+- Explicitly state that the `/children` endpoint can return Catalog and Collection objects that have fewer
+  fields than are available through other endpoints.
 
 ### Deprecated
 

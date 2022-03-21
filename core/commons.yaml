@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: The SpatioTemporal Asset Catalog API - Commons
   description: This is the OpenAPI version of the core STAC spec JSON Schemas.
-  version: 1.0.0-beta.5
+  version: 1.0.0-rc.1
 paths: {}
 components:
   responses:
@@ -148,7 +148,7 @@ components:
                       - type: string
                       - type: number
       example:
-        stac_version: 1.0.0
+        stac_version: '1.0.0'
         stac_extensions: []
         type: Collection
         id: Sentinel-2
@@ -598,7 +598,7 @@ components:
         assets:
           $ref: '#/components/schemas/assets'
       example:
-        stac_version: 1.0.0
+        stac_version: '1.0.0'
         stac_extensions:
           - 'https://stac-extensions.github.io/eo/v1.0.0/schema.json'
           - 'https://stac-extensions.github.io/view/v1.0.0/schema.json'

@@ -6,11 +6,11 @@
   - [Pagination](#pagination)
   - [Example](#example)
 
-- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-beta.5/collections))
+- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-rc.1/collections))
 - **Conformance URIs:** 
-  - <https://api.stacspec.org/v1.0.0-beta.5/collections>
-  - <https://api.stacspec.org/v1.0.0-beta.5/core>
-- **[Maturity Classification](../README.md#maturity-classification):** Proposal
+  - <https://api.stacspec.org/v1.0.0-rc.1/collections>
+  - <https://api.stacspec.org/v1.0.0-rc.1/core>
+- **[Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Dependencies**: [STAC API - Core](../core)
 
 A STAC API can return information about all STAC [Collections](../stac-spec/collection-spec/collection-spec.md) available using a link
@@ -28,7 +28,7 @@ aim to align with it. But it still seems to be in flux.*
 
 This conformance class also requires implementation of the link relations in the [STAC API - Core](../core) conformance class.
 
-The following Link relations shall exist in the Landing Page (root).
+The following Link relations must exist in the Landing Page (root).
 
 | **rel** | **href**       | **From** | **Description**     |
 | ------- | -------------- | -------- | ------------------- |
@@ -40,14 +40,14 @@ Additionally, `child` relations may exist to child Catalogs and Collections.
 | ------- | -------- | --------- | -------------------------------------------------------------------------------------------------------- |
 | `child` | various  | STAC Core | The child STAC Catalogs & Collections. Provides curated paths to get to STAC Collection and Item objects |
 
-The following Link relations shall exist in the `/collections` endpoint response.
+The following Link relations must exist in the `/collections` endpoint response.
 
 | **rel** | **href**       | **From**  | **Description** |
 | ------- | -------------- | --------- | --------------- |
 | `root`  | `/`            | STAC Core | The root URI    |
 | `self`  | `/collections` | OAFeat    | Self reference  |
 
-The following Link relations shall exist in the Collection object returned from the `/collections/{collectionId}` endpoint.
+The following Link relations must exist in the Collection object returned from the `/collections/{collectionId}` endpoint.
 
 | **rel**  | **href**                      | **From**  | **Description**                            |
 | -------- | ----------------------------- | --------- | ------------------------------------------ |
@@ -112,22 +112,22 @@ the links section must include a `self` link, and it must also link to alternate
         {
           "rel": "root",
           "type": "application/json",
-          "href": "https://myservice.com"
+          "href": "https://stac-api.example.com"
         },
         {
           "rel": "parent",
           "type": "application/json",
-          "href": "https://myservice.com"
+          "href": "https://stac-api.example.com"
         },
         {
           "rel": "self",
           "type": "application/json",
-          "href": "https://myservice.com/collections/cool-data"
+          "href": "https://stac-api.example.com/collections/cool-data"
         },
         {
           "rel": "items",
           "type": "application/json",
-          "href": "https://myservice.com/collections/cool-data/items"
+          "href": "https://stac-api.example.com/collections/cool-data/items"
         }
       ],
     }
@@ -136,12 +136,12 @@ the links section must include a `self` link, and it must also link to alternate
     {
       "rel": "root",
       "type": "application/json",
-      "href": "https://myservice.com"
+      "href": "https://stac-api.example.com"
     },
     {
       "rel": "self",
       "type": "application/json",
-      "href": "https://myservice.com/collections"
+      "href": "https://stac-api.example.com/collections"
     }
   ]
 }

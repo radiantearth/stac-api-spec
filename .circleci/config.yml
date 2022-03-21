@@ -24,7 +24,7 @@ jobs:
   validate:
     working_directory: ~/stac
     docker:
-      - image: cimg/node:14.7
+      - image: cimg/node:16.14
     steps:
       - checkout
       - save_cache:
@@ -44,7 +44,7 @@ jobs:
   build:
     working_directory: ~/stac
     docker:
-      - image: cimg/node:14.7
+      - image: cimg/node:16.14
     steps:
       - *restore_repo
       - *restore_dependencies
@@ -58,7 +58,7 @@ jobs:
   publish:
     working_directory: ~/stac
     docker:
-      - image: cimg/node:14.7
+      - image: cimg/node:16.14
     steps:
       - *restore_repo
       - *restore_dependencies
@@ -72,7 +72,7 @@ jobs:
   check-core-changes:
     working_directory: ~/stac
     docker:
-      - image: cimg/node:14.7
+      - image: cimg/node:16.14
     steps:
       - *restore_repo
       - *restore_dependencies

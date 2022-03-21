@@ -11,10 +11,10 @@ things clean we specify a conformance class for each, so clients can know exactl
 conformance class is specified in the relevant folder as an 'extension' to the main capability. But their
 semantics are exactly the same, so we put the shared openapi definition in this `fragments` directory.
 
-| Fragment Name                              | Description  |
-| ------------------------------------------ | ------------ |
-| [Context](context/README.md)               | Adds search related metadata (context) to GeoJSON Responses. |
-| [Fields](fields/README.md)                 | Adds parameter to control which fields are returned in the response. |
-| [ItemCollection](itemcollection/README.md) | The specification for a set of items, e.g. returned by a search. |
+| Fragment Name                              | Description                                                                |
+| ------------------------------------------ | -------------------------------------------------------------------------- |
+| [Context](context/README.md)               | Adds search related metadata (context) to GeoJSON Responses.               |
+| [Fields](fields/README.md)                 | Adds parameter to control which fields are returned in the response.       |
+| [ItemCollection](itemcollection/README.md) | The specification for a set of items, e.g. returned by a search.           |
 | [Query](query/README.md)                   | Adds parameter to compare properties and only return the items that match. |
-| [Sort](sort/README.md)                     | Adds Parameter to control sorting of returns results. | 
+| [Sort](sort/README.md)                     | Adds Parameter to control sorting of returns results.                      |

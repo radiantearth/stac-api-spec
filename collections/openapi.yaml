@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: STAC API - Collections
-  version: '1.0.0-beta.5'
+  version: '1.0.0-rc.1'
   description: >-
     This is an OpenAPI definition of the SpatioTemporal Asset Catalog API - Collections
     specification.  This is a subset of the STAC API - Features specification.
@@ -12,14 +12,15 @@ info:
     name: Apache License 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0'
 tags:
+  - name: Core
+    description: essential characteristics of a STAC API
   - name: Collections
-    description: |-
-      All endpoints related to STAC API - Collections
+    description: All endpoints related to STAC API - Collections
 paths:
   '/':
     get:
       tags:
-        - Features
+        - Core
       summary: landing page
       description: |-
         The landing page provides links to the sub-resources.
@@ -38,13 +39,13 @@ paths:
               schema:
                 $ref: '../core/openapi.yaml#/components/schemas/landingPage'
               example:
-                stac_version: 1.0.0-beta.5
+                stac_version: '1.0.0'
                 type: Catalog
                 id: sentinel
                 title: Copernicus Sentinel Imagery
                 description: Catalog of Copernicus Sentinel 1 and 2 imagery.
                 conformsTo:
-                  - 'https://api.stacspec.org/v1.0.0-beta.5/core'
+                  - 'https://api.stacspec.org/v1.0.0-rc.1/core'
                   - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core'
                   - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30'
                   - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson'
@@ -72,7 +73,7 @@ paths:
   '/collections':
     get:
       tags:
-        - Features
+        - Collections
       summary: the feature collections in the dataset
       description: |-
         A body of Feature Collections that belong or are used together with additional links.
@@ -86,7 +87,7 @@ paths:
   '/collections/{collectionId}':
     get:
       tags:
-        - Features
+        - Collections
       summary: |-
         describe the feature collection with id `collectionId`
       description: |-
@@ -164,13 +165,6 @@ components:
         application/json:
           schema:
             $ref: '../core/commons.yaml#/components/schemas/collection'
-    InvalidParameter:
-      description: |-
-        A query parameter has an invalid value.
-      content:
-        application/json:
-          schema:
-            $ref: '../core/commons.yaml#/components/schemas/exception'
     NotFound:
       description: |-
         The requested URI was not found.

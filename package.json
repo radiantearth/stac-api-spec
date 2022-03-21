@@ -1,36 +1,102 @@
 {
-  "name": "api-spec",
-  "version": "1.0.0-beta.5",
-  "description": "STAC API helpers to generate, serve and check the API spec.",
-  "repository": "https://github.com/radiantearth/stac-api-spec",
-  "license": "Apache-2.0",
-  "scripts": {
-    "serve": "redoc-cli serve core/openapi.yaml --watch --options.expandResponses \"200,201,202,203,204\" --options.pathInMiddlePanel true",
-    "check": "npm run check-markdown && npm run check-openapi",
-    "check-markdown": "remark . -f -r .circleci/rc.yaml --ignore-pattern stac-spec/",
-    "check-openapi": "npm run check-openapi-core && npm run check-openapi-commons && npm run check-openapi-ogcapi-features && npm run check-openapi-item-search && npm run check-openapi-fragments && npm run check-openapi-collections && npm run check-openapi-children",
-    "check-openapi-core": "spectral lint core/openapi.yaml --ruleset .circleci/.spectral.yml",
-    "check-openapi-commons": "spectral lint core/commons.yaml --ruleset .circleci/.spectral-fragments.yml",
-    "check-openapi-ogcapi-features": "spectral lint ogcapi-features/openapi.yaml ogcapi-features/extensions/*/openapi.yaml --ruleset .circleci/.spectral.yml",
-    "check-openapi-item-search": "spectral lint item-search/openapi.yaml --ruleset .circleci/.spectral.yml",
-    "check-openapi-fragments": "spectral lint fragments/*/openapi.yaml --ruleset .circleci/.spectral-fragments.yml",
-    "check-openapi-collections": "spectral lint collections/openapi.yaml --ruleset .circleci/.spectral.yml",
-    "check-openapi-children": "spectral lint children/openapi.yaml --ruleset .circleci/.spectral.yml",
-    "build-openapi": ".circleci/build-openapi.sh",
-    "publish-openapi": "node .circleci/publish.js",
-    "check-stac-spec-changes": "git diff --quiet HEAD ${npm_config_compare_to} -- stac-spec"
-  },
-  "dependencies": {
-    "@redocly/openapi-cli": "^1.0.0-beta.69",
-    "@stoplight/spectral": "^5.9.2",
-    "gh-pages": "^3.2.3",
-    "redoc-cli": "^0.12.3",
-    "remark-cli": "^8.0.1",
-    "remark-lint": "^7.0.1",
-    "remark-lint-no-html": "^2.0.1",
-    "remark-preset-lint-consistent": "^3.0.1",
-    "remark-preset-lint-markdown-style-guide": "^3.0.1",
-    "remark-preset-lint-recommended": "^4.0.1",
-    "remark-validate-links": "^10.0.2"
-  }
+    "name": "api-spec",
+    "version": "1.0.0-rc.1",
+    "description": "STAC API helpers to generate, serve and check the API spec.",
+    "repository": "https://github.com/radiantearth/stac-api-spec",
+    "license": "Apache-2.0",
+    "scripts": {
+        "serve": "redoc-cli serve core/openapi.yaml --watch --options.expandResponses \"200,201,202,203,204\" --options.pathInMiddlePanel true",
+        "check": "npm run check-markdown && npm run check-openapi",
+        "check-markdown": "remark . --frail --ignore-pattern stac-spec/",
+        "check-openapi": "npm run check-openapi-core && npm run check-openapi-commons && npm run check-openapi-ogcapi-features && npm run check-openapi-item-search && npm run check-openapi-fragments && npm run check-openapi-collections && npm run check-openapi-children",
+        "check-openapi-core": "spectral lint core/openapi.yaml --ruleset .circleci/.spectral.yml",
+        "check-openapi-commons": "spectral lint core/commons.yaml --ruleset .circleci/.spectral-fragments.yml",
+        "check-openapi-ogcapi-features": "spectral lint ogcapi-features/openapi.yaml ogcapi-features/extensions/*/openapi.yaml --ruleset .circleci/.spectral.yml",
+        "check-openapi-item-search": "spectral lint item-search/openapi.yaml --ruleset .circleci/.spectral.yml",
+        "check-openapi-fragments": "spectral lint fragments/*/openapi.yaml --ruleset .circleci/.spectral-fragments.yml",
+        "check-openapi-collections": "spectral lint collections/openapi.yaml --ruleset .circleci/.spectral.yml",
+        "check-openapi-children": "spectral lint children/openapi.yaml --ruleset .circleci/.spectral.yml",
+        "build-openapi": ".circleci/build-openapi.sh",
+        "publish-openapi": "node .circleci/publish.js",
+        "check-stac-spec-changes": "git diff --quiet HEAD ${npm_config_compare_to} -- stac-spec"
+    },
+    "dependencies": {
+        "@redocly/openapi-cli": "^1.0.0-beta.87",
+        "@stoplight/spectral-cli": "^6.3.0",
+        "gh-pages": "^3.2.3",
+        "redoc-cli": "^0.13.8",
+        "remark-cli": "^10.0.1",
+        "remark-lint": "^9.1.1",
+        "remark-gfm": "^3.0.1",
+        "remark-lint-no-html": "^3.1.1",
+        "remark-preset-lint-consistent": "^5.1.1",
+        "remark-preset-lint-markdown-style-guide": "^5.1.2",
+        "remark-preset-lint-recommended": "^6.1.2",
+        "remark-validate-links": "^11.0.2"
+    },
+    "remarkConfig": {
+        "plugins": [
+            "remark-gfm",
+            "validate-links",
+            "remark-preset-lint-consistent",
+            "remark-preset-lint-markdown-style-guide",
+            "remark-preset-lint-recommended",
+            "lint-no-html",
+            [
+                "remark-lint-emphasis-marker",
+                "*"
+            ],
+            "remark-lint-hard-break-spaces",
+            "remark-lint-blockquote-indentation",
+            "remark-lint-no-consecutive-blank-lines",
+            [
+                "remark-lint-maximum-line-length",
+                150
+            ],
+            "remark-lint-fenced-code-flag",
+            "remark-lint-fenced-code-marker",
+            "remark-lint-no-shell-dollars",
+            [
+                "remark-lint-code-block-style",
+                "fenced"
+            ],
+            "remark-lint-heading-increment",
+            "remark-lint-no-multiple-toplevel-headings",
+            "remark-lint-no-heading-punctuation",
+            [
+                "remark-lint-maximum-heading-length",
+                70
+            ],
+            [
+                "remark-lint-heading-style",
+                "atx"
+            ],
+            [
+                "remark-lint-no-shortcut-reference-link",
+                false
+            ],
+            "remark-lint-list-item-bullet-indent",
+            "remark-lint-ordered-list-marker-style",
+            "remark-lint-ordered-list-marker-value",
+            "remark-lint-checkbox-character-style",
+            [
+                "remark-lint-unordered-list-marker-style",
+                "-"
+            ],
+            [
+                "remark-lint-list-item-indent",
+                "space"
+            ],
+            "remark-lint-table-pipes",
+            "remark-lint-no-literal-urls",
+            [
+                "remark-lint-no-file-name-irregular-characters",
+                false
+            ],
+            [
+                "remark-lint-list-item-spacing",
+                false
+            ]
+        ]
+    }
 }

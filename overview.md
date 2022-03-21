@@ -20,7 +20,7 @@ off point for the more powerful capabilities - it contains a list of URL's, each
 'relationships' (`rel`) to indicate their functionality. Note that the [STAC Core specification](stac-spec) provides 
 most all the content of API responses - the STAC API is primarily concerned with the return of STAC 
 [Item](stac-spec/item-spec/README.md) and [Collection](stac-spec/collection-spec/README.md) objects via a 
-web API.  See the [rendered OpenAPI document](https://api.stacspec.org/v1.0.0-beta.5/core) for more details.
+web API.  See the [rendered OpenAPI document](https://api.stacspec.org/v1.0.0-rc.1/core) for more details.
 
 There are then two major sets of functionality that build on the core, which are designed to be complementary, letting
 implementations choose which parts they want to utilize. Most every STAC API implements at least one, and many follow
@@ -33,14 +33,14 @@ located at a `/search` endpoint. It re-uses all of the OAFeat [query
 parameters](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_items_) specified in their 'core', and adds a 
 couple more. It does not require a full implementation of OAFeat, it is instead a simplified construct that can run a 
 search across any set of indexed STAC [`Item`](stac-spec/item-spec/README.md) objects. See the [rendered OpenAPI 
-document](https://api.stacspec.org/v1.0.0-beta.5/item-spec) for more details.
+document](https://api.stacspec.org/v1.0.0-rc.1/item-spec) for more details.
 
 ### Collections
 
 The other most common set of functionality is [Collections](collections/). This is implemented with the `/collections`
 endpoint and linked to with the `data` relation. The response is a complete list of available STAC `Collection`
 entities. Each individual collection resource can be accessed with the endpoints like `/collection/{collectionId}` 
-by collection ID. This is a subset of the functionality defined by the STAC API - Features conformance class.
+by collection ID. This is a subset of the functionality defined by the *STAC API - Features* conformance class.
 
 This general pattern is  defined in OAFeat's 
 [Feature Collections](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_collections_) as part of
@@ -65,7 +65,7 @@ is always in GeoJSON and OpenAPI is used to specify STAC API. Full compliance in
 individual `/collections/{collectionId}/items` endpoints that expose querying single collections, as OAFeat does
 not currently allow cross-collection search. And it adds a few other requirements, which are highlighted in the 
 [features description](ogcapi-features/), in order to help STAC implementors understand OAFeat without having to
-read the full spec from scratch. See the [rendered OpenAPI document](https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features)
+read the full spec from scratch. See the [rendered OpenAPI document](https://api.stacspec.org/v1.0.0-rc.1/ogcapi-features)
 for more details.
 
 ### Extensions & Fragments
@@ -112,7 +112,7 @@ column is more of an example in some cases. OGC API makes some endpoint location
 | `/search`                                           | [Item Search](item-search) | search            | [ItemCollection](fragments/itemcollection/README.md)                                                | Retrieves a group of Item objects matching the provided search predicates, probably containing search metadata from the `search` extension |
 | **`/collections`**                                  | [OAFeat](ogcapi-features)  | data              | JSON                                                                                                | Object with a list of Collection objects contained in the catalog and links                                                                |
 | **`/conformance`**                                  | [OAFeat](ogcapi-features)  | conformance       | JSON                                                                                                | Info about standards to which the API conforms                                                                                             |
-| `/api`                                              | [OAFeat](ogcapi-features)  | service-desc      | any                                                                           | The description of the endpoints in this service                                                                                    |
+| `/api`                                              | [OAFeat](ogcapi-features)  | service-desc      | any                                                                                                 | The description of the endpoints in this service                                                                                           |
 | **`/collections/{collectionId}`**                   | [OAFeat](ogcapi-features)  | collection        | Collection                                                                                          | Returns single Collection JSON                                                                                                             |
 | **`/collections/{collectionId}/items`**             | [OAFeat](ogcapi-features)  | items             | ItemCollection                                                                                      | GeoJSON FeatureCollection-conformant entity of Item objects in collection                                                                  |
 | **`/collections/{collectionId}/items/{featureId}`** | [OAFeat](ogcapi-features)  | item              | Returns single Item (GeoJSON Feature). This relation is usually not used in OAFeat implementations. |
@@ -122,7 +122,7 @@ column is more of an example in some cases. OGC API makes some endpoint location
 STAC API is evolving to utilize OAFeat's 
 '[Conformance](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_declaration_of_conformance_classes)' 
 JSON structure. For 
-STAC API 1.0.0-beta.5 we declare new STAC Conformance classes, with the core ones detailed in the table below. [STAC 
+STAC API 1.0.0-rc.1 we declare new STAC Conformance classes, with the core ones detailed in the table below. [STAC 
 Features](ogcapi-features) requires the core OAFeat conformance classes, and declares that those endpoints return 
 STAC Collection and Feature objects.
 The core STAC conformance classes communicate the conformance JSON only in the root (`/`) document, while OGC API 
@@ -136,12 +136,14 @@ have the URIs for conformance to actually resolve to machine-readable informatio
 
 ### Conformance Class Table
 
-| **Name**      | **Specified in**                       | **Conformance URI**                                      | **Description**                                                                                                 |
-| ------------- | -------------------------------------- | -------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| STAC Core     | [Core](core)                           | <https://api.stacspec.org/v1.0.0-beta.5/core>            | Specifies the STAC Landing page `/`, communicating conformance and available endpoints.                         |
-| Item Search   | [Item Search](item-search)             | <https://api.stacspec.org/v1.0.0-beta.5/item-search>     | Enables search of all STAC Item objects on the server, with the STAC `[/search](#stac-api-endpoints)` endpoint. |
-| STAC Features | [STAC API - Features](ogcapi-features) | <https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features> | Specifies the use of OGC API - Features to serve STAC Item and Collection objects                               |
-| Collections   | [Collections](collections)             | <https://api.stacspec.org/v1.0.0-beta.5/collections>     | Specifies the use of a subset of OGC API - Features to serve Collection objects                                 |
+| **Name**      | **Specified in**                       | **Conformance URI**                                    | **Description**                                                                                                 |
+| ------------- | -------------------------------------- | ------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
+| STAC Core     | [Core](core)                           | <https://api.stacspec.org/v1.0.0-rc.1/core>            | Specifies the STAC Landing page `/`, communicating conformance and available endpoints.                         |
+| Item Search   | [Item Search](item-search)             | <https://api.stacspec.org/v1.0.0-rc.1/item-search>     | Enables search of all STAC Item objects on the server, with the STAC `[/search](#stac-api-endpoints)` endpoint. |
+| STAC Features | [STAC API - Features](ogcapi-features) | <https://api.stacspec.org/v1.0.0-rc.1/ogcapi-features> | Specifies the use of OGC API - Features to serve STAC Item and Collection objects                               |
+| Collections   | [Collections](collections)             | <https://api.stacspec.org/v1.0.0-rc.1/collections>     | Specifies the use of a subset of OGC API - Features to serve Collection objects                                 |
+| Children      | [Children](children)                   | <https://api.stacspec.org/v1.0.0-rc.1/children>        | Returns child objects of a Catalog                                                                              |
+| Browseable    | [Browseable](browseable)               | <https://api.stacspec.org/v1.0.0-rc.1/browseable>      | Indicates that all Items in a Catalog can be accessed through following child and item link relations           |
 
 Additional conformance classes are specified in the [STAC Extensions](extensions.md#Conformance-classes-of-extensions).
 
@@ -163,11 +165,11 @@ The Landing Page will at least have the following `conformsTo` and `links`:
     "description": "This Catalog aims to demonstrate the a simple landing page",
     "type": "Catalog",
     "conformsTo" : [
-        "https://api.stacspec.org/v1.0.0-beta.5/core",
-        "https://api.stacspec.org/v1.0.0-beta.5/browseable",
-        "https://api.stacspec.org/v1.0.0-beta.5/collections",
-        "https://api.stacspec.org/v1.0.0-beta.5/ogcapi-features",
-        "https://api.stacspec.org/v1.0.0-beta.5/item-search",
+        "https://api.stacspec.org/v1.0.0-rc.1/core",
+        "https://api.stacspec.org/v1.0.0-rc.1/browseable",
+        "https://api.stacspec.org/v1.0.0-rc.1/collections",
+        "https://api.stacspec.org/v1.0.0-rc.1/ogcapi-features",
+        "https://api.stacspec.org/v1.0.0-rc.1/item-search",
         "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core",
         "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30",
         "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson"
@@ -176,47 +178,47 @@ The Landing Page will at least have the following `conformsTo` and `links`:
         {
             "rel": "self",
             "type": "application/json",
-            "href": "https://stacserver.org"
+            "href": "https://stac-api.example.com"
         },
         {
             "rel": "root",
             "type": "application/json",
-            "href": "https://stacserver.org"
+            "href": "https://stac-api.example.com"
         },
         {
             "rel": "conformance",
             "type": "application/json",
-            "href": "https://stacserver.org/conformance"
+            "href": "https://stac-api.example.com/conformance"
         },
         {
             "rel": "service-desc",
             "type": "application/vnd.oai.openapi+json;version=3.0",
-            "href": "https://stacserver.org/api"
+            "href": "https://stac-api.example.com/api"
         },
         {
             "rel": "service-doc",
             "type": "text/html",
-            "href": "https://stacserver.org/api.html"
+            "href": "https://stac-api.example.com/api.html"
         },
         {
             "rel": "data",
             "type": "application/json",
-            "href": "https://stacserver.org/collections"
+            "href": "https://stac-api.example.com/collections"
         },
         {
             "rel": "child",
             "type": "application/json",
-            "href": "https://stacserver.org/collections/sentinel-2",
+            "href": "https://stac-api.example.com/collections/sentinel-2",
         },
         {
             "rel": "child",
             "type": "application/json",
-            "href": "https://stacserver.org/collections/landsat-8",
+            "href": "https://stac-api.example.com/collections/landsat-8",
         },
         {
             "rel": "search",
             "type": "application/geo+json",
-            "href": "https://stacserver.org/search"
+            "href": "https://stac-api.example.com/search"
         }
     ]
 }
