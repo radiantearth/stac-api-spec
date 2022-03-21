@@ -1,0 +1,1569 @@
+openapi: 3.0.3
+info:
+  title: STAC API - Item Search
+  version: 1.0.0-rc.1
+  description: >-
+    This is an OpenAPI definition of the SpatioTemporal Asset Catalog API - Item
+    Search specification.
+  contact:
+    name: STAC Specification
+    url: http://stacspec.org
+  license:
+    name: Apache License 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0
+tags:
+  - name: Item Search
+    description: essential characteristics of a STAC API
+paths:
+  /search:
+    get:
+      summary: Search STAC items with simple filtering.
+      operationId: getItemSearch
+      description: |-
+        Retrieve Items matching filters. Intended as a shorthand API for simple
+        queries.
+
+        This method is required to implement.
+
+        If this endpoint is implemented on a server, it is required to add a
+        link referring to this endpoint with `rel` set to `search` to the
+        `links` array in `GET /`. As `GET` is the default method, the `method`
+        may not be set explicitly in the link.
+      tags:
+        - Item Search
+      parameters:
+        - $ref: '#/components/parameters/bbox'
+        - $ref: '#/components/parameters/intersects'
+        - $ref: '#/components/parameters/datetime'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/ids'
+        - $ref: '#/components/parameters/collectionsArray'
+        - $ref: '#/components/parameters/fields'
+        - $ref: '#/components/parameters/filter'
+        - $ref: '#/components/parameters/sortby'
+      responses:
+        '200':
+          description: A feature collection.
+          content:
+            application/geo+json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/itemCollection'
+                  - $ref: '#/components/schemas/schemas-itemCollection'
+            text/html:
+              schema:
+                type: string
+        default:
+          $ref: '#/components/responses/Error'
+    post:
+      summary: Search STAC items with full-featured filtering.
+      operationId: postItemSearch
+      description: |-
+        Retrieve items matching filters. Intended as the standard, full-featured
+        query API.
+
+        This method is optional to implement, but recommended.
+
+        If this endpoint is implemented on a server, it is required to add a
+        link referring to this endpoint with `rel` set to `search` and `method`
+        set to `POST` to the `links` array in `GET /`.
+      tags:
+        - Item Search
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/searchBody'
+                - $ref: '#/components/schemas/schemas-searchBody'
+                - $ref: '#/components/schemas/components-schemas-searchBody'
+                - $ref: '#/components/schemas/openapi_components-schemas-searchBody'
+      responses:
+        '200':
+          description: A feature collection.
+          content:
+            application/geo+json:
+              schema:
+                $ref: '#/components/schemas/itemCollection'
+            text/html:
+              schema:
+                type: string
+        default:
+          $ref: '#/components/responses/Error'
+components:
+  parameters:
+    ids:
+      name: ids
+      in: query
+      description: Array of Item ids to return.
+      required: false
+      schema:
+        $ref: '#/components/schemas/ids'
+      explode: false
+    collectionsArray:
+      name: collections
+      in: query
+      description: |
+        Array of Collection IDs to include in the search for items.
+        Only Item objects in one of the provided collections will be searched
+      required: false
+      schema:
+        $ref: '#/components/schemas/collectionsArray'
+      explode: false
+    datetime:
+      name: datetime
+      in: query
+      description: >-
+        Either a date-time or an interval, open or closed. Date and time
+        expressions
+
+        adhere to RFC 3339. Open intervals are expressed using double-dots.
+
+
+        Examples:
+
+
+        * A date-time: "2018-02-12T23:20:50Z"
+
+        * A closed interval: "2018-02-12T00:00:00Z/2018-03-18T12:31:12Z"
+
+        * Open intervals: "2018-02-12T00:00:00Z/.." or "../2018-03-18T12:31:12Z"
+
+
+        Only features that have a temporal property that intersects the value of
+
+        `datetime` are selected.
+
+
+        If a feature has multiple temporal properties, it is the decision of the
+
+        server whether only a single temporal property is used to determine
+
+        the extent or all relevant temporal properties.
+      required: false
+      schema:
+        type: string
+      style: form
+      explode: false
+    bbox:
+      name: bbox
+      in: query
+      description: >-
+        Only features that have a geometry that intersects the bounding box are
+        selected.
+
+        The bounding box is provided as four or six numbers, depending on
+
+        whether the coordinate reference system includes a vertical axis (height
+
+        or depth):
+
+
+        * Lower left corner, coordinate axis 1
+
+        * Lower left corner, coordinate axis 2
+
+        * Minimum value, coordinate axis 3 (optional)
+
+        * Upper right corner, coordinate axis 1
+
+        * Upper right corner, coordinate axis 2
+
+        * Maximum value, coordinate axis 3 (optional)
+
+
+        The coordinate reference system of the values is WGS 84
+
+        longitude/latitude (http://www.opengis.net/def/crs/OGC/1.3/CRS84).
+
+
+        For WGS 84 longitude/latitude the values are in most cases the sequence
+
+        of minimum longitude, minimum latitude, maximum longitude and maximum
+
+        latitude. However, in cases where the box spans the antimeridian the
+
+        first value (west-most box edge) is larger than the third value
+
+        (east-most box edge).
+
+
+        If the vertical axis is included, the third and the sixth number are
+
+        the bottom and the top of the 3-dimensional bounding box.
+
+
+        If a feature has multiple spatial geometry properties, it is the
+
+        decision of the server whether only a single spatial geometry property
+
+        is used to determine the extent or all relevant geometries.
+
+
+        Example: The bounding box of the New Zealand Exclusive Economic Zone in
+
+        WGS 84 (from 160.6°E to 170°W and from 55.95°S to 25.89°S) would be
+
+        represented in JSON as `[160.6, -55.95, -170, -25.89]` and in a query as
+
+        `bbox=160.6,-55.95,-170,-25.89`.
+      required: false
+      schema:
+        type: array
+        oneOf:
+          - minItems: 4
+            maxItems: 4
+          - minItems: 6
+            maxItems: 6
+        items:
+          type: number
+      style: form
+      explode: false
+    limit:
+      name: limit
+      in: query
+      description: >-
+        The optional limit parameter recommends the number of items that should
+        be present in the response document.
+
+
+        Only items are counted that are on the first level of the collection in
+        the response document.
+
+        Nested objects contained within the explicitly requested items must not
+        be counted.
+
+
+        Minimum = 1. Maximum = 10000. Default = 10.
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 10000
+        default: 10
+      style: form
+      explode: false
+    intersects:
+      name: intersects
+      in: query
+      description: >-
+        The optional intersects parameter filters the result Items in the same
+        was as bbox, only with
+
+        a GeoJSON Geometry rather than a bbox.
+      required: false
+      schema:
+        $ref: '#/components/schemas/geometryGeoJSON'
+      style: form
+      explode: false
+    fields:
+      name: fields
+      x-stac-api-fragment: fields
+      in: query
+      description: |-
+        **Extension:** Fields
+
+        Determines the shape of the features in the response
+      required: false
+      schema:
+        type: string
+        example: id,type,-geometry,bbox,properties,-links,-assets
+      style: form
+      explode: false
+    filter:
+      name: filter
+      x-stac-api-fragment: filter
+      in: query
+      description: |-
+        **Extension:** Filter
+
+        A CQL2 filter expression for filtering items.
+      required: true
+      schema:
+        oneOf:
+          - $ref: '#/components/schemas/booleanValueExpression'
+          - $ref: '#/components/schemas/filter-cql2-text'
+    sortby:
+      name: sortby
+      x-stac-api-fragment: sort
+      in: query
+      description: |-
+        **Extension:** Sort
+
+        An array of property names, prefixed by either "+" for ascending or
+        "-" for descending. If no prefix is provided, "+" is assumed.
+      required: false
+      schema:
+        type: string
+        example: +id,-properties.eo:cloud_cover
+      style: form
+      explode: false
+  schemas:
+    searchBody:
+      description: The search criteria
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/bboxFilter'
+        - $ref: '#/components/schemas/datetimeFilter'
+        - $ref: '#/components/schemas/intersectsFilter'
+        - $ref: '#/components/schemas/collectionsFilter'
+        - $ref: '#/components/schemas/idsFilter'
+        - $ref: '#/components/schemas/limitFilter'
+    limit:
+      type: integer
+      minimum: 1
+      example: 10
+      default: 10
+      maximum: 10000
+      description: >-
+        The optional limit parameter limits the number of items that are
+        presented in the response document.
+
+
+        If the limit parameter value is greater than advertised limit maximum,
+        the server must return the
+
+        maximum possible number of items, rather than responding with an error.
+
+
+        Only items are counted that are on the first level of the collection in
+        the response document.
+
+        Nested objects contained within the explicitly requested items must not
+        be counted.
+
+
+        Minimum = 1. Maximum = 10000. Default = 10.
+    bboxFilter:
+      type: object
+      description: Only return items that intersect the provided bounding box.
+      properties:
+        bbox:
+          $ref: '#/components/schemas/schemas-bbox'
+    collectionsArray:
+      type: array
+      description: |-
+        Array of Collection IDs to include in the search for items.
+        Only Item objects in one of the provided collections will be searched.
+      items:
+        type: string
+    ids:
+      type: array
+      description: Array of Item ids to return.
+      items:
+        type: string
+    datetimeFilter:
+      description: An object representing a date+time based filter.
+      type: object
+      properties:
+        datetime:
+          $ref: '#/components/schemas/datetime_interval'
+    intersectsFilter:
+      type: object
+      description: Only returns items that intersect with the provided polygon.
+      properties:
+        intersects:
+          $ref: '#/components/schemas/geometryGeoJSON'
+    limitFilter:
+      type: object
+      description: Only returns maximum number of results (page size)
+      properties:
+        limit:
+          $ref: '#/components/schemas/limit'
+    idsFilter:
+      type: object
+      description: Only returns items that match the array of given ids
+      properties:
+        ids:
+          $ref: '#/components/schemas/ids'
+    collectionsFilter:
+      type: object
+      description: Only returns the collections specified
+      properties:
+        collections:
+          $ref: '#/components/schemas/collectionsArray'
+    datetime_interval:
+      type: string
+      description: >-
+        Either a date-time or an interval, open or closed. Date and time
+        expressions
+
+        adhere to RFC 3339. Open intervals are expressed using double-dots.
+
+
+        Examples:
+
+
+        * A date-time: "2018-02-12T23:20:50Z"
+
+        * A closed interval: "2018-02-12T00:00:00Z/2018-03-18T12:31:12Z"
+
+        * Open intervals: "2018-02-12T00:00:00Z/.." or "../2018-03-18T12:31:12Z"
+
+
+        Only features that have a temporal property that intersects the value of
+
+        `datetime` are selected.
+
+
+        If a feature has multiple temporal properties, it is the decision of the
+
+        server whether only a single temporal property is used to determine
+
+        the extent or all relevant temporal properties.
+      example: 2018-02-12T00:00:00Z/2018-03-18T12:31:12Z
+    pointGeoJSON:
+      type: object
+      required:
+        - type
+        - coordinates
+      properties:
+        type:
+          type: string
+          enum:
+            - Point
+        coordinates:
+          type: array
+          minItems: 2
+          items:
+            type: number
+    multipointGeoJSON:
+      type: object
+      required:
+        - type
+        - coordinates
+      properties:
+        type:
+          type: string
+          enum:
+            - MultiPoint
+        coordinates:
+          type: array
+          items:
+            type: array
+            minItems: 2
+            items:
+              type: number
+    linestringGeoJSON:
+      type: object
+      required:
+        - type
+        - coordinates
+      properties:
+        type:
+          type: string
+          enum:
+            - LineString
+        coordinates:
+          type: array
+          minItems: 2
+          items:
+            type: array
+            minItems: 2
+            items:
+              type: number
+    multilinestringGeoJSON:
+      type: object
+      required:
+        - type
+        - coordinates
+      properties:
+        type:
+          type: string
+          enum:
+            - MultiLineString
+        coordinates:
+          type: array
+          items:
+            type: array
+            minItems: 2
+            items:
+              type: array
+              minItems: 2
+              items:
+                type: number
+    polygonGeoJSON:
+      type: object
+      required:
+        - type
+        - coordinates
+      properties:
+        type:
+          type: string
+          enum:
+            - Polygon
+        coordinates:
+          type: array
+          items:
+            type: array
+            minItems: 4
+            items:
+              type: array
+              minItems: 2
+              items:
+                type: number
+    multipolygonGeoJSON:
+      type: object
+      required:
+        - type
+        - coordinates
+      properties:
+        type:
+          type: string
+          enum:
+            - MultiPolygon
+        coordinates:
+          type: array
+          items:
+            type: array
+            items:
+              type: array
+              minItems: 4
+              items:
+                type: array
+                minItems: 2
+                items:
+                  type: number
+    geometryGeoJSON:
+      oneOf:
+        - $ref: '#/components/schemas/pointGeoJSON'
+        - $ref: '#/components/schemas/multipointGeoJSON'
+        - $ref: '#/components/schemas/linestringGeoJSON'
+        - $ref: '#/components/schemas/multilinestringGeoJSON'
+        - $ref: '#/components/schemas/polygonGeoJSON'
+        - $ref: '#/components/schemas/multipolygonGeoJSON'
+        - $ref: '#/components/schemas/geometrycollectionGeoJSON'
+    geometrycollectionGeoJSON:
+      type: object
+      required:
+        - type
+        - geometries
+      properties:
+        type:
+          type: string
+          enum:
+            - GeometryCollection
+        geometries:
+          type: array
+          items:
+            $ref: '#/components/schemas/geometryGeoJSON'
+    booleanValueExpression:
+      type: object
+      oneOf:
+        - $ref: '#/components/schemas/logicalExpression'
+        - $ref: '#/components/schemas/notExpression'
+        - $ref: '#/components/schemas/comparisonPredicate'
+        - $ref: '#/components/schemas/spatialPredicate'
+        - $ref: '#/components/schemas/temporalPredicate'
+        - $ref: '#/components/schemas/arrayPredicate'
+    logicalExpression:
+      type: object
+      required:
+        - op
+        - args
+      properties:
+        op:
+          type: string
+          enum:
+            - and
+            - or
+        args:
+          type: array
+          minItems: 2
+          items:
+            $ref: '#/components/schemas/booleanValueExpression'
+    notExpression:
+      type: object
+      required:
+        - op
+        - args
+      properties:
+        op:
+          type: string
+          enum:
+            - not
+        args:
+          type: array
+          minItems: 1
+          maxItems: 1
+          items:
+            $ref: '#/components/schemas/booleanValueExpression'
+    dateString:
+      type: string
+      format: date
+    dateLiteral:
+      type: object
+      required:
+        - date
+      properties:
+        date:
+          $ref: '#/components/schemas/dateString'
+    timestampString:
+      type: string
+      format: date-time
+    timestampLiteral:
+      type: object
+      required:
+        - timestamp
+      properties:
+        timestamp:
+          $ref: '#/components/schemas/timestampString'
+    instantLiteral:
+      oneOf:
+        - $ref: '#/components/schemas/dateLiteral'
+        - $ref: '#/components/schemas/timestampLiteral'
+    scalarLiteral:
+      oneOf:
+        - type: string
+        - type: number
+        - type: boolean
+        - $ref: '#/components/schemas/instantLiteral'
+    propertyRef:
+      type: object
+      required:
+        - property
+      properties:
+        property:
+          type: string
+    point:
+      title: GeoJSON Point
+      type: object
+      required:
+        - type
+        - coordinates
+      properties:
+        type:
+          type: string
+          enum:
+            - Point
+        coordinates:
+          type: array
+          minItems: 2
+          items:
+            type: number
+        bbox:
+          type: array
+          minItems: 4
+          items:
+            type: number
+    linestring:
+      title: GeoJSON LineString
+      type: object
+      required:
+        - type
+        - coordinates
+      properties:
+        type:
+          type: string
+          enum:
+            - LineString
+        coordinates:
+          type: array
+          minItems: 2
+          items:
+            type: array
+            minItems: 2
+            items:
+              type: number
+        bbox:
+          type: array
+          minItems: 4
+          items:
+            type: number
+    polygon:
+      title: GeoJSON Polygon
+      type: object
+      required:
+        - type
+        - coordinates
+      properties:
+        type:
+          type: string
+          enum:
+            - Polygon
+        coordinates:
+          type: array
+          items:
+            type: array
+            minItems: 4
+            items:
+              type: array
+              minItems: 2
+              items:
+                type: number
+        bbox:
+          type: array
+          minItems: 4
+          items:
+            type: number
+    multipoint:
+      title: GeoJSON MultiPoint
+      type: object
+      required:
+        - type
+        - coordinates
+      properties:
+        type:
+          type: string
+          enum:
+            - MultiPoint
+        coordinates:
+          type: array
+          items:
+            type: array
+            minItems: 2
+            items:
+              type: number
+        bbox:
+          type: array
+          minItems: 4
+          items:
+            type: number
+    multilinestring:
+      title: GeoJSON MultiLineString
+      type: object
+      required:
+        - type
+        - coordinates
+      properties:
+        type:
+          type: string
+          enum:
+            - MultiLineString
+        coordinates:
+          type: array
+          items:
+            type: array
+            minItems: 2
+            items:
+              type: array
+              minItems: 2
+              items:
+                type: number
+        bbox:
+          type: array
+          minItems: 4
+          items:
+            type: number
+    multipolygon:
+      title: GeoJSON MultiPolygon
+      type: object
+      required:
+        - type
+        - coordinates
+      properties:
+        type:
+          type: string
+          enum:
+            - MultiPolygon
+        coordinates:
+          type: array
+          items:
+            type: array
+            items:
+              type: array
+              minItems: 4
+              items:
+                type: array
+                minItems: 2
+                items:
+                  type: number
+        bbox:
+          type: array
+          minItems: 4
+          items:
+            type: number
+    geometryLiteral:
+      oneOf:
+        - $ref: '#/components/schemas/point'
+        - $ref: '#/components/schemas/linestring'
+        - $ref: '#/components/schemas/polygon'
+        - $ref: '#/components/schemas/multipoint'
+        - $ref: '#/components/schemas/multilinestring'
+        - $ref: '#/components/schemas/multipolygon'
+    bbox:
+      type: array
+      oneOf:
+        - minItems: 4
+          maxItems: 4
+        - minItems: 6
+          maxItems: 6
+      items:
+        type: number
+    envelopeLiteral:
+      type: object
+      required:
+        - bbox
+      properties:
+        bbox:
+          $ref: '#/components/schemas/bbox'
+    spatialLiteral:
+      oneOf:
+        - $ref: '#/components/schemas/geometryLiteral'
+        - $ref: '#/components/schemas/envelopeLiteral'
+    instantString:
+      oneOf:
+        - $ref: '#/components/schemas/dateString'
+        - $ref: '#/components/schemas/timestampString'
+    functionRef:
+      type: object
+      required:
+        - function
+      properties:
+        function:
+          $ref: '#/components/schemas/function'
+    intervalArray:
+      type: array
+      minItems: 2
+      maxItems: 2
+      items:
+        oneOf:
+          - $ref: '#/components/schemas/instantString'
+          - type: string
+            enum:
+              - ..
+          - $ref: '#/components/schemas/propertyRef'
+          - $ref: '#/components/schemas/functionRef'
+    intervalLiteral:
+      type: object
+      required:
+        - interval
+      properties:
+        interval:
+          $ref: '#/components/schemas/intervalArray'
+    arithmeticExpression:
+      type: object
+      required:
+        - op
+        - args
+      properties:
+        op:
+          type: string
+          enum:
+            - +
+            - '-'
+            - '*'
+            - /
+        args:
+          $ref: '#/components/schemas/arithmeticOperands'
+    arithmeticOperands:
+      type: array
+      minItems: 2
+      maxItems: 2
+      items:
+        oneOf:
+          - $ref: '#/components/schemas/arithmeticExpression'
+          - $ref: '#/components/schemas/propertyRef'
+          - $ref: '#/components/schemas/functionRef'
+          - type: number
+    arrayLiteral:
+      type: array
+      items:
+        oneOf:
+          - $ref: '#/components/schemas/scalarLiteral'
+          - $ref: '#/components/schemas/spatialLiteral'
+          - $ref: '#/components/schemas/intervalLiteral'
+          - $ref: '#/components/schemas/propertyRef'
+          - $ref: '#/components/schemas/functionRef'
+          - $ref: '#/components/schemas/arithmeticExpression'
+          - $ref: '#/components/schemas/arrayLiteral'
+    function:
+      oneOf:
+        - type: object
+          required:
+            - name
+          properties:
+            name:
+              type: string
+            args:
+              type: array
+              items:
+                oneOf:
+                  - $ref: '#/components/schemas/scalarLiteral'
+                  - $ref: '#/components/schemas/spatialLiteral'
+                  - $ref: '#/components/schemas/intervalLiteral'
+                  - $ref: '#/components/schemas/propertyRef'
+                  - $ref: '#/components/schemas/functionRef'
+                  - $ref: '#/components/schemas/arithmeticExpression'
+                  - $ref: '#/components/schemas/arrayLiteral'
+        - type: object
+          required:
+            - name
+          properties:
+            name:
+              type: string
+              enum:
+                - casei
+                - accenti
+            args:
+              type: array
+              items:
+                oneOf:
+                  - type: string
+                  - $ref: '#/components/schemas/propertyRef'
+                  - $ref: '#/components/schemas/functionRef'
+    scalarExpression:
+      oneOf:
+        - $ref: '#/components/schemas/scalarLiteral'
+        - $ref: '#/components/schemas/propertyRef'
+        - $ref: '#/components/schemas/functionRef'
+        - $ref: '#/components/schemas/arithmeticExpression'
+    scalarOperands:
+      type: array
+      minItems: 2
+      maxItems: 2
+      items:
+        $ref: '#/components/schemas/scalarExpression'
+    binaryComparisonPredicate:
+      type: object
+      required:
+        - op
+        - args
+      properties:
+        op:
+          type: string
+          enum:
+            - '='
+            - <
+            - ''
+            - <=
+            - '>='
+            - <>
+        args:
+          $ref: '#/components/schemas/scalarOperands'
+    characterExpression:
+      oneOf:
+        - type: string
+        - $ref: '#/components/schemas/propertyRef'
+        - $ref: '#/components/schemas/functionRef'
+    isLikeOperands:
+      type: array
+      minItems: 2
+      maxItems: 2
+      items:
+        $ref: '#/components/schemas/characterExpression'
+    isLikePredicate:
+      type: object
+      required:
+        - op
+        - args
+      properties:
+        op:
+          type: string
+          enum:
+            - like
+        args:
+          $ref: '#/components/schemas/isLikeOperands'
+    numericExpression:
+      oneOf:
+        - type: number
+        - $ref: '#/components/schemas/propertyRef'
+        - $ref: '#/components/schemas/functionRef'
+        - $ref: '#/components/schemas/arithmeticExpression'
+    isBetweenOperands:
+      type: array
+      minItems: 3
+      maxItems: 3
+      items:
+        $ref: '#/components/schemas/numericExpression'
+    isBetweenPredicate:
+      type: object
+      required:
+        - op
+        - args
+      properties:
+        op:
+          type: string
+          enum:
+            - between
+        args:
+          $ref: '#/components/schemas/isBetweenOperands'
+    inListOperands:
+      type: array
+      items:
+        oneOf:
+          - $ref: '#/components/schemas/scalarExpression'
+          - type: array
+            items:
+              $ref: '#/components/schemas/scalarExpression'
+    isInListPredicate:
+      type: object
+      required:
+        - op
+        - args
+      properties:
+        op:
+          type: string
+          enum:
+            - in
+        args:
+          $ref: '#/components/schemas/inListOperands'
+    isNullPredicate:
+      type: object
+      required:
+        - op
+        - args
+      properties:
+        op:
+          type: string
+          enum:
+            - isNull
+        args:
+          $ref: '#/components/schemas/scalarExpression'
+    comparisonPredicate:
+      oneOf:
+        - $ref: '#/components/schemas/binaryComparisonPredicate'
+        - $ref: '#/components/schemas/isLikePredicate'
+        - $ref: '#/components/schemas/isBetweenPredicate'
+        - $ref: '#/components/schemas/isInListPredicate'
+        - $ref: '#/components/schemas/isNullPredicate'
+    geomExpression:
+      oneOf:
+        - $ref: '#/components/schemas/spatialLiteral'
+        - $ref: '#/components/schemas/propertyRef'
+        - $ref: '#/components/schemas/functionRef'
+    spatialOperands:
+      type: array
+      minItems: 2
+      maxItems: 2
+      items:
+        $ref: '#/components/schemas/geomExpression'
+    spatialPredicate:
+      type: object
+      required:
+        - op
+        - args
+      properties:
+        op:
+          type: string
+          enum:
+            - s_contains
+            - s_crosses
+            - s_disjoint
+            - s_equals
+            - s_intersects
+            - s_overlaps
+            - s_touches
+            - s_within
+        args:
+          $ref: '#/components/schemas/spatialOperands'
+    temporalLiteral:
+      oneOf:
+        - $ref: '#/components/schemas/instantLiteral'
+        - $ref: '#/components/schemas/intervalLiteral'
+    temporalExpression:
+      oneOf:
+        - $ref: '#/components/schemas/temporalLiteral'
+        - $ref: '#/components/schemas/propertyRef'
+        - $ref: '#/components/schemas/functionRef'
+    temporalOperands:
+      type: array
+      minItems: 2
+      maxItems: 2
+      items:
+        $ref: '#/components/schemas/temporalExpression'
+    temporalPredicate:
+      type: object
+      required:
+        - op
+        - args
+      properties:
+        op:
+          type: string
+          enum:
+            - t_after
+            - t_before
+            - t_contains
+            - t_disjoint
+            - t_during
+            - t_equals
+            - t_finishedBy
+            - t_finishes
+            - t_intersects
+            - t_meets
+            - t_metBy
+            - t_overlappedBy
+            - t_overlaps
+            - t_startedBy
+            - t_starts
+        args:
+          $ref: '#/components/schemas/temporalOperands'
+    arrayExpression:
+      type: array
+      minItems: 2
+      maxItems: 2
+      items:
+        oneOf:
+          - $ref: '#/components/schemas/propertyRef'
+          - $ref: '#/components/schemas/functionRef'
+          - $ref: '#/components/schemas/arrayLiteral'
+    arrayPredicate:
+      type: object
+      required:
+        - op
+        - args
+      properties:
+        op:
+          type: string
+          enum:
+            - a_containedBy
+            - a_contains
+            - a_equals
+            - a_overlaps
+        args:
+          $ref: '#/components/schemas/arrayExpression'
+    filter-cql2-text:
+      description: |
+        A CQL2 filter expression in the 'cql2-text' encoding.
+      type: string
+    exception:
+      type: object
+      description: >-
+        Information about the exception: an error code plus an optional
+        description.
+      required:
+        - code
+      properties:
+        code:
+          type: string
+        description:
+          type: string
+    stac_version:
+      title: STAC version
+      type: string
+      example: 1.0.0
+    stac_extensions:
+      title: STAC extensions
+      type: array
+      uniqueItems: true
+      items:
+        anyOf:
+          - title: Reference to a JSON Schema
+            type: string
+            format: uri
+          - title: Reference to a core extension
+            type: string
+    itemId:
+      type: string
+      description: Provider identifier, a unique ID.
+    schemas-bbox:
+      description: |-
+        Only features that have a geometry that intersects the bounding box are
+        selected. The bounding box is provided as four or six numbers,
+        depending on whether the coordinate reference system includes a
+        vertical axis (elevation or depth):
+
+        * Lower left corner, coordinate axis 1
+        * Lower left corner, coordinate axis 2  
+        * Lower left corner, coordinate axis 3 (optional) 
+        * Upper right corner, coordinate axis 1 
+        * Upper right corner, coordinate axis 2 
+        * Upper right corner, coordinate axis 3 (optional)
+
+        The coordinate reference system of the values is WGS84
+        longitude/latitude (http://www.opengis.net/def/crs/OGC/1.3/CRS84).
+
+        For WGS84 longitude/latitude the values are in most cases the sequence
+        of minimum longitude, minimum latitude, maximum longitude and maximum
+        latitude. However, in cases where the box spans the antimeridian the
+        first value (west-most box edge) is larger than the third value
+        (east-most box edge).
+
+        If a feature has multiple spatial geometry properties, it is the
+        decision of the server whether only a single spatial geometry property
+        is used to determine the extent or all relevant geometries.
+
+        Example: The bounding box of the New Zealand Exclusive Economic Zone in
+        WGS 84 (from 160.6°E to 170°W and from 55.95°S to 25.89°S) would be
+        represented in JSON as `[160.6, -55.95, -170, -25.89]` and in a query as
+        `bbox=160.6,-55.95,-170,-25.89`.
+      type: array
+      minItems: 4
+      maxItems: 6
+      items:
+        type: number
+      example:
+        - -110
+        - 39.5
+        - -105
+        - 40.5
+    itemType:
+      type: string
+      description: The GeoJSON type
+      enum:
+        - Feature
+    link:
+      title: Link
+      type: object
+      required:
+        - href
+        - rel
+      properties:
+        href:
+          type: string
+          format: uri
+          description: The location of the resource
+        rel:
+          type: string
+          description: Relation type of the link
+        type:
+          type: string
+          description: The media type of the resource
+        title:
+          type: string
+          description: Title of the resource
+        method:
+          type: string
+          enum:
+            - GET
+            - POST
+          default: GET
+          description: Specifies the HTTP method that the resource expects
+        headers:
+          type: object
+          description: Object key values pairs they map to headers
+          example:
+            Accept: application/json
+        body:
+          type: object
+          description: >-
+            For POST requests, the resource can specify the HTTP body as a JSON
+            object.
+        merge:
+          type: boolean
+          default: false
+          description: |-
+            This is only valid when the server is responding to POST request.
+
+            If merge is true, the client is expected to merge the body value
+            into the current request body before following the link.
+            This avoids passing large post bodies back and forth when following
+            links, particularly for navigating pages through the `POST /search`
+            endpoint.
+
+            NOTE: To support form encoding it is expected that a client be able
+            to merge in the key value pairs specified as JSON
+            `{"next": "token"}` will become `&next=token`.
+    links:
+      type: array
+      items:
+        $ref: '#/components/schemas/link'
+    datetime:
+      type: string
+      format: date-time
+      nullable: true
+      description: >-
+        The searchable date and time of the assets, in UTC.
+
+        It is formatted according to [RFC 3339, section
+        5.6](https://tools.ietf.org/html/rfc3339#section-5.6).
+
+        `null` is allowed, but requires `start_datetime` and `end_datetime` from
+        common metadata to be set.
+      example: '2018-02-12T00:00:00Z'
+    properties:
+      type: object
+      required:
+        - datetime
+      description: provides the core metadata fields plus extensions
+      properties:
+        datetime:
+          $ref: '#/components/schemas/datetime'
+      additionalProperties:
+        description: >-
+          Any additional properties added in via Item specification or
+          extensions.
+    assets:
+      type: object
+      additionalProperties:
+        type: object
+        required:
+          - href
+        properties:
+          href:
+            type: string
+            format: url
+            description: Link to the asset object
+            example: >-
+              http://cool-sat.com/catalog/collections/cs/items/CS3-20160503_132130_04/thumb.png
+          title:
+            type: string
+            description: Displayed title
+            example: Thumbnail
+          description:
+            type: string
+            description: >-
+              Multi-line description to explain the asset.
+
+
+              [CommonMark 0.29](http://commonmark.org/) syntax MAY be used for
+              rich text representation.
+            example: Small 256x256px PNG thumbnail for a preview.
+          type:
+            type: string
+            description: Media type of the asset
+            example: image/png
+          roles:
+            type: array
+            items:
+              type: string
+            description: Purposes of the asset
+            example:
+              - thumbnail
+    item:
+      description: >-
+        A GeoJSON Feature augmented with foreign members that contain values
+        relevant to a STAC entity
+      type: object
+      required:
+        - stac_version
+        - id
+        - type
+        - geometry
+        - bbox
+        - links
+        - properties
+        - assets
+      properties:
+        stac_version:
+          $ref: '#/components/schemas/stac_version'
+        stac_extensions:
+          $ref: '#/components/schemas/stac_extensions'
+        id:
+          $ref: '#/components/schemas/itemId'
+        bbox:
+          $ref: '#/components/schemas/schemas-bbox'
+        geometry:
+          $ref: '#/components/schemas/geometryGeoJSON'
+        type:
+          $ref: '#/components/schemas/itemType'
+        links:
+          $ref: '#/components/schemas/links'
+        properties:
+          $ref: '#/components/schemas/properties'
+        assets:
+          $ref: '#/components/schemas/assets'
+      example:
+        stac_version: 1.0.0
+        stac_extensions:
+          - https://stac-extensions.github.io/eo/v1.0.0/schema.json
+          - https://stac-extensions.github.io/view/v1.0.0/schema.json
+          - https://example.com/cs-extension/1.0/schema.json
+        type: Feature
+        id: CS3-20160503_132131_05
+        bbox:
+          - -122.59750209
+          - 37.48803556
+          - -122.2880486
+          - 37.613537207
+        geometry:
+          type: Polygon
+          coordinates:
+            - - - -122.308150179
+                - 37.488035566
+              - - -122.597502109
+                - 37.538869539
+              - - -122.576687533
+                - 37.613537207
+              - - -122.2880486
+                - 37.562818007
+              - - -122.308150179
+                - 37.488035566
+        properties:
+          datetime: '2016-05-03T13:22:30.040Z'
+          title: A CS3 item
+          license: PDDL-1.0
+          providers:
+            - name: CoolSat
+              roles:
+                - producer
+                - licensor
+              url: https://cool-sat.com/
+          view:sun_azimuth: 168.7
+          eo:cloud_cover: 0.12
+          view:off_nadir: 1.4
+          platform: coolsat2
+          instruments:
+            - cool_sensor_v1
+          eo:bands: []
+          view:sun_elevation: 33.4
+          eo:gsd: 0.512
+        collection: CS3
+        links:
+          - rel: self
+            href: http://cool-sat.com/collections/CS3/items/20160503_132130_04
+          - rel: root
+            href: http://cool-sat.com/collections
+          - rel: parent
+            href: http://cool-sat.com/collections/CS3
+          - rel: collection
+            href: http://cool-sat.com/collections/CS3
+        assets:
+          analytic:
+            href: >-
+              http://cool-sat.com/static-catalog/CS3/20160503_132130_04/analytic.tif
+            title: 4-Band Analytic
+          thumbnail:
+            href: >-
+              http://cool-sat.com/static-catalog/CS3/20160503_132130_04/thumbnail.png
+            title: Thumbnail
+    itemCollection:
+      description: >-
+        A GeoJSON FeatureCollection augmented with foreign members that contain
+        values relevant to a STAC entity
+      type: object
+      required:
+        - features
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - FeatureCollection
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/item'
+        links:
+          type: array
+          description: >-
+            An array of links. Can be used for pagination, e.g. by providing a
+            link with the `next` relation type.
+          items:
+            $ref: '#/components/schemas/link'
+          example:
+            - rel: next
+              href: >-
+                http://api.cool-sat.com/search?next=ANsXtp9mrqN0yrKWhf-y2PUpHRLQb1GT-mtxNcXou8TwkXhi1Jbk
+    schemas-itemCollection:
+      type: object
+      description: >-
+        **Extension:** Context
+
+
+        Augments lists of resources with the number of returned and matches
+        resource and the given limit for the request.
+      x-stac-api-fragment: context
+      properties:
+        context:
+          type: object
+          required:
+            - returned
+          properties:
+            returned:
+              type: integer
+              minimum: 0
+              example: 1
+            limit:
+              type: integer
+              nullable: true
+              minimum: 0
+              example: 5
+            matched:
+              type: integer
+              minimum: 0
+              example: 314159
+    fields:
+      description: |
+        The include and exclude members specify an array of
+        property names that are either included or excluded
+        from the result, respectively. If both include and
+        exclude are specified, include takes precedence.
+        Values should include the full JSON path of the property.
+      type: object
+      properties:
+        include:
+          type: array
+          items:
+            type: string
+        exclude:
+          type: array
+          items:
+            type: string
+      example:
+        include:
+          - id
+          - properties.eo:cloud_cover
+        exclude:
+          - geometry
+          - properties.datetime
+    schemas-searchBody:
+      type: object
+      x-stac-api-fragment: fields
+      description: |-
+        **Extension:** Fields
+
+        Determines the shape of the features in the response
+      properties:
+        fields:
+          $ref: '#/components/schemas/fields'
+    filter-lang:
+      description: |
+        The CQL2 filter encoding that the 'filter' value uses.
+      type: string
+      enum:
+        - cql2-text
+        - cql2-json
+    filter-crs:
+      description: >
+        The coordinate reference system (CRS) used by spatial literals in the
+        'filter' value.  The only value that STAC APIs must
+
+        accept is 'http://www.opengis.net/def/crs/OGC/1.3/CRS84'.
+      type: string
+      format: uri
+    components-schemas-searchBody:
+      type: object
+      x-stac-api-fragment: filter
+      description: |-
+        **Extension:** Filter
+
+        A filter for properties in Items.
+      properties:
+        filter:
+          $ref: '#/components/schemas/booleanValueExpression'
+        filter-lang:
+          $ref: '#/components/schemas/filter-lang'
+        filter-crs:
+          $ref: '#/components/schemas/filter-crs'
+    sortby:
+      type: array
+      description: |
+        An array of objects containing a property name and sort direction.
+      minItems: 1
+      items:
+        type: object
+        required:
+          - field
+          - direction
+        properties:
+          field:
+            type: string
+          direction:
+            type: string
+            default: asc
+            enum:
+              - asc
+              - desc
+      example:
+        - field: properties.eo:cloud_cover
+          direction: asc
+        - field: id
+          direction: desc
+    openapi_components-schemas-searchBody:
+      type: object
+      x-stac-api-fragment: sort
+      description: |-
+        **Extension:** Sort
+
+        Sort the results.
+      properties:
+        sortby:
+          $ref: '#/components/schemas/sortby'
+  responses:
+    Error:
+      description: An error occurred.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exception'
