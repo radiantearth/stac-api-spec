@@ -74,53 +74,53 @@ The STAC API Landing Page should look like the following (note the `child` link 
 
 ```json
 {
-    "stac_version": "1.0.0",
-    "id": "example-stac",
-    "title": "A simple STAC API Example, implementing STAC API - Children",
-    "description": "This Catalog aims to demonstrate the a simple landing page",
-    "type": "Catalog",
-    "conformsTo" : [
-        "https://api.stacspec.org/v1.0.0-rc.1/core",
-        "https://api.stacspec.org/v1.0.0-rc.1/children",
-        "https://api.stacspec.org/v1.0.0-rc.1/browseable"
-    ],
-    "links": [
-        {
-            "rel": "self",
-            "type": "application/json",
-            "href": "https://stac-api.example.com"
-        },
-        {
-            "rel": "root",
-            "type": "application/json",
-            "href": "https://stac-api.example.com"
-        },
-        {
-            "rel": "service-desc",
-            "type": "application/vnd.oai.openapi+json;version=3.0",
-            "href": "https://stac-api.example.com/api"
-        },
-        {
-            "rel": "service-doc",
-            "type": "text/html",
-            "href": "https://stac-api.example.com/api.html"
-        },
-        {
-            "rel": "children",
-            "type": "application/json",
-            "href": "https://stac-api.example.com/children",
-        },
-        {
-            "rel": "child",
-            "type": "application/json",
-            "href": "https://stac-api.example.com/catalogs/cool-data",
-        },
-        {
-            "rel": "child",
-            "type": "application/json",
-            "href": "https://stac-api.example.com/catalogs/some-other-data",
-        }
-    ]
+  "stac_version": "1.0.0",
+  "id": "example-stac",
+  "title": "A simple STAC API Example, implementing STAC API - Children",
+  "description": "This Catalog aims to demonstrate the a simple landing page",
+  "type": "Catalog",
+  "conformsTo": [
+    "https://api.stacspec.org/v1.0.0-rc.1/core",
+    "https://api.stacspec.org/v1.0.0-rc.1/children",
+    "https://api.stacspec.org/v1.0.0-rc.1/browseable"
+  ],
+  "links": [
+    {
+      "rel": "self",
+      "type": "application/json",
+      "href": "https://stac-api.example.com"
+    },
+    {
+      "rel": "root",
+      "type": "application/json",
+      "href": "https://stac-api.example.com"
+    },
+    {
+      "rel": "service-desc",
+      "type": "application/vnd.oai.openapi+json;version=3.0",
+      "href": "https://stac-api.example.com/api"
+    },
+    {
+      "rel": "service-doc",
+      "type": "text/html",
+      "href": "https://stac-api.example.com/api.html"
+    },
+    {
+      "rel": "children",
+      "type": "application/json",
+      "href": "https://stac-api.example.com/children"
+    },
+    {
+      "rel": "child",
+      "type": "application/json",
+      "href": "https://stac-api.example.com/catalogs/cool-data"
+    },
+    {
+      "rel": "child",
+      "type": "application/json",
+      "href": "https://stac-api.example.com/catalogs/some-other-data"
+    }
+  ]
 }
 ```
 
@@ -137,14 +137,6 @@ The `/children` endpoint response object should look as follows:
       "description": "A lot of awesome words describing the data",
       "type": "Catalog",
       "license": "CC-BY",
-      "extent": {
-        "spatial": {
-          "bbox": [[-135.17, 36.83, -51.24, 62.25]]
-        },
-        "temporal": {
-          "interval": [["2009-01-01T00:00:00Z",null]]
-        }
-      },
       "links": [
         {
           "rel": "root",
@@ -161,7 +153,7 @@ The `/children` endpoint response object should look as follows:
           "type": "application/json",
           "href": "https://stac-api.example.com/catalogs/cool-data"
         }
-      ],
+      ]
     },
     {
       "stac_version": "1.0.0",
@@ -169,14 +161,14 @@ The `/children` endpoint response object should look as follows:
       "id": "some-other-data",
       "title": "Some Other Data from Y Satellite",
       "description": "More awesome words describing the data",
-      "type": "Catalog",
+      "type": "Collection",
       "license": "CC-BY",
       "extent": {
         "spatial": {
           "bbox": [[-135.17, 36.83, -51.24, 62.25]]
         },
         "temporal": {
-          "interval": [["2009-01-01T00:00:00Z",null]]
+          "interval": [["2009-01-01T00:00:00Z", null]]
         }
       },
       "links": [
@@ -193,9 +185,9 @@ The `/children` endpoint response object should look as follows:
         {
           "rel": "self",
           "type": "application/json",
-          "href": "https://stac-api.example.com/catalogs/some-other-data"
+          "href": "https://stac-api.example.com/collections/some-other-data"
         }
-      ],
+      ]
     }
   ],
   "links": [
