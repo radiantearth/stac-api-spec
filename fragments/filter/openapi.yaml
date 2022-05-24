@@ -148,7 +148,7 @@ components:
         A CQL2 filter expression in the 'cql2-text' encoding.
       type: string
     filter-cql2-json:
-      $ref: 'https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/cql2/standard/schema/cql2.yml#/components/schemas/booleanValueExpression'
+      $ref: 'https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/cql2/standard/schema/cql2.yml#/components/schemas/booleanExpression'
     filter-lang:
       description: |
         The CQL2 filter encoding that the 'filter' value uses.
