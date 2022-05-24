@@ -177,12 +177,12 @@ previous (page=2) pages:
   {
     "rel": "prev",
     "href": "https://stac-api.example.com/collections?page=2"
-    "type": "application/geo+json"
+    "type": "application/json"
   },
   {
     "rel": "next",
     "href": "https://stac-api.example.com/collections?page=4"
-    "type": "application/geo+json"
+    "type": "application/json"
   }
 ]
 ```
