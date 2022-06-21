@@ -15,7 +15,7 @@
 
 ## Releases (stable)
 
-- [v1.0.0-rc.1](https://github.com/radiantearth/stac-api-spec/tree/v1.0.0-rc.1)
+- [v1.0.0-rc.1](https://github.com/radiantearth/stac-api-spec/tree/v1.0.0-rc.1) (latest)
 - [v1.0.0-beta.5](https://github.com/radiantearth/stac-api-spec/tree/v1.0.0-beta.5)
 - [v1.0.0-beta.4](https://github.com/radiantearth/stac-api-spec/tree/v1.0.0-beta.4)
 - [v1.0.0-beta.3](https://github.com/radiantearth/stac-api-spec/tree/v1.0.0-beta.3)
