@@ -28,7 +28,7 @@
 The [main](https://github.com/radiantearth/stac-api-spec/tree/main) branch in GitHub is
 used for active development and may be unstable. Implementers should reference one of
 the release branches above for a stable version of the specification.
-*NOTE: This means that if you are on github.com/radiantearth/stac-api-spec then you are looking at an unreleased,
+**NOTE**: This means that if you are on github.com/radiantearth/stac-api-spec then you are looking at an unreleased,
 unstable version of the specification. Use the first listed link on releases to read the current released, stable version
 of the spec.
 ## About
