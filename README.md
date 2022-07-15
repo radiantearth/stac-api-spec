@@ -4,7 +4,8 @@
 # STAC API
 
 - [STAC API](#stac-api)
-  - [Releases](#releases)
+  - [Releases (stable)](#releases-stable)
+  - [Development (unstable)](#development-unstable)
   - [About](#about)
   - [Stability Note](#stability-note)
   - [Maturity Classification](#maturity-classification)
@@ -12,9 +13,9 @@
   - [In this repository](#in-this-repository)
   - [Contributing](#contributing)
 
-## Releases
+## Releases (stable)
 
-- [v1.0.0-rc.1](https://github.com/radiantearth/stac-api-spec/tree/v1.0.0-rc.1)
+- [v1.0.0-rc.1](https://github.com/radiantearth/stac-api-spec/tree/v1.0.0-rc.1) (latest)
 - [v1.0.0-beta.5](https://github.com/radiantearth/stac-api-spec/tree/v1.0.0-beta.5)
 - [v1.0.0-beta.4](https://github.com/radiantearth/stac-api-spec/tree/v1.0.0-beta.4)
 - [v1.0.0-beta.3](https://github.com/radiantearth/stac-api-spec/tree/v1.0.0-beta.3)
@@ -22,6 +23,14 @@
 - [v1.0.0-beta.1](https://github.com/radiantearth/stac-api-spec/tree/v1.0.0-beta.1)
 - [v0.9.0](https://github.com/radiantearth/stac-api-spec/tree/v0.9.0)
 
+## Development (unstable)
+
+The [main](https://github.com/radiantearth/stac-api-spec/tree/main) branch in GitHub is
+used for active development and may be unstable. Implementers should reference one of
+the release branches above for a stable version of the specification.
+**NOTE**: This means that if you are on github.com/radiantearth/stac-api-spec then you are looking at an unreleased,
+unstable version of the specification. Use the first listed link on releases to read the current released, stable version
+of the spec.
 ## About
 
 The SpatioTemporal Asset Catalog (STAC) family of specifications aim to standardize the way geospatial asset metadata is structured and queried.
