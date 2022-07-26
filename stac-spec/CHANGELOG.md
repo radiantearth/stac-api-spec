@@ -7,10 +7,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-### Changed
-
-- [Items and Collections API Version Extension](https://github.com/stac-api-extensions/version/blob/main/README.md) moved out of this specification and into a standalone specification repository.
-
 ## [v1.0.0] - 2021-05-25
 
 ### Added

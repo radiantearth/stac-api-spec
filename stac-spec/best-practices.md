@@ -661,7 +661,7 @@ recommended to include both.
 In the Item and Collection STAC JSON, versions and deprecation can be indicated with the
 [Versioning Indicators Extension](https://github.com/stac-extensions/version).
 
-The [Items and Collections API Version Extension](https://github.com/stac-api-extensions/version/blob/main/README.md) provides endpoints and 
+The [Items and Collections API Version Extension](https://github.com/stac-extensions/version/) provides endpoints and 
 semantics for keeping and accessing previous versions of Collections and Items. The same semantics can be used in static 
 catalogs to preserve previous versions of the documents and link them together.
 
