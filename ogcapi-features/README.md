@@ -344,16 +344,14 @@ The core STAC API only supports retrieving existing Items.
 The Transaction extension supports the creation, editing, and deleting of items through the use of the 
 POST, PUT, PATCH, and DELETE methods. The full description of how this extension works can be found in the 
 [transaction fragment](extensions/transaction/). 
+It is the STAC API equivalent of [OGC API - Features - Part 4: Create, Replace, Update and Delete](https://docs.ogc.org/DRAFTS/20-002.html).
 
 ### Items and Collections API Version Extension
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-rc.1/ogcapi-features/extensions/version>
-- **Extension [Maturity Classification](../README.md#maturity-classification):** Candidate
-- **Definition**: [STAC API - Version](extensions/version/)
+- **Definition**: [Items and Collections API Version Extension](https://github.com/stac-api-extensions/version/blob/main/README.md)
 
-The core API only supports semantics for creating and accessing a single version of an Item or Collection.
+The `STAC API - Features` conformance class only supports semantics for creating and accessing a single version of an Item or Collection.
 The Version Extension defines the API resources and semantics for creating and accessing versioned records.
-It is the STAC API equivalent of [OGC API - Features - Part 4: Create, Replace, Update and Delete](https://docs.ogc.org/DRAFTS/20-002.html).
 
 ### Fields Extension
 
