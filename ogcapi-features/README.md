@@ -177,12 +177,12 @@ previous (page=2) pages:
   {
     "rel": "prev",
     "href": "https://stac-api.example.com/collections?page=2"
-    "type": "application/geo+json"
+    "type": "application/json"
   },
   {
     "rel": "next",
     "href": "https://stac-api.example.com/collections?page=4"
-    "type": "application/geo+json"
+    "type": "application/json"
   }
 ]
 ```
@@ -393,7 +393,7 @@ The full description and examples of this are found in the [context fragment](..
 
 ### Filter Extension
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-rc.1/item-search#filter>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-rc.1/ogcapi-features#filter>
 - **Extension [Maturity Classification](../README.md#maturity-classification):** Pilot
 - **Definition**: [STAC API - Filter Fragment](../fragments/filter/)
 
@@ -407,7 +407,7 @@ fragment](../fragments/filter/).
 
 ### Query Extension
 
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-rc.1/item-search#query>
+- **Conformance URI:** <https://api.stacspec.org/v1.0.0-rc.1/ogcapi-features#query>
 - **Extension [Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Definition**: [STAC API - Query Fragment](../fragments/query/)
 

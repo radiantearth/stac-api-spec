@@ -930,11 +930,11 @@ filter=sentinel:data_coverage > 50 OR landsat:coverage_percent < 10 OR (sentinel
         "args": [
           {
             "op": "isNull",
-            "args": { "property": "sentinel:data_coverage" }
+            "args": [ { "property": "sentinel:data_coverage" } ]
           },
           {
             "op": "isNull",
-            "args": { "property": "landsat:coverage_percent" }
+            "args": [ { "property": "landsat:coverage_percent" } ]
           }
         ]
       }

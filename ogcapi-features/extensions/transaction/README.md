@@ -40,47 +40,54 @@ work to get it incorporated.
 
 When the body is a partial Item:
 
-- Shall only create a new resource.
-- Shall return 409 if an Item exists for the same collection and id values.
-- Shall populate the `collection` field in the Item from the URI.
-- Shall return 201 and a Location header with the URI of the newly added resource for a successful operation.
+- Must only create a new resource.
+- Must have an id field.
+- Must return 409 if an Item exists for the same collection and id field values.
+- Must populate the `collection` field in the Item from the URI.
+- Must return 201 and a Location header with the URI of the newly added resource for a successful operation.
 - May return the content of the newly added resource for a successful operation.
 
 When the body is a partial ItemCollection:
 
-- Shall only create a new resource.
-- Shall return 409 if an Item exists for any of the same collection and id values.
-- Shall populate the `collection` field in each Item from the URI.
-- Shall return 201 without a Location header.
-- May create only some of the Items in the ItemCollection.
+- Must only create a new resource.
+- Each Item in the ItemCollection must have an id field.
+- Must return 409 if an Item exists for any of the same collection and id values.
+- Must populate the `collection` field in each Item from the URI.
+- Must return 201 without a Location header.
+- May create only some of the Items in the ItemCollection. Implementations are not
+  required to implement all-or-none sematics for this operation. For example, if an
+  ItemCollection contains two Items and one is successfully created and the other
+  fails to be created, the server is not required to then delete the successfully
+  created one. When only some of the Items in the ItemCollection are created, the
+  server should communicate this failure back to the client with an error status code.
 
 All cases:
 
-- Shall return 202 if the operation is queued for asynchronous execution.
+- Must return 202 if the operation is queued for asynchronous execution.
 
 ### PUT
 
-- Shall populate the `id` and `collection` fields in the Item from the URI.
-- Shall return 200 or 204 for a successful operation.
+- Must populate the `id` and `collection` fields in the Item from the URI.
+- Must return 200 or 204 for a successful operation.
 - If 200 status code is returned, the server shall return the content of the updated resource for a successful operation.
-- Shall return 202 if the operation is queued for asynchronous execution.
-- Shall return 404 if no Item exists for this resource URI.
+- Must return 202 if the operation is queued for asynchronous execution.
+- Must return 404 if no Item exists for this resource URI.
 - If the `id` or `collection` fields are different from those in the URI, status code 400 shall be returned.
  
 ### PATCH
 
-- Shall populate the `id` and `collection` fields in the Item from the URI.
-- Shall return 200 or 204 for a successful operation.
+- Must populate the `id` and `collection` fields in the Item from the URI.
+- Must return 200 or 204 for a successful operation.
 - If status code 200 is returned, the server shall return the content of the updated resource for a successful operation.
 - May return the content of the updated resource for a successful operation.
-- Shall return 202 if the operation is queued for asynchronous execution.
-- Shall return 404 if no Item exists for this resource URI.
+- Must return 202 if the operation is queued for asynchronous execution.
+- Must return 404 if no Item exists for this resource URI.
 - If the `id` or `collection` fields are different from those in the URI, status code 400 shall be returned.
 
 PATCH is compliant with [RFC 7386](https://tools.ietf.org/html/rfc7386).
 
 ### DELETE
 
-- Shall return 200 or 204 for a successful operation.
-- Shall return a 202 if the operation is queued for asynchronous execution.
+- Must return 200 or 204 for a successful operation.
+- Must return a 202 if the operation is queued for asynchronous execution.
 - May return a 404 if no Item existed prior to the delete operation. Returning a 200 or 204 is also valid in this situation.
