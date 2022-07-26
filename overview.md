@@ -6,7 +6,7 @@ usually want to access
 a subset of the entire catalog, such as for a certain date range, in a particular area of interest, or matching properties
 they care about. STAC API extensions specify those query parameters, and compliant servers return STAC [Item](stac-spec/item-spec/README.md) 
 objects that
-match the user's preferences. A lot of additional functionality can added through the [OGC API](https://ogcapi.ogc.org/) family of
+match the user's preferences. A lot of additional functionality can be added through the [OGC API](https://ogcapi.ogc.org/) family of
 standards, particularly [OGC API - Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) (OAFeat, for our
 shorthand).  Notes on implementation recommendations may be found [here](implementation.md).
 
@@ -15,16 +15,16 @@ shorthand).  Notes on implementation recommendations may be found [here](impleme
 ### Core
 
 The [core](core/) of STAC API simply returns a valid [STAC Catalog](stac-spec/catalog-spec/catalog-spec.md) and a description
-of what parts of the fuller STAC API specification it conforms to. The `links` section of the Catalog is the jumping
-off point for the more powerful capabilities - it contains a list of URL's, each described by particular link 
+of what parts of the fuller STAC API specification it conforms to. The `links` section of the Catalog is the jumping-off
+point for the more powerful capabilities - it contains a list of URLs, each are described by particular link 
 'relationships' (`rel`) to indicate their functionality. Note that the [STAC Core specification](stac-spec) provides 
-most all the content of API responses - the STAC API is primarily concerned with the return of STAC 
+most of the content of API responses - the STAC API is primarily concerned with the return of STAC 
 [Item](stac-spec/item-spec/README.md) and [Collection](stac-spec/collection-spec/README.md) objects via a 
 web API.  See the [rendered OpenAPI document](https://api.stacspec.org/v1.0.0-rc.1/core) for more details.
 
 There are then two major sets of functionality that build on the core, which are designed to be complementary, letting
-implementations choose which parts they want to utilize. Most every STAC API implements at least one, and many follow
-two or all three.	
+implementations choose which parts they want to utilize. Almost every STAC API implements at least one and many follow
+two or all three.
 
 ### Item Search
 
@@ -38,7 +38,7 @@ document](https://api.stacspec.org/v1.0.0-rc.1/item-spec) for more details.
 ### Collections
 
 The other most common set of functionality is [Collections](collections/). This is implemented with the `/collections`
-endpoint and linked to with the `data` relation. The response is a complete list of available STAC `Collection`
+endpoint and linked with the `data` relation. The response is a complete list of available STAC `Collection`
 entities. Each individual collection resource can be accessed with the endpoints like `/collection/{collectionId}` 
 by collection ID. This is a subset of the functionality defined by the *STAC API - Features* conformance class.
 
@@ -71,9 +71,9 @@ for more details.
 ### Extensions & Fragments
 
 Both STAC API and OAFeat allow 'extensions' that can be added for additional functionality. The STAC community has 
-created a number of extensions to OAFeat, in order to meet requirements of its implementors, and the complete list 
-can be found in the [extensions document](extensions.md), which links to each of them and details their maturity . 
-These are specified in OpenAPI, which works cleanly when the new functionality is a new api location (a complete 
+created a number of extensions to OAFeat, in order to meet the requirements of its implementors and the complete list 
+can be found in the [extensions document](extensions.md), which links to each of them and details their maturity. 
+These are specified in OpenAPI, which works cleanly when the new functionality is a new API location (a complete 
 resource, or adding POST to an existing one). Many of the additions, however, are done at the parameter or response 
 level, like adding a `sortby` field to return ordered results. To make these reusable by both Item Search and OAFeat, 
 in STAC they are specified in the [fragments/](fragments/) directory, where the core functionality is described.
@@ -82,7 +82,7 @@ class (to say, for example, that item-search supports `sortby` but ogcapi-featur
 on a fragment then it will likely just be a thin wrapper to declare the conformance. This is a bit less than ideal,
 but it seemed to be the best approach that actually works with OpenAPI.
 
-We are working to fully align STAC's OAFeat extensions to be the same as the OGC API building blocks being worked on,
+We are working to fully align STAC's OAFeat extensions to be the same as the OGC API building blocks being worked on
 so that every STAC extension is specified at the OGC API level. The end goal is for STAC API to just present a 
 curated set of extension options.
 
@@ -92,10 +92,10 @@ This version of STAC API depends on OGC API - Features - Part 1: Core [Version 1
 Future versions will likely depend on [OGC API Common](https://github.com/opengeospatial/ogcapi-common) and additional parts of
 Features as components evolve and mature.
 
-This version of STAC API is intended to work with any STAC core specification version 0.9.x or 1.x.x (included betas), but is not 
+This version of STAC API is intended to work with any STAC core specification version 0.9.x or 1.x.x (including betas), but is not 
 designed to work with STAC 2.0 and above (since we use [SemVer](https://semver.org/) it may introduce backwards incompatible changes). 
 The STAC API spec is released with the latest stable STAC core specification version included in the [`/stac-spec`](stac-spec/) 
-directory as a [submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules). To determine which version it is just check the 
+directory as a [submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules). To determine which version it is, just check the 
 [`/stac-spec/CHANGELOG.md`](stac-spec/CHANGELOG.md) for the topmost version & release date.
 
 ## Capabilities List
@@ -123,7 +123,7 @@ STAC API is evolving to utilize OAFeat's
 '[Conformance](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_declaration_of_conformance_classes)' 
 JSON structure. For 
 STAC API 1.0.0-rc.1 we declare new STAC Conformance classes, with the core ones detailed in the table below. [STAC 
-Features](ogcapi-features) requires the core OAFeat conformance classes, and declares that those endpoints return 
+Features](ogcapi-features) requires the core OAFeat conformance classes and declares that those endpoints return 
 STAC Collection and Feature objects.
 The core STAC conformance classes communicate the conformance JSON only in the root (`/`) document, while OGC API 
 requires they also live at the `/conformance` endpoint. STAC's conformance structure is detailed in the 
@@ -131,7 +131,7 @@ requires they also live at the `/conformance` endpoint. STAC's conformance struc
 conformance URIs serve up a rendered HTML version of the corresponding OpenAPI document at the given location.
 
 **NOTE:** *By 1.0.0 we aim to have requirements classes specified in detail, as testable assertions, 
-like OGC does, but for now the core reference is just this spec document and the OpenAPI yaml. We also desire to 
+as OGC does, but for now the core reference is just this spec document and the OpenAPI YAML. We also desire to 
 have the URIs for conformance to actually resolve to machine-readable information clients can use.*	
 
 ### Conformance Class Table
