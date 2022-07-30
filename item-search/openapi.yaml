@@ -38,10 +38,6 @@ paths:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/ids'
         - $ref: '#/components/parameters/collectionsArray'
-        # extensions
-        - $ref: '../fragments/fields/openapi.yaml#/components/parameters/fields'
-        - $ref: '../fragments/filter/openapi.yaml#/components/parameters/filter'
-        - $ref: '../fragments/sort/openapi.yaml#/components/parameters/sortby'
       responses:
         '200':
           description: A feature collection.
@@ -75,12 +71,7 @@ paths:
         content:
           application/json:
             schema:
-              allOf:
-                - $ref: '#/components/schemas/searchBody'
-                # extensions
-                - $ref: '../fragments/fields/openapi.yaml#/components/schemas/searchBody'
-                - $ref: '../fragments/filter/openapi.yaml#/components/schemas/searchBody'
-                - $ref: '../fragments/sort/openapi.yaml#/components/schemas/searchBody'
+              $ref: '#/components/schemas/searchBody'
       responses:
         '200':
           description: A feature collection.
