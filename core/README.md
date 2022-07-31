@@ -27,7 +27,7 @@ this "browse" mode of interaction is complementary to the dynamic search capabil
 Conversely, STAC API implementations may not support browse, even though the root is a Catalog object, if they do not
 have the appropriate `child` and `item` link relations to traverse over the objects in the catalog. STAC API
 implementations may provide an even greater guarantee of Item reachability with the
-[STAC API - Browseable](../browseable/README.md) conformance class.
+[Browseable Extension](https://github.com/stac-api-extensions/browseable).
 
 Providing these two complementary ways of interacting with the catalog allow users to iteratively interrogate the data
 to discover what data is available through browse and filter the data to only what they are interested in
@@ -214,7 +214,7 @@ None.
 A STAC API is more useful when it presents a complete `Catalog` representation of all the data contained in the
 API, such that all `Item` objects can be reached by transitively traversing `child` and `item` link relations from
 the root. This property of being able to reach all Items in this way is formalized in the
-[*STAC API - Browseable* conformance class](../browseable/README.md), but any Catalog can be structured for hierarchical traversal. 
+[Browseable Extension](https://github.com/stac-api-extensions/browseable), but any Catalog can be structured for hierarchical traversal. 
 Implementers who have search as their primary use case should consider also implementing this
 alternate view over the data by presenting it as a directed graph of catalogs, where the `child` link relations typically
 form a tree, and where each catalog can be retrieved with a single request (e.g., each Catalog JSON is small enough that

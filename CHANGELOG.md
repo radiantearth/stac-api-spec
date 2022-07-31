@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - [Transaction](https://github.com/stac-api-extensions/transaction/blob/main/README.md)
     - [Query](https://github.com/stac-api-extensions/query/blob/main/README.md)
     - [Children](https://github.com/stac-api-extensions/children/blob/main/README.md)
+    - [Browseable](https://github.com/stac-api-extensions/browseable/blob/main/README.md)
 
 ## [v1.0.0-rc.1] - 2022-03-17
 

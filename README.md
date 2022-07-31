@@ -112,14 +112,6 @@ each STAC collection. It also includes extensions that can be used to further en
 The *[item-search](item-search)* folder contains the Item Search specification, which enables 
 cross-collection search of STAC Item objects at a `search` endpoint, as well as a number of extensions. 
 
-**STAC API - Children:**
-The *[children](children)* folder describes how a STAC API Catalog can advertise the children (child catalogs or child collections)
-it contains.
-
-**STAC API - Browseable:**
-The *[browseable](browseable)* folder describes how a STAC API Catalog can advertise that all Items can be accessed
-by following through `child` and `item` link relations.
-
 **Extensions:**
 The *[extensions](extensions.md) document* describes how STAC incubates new functionality, and it links to the existing 
 extensions that can be added to enrich the functionality of a STAC API. Each has an OpenAPI yaml, but some of the yaml
