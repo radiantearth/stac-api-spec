@@ -44,10 +44,7 @@ paths:
           content:
             application/geo+json:
               schema:
-                allOf:
-                  - $ref: '../fragments/itemcollection/openapi.yaml#/components/schemas/itemCollection'
-                  # extensions
-                  - $ref: '../fragments/context/openapi.yaml#/components/schemas/itemCollection'
+                $ref: '../fragments/itemcollection/openapi.yaml#/components/schemas/itemCollection'
             text/html:
               schema:
                 type: string
