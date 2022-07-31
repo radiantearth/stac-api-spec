@@ -9,15 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Extensions moved to standalone specification repositories:
-    - [Items and Collections API Version](https://github.com/stac-api-extensions/version/blob/main/README.md) 
-    - [Fields](https://github.com/stac-api-extensions/fields/blob/main/README.md)
-    - [Filter](https://github.com/stac-api-extensions/filter/blob/main/README.md)
-    - [Context](https://github.com/stac-api-extensions/context/blob/main/README.md)
-    - [Sort](https://github.com/stac-api-extensions/sort/blob/main/README.md)
-    - [Transaction](https://github.com/stac-api-extensions/transaction/blob/main/README.md)
-    - [Query](https://github.com/stac-api-extensions/query/blob/main/README.md)
-    - [Children](https://github.com/stac-api-extensions/children/blob/main/README.md)
-    - [Browseable](https://github.com/stac-api-extensions/browseable/blob/main/README.md)
+    - [Items and Collections API Version](https://github.com/stac-api-extensions/version) 
+    - [Fields](https://github.com/stac-api-extensions/fields)
+    - [Filter](https://github.com/stac-api-extensions/filter)
+    - [Context](https://github.com/stac-api-extensions/context)
+    - [Sort](https://github.com/stac-api-extensions/sort)
+    - [Transaction](https://github.com/stac-api-extensions/transaction)
+    - [Query](https://github.com/stac-api-extensions/query)
+    - [Children](https://github.com/stac-api-extensions/children)
+    - [Browseable](https://github.com/stac-api-extensions/browseable)
 
 ## [v1.0.0-rc.1] - 2022-03-17
 
