@@ -962,7 +962,7 @@ filter=eo:cloud_cover BETWEEN 0 AND 50
     "op": "between",
     "args": [
       { "property": "eo:cloud_cover" },
-      [ 0, 50 ]
+      0, 50
     ]
   }
 }
