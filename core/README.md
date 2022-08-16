@@ -10,13 +10,17 @@
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-rc.1/core)),
 - **Conformance URIs:**
   - <https://api.stacspec.org/v1.0.0-rc.1/core>
+  - <https://api.stacspec.org/v1.0.0-rc.1/browseable>
 - **[Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Dependencies**: None
   and [commons.yaml](commons.yaml) is the OpenAPI version of the core [STAC spec](../stac-spec) JSON Schemas.
 
-All STAC API implementations must support the *STAC API - Core* conformance class. The only requirement of this class
-is to provide a valid [STAC Catalog](../stac-spec/catalog-spec/catalog-spec.md) that also includes a `conformsTo`
-attribute with a string array value. Any API implementing this is considered a valid STAC API.
+All STAC API implementations must implement the *STAC API - Core* specification. The conformance class
+<https://api.stacspec.org/v1.0.0-rc.1/core> requires a server to provide a valid
+[STAC Catalog](../stac-spec/catalog-spec/catalog-spec.md) that also includes a `conformsTo`
+attribute with a string array value. Any API implementing this is considered a valid STAC API. Additionally, 
+a STAC API conforming conformance class (<https://api.stacspec.org/v1.0.0-rc.1/browseable>) must be structured
+such that all Items in the catalog can be accessed by following `child` and `item` link relations. 
 
 Even if a STAC catalog is simply files on a web server or objects in cloud storage, serving these files over HTTP
 makes it into a defacto hypermedia-driven web API. Even if none of the 
@@ -27,7 +31,7 @@ this "browse" mode of interaction is complementary to the dynamic search capabil
 Conversely, STAC API implementations may not support browse, even though the root is a Catalog object, if they do not
 have the appropriate `child` and `item` link relations to traverse over the objects in the catalog. STAC API
 implementations may provide an even greater guarantee of Item reachability with the
-[Browseable Extension](https://github.com/stac-api-extensions/browseable).
+browseable conformance class (<https://api.stacspec.org/v1.0.0-rc.1/browseable>).
 
 Providing these two complementary ways of interacting with the catalog allow users to iteratively interrogate the data
 to discover what data is available through browse and filter the data to only what they are interested in
@@ -69,7 +73,18 @@ The scope of the conformance classes declared in the `conformsTo` field and the 
 to the STAC API Catalog that declares them. A STAC API Catalog may link to sub-catalogs within it via `child` links
 that declare different conformance classes. This is useful when an entire catalog cannot be searched against to
 support the *STAC API - Item Search* conformance class, perhaps because it uses multiple databases to store items,
-but sub-catalogs whose items are all in one database can support search. 
+but sub-catalogs whose items are all in one database can support search.
+
+A STAC API conforming to the *STAC API - Browseable* conformance class
+(<https://api.stacspec.org/v1.0.0-rc.1/browseable>) must be structured such that
+all Items in the catalog can be accessed by following `child` and `item` link relations. This is a more significant
+constraint than a STAC API without this conformance class or a STAC Catalog that is available over HTTP but does not
+implement STAC API, neither of which have any guarantee regarding the reachability of Items. This conformance 
+class is used to signal to users that they can fully navigate to all available Items using a UI (like [STAC Browser](https://github.com/radiantearth/stac-browser), 
+and also makes it clear to crawlers that they can reach everything by following catalog links. 
+
+Recommendations for structuring Catalogs hierarchically can be found in
+[Structuring Catalog Hierarchies](../core/README.md#structuring-catalog-hierarchies) from the *STAC API - Core* specification.
 
 ## Link Relations
 
@@ -96,7 +111,10 @@ supported by this endpoint, e.g., `text/html`.
 | `service-doc` | `/api.html` | OAFeat   | A human-consumable service description. The path for this endpoint is only recommended to be `/api.html`, but may be another path. |
 
 Additionally, `child` relations may exist to child Catalogs and Collections and `item` relations to Items. These
-relations form a directed graph that enables traversal from a root catalog or collection to items.
+relations form a directed graph that enables traversal from a root catalog or collection to items. 
+
+If all Items in a Catalog can be accessed by traversing these links, the browseable conformance class
+<https://api.stacspec.org/v1.0.0-rc.1/browseable> should be advertised also.
 
 | **rel** | **href** | **From**  | **Description**                        |
 | ------- | -------- | --------- | -------------------------------------- |
@@ -214,7 +232,7 @@ None.
 A STAC API is more useful when it presents a complete `Catalog` representation of all the data contained in the
 API, such that all `Item` objects can be reached by transitively traversing `child` and `item` link relations from
 the root. This property of being able to reach all Items in this way is formalized in the
-[Browseable Extension](https://github.com/stac-api-extensions/browseable), but any Catalog can be structured for hierarchical traversal. 
+Browseable conformance class, but any Catalog can be structured for hierarchical traversal. 
 Implementers who have search as their primary use case should consider also implementing this
 alternate view over the data by presenting it as a directed graph of catalogs, where the `child` link relations typically
 form a tree, and where each catalog can be retrieved with a single request (e.g., each Catalog JSON is small enough that

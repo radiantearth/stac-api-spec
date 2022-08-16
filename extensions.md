@@ -37,8 +37,6 @@ This is the list of all official extensions that are contained in the
 | [Query](https://github.com/stac-api-extensions/query/blob/main/README.md)                               | [STAC API - Item Search](item-search/) request                                                             | Adds parameter to search Item and Collection properties.                                                                                    | Candidate  |
 | [Children](https://github.com/stac-api-extensions/children/blob/main/README.md)                         | [STAC API - Core](core/)                                                                                   | Defines advertisement of the children (child catalogs or child collections)                                                                 |
 | a catalog contains.                                                                                     | Proposal                                                                                                   |
-| [Browseable](https://github.com/stac-api-extensions/browseable/blob/main/README.md)                     | [STAC API - Core](core/)                                                                                   | Defines advertising that all Items can be accessed                                                                                          |
-| by following `child` and `item` link relations.                                                         | Proposal                                                                                                   |
 
 ## Vendor Extensions
 

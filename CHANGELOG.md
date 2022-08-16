@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Browseable specification has been incorporated into the *STAC API - Core* specification.
 - Extensions moved to standalone specification repositories:
     - [Items and Collections API Version](https://github.com/stac-api-extensions/version) 
     - [Fields](https://github.com/stac-api-extensions/fields)
@@ -17,7 +18,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - [Transaction](https://github.com/stac-api-extensions/transaction)
     - [Query](https://github.com/stac-api-extensions/query)
     - [Children](https://github.com/stac-api-extensions/children)
-    - [Browseable](https://github.com/stac-api-extensions/browseable)
 
 ## [v1.0.0-rc.1] - 2022-03-17
 
