@@ -142,10 +142,8 @@ have the URIs for conformance to actually resolve to machine-readable informatio
 | Item Search   | [Item Search](item-search)             | <https://api.stacspec.org/v1.0.0-rc.1/item-search>     | Enables search of all STAC Item objects on the server, with the STAC `[/search](#stac-api-endpoints)` endpoint. |
 | STAC Features | [STAC API - Features](ogcapi-features) | <https://api.stacspec.org/v1.0.0-rc.1/ogcapi-features> | Specifies the use of OGC API - Features to serve STAC Item and Collection objects                               |
 | Collections   | [Collections](collections)             | <https://api.stacspec.org/v1.0.0-rc.1/collections>     | Specifies the use of a subset of OGC API - Features to serve Collection objects                                 |
-| Children      | [Children](children)                   | <https://api.stacspec.org/v1.0.0-rc.1/children>        | Returns child objects of a Catalog                                                                              |
-| Browseable    | [Browseable](browseable)               | <https://api.stacspec.org/v1.0.0-rc.1/browseable>      | Indicates that all Items in a Catalog can be accessed through following child and item link relations           |
 
-Additional conformance classes are specified in the [STAC Extensions](extensions.md#Conformance-classes-of-extensions).
+Additional conformance classes can be specified by [STAC API Extensions](extensions.md).
 
 ## Example Landing Page 
 

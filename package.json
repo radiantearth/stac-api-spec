@@ -24,7 +24,7 @@
         "@redocly/openapi-cli": "^1.0.0-beta.94",
         "@stoplight/spectral-cli": "^6.4.2",
         "gh-pages": "^4.0.0",
-        "redoc-cli": "^0.13.16",
+        "redoc-cli": "^0.13.17",
         "remark-cli": "^11.0.0",
         "remark-lint": "^9.1.1",
         "remark-gfm": "^3.0.1",

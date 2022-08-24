@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased] - TBD
+
+### Changed
+
+- Browseable specification has been incorporated into the *STAC API - Core* specification.
+- Extensions moved to standalone specification repositories:
+    - [Items and Collections API Version](https://github.com/stac-api-extensions/version) 
+    - [Fields](https://github.com/stac-api-extensions/fields)
+    - [Filter](https://github.com/stac-api-extensions/filter)
+    - [Context](https://github.com/stac-api-extensions/context)
+    - [Sort](https://github.com/stac-api-extensions/sort)
+    - [Transaction](https://github.com/stac-api-extensions/transaction)
+    - [Query](https://github.com/stac-api-extensions/query)
+    - [Children](https://github.com/stac-api-extensions/children)
+
 ## [v1.0.0-rc.1] - 2022-03-17
 
 ### Added

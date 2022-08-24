@@ -9,13 +9,6 @@
   - [Example Landing Page for STAC API - Features](#example-landing-page-for-stac-api---features)
   - [Example Collection for STAC API - Features](#example-collection-for-stac-api---features)
   - [Extensions](#extensions)
-    - [Transaction Extension](#transaction-extension)
-    - [Items and Collections API Version Extension](#items-and-collections-api-version-extension)
-    - [Fields Extension](#fields-extension)
-    - [Sort Extension](#sort-extension)
-    - [Context Extension](#context-extension)
-    - [Filter Extension](#filter-extension)
-    - [Query Extension](#query-extension)
 
 *based on [**OGC API - Features - Part 1: Core**](https://www.ogc.org/standards/ogcapi-features)*
 
@@ -327,95 +320,11 @@ as is typical with a static STAC Collection, there are no links here with rel va
 ## Extensions
 
 These extensions provide additional functionality that enhances *STAC API - Features*. 
-All are specified as [fragments](../fragments), as they are re-used by extensions to other STAC APIs.
-STAC APIs that offer the following capabilities must include the relevant **conformance URI** in the 
-`conformsTo` response at the root (`/`) landing page, to indicate to clients that they will respond properly 
-to requests from clients.
 
-### Transaction Extension
-
-- **Conformance URIs:**
-  - <https://api.stacspec.org/v1.0.0-rc.1/ogcapi-features/extensions/transaction>
-  - <http://www.opengis.net/spec/ogcapi-features-4/1.0/conf/simpletx>
-- **Extension [Maturity Classification](../README.md#maturity-classification):** Candidate
-- **Definition**: [STAC API - Transaction Fragment](extensions/transaction/)
-
-The core STAC API only supports retrieving existing Items.
-The Transaction extension supports the creation, editing, and deleting of items through the use of the 
-POST, PUT, PATCH, and DELETE methods. The full description of how this extension works can be found in the 
-[transaction fragment](extensions/transaction/). 
-
-### Items and Collections API Version Extension
-
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-rc.1/ogcapi-features/extensions/version>
-- **Extension [Maturity Classification](../README.md#maturity-classification):** Candidate
-- **Definition**: [STAC API - Version](extensions/version/)
-
-The core API only supports semantics for creating and accessing a single version of an Item or Collection.
-The Version Extension defines the API resources and semantics for creating and accessing versioned records.
-It is the STAC API equivalent of [OGC API - Features - Part 4: Create, Replace, Update and Delete](https://docs.ogc.org/DRAFTS/20-002.html).
-
-### Fields Extension
-
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-rc.1/ogcapi-features#fields>
-- **Extension [Maturity Classification](../README.md#maturity-classification):** Candidate
-- **Definition**: [STAC API - Fields Fragment](../fragments/fields/)
-
-By default, the Items resource `/collections/{collectionId}/items` returns all attributes 
-of each Item, as there is no way to specify 
-exactly those attributes that should be returned. The Fields extension to STAC Features adds new functionality that 
-allows the client to suggest to the server which Item attributes should be included or excluded in the response, 
-through the use of a `fields` parameter. The full description of how this extension works can be found in the 
-[fields fragment](../fragments/fields/). 
-
-### Sort Extension
-
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-rc.1/ogcapi-features#sort>
-- **Extension [Maturity Classification](../README.md#maturity-classification):** Candidate
-- **Definition**: [STAC API - Sort Fragment](../fragments/sort/)
-
-By default, the Items resource `/collections/{collectionId}/items` returns results in no specified order. Whatever order the results are in 
-is up to the implementor, and will typically default to an arbitrary order that is fastest for the underlying data store 
-to retrieve results. This extension adds a new parameter, `sortby`, that lets a user specify a comma separated list of
-field names to sort by, with an indication of direction. It uses '+' and
-'-' to indicate sort order of the list of fields. The full description of the semantics
-of this extension can be found in the [sort fragment](../fragments/sort).
-
-### Context Extension
-
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-rc.1/ogcapi-features#context>
-- **Extension [Maturity Classification](../README.md#maturity-classification):** Candidate
-- **Definition**: [STAC API - Context Fragment](../fragments/context/)
-
-This extension is intended to augment the core ItemCollection responses from the Items resource `/collections/{collectionId}/items`  with a
-JSON object called `context` that includes the number of items `matched`, `returned` and the `limit` requested.
-The full description and examples of this are found in the [context fragment](../fragments/context).
-
-### Filter Extension
-
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-rc.1/ogcapi-features#filter>
-- **Extension [Maturity Classification](../README.md#maturity-classification):** Pilot
-- **Definition**: [STAC API - Filter Fragment](../fragments/filter/)
-
-The Features items endpoint, `/collections/{collectionId}/items`, by default only accepts a few parameters to filter the results
-by properties. The Filter extension adds a new parameter, `filter`, that can take a number of comparison operators to
-match predicates between the fields requested and the values of Item objects. It can only be
-used with GET requests, as a POST to the items endpoint is a create operation in the
-Transaction Extension. It supports two
-query formats, `cql2-text` and `cql2-json`. The full details on the JSON structure are specified in the [filter 
-fragment](../fragments/filter/).
-
-### Query Extension
-
-- **Conformance URI:** <https://api.stacspec.org/v1.0.0-rc.1/ogcapi-features#query>
-- **Extension [Maturity Classification](../README.md#maturity-classification):** Candidate
-- **Definition**: [STAC API - Query Fragment](../fragments/query/)
-
-**Note**: It is recommended that implementers implement the [Filter Extension](#filter-extension) instead, as
-it offers a more robust set of operators and uses the CQL2 standard.
-
-The STAC search endpoint, `/search`, by default only accepts a limited set of parameters to limit the results
-by properties. The Query extension adds a new parameter, `query`, that can take a number of comparison operators to
-match predicates between the fields requested and the values of Item objects. It can be used with both GET and POST, though
-GET includes the exact same JSON. The full details on the JSON structure are specified in the [query 
-fragment](../fragments/query/).
+- [Transaction Extension](https://github.com/stac-api-extensions/transaction/blob/main/README.mda)
+- [Items and Collections API Version Extension](https://github.com/stac-api-extensions/version/blob/main/README.mda)
+- [Fields Extension](https://github.com/stac-api-extensions/fields/blob/main/README.mda)
+- [Sort Extension](https://github.com/stac-api-extensions/sort/blob/main/README.mda)
+- [Context Extension](https://github.com/stac-api-extensions/context/blob/main/README.mda)
+- [Filter Extension](https://github.com/stac-api-extensions/filter/blob/main/README.mda)
+- [Query Extension](https://github.com/stac-api-extensions/query/blob/main/README.mda)
