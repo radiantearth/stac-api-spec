@@ -37,8 +37,8 @@ The SpatioTemporal Asset Catalog (STAC) family of specifications aim to standard
 A 'spatiotemporal asset' is any file that represents information about the Earth captured in a certain space and 
 time. The core STAC specifications live in the GitHub repository [radiantearth/stac-spec](https://github.com/radiantearth/stac-spec).
 
-A STAC API is a dynamic version of a SpatioTemporal Asset Catalog. This repository defines the four
-STAC API foundation specifications -- [STAC API - Core](core/), [STAC API - Collections](collections/),
+A STAC API is a dynamic version of a SpatioTemporal Asset Catalog. This repository defines the three
+STAC API foundation specifications -- [STAC API - Core](core/),
 [STAC API - Features](ogcapi-features/), and [STAC API - Item Search](item-search/) -- which can be composed 
 with [Extensions](extensions.md) to define a specific STAC API implementation.
 
@@ -103,9 +103,6 @@ The **[Overview](overview.md)** document describes all the various parts of the 
 **STAC API - Core:**
 The *[core](core/)* folder describes the core STAC API specification that enables browsing catalogs and 
 retrieving the API capabilities. This includes the OpenAPI schemas for STAC Item, Catalog and Collection objects.
-
-**STAC API - Collections:**
-The *[collections](collections)* folder describes how a STAC API Catalog can advertise the Collections it contains.
 
 **STAC API - Features:**
 The *[ogcapi-features](ogcapi-features)* folder describes how a STAC API can fully implement [OGC API - 

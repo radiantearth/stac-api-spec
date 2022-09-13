@@ -14,7 +14,7 @@ shorthand).  Notes on implementation recommendations may be found [here](impleme
 
 ### Core
 
-The [core](core/) of STAC API simply returns a valid [STAC Catalog](stac-spec/catalog-spec/catalog-spec.md) and a description
+The [Core](core/) of STAC API simply returns a valid [STAC Catalog](stac-spec/catalog-spec/catalog-spec.md) and a description
 of what parts of the fuller STAC API specification it conforms to. The `links` section of the Catalog is the jumping-off
 point for the more powerful capabilities - it contains a list of URLs, each are described by particular link 
 'relationships' (`rel`) to indicate their functionality. Note that the [STAC Core specification](stac-spec) provides 
@@ -28,29 +28,14 @@ two or all three.
 
 ### Item Search
 
-The [item search](item-search) functionality is one of the most common, provided by the `search` rel often 
+The [Item Search](item-search) functionality is one of the most common, provided by the `search` rel often 
 located at a `/search` endpoint. It re-uses all of the OAFeat [query 
 parameters](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_items_) specified in their 'core', and adds a 
 couple more. It does not require a full implementation of OAFeat, it is instead a simplified construct that can run a 
 search across any set of indexed STAC [`Item`](stac-spec/item-spec/README.md) objects. See the [rendered OpenAPI 
 document](https://api.stacspec.org/v1.0.0-rc.1/item-spec) for more details.
 
-### Collections
-
-The other most common set of functionality is [Collections](collections/). This is implemented with the `/collections`
-endpoint and linked with the `data` relation. The response is a complete list of available STAC `Collection`
-entities. Each individual collection resource can be accessed with the endpoints like `/collection/{collectionId}` 
-by collection ID. This is a subset of the functionality defined by the *STAC API - Features* conformance class.
-
-This general pattern is  defined in OAFeat's 
-[Feature Collections](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_collections_) as part of
-OGC API - Features Part 1, but STAC is currently just using a subset of the full OAFeat conformance class, 
-so for now it is specified here.
-STAC's [Collection](stac-spec/collection-spec/README.md) extends the OGC Collection with a handful of [additional 
-fields](stac-spec/collection-spec/collection-spec.md#collection-fields). STAC APIs are expected to return STAC
-compliant Collections.
-
-### STAC API - Features
+### Features and Collections
 
 The other major functionality for a STAC API is to [serve STAC Collection and Item](ogcapi-features) objects through 
 the [OGC API - Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) endpoints. This enables any OAFeat client

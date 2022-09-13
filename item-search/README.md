@@ -229,7 +229,7 @@ searching on specific Item properties.
 
 #### PUT / PATCH / DELETE
 
-The other HTTP verbs are not supported in STAC Item Search. The [Transaction Extension](../ogcapi-features/extensions/transaction/README.md)
+The other HTTP verbs are not supported in STAC Item Search. The [Transaction Extension](https://github.com/stac-api-extensions/transaction)
 does implement them, for STAC and OAFeat implementations that want to enable writing and deleting items.
 
 ## Example Landing Page for STAC API - Item Search
