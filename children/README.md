@@ -57,8 +57,8 @@ array of Links in a field `links`.
 ## Pagination
 
 The `/children` endpoint supports a pagination mechanism that aligns with pagination as described in the 
-OGC API - Common - Part 2: Geospatial Data specification. This is described in detail in
-the [STAC - Features Collection Pagination section](../ogcapi-features/README.md#collection-pagination).
+[OGC API - Common - Part 2: Geospatial Data](https://portal.ogc.org/files/99149) specification. This is described in detail in
+the [STAC API - Features section on Collection Pagination](../ogcapi-features/README.md#collection-pagination).
 To the greatest extent possible, the catalog should be structured such that all children can be
 retrieved from the endpoint in a single call.
 

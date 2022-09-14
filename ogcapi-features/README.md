@@ -223,10 +223,11 @@ See the [paging examples](../item-search/examples.md#paging-examples) for additi
 
 OAFeat does not define a specific mechanism for how clients may access all collections from servers
 with many
-collections. STAC - Features adds support for this with pagination (similar to the Item pagination
+collections. STAC API - Features adds support for this with pagination (similar to the Item pagination
 mechanism) through hypermedia links for the Collections resource
 (`/collections`). This mechanism aligns with pagination of collections in the
-OGC API - Common - Part 2: Geospatial Data specification. With this, a link with
+[OGC API - Common - Part 2: Geospatial Data](https://portal.ogc.org/files/99149) specification. 
+With this, a link with
 relation `next` is included in the `links` array,
 and this is used to navigate to the next page of Collection objects. The specific query
 parameter used for paging is implementation specific and not defined by STAC API. For example,
