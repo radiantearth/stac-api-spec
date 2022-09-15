@@ -45,7 +45,7 @@ with [Extensions](extensions.md) to define a specific STAC API implementation.
 A STAC API can be used to retrieve STAC [Catalog](stac-spec/catalog-spec/catalog-spec.md), 
 [Collection](stac-spec/collection-spec/collection-spec.md), [Item](stac-spec/item-spec/item-spec.md), 
 or STAC API [ItemCollection](fragments/itemcollection/README.md) objects from various endpoints.
-Catalog and Collection objects are JSON, while Item and ItemCollection objects are GeoJSON-compliant entities with foreign members.  
+Catalog and Collection objects are JSON, while Item and ItemCollection objects are GeoJSON-compliant entities with foreign members.
 Typically, a Feature is used when returning a single Item object, and FeatureCollection when multiple Item objects (rather than a 
 JSON array of Item entities).
 
