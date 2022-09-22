@@ -9,21 +9,25 @@
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-rc.1/children))
 - **Conformance URIs:** 
   - <https://api.stacspec.org/v1.0.0-rc.1/children>
-  - <https://api.stacspec.org/v1.0.0-rc.1/core>
 - **[Maturity Classification](../README.md#maturity-classification):** Proposal
 - **Dependencies**: [STAC API - Core](../core)
 
-A STAC API Landing Page (a Catalog) can return information about the Catalog and Collection child objects
-it contains using the link relation `children` to an endpoint `/children`. The `/children` endpoint must
-return the all the Catalog and Collection objects referenced by these `child` link relations.
+The *STAC API - Children* specification defines the *STAC API - Children* conformance class
+(<https://api.stacspec.org/v1.0.0-rc.1/children>), which defines an endpoint that presents a
+single resource from which clients can retrieve the immediate children of a Catalog.
 
-The purpose of this endpoint is to present a single resource from which clients can retrieve
-the immediate children of a Catalog, which may be Catalog or Collection objects.
+With this conformance class, a STAC API Landing Page (a Catalog) can return information about the Catalog
+and Collection child objects
+it contains using the link relation `children` to an endpoint `/children`. 
+
 While the `child` link relations in a Catalog already allow for describing these
 relationships, this scheme requires a client to retrieve each resource URL to find any information about
 the children (e.g., title, description), which can cause significant performance issues in user-facing
 applications. Implementers may choose to to return only a subset of fields for each Catalog or Collection,
 but the objects must still be valid Catalogs and Collections.
+
+The `/children` endpoint must
+return the all the Catalog and Collection objects referenced by `child` link relations.
 
 ## Link Relations
 

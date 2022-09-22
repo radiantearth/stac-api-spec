@@ -24,9 +24,6 @@
 - **Conformance Class URIs:**
   - <https://api.stacspec.org/v1.0.0-rc.1/ogcapi-features> - Features
   - <https://api.stacspec.org/v1.0.0-rc.1/collections> - Collections
-  - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core> - [OGC API - Features - Conformance Class Core](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_core)
-  - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson> - [OGC API - Features - Conformance Class GeoJSON](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_geojson)
-  - <http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30> - [OGC API - Features - Conformance Class OpenAPI 3.0](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_oas30)
 - **[Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Dependencies**:
   - [STAC API - Core](../core)
