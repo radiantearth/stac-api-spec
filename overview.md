@@ -35,7 +35,7 @@ couple more. It does not require a full implementation of OAFeat, it is instead 
 search across any set of indexed STAC [`Item`](stac-spec/item-spec/README.md) objects. See the [rendered OpenAPI 
 document](https://api.stacspec.org/v1.0.0-rc.1/item-spec) for more details.
 
-### Features and Collections
+### Collections and Features
 
 The other major functionality for a STAC API is to [serve STAC Collection and Item](ogcapi-features) objects through 
 the [OGC API - Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) endpoints. This enables any OAFeat client
@@ -126,8 +126,8 @@ have the URIs for conformance to actually resolve to machine-readable informatio
 | STAC API - Core        | [Core](core)                                | <https://api.stacspec.org/v1.0.0-rc.1/core>            | Specifies the STAC Landing page `/`, communicating conformance and available endpoints.                         |
 | STAC API - Browseable  | [Core](core)                                | <https://api.stacspec.org/v1.0.0-rc.1/browseable>      | Advertises .                                                                                                    |
 | STAC API - Item Search | [Item Search](item-search)                  | <https://api.stacspec.org/v1.0.0-rc.1/item-search>     | Enables search of all STAC Item objects on the server, with the STAC `[/search](#stac-api-endpoints)` endpoint. |
-| STAC API - Features    | [Features and Collections](ogcapi-features) | <https://api.stacspec.org/v1.0.0-rc.1/ogcapi-features> | Specifies the use of OGC API - Features to serve STAC Item and Collection objects                               |
-| STAC API - Collections | [Features and Collections](ogcapi-features) | <https://api.stacspec.org/v1.0.0-rc.1/collections>     | Specifies the use of a subset of STAC API - Features to serve Collection objects                                |
+| STAC API - Features    | [Collections and Features](ogcapi-features) | <https://api.stacspec.org/v1.0.0-rc.1/ogcapi-features> | Specifies the use of OGC API - Features to serve STAC Item and Collection objects                               |
+| STAC API - Collections | [Collections and Features](ogcapi-features) | <https://api.stacspec.org/v1.0.0-rc.1/collections>     | Specifies the use of a subset of STAC API - Features to serve Collection objects                                |
 | STAC API - Children    | [Children](children)                        | <https://api.stacspec.org/v1.0.0-rc.1/children>        | Specifies and endpoint exists to retrieve all of the children of the catalog (sub-catalogs and collections)     |
 
 Additional conformance classes can be specified by [STAC API Extensions](extensions.md).

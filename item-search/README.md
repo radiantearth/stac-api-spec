@@ -22,7 +22,8 @@
 - **Dependencies**: [STAC API - Core](../core)
 - **Examples**: [examples.md](examples.md)
 
-The *STAC API - Item Search* specification defines the *STAC API - Item Search* conformance class (<https://api.stacspec.org/v1.0.0-rc.1/item-search>), which
+The *STAC API - Item Search* specification defines the *STAC API - Item Search*
+conformance class (<https://api.stacspec.org/v1.0.0-rc.1/item-search>), which
 provides the ability to search for STAC [Item](../stac-spec/item-spec/README.md)
 objects across collections.
 It retrieves a group of Item objects that match the provided parameters, wrapped in an

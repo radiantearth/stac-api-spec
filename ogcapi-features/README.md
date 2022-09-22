@@ -1,6 +1,6 @@
-# STAC API - Features and Collections Specification
+# STAC API - Collections and Features Specification
 
-- [STAC API - Features and Collections Specification](#stac-api---features-and-collections-specification)
+- [STAC API - Collections and Features Specification](#stac-api---collections-and-features-specification)
   - [Conformance Classes](#conformance-classes)
     - [STAC API - Features](#stac-api---features)
     - [STAC API - Collections](#stac-api---collections)
@@ -30,7 +30,7 @@
   - [OGC API - Features](https://www.ogc.org/standards/ogcapi-features)
   uses all the OGC API - Features openapi fragments to describe returning STAC Item objects.
 
-The *STAC API - Features and Collections* specification extends the
+The *STAC API - Collections and Features* specification extends the
 [OGC API - Features - Part 1: Core](https://docs.opengeospatial.org/is/17-069r3/17-069r3.html)
 (OAFeat) specification. OAFeat
 allows returning any content type from its endpoints, whereas *STAC API - Features* requires support
@@ -41,7 +41,7 @@ entities. As these entities are also GeoJSON types, the GeoJSON conformance clas
 ## Conformance Classes
 
 While OAFeat defines a single conformance class for its endpoints, STAC API divides these behaviors into two
-conformance classes -- Features and Collections. The STAC API - Features
+conformance classes -- Collections and Features. The STAC API - Features
 (<https://api.stacspec.org/v1.0.0-rc.1/ogcapi-features>) conformance class includes and extends the behavior
 of OAFeat, while the STAC API - Collections (<https://api.stacspec.org/v1.0.0-rc.1/collections>) conformance
 class is the subset of Features that pertains only to Collections.
