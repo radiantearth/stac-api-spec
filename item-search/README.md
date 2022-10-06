@@ -105,13 +105,13 @@ See [examples](examples.md) for some example requests.
 
 **limit** The limit parameter follows the same semantics of the OAFeat Item resource limit parameter. The value is
 a suggestion to the server as to the maximum number of Item objects the
-client would prefer in the response. The OpenAPI specification defines the default and maximum values
+client would prefer in the response. The server must return fewer Item objects, but
+may not return more. The OpenAPI specification defines the default and maximum values
 for this parameter. The base specifications define these with a default of 10 and a maximum of 10000, but implementers
 may choose other values to advertise through their `service-desc` endpoint.  If the limit parameter value is greater
-than the advertised maximum limit, the server must return the maximum possible number of items (ideally, the number
-as the advertised maximum limit), rather than responding with an error.
+than the advertised maximum limit, the server must return a 400 Bad Request status code.
 
-Only one of either **intersects** or **bbox** may be specified.  If both are specified, a 400 Bad Request response
+Only one of either **intersects** or **bbox** may be specified.  If both are specified, a 400 Bad Request status code
 must be returned.
 
 **datetime** The datetime parameter use the same allowed values as the
