@@ -82,7 +82,7 @@ This conformance class should be advertised to OAFeat clients so they will know 
 ### OGC API - Features - Part 1: OpenAPI 3.0
 
 If OpenAPI 3.0 is used for the endpoint referenced by the `service-desc` link relation in the landing page defined
-by *STAC API - Core`, the
+by *STAC API - Core*, the
 [OGC API - Features - Part 1 Requirements Class OpenAPI 3.0](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_oas30)
 (<http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30>) can be advertised. 
 
