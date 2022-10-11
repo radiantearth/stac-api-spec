@@ -62,7 +62,7 @@ This subset is:
 - the `/collections` and `/collections/{collection_id}` endpoints
 
 This subset of behavior is useful in conjunction
-with the *STAC API - Item Search` conformance class to allow the description of STAC Collections
+with the *STAC API - Item Search* conformance class to allow the description of STAC Collections
 without needing to implement the entire *STAC API - Features* conformance class.
 
 ### OGC API - Features - Part 1: Core
