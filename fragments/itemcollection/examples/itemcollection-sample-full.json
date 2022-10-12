@@ -1,5 +1,7 @@
 {
     "type": "FeatureCollection",
+    "numberMatched": 10,
+    "numberReturned": 1,
     "features": [
         {
             "stac_version": "1.0.0",
