@@ -14,8 +14,7 @@ plugins:
   - - remark-lint-maximum-line-length
     - 150
 # Code
-  - - remark-lint-fenced-code-flag
-    - false
+  - remark-lint-fenced-code-flag
   - remark-lint-fenced-code-marker
   - remark-lint-no-shell-dollars
   - - remark-lint-code-block-style
