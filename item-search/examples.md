@@ -14,7 +14,7 @@ OGC API - Features. It requests 100 results in `mycollection` that is in New Zea
 }
 ```
 
-```http
+```
 GET /search?collections=mycollection&bbox=160.6,-55.95,-170,-25.89&limit=100&datetime=2019-01-01T00:00:00Z/2019-01-01T23:59:59Z
 ```
 
@@ -22,7 +22,7 @@ GET /search?collections=mycollection&bbox=160.6,-55.95,-170,-25.89&limit=100&dat
 
 #### Simple GET based search
 Request:
-```http
+```
 HTTP GET /search?bbox=-110,39.5,-105,40.5
 ```
 
@@ -139,7 +139,7 @@ Response with `200 OK`:
 This tells the client to POST to the search endpoint with the header `Search-After` to obtain the next set of results:
 
 Request:
-```http
+```
 POST /search
 Search-After: LC81530752019135LGN00
 ```

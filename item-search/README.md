@@ -74,7 +74,7 @@ a set of values, query parameters must use comma-separated string values with no
 
 ### Query Examples
 
-```http
+```
 GET /search?collections=landsat8,sentinel&bbox=-10.415,36.066,3.779,44.213&limit=200&datetime=2017-05-05T00:00:00Z
 ```
 

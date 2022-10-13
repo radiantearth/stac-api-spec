@@ -272,25 +272,25 @@ an OAFeat `items` endpoint.
 
 Request all the data in `mycollection` that is in New Zealand:
 
-```http
+```
 GET /collections/mycollection/items?bbox=160.6,-55.95,-170,-25.89
 ```
 
 Request 100 results in `mycollection` from New Zealand:
 
-```http
+```
 GET /collections/mycollection/items?bbox=160.6,-55.95,-170,-25.89&limit=100
 ```
 
 Request all the data in `mycollection` that is in New Zealand at anytime on January 1st, 2019:
 
-```http
+```
 GET /collections/mycollection/items?bbox=160.6,-55.95,-170,-25.89&datetime=2019-01-01T00:00:00Z/2019-01-01T23:59:59Z
 ```
 
 Request 10 results from the data in `mycollection` from between January 1st (inclusive) and April 1st, 2019 (exclusive):
 
-```http
+```
 GET /collections/mycollection/items?datetime=2019-01-01T00:00:00Z/2019-03-31T23:59:59Z&limit=10
 ```
 

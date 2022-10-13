@@ -16,7 +16,7 @@ configuration so browser-based UIs running on a different domain may more easily
 
 APIs should acknowledge pre-flight request headers. In general, these header values should be set on responses:
 
-```http
+```
 access-control-allow-origin: *
 access-control-allow-methods: OPTIONS, POST, GET
 access-control-allow-headers: Content-Type
