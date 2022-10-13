@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] - TBD
 
+### Added
+
+- Added optional `numberMatched` and `numberReturned` fields to ItemCollection to align with OGC Commons
+  and OAFeat.
+
 ### Changed
 
 - The Collections specification has been incorporated into the *Features* specification, but remains as
