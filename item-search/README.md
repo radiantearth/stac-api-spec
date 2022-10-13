@@ -18,12 +18,13 @@
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-rc.1/item-search))
 - **Conformance URIs:**
   - <https://api.stacspec.org/v1.0.0-rc.1/item-search>
-  - <https://api.stacspec.org/v1.0.0-rc.1/core>
 - **[Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Dependencies**: [STAC API - Core](../core)
 - **Examples**: [examples.md](examples.md)
 
-A search endpoint provides the ability to query STAC [Item](../stac-spec/item-spec/README.md)
+The *STAC API - Item Search* specification defines the *STAC API - Item Search*
+conformance class (<https://api.stacspec.org/v1.0.0-rc.1/item-search>), which
+provides the ability to search for STAC [Item](../stac-spec/item-spec/README.md)
 objects across collections.
 It retrieves a group of Item objects that match the provided parameters, wrapped in an
 [ItemCollection](../fragments/itemcollection/README.md) (which is a
@@ -229,7 +230,7 @@ searching on specific Item properties.
 
 #### PUT / PATCH / DELETE
 
-The other HTTP verbs are not supported in STAC Item Search. The [Transaction Extension](../ogcapi-features/extensions/transaction/README.md)
+The other HTTP verbs are not supported in STAC Item Search. The [Transaction Extension](https://github.com/stac-api-extensions/transaction)
 does implement them, for STAC and OAFeat implementations that want to enable writing and deleting items.
 
 ## Example Landing Page for STAC API - Item Search

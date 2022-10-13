@@ -8,7 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Browseable specification has been incorporated into the *STAC API - Core* specification.
+- The Collections specification has been incorporated into the *Features* specification, but remains as
+  a separate conformance class. 
+- The Browseable specification has been incorporated into the *Core* specification, but remains as
+  a separate conformance class.
 - Extensions moved to standalone specification repositories:
     - [Items and Collections API Version](https://github.com/stac-api-extensions/version) 
     - [Fields](https://github.com/stac-api-extensions/fields)
