@@ -1,7 +1,7 @@
 const ghpages = require('gh-pages');
 
 let args = process.argv.slice(2);
-let tag = 'dev';
+let tag = 'main';
 if (args.length && args[0].trim().length > 0) {
 	tag = args[0];
 }
