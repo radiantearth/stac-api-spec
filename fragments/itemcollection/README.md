@@ -19,11 +19,13 @@ required fields is a valid STAC ItemCollection.
 
 This object describes a STAC ItemCollection. The fields `type` and `features` are inherited from GeoJSON FeatureCollection.
 
-| Field Name | Type                                                                 | Description                                                                     |
-| ---------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| type       | string                                                               | **REQUIRED.** Always "FeatureCollection" to provide compatibility with GeoJSON. |
-| features   | \[[STAC Item](../../stac-spec/item-spec/item-spec.md)]               | **REQUIRED** A possibly-empty array of Item objects.                            |
-| links      | \[[Link Object](../../stac-spec/item-spec/item-spec.md#link-object)] | An array of Links related to this ItemCollection.                               |
+| Field Name     | Type                                                                 | Description                                                                     |
+| -------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| type           | string                                                               | **REQUIRED.** Always "FeatureCollection" to provide compatibility with GeoJSON. |
+| features       | \[[STAC Item](../../stac-spec/item-spec/item-spec.md)]               | **REQUIRED.** A possibly-empty array of Item objects.                           |
+| links          | \[[Link Object](../../stac-spec/item-spec/item-spec.md#link-object)] | An array of Links related to this ItemCollection.                               |
+| numberMatched  | integer                                                              | The number of Items that meet the selection parameters, possibly estimated.     |
+| numberReturned | integer                                                              | The number of Items in the `features` array.                                    |
 
 ## Extensions
 
