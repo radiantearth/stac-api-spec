@@ -33,7 +33,7 @@ located at a `/search` endpoint. It re-uses all of the OAFeat [query
 parameters](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_items_) specified in their 'core', and adds a 
 couple more. It does not require a full implementation of OAFeat, it is instead a simplified construct that can run a 
 search across any set of indexed STAC [`Item`](stac-spec/item-spec/README.md) objects. See the [rendered OpenAPI 
-document](https://api.stacspec.org/v1.0.0-rc.2/item-spec) for more details.
+document](https://api.stacspec.org/v1.0.0-rc.2/item-search) for more details.
 
 ### Collections and Features
 
