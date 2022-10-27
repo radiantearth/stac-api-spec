@@ -34,7 +34,7 @@ Response with `200 OK`:
     "links": [
         {
             "rel": "next",
-            "https://stac-api.example.com/search?page=2"
+            "href": "https://stac-api.example.com/search?page=2",
             "type": "application/geo+json"
         }
     ]
