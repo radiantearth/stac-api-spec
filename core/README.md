@@ -7,19 +7,19 @@
   - [Extensions](#extensions)
   - [Structuring Catalog Hierarchies](#structuring-catalog-hierarchies)
 
-- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-rc.1/core)),
+- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-rc.2/core)),
 - **Conformance URIs:**
-  - <https://api.stacspec.org/v1.0.0-rc.1/core>
-  - <https://api.stacspec.org/v1.0.0-rc.1/browseable>
+  - <https://api.stacspec.org/v1.0.0-rc.2/core>
+  - <https://api.stacspec.org/v1.0.0-rc.2/browseable>
 - **[Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Dependencies**: None
   and [commons.yaml](commons.yaml) is the OpenAPI version of the core [STAC spec](../stac-spec) JSON Schemas.
 
 All STAC API implementations must implement the *STAC API - Core* specification. The conformance class
-<https://api.stacspec.org/v1.0.0-rc.1/core> requires a server to provide a valid
+<https://api.stacspec.org/v1.0.0-rc.2/core> requires a server to provide a valid
 [STAC Catalog](../stac-spec/catalog-spec/catalog-spec.md) that also includes a `conformsTo`
 attribute with a string array value. Any API implementing this is considered a valid STAC API. Additionally, 
-a STAC API conforming conformance class (<https://api.stacspec.org/v1.0.0-rc.1/browseable>) must be structured
+a STAC API conforming conformance class (<https://api.stacspec.org/v1.0.0-rc.2/browseable>) must be structured
 such that all Items in the catalog can be accessed by following `child` and `item` link relations. 
 
 Even if a STAC catalog is simply files on a web server or objects in cloud storage, serving these files over HTTP
@@ -31,7 +31,7 @@ this "browse" mode of interaction is complementary to the dynamic search capabil
 Conversely, STAC API implementations may not support browse, even though the root is a Catalog object, if they do not
 have the appropriate `child` and `item` link relations to traverse over the objects in the catalog. STAC API
 implementations may provide an even greater guarantee of Item reachability with the
-browseable conformance class (<https://api.stacspec.org/v1.0.0-rc.1/browseable>).
+browseable conformance class (<https://api.stacspec.org/v1.0.0-rc.2/browseable>).
 
 Providing these two complementary ways of interacting with the catalog allow users to iteratively interrogate the data
 to discover what data is available through browse and filter the data to only what they are interested in
@@ -76,7 +76,7 @@ support the *STAC API - Item Search* conformance class, perhaps because it uses 
 but sub-catalogs whose items are all in one database can support search.
 
 A STAC API conforming to the *STAC API - Browseable* conformance class
-(<https://api.stacspec.org/v1.0.0-rc.1/browseable>) must be structured such that
+(<https://api.stacspec.org/v1.0.0-rc.2/browseable>) must be structured such that
 all Items in the catalog can be accessed by following `child` and `item` link relations. This is a more significant
 constraint than a STAC API without this conformance class or a STAC Catalog that is available over HTTP but does not
 implement STAC API, neither of which have any guarantee regarding the reachability of Items. This conformance 
@@ -114,7 +114,7 @@ Additionally, `child` relations may exist to child Catalogs and Collections and 
 relations form a directed graph that enables traversal from a root catalog or collection to items. 
 
 If all Items in a Catalog can be accessed by traversing these links, the browseable conformance class
-<https://api.stacspec.org/v1.0.0-rc.1/browseable> should be advertised also.
+<https://api.stacspec.org/v1.0.0-rc.2/browseable> should be advertised also.
 
 | **rel** | **href** | **From**  | **Description**                        |
 | ------- | -------- | --------- | -------------------------------------- |
@@ -186,7 +186,7 @@ different conformance classes and a different set of links.
     "description": "This Catalog aims to demonstrate the a simple landing page",
     "type": "Catalog",
     "conformsTo" : [
-        "https://api.stacspec.org/v1.0.0-rc.1/core"
+        "https://api.stacspec.org/v1.0.0-rc.2/core"
     ],
     "links": [
         {
