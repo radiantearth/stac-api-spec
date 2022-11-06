@@ -56,7 +56,7 @@ In a STAC API, the root endpoint (Landing Page) has the following characteristic
   [Collection](../stac-spec/collection-spec/README.md), and [Item](../stac-spec/item-spec/README.md) objects.
 - The `links` attribute is part of a STAC Catalog, and provides a list of relations to API endpoints. Some of these endpoints can
   exist on any path (e.g., sub-catalogs) and some have a specified path (e.g., `/search`),
-  so the client must inspect the the `rel` (relationship) to understand what capabilities are offered at each location.
+  so the client must inspect the `rel` (relationship) to understand what capabilities are offered at each location.
 - The `conformsTo` section provides the capabilities of this service. This is the field
   that indicates to clients that this is a STAC API and how to access conformance classes, including this
   one. The relevant conformance URIs are listed in each part of the API specification. If a conformance URI is listed then 

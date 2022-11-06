@@ -53,7 +53,7 @@ A simple regex for an RFC 3339 datetime is:
 
 This is not a precise regex, as it matches some strings that violate semantics. There are additional restrictions, for example, 
 the month (01-12), the day (01-31), the hour (0-24), minute (0-60), seconds (0-9), and timezone offsets.  However, the best 
-strategy is to use this regex to ensure the datetime conforms to the the RFC 3339 profile and then us an ISO8601 parser to produce
+strategy is to use this regex to ensure the datetime conforms to the RFC 3339 profile and then us an ISO8601 parser to produce
 a valid datetime object from the datetime string.
 
 Thereby, the recommended process for parsing the datetime value (which may consist of a single
