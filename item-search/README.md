@@ -110,7 +110,8 @@ client would prefer in the response. The server may return fewer Item objects, b
 must not return more. The OpenAPI specification defines the default and maximum values
 for this parameter. The base specifications define these with a default of 10 and a maximum of 10000, but implementers
 may choose other values to advertise through their `service-desc` endpoint.  If the limit parameter value is greater
-than the advertised maximum limit, the server must return a 400 Bad Request status code.
+than the advertised maximum limit, the server must act as if the request were for the maximum
+and not return an error.
 
 Only one of either **intersects** or **bbox** may be specified.  If both are specified, a 400 Bad Request status code
 must be returned.

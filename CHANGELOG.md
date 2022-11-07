@@ -4,7 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.0-rc.2]
+## [Unreleased]
+
+### Fixed
+
+- Item Search `limit` parameter semantics have been changed again to align with the current OAFeat definition, rather than the inconsistent definition in [version 1.0](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0). The new behavior is that if a client requests a limit value above the maximum advertised by the server, that the server should treat the request as if the limit parameter were the maximum value. It must not respond with a error because the the limit value, and must respond with no more than that many items.
+
+## [1.0.0-rc.2] - 2022-11-01
 
 ### Added
 
