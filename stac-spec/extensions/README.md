@@ -1,17 +1,18 @@
 # Extensions
 
-- [Overview](#overview)
-- [Using Extensions](#using-extensions)
-  - [Extension IDs in `stac_extensions`](#extension-ids-in-stac_extensions)
-- [Stable STAC Extensions](#stable-stac-extensions)
-- [Community Extensions](#community-extensions)
-  - [Proposed extensions](#proposed-extensions)
-- [Extending STAC](#extending-stac)
-  - [General Conventions](#general-conventions)
-  - [Proposing new extensions](#proposing-new-extensions)
-  - [Extension Maturity](#extension-maturity)
-  - [Prefixes](#prefixes)
-  - [Use of arrays and objects](#use-of-arrays-and-objects)
+- [Extensions](#extensions)
+  - [Overview](#overview)
+  - [Using Extensions](#using-extensions)
+    - [Extension IDs in `stac_extensions`](#extension-ids-in-stac_extensions)
+  - [Stable STAC Extensions](#stable-stac-extensions)
+  - [Community Extensions](#community-extensions)
+    - [Proposed extensions](#proposed-extensions)
+  - [Extending STAC](#extending-stac)
+    - [General Conventions](#general-conventions)
+    - [Proposing new extensions](#proposing-new-extensions)
+    - [Extension Maturity](#extension-maturity)
+    - [Prefixes](#prefixes)
+    - [Use of arrays and objects](#use-of-arrays-and-objects)
 
 ## Overview
 
@@ -161,7 +162,7 @@ stable for over a year and are used in twenty or more implementations.
 ### Prefixes
 
 A STAC Item can combine schema information from several different sources - the core STAC Item information,
-an earth observation community extension, and a vendor specific provider. It can be difficult to distinguish exactly where each definition
+an earth observation community extension, and a vendor-specific provider. It can be difficult to distinguish exactly where each definition
 came from, and to pull out the most relevant information, especially when vendors often will dump in all the metadata they have in to the
 STAC definition.
 

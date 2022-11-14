@@ -5,7 +5,7 @@ lists the existing extensions, and explains the process of creating and maturing
 
 Anyone is welcome to create an extension (see [info on this](#creating-new-extensions) below), and is encouraged to at least 
 link to the extension from here.
-The third-party / vendor extension section is for the sharing of extensions. As third parties create useful extensions for their implementation
+The third-party / community extension section is for the sharing of extensions. As third parties create useful extensions for their implementation
 it is expected that others will make use of it, and then evolve to make it a 'community extension', that several providers maintain together.
 For now anyone from the community is welcome to use the appropriate parts of the stac-api-spec repository to collaborate.
 
@@ -26,26 +26,25 @@ as additional parameters for search through either **STAC API - Item Search** or
 This is the list of all official extensions that are contained in the 
 [stac-api-extensions](https://github.com/stac-api-extensions) GitHub organization.
 
-| Extension Name                                                                                          | Scope*                                                                                                     | Description                                                                                                                                 | Maturity   |
+| Extension Name                                                                                          | Scope                                                                                                     | Description                                                                                                                                 | Maturity   |
 | ------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
-| [Fields](https://github.com/stac-api-extensions/fields/blob/main/README.md)                             | [STAC API - Item Search](item-search/) request                                                             | Adds parameter to control which fields are returned in the response.                                                                        | Candidate  |
-| [Filter](https://github.com/stac-api-extensions/filter/blob/main/README.md)                             | [STAC API - Item Search](item-search/) and [STAC API - Features](ogcapi-features) `/items` requests        | Adds parameter to search Item and Collection properties.                                                                                    | Pilot      |
-| [Context](https://github.com/stac-api-extensions/context/blob/main/README.md)                           | [STAC API - Item Search](item-search/) response ([ItemCollection](fragments/itemcollection/README.md))     | Adds search related metadata (context) to ItemCollection.                                                                                   | Candidate  |
-| [Sort](https://github.com/stac-api-extensions/sort/blob/main/README.md)                                 | [STAC API - Item Search](item-search/) request                                                             | Adds Parameter to control sorting of returns results.                                                                                       | Candidate  |
-| [Transaction](https://github.com/stac-api-extensions/transaction/blob/main/README.md)                   | [STAC API - Features](ogcapi-features) POST on `/items` endpoint, DELETE/PUT on `/items/{itemId}` endpoint | Adds PUT and DELETE endpoints for the creation, editing, and deleting of Item objects.                                                      | Candidate  |
-| [Items and Collections API Version](https://github.com/stac-api-extensions/version/blob/main/README.md) | [STAC API - Features](ogcapi-features) on `/items` endpoint                                                | Adds GET versions resource to Collection and Item endpoints and provides semantics for a versioning scheme for Collection and Item objects. | *Proposal* |
-| [Query](https://github.com/stac-api-extensions/query/blob/main/README.md)                               | [STAC API - Item Search](item-search/) request                                                             | Adds parameter to search Item and Collection properties.                                                                                    | Candidate  |
-| [Children](https://github.com/stac-api-extensions/children/blob/main/README.md)                         | [STAC API - Core](core/)                                                                                   | Defines advertisement of the children (child catalogs or child collections) a catalog contains.                                             | Proposal   |
+| [Fields](https://github.com/stac-api-extensions/fields/blob/main/README.md)                             | [STAC API - Item Search](item-search/) and [STAC API - Features](ogcapi-features)                                                 | Adds parameter to control which fields are returned in the response.                                                                        | Candidate  |
+| [Filter](https://github.com/stac-api-extensions/filter/blob/main/README.md)                             | [STAC API - Item Search](item-search/) and [STAC API - Features](ogcapi-features)         | Adds parameter to search Item properties.                                                                                    | Pilot      |
+| [Context](https://github.com/stac-api-extensions/context/blob/main/README.md)                           | [STAC API - Item Search](item-search/) and [STAC API - Features](ogcapi-features)     | Adds search related metadata (context) to ItemCollection.                                                                                   | Candidate  |
+| [Sort](https://github.com/stac-api-extensions/sort/blob/main/README.md)                                 | [STAC API - Item Search](item-search/) and [STAC API - Features](ogcapi-features)                                                             | Adds parameter to control sorting of results.                                                                                       | Candidate  |
+| [Transaction](https://github.com/stac-api-extensions/transaction/blob/main/README.md)                   | [STAC API - Features](ogcapi-features)  | Adds POST, PUT, and DELETE endpoints for the creation, editing, and deleting of Item objects.                                                      | Candidate  |
+| [Query](https://github.com/stac-api-extensions/query/blob/main/README.md)                               | [STAC API - Item Search](item-search/) and [STAC API - Features](ogcapi-features)                                  | Adds parameter to search Item  properties.                                                                                    | Candidate  |
+| [Children](https://github.com/stac-api-extensions/children/blob/main/README.md)                         | [STAC API - Core](core/)                                                                                   | Defines advertisement of the children (child catalogs or child collections) that a catalog contains.                                             | Proposal   |
 
-## Vendor Extensions
+## Community Extensions
 
-The following extensions are provided by third parties (vendors). They tackle very specific
+The following extensions are community extensions. They tackle very specific
 use-cases and may be less stable than the official extensions. Once stable and adopted by multiple
 parties, extensions may be made official and incorporated in the STAC repository.
 
 Please contact a STAC maintainer or open a Pull Request to add your extension to this table.
 
-| Name                                                                       | Scope                                          | Description                                                                                                                                  | Vendor                                         |
+| Name                                                                       | Scope                                          | Description                                                                                                                                  | Maintainer(s)                                         |
 | -------------------------------------------------------------------------- | ---------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
 | [Free-text Search](https://github.com/cedadev/stac-freetext-search)        | [STAC API - Item Search](item-search/) request | Adds `q` parameter and free-text search against item properties                                                                              | [CEDA, STFC, UKRI](https://github.com/cedadev) |
 | [Context Collections](https://github.com/cedadev/stac-context-collections) | [STAC API - Item Search](item-search/) request | Adds a `collections` keyword to the [context](https://github.com/radiantearth/stac-api-spec/tree/main/fragments/context) extension response. | [CEDA, STFC, UKRI](https://github.com/cedadev) |
@@ -58,6 +57,6 @@ a service has the indicated functionality. It is also recommended to note the 'e
 so others can know how widely it is used.
 
 The new extension can live anywhere online, with a recommendation of using a GitHub repository to be able to track changes. 
-The first step in sharing the extension is to add it to the vendor extension table above. If it is of something
+The first step in sharing the extension is to add it to the community extension table above. If it is of something
 that the wider community may be interested in then it should be added to the appropriate folder in the main repo as a pull 
 request. 
