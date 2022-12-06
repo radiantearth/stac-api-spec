@@ -183,7 +183,7 @@ different conformance classes and a different set of links.
     "stac_version": "1.0.0",
     "id": "example-stac",
     "title": "A simple STAC API Example",
-    "description": "This Catalog aims to demonstrate the a simple landing page",
+    "description": "This Catalog aims to demonstrate a simple landing page",
     "type": "Catalog",
     "conformsTo" : [
         "https://api.stacspec.org/v1.0.0-rc.2/core"
