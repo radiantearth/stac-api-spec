@@ -212,12 +212,12 @@ different conformance classes and a different set of links.
         {
             "rel": "child",
             "type": "application/json",
-            "href": "https://stac-api.example.com/catalogs/sentinel-2",
+            "href": "https://stac-api.example.com/catalogs/sentinel-2"
         },
         {
             "rel": "child",
             "type": "application/json",
-            "href": "https://stac-api.example.com/catalogs/landsat-8",
+            "href": "https://stac-api.example.com/catalogs/landsat-8"
         }
     ]
 }
