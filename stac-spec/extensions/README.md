@@ -1,17 +1,18 @@
 # Extensions
 
-- [Overview](#overview)
-- [Using Extensions](#using-extensions)
-  - [Extension IDs in `stac_extensions`](#extension-ids-in-stac_extensions)
-- [Stable STAC Extensions](#stable-stac-extensions)
-- [Community Extensions](#community-extensions)
-  - [Proposed extensions](#proposed-extensions)
-- [Extending STAC](#extending-stac)
-  - [General Conventions](#general-conventions)
-  - [Proposing new extensions](#proposing-new-extensions)
-  - [Extension Maturity](#extension-maturity)
-  - [Prefixes](#prefixes)
-  - [Use of arrays and objects](#use-of-arrays-and-objects)
+- [Extensions](#extensions)
+  - [Overview](#overview)
+  - [Using Extensions](#using-extensions)
+    - [Extension IDs in `stac_extensions`](#extension-ids-in-stac_extensions)
+  - [Stable STAC Extensions](#stable-stac-extensions)
+  - [Community Extensions](#community-extensions)
+    - [Proposed extensions](#proposed-extensions)
+  - [Extending STAC](#extending-stac)
+    - [General Conventions](#general-conventions)
+    - [Proposing new extensions](#proposing-new-extensions)
+    - [Extension Maturity](#extension-maturity)
+    - [Prefixes](#prefixes)
+    - [Use of arrays and objects](#use-of-arrays-and-objects)
 
 ## Overview
 
@@ -37,26 +38,26 @@ Each extension has at least one *owner*. You can find extension owners in each e
 
 ## Using Extensions
 
-When deciding how to model data in STAC it is highly recommended to first look at the [list of 
+When deciding how to model data in STAC it is highly recommended to first look at the [list of
 extensions](https://stac-extensions.github.io/) and re-use fields there instead of creating your own version. This
-increases interoperability, as users know that the meaning of your fields is the same as in other STAC 
-implementations. Many clients will also understand more mature extensions for better display and querying. 
+increases interoperability, as users know that the meaning of your fields is the same as in other STAC
+implementations. Many clients will also understand more mature extensions for better display and querying.
 
 To incorporate an extension in STAC the 'extension ID' of the extension must be added to the `stac_extensions`
-array of the STAC [Catalog](../catalog-spec/catalog-spec.md#stac_extensions), 
+array of the STAC [Catalog](../catalog-spec/catalog-spec.md#stac_extensions),
 [Collection](../collection-spec/collection-spec.md#stac_extensions) or [Item](../item-spec/item-spec.md#stac_extensions)
 object. This identifier is a link to the JSON Schema URL that validates the fields in the extension, so STAC validators
-can fetch the Schema to validate that the STAC object properly follows the extension. These JSON Schema URLs also act as 
+can fetch the Schema to validate that the STAC object properly follows the extension. These JSON Schema URLs also act as
 identifiers for specific version of the extension that the STAC object implements. The extension ID can be
-found listed as the 'identifier' in the second line of the README of any extension made with the [extension 
-template](https://github.com/stac-extensions/template), and new ones get published automatically with any release made 
+found listed as the 'identifier' in the second line of the README of any extension made with the [extension
+template](https://github.com/stac-extensions/template), and new ones get published automatically with any release made
 with the template.
 
 ### Extension IDs in `stac_extensions`
 
 The logic for when an object should list an extension ID in its `stac_extension` array is as follows:
 
-- If the object directly implements the extension (by following the specified requirements - usually by including 
+- If the object directly implements the extension (by following the specified requirements - usually by including
 fields, but occasionally implementing alternate behaviors), the  `stac_extensions` of that object should contain the extension ID.
 - If an Asset implements fields of the extension, then `stac_extensions` of the Item or Collection which holds that
   Asset should contain the extension ID.
@@ -83,14 +84,14 @@ through the [Extension Maturity](#extension-maturity) classification they, will 
 ## Community Extensions
 
 There are many more extensions that are part of the broader STAC ecosystem. The center of activity for these is the
-[stac-extensions GitHub organization](https://github.com/stac-extensions), which has a number of extension repositories. For 
-an overview of all extensions with their [Extension Maturity](#extension-maturity) classification see the 
+[stac-extensions GitHub organization](https://github.com/stac-extensions), which has a number of extension repositories. For
+an overview of all extensions with their [Extension Maturity](#extension-maturity) classification see the
 [STAC extensions overview page](https://stac-extensions.github.io/).
 
 ### Proposed extensions
 
 Beyond the community extensions there have been a number of extensions that people have proposed to the STAC community. These
-can be found in the STAC [Issue Tracker](https://github.com/radiantearth/stac-spec/issues) under the 
+can be found in the STAC [Issue Tracker](https://github.com/radiantearth/stac-spec/issues) under the
 [new extension](https://github.com/radiantearth/stac-spec/issues?q=is%3Aissue+is%3Aopen+label%3A%22new+extension%22) label.
 These are ideas that others would likely use and potentially collaborate on. Anyone is free to add new
 ideas there, and see the section below on [proposing new extensions](#proposing-new-extensions) for the
@@ -107,7 +108,7 @@ Best practices for extension proposals are still emerging in this section.
 ### General Conventions
 
 Creating a new extension usually involves defining a set of logically grouped fields, and specifying what the allowed values
-for those fields are. This should be done in the extension text and in JSON Schema, to provide validation. While one 
+for those fields are. This should be done in the extension text and in JSON Schema, to provide validation. While one
 can theoretically add fields anywhere in JSON there are some conventions as to where to add them in STAC objects.
 
 1. Additional attributes relating to an [Item](../item-spec/item-spec.md) should be added into the Item Properties object,
@@ -122,10 +123,10 @@ can theoretically add fields anywhere in JSON there are some conventions as to w
 ### Proposing new extensions
 
 Extensions can be hosted anywhere, but should use the
-[extension template](https://github.com/stac-extensions/stac-extensions.github.io#using-the-stac-extensions-template) 
-as a starting point. If you'd like to add a repository to the [stac-extensions](https://github.com/stac-extensions) 
-GitHub organization, just ask on [Gitter](https://gitter.im/SpatioTemporal-Asset-Catalog/Lobby)! This is fine for 
-work-in-progress extensions. You can also host the extension repository in your own GitHub account, and optionally 
+[extension template](https://github.com/stac-extensions/stac-extensions.github.io#using-the-stac-extensions-template)
+as a starting point. If you'd like to add a repository to the [stac-extensions](https://github.com/stac-extensions)
+GitHub organization, just ask on [Gitter](https://gitter.im/SpatioTemporal-Asset-Catalog/Lobby)! This is fine for
+work-in-progress extensions. You can also host the extension repository in your own GitHub account, and optionally
 transfer it to the stac-extensions org later.
 
 For new extensions that require community discussion, we recommend the following workflow:

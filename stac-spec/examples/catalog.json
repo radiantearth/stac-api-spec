@@ -31,7 +31,7 @@
     {
       "rel": "item",
       "href": "./collectionless-item.json",
-      "type": "application/json",
+      "type": "application/geo+json",
       "title": "Collection with no items (standalone)"
     },
     {
