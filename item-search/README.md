@@ -1,6 +1,8 @@
 # STAC API - Item Search
 
 - [STAC API - Item Search](#stac-api---item-search)
+  - [Summary](#summary)
+  - [Overview](#overview)
   - [Link Relations](#link-relations)
   - [Endpoints](#endpoints)
   - [Query Parameters and Fields](#query-parameters-and-fields)
@@ -51,9 +53,9 @@ This conformance class also requires implementation of the link relations in the
 
 The following Link relations must exist in the Landing Page (root).
 
-| **rel**  | **href**  | **From**               | **Description**             |
-| -------- | --------- | ---------------------- | --------------------------- |
-| `search` | `/search` | STAC API - Item Search | URI for the Search endpoint |
+| **rel**  | **href**  | **Media Type**       | **From**               | **Description**             |
+| -------- | --------- | -------------------- | ---------------------- | --------------------------- |
+| `search` | `/search` | application/geo+json | STAC API - Item Search | URI for the Search endpoint |
 
 This `search` link relation must have a `type` of `application/geo+json`. If no `method` attribute is
 specified, it is assumed to represent a GET request. If the server supports both GET and POST requests, two links should be included, one with a `method` of `GET` one with a `method` of `POST`.
@@ -65,9 +67,9 @@ with, but these other types are not part of the STAC API requirements.
 
 This conformance class also requires for the endpoints in the [STAC API - Core](../core) conformance class to be implemented.
 
-| Endpoint  | Returns         | Description     |
-| --------- | --------------- | --------------- |
-| `/search` | Item Collection | Search endpoint |
+| **Endpoint** | **Returns**     | **Media Type**       | **From**               | **Description** |
+| ------------ | --------------- | -------------------- | ---------------------- | --------------- |
+| `/search`    | Item Collection | application/geo+json | STAC API - Item Search | Search endpoint |
 
 ## Query Parameters and Fields
 
@@ -97,7 +99,7 @@ For more examples see [examples.md](examples.md).
 
 The core parameters for STAC search are defined by OAFeat, and STAC adds a few parameters for convenience.
 
-| Parameter   | Type             | Source API | Description                                                                                                                                                                     |
+| **Parameter**   | **Type**             | **Source API** | **Description**                                                                                                                                                                     |
 | ----------- | ---------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | limit       | integer          | OAFeat     | The maximum number of results to return (page size).                                                                                                                            |
 | bbox        | \[number]        | OAFeat     | Requested bounding box.                                                                                                                                                         |
@@ -185,7 +187,7 @@ execute a subsequent request for the next page of results.
 
 The following fields have been added to the Link object specification for the API spec:
 
-| Parameter | Type    | Description                                                                                                                                                  |
+| **Parameter** | **Type**    | **Description**                                                                                                                                                  |
 | --------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | method    | string  | The HTTP method of the request, usually `GET` or `POST`. Defaults to `GET`                                                                                   |
 | headers   | object  | A dictionary of header values that must be included in the next request                                                                                      |
