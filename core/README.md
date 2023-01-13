@@ -149,10 +149,10 @@ This conformance class also requires for the endpoints in the [STAC API - Core](
 
 These endpoints are required, with details provided in this [OpenAPI specification document](openapi.yaml).
 
-| **Endpoint** | **Media Type** | **Returns**                                        | **Description**                                                                                                                                                        |
-| -------- | ----- | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `/`      | application/json | [Catalog](../stac-spec/catalog-spec/README.md) | Landing page, links to API capabilities                                                                                                                            |
-| `/api`   | various | any                                            | The service description of the service from the `service-desc` link `rel`. The path is only recommended to be `/api`, and is at the discretion of the implementer. |
+| **Endpoint** | **Media Type**   | **Returns**                                    | **Description**                                                                                                                                                    |
+| ------------ | ---------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `/`          | application/json | [Catalog](../stac-spec/catalog-spec/README.md) | Landing page, links to API capabilities                                                                                                                            |
+| `/api`       | various          | any                                            | The service description of the service from the `service-desc` link `rel`. The path is only recommended to be `/api`, and is at the discretion of the implementer. |
 
 The service description endpoint may return any specification format. It is recommended to use OpenAPI 3.0 or 3.1
 with media types `application/vnd.oai.openapi` (YAML), `application/vnd.oai.openapi+json;version=3.0` (3.0 JSON),
@@ -167,8 +167,8 @@ class for OpenAPI 3.1, but may in the future.
 If sub-catalogs are used, it is **recommended** that these use the endpoint `/catalogs/{catalogId}` to avoid conflicting
 with other endpoints from the root.
 
-| **Endpoint**                | **Media Type** | **Returns**                                        | **Description**          |
-| ----------------------- | -- | -------------------------------------------- | -------------------- |
+| **Endpoint**            | **Media Type**   | **Returns**                                    | **Description**      |
+| ----------------------- | ---------------- | ---------------------------------------------- | -------------------- |
 | `/catalogs/{catalogId}` | application/json | [Catalog](../stac-spec/catalog-spec/README.md) | child Catalog object |
 
 ## Example Landing Page for STAC API - Core
