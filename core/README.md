@@ -7,14 +7,6 @@
   - [Extensions](#extensions)
   - [Structuring Catalog Hierarchies](#structuring-catalog-hierarchies)
 
-- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-rc.2/core)),
-- **Conformance URIs:**
-  - <https://api.stacspec.org/v1.0.0-rc.2/core>
-  - <https://api.stacspec.org/v1.0.0-rc.2/browseable>
-- **[Maturity Classification](../README.md#maturity-classification):** Candidate
-- **Dependencies**: None
-  and [commons.yaml](commons.yaml) is the OpenAPI version of the core [STAC spec](../stac-spec) JSON Schemas.
-
 All STAC API implementations must implement the *STAC API - Core* specification. The conformance class
 <https://api.stacspec.org/v1.0.0-rc.2/core> requires a server to provide a valid
 [STAC Catalog](../stac-spec/catalog-spec/catalog-spec.md) that also includes a `conformsTo`
@@ -44,7 +36,7 @@ Recommendations for supporting both of these discussed in [Structuring Catalog H
 
 The root of a STAC API is the Landing Page. This resource is the starting point to determine what behaviors 
 the API supports via the `conformsTo` array and the URIs of resources via link relations.
-Support for this type of behavior in a web API is known as 
+Support for this type of behavior in a web API is known as
 [Hypermedia as the Engine of Application State (HATEOAS)](https://en.wikipedia.org/wiki/HATEOAS). 
 A hypermedia-driven web API provides a robust, consistent, and flexible mechanism for interacting with remote resources.
 STAC API relies heavily on hypermedia for API resource discovery and navigation.
@@ -90,11 +82,11 @@ Recommendations for structuring Catalogs hierarchically can be found in
 
 The following Link relations must exist in the Landing Page (root).
 
-| **rel**        | **href** | **From**  | **Description**                                      |
-| -------------- | -------- | --------- | ---------------------------------------------------- |
-| `root`         | `/`      | STAC Core | The root URI                                         |
-| `self`         | `/`      | OAFeat    | Self reference, same as root URI                     |
-| `service-desc` | `/api`   | OAFeat    | The service description in a machine-readable format |
+| **rel**        | **href** | **Media Type**   | **From**  | **Description**                                      |
+| -------------- | -------- | ---------------- | --------- | ---------------------------------------------------- |
+| `root`         | `/`      | application/json | STAC Core | The root URI                                         |
+| `self`         | `/`      | application/json | OAFeat    | Self reference, same as root URI                     |
+| `service-desc` | `/api`   | various          | OAFeat    | The service description in a machine-readable format |
 
 The path for the `service-desc` endpoint is recommended to be `/api`, but may be another path. Recommended to be
 OpenAPI 3.0 or 3.1 with media types `application/vnd.oai.openapi` (YAML),
@@ -106,9 +98,9 @@ page, for example, in the form of [Redoc](https://github.com/Redocly/redoc) inte
 , but any format is allowed. The Link `type` field should correspond to whatever format or formats are
 supported by this endpoint, e.g., `text/html`.
 
-| **rel**       | **href**    | **From** | **Description**                                                                                                                    |
-| ------------- | ----------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `service-doc` | `/api.html` | OAFeat   | A human-consumable service description. The path for this endpoint is only recommended to be `/api.html`, but may be another path. |
+| **rel**       | **href**    | **Media Type** | **From** | **Description**                                                                                                                    |
+| ------------- | ----------- | -------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `service-doc` | `/api.html` | text/html      | OAFeat   | A human-consumable service description. The path for this endpoint is only recommended to be `/api.html`, but may be another path. |
 
 Additionally, `child` relations may exist to child Catalogs and Collections and `item` relations to Items. These
 relations form a directed graph that enables traversal from a root catalog or collection to items. 
@@ -116,10 +108,10 @@ relations form a directed graph that enables traversal from a root catalog or co
 If all Items in a Catalog can be accessed by traversing these links, the browseable conformance class
 <https://api.stacspec.org/v1.0.0-rc.2/browseable> should be advertised also.
 
-| **rel** | **href** | **From**  | **Description**                        |
-| ------- | -------- | --------- | -------------------------------------- |
-| `child` | various  | STAC Core | The child STAC Catalogs & Collections. |
-| `item`  | various  | STAC Core | The child STAC Items.                  |
+| **rel** | **href** | **Media Type**       | **From**  | **Description**                        |
+| ------- | -------- | -------------------- | --------- | -------------------------------------- |
+| `child` | various  | application/json     | STAC Core | The child STAC Catalogs & Collections. |
+| `item`  | various  | application/geo+json | STAC Core | The child STAC Items.                  |
 
 While it is valid to have `item` links from the landing page, most STAC API implementations 
 serve large numbers of features, so they will typically use several layers of intermediate `child` links before
