@@ -1,6 +1,8 @@
 # STAC API - Collections and Features Specification
 
 - [STAC API - Collections and Features Specification](#stac-api---collections-and-features-specification)
+  - [Summary](#summary)
+  - [Overview](#overview)
   - [Conformance Classes](#conformance-classes)
     - [STAC API - Features](#stac-api---features)
     - [STAC API - Collections](#stac-api---collections)
@@ -16,6 +18,8 @@
   - [Example Collection Endpoint](#example-collection-endpoint)
   - [Extensions](#extensions)
 
+## Summary
+
 *based on [**OGC API - Features - Part 1: Core**](https://www.ogc.org/standards/ogcapi-features)*
 
 - **OpenAPI specifications:**
@@ -29,6 +33,8 @@
   - [STAC API - Core](../core)
   - [OGC API - Features](https://www.ogc.org/standards/ogcapi-features)
   uses all the OGC API - Features openapi fragments to describe returning STAC Item objects.
+
+## Overview
 
 The *STAC API - Collections and Features* specification extends the
 [OGC API - Features - Part 1: Core](https://docs.opengeospatial.org/is/17-069r3/17-069r3.html)
@@ -190,8 +196,8 @@ or `token` and any additional filter parameters if given and required. For examp
     "links": [
         {
             "rel": "next",
+            "type": "application/geo+json",
             "href": "https://stac-api.example.com/collections/my_collection/items?page=2"
-            "type": "application/geo+json"
         }
     ]
 ```
@@ -236,20 +242,21 @@ In our simple example of numerical pages, the response for `page=3` would have a
 `links` array containing these two Links indicating the URLs for the next (page=4) and
 previous (page=2) pages:
 
-```none
-"links": [
-  ...
-  {
-    "rel": "prev",
-    "href": "https://stac-api.example.com/collections?page=2"
-    "type": "application/json"
-  },
-  {
-    "rel": "next",
-    "href": "https://stac-api.example.com/collections?page=4"
-    "type": "application/json"
-  }
-]
+```json
+{
+    "links": [
+    {
+        "rel": "prev",
+        "type": "application/json",
+        "href": "https://stac-api.example.com/collections?page=2"
+    },
+    {
+        "rel": "next",
+        "type": "application/json",
+        "href": "https://stac-api.example.com/collections?page=4"
+    }
+    ]
+}
 ```
 
 In addition to supporting query parameters in the URL value of the `href` field,

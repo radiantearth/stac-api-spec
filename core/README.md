@@ -1,11 +1,15 @@
 # STAC API - Core Specification
 
 - [STAC API - Core Specification](#stac-api---core-specification)
+  - [Summary](#summary)
+  - [Overview](#overview)
   - [Link Relations](#link-relations)
   - [Endpoints](#endpoints)
   - [Example Landing Page for STAC API - Core](#example-landing-page-for-stac-api---core)
   - [Extensions](#extensions)
   - [Structuring Catalog Hierarchies](#structuring-catalog-hierarchies)
+
+## Summary
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-rc.2/core)),
 - **Conformance URIs:**
@@ -14,6 +18,8 @@
 - **[Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Dependencies**: None
   and [commons.yaml](commons.yaml) is the OpenAPI version of the core [STAC spec](../stac-spec) JSON Schemas.
+
+## Overview
 
 All STAC API implementations must implement the *STAC API - Core* specification. The conformance class
 <https://api.stacspec.org/v1.0.0-rc.2/core> requires a server to provide a valid
@@ -143,10 +149,10 @@ This conformance class also requires for the endpoints in the [STAC API - Core](
 
 These endpoints are required, with details provided in this [OpenAPI specification document](openapi.yaml).
 
-| Endpoint | Returns                                        | Description                                                                                                                                                        |
-| -------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `/`      | [Catalog](../stac-spec/catalog-spec/README.md) | Landing page, links to API capabilities                                                                                                                            |
-| `/api`   | any                                            | The service description of the service from the `service-desc` link `rel`. The path is only recommended to be `/api`, and is at the discretion of the implementer. |
+| **Endpoint** | **Media Type** | **Returns**                                        | **Description**                                                                                                                                                        |
+| -------- | ----- | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `/`      | application/json | [Catalog](../stac-spec/catalog-spec/README.md) | Landing page, links to API capabilities                                                                                                                            |
+| `/api`   | various | any                                            | The service description of the service from the `service-desc` link `rel`. The path is only recommended to be `/api`, and is at the discretion of the implementer. |
 
 The service description endpoint may return any specification format. It is recommended to use OpenAPI 3.0 or 3.1
 with media types `application/vnd.oai.openapi` (YAML), `application/vnd.oai.openapi+json;version=3.0` (3.0 JSON),
@@ -161,22 +167,22 @@ class for OpenAPI 3.1, but may in the future.
 If sub-catalogs are used, it is **recommended** that these use the endpoint `/catalogs/{catalogId}` to avoid conflicting
 with other endpoints from the root.
 
-| Endpoint                | Returns                                        | Description          |
-| ----------------------- | ---------------------------------------------- | -------------------- |
-| `/catalogs/{catalogId}` | [Catalog](../stac-spec/catalog-spec/README.md) | child Catalog object |
+| **Endpoint**                | **Media Type** | **Returns**                                        | **Description**          |
+| ----------------------- | -- | -------------------------------------------- | -------------------- |
+| `/catalogs/{catalogId}` | application/json | [Catalog](../stac-spec/catalog-spec/README.md) | child Catalog object |
 
 ## Example Landing Page for STAC API - Core
 
 This JSON is what would be expected from an API that only implements *STAC API - Core*. It is a valid STAC Catalog
-with additional Links and a `conformsTo` attribute. In practice, 
-most APIs will also implement other conformance classes, and those will be reflected in the `links` and 
-`conformsTo` attribute.  A more typical Landing Page example is in 
+with additional Links and a `conformsTo` attribute. In practice,
+most APIs will also implement other conformance classes, and those will be reflected in the `links` and
+`conformsTo` attribute.  A more typical Landing Page example is in
 the [overview](../overview.md#example-landing-page) document.
 
 This particular catalog provides both the ability to browse down to child Catalog objects through its
 `child` links, and also provides the search endpoint to be able to search across items in its collections. Note
 that some of those links are not required and other servers may provide
-different conformance classes and a different set of links. 
+different conformance classes and a different set of links.
 
 ```json
 {
@@ -282,7 +288,7 @@ per provider (e.g., Sentinel-2), per domain (e.g., cloud data), or per form of d
 
 Going the other direction, collections can be sub-grouped into smaller catalogs. For example, this example
 groups a catalog of Landsat 8 Collection 1 items by path, row, and date (the path/row system is used by this
-product for gridding). 
+product for gridding).
 
 - / (root)
   - /catalogs/landsat_8_c1

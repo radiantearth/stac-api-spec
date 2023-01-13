@@ -93,6 +93,7 @@ This can be even more effective when using continuation tokens on the server, as
 repeated in the subsequent request:
 
 Response with `200 OK`:
+
 ```json
 {
     "rel": "next",
@@ -104,9 +105,11 @@ Response with `200 OK`:
     }
 }
 ```
+
 The above link tells the client not to merge (default of false) so it is only required to pass the next token in the body.
 
 Request to `POST /search`:
+
 ```json
 {
     "next": "a9f3kfbc98e29a0da23"
@@ -114,7 +117,9 @@ Request to `POST /search`:
 ```
 
 #### POST search using headers
+
 Request to `HTTP POST /search`:
+
 ```json
 {
     "bbox": [-110, 39.5, -105, 40.5],
@@ -124,6 +129,7 @@ Request to `HTTP POST /search`:
 ```
 
 Response with `200 OK`:
+
 ```json
 {
     "type": "FeatureCollection",
@@ -145,6 +151,7 @@ Response with `200 OK`:
 This tells the client to POST to the search endpoint with the header `Search-After` to obtain the next set of results:
 
 Request:
+
 ```
 POST /search
 Search-After: LC81530752019135LGN00
