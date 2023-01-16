@@ -140,20 +140,20 @@ of that Collection, rather than the API sub-path of `/collections`.
 
 The following Link relations must exist in the ItemCollection object returned from the `/collections/{collectionId}/items` endpoint.
 
-| **rel**      | **href**                            | **Media Type**   | **From**  | **Description**      |
-| ------------ | ----------------------------------- | ---------------- | --------- | -------------------- |
-| `root`       | `/`                                 | application/json | STAC Core | The root URI         |
+| **rel**      | **href**                            | **Media Type**       | **From**  | **Description**      |
+| ------------ | ----------------------------------- | -------------------- | --------- | -------------------- |
+| `root`       | `/`                                 | application/json     | STAC Core | The root URI         |
 | `self`       | `/collections/{collectionId}/items` | application/geo+json | OAFeat    | Self reference       |
-| `collection` | `/collections/{collectionId}`       | application/json | OAFeat    | Collection reference |
+| `collection` | `/collections/{collectionId}`       | application/json     | OAFeat    | Collection reference |
 
 ### Items (/collections/{collectionId}/items/{itemId})
 
 The following Link relations must exist in the Item object returned from the `/collections/{collectionId}/items/{itemId}` endpoint.
 
-| **rel**  | **href**                                     | **Media Type**   | **From**  | **Description**                                     |
-| -------- | -------------------------------------------- | ---------------- | --------- | --------------------------------------------------- |
-| `root`   | `/`                                          | application/json | STAC Core | The root URI                                        |
-| `parent` | `/collections/{collectionId}`                | application/json | OAFeat    | Parent reference, usually the containing Collection |
+| **rel**  | **href**                                     | **Media Type**       | **From**  | **Description**                                     |
+| -------- | -------------------------------------------- | -------------------- | --------- | --------------------------------------------------- |
+| `root`   | `/`                                          | application/json     | STAC Core | The root URI                                        |
+| `parent` | `/collections/{collectionId}`                | application/json     | OAFeat    | Parent reference, usually the containing Collection |
 | `self`   | `/collections/{collectionId}/items/{itemId}` | application/geo+json | OAFeat    | Self reference                                      |
 
 Note that the `parent` link for an Item should point to the containing Collection
