@@ -6,10 +6,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## Changed
-
-- Error body response now allows additional properties.
-
 ## Added
 
 - Added authentication status code recommendations.

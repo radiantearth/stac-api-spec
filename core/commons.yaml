@@ -15,7 +15,6 @@ components:
   schemas:
     exception:
       type: object
-      additionalProperties: true
       description: |-
         Information about the exception: an error code plus an optional description.
       required:
