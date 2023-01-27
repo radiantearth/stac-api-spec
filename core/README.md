@@ -116,10 +116,10 @@ relations form a directed graph that enables traversal from a root catalog or co
 If all Items in a Catalog can be accessed by traversing these links, the browseable conformance class
 <https://api.stacspec.org/v1.0.0-rc.2/browseable> should be advertised also.
 
-| **rel** | **href** | **From**  | **Description**                        |
-| ------- | -------- | --------- | -------------------------------------- |
-| `child` | various  | STAC Core | The child STAC Catalogs & Collections. |
-| `item`  | various  | STAC Core | The child STAC Items.                  |
+| **rel** | **href** | **From**        | **Description**                        |
+| ------- | -------- | --------------- | -------------------------------------- |
+| `child` | various  | STAC API - Core | The child STAC Catalogs & Collections. |
+| `item`  | various  | STAC API - Core | The child STAC Items.                  |
 
 While it is valid to have `item` links from the landing page, most STAC API implementations 
 serve large numbers of features, so they will typically use several layers of intermediate `child` links before
