@@ -37,7 +37,9 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/LandingPage'
-        default:
+        '4XX':
+          $ref: 'commons.yaml#/components/responses/Error'
+        '5XX':
           $ref: 'commons.yaml#/components/responses/Error'
 components:
   schemas:

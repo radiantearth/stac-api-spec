@@ -81,7 +81,9 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/ConformanceDeclaration'
-        default:
+        '4XX':
+          $ref: '../core/commons.yaml#/components/responses/Error'
+        '5XX':
           $ref: '../core/commons.yaml#/components/responses/Error'
   '/collections':
     get:
@@ -95,7 +97,9 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/Collections'
-        default:
+        '4XX':
+          $ref: '../core/commons.yaml#/components/responses/Error'          
+        '5XX':
           $ref: '../core/commons.yaml#/components/responses/Error'
   '/collections/{collectionId}':
     get:
@@ -114,7 +118,9 @@ paths:
           $ref: '#/components/responses/Collection'
         '404':
           $ref: '#/components/responses/NotFound'
-        default:
+        '4XX':
+          $ref: '../core/commons.yaml#/components/responses/Error'
+        '5XX':
           $ref: '../core/commons.yaml#/components/responses/Error'
   '/collections/{collectionId}/items':
     get:
@@ -138,7 +144,9 @@ paths:
           $ref: '#/components/responses/Features'
         '404':
           $ref: '#/components/responses/NotFound'
-        default:
+        '4XX':
+          $ref: '../core/commons.yaml#/components/responses/Error'
+        '5XX':
           $ref: '../core/commons.yaml#/components/responses/Error'
   '/collections/{collectionId}/items/{featureId}':
     get:
@@ -157,7 +165,9 @@ paths:
           $ref: '#/components/responses/Feature'
         '404':
           $ref: '#/components/responses/NotFound'
-        default:
+        '4XX':
+          $ref: '../core/commons.yaml#/components/responses/Error'
+        '5XX':
           $ref: '../core/commons.yaml#/components/responses/Error'
 components:
   parameters:

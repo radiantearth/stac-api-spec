@@ -82,7 +82,9 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/Collections'
-        default:
+        '4XX':
+          $ref: '../core/commons.yaml#/components/responses/Error'
+        '5XX':
           $ref: '../core/commons.yaml#/components/responses/Error'
   '/collections/{collectionId}':
     get:
@@ -101,7 +103,9 @@ paths:
           $ref: '#/components/responses/Collection'
         '404':
           $ref: '#/components/responses/NotFound'
-        default:
+        '4XX':
+          $ref: '../core/commons.yaml#/components/responses/Error'
+        '5XX':
           $ref: '../core/commons.yaml#/components/responses/Error'
 components:
   parameters:
