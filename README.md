@@ -32,6 +32,7 @@ the release branches above for a stable version of the specification.
 **NOTE**: This means that if you are on github.com/radiantearth/stac-api-spec then you are looking at an unreleased,
 unstable version of the specification. Use the first listed link on releases to read the current released, stable version
 of the spec.
+
 ## About
 
 The SpatioTemporal Asset Catalog (STAC) family of specifications aim to standardize the way geospatial asset metadata is structured and queried.
@@ -117,7 +118,8 @@ cross-collection search of STAC Item objects at a `search` endpoint, as well as 
 **Extensions:**
 The *[extensions](extensions.md) document* describes how STAC incubates new functionality, and it links to the existing 
 extensions that can be added to enrich the functionality of a STAC API. Each has an OpenAPI yaml, but some of the yaml
-documents live as fragments in the [fragments/](fragments/) folder.
+documents live as fragments in the [fragments/](fragments/) folder. The official list of STAC API Extensions
+is maintained [here](https://stac-api-extensions.github.io).
 
 **Fragments:**
 The *[fragments/](fragments/)* folder contains re-usable building blocks to be used in a STAC API, including common OpenAPI 
