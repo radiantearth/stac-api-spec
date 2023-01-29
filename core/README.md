@@ -7,14 +7,6 @@
   - [Extensions](#extensions)
   - [Structuring Catalog Hierarchies](#structuring-catalog-hierarchies)
 
-- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-rc.2/core)),
-- **Conformance URIs:**
-  - <https://api.stacspec.org/v1.0.0-rc.2/core>
-  - <https://api.stacspec.org/v1.0.0-rc.2/browseable>
-- **[Maturity Classification](../README.md#maturity-classification):** Candidate
-- **Dependencies**: None
-  and [commons.yaml](commons.yaml) is the OpenAPI version of the core [STAC spec](../stac-spec) JSON Schemas.
-
 All STAC API implementations must implement the *STAC API - Core* specification. The conformance class
 <https://api.stacspec.org/v1.0.0-rc.2/core> requires a server to provide a valid
 [STAC Catalog](../stac-spec/catalog-spec/catalog-spec.md) that also includes a `conformsTo`
@@ -88,7 +80,7 @@ Recommendations for structuring Catalogs hierarchically can be found in
 
 ## Link Relations
 
-The following Link relations must exist in the Landing Page (root).
+The following Link relations must exist in the Landing Page (root):
 
 | **rel**        | **href** | **From**  | **Description**                                      |
 | -------------- | -------- | --------- | ---------------------------------------------------- |
@@ -101,25 +93,30 @@ OpenAPI 3.0 or 3.1 with media types `application/vnd.oai.openapi` (YAML),
 `application/vnd.oai.openapi+json;version=3.0` (3.0 JSON), or `application/vnd.oai.openapi+json;version=3.1`
 (3.1 JSON).
 
-A `service-doc` endpoint is recommended, but not required. This commonly returns an HTML
+The following Link relations may exist in the Landing Page (root):
+
+| **rel**       | **href**    | **From**        | **Description**                                                                                                                    |
+| ------------- | ----------- | --------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `service-doc` | `/api.html` | OAFeat          | A human-consumable service description. The path for this endpoint is only recommended to be `/api.html`, but may be another path. |
+| `concestor`   | various     | STAC API - Core | A link to the most distant ancestor catalog if this catalog is in a tree of sub-catalogs.                                          |
+| `child`       | various     | STAC Core       | The child STAC Catalogs & Collections.                                                                                             |
+| `item`        | various     | STAC Core       | The child STAC Items.                                                                                                              |
+
+The `service-doc` link relation and endpoint is recommended, but not required. This commonly returns an HTML
 page, for example, in the form of [Redoc](https://github.com/Redocly/redoc) interactive API
 , but any format is allowed. The Link `type` field should correspond to whatever format or formats are
 supported by this endpoint, e.g., `text/html`.
 
-| **rel**       | **href**    | **From** | **Description**                                                                                                                    |
-| ------------- | ----------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `service-doc` | `/api.html` | OAFeat   | A human-consumable service description. The path for this endpoint is only recommended to be `/api.html`, but may be another path. |
+The `concestor` link is to the most distant ancestor catalog if this catalog is in a tree of sub-catalogs.
+This link is to the final URL that is reached when recursively following parent link relations. The word was
+coined by Richard Dawkins to describe the genetic concepts of "most recent common ancestor" (MRCA) or
+"last common ancestor" (LCA).
 
-Additionally, `child` relations may exist to child Catalogs and Collections and `item` relations to Items. These
-relations form a directed graph that enables traversal from a root catalog or collection to items. 
+The `child` relations may exist to child Catalogs and Collections and `item` relations to Items. These
+relations form a directed graph that enables traversal from a root catalog or collection to items.
 
 If all Items in a Catalog can be accessed by traversing these links, the browseable conformance class
 <https://api.stacspec.org/v1.0.0-rc.2/browseable> should be advertised also.
-
-| **rel** | **href** | **From**  | **Description**                        |
-| ------- | -------- | --------- | -------------------------------------- |
-| `child` | various  | STAC Core | The child STAC Catalogs & Collections. |
-| `item`  | various  | STAC Core | The child STAC Items.                  |
 
 While it is valid to have `item` links from the landing page, most STAC API implementations 
 serve large numbers of features, so they will typically use several layers of intermediate `child` links before
