@@ -48,7 +48,9 @@ paths:
             text/html:
               schema:
                 type: string
-        default:
+        4XX:
+          $ref: '#/components/responses/Error'
+        5XX:
           $ref: '#/components/responses/Error'
     post:
       summary: Search STAC items with full-featured filtering.
@@ -79,7 +81,9 @@ paths:
             text/html:
               schema:
                 type: string
-        default:
+        4XX:
+          $ref: '#/components/responses/Error'
+        5XX:
           $ref: '#/components/responses/Error'
 components:
   parameters:
@@ -496,18 +500,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/geometryGeoJSON'
-    exception:
-      type: object
-      description: >-
-        Information about the exception: an error code plus an optional
-        description.
-      required:
-        - code
-      properties:
-        code:
-          type: string
-        description:
-          type: string
     stac_version:
       title: STAC version
       type: string
@@ -821,6 +813,18 @@ components:
         numberReturned:
           type: integer
           minimum: 0
+    exception:
+      type: object
+      description: >-
+        Information about the exception: an error code plus an optional
+        description.
+      required:
+        - code
+      properties:
+        code:
+          type: string
+        description:
+          type: string
   responses:
     Error:
       description: An error occurred.

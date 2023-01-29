@@ -80,8 +80,10 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/ConformanceDeclaration'
-        '500':
-          $ref: '#/components/responses/ServerError'
+        4XX:
+          $ref: '#/components/responses/Error'
+        5XX:
+          $ref: '#/components/responses/Error'
   /collections:
     get:
       tags:
@@ -96,8 +98,10 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/Collections'
-        '500':
-          $ref: '#/components/responses/ServerError'
+        4XX:
+          $ref: '#/components/responses/Error'
+        5XX:
+          $ref: '#/components/responses/Error'
   /collections/{collectionId}:
     get:
       tags:
@@ -116,8 +120,10 @@ paths:
           $ref: '#/components/responses/Collection'
         '404':
           $ref: '#/components/responses/NotFound'
-        '500':
-          $ref: '#/components/responses/ServerError'
+        4XX:
+          $ref: '#/components/responses/Error'
+        5XX:
+          $ref: '#/components/responses/Error'
   /collections/{collectionId}/items:
     get:
       tags:
@@ -138,12 +144,12 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/Features'
-        '400':
-          $ref: '#/components/responses/InvalidParameter'
         '404':
           $ref: '#/components/responses/NotFound'
-        '500':
-          $ref: '#/components/responses/ServerError'
+        4XX:
+          $ref: '#/components/responses/Error'
+        5XX:
+          $ref: '#/components/responses/Error'
   /collections/{collectionId}/items/{featureId}:
     get:
       tags:
@@ -161,8 +167,10 @@ paths:
           $ref: '#/components/responses/Feature'
         '404':
           $ref: '#/components/responses/NotFound'
-        '500':
-          $ref: '#/components/responses/ServerError'
+        4XX:
+          $ref: '#/components/responses/Error'
+        5XX:
+          $ref: '#/components/responses/Error'
 components:
   parameters:
     bbox:
@@ -1472,16 +1480,10 @@ components:
         application/geo+json:
           schema:
             $ref: '#/components/schemas/item'
-    InvalidParameter:
-      description: A query parameter has an invalid value.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exception'
     NotFound:
       description: The requested URI was not found.
-    ServerError:
-      description: A server error occurred.
+    Error:
+      description: An error occurred.
       content:
         application/json:
           schema:

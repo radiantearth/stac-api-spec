@@ -46,7 +46,9 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/LandingPage'
-        '500':
+        4XX:
+          $ref: '#/components/responses/Error'
+        5XX:
           $ref: '#/components/responses/Error'
 components:
   schemas:
