@@ -70,7 +70,9 @@ but sub-catalogs whose items are all in one database can support search.
 
 The Browseable conformance class (<https://api.stacspec.org/v1.0.0-rc.2/browseable>) provides a formal way
 to advertise that all Items in the Catalog presented by a STAC API may be reached by following `child` and
-`item` link relations. In a non-API STAC Catalog, all items must be reachable via these relations to be considered in the catalog. With a STAC API Catalog, items are considered to be in the catalog if they are accessible via search operations. However, a STAC API Catalog may also have child and item link relations.
+`item` link relations. In a non-API STAC Catalog, all items must be reachable via these relations to be
+considered in the catalog. With a STAC API Catalog, items are considered to be in the catalog if they are
+accessible via search operations. However, a STAC API Catalog may also have child and item link relations.
 This presents an ambiguity between whether the same set of items accessible via search operations
 is also accessible via link relations. Browseable clarifies this by unambiguously advertising that
 items available via search can also be accessed by following link relations.
