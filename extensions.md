@@ -1,7 +1,7 @@
 # STAC API Extensions
 
 STAC API aims to define a core of functionality, with richer capabilities enabled by extensions. The list of
-STAC API Extensions is maintained at <https://stac-api-extensions.github.io>.
+STAC API Extensions is maintained at **<https://stac-api-extensions.github.io>**.
 
 This document explains the process of creating and maturing an extension.
 
