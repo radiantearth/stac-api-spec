@@ -90,3 +90,11 @@ These are several examples of datetime intervals:
 - `1990-12-31T23:59:59Z/`
 - `1990-12-31T23:59:59Z/..`
 - `1990-12-31T23:59:59Z/1991-12-31T23:59:59Z`
+
+## Authentication Status Codes
+
+When authentication is applied to a STAC API, it is recommended the following status codes be returned:
+
+- 401 when no or invalid authentication information is provided
+- 403 when valid authentication information is provided, but the principal does not have access (permissions)
+  on the requested resource

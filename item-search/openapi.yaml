@@ -48,7 +48,9 @@ paths:
             text/html:
               schema:
                 type: string
-        default:
+        '4XX':
+          $ref: '../core/commons.yaml#/components/responses/Error'
+        '5XX':
           $ref: '../core/commons.yaml#/components/responses/Error'
     post:
       summary: Search STAC items with full-featured filtering.
@@ -79,7 +81,9 @@ paths:
             text/html:
               schema:
                 type: string
-        default:
+        '4XX':
+          $ref: '../core/commons.yaml#/components/responses/Error'
+        '5XX':
           $ref: '../core/commons.yaml#/components/responses/Error'
 components:
   parameters:
