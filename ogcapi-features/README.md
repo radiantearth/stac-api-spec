@@ -19,8 +19,11 @@
   - [Extensions](#extensions)
 
 ## Summary
+<<<<<<< pv/clarify-media-types-2
 
 *based on [**OGC API - Features - Part 1: Core**](https://www.ogc.org/standards/ogcapi-features)*
+=======
+>>>>>>> main
 
 - **OpenAPI specifications:**
   - [STAC API - Features](openapi-features.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-rc.2/ogcapi-features))
