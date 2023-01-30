@@ -551,7 +551,8 @@ components:
         The searchable date and time of the assets, in UTC.
         It is formatted according to [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6).
         `null` is allowed, but requires `start_datetime` and `end_datetime` from common metadata to be set.
-      examples: '2018-02-12T00:00:00Z'
+      examples:
+        - '2018-02-12T00:00:00Z'
     stac_version:
       title: STAC version
       type: string
@@ -710,7 +711,7 @@ components:
           type:
             type: string
             description: Media type of the asset
-            examples: 
+            examples:
               - image/png
           roles:
             type: array
