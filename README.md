@@ -118,7 +118,7 @@ cross-collection search of STAC Item objects at a `search` endpoint, as well as 
 **Extensions:**
 The *[extensions](extensions.md) document* describes how STAC adds new functionality
 through extensions. The official list of STAC API Extensions
-is maintained [here](https://stac-api-extensions.github.io).
+is maintained at [stac-api-extensions.github.io](https://stac-api-extensions.github.io).
 
 **Fragments:**
 The *[fragments/](fragments/)* folder contains re-usable building blocks to be used in a STAC API, including common OpenAPI 

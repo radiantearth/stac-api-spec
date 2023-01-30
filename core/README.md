@@ -231,7 +231,7 @@ different conformance classes and a different set of links.
 
 ## Extensions
 
-STAC API Extensions can be found [here](https://stac-api-extensions.github.io).
+STAC API Extensions can be found at [stac-api-extensions.github.io](https://stac-api-extensions.github.io).
 
 ## Structuring Catalog Hierarchies
 

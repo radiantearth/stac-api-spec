@@ -396,4 +396,4 @@ as is typical with a static STAC Collection, there are no links here with rel va
 
 ## Extensions
 
-STAC API Extensions can be found [here](https://stac-api-extensions.github.io).
+STAC API Extensions can be found at [stac-api-extensions.github.io](https://stac-api-extensions.github.io).
