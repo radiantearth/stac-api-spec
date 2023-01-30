@@ -1,11 +1,15 @@
 # STAC API - Core Specification
 
 - [STAC API - Core Specification](#stac-api---core-specification)
+  - [Summary](#summary)
+  - [Overview](#overview)
   - [Link Relations](#link-relations)
   - [Endpoints](#endpoints)
   - [Example Landing Page for STAC API - Core](#example-landing-page-for-stac-api---core)
   - [Extensions](#extensions)
   - [Structuring Catalog Hierarchies](#structuring-catalog-hierarchies)
+
+## Summary
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-rc.2/core)),
 - **Conformance URIs:**
@@ -14,6 +18,8 @@
 - **[Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Dependencies**: None
   and [commons.yaml](commons.yaml) is the OpenAPI version of the core [STAC spec](../stac-spec) JSON Schemas.
+
+## Overview
 
 All STAC API implementations must implement the *STAC API - Core* specification. The conformance class
 <https://api.stacspec.org/v1.0.0-rc.2/core> requires a server to provide a valid
