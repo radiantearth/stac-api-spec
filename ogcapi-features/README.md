@@ -1,6 +1,8 @@
 # STAC API - Collections and Features Specification
 
 - [STAC API - Collections and Features Specification](#stac-api---collections-and-features-specification)
+  - [Summary](#summary)
+  - [Overview](#overview)
   - [Conformance Classes](#conformance-classes)
     - [STAC API - Features](#stac-api---features)
     - [STAC API - Collections](#stac-api---collections)
@@ -16,7 +18,7 @@
   - [Example Collection Endpoint](#example-collection-endpoint)
   - [Extensions](#extensions)
 
-*based on [**OGC API - Features - Part 1: Core**](https://www.ogc.org/standards/ogcapi-features)*
+## Summary
 
 - **OpenAPI specifications:**
   - [STAC API - Features](openapi-features.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-rc.2/ogcapi-features))
@@ -29,6 +31,8 @@
   - [STAC API - Core](../core)
   - [OGC API - Features](https://www.ogc.org/standards/ogcapi-features)
   uses all the OGC API - Features openapi fragments to describe returning STAC Item objects.
+
+## Overview
 
 The *STAC API - Collections and Features* specification extends the
 [OGC API - Features - Part 1: Core](https://docs.opengeospatial.org/is/17-069r3/17-069r3.html)
