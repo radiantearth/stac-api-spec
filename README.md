@@ -116,9 +116,8 @@ The *[item-search](item-search)* folder contains the Item Search specification, 
 cross-collection search of STAC Item objects at a `search` endpoint, as well as a number of extensions. 
 
 **Extensions:**
-The *[extensions](extensions.md) document* describes how STAC incubates new functionality, and it links to the existing 
-extensions that can be added to enrich the functionality of a STAC API. Each has an OpenAPI yaml, but some of the yaml
-documents live as fragments in the [fragments/](fragments/) folder. The official list of STAC API Extensions
+The *[extensions](extensions.md) document* describes how STAC adds new functionality
+through extensions. The official list of STAC API Extensions
 is maintained [here](https://stac-api-extensions.github.io).
 
 **Fragments:**

@@ -15,13 +15,6 @@
   - [Example Landing Page for STAC API - Item Search](#example-landing-page-for-stac-api---item-search)
   - [Extensions](#extensions)
 
-- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-rc.2/item-search))
-- **Conformance URIs:**
-  - <https://api.stacspec.org/v1.0.0-rc.2/item-search>
-- **[Maturity Classification](../README.md#maturity-classification):** Candidate
-- **Dependencies**: [STAC API - Core](../core)
-- **Examples**: [examples.md](examples.md)
-
 The *STAC API - Item Search* specification defines the *STAC API - Item Search*
 conformance class (<https://api.stacspec.org/v1.0.0-rc.2/item-search>), which
 provides the ability to search for STAC [Item](../stac-spec/item-spec/README.md)
@@ -291,10 +284,4 @@ the [overview](../overview.md#example-landing-page) document.
 
 ## Extensions
 
-These extensions provide additional functionality that enhances Item Search.
-
-- [Fields Extension](https://github.com/stac-api-extensions/fields/blob/main/README.md)
-- [Sort Extension](https://github.com/stac-api-extensions/sort/blob/main/README.md)
-- [Context Extension](https://github.com/stac-api-extensions/context/blob/main/README.md)
-- [Filter Extension](https://github.com/stac-api-extensions/filter/blob/main/README.md)
-- [Query Extension](https://github.com/stac-api-extensions/query/blob/main/README.md)
+STAC API Extensions can be found [here](https://stac-api-extensions.github.io).

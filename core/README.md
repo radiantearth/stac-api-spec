@@ -7,14 +7,6 @@
   - [Extensions](#extensions)
   - [Structuring Catalog Hierarchies](#structuring-catalog-hierarchies)
 
-- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-rc.2/core)),
-- **Conformance URIs:**
-  - <https://api.stacspec.org/v1.0.0-rc.2/core>
-  - <https://api.stacspec.org/v1.0.0-rc.2/browseable>
-- **[Maturity Classification](../README.md#maturity-classification):** Candidate
-- **Dependencies**: None
-  and [commons.yaml](commons.yaml) is the OpenAPI version of the core [STAC spec](../stac-spec) JSON Schemas.
-
 All STAC API implementations must implement the *STAC API - Core* specification. The conformance class
 <https://api.stacspec.org/v1.0.0-rc.2/core> requires a server to provide a valid
 [STAC Catalog](../stac-spec/catalog-spec/catalog-spec.md) that also includes a `conformsTo`
@@ -225,7 +217,7 @@ different conformance classes and a different set of links.
 
 ## Extensions
 
-None.
+STAC API Extensions can be found [here](https://stac-api-extensions.github.io).
 
 ## Structuring Catalog Hierarchies
 
