@@ -155,7 +155,6 @@ The Landing Page will at least have the following `conformsTo` and `links`:
         "https://api.stacspec.org/v1.0.0-rc.2/ogcapi-features",
         "https://api.stacspec.org/v1.0.0-rc.2/item-search",
         "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core",
-        "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30",
         "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson"
     ],
     "links": [
@@ -176,7 +175,7 @@ The Landing Page will at least have the following `conformsTo` and `links`:
         },
         {
             "rel": "service-desc",
-            "type": "application/vnd.oai.openapi+json;version=3.0",
+            "type": "application/vnd.oai.openapi+json;version=3.1",
             "href": "https://stac-api.example.com/api"
         },
         {

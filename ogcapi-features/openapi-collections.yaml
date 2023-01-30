@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.1.0
 info:
   title: STAC API - Collections
   version: 1.0.0-rc.2
@@ -11,6 +11,7 @@ info:
   license:
     name: Apache License 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0'
+  x-conformance-classes: [ "https://api.stacspec.org/v1.0.0-rc.2/collections" ]
 tags:
   - name: Core
     description: essential characteristics of a STAC API
@@ -47,7 +48,6 @@ paths:
                 conformsTo:
                   - 'https://api.stacspec.org/v1.0.0-rc.2/core'
                   - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core'
-                  - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30'
                   - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson'
                 links:
                   - href: 'http://data.example.org/'
@@ -56,7 +56,7 @@ paths:
                     title: this document
                   - href: 'http://data.example.org/api'
                     rel: service-desc
-                    type: application/vnd.oai.openapi+json;version=3.0
+                    type: application/vnd.oai.openapi+json;version=3.1
                     title: the API definition
                   - href: 'http://data.example.org/api.html'
                     rel: service-doc

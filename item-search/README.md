@@ -15,13 +15,6 @@
   - [Example Landing Page for STAC API - Item Search](#example-landing-page-for-stac-api---item-search)
   - [Extensions](#extensions)
 
-- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-rc.2/item-search))
-- **Conformance URIs:**
-  - <https://api.stacspec.org/v1.0.0-rc.2/item-search>
-- **[Maturity Classification](../README.md#maturity-classification):** Candidate
-- **Dependencies**: [STAC API - Core](../core)
-- **Examples**: [examples.md](examples.md)
-
 The *STAC API - Item Search* specification defines the *STAC API - Item Search*
 conformance class (<https://api.stacspec.org/v1.0.0-rc.2/item-search>), which
 provides the ability to search for STAC [Item](../stac-spec/item-spec/README.md)
@@ -265,7 +258,7 @@ the [overview](../overview.md#example-landing-page) document.
         },
         {
             "rel": "service-desc",
-            "type": "application/vnd.oai.openapi+json;version=3.0",
+            "type": "application/vnd.oai.openapi+json;version=3.1",
             "href": "https://stac-api.example.com/api"
         },
         {

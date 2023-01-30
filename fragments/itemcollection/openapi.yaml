@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.1.0
 info:
   title: The SpatioTemporal Asset Catalog API - Item Collection
   description: The specification for a set of items, e.g. returned by a search.
@@ -29,7 +29,7 @@ components:
             with the `next` relation type.
           items:
             $ref: '../../core/commons.yaml#/components/schemas/link'
-          example:
+          examples:
             - rel: next
               href: >-
                 http://api.cool-sat.com/search?next=ANsXtp9mrqN0yrKWhf-y2PUpHRLQb1GT-mtxNcXou8TwkXhi1Jbk

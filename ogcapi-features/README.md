@@ -84,7 +84,9 @@ This conformance class should be advertised to OAFeat clients so they will know 
 If OpenAPI 3.0 is used for the endpoint referenced by the `service-desc` link relation in the landing page defined
 by *STAC API - Core*, the
 [OGC API - Features - Part 1 Requirements Class OpenAPI 3.0](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_oas30)
-(<http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30>) can be advertised. 
+(<http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30>) can be advertised. STAC API specifications
+are defined in OpenAPI 3.1 instead of 3.0, so implementations using these documents should not advertise
+this conformance class.
 
 ## Link Relations
 
@@ -335,7 +337,7 @@ the [overview](../overview.md#example-landing-page) document.
         },
         {
             "rel": "service-desc",
-            "type": "application/vnd.oai.openapi+json;version=3.0",
+            "type": "application/vnd.oai.openapi+json;version=3.1",
             "href": "https://stac-api.example.com/api"
         },
         {
