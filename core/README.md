@@ -9,8 +9,6 @@
   - [Extensions](#extensions)
   - [Structuring Catalog Hierarchies](#structuring-catalog-hierarchies)
 
-<<<<<<< pv/openapi
-=======
 ## Summary
 
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-rc.2/core)),
@@ -23,7 +21,6 @@
 
 ## Overview
 
->>>>>>> main
 All STAC API implementations must implement the *STAC API - Core* specification. The conformance class
 <https://api.stacspec.org/v1.0.0-rc.2/core> requires a server to provide a valid
 [STAC Catalog](../stac-spec/catalog-spec/catalog-spec.md) that also includes a `conformsTo`
