@@ -11,6 +11,7 @@ info:
   license:
     name: Apache License 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0'
+  x-conformance-classes: [ "https://api.stacspec.org/v1.0.0-rc.2/collections" ]
 tags:
   - name: Core
     description: essential characteristics of a STAC API
