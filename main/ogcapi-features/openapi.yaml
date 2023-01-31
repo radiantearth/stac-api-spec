@@ -11,6 +11,8 @@ info:
   license:
     name: Apache License 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0
+  x-conformance-classes:
+    - https://api.stacspec.org/v1.0.0-rc.2/ogcapi-features
 tags:
   - name: Features
     description: 'All endpoints related to OGC API - Features - Part 1: Core'
