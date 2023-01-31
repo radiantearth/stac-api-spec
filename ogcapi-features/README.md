@@ -1,6 +1,8 @@
 # STAC API - Collections and Features Specification
 
 - [STAC API - Collections and Features Specification](#stac-api---collections-and-features-specification)
+  - [Summary](#summary)
+  - [Overview](#overview)
   - [Conformance Classes](#conformance-classes)
     - [STAC API - Features](#stac-api---features)
     - [STAC API - Collections](#stac-api---collections)
@@ -16,7 +18,7 @@
   - [Example Collection Endpoint](#example-collection-endpoint)
   - [Extensions](#extensions)
 
-*based on [**OGC API - Features - Part 1: Core**](https://www.ogc.org/standards/ogcapi-features)*
+## Summary
 
 - **OpenAPI specifications:**
   - [STAC API - Features](openapi-features.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-rc.2/ogcapi-features))
@@ -29,6 +31,8 @@
   - [STAC API - Core](../core)
   - [OGC API - Features](https://www.ogc.org/standards/ogcapi-features)
   uses all the OGC API - Features openapi fragments to describe returning STAC Item objects.
+
+## Overview
 
 The *STAC API - Collections and Features* specification extends the
 [OGC API - Features - Part 1: Core](https://docs.opengeospatial.org/is/17-069r3/17-069r3.html)
@@ -392,12 +396,4 @@ as is typical with a static STAC Collection, there are no links here with rel va
 
 ## Extensions
 
-These extensions provide additional functionality that enhances *STAC API - Features*.
-
-- [Transaction Extension](https://github.com/stac-api-extensions/transaction/blob/main/README.md)
-- [Items and Collections API Version Extension](https://github.com/stac-api-extensions/version/blob/main/README.md)
-- [Fields Extension](https://github.com/stac-api-extensions/fields/blob/main/README.md)
-- [Sort Extension](https://github.com/stac-api-extensions/sort/blob/main/README.md)
-- [Context Extension](https://github.com/stac-api-extensions/context/blob/main/README.md)
-- [Filter Extension](https://github.com/stac-api-extensions/filter/blob/main/README.md)
-- [Query Extension](https://github.com/stac-api-extensions/query/blob/main/README.md)
+STAC API Extensions can be found at [stac-api-extensions.github.io](https://stac-api-extensions.github.io).
