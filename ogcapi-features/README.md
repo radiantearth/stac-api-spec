@@ -396,12 +396,4 @@ as is typical with a static STAC Collection, there are no links here with rel va
 
 ## Extensions
 
-These extensions provide additional functionality that enhances *STAC API - Features*.
-
-- [Transaction Extension](https://github.com/stac-api-extensions/transaction/blob/main/README.md)
-- [Items and Collections API Version Extension](https://github.com/stac-api-extensions/version/blob/main/README.md)
-- [Fields Extension](https://github.com/stac-api-extensions/fields/blob/main/README.md)
-- [Sort Extension](https://github.com/stac-api-extensions/sort/blob/main/README.md)
-- [Context Extension](https://github.com/stac-api-extensions/context/blob/main/README.md)
-- [Filter Extension](https://github.com/stac-api-extensions/filter/blob/main/README.md)
-- [Query Extension](https://github.com/stac-api-extensions/query/blob/main/README.md)
+STAC API Extensions can be found at [stac-api-extensions.github.io](https://stac-api-extensions.github.io).
