@@ -98,7 +98,7 @@ The following Link relations must exist in the Landing Page (root).
 
 | **rel**        | **href** | **Media Type**   | **From**  | **Description**                                      |
 | -------------- | -------- | ---------------- | --------- | ---------------------------------------------------- |
-| `root`         | `/`      | application/json | STAC Core | The root URI                                         |
+| `root`         | `/`      | application/json | STAC API - Core | The root URI                                         |
 | `self`         | `/`      | application/json | OAFeat    | Self reference, same as root URI                     |
 | `service-desc` | `/api`   | various          | OAFeat    | The service description in a machine-readable format |
 
@@ -124,8 +124,8 @@ If all Items in a Catalog can be accessed by traversing these links, the browsea
 
 | **rel** | **href** | **Media Type**       | **From**  | **Description**                        |
 | ------- | -------- | -------------------- | --------- | -------------------------------------- |
-| `child` | various  | application/json     | STAC Core | The child STAC Catalogs & Collections. |
-| `item`  | various  | application/geo+json | STAC Core | The child STAC Items.                  |
+| `child` | various  | application/json     | STAC API - Core | The child STAC Catalogs & Collections. |
+| `item`  | various  | application/geo+json | STAC API - Core | The child STAC Items.                  |
 
 While it is valid to have `item` links from the landing page, most STAC API implementations 
 serve large numbers of features, so they will typically use several layers of intermediate `child` links before
@@ -231,7 +231,7 @@ different conformance classes and a different set of links.
 
 ## Extensions
 
-None.
+STAC API Extensions can be found at [stac-api-extensions.github.io](https://stac-api-extensions.github.io).
 
 ## Structuring Catalog Hierarchies
 
