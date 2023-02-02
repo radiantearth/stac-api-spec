@@ -113,7 +113,6 @@ The following Link relations must exist in the Landing Page (root).
 
 The following Link relations must exist in the `/collections` endpoint response.
 
-<<<<<<< HEAD
 | **rel** | **href**       | **Media Type**   | **From**                                    | **Description** |
 | ------- | -------------- | ---------------- | ------------------------------------------- | --------------- |
 | `root`  | `/`            | application/json | STAC API - Features, STAC API - Collections | The root URI    |
