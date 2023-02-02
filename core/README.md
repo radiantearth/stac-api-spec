@@ -58,7 +58,7 @@ classes](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_declaration_o
 landing page instead of in the JSON response from the `/conformance` endpoint. This is different from how the OGC API advertises
 conformance, as STAC feels it is important for clients
 to understand conformance from a single request to the landing page. Implementers who implement the *OGC API - Features* and/or
-*STAC API - Features* conformance classes must also implement the `/conformance` endpoint.
+[STAC API - Features](../ogcapi-features/README.md) conformance classes must also implement the `/conformance` endpoint.
 
 The scope of the conformance classes declared in the `conformsTo` field and the `/conformance` endpoint are limited
 to the STAC API Catalog that declares them. A STAC API Catalog may link to sub-catalogs within it via `child` links
@@ -78,7 +78,8 @@ is also accessible via link relations. Browseable clarifies this by unambiguousl
 items available via search can also be accessed by following link relations.
 
 Support for this "browse" mode of interaction via link relations is complementary to the dynamic search
-capabilities defined in the *STAC API - Features* and *STAC API - Item Search* conformance classes.
+capabilities defined in the [STAC API - Features](../ogcapi-features/README.md) and
+[STAC API - Item Search](../item-search/README.md) conformance classes.
 Conversely, a STAC API implementation may not support browsing, even though the root is a Catalog object,
 if it does not have the appropriate `child` and `item` link relations to traverse over the objects in
 the catalog.
@@ -138,7 +139,7 @@ search over only a sub-catalog. This is useful for very large or federated catal
 over the entire catalog, but can support searching over individual sub-catalogs within it.
 
 Note that there is a different link relation `items` (plural)
-used by the *STAC API - Features* conformance class that links from a collection resource
+used by the [STAC API - Features](../ogcapi-features/README.md) conformance class that links from a collection resource
 (at the `/collections/{collectionId}` endpoint) to the items in
 that collection (at the `/collections/{collectionId}/items` endpoint). Both of these endpoints are
 [derived from OGC API - Features](https://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_items_).
