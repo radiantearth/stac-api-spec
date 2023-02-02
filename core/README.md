@@ -72,8 +72,8 @@ The Browseable conformance class (<https://api.stacspec.org/v1.0.0-rc.2/browseab
 to advertise that all Items in the Catalog presented by a STAC API may be reached by following `child` and
 `item` link relations. In a non-API STAC Catalog, all items must be reachable via these relations to be
 considered in the catalog. With a STAC API Catalog, items are considered to be in the catalog if they are
-accessible via search operations. However, a STAC API Catalog may also have child and item link relations.
-This presents an ambiguity between whether the same set of items accessible via search operations
+accessible via `child` and `item` relations **or** search operations using either [STAC API - Features](../ogcapi-features/README.md) or
+[STAC API - Item Search](../item-search/README.md) endpoints. When a STAC API Catalog has child and item link relations, there is ambiguity in whether the same set of items accessible via search operations
 is also accessible via link relations. Browseable clarifies this by unambiguously advertising that
 items available via search can also be accessed by following link relations.
 
