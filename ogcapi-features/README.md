@@ -119,7 +119,6 @@ The following Link relations must exist in the `/collections` endpoint response.
 | `root`  | `/`            | application/json | STAC API - Features, STAC API - Collections | The root URI    |
 | `self`  | `/collections` | application/json | OAFeat                                      | Self reference  |
 
-
 ### Collection (/collections/{collectionId})
 
 The following Link relations must exist in the Collection object returned from the `/collections/{collectionId}` endpoint.

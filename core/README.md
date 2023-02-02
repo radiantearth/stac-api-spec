@@ -96,11 +96,11 @@ Recommendations for structuring Catalogs hierarchically can be found in
 
 The following Link relations must exist in the Landing Page (root).
 
-| **rel**        | **href** | **Media Type**   | **From**  | **Description**                                      |
-| -------------- | -------- | ---------------- | --------- | ---------------------------------------------------- |
+| **rel**        | **href** | **Media Type**   | **From**        | **Description**                                      |
+| -------------- | -------- | ---------------- | --------------- | ---------------------------------------------------- |
 | `root`         | `/`      | application/json | STAC API - Core | The root URI                                         |
-| `self`         | `/`      | application/json | OAFeat    | Self reference, same as root URI                     |
-| `service-desc` | `/api`   | various          | OAFeat    | The service description in a machine-readable format |
+| `self`         | `/`      | application/json | OAFeat          | Self reference, same as root URI                     |
+| `service-desc` | `/api`   | various          | OAFeat          | The service description in a machine-readable format |
 
 The path for the `service-desc` endpoint is recommended to be `/api`, but may be another path. Recommended to be
 OpenAPI 3.0 or 3.1 with media types `application/vnd.oai.openapi` (YAML),
@@ -122,8 +122,8 @@ relations form a directed graph that enables traversal from a root catalog or co
 If all Items in a Catalog can be accessed by traversing these links, the browseable conformance class
 <https://api.stacspec.org/v1.0.0-rc.2/browseable> should be advertised also.
 
-| **rel** | **href** | **Media Type**       | **From**  | **Description**                        |
-| ------- | -------- | -------------------- | --------- | -------------------------------------- |
+| **rel** | **href** | **Media Type**       | **From**        | **Description**                        |
+| ------- | -------- | -------------------- | --------------- | -------------------------------------- |
 | `child` | various  | application/json     | STAC API - Core | The child STAC Catalogs & Collections. |
 | `item`  | various  | application/geo+json | STAC API - Core | The child STAC Items.                  |
 
