@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## Changed
+
+- OpenAPI schemas are now OpenAPI 3.1 instead of OpenAPI 3.0.
+
 ## Added
 
 - Added authentication status code recommendations.

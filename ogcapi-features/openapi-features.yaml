@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.1.0
 info:
   title: STAC API - Features
   version: 1.0.0-rc.2
@@ -47,7 +47,6 @@ paths:
                 conformsTo:
                   - 'https://api.stacspec.org/v1.0.0-rc.2/core'
                   - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core'
-                  - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30'
                   - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson'
                 links:
                   - href: 'http://data.example.org/'
@@ -56,7 +55,7 @@ paths:
                     title: this document
                   - href: 'http://data.example.org/api'
                     rel: service-desc
-                    type: application/vnd.oai.openapi+json;version=3.0
+                    type: application/vnd.oai.openapi+json;version=3.1
                     title: the API definition
                   - href: 'http://data.example.org/api.html'
                     rel: service-doc
@@ -99,7 +98,7 @@ paths:
         '200':
           $ref: '#/components/responses/Collections'
         '4XX':
-          $ref: '../core/commons.yaml#/components/responses/Error'          
+          $ref: '../core/commons.yaml#/components/responses/Error'
         '5XX':
           $ref: '../core/commons.yaml#/components/responses/Error'
   '/collections/{collectionId}':
@@ -310,7 +309,8 @@ components:
         parameters like `bbox`.
       type: integer
       minimum: 0
-      example: 127
+      examples: 
+        - 127
     numberReturned:
       description: |-
         The number of features in the feature collection.
@@ -322,12 +322,14 @@ components:
         of items in the "features" array.
       type: integer
       minimum: 0
-      example: 10
+      examples: 
+        - 10
     timeStamp:
       description: This property indicates the time and date when the response was generated.
       type: string
       format: date-time
-      example: '2017-08-17T08:05:32Z'
+      examples: 
+        - '2017-08-17T08:05:32Z'
   responses:
     ConformanceDeclaration:
       description: |-
@@ -344,7 +346,6 @@ components:
           example:
             conformsTo:
               - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core'
-              - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30'
               - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson'
     Collections:
       description: |-

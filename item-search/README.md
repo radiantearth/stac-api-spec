@@ -282,7 +282,7 @@ the [overview](../overview.md#example-landing-page) document.
         },
         {
             "rel": "service-desc",
-            "type": "application/vnd.oai.openapi+json;version=3.0",
+            "type": "application/vnd.oai.openapi+json;version=3.1",
             "href": "https://stac-api.example.com/api"
         },
         {
