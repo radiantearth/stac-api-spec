@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added authentication status code recommendations.
 - Added extension field to all OpenAPI specifications `x-conformance-classes` indicating the
   conformance classes they define.
+- STAC API - Item Search now requires a `root` link relation in the response from `/search`
 
 ### Fixed
 
