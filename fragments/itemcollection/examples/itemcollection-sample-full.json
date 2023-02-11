@@ -60,11 +60,15 @@
             "links": [
                 {
                     "rel": "self",
-                    "href": "https://stac-api.example.com/catalog/CS3-20160503_132130_04/CS3-20160503_132130_04.json"
+                    "href": "https://stac-api.example.com/collections/CS3/items/CS3-20160503_132131_05"
+                },
+                {
+                    "rel": "root",
+                    "href": "https://stac-api.example.com/"
                 },
                 {
                     "rel": "collection",
-                    "href": "https://stac-api.example.com/catalog/CS3-20160503_132130_04/catalog.json"
+                    "href": "https://stac-api.example.com/collections/CS3"
                 }
             ],
             "assets": {
@@ -84,8 +88,9 @@
     ],
     "links": [
         {
-            "rel": "self",
-            "href": "http://stac.example.com/search?collection=CS3"
+            "rel": "root",
+            "href": "http://stac.example.com/",
+            "type": "application/json"
         }
     ]
 }
