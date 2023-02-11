@@ -15,6 +15,7 @@ info:
 tags:
   - name: Item Search
     description: essential characteristics of a STAC API
+x-conformance-classes: [ "https://api.stacspec.org/v1.0.0-rc.2/item-search" ]
 paths:
   /search:
     get:

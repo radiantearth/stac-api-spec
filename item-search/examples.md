@@ -36,6 +36,11 @@ Response with `200 OK`:
             "rel": "next",
             "href": "https://stac-api.example.com/search?page=2",
             "type": "application/geo+json"
+        },
+        {
+            "rel": "root",
+            "href": "https://stac-api.example.com/",
+            "type": "application/json"
         }
     ]
 }
@@ -66,6 +71,11 @@ Response with `200 OK`:
                 "limit": 10
             },
             "merge": true
+        },
+        {
+            "rel": "root",
+            "href": "https://stac-api.example.com/",
+            "type": "application/json"
         }
     ]
 }
@@ -118,6 +128,7 @@ Request to `HTTP POST /search`:
 ```
 
 Response with `200 OK`:
+
 ```json
 {
     "type": "FeatureCollection",
@@ -131,6 +142,11 @@ Response with `200 OK`:
             "headers": {
                 "Search-After": "LC81530752019135LGN00"
             }
+        },
+        {
+            "rel": "root",
+            "href": "https://stac-api.example.com/",
+            "type": "application/json"
         }
     ]
 }
