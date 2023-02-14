@@ -55,12 +55,11 @@ for more details.
 
 ### Extensions & Fragments
 
-Both STAC API and OAFeat allow 'extensions' that can be added for additional functionality. The STAC community has 
+Both STAC API and OAFeat allow 'extensions' that can be added for additional functionality. The STAC community has
 created [a number of extensions](https://stac-api-extensions.github.io) to OAFeat
-in order to meet the requirements of its implementors. Additional details about extensions can be found in the
-[extensions document](extensions.md).
-These are specified in OpenAPI, which works cleanly when the new functionality is a new API location (a complete 
-resource, or adding POST to an existing one). Many of the additions, however, are done at the parameter or response 
+in order to meet the requirements of its implementors. Additional details about extensions can be found in the [extensions document](extensions.md).
+These are specified in OpenAPI, which works cleanly when the new functionality is a new API location (a complete
+resource, or adding POST to an existing one). Many of the additions, however, are done at the parameter or response
 level, like adding a `sortby` field to return ordered results.
 
 Each *extension* is made specifically against a part of the STAC API, so that it can be specified as a conformance

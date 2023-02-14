@@ -61,12 +61,17 @@
                 {
                     "rel": "self",
                     "type": "application/json",
-                    "href": "https://stac-api.example.com/catalog/cs3-20160503_132130_04/cs3-20160503_132130_04.json"
+                    "href": "https://stac-api.example.com/collections/cs3/items/CS3-20160503_132131_05"
+                },
+                {
+                    "rel": "root",
+                    "type": "application/json",
+                    "href": "https://stac-api.example.com/"
                 },
                 {
                     "rel": "collection",
                     "type": "application/json",
-                    "href": "https://stac-api.example.com/catalog/cs3-20160503_132130_04/catalog.json"
+                    "href": "https://stac-api.example.com/collections/cs3"
                 }
             ],
             "assets": {
@@ -88,9 +93,9 @@
     ],
     "links": [
         {
-            "rel": "self",
-            "type": "application/geo+json",
-            "href": "http://stac.example.com/search?collection=cs3"
+            "rel": "root",
+            "href": "http://stac.example.com/",
+            "type": "application/json"
         }
     ]
 }

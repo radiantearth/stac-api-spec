@@ -63,6 +63,12 @@ specified, it is assumed to represent a GET request. If the server supports both
 Other links with relation `search` may be included that advertise other content types the server may respond
 with, but these other types are not part of the STAC API requirements.
 
+The following Link relations must exist in the `/search` endpoint response.
+
+| **rel** | **href** | **From**               | **Description** |
+| ------- | -------- | ---------------------- | --------------- |
+| `root`  | `/`      | STAC API - Item Search | The root URI    |
+
 ## Endpoints
 
 This conformance class also requires for the endpoints in the [STAC API - Core](../core) conformance class to be implemented.
@@ -166,6 +172,11 @@ parameter name is defined by the implementor and is not necessarily part of the 
             "rel": "prev",
             "href": "https://stac-api.example.com/search?page=1",
             "type": "application/geo+json"
+        },
+        {
+            "rel": "root",
+            "href": "https://stac-api.example.com/",
+            "type": "application/json"
         }
     ]
 }
