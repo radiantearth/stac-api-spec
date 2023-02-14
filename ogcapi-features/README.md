@@ -100,6 +100,10 @@ by *STAC API - Core*, the
 
 These conformance classes also requires implementation of the link relations in the [STAC API - Core](../core) conformance class.
 
+While the STAC definition does not require the existence of the `type` field in
+all Link objects, this is required by OAFeat and is thereby required by the
+*STAC API - Features* conformance class.
+
 ### Landing Page (/)
 
 The following Link relations must exist in the Landing Page (root).

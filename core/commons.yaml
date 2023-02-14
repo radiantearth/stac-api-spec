@@ -388,7 +388,6 @@ components:
       required:
         - href
         - rel
-        - type
       properties:
         href:
           type: string
