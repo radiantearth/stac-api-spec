@@ -466,6 +466,8 @@ components:
           $ref: '#/components/schemas/stac_extensions'
         type:
           type: string
+          enum:
+            - Catalog
         id:
           type: string
         title:
@@ -795,6 +797,8 @@ components:
           $ref: '#/components/schemas/stac_extensions'
         type:
           type: string
+          enum:
+            - Collection
         id:
           description: identifier of the collection used, for example, in URIs
           type: string

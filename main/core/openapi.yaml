@@ -144,6 +144,8 @@ components:
           $ref: '#/components/schemas/stac_extensions'
         type:
           type: string
+          enum:
+            - Catalog
         id:
           type: string
         title:
