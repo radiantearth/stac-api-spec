@@ -97,6 +97,10 @@ Recommendations for supporting browse is discussed in [Structuring Catalog Hiera
 
 ## Link Relations
 
+While the STAC definition of Link does not require the `type` field,
+*STAC API - Core* requires all Links to have this field.
+If the target of a Link's `type` is unknown, `type` SHOULD be set to `application/octet-stream` or `text/plain`.
+
 The following Link relations must exist in the Landing Page (root).
 
 | **rel**        | **href** | **Media Type**   | **From**        | **Description**                                      |
