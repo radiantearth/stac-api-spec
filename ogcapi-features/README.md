@@ -157,12 +157,11 @@ The following Link relations must exist in the Item object returned from the `/c
 | **rel**  | **href**                                     | **Media Type**       | **From**            | **Description**                                     |
 | -------- | -------------------------------------------- | -------------------- | ------------------- | --------------------------------------------------- |
 | `root`   | `/`                                          | application/json     | STAC API - Features | The root URI                                        |
+| `collection` | `/collections/{collectionId}`            | application/json     | STAC Collection     | The containing Collection |
 | `parent` | `/collections/{collectionId}`                | application/json     | OAFeat              | Parent reference, usually the containing Collection |
 | `self`   | `/collections/{collectionId}/items/{itemId}` | application/geo+json | OAFeat              | Self reference                                      |
 
-Note that the `parent` link for an Item should point to the containing Collection
-(e.g., `/collections/{collectionId}`), rather than the API sub-path
-of `/collections/{collectionId}/items/`.
+The `parent` link for an item may point to a Collection or a Catalog.  A `collection` link for an Item will always point to the containing Collection.  Links to a Collection must point to the `/collections/{collectionId}` endpoint, rather than the API sub-path of `/collections/{collectionId}/items/`.
 
 ## Endpoints
 
