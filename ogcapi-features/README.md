@@ -67,6 +67,7 @@ The *STAC API - Collections* (<https://api.stacspec.org/v1.0.0-rc.2/collections>
 requires only the subset of the behavior of Features that relates to Collections.
 
 This subset is:
+
 - the `data` link relation on the landing page
 - the `/collections` and `/collections/{collection_id}` endpoints
 
@@ -99,39 +100,43 @@ by *STAC API - Core*, the
 
 These conformance classes also requires implementation of the link relations in the [STAC API - Core](../core) conformance class.
 
+While the STAC definition of Link does not require the `type` field, this is required by OAFeat,
+and is thereby required by the *STAC API - Features* conformance class.
+If the target of a Link's `type` is unknown, `type` SHOULD be set to `application/octet-stream` or `text/plain`.
+
 ### Landing Page (/)
 
 The following Link relations must exist in the Landing Page (root).
 
-| **rel**       | **href**       | **From** | **Description**     |
-| ------------- | -------------- | -------- | ------------------- |
-| `conformance` | `/conformance` | OAFeat   | Conformance URI     |
-| `data`        | `/collections` | OAFeat   | List of Collections |
+| **rel**       | **href**       | **Media Type**   | **From** | **Description**     |
+| ------------- | -------------- | ---------------- | -------- | ------------------- |
+| `conformance` | `/conformance` | application/json | OAFeat   | Conformance URI     |
+| `data`        | `/collections` | application/json | OAFeat   | List of Collections |
 
 ### Collections (/collections)
 
 The following Link relations must exist in the `/collections` endpoint response.
 
-| **rel** | **href**       | **From**                                    | **Description** |
-| ------- | -------------- | ------------------------------------------- | --------------- |
-| `root`  | `/`            | STAC API - Features, STAC API - Collections | The root URI    |
-| `self`  | `/collections` | OAFeat                                      | Self reference  |
+| **rel** | **href**       | **Media Type**   | **From**                                    | **Description** |
+| ------- | -------------- | ---------------- | ------------------------------------------- | --------------- |
+| `root`  | `/`            | application/json | STAC API - Features, STAC API - Collections | The root URI    |
+| `self`  | `/collections` | application/json | OAFeat                                      | Self reference  |
 
 ### Collection (/collections/{collectionId})
 
 The following Link relations must exist in the Collection object returned from the `/collections/{collectionId}` endpoint.
 
-| **rel**  | **href**                      | **From**                                    | **Description**                            |
-| -------- | ----------------------------- | ------------------------------------------- | ------------------------------------------ |
-| `root`   | `/`                           | STAC API - Features, STAC API - Collections | The root URI                               |
-| `parent` | `/`                           | OAFeat                                      | Parent reference, usually the root Catalog |
-| `self`   | `/collections/{collectionId}` | OAFeat                                      | Self reference                             |
+| **rel**  | **href**                      | **Media Type**   | **From**                                    | **Description**                            |
+| -------- | ----------------------------- | ---------------- | ------------------------------------------- | ------------------------------------------ |
+| `root`   | `/`                           | application/json | STAC API - Features, STAC API - Collections | The root URI                               |
+| `parent` | `/`                           | application/json | OAFeat                                      | Parent reference, usually the root Catalog |
+| `self`   | `/collections/{collectionId}` | application/json | OAFeat                                      | Self reference                             |
 
 Additionally, these relations may exist for the `/collections/{collectionId}` endpoint:
 
-| **rel**     | **href** | **From**        | **Description**                                                                                                                                                                                                                                                                                         |
-| ----------- | -------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `canonical` | various  | STAC API - Core | Provides the preferred paths to get to STAC Collection and Item objects, if they differ from the URL that was used to retrieve the STAC object and thus duplicate other content. This can be useful in federated catalogs that present metadata that has a different location than the source metadata. |
+| **rel**     | **href** | **Media Type** | **From**        | **Description**                                                                                                                                                                                                                                                                                         |
+| ----------- | -------- | -------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `canonical` | various  | various        | STAC API - Core | Provides the preferred paths to get to STAC Collection and Item objects, if they differ from the URL that was used to retrieve the STAC object and thus duplicate other content. This can be useful in federated catalogs that present metadata that has a different location than the source metadata. |
 
 Usually, the `self` link in a Collection must link to the same URL that was used to request
 it. However, implementations may choose to have the canonical location of the Collection be
@@ -170,12 +175,12 @@ This conformance class also requires for the endpoints in the [STAC API - Core](
 
 The *OGC API - Features* endpoints are shown below, with details provided in the OpenAPI specifications for [Features](openapi-features.yaml) or [Collections](openapi-collections.yaml).
 
-| Endpoint                                        | Returns                                                 | Description                                                                         |
-| ----------------------------------------------- | ------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| `/collections`                                  | JSON                                                    | Object containing an array of Collection objects in the Catalog, and Link relations |
-| `/collections/{collectionId}`                   | [Collection](../stac-spec/collection-spec/README.md)    | Returns single Collection JSON                                                      |
-| `/collections/{collectionId}/items`             | [ItemCollection](../fragments/itemcollection/README.md) | GeoJSON FeatureCollection-conformant entity of Item objects in collection           |
-| `/collections/{collectionId}/items/{featureId}` | [Item](../stac-spec/item-spec/README.md)                | Returns single Item (GeoJSON Feature)                                               |
+| **Endpoint**                                    | **Returns**          | **Media Type**                                          | **Description**                                                                     |
+| ----------------------------------------------- | -------------------- | ------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `/collections`                                  | application/json     | JSON                                                    | Object containing an array of Collection objects in the Catalog, and Link relations |
+| `/collections/{collectionId}`                   | application/json     | [Collection](../stac-spec/collection-spec/README.md)    | Returns single Collection JSON                                                      |
+| `/collections/{collectionId}/items`             | application/geo+json | [ItemCollection](../fragments/itemcollection/README.md) | GeoJSON FeatureCollection-conformant entity of Item objects in collection           |
+| `/collections/{collectionId}/items/{featureId}` | application/geo+json | [Item](../stac-spec/item-spec/README.md)                | Returns single Item (GeoJSON Feature)                                               |
 
 The OGC API - Features is a standard API that represents collections of geospatial data. It defines a RESTful interface
 to query geospatial data, with GeoJSON as a main return type. With OAFeat you can return any `Feature`, which is a geometry
@@ -232,8 +237,8 @@ or `token` and any additional filter parameters if given and required. For examp
     "links": [
         {
             "rel": "next",
+            "type": "application/geo+json",
             "href": "https://stac-api.example.com/collections/my_collection/items?page=2"
-            "type": "application/geo+json"
         }
     ]
 ```
@@ -278,20 +283,21 @@ In our simple example of numerical pages, the response for `page=3` would have a
 `links` array containing these two Links indicating the URLs for the next (page=4) and
 previous (page=2) pages:
 
-```none
-"links": [
-  ...
-  {
-    "rel": "prev",
-    "href": "https://stac-api.example.com/collections?page=2"
-    "type": "application/json"
-  },
-  {
-    "rel": "next",
-    "href": "https://stac-api.example.com/collections?page=4"
-    "type": "application/json"
-  }
-]
+```json
+{
+    "links": [
+    {
+        "rel": "prev",
+        "type": "application/json",
+        "href": "https://stac-api.example.com/collections?page=2"
+    },
+    {
+        "rel": "next",
+        "type": "application/json",
+        "href": "https://stac-api.example.com/collections?page=4"
+    }
+    ]
+}
 ```
 
 In addition to supporting query parameters in the URL value of the `href` field,

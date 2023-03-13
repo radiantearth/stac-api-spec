@@ -49,13 +49,17 @@ Implementing `GET /search` is **required**, `POST /search` is optional, but reco
 
 ## Link Relations
 
+While the STAC definition of Link does not require the `type` field,
+*STAC API - Item Search* requires all Links to have this field.
+If the target of a Link's `type` is unknown, `type` SHOULD be set to `application/octet-stream` or `text/plain`.
+
 This conformance class also requires implementation of the link relations in the [STAC API - Core](../core) conformance class.
 
 The following Link relations must exist in the Landing Page (root).
 
-| **rel**  | **href**  | **From**               | **Description**             |
-| -------- | --------- | ---------------------- | --------------------------- |
-| `search` | `/search` | STAC API - Item Search | URI for the Search endpoint |
+| **rel**  | **href**  | **Media Type**       | **From**               | **Description**             |
+| -------- | --------- | -------------------- | ---------------------- | --------------------------- |
+| `search` | `/search` | application/geo+json | STAC API - Item Search | URI for the Search endpoint |
 
 This `search` link relation must have a `type` of `application/geo+json`. If no `method` attribute is
 specified, it is assumed to represent a GET request. If the server supports both GET and POST requests, two links should be included, one with a `method` of `GET` one with a `method` of `POST`.
@@ -73,9 +77,9 @@ The following Link relations must exist in the `/search` endpoint response.
 
 This conformance class also requires for the endpoints in the [STAC API - Core](../core) conformance class to be implemented.
 
-| Endpoint  | Returns         | Description     |
-| --------- | --------------- | --------------- |
-| `/search` | Item Collection | Search endpoint |
+| **Endpoint** | **Returns**     | **Media Type**       | **From**               | **Description** |
+| ------------ | --------------- | -------------------- | ---------------------- | --------------- |
+| `/search`    | Item Collection | application/geo+json | STAC API - Item Search | Search endpoint |
 
 ## Query Parameters and Fields
 
@@ -105,14 +109,14 @@ For more examples see [examples.md](examples.md).
 
 The core parameters for STAC search are defined by OAFeat, and STAC adds a few parameters for convenience.
 
-| Parameter   | Type             | Source API | Description                                                                                                                                                                     |
-| ----------- | ---------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| limit       | integer          | OAFeat     | The maximum number of results to return (page size).                                                                                                                            |
-| bbox        | \[number]        | OAFeat     | Requested bounding box.                                                                                                                                                         |
-| datetime    | string           | OAFeat     | Single date+time, or a range ('/' separator), formatted to [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). Use double dots `..` for open date ranges. |
-| intersects  | GeoJSON Geometry | STAC       | Searches items by performing intersection between their geometry and provided GeoJSON geometry.  All GeoJSON geometry types must be supported.                                  |
-| ids         | \[string]        | STAC       | Array of Item ids to return.                                                                                                                                                    |
-| collections | \[string]        | STAC       | Array of one or more Collection IDs that each matching Item must be in.                                                                                                         |
+| **Parameter** | **Type**         | **Source API** | **Description**                                                                                                                                                                 |
+| ------------- | ---------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| limit         | integer          | OAFeat         | The maximum number of results to return (page size).                                                                                                                            |
+| bbox          | \[number]        | OAFeat         | Requested bounding box.                                                                                                                                                         |
+| datetime      | string           | OAFeat         | Single date+time, or a range ('/' separator), formatted to [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). Use double dots `..` for open date ranges. |
+| intersects    | GeoJSON Geometry | STAC           | Searches items by performing intersection between their geometry and provided GeoJSON geometry.  All GeoJSON geometry types must be supported.                                  |
+| ids           | \[string]        | STAC           | Array of Item ids to return.                                                                                                                                                    |
+| collections   | \[string]        | STAC           | Array of one or more Collection IDs that each matching Item must be in.                                                                                                         |
 
 See [examples](examples.md) for some example requests.
 
@@ -125,14 +129,14 @@ may choose other values to advertise through their `service-desc` endpoint.  If 
 than the advertised maximum limit, the server must act as if the request were for the maximum
 and not return an error.
 
-Only one of either **intersects** or **bbox** may be specified.  If both are specified, a 400 Bad Request status code
-must be returned.
-
 **datetime** The datetime parameter use the same allowed values as the
 [OAF datetime](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_parameter_datetime) parameter.
 This allows for either a single [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) datetime or an
 open or closed interval that also uses RFC 3339 datetimes. Additional details about this parameter can be
 found in the [Implementation Recommendations](../implementation.md#datetime-parameter-handling).
+
+Only one of either **intersects** or **bbox** may be specified.  If both are specified, a 400 Bad Request status code
+must be returned.
 
 **bbox** Represented using either 2D or 3D geometries. The length of the array must be 2\*n where
 *n* is the number of dimensions. The array contains all axes of the southwesterly most extent
@@ -141,7 +145,12 @@ Longitude/Latitude/Elevation based on [WGS 84](http://www.opengis.net/def/crs/OG
 When using 3D geometries, the elevation of the southwesterly most extent is the minimum elevation
 in meters and the elevation of the northeasterly most extent is the maximum. When filtering with
 a 3D bbox over Items with 2D geometries, it is assumed that the 2D geometries are at
-elevation 0.
+elevation 0. Degenerate bboxes that form a point or line must be supported.
+
+**intersects** It is at the discretion of the implementation to reject semantically-invalid
+GeoJSON objects, e.g., a self-intersecting Polygon or a LineString with zero-length segments.
+These should result in a 400 Bad Request status code and a specific error message, rather than
+a 500 Server Error and generic or database-level error message.
 
 ## Response
 
@@ -198,12 +207,12 @@ execute a subsequent request for the next page of results.
 
 The following fields have been added to the Link object specification for the API spec:
 
-| Parameter | Type    | Description                                                                                                                                                  |
-| --------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| method    | string  | The HTTP method of the request, usually `GET` or `POST`. Defaults to `GET`                                                                                   |
-| headers   | object  | A dictionary of header values that must be included in the next request                                                                                      |
-| body      | object  | A JSON object containing fields/values that must be included in the body of the next request                                                                 |
-| merge     | boolean | If `true`, the headers/body fields in the `next` link must be merged into the original request and be sent combined in the next request. Defaults to `false` |
+| **Parameter** | **Type** | **Description**                                                                                                                                              |
+| ------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| method        | string   | The HTTP method of the request, usually `GET` or `POST`. Defaults to `GET`                                                                                   |
+| headers       | object   | A dictionary of header values that must be included in the next request                                                                                      |
+| body          | object   | A JSON object containing fields/values that must be included in the body of the next request                                                                 |
+| merge         | boolean  | If `true`, the headers/body fields in the `next` link must be merged into the original request and be sent combined in the next request. Defaults to `false` |
 
 The implementor has the freedom to decide exactly how to apply these extended fields for their particular pagination
 mechanism.  The same freedom that exists for GET requests, where the actual URL parameter used to defined the next page
