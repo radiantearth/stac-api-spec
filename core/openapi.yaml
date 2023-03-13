@@ -52,9 +52,7 @@ components:
     LandingPage:
       description: |-
         The landing page provides links to the API definition
-        (link relations `service-desc` and `service-doc`)
-        and the Feature Collection (path `/collections`, link relation
-        `data`).
+        (link relations `service-desc` and `service-doc`).
       content:
         application/json:
           schema:
