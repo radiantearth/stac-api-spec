@@ -30,7 +30,3 @@ This object describes a STAC ItemCollection. The fields `type` and `features` ar
 ## Extensions
 
 STAC API Extensions can be found [here](https://stac-api-extensions.github.io).
-
-In addition to STAC API extensions, the STAC
-[Single File STAC Extension](https://github.com/stac-extensions/single-file-stac/blob/main/README.md)
-provides a set of Collection and Item objects as a single file catalog.

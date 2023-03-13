@@ -129,14 +129,14 @@ may choose other values to advertise through their `service-desc` endpoint.  If 
 than the advertised maximum limit, the server must act as if the request were for the maximum
 and not return an error.
 
-Only one of either **intersects** or **bbox** may be specified.  If both are specified, a 400 Bad Request status code
-must be returned.
-
 **datetime** The datetime parameter use the same allowed values as the
 [OAF datetime](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_parameter_datetime) parameter.
 This allows for either a single [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) datetime or an
 open or closed interval that also uses RFC 3339 datetimes. Additional details about this parameter can be
 found in the [Implementation Recommendations](../implementation.md#datetime-parameter-handling).
+
+Only one of either **intersects** or **bbox** may be specified.  If both are specified, a 400 Bad Request status code
+must be returned.
 
 **bbox** Represented using either 2D or 3D geometries. The length of the array must be 2\*n where
 *n* is the number of dimensions. The array contains all axes of the southwesterly most extent
@@ -145,7 +145,12 @@ Longitude/Latitude/Elevation based on [WGS 84](http://www.opengis.net/def/crs/OG
 When using 3D geometries, the elevation of the southwesterly most extent is the minimum elevation
 in meters and the elevation of the northeasterly most extent is the maximum. When filtering with
 a 3D bbox over Items with 2D geometries, it is assumed that the 2D geometries are at
-elevation 0.
+elevation 0. Degenerate bboxes that form a point or line must be supported.
+
+**intersects** It is at the discretion of the implementation to reject semantically-invalid
+GeoJSON objects, e.g., a self-intersecting Polygon or a LineString with zero-length segments.
+These should result in a 400 Bad Request status code and a specific error message, rather than
+a 500 Server Error and generic or database-level error message.
 
 ## Response
 
