@@ -705,14 +705,17 @@ components:
         links:
           - rel: self
             href: http://cool-sat.com/collections/Sentinel-2
+            type: application/json
           - rel: root
             href: http://cool-sat.com/collections
+            type: application/json
           - rel: license
             href: >-
               https://scihub.copernicus.eu/twiki/pub/SciHubWebPortal/TermsConditions/Sentinel_Data_Terms_and_Conditions.pdf
             title: >-
               Legal notice on the use of Copernicus Sentinel Data and Service
               Information
+            type: application/pdf
     exception:
       type: object
       description: >-

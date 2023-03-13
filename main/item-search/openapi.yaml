@@ -766,21 +766,27 @@ components:
         links:
           - rel: self
             href: http://cool-sat.com/collections/CS3/items/20160503_132130_04
+            type: application/geo+json
           - rel: root
             href: http://cool-sat.com/collections
+            type: application/json
           - rel: parent
             href: http://cool-sat.com/collections/CS3
+            type: application/json
           - rel: collection
             href: http://cool-sat.com/collections/CS3
+            type: application/json
         assets:
           analytic:
             href: >-
               http://cool-sat.com/static-catalog/CS3/20160503_132130_04/analytic.tif
             title: 4-Band Analytic
+            type: image/tiff; application=geotiff; profile=cloud-optimized
           thumbnail:
             href: >-
               http://cool-sat.com/static-catalog/CS3/20160503_132130_04/thumbnail.png
             title: Thumbnail
+            type: image/png
     itemCollection:
       description: >-
         A GeoJSON FeatureCollection augmented with foreign members that contain
@@ -807,6 +813,7 @@ components:
             $ref: '#/components/schemas/link'
           example:
             - rel: next
+              type: application/geo+json
               href: >-
                 http://api.cool-sat.com/search?next=ANsXtp9mrqN0yrKWhf-y2PUpHRLQb1GT-mtxNcXou8TwkXhi1Jbk
         numberMatched:
