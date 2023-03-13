@@ -119,7 +119,6 @@ conformance URIs serve up a rendered HTML version of the corresponding OpenAPI d
 | **Name**               | **Specified in**                            | **Conformance URI**                                    | **Description**                                                                                                 |
 | ---------------------- | ------------------------------------------- | ------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
 | STAC API - Core        | [Core](core)                                | <https://api.stacspec.org/v1.0.0-rc.2/core>            | Specifies the STAC Landing page `/`, communicating conformance and available endpoints.                         |
-| STAC API - Browseable  | [Core](core)                                | <https://api.stacspec.org/v1.0.0-rc.2/browseable>      | Advertises all Items can be reached through `child` and `item` links, as they would be in a non-API Catalog.    |
 | STAC API - Item Search | [Item Search](item-search)                  | <https://api.stacspec.org/v1.0.0-rc.2/item-search>     | Enables search of all STAC Item objects on the server, with the STAC `[/search](#stac-api-endpoints)` endpoint. |
 | STAC API - Features    | [Collections and Features](ogcapi-features) | <https://api.stacspec.org/v1.0.0-rc.2/ogcapi-features> | Specifies the use of OGC API - Features to serve STAC Item and Collection objects                               |
 | STAC API - Collections | [Collections and Features](ogcapi-features) | <https://api.stacspec.org/v1.0.0-rc.2/collections>     | Specifies the use of a subset of STAC API - Features to serve Collection objects                                |
@@ -145,7 +144,6 @@ The Landing Page will at least have the following `conformsTo` and `links`:
     "type": "Catalog",
     "conformsTo" : [
         "https://api.stacspec.org/v1.0.0-rc.2/core",
-        "https://api.stacspec.org/v1.0.0-rc.2/browseable",
         "https://api.stacspec.org/v1.0.0-rc.2/collections",
         "https://api.stacspec.org/v1.0.0-rc.2/ogcapi-features",
         "https://api.stacspec.org/v1.0.0-rc.2/item-search",

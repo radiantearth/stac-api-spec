@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## Changed
+
+- Browseable has been moved to an extension, now located at <https://github.com/stac-api-extensions/browseable>
+
 ## Added
 
 - Added authentication status code recommendations.
