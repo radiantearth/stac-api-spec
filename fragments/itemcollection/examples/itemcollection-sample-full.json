@@ -7,7 +7,7 @@
             "stac_version": "1.0.0",
             "stac_extensions": [],
             "type": "Feature",
-            "id": "CS3-20160503_132131_05",
+            "id": "cs3-20160503_132131_05",
             "bbox": [
                 -122.59750209,
                 37.48803556,
@@ -56,28 +56,33 @@
                     }
                 ]
             },
-            "collection": "CS3",
+            "collection": "cs3",
             "links": [
                 {
                     "rel": "self",
-                    "href": "https://stac-api.example.com/collections/CS3/items/CS3-20160503_132131_05"
+                    "type": "application/json",
+                    "href": "https://stac-api.example.com/collections/cs3/items/CS3-20160503_132131_05"
                 },
                 {
                     "rel": "root",
+                    "type": "application/json",
                     "href": "https://stac-api.example.com/"
                 },
                 {
                     "rel": "collection",
-                    "href": "https://stac-api.example.com/collections/CS3"
+                    "type": "application/json",
+                    "href": "https://stac-api.example.com/collections/cs3"
                 }
             ],
             "assets": {
                 "analytic": {
-                    "href": "https://stac-api.example.com/catalog/CS3-20160503_132130_04/analytic.tif",
+                    "href": "https://stac-api.example.com/catalog/cs3-20160503_132130_04/analytic.tif",
+                    "type": "image/tiff; application=geotiff; profile=cloud-optimized",
                     "title": "4-Band Analytic"
                 },
                 "thumbnail": {
-                    "href": "https://stac-api.example.com/catalog/CS3-20160503_132130_04/thumbnail.png",
+                    "href": "https://stac-api.example.com/catalog/cs3-20160503_132130_04/thumbnail.png",
+                    "type": "image/png",
                     "title": "Thumbnail",
                     "roles": [
                         "thumbnail"

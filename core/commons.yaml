@@ -245,11 +245,14 @@ components:
         links:
           - rel: self
             href: 'http://cool-sat.com/collections/Sentinel-2'
+            type: application/json
           - rel: root
             href: 'http://cool-sat.com/collections'
+            type: application/json
           - rel: license
             href: 'https://scihub.copernicus.eu/twiki/pub/SciHubWebPortal/TermsConditions/Sentinel_Data_Terms_and_Conditions.pdf'
             title: Legal notice on the use of Copernicus Sentinel Data and Service Information
+            type: application/pdf
     extent:
       type: object
       description: |-
@@ -650,19 +653,25 @@ components:
         links:
           - rel: self
             href: 'http://cool-sat.com/collections/CS3/items/20160503_132130_04'
+            type: application/geo+json
           - rel: root
             href: 'http://cool-sat.com/collections'
+            type: application/json
           - rel: parent
             href: 'http://cool-sat.com/collections/CS3'
+            type: application/json
           - rel: collection
             href: 'http://cool-sat.com/collections/CS3'
+            type: application/json
         assets:
           analytic:
             href: 'http://cool-sat.com/static-catalog/CS3/20160503_132130_04/analytic.tif'
             title: 4-Band Analytic
+            type: image/tiff; application=geotiff; profile=cloud-optimized
           thumbnail:
             href: 'http://cool-sat.com/static-catalog/CS3/20160503_132130_04/thumbnail.png'
             title: Thumbnail
+            type: image/png
     itemId:
       type: string
       description: Provider identifier, a unique ID.
