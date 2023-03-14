@@ -117,10 +117,10 @@ The following Link relations are defined for the Landing Page (root).
 
 The following Link relations are defined for the `/collections` endpoint response.
 
-| **rel** | **href**       | **Media Type**   | **From**                                                 | **Description**             |
-| ------- | -------------- | ---------------- | -------------------------------------------------------- | --------------------------- |
-| `root`  | `/`            | application/json | STAC API - Features, STAC API - Collections | **REQUIRED** The root URI                |
-| `self`  | `/collections` | application/json | OAFeat                                                   | **REQUIRED** Self reference |
+| **rel** | **href**       | **Media Type**   | **From**                                    | **Description**             |
+| ------- | -------------- | ---------------- | ------------------------------------------- | --------------------------- |
+| `root`  | `/`            | application/json | STAC API - Features, STAC API - Collections | **REQUIRED** The root URI   |
+| `self`  | `/collections` | application/json | OAFeat                                      | **REQUIRED** Self reference |
 
 ### Collection (/collections/{collectionId})
 
