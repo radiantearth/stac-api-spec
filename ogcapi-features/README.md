@@ -146,7 +146,7 @@ The following Link relations are defined for the ItemCollection object returned 
 
 | **rel**      | **href**                            | **Media Type**       | **From**                         | **Description**                   |
 | ------------ | ----------------------------------- | -------------------- | -------------------------------- | --------------------------------- |
-| `root`       | `/`                                 | application/json     | **REQUIRED** STAC API - Features | The root URI                      |
+| `root`       | `/`                                 | application/json     | STAC API - Features | **REQUIRED** The root URI                      |
 | `self`       | `/collections/{collectionId}/items` | application/geo+json | OAFeat                           | **REQUIRED** Self reference       |
 | `collection` | `/collections/{collectionId}`       | application/json     | OAFeat                           | **REQUIRED** Collection reference |
 
