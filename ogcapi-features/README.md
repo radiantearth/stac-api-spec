@@ -119,7 +119,7 @@ The following Link relations are defined for the `/collections` endpoint respons
 
 | **rel** | **href**       | **Media Type**   | **From**                                                 | **Description**             |
 | ------- | -------------- | ---------------- | -------------------------------------------------------- | --------------------------- |
-| `root`  | `/`            | application/json | **REQUIRED** STAC API - Features, STAC API - Collections | The root URI                |
+| `root`  | `/`            | application/json | STAC API - Features, STAC API - Collections | **REQUIRED** The root URI                |
 | `self`  | `/collections` | application/json | OAFeat                                                   | **REQUIRED** Self reference |
 
 ### Collection (/collections/{collectionId})
