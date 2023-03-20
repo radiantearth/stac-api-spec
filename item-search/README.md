@@ -55,11 +55,11 @@ If the target of a Link's `type` is unknown, `type` SHOULD be set to `applicatio
 
 This conformance class also requires implementation of the link relations in the [STAC API - Core](../core) conformance class.
 
-The following Link relations must exist in the Landing Page (root).
+The following Link relations are defined for the Landing Page (root).
 
-| **rel**  | **href**  | **Media Type**       | **From**               | **Description**             |
-| -------- | --------- | -------------------- | ---------------------- | --------------------------- |
-| `search` | `/search` | application/geo+json | STAC API - Item Search | URI for the Search endpoint |
+| **rel**  | **href**  | **Media Type**       | **From**               | **Description**                          |
+| -------- | --------- | -------------------- | ---------------------- | ---------------------------------------- |
+| `search` | `/search` | application/geo+json | STAC API - Item Search | **REQUIRED** URI for the Search endpoint |
 
 This `search` link relation must have a `type` of `application/geo+json`. If no `method` attribute is
 specified, it is assumed to represent a GET request. If the server supports both GET and POST requests, two links should be included, one with a `method` of `GET` one with a `method` of `POST`.
@@ -67,11 +67,11 @@ specified, it is assumed to represent a GET request. If the server supports both
 Other links with relation `search` may be included that advertise other content types the server may respond
 with, but these other types are not part of the STAC API requirements.
 
-The following Link relations must exist in the `/search` endpoint response.
+The following Link relations are defined for the `/search` endpoint response.
 
-| **rel** | **href** | **From**               | **Description** |
-| ------- | -------- | ---------------------- | --------------- |
-| `root`  | `/`      | STAC API - Item Search | The root URI    |
+| **rel** | **href** | **From**               | **Description**           |
+| ------- | -------- | ---------------------- | ------------------------- |
+| `root`  | `/`      | STAC API - Item Search | **REQUIRED** The root URI |
 
 ## Endpoints
 

@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Changed
 
 - Browseable has been moved to an extension, now located at <https://github.com/stac-api-extensions/browseable>
+- Link relation `parent` is no longer a required link for Collections or Items
 
 ## Added
 
