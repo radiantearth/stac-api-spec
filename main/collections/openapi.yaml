@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: STAC API - Collections
-  version: 1.0.0-rc.2
+  version: 1.0.0-rc.3
   description: >-
     This is an OpenAPI definition of the SpatioTemporal Asset Catalog API -
     Collections specification.  This is a subset of the STAC API - Features
@@ -13,7 +13,7 @@ info:
     name: Apache License 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0
   x-conformance-classes:
-    - https://api.stacspec.org/v1.0.0-rc.2/collections
+    - https://api.stacspec.org/v1.0.0-rc.3/collections
 tags:
   - name: Core
     description: essential characteristics of a STAC API
@@ -47,7 +47,7 @@ paths:
                 title: Copernicus Sentinel Imagery
                 description: Catalog of Copernicus Sentinel 1 and 2 imagery.
                 conformsTo:
-                  - https://api.stacspec.org/v1.0.0-rc.2/core
+                  - https://api.stacspec.org/v1.0.0-rc.3/core
                   - http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core
                   - http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30
                   - >-
