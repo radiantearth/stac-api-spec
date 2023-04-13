@@ -5,12 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v1.0.0-rc.4] - TBD
+
+## Changed
+
+- Field `type` is no longer required for all Link objects, but is instead strongly
+  recommended. This was added as a requirement in 1.0.0-rc.3 based on a mis-reading
+  of the OGC Features spec, and is now removed as a requirement.
+
 ## [v1.0.0-rc.3] - 2023-03-27
 
 ## Changed
 
 - Browseable has been moved to an extension, now located at <https://github.com/stac-api-extensions/browseable>
 - Link relation `parent` is no longer a required link for Collections or Items
+- Field `type` is now required for all Link objects
 
 ## Added
 
