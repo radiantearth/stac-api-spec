@@ -49,8 +49,8 @@ Implementing `GET /search` is **required**, `POST /search` is optional, but reco
 
 ## Link Relations
 
-While the STAC definition of Link does not require the `type` field,
-*STAC API - Item Search* requires all Links to have this field.
+The STAC definition of Link does not require the `type` field,
+but it is **STRONGLY RECOMMENDED** that this field exists.
 If the target of a Link's `type` is unknown, `type` SHOULD be set to `application/octet-stream` or `text/plain`.
 
 This conformance class also requires implementation of the link relations in the [STAC API - Core](../core) conformance class.

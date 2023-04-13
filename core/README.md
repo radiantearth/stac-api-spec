@@ -63,8 +63,8 @@ but sub-catalogs whose items are all in one database can support search.
 
 ## Link Relations
 
-While the STAC definition of Link does not require the `type` field,
-*STAC API - Core* requires all Links to have this field.
+The STAC definition of Link does not require the `type` field,
+but it is **STRONGLY RECOMMENDED** that this field exists.
 If the target of a Link's `type` is unknown, `type` SHOULD be set to `application/octet-stream` or `text/plain`.
 
 The following Link relations are defined for the Landing Page (root).
