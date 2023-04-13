@@ -19,9 +19,9 @@
 
 ## Summary
 
-- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-rc.3/item-search))
+- **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-rc.4/item-search))
 - **Conformance URIs:**
-  - <https://api.stacspec.org/v1.0.0-rc.3/item-search>
+  - <https://api.stacspec.org/v1.0.0-rc.4/item-search>
 - **[Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Dependencies**: [STAC API - Core](../core)
 - **Examples**: [examples.md](examples.md)
@@ -29,7 +29,7 @@
 ## Overview
 
 The *STAC API - Item Search* specification defines the *STAC API - Item Search*
-conformance class (<https://api.stacspec.org/v1.0.0-rc.3/item-search>), which
+conformance class (<https://api.stacspec.org/v1.0.0-rc.4/item-search>), which
 provides the ability to search for STAC [Item](../stac-spec/item-spec/README.md)
 objects across collections.
 It retrieves a group of Item objects that match the provided parameters, wrapped in an
@@ -275,8 +275,8 @@ the [overview](../overview.md#example-landing-page) document.
     "description": "This Catalog aims to demonstrate the a simple landing page",
     "type": "Catalog",
     "conformsTo" : [
-        "https://api.stacspec.org/v1.0.0-rc.3/core",
-        "https://api.stacspec.org/v1.0.0-rc.3/item-search"
+        "https://api.stacspec.org/v1.0.0-rc.4/core",
+        "https://api.stacspec.org/v1.0.0-rc.4/item-search"
     ],
     "links": [
         {

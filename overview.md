@@ -20,7 +20,7 @@ point for the more powerful capabilities - it contains a list of URLs with link
 'relationships' (`rel`) and descriptions to indicate their functionality. Note that the [STAC Core specification](stac-spec) provides
 most of the content of API responses - the STAC API is primarily concerned with the return of STAC
 [Item](stac-spec/item-spec/README.md) and [Collection](stac-spec/collection-spec/README.md) objects via a
-web API.  See the [rendered OpenAPI document](https://api.stacspec.org/v1.0.0-rc.3/core) for more details.
+web API.  See the [rendered OpenAPI document](https://api.stacspec.org/v1.0.0-rc.4/core) for more details.
 
 There are then two major sets of functionality that build on the core, [Item Search](item-search) and [Collection and Features](ogcapi-features)
 , which are designed to be complementary, letting
@@ -33,7 +33,7 @@ located at a `/search` endpoint. It re-uses all of the OAFeat [query
 parameters](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_items_) specified in their 'core', and adds a
 few more. It does not require a full implementation of OAFeat, but it is instead a simplified construct that can run a
 search across any group of STAC [`Item`](stac-spec/item-spec/README.md) objects. See the [rendered OpenAPI
-document](https://api.stacspec.org/v1.0.0-rc.3/item-search) for more details.
+document](https://api.stacspec.org/v1.0.0-rc.4/item-search) for more details.
 
 ### Collections and Features
 
@@ -50,7 +50,7 @@ Full compliance involves splitting STAC `Item` objects into
 individual `/collections/{collectionId}/items` endpoints that expose querying single collections, as OAFeat does
 not currently support cross-collection search. It also adds a few other requirements, which are highlighted in the
 [features description](ogcapi-features/), in order to help STAC implementors understand OAFeat without having to
-read the full specification from scratch. See the [rendered OpenAPI document](https://api.stacspec.org/v1.0.0-rc.3/ogcapi-features)
+read the full specification from scratch. See the [rendered OpenAPI document](https://api.stacspec.org/v1.0.0-rc.4/ogcapi-features)
 for more details.
 
 ### Extensions & Fragments
@@ -118,10 +118,10 @@ conformance URIs serve up a rendered HTML version of the corresponding OpenAPI d
 
 | **Name**               | **Specified in**                            | **Conformance URI**                                    | **Description**                                                                                                 |
 | ---------------------- | ------------------------------------------- | ------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
-| STAC API - Core        | [Core](core)                                | <https://api.stacspec.org/v1.0.0-rc.3/core>            | Specifies the STAC Landing page `/`, communicating conformance and available endpoints.                         |
-| STAC API - Item Search | [Item Search](item-search)                  | <https://api.stacspec.org/v1.0.0-rc.3/item-search>     | Enables search of all STAC Item objects on the server, with the STAC `[/search](#stac-api-endpoints)` endpoint. |
-| STAC API - Features    | [Collections and Features](ogcapi-features) | <https://api.stacspec.org/v1.0.0-rc.3/ogcapi-features> | Specifies the use of OGC API - Features to serve STAC Item and Collection objects                               |
-| STAC API - Collections | [Collections and Features](ogcapi-features) | <https://api.stacspec.org/v1.0.0-rc.3/collections>     | Specifies the use of a subset of STAC API - Features to serve Collection objects                                |
+| STAC API - Core        | [Core](core)                                | <https://api.stacspec.org/v1.0.0-rc.4/core>            | Specifies the STAC Landing page `/`, communicating conformance and available endpoints.                         |
+| STAC API - Item Search | [Item Search](item-search)                  | <https://api.stacspec.org/v1.0.0-rc.4/item-search>     | Enables search of all STAC Item objects on the server, with the STAC `[/search](#stac-api-endpoints)` endpoint. |
+| STAC API - Features    | [Collections and Features](ogcapi-features) | <https://api.stacspec.org/v1.0.0-rc.4/ogcapi-features> | Specifies the use of OGC API - Features to serve STAC Item and Collection objects                               |
+| STAC API - Collections | [Collections and Features](ogcapi-features) | <https://api.stacspec.org/v1.0.0-rc.4/collections>     | Specifies the use of a subset of STAC API - Features to serve Collection objects                                |
 
 Additional conformance classes can be specified by [STAC API Extensions](extensions.md).
 
@@ -143,10 +143,10 @@ The Landing Page will at least have the following `conformsTo` and `links`:
     "description": "This Catalog aims to demonstrate the a simple landing page",
     "type": "Catalog",
     "conformsTo" : [
-        "https://api.stacspec.org/v1.0.0-rc.3/core",
-        "https://api.stacspec.org/v1.0.0-rc.3/collections",
-        "https://api.stacspec.org/v1.0.0-rc.3/ogcapi-features",
-        "https://api.stacspec.org/v1.0.0-rc.3/item-search",
+        "https://api.stacspec.org/v1.0.0-rc.4/core",
+        "https://api.stacspec.org/v1.0.0-rc.4/collections",
+        "https://api.stacspec.org/v1.0.0-rc.4/ogcapi-features",
+        "https://api.stacspec.org/v1.0.0-rc.4/item-search",
         "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core",
         "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30",
         "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson"

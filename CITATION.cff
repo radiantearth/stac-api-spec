@@ -8,9 +8,9 @@ preferred-citation:
   type: standard
   title: "SpatioTemporal Asset Catalog (STAC) API specification"
   abstract: "An API to make geospatial assets openly searchable and crawlable."
-  version: 1.0.0-rc.3
+  version: 1.0.0-rc.4
   year: 2023
-  date-released: 2023-03-27
+  date-released: 2023-04-13
   license: Apache-2.0
   url: https://stacspec.org
   repository: https://github.com/radiantearth/stac-api-spec
