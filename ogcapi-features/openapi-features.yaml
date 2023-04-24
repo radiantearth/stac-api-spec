@@ -1,24 +1,23 @@
 openapi: 3.0.3
 info:
   title: STAC API - Features
-  version: 1.0.0-rc.4
+  version: v1.0.0
   description: >-
     This is an OpenAPI definition of the SpatioTemporal Asset Catalog API - Features
     specification. This extends OGC API - Features - Part 1: Core.
   contact:
     name: STAC Specification
-    url: 'http://stacspec.org'
+    url: "http://stacspec.org"
   license:
     name: Apache License 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0'
-  x-conformance-classes:
-    ['https://api.stacspec.org/v1.0.0-rc.4/ogcapi-features']
+    url: "http://www.apache.org/licenses/LICENSE-2.0"
+  x-conformance-classes: ["https://api.stacspec.org/v1.0.0/ogcapi-features"]
 tags:
   - name: Features
     description: |-
       All endpoints related to OGC API - Features - Part 1: Core
 paths:
-  '/':
+  "/":
     get:
       tags:
         - Features
@@ -27,7 +26,7 @@ paths:
         The landing page provides links to the sub-resources.
       operationId: getLandingPage
       responses:
-        '200':
+        "200":
           description: |-
             The landing page provides links to the API definition
             (link relations `service-desc` and `service-doc`),
@@ -38,40 +37,40 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../core/openapi.yaml#/components/schemas/landingPage'
+                $ref: "../core/openapi.yaml#/components/schemas/landingPage"
               example:
-                stac_version: '1.0.0'
+                stac_version: "1.0.0"
                 type: Catalog
                 id: sentinel
                 title: Copernicus Sentinel Imagery
                 description: Catalog of Copernicus Sentinel 1 and 2 imagery.
                 conformsTo:
-                  - 'https://api.stacspec.org/v1.0.0-rc.4/core'
-                  - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core'
-                  - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30'
-                  - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson'
+                  - "https://api.stacspec.org/v1.0.0/core"
+                  - "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core"
+                  - "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30"
+                  - "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson"
                 links:
-                  - href: 'http://data.example.org/'
+                  - href: "http://data.example.org/"
                     rel: self
                     type: application/json
                     title: this document
-                  - href: 'http://data.example.org/api'
+                  - href: "http://data.example.org/api"
                     rel: service-desc
                     type: application/vnd.oai.openapi+json;version=3.0
                     title: the API definition
-                  - href: 'http://data.example.org/api.html'
+                  - href: "http://data.example.org/api.html"
                     rel: service-doc
                     type: text/html
                     title: the API documentation
-                  - href: 'http://data.example.org/conformance'
+                  - href: "http://data.example.org/conformance"
                     rel: conformance
                     type: application/json
                     title: OGC API conformance classes implemented by this server
-                  - href: 'http://data.example.org/collections'
+                  - href: "http://data.example.org/collections"
                     rel: data
                     type: application/json
                     title: Information about the feature collections
-  '/conformance':
+  "/conformance":
     get:
       tags:
         - Features
@@ -81,13 +80,13 @@ paths:
         server conforms to.
       operationId: getConformanceDeclaration
       responses:
-        '200':
-          $ref: '#/components/responses/ConformanceDeclaration'
-        '4XX':
-          $ref: '../core/commons.yaml#/components/responses/Error'
-        '5XX':
-          $ref: '../core/commons.yaml#/components/responses/Error'
-  '/collections':
+        "200":
+          $ref: "#/components/responses/ConformanceDeclaration"
+        "4XX":
+          $ref: "../core/commons.yaml#/components/responses/Error"
+        "5XX":
+          $ref: "../core/commons.yaml#/components/responses/Error"
+  "/collections":
     get:
       tags:
         - Features
@@ -97,13 +96,13 @@ paths:
         Request may not return the full set of metadata per Feature Collection.
       operationId: getCollections
       responses:
-        '200':
-          $ref: '#/components/responses/Collections'
-        '4XX':
-          $ref: '../core/commons.yaml#/components/responses/Error'
-        '5XX':
-          $ref: '../core/commons.yaml#/components/responses/Error'
-  '/collections/{collectionId}':
+        "200":
+          $ref: "#/components/responses/Collections"
+        "4XX":
+          $ref: "../core/commons.yaml#/components/responses/Error"
+        "5XX":
+          $ref: "../core/commons.yaml#/components/responses/Error"
+  "/collections/{collectionId}":
     get:
       tags:
         - Features
@@ -114,17 +113,17 @@ paths:
         Request this endpoint to get a full list of metadata for the Feature Collection.
       operationId: describeCollection
       parameters:
-        - $ref: '#/components/parameters/collectionId'
+        - $ref: "#/components/parameters/collectionId"
       responses:
-        '200':
-          $ref: '#/components/responses/Collection'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '4XX':
-          $ref: '../core/commons.yaml#/components/responses/Error'
-        '5XX':
-          $ref: '../core/commons.yaml#/components/responses/Error'
-  '/collections/{collectionId}/items':
+        "200":
+          $ref: "#/components/responses/Collection"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "4XX":
+          $ref: "../core/commons.yaml#/components/responses/Error"
+        "5XX":
+          $ref: "../core/commons.yaml#/components/responses/Error"
+  "/collections/{collectionId}/items":
     get:
       tags:
         - Features
@@ -137,20 +136,20 @@ paths:
         collection of features of a similar type, based on a common schema.
       operationId: getFeatures
       parameters:
-        - $ref: '#/components/parameters/collectionId'
-        - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/bbox'
-        - $ref: '#/components/parameters/datetime'
+        - $ref: "#/components/parameters/collectionId"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/bbox"
+        - $ref: "#/components/parameters/datetime"
       responses:
-        '200':
-          $ref: '#/components/responses/Features'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '4XX':
-          $ref: '../core/commons.yaml#/components/responses/Error'
-        '5XX':
-          $ref: '../core/commons.yaml#/components/responses/Error'
-  '/collections/{collectionId}/items/{featureId}':
+        "200":
+          $ref: "#/components/responses/Features"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "4XX":
+          $ref: "../core/commons.yaml#/components/responses/Error"
+        "5XX":
+          $ref: "../core/commons.yaml#/components/responses/Error"
+  "/collections/{collectionId}/items/{featureId}":
     get:
       tags:
         - Features
@@ -160,17 +159,17 @@ paths:
         with id `collectionId`.
       operationId: getFeature
       parameters:
-        - $ref: '#/components/parameters/collectionId'
-        - $ref: '#/components/parameters/featureId'
+        - $ref: "#/components/parameters/collectionId"
+        - $ref: "#/components/parameters/featureId"
       responses:
-        '200':
-          $ref: '#/components/responses/Feature'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '4XX':
-          $ref: '../core/commons.yaml#/components/responses/Error'
-        '5XX':
-          $ref: '../core/commons.yaml#/components/responses/Error'
+        "200":
+          $ref: "#/components/responses/Feature"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "4XX":
+          $ref: "../core/commons.yaml#/components/responses/Error"
+        "5XX":
+          $ref: "../core/commons.yaml#/components/responses/Error"
 components:
   parameters:
     bbox:
@@ -281,14 +280,14 @@ components:
         - collections
       properties:
         links:
-          $ref: '../core/commons.yaml#/components/schemas/links'
+          $ref: "../core/commons.yaml#/components/schemas/links"
         collections:
           type: array
           items:
-            $ref: '../core/commons.yaml#/components/schemas/collection'
+            $ref: "../core/commons.yaml#/components/schemas/collection"
     featureCollectionGeoJSON:
       allOf:
-        - $ref: '../core/commons.yaml#/components/schemas/featureCollectionGeoJSON'
+        - $ref: "../core/commons.yaml#/components/schemas/featureCollectionGeoJSON"
         - type: object
           required:
             - features
@@ -296,15 +295,15 @@ components:
             features:
               type: array
               items:
-                $ref: '../core/commons.yaml#/components/schemas/item'
+                $ref: "../core/commons.yaml#/components/schemas/item"
             links:
-              $ref: '../core/commons.yaml#/components/schemas/links'
+              $ref: "../core/commons.yaml#/components/schemas/links"
             timeStamp:
-              $ref: '#/components/schemas/timeStamp'
+              $ref: "#/components/schemas/timeStamp"
             numberMatched:
-              $ref: '#/components/schemas/numberMatched'
+              $ref: "#/components/schemas/numberMatched"
             numberReturned:
-              $ref: '#/components/schemas/numberReturned'
+              $ref: "#/components/schemas/numberReturned"
     numberMatched:
       description: |-
         The number of features of the feature type that match the selection
@@ -328,7 +327,7 @@ components:
       description: This property indicates the time and date when the response was generated.
       type: string
       format: date-time
-      example: '2017-08-17T08:05:32Z'
+      example: "2017-08-17T08:05:32Z"
   responses:
     ConformanceDeclaration:
       description: |-
@@ -341,12 +340,12 @@ components:
       content:
         application/json:
           schema:
-            $ref: '../core/commons.yaml#/components/schemas/conformanceClasses'
+            $ref: "../core/commons.yaml#/components/schemas/conformanceClasses"
           example:
             conformsTo:
-              - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core'
-              - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30'
-              - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson'
+              - "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core"
+              - "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30"
+              - "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson"
     Collections:
       description: |-
         The feature collections shared by this API.
@@ -367,7 +366,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/collections'
+            $ref: "#/components/schemas/collections"
     Collection:
       description: |-
         Information about the feature collection with id `collectionId`.
@@ -385,7 +384,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '../core/commons.yaml#/components/schemas/collection'
+            $ref: "../core/commons.yaml#/components/schemas/collection"
     Features:
       description: |-
         The response is a document consisting of features in the collection.
@@ -410,7 +409,7 @@ components:
       content:
         application/geo+json:
           schema:
-            $ref: '#/components/schemas/featureCollectionGeoJSON'
+            $ref: "#/components/schemas/featureCollectionGeoJSON"
     Feature:
       description: |-
         fetch the feature with id `featureId` in the feature collection
@@ -418,7 +417,7 @@ components:
       content:
         application/geo+json:
           schema:
-            $ref: '../core/commons.yaml#/components/schemas/item'
+            $ref: "../core/commons.yaml#/components/schemas/item"
     NotFound:
       description: |-
         The requested URI was not found.

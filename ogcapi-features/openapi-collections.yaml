@@ -1,24 +1,24 @@
 openapi: 3.0.3
 info:
   title: STAC API - Collections
-  version: 1.0.0-rc.4
+  version: v1.0.0
   description: >-
     This is an OpenAPI definition of the SpatioTemporal Asset Catalog API - Collections
     specification.  This is a subset of the STAC API - Features specification.
   contact:
     name: STAC Specification
-    url: 'http://stacspec.org'
+    url: "http://stacspec.org"
   license:
     name: Apache License 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0'
-  x-conformance-classes: ['https://api.stacspec.org/v1.0.0-rc.4/collections']
+    url: "http://www.apache.org/licenses/LICENSE-2.0"
+  x-conformance-classes: ["https://api.stacspec.org/v1.0.0/collections"]
 tags:
   - name: Core
     description: essential characteristics of a STAC API
   - name: Collections
     description: All endpoints related to STAC API - Collections
 paths:
-  '/':
+  "/":
     get:
       tags:
         - Core
@@ -27,7 +27,7 @@ paths:
         The landing page provides links to the sub-resources.
       operationId: getLandingPage
       responses:
-        '200':
+        "200":
           description: |-
             The landing page provides links to the API definition
             (link relations `service-desc` and `service-doc`),
@@ -38,40 +38,40 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../core/openapi.yaml#/components/schemas/landingPage'
+                $ref: "../core/openapi.yaml#/components/schemas/landingPage"
               example:
-                stac_version: '1.0.0'
+                stac_version: "1.0.0"
                 type: Catalog
                 id: sentinel
                 title: Copernicus Sentinel Imagery
                 description: Catalog of Copernicus Sentinel 1 and 2 imagery.
                 conformsTo:
-                  - 'https://api.stacspec.org/v1.0.0-rc.4/core'
-                  - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core'
-                  - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30'
-                  - 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson'
+                  - "https://api.stacspec.org/v1.0.0/core"
+                  - "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core"
+                  - "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30"
+                  - "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson"
                 links:
-                  - href: 'http://data.example.org/'
+                  - href: "http://data.example.org/"
                     rel: self
                     type: application/json
                     title: this document
-                  - href: 'http://data.example.org/api'
+                  - href: "http://data.example.org/api"
                     rel: service-desc
                     type: application/vnd.oai.openapi+json;version=3.0
                     title: the API definition
-                  - href: 'http://data.example.org/api.html'
+                  - href: "http://data.example.org/api.html"
                     rel: service-doc
                     type: text/html
                     title: the API documentation
-                  - href: 'http://data.example.org/conformance'
+                  - href: "http://data.example.org/conformance"
                     rel: conformance
                     type: application/json
                     title: OGC API conformance classes implemented by this server
-                  - href: 'http://data.example.org/collections'
+                  - href: "http://data.example.org/collections"
                     rel: data
                     type: application/json
                     title: Information about the feature collections
-  '/collections':
+  "/collections":
     get:
       tags:
         - Collections
@@ -81,13 +81,13 @@ paths:
         Request may not return the full set of metadata per Feature Collection.
       operationId: getCollections
       responses:
-        '200':
-          $ref: '#/components/responses/Collections'
-        '4XX':
-          $ref: '../core/commons.yaml#/components/responses/Error'
-        '5XX':
-          $ref: '../core/commons.yaml#/components/responses/Error'
-  '/collections/{collectionId}':
+        "200":
+          $ref: "#/components/responses/Collections"
+        "4XX":
+          $ref: "../core/commons.yaml#/components/responses/Error"
+        "5XX":
+          $ref: "../core/commons.yaml#/components/responses/Error"
+  "/collections/{collectionId}":
     get:
       tags:
         - Collections
@@ -98,16 +98,16 @@ paths:
         Request this endpoint to get a full list of metadata for the Feature Collection.
       operationId: describeCollection
       parameters:
-        - $ref: '#/components/parameters/collectionId'
+        - $ref: "#/components/parameters/collectionId"
       responses:
-        '200':
-          $ref: '#/components/responses/Collection'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '4XX':
-          $ref: '../core/commons.yaml#/components/responses/Error'
-        '5XX':
-          $ref: '../core/commons.yaml#/components/responses/Error'
+        "200":
+          $ref: "#/components/responses/Collection"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "4XX":
+          $ref: "../core/commons.yaml#/components/responses/Error"
+        "5XX":
+          $ref: "../core/commons.yaml#/components/responses/Error"
 components:
   parameters:
     collectionId:
@@ -125,11 +125,11 @@ components:
         - collections
       properties:
         links:
-          $ref: '../core/commons.yaml#/components/schemas/links'
+          $ref: "../core/commons.yaml#/components/schemas/links"
         collections:
           type: array
           items:
-            $ref: '../core/commons.yaml#/components/schemas/collection'
+            $ref: "../core/commons.yaml#/components/schemas/collection"
   responses:
     Collections:
       description: |-
@@ -151,7 +151,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/collections'
+            $ref: "#/components/schemas/collections"
     Collection:
       description: |-
         Information about the feature collection with id `collectionId`.
@@ -169,7 +169,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '../core/commons.yaml#/components/schemas/collection'
+            $ref: "../core/commons.yaml#/components/schemas/collection"
     NotFound:
       description: |-
         The requested URI was not found.
