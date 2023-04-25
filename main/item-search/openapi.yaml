@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: STAC API - Item Search
-  version: 1.0.0-rc.4
+  version: v1.0.0
   description: >-
     This is an OpenAPI definition of the SpatioTemporal Asset Catalog API - Item
     Search specification.
@@ -15,7 +15,7 @@ tags:
   - name: Item Search
     description: essential characteristics of a STAC API
 x-conformance-classes:
-  - https://api.stacspec.org/v1.0.0-rc.4/item-search
+  - https://api.stacspec.org/v1.0.0/item-search
 paths:
   /search:
     get:
