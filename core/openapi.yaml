@@ -1,23 +1,23 @@
 openapi: 3.0.3
 info:
   title: STAC API - Core
-  version: 1.0.0-rc.4
+  version: v1.0.0
   description: >-
     This is an OpenAPI definition of the SpatioTemporal Asset Catalog API - Core
     specification. Any service that implements this endpoint to allow discovery of
     spatiotemporal assets can be considered a STAC API.
   contact:
     name: STAC Specification
-    url: 'http://stacspec.org'
+    url: "http://stacspec.org"
   license:
     name: Apache License 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0'
-  x-conformance-classes: ['https://api.stacspec.org/v1.0.0-rc.4/core']
+    url: "http://www.apache.org/licenses/LICENSE-2.0"
+  x-conformance-classes: ["https://api.stacspec.org/v1.0.0/core"]
 tags:
   - name: Core
     description: essential characteristics of a STAC API
 paths:
-  '/':
+  "/":
     get:
       tags:
         - Core
@@ -36,18 +36,18 @@ paths:
         Extensions may add additional links with new relation types.
       operationId: getLandingPage
       responses:
-        '200':
-          $ref: '#/components/responses/LandingPage'
-        '4XX':
-          $ref: 'commons.yaml#/components/responses/Error'
-        '5XX':
-          $ref: 'commons.yaml#/components/responses/Error'
+        "200":
+          $ref: "#/components/responses/LandingPage"
+        "4XX":
+          $ref: "commons.yaml#/components/responses/Error"
+        "5XX":
+          $ref: "commons.yaml#/components/responses/Error"
 components:
   schemas:
     landingPage:
       allOf:
-        - $ref: 'commons.yaml#/components/schemas/catalog'
-        - $ref: 'commons.yaml#/components/schemas/conformanceClasses'
+        - $ref: "commons.yaml#/components/schemas/catalog"
+        - $ref: "commons.yaml#/components/schemas/conformanceClasses"
   responses:
     LandingPage:
       description: |-
@@ -56,33 +56,33 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/landingPage'
+            $ref: "#/components/schemas/landingPage"
           example:
             type: Catalog
-            stac_version: '1.0.0'
+            stac_version: "1.0.0"
             id: sentinel
             title: Copernicus Sentinel Imagery
             description: Catalog of Copernicus Sentinel 1 and 2 imagery.
             conformsTo:
-              - 'https://api.stacspec.org/v1.0.0-rc.4/core'
+              - "https://api.stacspec.org/v1.0.0/core"
             links:
-              - href: 'http://data.example.org/'
+              - href: "http://data.example.org/"
                 rel: self
                 type: application/json
                 title: this document
-              - href: 'http://data.example.org/api'
+              - href: "http://data.example.org/api"
                 rel: service-desc
                 type: application/vnd.oai.openapi+json;version=3.0
                 title: the API definition
-              - href: 'http://data.example.org/api.html'
+              - href: "http://data.example.org/api.html"
                 rel: service-doc
                 type: text/html
                 title: the API documentation
-              - href: 'http://data.example.org/catalogs/sentinel-1'
+              - href: "http://data.example.org/catalogs/sentinel-1"
                 rel: child
                 type: application/json
                 title: Sentinel 1 Catalog
-              - href: 'http://data.example.org/catalogs/sentinel-2'
+              - href: "http://data.example.org/catalogs/sentinel-2"
                 rel: child
                 type: application/json
                 title: Sentinel 2 Catalog

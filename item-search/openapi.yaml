@@ -1,20 +1,20 @@
 openapi: 3.0.3
 info:
   title: STAC API - Item Search
-  version: 1.0.0-rc.4
+  version: v1.0.0
   description: >-
     This is an OpenAPI definition of the SpatioTemporal Asset Catalog API - Item Search
     specification.
   contact:
     name: STAC Specification
-    url: 'http://stacspec.org'
+    url: "http://stacspec.org"
   license:
     name: Apache License 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0'
+    url: "http://www.apache.org/licenses/LICENSE-2.0"
 tags:
   - name: Item Search
     description: essential characteristics of a STAC API
-x-conformance-classes: ['https://api.stacspec.org/v1.0.0-rc.4/item-search']
+x-conformance-classes: ["https://api.stacspec.org/v1.0.0/item-search"]
 paths:
   /search:
     get:
@@ -33,26 +33,26 @@ paths:
       tags:
         - Item Search
       parameters:
-        - $ref: '#/components/parameters/bbox'
-        - $ref: '#/components/parameters/intersects'
-        - $ref: '#/components/parameters/datetime'
-        - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/ids'
-        - $ref: '#/components/parameters/collectionsArray'
+        - $ref: "#/components/parameters/bbox"
+        - $ref: "#/components/parameters/intersects"
+        - $ref: "#/components/parameters/datetime"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/ids"
+        - $ref: "#/components/parameters/collectionsArray"
       responses:
-        '200':
+        "200":
           description: A feature collection.
           content:
             application/geo+json:
               schema:
-                $ref: '../fragments/itemcollection/openapi.yaml#/components/schemas/itemCollection'
+                $ref: "../fragments/itemcollection/openapi.yaml#/components/schemas/itemCollection"
             text/html:
               schema:
                 type: string
-        '4XX':
-          $ref: '../core/commons.yaml#/components/responses/Error'
-        '5XX':
-          $ref: '../core/commons.yaml#/components/responses/Error'
+        "4XX":
+          $ref: "../core/commons.yaml#/components/responses/Error"
+        "5XX":
+          $ref: "../core/commons.yaml#/components/responses/Error"
     post:
       summary: Search STAC items with full-featured filtering.
       operationId: postItemSearch
@@ -71,21 +71,21 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/searchBody'
+              $ref: "#/components/schemas/searchBody"
       responses:
-        '200':
+        "200":
           description: A feature collection.
           content:
             application/geo+json:
               schema:
-                $ref: '../fragments/itemcollection/openapi.yaml#/components/schemas/itemCollection'
+                $ref: "../fragments/itemcollection/openapi.yaml#/components/schemas/itemCollection"
             text/html:
               schema:
                 type: string
-        '4XX':
-          $ref: '../core/commons.yaml#/components/responses/Error'
-        '5XX':
-          $ref: '../core/commons.yaml#/components/responses/Error'
+        "4XX":
+          $ref: "../core/commons.yaml#/components/responses/Error"
+        "5XX":
+          $ref: "../core/commons.yaml#/components/responses/Error"
 components:
   parameters:
     ids:
@@ -95,7 +95,7 @@ components:
         Array of Item ids to return.
       required: false
       schema:
-        $ref: '#/components/schemas/ids'
+        $ref: "#/components/schemas/ids"
       explode: false
     collectionsArray:
       name: collections
@@ -105,7 +105,7 @@ components:
         Only Item objects in one of the provided collections will be searched
       required: false
       schema:
-        $ref: '#/components/schemas/collectionsArray'
+        $ref: "#/components/schemas/collectionsArray"
       explode: false
     datetime:
       name: datetime
@@ -205,7 +205,7 @@ components:
         a GeoJSON Geometry rather than a bbox.
       required: false
       schema:
-        $ref: '../core/commons.yaml#/components/schemas/geometryGeoJSON'
+        $ref: "../core/commons.yaml#/components/schemas/geometryGeoJSON"
       style: form
       explode: false
   schemas:
@@ -213,12 +213,12 @@ components:
       description: The search criteria
       type: object
       allOf:
-        - $ref: '#/components/schemas/bboxFilter'
-        - $ref: '#/components/schemas/datetimeFilter'
-        - $ref: '#/components/schemas/intersectsFilter'
-        - $ref: '#/components/schemas/collectionsFilter'
-        - $ref: '#/components/schemas/idsFilter'
-        - $ref: '#/components/schemas/limitFilter'
+        - $ref: "#/components/schemas/bboxFilter"
+        - $ref: "#/components/schemas/datetimeFilter"
+        - $ref: "#/components/schemas/intersectsFilter"
+        - $ref: "#/components/schemas/collectionsFilter"
+        - $ref: "#/components/schemas/idsFilter"
+        - $ref: "#/components/schemas/limitFilter"
     limit:
       type: integer
       minimum: 1
@@ -240,7 +240,7 @@ components:
       description: Only return items that intersect the provided bounding box.
       properties:
         bbox:
-          $ref: '../core/commons.yaml#/components/schemas/bbox'
+          $ref: "../core/commons.yaml#/components/schemas/bbox"
     collectionsArray:
       type: array
       description: |-
@@ -259,31 +259,31 @@ components:
       type: object
       properties:
         datetime:
-          $ref: '#/components/schemas/datetime_interval'
+          $ref: "#/components/schemas/datetime_interval"
     intersectsFilter:
       type: object
       description: Only returns items that intersect with the provided polygon.
       properties:
         intersects:
-          $ref: '../core/commons.yaml#/components/schemas/geometryGeoJSON'
+          $ref: "../core/commons.yaml#/components/schemas/geometryGeoJSON"
     limitFilter:
       type: object
       description: Only returns maximum number of results (page size)
       properties:
         limit:
-          $ref: '#/components/schemas/limit'
+          $ref: "#/components/schemas/limit"
     idsFilter:
       type: object
       description: Only returns items that match the array of given ids
       properties:
         ids:
-          $ref: '#/components/schemas/ids'
+          $ref: "#/components/schemas/ids"
     collectionsFilter:
       type: object
       description: Only returns the collections specified
       properties:
         collections:
-          $ref: '#/components/schemas/collectionsArray'
+          $ref: "#/components/schemas/collectionsArray"
     datetime_interval:
       type: string
       description: |-
@@ -302,4 +302,4 @@ components:
         If a feature has multiple temporal properties, it is the decision of the
         server whether only a single temporal property is used to determine
         the extent or all relevant temporal properties.
-      example: '2018-02-12T00:00:00Z/2018-03-18T12:31:12Z'
+      example: "2018-02-12T00:00:00Z/2018-03-18T12:31:12Z"

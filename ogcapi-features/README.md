@@ -26,11 +26,11 @@
 ## Summary
 
 - **OpenAPI specifications:**
-  - [STAC API - Features](openapi-features.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-rc.4/ogcapi-features))
-  - [STAC API - Collections](openapi-collections.yaml) ([rendered version](https://api.stacspec.org/v1.0.0-rc.4/collections))
+  - [STAC API - Features](openapi-features.yaml) ([rendered version](https://api.stacspec.org/v1.0.0/ogcapi-features))
+  - [STAC API - Collections](openapi-collections.yaml) ([rendered version](https://api.stacspec.org/v1.0.0/collections))
 - **Conformance Class URIs:**
-  - <https://api.stacspec.org/v1.0.0-rc.4/ogcapi-features> - Features
-  - <https://api.stacspec.org/v1.0.0-rc.4/collections> - Collections
+  - <https://api.stacspec.org/v1.0.0/ogcapi-features> - Features
+  - <https://api.stacspec.org/v1.0.0/collections> - Collections
 - **[Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Dependencies**:
   - [STAC API - Core](../core)
@@ -51,19 +51,19 @@ entities. As these entities are also GeoJSON types, the GeoJSON conformance clas
 
 While OAFeat defines a single conformance class for its endpoints, STAC API divides these behaviors into two
 conformance classes -- Collections and Features. The STAC API - Features
-(<https://api.stacspec.org/v1.0.0-rc.4/ogcapi-features>) conformance class includes and extends the behavior
-of OAFeat, while the STAC API - Collections (<https://api.stacspec.org/v1.0.0-rc.4/collections>) conformance
+(<https://api.stacspec.org/v1.0.0/ogcapi-features>) conformance class includes and extends the behavior
+of OAFeat, while the STAC API - Collections (<https://api.stacspec.org/v1.0.0/collections>) conformance
 class is the subset of Features that pertains only to Collections.
 
 ### STAC API - Features
 
-The *STAC API - Features* (<https://api.stacspec.org/v1.0.0-rc.4/ogcapi-features>) conformance class
+The *STAC API - Features* (<https://api.stacspec.org/v1.0.0/ogcapi-features>) conformance class
 encompasses all of the behavior described in this specification, as
 derived from OAFeat.
 
 ### STAC API - Collections
 
-The *STAC API - Collections* (<https://api.stacspec.org/v1.0.0-rc.4/collections>) conformance class
+The *STAC API - Collections* (<https://api.stacspec.org/v1.0.0/collections>) conformance class
 requires only the subset of the behavior of Features that relates to Collections.
 
 This subset is:
@@ -77,7 +77,7 @@ without needing to implement the entire *STAC API - Features* conformance class.
 
 ### OGC API - Features - Part 1: Core
 
-A STAC API implementation that conforms to *STAC API - Features* (<https://api.stacspec.org/v1.0.0-rc.4/ogcapi-features>)
+A STAC API implementation that conforms to *STAC API - Features* (<https://api.stacspec.org/v1.0.0/ogcapi-features>)
 also conforms to
 [OGC API - Features - Part 1 Requirements Class Core](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rc_core)
 conformance class (<http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core>). 
@@ -355,9 +355,9 @@ the [overview](../overview.md#example-landing-page) document.
     "description": "This Catalog aims to demonstrate the a simple landing page",
     "type": "Catalog",
     "conformsTo" : [
-        "https://api.stacspec.org/v1.0.0-rc.4/core",
-        "https://api.stacspec.org/v1.0.0-rc.4/ogcapi-features",
-        "https://api.stacspec.org/v1.0.0-rc.4/collections",
+        "https://api.stacspec.org/v1.0.0/core",
+        "https://api.stacspec.org/v1.0.0/ogcapi-features",
+        "https://api.stacspec.org/v1.0.0/collections",
         "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core",
         "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30",
         "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson"
