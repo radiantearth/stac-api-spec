@@ -76,11 +76,11 @@ will require the spec to go to 2.0.0.
 ## Maturity Classification
 
 Conformance classes and extensions are meant to evolve to maturity, and thus may be in different states
-in terms of stability and number of implementations. All extensions must include a 
-maturity classification, so that STAC API spec users can easily get a sense of how much they can count
-on the extension. 
+in terms of stability and number of implementations. All extensions must include a
+maturity classification so that STAC API spec users can easily get a sense of how much they can count
+on the extension.
 
-| Maturity Classification | Min Impl # | Description                                                                                                                                                | Stability                                                                                                 |
+| Maturity Classification | Impl # | Description                                                                                                                                                | Stability                                                                                                 |
 | ----------------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
 | Proposal                | 0          | An idea put forward by a community member to gather feedback                                                                                               | Not stable - breaking changes almost guaranteed as implementers try out the idea.                         |
 | Pilot                   | 1          | Idea is fleshed out, with examples and a JSON schema, and implemented in one or more catalogs. Additional implementations encouraged to help give feedback | Approaching stability - breaking changes are not anticipated but can easily come from additional feedback |
@@ -88,13 +88,11 @@ on the extension.
 | Stable                  | 6          | Highest current level of maturity. The community of extension maintainers commits to a STAC review process for any changes, which are not made lightly.    | Completely stable, all changes require a new version number and review process.                           |
 | Deprecated              | N/A        | A previous extension that has likely been superseded by a newer one or did not work out for some reason.                                                   | Will not be updated and may be removed in an upcoming major release.                                      |
 
-Maturity mostly comes through diverse implementations, so the minimum number of implementations
-column is the main gating function for an extension to mature. But extension authors can also
+Maturity mostly comes through adoption and implementations, so the number of implementations
+is the main gating function for an extension to mature. These implementations may be of an API server
+or client. Extension authors may also
 choose to hold back the maturity advancement if they don't feel they are yet ready to commit to
 the less breaking changes of the next level.
-
-A 'mature' classification level will likely be added once there are extensions that have been 
-stable for over a year and are used in twenty or more implementations.
 
 ## Communication
 
