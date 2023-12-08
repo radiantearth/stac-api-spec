@@ -107,6 +107,8 @@ components:
           $ref: "#/components/schemas/extent"
         providers:
           $ref: "#/components/schemas/providers"
+        assets:
+          $ref: "#/components/schemas/assets"
         links:
           $ref: "#/components/schemas/links"
         summaries:
