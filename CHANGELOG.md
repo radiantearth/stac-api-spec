@@ -20,6 +20,8 @@ None
 ### Changed
 
 - Field `type` is no longer required for all Link objects, but is instead strongly
+  recommended. This was added as a requirement in 1.0.0-rc.3 based on a mis-reading
+  of the OGC Features spec, and is now removed as a requirement.
 
 ## [v1.0.0-rc.3] - 2023-03-27
 
