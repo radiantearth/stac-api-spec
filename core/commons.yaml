@@ -113,43 +113,32 @@ components:
           $ref: "#/components/schemas/links"
         summaries:
           description: |-
-            Summaries are either a unique set of all available values *or*
-            statistics. Statistics by default only specify the range (minimum
-            and maximum values), but can optionally be accompanied by additional
-            statistical values. The range can specify the potential range of
-            values, but it is recommended to be as precise as possible. The set
-            of values must contain at least one element and it is strongly
-            recommended to list all values. It is recommended to list as many
-            properties as reasonable so that consumers get a full overview of
-            the Collection. Properties that are covered by the Collection
-            specification (e.g. `providers` and `license`) may not be repeated
-            in the summaries.
+            A map of Item property summaries, either a set of values, a range of values or a JSON Schema.
           type: object
           additionalProperties:
             oneOf:
+              - title: JSON Schema (draft-07)
+                type: object
+                minProperties: 1
               - type: array
                 title: Set of values
+                minItems: 1
                 items:
-                  description: A value of any type.
+                  description: >-
+                    For each field only the original data type of the property can occur (except for arrays).
               - type: object
-                title: Statistics
-                description: |-
-                  By default, only ranges with a minimum and a maximum value can
-                  be specified. Ranges can be specified for ordinal values only,
-                  which means they need to have a rank order. Therefore, ranges
-                  can only be specified for numbers and some special types of
-                  strings. Examples: grades (A to F), dates or times.
-                  Implementors are free to add other derived statistical values
-                  to the object, for example `mean` or `stddev`.
+                title: Range / Statistics
                 required:
-                  - min
-                  - max
+                  - minimum
+                  - maximum
                 properties:
-                  min:
+                  minimum:
+                    title: Minimum value
                     anyOf:
                       - type: string
                       - type: number
-                  max:
+                  maximum:
+                    title: Maximum value
                     anyOf:
                       - type: string
                       - type: number
