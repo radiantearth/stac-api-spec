@@ -200,6 +200,8 @@ The href may contain any arbitrary URL parameter:
 Implementations may also add link relations `prev`, `first`, and `last`, though these are not required and may
 be infeasible to implement in some data stores.
 
+Clients shall interpre the absence of `prev` or `last` link relations to indicate the response represents respectively the first and last page of results.
+
 OAFeat does not support POST requests for searches, however the STAC API spec does. Hypermedia links are not designed
 for anything other than GET requests, so providing a next link for a POST search request becomes problematic. STAC has
 decided to extend the Link object to support additional fields that provide hints to the client as to how it must
