@@ -15,12 +15,12 @@ Any JSON object that contains all the required fields is a valid STAC Collection
 
 This object describes a STAC CollectionCollection.
 
-| Field Name     | Type                                                                 | Description                                                                     |
-| -------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| collections    | \[[STAC Collection](../../stac-spec/collection-spec/collection-spec.md)]               | **REQUIRED.** A possibly-empty array of Collection objects.                           |
-| links          | \[[Link Object](../../stac-spec/collection-spec/collection-spec.md#link-object)] | An array of Links related to this CollectionCollection.                               |
-| numberMatched  | integer                                                              | The number of Collections that meet the selection parameters, possibly estimated.     |
-| numberReturned | integer                                                              | The number of Collections in the `collections` array.                                    |
+| Field Name     | Type                                                                             | Description                                                                       |
+| -------------- | -------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| collections    | \[[STAC Collection](../../stac-spec/collection-spec/collection-spec.md)]         | **REQUIRED.** A possibly-empty array of Collection objects.                       |
+| links          | \[[Link Object](../../stac-spec/collection-spec/collection-spec.md#link-object)] | An array of Links related to this CollectionCollection.                           |
+| numberMatched  | integer                                                                          | The number of Collections that meet the selection parameters, possibly estimated. |
+| numberReturned | integer                                                                          | The number of Collections in the `collections` array.                             |
 
 ## Extensions
 

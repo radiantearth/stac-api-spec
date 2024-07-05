@@ -130,6 +130,12 @@ components:
           type: array
           items:
             $ref: "../core/commons.yaml#/components/schemas/collection"
+        numberMatched:
+          type: integer
+          minimum: 0
+        numberReturned:
+          type: integer
+          minimum: 0
   responses:
     Collections:
       description: |-
