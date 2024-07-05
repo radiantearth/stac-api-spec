@@ -1,0 +1,42 @@
+openapi: 3.0.3
+info:
+  title: The SpatioTemporal Asset Catalog API - Item Collection
+  description: The specification for a set of items, e.g. returned by a search.
+  version: v1.0.0
+paths: {}
+components:
+  schemas:
+    itemCollection:
+      description: >-
+        A GeoJSON FeatureCollection augmented with foreign members that contain values relevant to a STAC entity
+      type: object
+      required:
+        - features
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - FeatureCollection
+        features:
+          type: array
+          items:
+            $ref: "../../core/commons.yaml#/components/schemas/item"
+        links:
+          type: array
+          description: >-
+            An array of links. Can be used for pagination, e.g. by providing a link
+            with the `next` relation type.
+          items:
+            $ref: "../../core/commons.yaml#/components/schemas/link"
+          example:
+            - rel: next
+              type: application/geo+json
+              href: >-
+                http://api.cool-sat.com/search?next=ANsXtp9mrqN0yrKWhf-y2PUpHRLQb1GT-mtxNcXou8TwkXhi1Jbk
+        numberMatched:
+          type: integer
+          minimum: 0
+        numberReturned:
+          type: integer
+          minimum: 0

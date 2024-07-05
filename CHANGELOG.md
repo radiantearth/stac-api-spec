@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Added fragment for CollectionCollection
+
 ### Changed
 
 - Fix the schema for Collection summaries:
