@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Added fragment for CollectionCollection
+- Added `numberMatched` and `numberReturned` to `GET /collections` endpoint
+
 ### Changed
 
 - Fix the schema for Collection summaries:
