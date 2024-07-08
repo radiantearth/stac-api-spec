@@ -50,6 +50,43 @@ Response with `200 OK`:
 
 Following the link `https://stac-api.example.com/search?page=2` will send the user to the next page of results.
 
+#### Simple GET based search showing the last page of results
+
+Request:
+```
+HTTP GET /search?bbox=-110,39.5,-105,40.5
+```
+
+Response with `200 OK`:
+
+```json
+{
+    "type": "FeatureCollection",
+    "features": [
+       ...
+    ],
+    "links": [
+        {
+            "rel": "first",
+            "href": "https://stac-api.example.com/search?page=1",
+            "type": "application/geo+json"
+        },
+        {
+            "rel": "prev",
+            "href": "https://stac-api.example.com/search?page=7",
+            "type": "application/geo+json"
+        },
+        {
+            "rel": "root",
+            "href": "https://stac-api.example.com/",
+            "type": "application/json"
+        }
+    ]
+}
+```
+
+Notice the absence of a `next` link. This indicates to the client that this response is the last page of results for the submitted request.
+
 #### POST search with body and merge fields
 
 Request to `HTTP POST /search`:
