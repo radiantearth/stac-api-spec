@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Allow the `geometry` property in Items to be set to `null` to align with STAC
 - Fix the schema for Collection summaries:
   - Allow JSON Schema
   - Update `min` and `max` to `minimum` and `maxmimum`
