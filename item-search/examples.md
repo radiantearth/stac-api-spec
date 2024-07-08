@@ -62,7 +62,9 @@ Response with `200 OK`:
 ```json
 {
     "type": "FeatureCollection",
-    "features": [],
+    "features": [
+       ...
+    ],
     "links": [
         {
             "rel": "first",
