@@ -215,7 +215,7 @@ to `/collections/{collectionId}/items`. However, static catalogs and other parts
 It is recommended to have each OAFeat Collection correspond to a STAC Collection,
 and the `/collections/{collectionId}/items` endpoint can be used as a single collection search. Implementations may **optionally**
 provide support for the full superset of STAC API query parameters to the `/collections/{collectionId}/items` endpoint,
-where the collection ID in the path is equivalent to providing that single value in the `Collections* query parameter in
+where the collection ID in the path is equivalent to providing that single value in the `collections` query parameter in
 STAC API.
 
 Implementing OAFeat enables a wider range of clients to access the API's STAC Item objects, as it is a more widely implemented
