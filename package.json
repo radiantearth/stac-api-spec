@@ -20,7 +20,7 @@
     },
     "dependencies": {
         "@redocly/openapi-cli": "^1.0.0-beta.94",
-        "@stoplight/spectral-cli": "^6.6.0",
+        "@stoplight/spectral-cli": "^6.15.0",
         "gh-pages": "^5.0.0",
         "redoc-cli": "^0.13.21",
         "remark-cli": "^11.0.0",
