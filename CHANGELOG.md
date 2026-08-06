@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Added fragment for CollectionCollection
 - Added `numberMatched` and `numberReturned` to `GET /collections` endpoint
+- Item Search: Added optional conformance class to require the `collections` parameter
 
 ### Changed
 
