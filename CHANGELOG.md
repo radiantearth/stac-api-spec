@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix the schema for Collection summaries:
   - Allow JSON Schema
   - Update `min` and `max` to `minimum` and `maxmimum`
+- Changed maturity classification from Candidate to Stable for all specifications
 
 ### Fixed
 
