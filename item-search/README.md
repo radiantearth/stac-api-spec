@@ -8,6 +8,11 @@
   - [Query Parameters and Fields](#query-parameters-and-fields)
     - [Query Examples](#query-examples)
     - [Query Parameter Table](#query-parameter-table)
+      - [limit](#limit)
+      - [datetime](#datetime)
+      - [bbox](#bbox)
+      - [intersects](#intersects)
+      - [collections](#collections)
   - [Response](#response)
     - [Pagination](#pagination)
   - [HTTP Request Methods and Content Types](#http-request-methods-and-content-types)
@@ -22,6 +27,7 @@
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0/item-search))
 - **Conformance URIs:**
   - <https://api.stacspec.org/v1.0.0/item-search>
+  - <https://api.stacspec.org/v1.0.0/item-search#require-collections> (optional, see [collections](#collections))
 - **[Maturity Classification](../README.md#maturity-classification):** Candidate
 - **Dependencies**: [STAC API - Core](../core)
 - **Examples**: [examples.md](examples.md)
@@ -120,7 +126,12 @@ The core parameters for STAC search are defined by OAFeat, and STAC adds a few p
 
 See [examples](examples.md) for some example requests.
 
-**limit** The limit parameter follows the same semantics of the OAFeat Item resource limit parameter. The value is
+Only one of either **intersects** or **bbox** may be specified.  If both are specified, a 400 Bad Request status code
+must be returned.
+
+#### limit
+
+The limit parameter follows the same semantics of the OAFeat Item resource limit parameter. The value is
 a suggestion to the server as to the maximum number of Item objects the
 client would prefer in the response. The server may return fewer Item objects, but
 must not return more. The OpenAPI specification defines the default and maximum values
@@ -129,16 +140,17 @@ may choose other values to advertise through their `service-desc` endpoint.  If 
 than the advertised maximum limit, the server must act as if the request were for the maximum
 and not return an error.
 
-**datetime** The datetime parameter use the same allowed values as the
+#### datetime
+
+The datetime parameter uses the same allowed values as the
 [OAF datetime](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_parameter_datetime) parameter.
 This allows for either a single [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) datetime or an
 open or closed interval that also uses RFC 3339 datetimes. Additional details about this parameter can be
 found in the [Implementation Recommendations](../implementation.md#datetime-parameter-handling).
 
-Only one of either **intersects** or **bbox** may be specified.  If both are specified, a 400 Bad Request status code
-must be returned.
+#### bbox
 
-**bbox** Represented using either 2D or 3D geometries. The length of the array must be 2\*n where
+Represented using either 2D or 3D geometries. The length of the array must be 2\*n where
 *n* is the number of dimensions. The array contains all axes of the southwesterly most extent
 followed by all axes of the northeasterly most extent specified in Longitude/Latitude or
 Longitude/Latitude/Elevation based on [WGS 84](http://www.opengis.net/def/crs/OGC/1.3/CRS84).
@@ -147,10 +159,24 @@ in meters and the elevation of the northeasterly most extent is the maximum. Whe
 a 3D bbox over Items with 2D geometries, it is assumed that the 2D geometries are at
 elevation 0. Degenerate bboxes that form a point or line must be supported.
 
-**intersects** It is at the discretion of the implementation to reject semantically-invalid
+#### intersects
+
+It is at the discretion of the implementation to reject semantically-invalid
 GeoJSON objects, e.g., a self-intersecting Polygon or a LineString with zero-length segments.
 These should result in a 400 Bad Request status code and a specific error message, rather than
 a 500 Server Error and generic or database-level error message.
+
+#### collections
+
+Providing the `collections` parameter is optional by default.
+For very large deployments that encounter performance issues in Item Search,
+there is an optional conformance class <https://api.stacspec.org/v1.0.0/item-search#require-collections>,
+whose sole purpose is to require that at least one Collection ID is provided in the `collections` parameter.
+If this conformance class is implemented and a request does not provide the `collections` parameter,
+a 400 Bad Request status code must be returned.
+It is strongly recommended to implement this conformance class only if it is strictly required for
+operational purposes, as the usability of Item Search degrades when users must first discover the
+relevant Collection IDs before they can search for Items.
 
 ## Response
 
