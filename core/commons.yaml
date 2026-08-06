@@ -586,7 +586,7 @@ components:
         bbox:
           $ref: "#/components/schemas/bbox"
         geometry:
-          $ref: "#/components/schemas/geometryGeoJSON"
+          $ref: "#/components/schemas/geometry"
         type:
           $ref: "#/components/schemas/itemType"
         links:
@@ -718,6 +718,13 @@ components:
             description: Purposes of the asset
             example:
               - thumbnail
+    geometry:
+      oneOf:
+        - $ref: "#/components/schemas/geometryGeoJSON"
+        - title: Unlocated Feature
+          nullable: true
+          enum:
+          - null
     geometryGeoJSON:
       oneOf:
         - $ref: "#/components/schemas/pointGeoJSON"
@@ -879,7 +886,7 @@ components:
           enum:
             - Feature
         geometry:
-          $ref: "#/components/schemas/geometryGeoJSON"
+          $ref: "#/components/schemas/geometry"
         properties:
           type: object
           nullable: true
