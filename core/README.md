@@ -14,7 +14,7 @@
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0/core)),
 - **Conformance URIs:**
   - <https://api.stacspec.org/v1.0.0/core>
-- **[Maturity Classification](../README.md#maturity-classification):** Candidate
+- **[Maturity Classification](../README.md#maturity-classification):** Stable
 - **Dependencies**: None
   and [commons.yaml](commons.yaml) is the OpenAPI version of the core [STAC spec](../stac-spec) JSON Schemas.
 

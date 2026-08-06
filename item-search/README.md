@@ -22,7 +22,7 @@
 - **OpenAPI specification:** [openapi.yaml](openapi.yaml) ([rendered version](https://api.stacspec.org/v1.0.0/item-search))
 - **Conformance URIs:**
   - <https://api.stacspec.org/v1.0.0/item-search>
-- **[Maturity Classification](../README.md#maturity-classification):** Candidate
+- **[Maturity Classification](../README.md#maturity-classification):** Stable
 - **Dependencies**: [STAC API - Core](../core)
 - **Examples**: [examples.md](examples.md)
 
@@ -129,7 +129,7 @@ may choose other values to advertise through their `service-desc` endpoint.  If 
 than the advertised maximum limit, the server must act as if the request were for the maximum
 and not return an error.
 
-**datetime** The datetime parameter use the same allowed values as the
+**datetime** The datetime parameter uses the same allowed values as the
 [OAF datetime](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_parameter_datetime) parameter.
 This allows for either a single [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) datetime or an
 open or closed interval that also uses RFC 3339 datetimes. Additional details about this parameter can be
