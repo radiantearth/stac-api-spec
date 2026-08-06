@@ -31,7 +31,7 @@
 - **Conformance Class URIs:**
   - <https://api.stacspec.org/v1.0.0/ogcapi-features> - Features
   - <https://api.stacspec.org/v1.0.0/collections> - Collections
-- **[Maturity Classification](../README.md#maturity-classification):** Candidate
+- **[Maturity Classification](../README.md#maturity-classification):** Stable
 - **Dependencies**:
   - [STAC API - Core](../core)
   - [OGC API - Features](https://www.ogc.org/standards/ogcapi-features)
